@@ -5,6 +5,7 @@ export const metadata = {
   description:
     '부산소프트웨어마이스터고등학교 입학전형 시스템 마루의 어드민 페이지입니다.',
 };
+
 const RootLayout = (props: { children: ReactNode }) => {
   return (
     <html lang="en">
