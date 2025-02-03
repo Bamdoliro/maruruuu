@@ -7,15 +7,15 @@
   "scripts": {
     "lint": "eslint \"**/*.ts*\""
   },
+  "dependencies": {
+    "@types/styled-components": "^5.1.26",
+    "react": "^19.0.0",
+    "styled-components": "^6.1.14"
+  },
   "devDependencies": {
     "@maru/eslint-config": "workspace:*",
     "@maru/tsconfig": "workspace:*",
     "@types/react": "18.3.1",
     "typescript": "5.5.4"
-  },
-  "dependencies": {
-    "@types/styled-components": "^5.1.26",
-    "react": "^19.0.0",
-    "styled-components": "^6.1.14"
   }
 }
