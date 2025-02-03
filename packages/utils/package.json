@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "main": "./index.ts",
   "types": "./index.ts",
+  "license": "MIT",
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint \"**/*.ts*\"",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit"
   },
@@ -18,7 +19,6 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@maru/icon": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "styled-components": "^6.1.14"
