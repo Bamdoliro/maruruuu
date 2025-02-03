@@ -1,5 +1,6 @@
 const color = {
   white: '#FFFFFF',
+  black: '#000000',
 
   gray900: '#21242C',
   gray850: '#292C35',
@@ -15,9 +16,12 @@ const color = {
   gray100: '#F8F8F9',
   gray50: '#FAFAFB',
 
-  maruBlue: '#257CFF',
-  maruDarkBlue: '#186EEE',
+  bamdoliro: '#1E2E3D',
+  maruDefault: '#257CFF',
+  maruHoverd: '#186EEE',
   maruLightBlue: '#E5F0FF',
+  maruHigh: '#3081FF',
+  maruRow: '#0C57CB',
 
   red: '#F44336',
   lightRed: '#FEE8E7',
