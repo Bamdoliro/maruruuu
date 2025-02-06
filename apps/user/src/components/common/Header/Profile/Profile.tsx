@@ -89,4 +89,8 @@ const MenuItem = styled.div`
   height: 48px;
   padding: 9px 24px;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${color.gray100};
+  }
 `;
