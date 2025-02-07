@@ -19,7 +19,7 @@ const Profile = () => {
         <Text fontType="H5" color={color.gray900}>
           정홍섭 님
         </Text>
-        <IconArrowDropdown color={color.gray600} width={24} height={24} />
+        <IconArrowDropdown color={color.gray500} width={24} height={24} />
       </ProfileButton>
       {isMenuOpen && (
         <MenuListBox>
