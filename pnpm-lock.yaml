@@ -81,6 +81,9 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.66.0
         version: 5.66.0(@tanstack/react-query@5.66.0)(react@18.2.0)
+      '@toss/use-overlay':
+        specifier: ^1.4.2
+        version: 1.4.2(react@18.2.0)
       '@types/styled-components':
         specifier: ^5.1.26
         version: 5.1.34
@@ -705,6 +708,15 @@ packages:
       react: ^18 || ^19
     dependencies:
       '@tanstack/query-core': 5.66.0
+      react: 18.2.0
+    dev: false
+
+  /@toss/use-overlay@1.4.2(react@18.2.0):
+    resolution: {integrity: sha512-OYJKSKkldho8qrJR0xMJLpz85H68+E+y6H3y/N0XUed/b0ytbfU+fuxcPd14uiC8H0xzliTGBlY8GQP9Z/lteQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+    dependencies:
       react: 18.2.0
     dev: false
 
