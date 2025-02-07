@@ -49,16 +49,18 @@ const Footer = () => {
             <Column gap={24}>
               <StyledLink href={ROUTES.TERMS_OF_SERVICE}>이용약관</StyledLink>
               <StyledLink href={ROUTES.PRIVACY_POLCY}>개인정보처리방침</StyledLink>
-              <StyledLink href={ROUTES.PERSONAL_INFO_COLLECTION}>개인정보 수집</StyledLink>
+              <StyledLink href={ROUTES.PERSONAL_INFO_COLLECTION}>
+                개인정보 수집
+              </StyledLink>
             </Column>
           </Row>
           <Row gap={17} alignItems="center">
-            <HoveredIconRoundBamdoliro
+            <HoverdIconRoundInstagram
               width={36}
               height={36}
               onClick={() => router.push('https://www.instagram.com/bamdoliro')}
             />
-            <HoverdIconRoundInstagram
+            <HoveredIconRoundBamdoliro
               width={36}
               height={36}
               onClick={() => router.push('https://bamdoliro.com/')}
@@ -98,7 +100,7 @@ const StyledLink = styled(Link)`
 `;
 
 const HoveredIconRoundBamdoliro = styled(IconRoundBamdoliro)`
-  :hover {
+  :hover :first-child {
     fill: ${color.bamdoliro};
   }
 
@@ -106,7 +108,7 @@ const HoveredIconRoundBamdoliro = styled(IconRoundBamdoliro)`
 `;
 
 const HoverdIconRoundInstagram = styled(IconRoundInstagram)`
-  :hover {
+  :hover :first-child {
     fill: ${color.bamdoliro};
   }
 
