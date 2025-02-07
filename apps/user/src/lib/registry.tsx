@@ -28,3 +28,5 @@ const StyledComponentRegistry = ({ children }: RegistryProps) => {
     </StyleSheetManager>
   );
 };
+
+export default StyledComponentRegistry;
