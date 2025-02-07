@@ -47,7 +47,7 @@ export default Profile;
 
 const StyledProfile = styled.div`
   ${flex({ flexDirection: 'column', alignItems: 'flex-end' })}
-  max-width: 240px;
+  min-width: 240px;
 `;
 
 const ProfileButton = styled.button`
