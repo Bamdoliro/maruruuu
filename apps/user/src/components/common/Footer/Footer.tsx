@@ -47,9 +47,9 @@ const Footer = () => {
           </Row>
           <Row gap={125} alignItems="flex-start">
             <Column gap={24}>
-              <StyledLink href={ROUTES.FORM}>이용약관</StyledLink>
-              <StyledLink href={ROUTES.NOTICE}>개인정보처리방침</StyledLink>
-              <StyledLink href={ROUTES.FAQ}>개인정보 수집</StyledLink>
+              <StyledLink href={ROUTES.TERMS_OF_SERVICE}>이용약관</StyledLink>
+              <StyledLink href={ROUTES.PRIVACY_POLCY}>개인정보처리방침</StyledLink>
+              <StyledLink href={ROUTES.PERSONAL_INFO_COLLECTION}>개인정보 수집</StyledLink>
             </Column>
           </Row>
           <Row gap={17} alignItems="center">
