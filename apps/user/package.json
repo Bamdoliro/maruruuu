@@ -23,6 +23,7 @@
     "@toss/use-overlay": "^1.4.2",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.7.9",
+    "dayjs": "^1.11.13",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
