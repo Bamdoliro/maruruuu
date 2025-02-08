@@ -8,4 +8,5 @@ export const ROUTES = {
   TERMS_OF_SERVICE: '/tos',
   PRIVACY_POLCY: '/privacy',
   PERSONAL_INFO_COLLECTION: '/collection',
+  FAIR: '/fair',
 };
