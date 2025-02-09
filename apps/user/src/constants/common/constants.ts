@@ -9,4 +9,6 @@ export const ROUTES = {
   PRIVACY_POLCY: '/privacy',
   PERSONAL_INFO_COLLECTION: '/collection',
   FAIR: '/fair',
+  FIRST_RESULT: '/result/first',
+  FINAL_RESULT: '/result/final',
 };
