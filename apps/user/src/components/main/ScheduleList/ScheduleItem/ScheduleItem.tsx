@@ -4,8 +4,10 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import dayjs, { Dayjs } from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
+import utc from 'dayjs/plugin/utc';
 
 dayjs.extend(isBetween);
+dayjs.extend(utc);
 
 interface ScheduleItemProps {
   title: string;
