@@ -11,12 +11,12 @@ const ApplicationBox = () => {
   const place = '본교 SRC관 1층';
   const router = useRouter();
 
+  const handleMoveFairPage = () => {
+    router.push(ROUTES.FAIR);
+  };
+
   return (
-    <StyledApplicationBox
-      onClick={() => {
-        router.push(ROUTES.FAIR);
-      }}
-    >
+    <StyledApplicationBox onClick={handleMoveFairPage}>
       <Row gap={8} alignItems="center">
         <Text fontType="H3" color={color.gray900}>
           입학전형 설명회 신청

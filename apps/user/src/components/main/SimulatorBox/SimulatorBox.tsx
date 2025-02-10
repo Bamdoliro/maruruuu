@@ -9,12 +9,12 @@ import styled from 'styled-components';
 const SimulatorBox = () => {
   const router = useRouter();
 
+  const handleMoveSimulator = () => {
+    router.push(ROUTES.SIMULATOR);
+  };
+
   return (
-    <StyledSimulatorBox
-      onClick={() => {
-        router.push(ROUTES.FAIR);
-      }}
-    >
+    <StyledSimulatorBox onClick={handleMoveSimulator}>
       <Row gap={8} alignItems="flex-start" justifyContent="space-between">
         <Text fontType="H3" color={color.gray900}>
           성적 모의 계산

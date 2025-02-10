@@ -11,4 +11,5 @@ export const ROUTES = {
   FAIR: '/fair',
   FIRST_RESULT: '/result/first',
   FINAL_RESULT: '/result/final',
+  SIMULATOR: '/simulator',
 };

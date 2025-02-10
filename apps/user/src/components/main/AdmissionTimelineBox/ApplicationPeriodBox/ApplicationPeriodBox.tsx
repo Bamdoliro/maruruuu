@@ -3,12 +3,9 @@ import { schoolRecruitDate } from './ApplicationPeriodBox.helper';
 import { color } from '@maru/design-system';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
-import { useRouter } from 'next/navigation';
-import { ROUTES } from '@/constants/common/constants';
 
 const ApplicationPeriodBox = () => {
-  const router = useRouter();
-  const { applicationStart, applicationEnd } = schoolRecruitDate();
+  const { applicationStart, applicationEnd, handleMoveFormPage } = schoolRecruitDate();
 
   return (
     <StyledApplicationPeriodBox>
@@ -21,14 +18,7 @@ const ApplicationPeriodBox = () => {
           {applicationStart} ~ {applicationEnd}
         </Text>
       </Column>
-      <Button
-        width={250}
-        size="LARGE"
-        styleType="PRIMARY"
-        onClick={() => {
-          router.push(ROUTES.FORM);
-        }}
-      >
+      <Button width={250} size="LARGE" styleType="PRIMARY" onClick={handleMoveFormPage}>
         원서 작성하기
       </Button>
     </StyledApplicationPeriodBox>
