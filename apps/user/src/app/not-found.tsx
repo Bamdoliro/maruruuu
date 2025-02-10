@@ -48,7 +48,3 @@ const StyledNotFound = styled.div`
   margin: 82px auto 0;
   width: fit-content;
 `;
-
-const StyledText = styled(Text)`
-  ${flex({ alignItems: 'center' })};
-`;
