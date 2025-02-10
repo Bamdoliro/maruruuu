@@ -1,5 +1,5 @@
 import { Button, Column, Text } from '@maru/ui';
-import { schoolRecruitDate } from './ApplicationPeriodBox.helper';
+import { schoolRecruitDate } from './ApplicationPeriodBox.hook';
 import { color } from '@maru/design-system';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
