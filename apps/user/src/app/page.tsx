@@ -17,11 +17,11 @@ export default function Home() {
   return (
     <AppLayout header footer>
       <StyledMainPage>
-        <Row gap={80} width="100%" justifyContent="center">
+        <Row gap={80} width="100%" justifyContent="flex-start">
           <AdmissionTimelineBox />
           <ScheduleList />
         </Row>
-        <Row gap={48} width="100%" justifyContent="center">
+        <Row gap={48} width="100%" justifyContent="flex-start">
           <GuidelineBox />
           <ApplicationBox />
           <SimulatorBox />
