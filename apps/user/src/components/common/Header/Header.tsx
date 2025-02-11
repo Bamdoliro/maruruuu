@@ -42,7 +42,7 @@ const Header = () => {
           {NAVIGATION_LIST.map(({ route, name }, index) => (
             <UnderlineButton
               key={`navigation ${index}`}
-              active={route === pathName}
+              active={pathName === route || pathName.startsWith(`${route}/`)}
               onClick={() => router.push(route)}
             >
               {name}
