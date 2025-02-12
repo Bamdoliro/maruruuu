@@ -21,7 +21,7 @@ export default function Home() {
           <AdmissionTimelineBox />
           <ScheduleList />
         </Row>
-        <Row gap={48} width="100%" justifyContent="center">
+        <Row gap={48} width="100%" justifyContent="flex-start">
           <GuidelineBox />
           <ApplicationBox />
           <SimulatorBox />
