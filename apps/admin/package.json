@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "admin",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -11,9 +11,22 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@maru/design-system": "workspace:*",
+    "@maru/hooks": "workspace:*",
+    "@maru/icon": "workspace:*",
+    "@maru/ui": "workspace:*",
+    "@maru/utils": "workspace:*",
+    "@suspensive/react": "^2.18.12",
+    "@suspensive/react-query": "^2.18.12",
+    "@tanstack/react-query": "^5.66.0",
+    "@tanstack/react-query-devtools": "^5.66.0",
+    "axios": "^1.7.9",
     "next": "^14.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-cookie": "^7.2.2",
+    "react-dom": "^18.2.0",
+    "react-toastify": "^11.0.3",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@maru/eslint-config": "workspace:*",
@@ -21,6 +34,7 @@
     "@types/node": "^20",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
+    "styled-components": "^6.1.14",
     "typescript": "5.5.4"
   }
 }
