@@ -12,4 +12,15 @@ export const ROUTES = {
   FIRST_RESULT: '/result/first',
   FINAL_RESULT: '/result/final',
   SIMULATOR: '/simulator',
+  LOGIN: '/login',
+};
+
+export const TOKEN = {
+  ACCESS: 'access-token',
+  REFRESH: 'refresh-token',
+} as const;
+
+export const KEY = {
+  NOTICE_LIST: 'useNoticeList',
+  NOTICE_DETAIL: 'useNoticeDetail',
 };

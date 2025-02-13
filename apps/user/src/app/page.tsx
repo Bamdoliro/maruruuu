@@ -16,8 +16,8 @@ import styled from 'styled-components';
 export default function Home() {
   return (
     <AppLayout header footer>
-      <StyledMainPage>
-        <Row gap={80} width="100%" justifyContent="flex-start">
+      <StyledHome>
+        <Row gap={80} width="100%" justifyContent="center">
           <AdmissionTimelineBox />
           <ScheduleList />
         </Row>
@@ -26,12 +26,12 @@ export default function Home() {
           <ApplicationBox />
           <SimulatorBox />
         </Row>
-      </StyledMainPage>
+      </StyledHome>
     </AppLayout>
   );
 }
 
-const StyledMainPage = styled.div`
+const StyledHome = styled.div`
   ${flex({ flexDirection: 'column', alignItems: 'center' })}
   gap: 80px;
   padding: 52px 96px 111px;

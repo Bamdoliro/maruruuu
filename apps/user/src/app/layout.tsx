@@ -1,5 +1,6 @@
 import Provider from '@/components/Provider';
 import StyledComponentRegistry from '@/lib/registry';
+import QueryClientProvider from '@/services/QueryClientProvider';
 import React, { ReactNode } from 'react';
 
 export const metadata = {
@@ -17,7 +18,9 @@ const RootLayout = ({ children }: Props) => {
       <head>
         <body>
           <StyledComponentRegistry>
-            <Provider>{children}</Provider>
+            <QueryClientProvider>
+              <Provider>{children}</Provider>
+            </QueryClientProvider>
           </StyledComponentRegistry>
         </body>
       </head>
