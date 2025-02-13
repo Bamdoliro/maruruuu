@@ -19,7 +19,7 @@ export const useNoticeListQuery = () => {
 
 export const useNoticeDetailQuery = (id: number) => {
   const { data, ...restQuery } = useSuspenseQuery({
-    queryKey: [KEY.NOTICE_DETAIL] as const,
+    queryKey: [KEY.NOTICE_DETAIL, id],
     queryFn: () => getNoticeDetail(id),
   });
 
