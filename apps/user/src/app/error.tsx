@@ -16,8 +16,7 @@ const Error = () => {
   };
 
   const handlePageRefresh = () => {
-    router.refresh();
-    
+    window.location.reload();
   };
 
   return (
