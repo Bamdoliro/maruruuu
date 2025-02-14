@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <AppLayout header footer>
       <StyledHome>
-        <Row gap={80} width="100%" justifyContent="center">
+        <Row gap={80} width="100%" justifyContent="flex-start">
           <AdmissionTimelineBox />
           <ScheduleList />
         </Row>
@@ -40,5 +40,5 @@ export default function Home() {
 const StyledHome = styled.div`
   ${flex({ flexDirection: 'column', alignItems: 'center' })}
   gap: 80px;
-  padding: 52px 96px 111px;
+  padding: 52px 96px 146px;
 `;
