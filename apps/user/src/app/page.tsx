@@ -3,7 +3,9 @@
 import {
   AdmissionTimelineBox,
   ApplicationBox,
+  FaqBox,
   GuidelineBox,
+  NoticeBox,
   ScheduleList,
   SimulatorBox,
 } from '@/components/main';
@@ -25,6 +27,10 @@ export default function Home() {
           <GuidelineBox />
           <ApplicationBox />
           <SimulatorBox />
+        </Row>
+        <Row gap={48} width="100%" justifyContent="flex-start">
+          <NoticeBox />
+          <FaqBox />
         </Row>
       </StyledHome>
     </AppLayout>
