@@ -1,12 +1,38 @@
 'use client';
 
 import { color } from '@maru/design-system';
-import { Button, Column, Input, PreviewInput } from '@maru/ui';
+import { Button, Column, Input, Loader, PreviewInput } from '@maru/ui';
 import { flex } from '@maru/utils';
 import Image from 'next/image';
 import { styled } from 'styled-components';
+import { useInput, useLoginAction } from './Login.hooks';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useEffect } from 'react';
+import { Cookie } from '@/apis/cookie/cookie';
+import { ROUTES } from '@/constants/common/constant';
 
-const LoginPage = () => {
+const LoginContent = () => {
+  const { loginAdminData, handleLoginAdminDataChange } = useInput();
+  const { handleLogin } = useLoginAction(loginAdminData);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const message = searchParams.get('message');
+
+  const handleEnterKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
+  useEffect(() => {
+    if (message) {
+      alert(message);
+      localStorage.clear();
+      Cookie.removeItem('refresh-token');
+      router.replace(ROUTES.MAIN);
+    }
+  }, [message, router]);
+
   return (
     <StyledLogin>
       <LoginBox>
@@ -14,16 +40,37 @@ const LoginPage = () => {
           <Image src="/svg/maruLogo.svg" width={232} height={70} alt="logo" />
           <Column gap={36} width="100%">
             <Column gap={24}>
-              <Input label="전화번호" width="100%" name="phoneNumber" />
-              <PreviewInput label="비밀번호" width="100%" name="password" />
+              <Input
+                label="전화번호"
+                width="100%"
+                name="phoneNumber"
+                onChange={handleLoginAdminDataChange}
+              />
+              <PreviewInput
+                label="비밀번호"
+                width="100%"
+                name="password"
+                onChange={handleLoginAdminDataChange}
+                onKeyDown={handleEnterKeyPress}
+              />
             </Column>
             <Column gap={16}>
-              <Button width="100%">로그인</Button>
+              <Button width="100%" onClick={handleLogin}>
+                로그인
+              </Button>
             </Column>
           </Column>
         </Column>
       </LoginBox>
     </StyledLogin>
+  );
+};
+
+const LoginPage = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <LoginContent />
+    </Suspense>
   );
 };
 
