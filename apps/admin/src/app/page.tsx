@@ -6,32 +6,17 @@ import { flex } from '@maru/utils';
 import Image from 'next/image';
 import { styled } from 'styled-components';
 import { useInput, useLoginAction } from './Login.hooks';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect } from 'react';
-import { Cookie } from '@/apis/cookie/cookie';
-import { ROUTES } from '@/constants/common/constant';
+import { Suspense } from 'react';
 
 const LoginContent = () => {
   const { loginAdminData, handleLoginAdminDataChange } = useInput();
   const { handleLogin } = useLoginAction(loginAdminData);
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const message = searchParams.get('message');
 
   const handleEnterKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleLogin();
     }
   };
-
-  useEffect(() => {
-    if (message) {
-      alert(message);
-      localStorage.clear();
-      Cookie.removeItem('refresh-token');
-      router.replace(ROUTES.MAIN);
-    }
-  }, [message, router]);
 
   return (
     <StyledLogin>
