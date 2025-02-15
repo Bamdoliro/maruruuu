@@ -1,3 +1,7 @@
+export const KEY = {
+  LOGIN_CHECK: 'useLoginCheck',
+};
+
 export const ROUTES = {
   MAIN: '/',
 } as const;
