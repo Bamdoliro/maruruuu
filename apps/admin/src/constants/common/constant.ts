@@ -1,3 +1,7 @@
+export const KEY = {
+  ADMIN: 'useAdmin',
+};
+
 export const ROUTES = {
   MAIN: '/',
 } as const;
