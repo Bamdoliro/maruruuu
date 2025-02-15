@@ -10,13 +10,13 @@ interface FaqListProps {
 
 const FaqList = ({ category }: FaqListProps) => {
   const { data: faqListData } = useFaqListQuery(category);
-  const [openIdex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
     setOpenIndex(null);
   }, [category]);
 
-  const handleOnToggle = (index: number) => {
+  const handleToggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
@@ -24,11 +24,11 @@ const FaqList = ({ category }: FaqListProps) => {
     <StyledFaqList>
       {faqListData.map(({ title, content }, index) => (
         <FaqItem
-          key={index}
+          key={`faq ${index}`}
           title={title}
           content={content}
-          isOpen={openIdex === index}
-          onToggle={() => handleOnToggle(index)}
+          isOpen={openIndex === index}
+          onToggle={() => handleToggle(index)}
         />
       ))}
     </StyledFaqList>
