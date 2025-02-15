@@ -4,12 +4,15 @@ import FaqBoxItem from './FaqBoxItem/FaqBoxItem';
 
 const FaqBoxList = () => {
   const { data: mainFaqListData } = useFaqListQuery('TOP_QUESTION');
+  const sliceFaqData = mainFaqListData.slice(0, 3);
 
   return (
     <StyledFaqBoxList>
-      {mainFaqListData.slice(0, 3).map(({ title }, index) => (
-        <FaqBoxItem key={`faq item ${index}`} title={title} />
-      ))}
+      {mainFaqListData
+        ? sliceFaqData.map(({ title }, index) => (
+            <FaqBoxItem key={`faq item ${index}`} title={title} />
+          ))
+        : null}
     </StyledFaqBoxList>
   );
 };

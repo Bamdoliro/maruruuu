@@ -4,12 +4,15 @@ import NoticeBoxItem from './NoticeBoxItem/NoticeBoxItem';
 
 const NoticeBoxList = () => {
   const { data: mainNoticeListData } = useNoticeListQuery();
+  const sliceNoticeData = mainNoticeListData.slice(0, 3);
 
   return (
     <StyledNoticeBoxList>
-      {mainNoticeListData.slice(0, 3).map(({ title, id }, index) => (
-        <NoticeBoxItem id={id} title={title} key={`notice box ${index}`} />
-      ))}
+      {mainNoticeListData
+        ? sliceNoticeData.map(({ title, id }, index) => (
+            <NoticeBoxItem id={id} title={title} key={`notice box ${index}`} />
+          ))
+        : null}
     </StyledNoticeBoxList>
   );
 };
