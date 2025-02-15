@@ -1,4 +1,4 @@
-import { PostLoginAuthReq, GetCheckLoginRes } from '@/types/auth/remote';
+import { PostLoginAuthReq } from '@/types/auth/remote';
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
 
@@ -9,9 +9,4 @@ export const postLoginAdmin = async ({ phoneNumber, password }: PostLoginAuthReq
 
 export const deleteLogoutAdmin = async () => {
   await maru.delete('/auth', authorization());
-};
-
-export const getCheckLogin = async () => {
-  const { data } = await maru.get<GetCheckLoginRes>('/user', authorization());
-  return data;
 };

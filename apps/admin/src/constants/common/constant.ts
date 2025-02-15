@@ -1,5 +1,5 @@
 export const KEY = {
-  LOGIN_CHECK: 'useLoginCheck',
+  ADMIN: 'useAdmin',
 };
 
 export const ROUTES = {
