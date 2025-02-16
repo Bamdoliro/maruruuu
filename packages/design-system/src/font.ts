@@ -30,6 +30,8 @@ const font = {
 
   context: fontGenerator(500, 1, 130, 0),
   caption: fontGenerator(400, 0.75, 140, 0),
+  code: fontGenerator(400, 1, 130, 0),
+  form: fontGenerator(400, 1, 180, 0),
 
   btn1: fontGenerator(600, 1.125, 130, 0),
   btn2: fontGenerator(500, 1, 130, 0),
