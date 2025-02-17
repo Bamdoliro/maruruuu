@@ -1,4 +1,5 @@
 export interface Fair {
+  id: number;
   start: string;
   place: string;
   applicationUrl: string;
