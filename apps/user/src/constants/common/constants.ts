@@ -13,6 +13,8 @@ export const ROUTES = {
   FINAL_RESULT: '/result/final',
   SIMULATOR: '/simulator',
   LOGIN: '/login',
+  CHANGE_PASSWORD: '/change-password',
+  SIGNUP: '/signup',
 };
 
 export const TOKEN = {
