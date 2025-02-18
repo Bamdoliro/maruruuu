@@ -1,4 +1,5 @@
 import Provider from '@/components/Provider';
+import GoogleAnalytics from '@/lib/GoogleAnalytics';
 import StyledComponentRegistry from '@/lib/registry';
 import QueryClientProvider from '@/services/QueryClientProvider';
 import React, { ReactNode } from 'react';
@@ -17,6 +18,9 @@ const RootLayout = ({ children }: Props) => {
     <html lang="ko">
       <head>
         <body>
+          {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+          ) : null}
           <StyledComponentRegistry>
             <QueryClientProvider>
               <Provider>{children}</Provider>
