@@ -61,7 +61,7 @@ const FairContent = ({ category }: FairContentProps) => {
 export default FairContent;
 
 const Separator = styled.p`
-  border: 1px solid ${color.gray400};
+  border: 1px solid ${color.gray200};
   margin: 2% 0;
   width: 100%;
   max-width: 830px;
