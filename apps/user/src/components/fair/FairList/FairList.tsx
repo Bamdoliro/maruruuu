@@ -28,9 +28,13 @@ const FairList = ({ fairType, status }: FairListProps) => {
       {fairListData
         .filter(({ status: itemStatus }) => status.includes(itemStatus))
         .map(
-          ({ start, place, status, applicationStartDate, applicationEndDate }, index) => (
+          (
+            { id, start, place, status, applicationStartDate, applicationEndDate },
+            index
+          ) => (
             <FairItem
               key={`fair ${index}`}
+              id={id}
               place={place}
               start={start}
               status={status}
