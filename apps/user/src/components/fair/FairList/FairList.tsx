@@ -39,6 +39,8 @@ const FairList = ({ fairType, status }: FairListProps) => {
       )
     ) {
       alert('신청이 마감된 입학 설명회입니다.');
+    } else if (status.includes('APPLICATION_NOT_STARTED')) {
+      alert('신청이 시작되지 않았습니다. 신청 기한을 확인해주세요.');
     }
   };
 
