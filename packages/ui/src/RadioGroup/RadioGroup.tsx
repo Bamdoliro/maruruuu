@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Row from '../Flex/Row';
 import Radio from '../Radio/Radio';
+import { flex } from '@maru/utils';
 
 interface Radio {
   value: string;
@@ -11,7 +12,7 @@ interface Radio {
 }
 
 interface RadioGroupProps {
-  label: string;
+  label?: string | React.ReactNode;
   items: Radio[] | string[];
   name: string;
   value: string;
@@ -22,7 +23,7 @@ const RadioGroup = ({ label, items, name, value, onChange }: RadioGroupProps) =>
   return (
     <StyledRadioGroup>
       <Label>{label}</Label>
-      <Row>
+      <Row gap={40}>
         {items.map((item, index) => {
           const isString = typeof item === 'string';
           const radioLabel = isString ? item : item.label;
@@ -49,7 +50,6 @@ const RadioGroup = ({ label, items, name, value, onChange }: RadioGroupProps) =>
 export default RadioGroup;
 
 const StyledRadioGroup = styled.div`
-  width: 100%;
   height: 100%;
 `;
 
@@ -62,5 +62,4 @@ const Label = styled.p`
 const RadioLabel = styled.p`
   ${font.p2};
   color: ${color.gray900};
-  margin-right: 40px;
 `;
