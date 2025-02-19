@@ -1,9 +1,7 @@
-import { ROUTES } from '@/constants/common/constants';
 import { formatApplicationDate, formatStartDate, formatStatus } from '@/utils';
 import { color } from '@maru/design-system';
 import { Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
 interface FairItemProps {
@@ -13,6 +11,7 @@ interface FairItemProps {
   applicationStartDate: string;
   applicationEndDate: string;
   status: string;
+  onClick: (id: number) => void;
 }
 
 const FairItem = ({
@@ -22,15 +21,10 @@ const FairItem = ({
   applicationStartDate,
   applicationEndDate,
   status,
+  onClick,
 }: FairItemProps) => {
-  const router = useRouter();
-
-  const handleMoveFairApplicationPage = () => {
-    router.push(`${ROUTES.FAIR}/${id}`);
-  };
-
   return (
-    <StyledFairItem onClick={handleMoveFairApplicationPage}>
+    <StyledFairItem onClick={() => onClick(id)}>
       <Row gap={30} alignItems="center">
         <Text fontType="H3" color={color.gray900}>
           {formatStartDate(start)}

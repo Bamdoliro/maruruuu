@@ -4,6 +4,8 @@ import FairItem from './FairItem/FairItem';
 import { Text } from '@maru/ui';
 import { color } from '@maru/design-system';
 import { flex } from '@maru/utils';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/common/constants';
 
 interface FairListProps {
   fairType: string;
@@ -11,6 +13,7 @@ interface FairListProps {
 }
 
 const FairList = ({ fairType, status }: FairListProps) => {
+  const router = useRouter();
   const { data: fairListData } = useFairListQuery(fairType);
 
   if (!fairListData || fairListData.length === 0) {
@@ -23,6 +26,22 @@ const FairList = ({ fairType, status }: FairListProps) => {
     );
   }
 
+  const handleMoveApplicationPage = (id: number) => {
+    if (status.includes('APPLICATION_IN_PROGRESS')) {
+      if (fairType === 'STUDENT_AND_PARENT') {
+        router.push(`${ROUTES.FAIR}/student/${id}`);
+      } else if (fairType === 'TEACHER') {
+        router.push(`${ROUTES.FAIR}/teacher/${id}`);
+      }
+    } else if (
+      status.some((status) =>
+        ['APPLICATION_CLOSED', 'APPLICATION_EARLY_CLOSED'].includes(status)
+      )
+    ) {
+      alert('신청이 마감된 입학 설명회입니다.');
+    }
+  };
+
   return (
     <StyledFairList>
       {fairListData
@@ -33,13 +52,14 @@ const FairList = ({ fairType, status }: FairListProps) => {
             index
           ) => (
             <FairItem
-              key={`fair ${index}`}
               id={id}
+              key={`fair ${index}`}
               place={place}
               start={start}
               status={status}
               applicationEndDate={applicationEndDate}
               applicationStartDate={applicationStartDate}
+              onClick={() => handleMoveApplicationPage(id)}
             />
           )
         )}
