@@ -1,12 +1,12 @@
 import { color, font } from '@maru/design-system';
 import { IconError } from '@maru/icon';
-import React from 'react';
 import styled, { css } from 'styled-components';
 import ConditionalMessage from './ConditionalMessage';
 import type { InputProps } from './Input.type';
 
 const Input = ({
   width = 320,
+  height,
   label,
   placeholder,
   type = 'text',
@@ -20,7 +20,7 @@ const Input = ({
   isError = false,
 }: InputProps) => {
   return (
-    <div style={{ width }}>
+    <div style={{ width, height }}>
       {label && <Label>{label}</Label>}
       <div style={{ position: 'relative' }}>
         <StyledInput
