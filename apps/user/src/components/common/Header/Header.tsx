@@ -1,14 +1,18 @@
 import { ROUTES } from '@/constants/common/constants';
 import { color } from '@maru/design-system';
-import { Row, UnderlineButton } from '@maru/ui';
+import { Button, Row, UnderlineButton } from '@maru/ui';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import Profile from './Profile/Profile';
+import { useUser } from '@/hooks';
+import { useCTAButton } from './Header.hook';
 
 const Header = () => {
   const router = useRouter();
   const pathName = usePathname();
+  const { isLogIn } = useUser();
+  const { handleMoveLoginPage, handleMoveSignupPage } = useCTAButton();
 
   const NAVIGATION_LIST = [
     { name: '홈', route: ROUTES.MAIN },
@@ -36,7 +40,26 @@ const Header = () => {
             alt="logo"
             onClick={() => router.push(ROUTES.MAIN)}
           />
-          <Profile />
+          {isLogIn ? (
+            <Profile />
+          ) : (
+            <Row gap={10} alignItems="center">
+              <Button
+                styleType="QUATERNARY"
+                size="SMALL"
+                onClick={handleMoveLoginPage}
+              >
+                로그인
+              </Button>
+              <Button
+                styleType="PRIMARY"
+                size="SMALL"
+                onClick={handleMoveSignupPage}
+              >
+                회원가입
+              </Button>
+            </Row>
+          )}
         </Row>
         <Row style={{ padding: '0px 96px' }} alignItems="center">
           {NAVIGATION_LIST.map(({ route, name }, index) => (
