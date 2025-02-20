@@ -6,13 +6,15 @@ import { FairApplication } from '@/types/fair/client';
 import { toast } from 'react-toastify';
 import { ROUTES } from '@/constants/common/constants';
 
-export const useFairApplicationQuery = (id: number) => {
+export const useFairApplicationQuery = (
+  id: number,
+  fairApplicationData: FairApplication
+) => {
   const { handleError } = useApiError();
   const router = useRouter();
 
   const { mutate: postFairApplicationMutate, ...restMutation } = useMutation({
-    mutationFn: (fiarApplicationData: FairApplication) =>
-      postFairApplication(id, fiarApplicationData),
+    mutationFn: () => postFairApplication(id, fairApplicationData),
     onSuccess: () => {
       toast('입학 설명회 참석 신청이 되었습니다.', {
         type: 'success',
