@@ -2,7 +2,7 @@ import { maru } from '@/apis/instance/instance';
 import { FairApplication } from '@/types/fair/client';
 import { GetFairListRes } from '@/types/fair/remote';
 
-export const getFairList = async (fairType: string) => {
+export const getFairList = async (fairType?: string) => {
   const { data } = await maru.get<GetFairListRes>(`/fair?type=${fairType}`);
 
   return data;
