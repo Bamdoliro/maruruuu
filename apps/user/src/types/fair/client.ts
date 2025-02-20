@@ -13,6 +13,6 @@ export interface FairApplication {
   name: string;
   type: string;
   phoneNumber: string;
-  headcount?: number;
-  question: string;
+  headcount?: number | null;
+  question?: string;
 }
