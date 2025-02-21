@@ -3,6 +3,7 @@ import GoogleAnalytics from '@/lib/GoogleAnalytics';
 import StyledComponentRegistry from '@/lib/registry';
 import QueryClientProvider from '@/services/QueryClientProvider';
 import React, { ReactNode } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
   title: '부산소프트웨어마이스터고 입학전형 | 마루',

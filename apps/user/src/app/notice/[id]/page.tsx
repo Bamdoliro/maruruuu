@@ -44,7 +44,6 @@ export default NoticeDetail;
 const StyledNoticeDetail = styled.div`
   ${flex({ flexDirection: 'column' })}
   width: 100%;
-  max-width: 1440px;
   height: 100%;
   position: relative;
   gap: 36px;
