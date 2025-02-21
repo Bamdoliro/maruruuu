@@ -1,18 +1,20 @@
 import { color, font } from '@maru/design-system';
-import type { TextareaHTMLAttributes } from 'react';
+import type { CSSProperties, TextareaHTMLAttributes } from 'react';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import ConditionalMessage from './ConditionalMessage';
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   limit: number;
-  label: string;
+  label: string | React.ReactNode;
   isError?: boolean;
   errorMessage?: string;
   message?: string;
+  width?: CSSProperties['width'];
 }
 
 const Textarea = ({
+  width = 320,
   limit,
   label,
   name,
@@ -25,7 +27,7 @@ const Textarea = ({
   const textValue = value as string;
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', width }}>
       {label && <Label>{label}</Label>}
       <div style={{ position: 'relative' }}>
         <StyledTextarea
@@ -85,7 +87,7 @@ const TextCount = styled.span`
 `;
 
 const Label = styled.p`
-  ${font.H5}
+  ${font.context}
   color: ${color.gray900};
   margin-bottom: 8px;
 `;
