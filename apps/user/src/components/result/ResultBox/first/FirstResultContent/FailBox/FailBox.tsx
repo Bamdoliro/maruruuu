@@ -17,7 +17,7 @@ const FailBox = () => {
         앞으로의 여정에서도 여러분의 도전과 성장을 응원하며, 더 나은 내일을 향해 함께
         걷도록 하겠습니다.
       </Text>
-      <Button size="LARGE" styleType="SECONDARY" onClick={handleMoveMainPage}>
+      <Button size="LARGE" styleType="PRIMARY" onClick={handleMoveMainPage}>
         홈으로 돌아가기
       </Button>
     </StyledFailBox>
