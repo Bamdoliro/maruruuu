@@ -12,6 +12,7 @@ import { styled } from 'styled-components';
 
 const ResultFirst = () => {
   const [firstResultStep, setFirstResultStep] = useState<ResultStep>('MAIN');
+
   return (
     <AppLayout header footer>
       <StyledResultFirst>
