@@ -5,3 +5,5 @@ export interface Result {
   changedToRegular: boolean;
   passed: boolean;
 }
+
+export type ResultStep = 'MAIN' | 'RESULT';
