@@ -1,6 +1,6 @@
 'use client';
 
-import { FirstResultBox, ResultMain } from '@/components/result';
+import { FirstResultBox, ResultMainBox } from '@/components/result';
 import AppLayout from '@/layouts/AppLayout';
 import { ResultStep } from '@/types/result/client';
 import { color } from '@maru/design-system';
@@ -28,7 +28,7 @@ const ResultFirst = () => {
           value={firstResultStep}
           caseBy={{
             MAIN: (
-              <ResultMain
+              <ResultMainBox
                 date="2024년 10월 23일 (월) 15:00"
                 capacity="일반전형 및 특별전형 각각 모집정원의 130% 이내"
                 setResultStep={setFirstResultStep}
