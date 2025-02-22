@@ -5,24 +5,24 @@ import { useFirstResultQuery } from '@/services/result/queries';
 import PassBox from './FirstResultContent/PassBox/PassBox';
 import FailBox from './FirstResultContent/FailBox/FailBox';
 
-const FirstResultTable = () => {
+const FirstResultBox = () => {
   const { data: firstResultData } = useFirstResultQuery();
 
   return (
-    <StyledFirstResultTable>
+    <StyledFirstResultBox>
       <FirstResultItem
         type={firstResultData?.type}
         isPassed={firstResultData?.passed}
         changedToRegular={firstResultData?.changedToRegular}
       />
       {firstResultData?.passed ? <PassBox /> : <FailBox />}
-    </StyledFirstResultTable>
+    </StyledFirstResultBox>
   );
 };
 
-export default FirstResultTable;
+export default FirstResultBox;
 
-const StyledFirstResultTable = styled.div`
+const StyledFirstResultBox = styled.div`
   ${flex({ flexDirection: 'column', alignItems: 'center' })}
   width: 100%;
   gap: 8px;
