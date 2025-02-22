@@ -30,5 +30,5 @@ export const KEY = {
   USER: 'useUser',
   FIRST_RESULT: 'useFirstResult',
   FINAL_RESULT: 'useFinalResult',
-  ADMISSION_TICKEY: 'useDownloadAdmissionTicket',
+  ADMISSION_TICKET: 'useDownloadAdmissionTicket',
 };

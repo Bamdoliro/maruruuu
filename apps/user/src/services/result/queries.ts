@@ -25,7 +25,7 @@ export const useFinalResultQuery = () => {
 
 export const useDownloadAdmissionTicketQuery = () => {
   const { data, ...restQuery } = useQuery({
-    queryKey: [KEY.ADMISSION_TICKEY] as const,
+    queryKey: [KEY.ADMISSION_TICKET] as const,
     queryFn: getAdmissionTicket,
     enabled: !!Storage.getItem(TOKEN.ACCESS),
   });
