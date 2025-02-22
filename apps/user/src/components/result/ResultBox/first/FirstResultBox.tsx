@@ -1,8 +1,9 @@
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import FirstResultItem from './FirstResultItem/FirstResultItem';
-import FirstResultFooter from './FirstResultFooter/FirstResultFooter';
 import { useFirstResultQuery } from '@/services/result/queries';
+import PassBox from './FirstResultContent/PassBox/PassBox';
+import FailBox from './FirstResultContent/FailBox/FailBox';
 
 const FirstResultTable = () => {
   const { data: firstResultData } = useFirstResultQuery();
@@ -14,7 +15,7 @@ const FirstResultTable = () => {
         isPassed={firstResultData?.passed}
         changedToRegular={firstResultData?.changedToRegular}
       />
-      <FirstResultFooter isPassed={firstResultData?.passed} />
+      {firstResultData?.passed ? <PassBox /> : <FailBox />}
     </StyledFirstResultTable>
   );
 };
