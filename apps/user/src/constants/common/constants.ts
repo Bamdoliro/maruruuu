@@ -28,4 +28,7 @@ export const KEY = {
   FAQ_LIST: 'useFaqList',
   FAIR_LIST: 'useFairList',
   USER: 'useUser',
+  FIRST_RESULT: 'useFirstResult',
+  FINAL_RESULT: 'useFinalResult',
+  ADMISSION_TICKET: 'useDownloadAdmissionTicket',
 };

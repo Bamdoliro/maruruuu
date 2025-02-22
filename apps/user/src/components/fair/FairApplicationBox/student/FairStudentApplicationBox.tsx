@@ -26,7 +26,7 @@ const FairStudentApplicationBox = ({ id }: FairStudentApplicationBoxProps) => {
   );
 
   return (
-    <StyledFairStudentApplicationBox>
+    <div>
       <Column gap={120}>
         <Column gap={64}>
           <Input
@@ -150,13 +150,11 @@ const FairStudentApplicationBox = ({ id }: FairStudentApplicationBoxProps) => {
           제출하기
         </Button>
       </Column>
-    </StyledFairStudentApplicationBox>
+    </div>
   );
 };
 
 export default FairStudentApplicationBox;
-
-const StyledFairStudentApplicationBox = styled.div``;
 
 const PrivacyConcert = styled.div`
   ${flex({ flexDirection: 'column' })}
