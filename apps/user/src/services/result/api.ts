@@ -13,3 +13,12 @@ export const getFinalResult = async () => {
 
   return data;
 };
+
+export const getAdmissionTicket = async () => {
+  const { data } = await maru.get('/form/admission-ticket', {
+    ...authorization(),
+    responseType: 'blob',
+  });
+
+  return data;
+};
