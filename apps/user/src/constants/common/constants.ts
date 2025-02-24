@@ -4,7 +4,7 @@ export const ROUTES = {
   FORM_MANAGEMENT: '/management',
   NOTICE: '/notice',
   FAQ: '/faq',
-  ADMISSION_REGISTRATION: '/enroll',
+  ADMISSION_REGISTRATION: '/enrollment',
   TERMS_OF_SERVICE: '/tos',
   PRIVACY_POLCY: '/privacy',
   PERSONAL_INFO_COLLECTION: '/collection',
@@ -31,4 +31,5 @@ export const KEY = {
   FIRST_RESULT: 'useFirstResult',
   FINAL_RESULT: 'useFinalResult',
   ADMISSION_TICKET: 'useDownloadAdmissionTicket',
+  FORM_STATUS: 'useFormStatus',
 };
