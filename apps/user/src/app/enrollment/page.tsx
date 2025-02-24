@@ -1,6 +1,6 @@
 'use client';
 
-import { EntrollmentLoader, ExplainBox, FileUploader } from '@/components/enrollment';
+import { EnrollmentLoader, ExplainBox, FileUploader } from '@/components/enrollment';
 import AppLayout from '@/layouts/AppLayout';
 import { color } from '@maru/design-system';
 import { Button, Column, Text } from '@maru/ui';
@@ -39,7 +39,7 @@ const Enrollment = () => {
 
   return (
     <AppLayout header footer>
-      <EntrollmentLoader isOpen={isPending} />
+      <EnrollmentLoader isOpen={isPending} />
       <StyledEnrollment>
         <Text fontType="H1" color={color.gray900}>
           입학 등록원 제출

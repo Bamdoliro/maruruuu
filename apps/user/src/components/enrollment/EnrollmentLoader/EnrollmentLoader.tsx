@@ -3,14 +3,14 @@ import { Column, Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
-interface EntrollmentLoaderProps {
+interface EnrollmentLoaderProps {
   isOpen: boolean;
 }
 
-const EntrollmentLoader = ({ isOpen }: EntrollmentLoaderProps) => {
+const EnrollmentLoader = ({ isOpen }: EnrollmentLoaderProps) => {
   return (
     <BlurBackground $isOpen={isOpen}>
-      <StyledEntrollmentLoader>
+      <StyledEnrollmentLoader>
         <Column gap={8} alignItems="center">
           <Text fontType="H2" color={color.gray900}>
             pdf를 업로드하는 중입니다.
@@ -20,12 +20,12 @@ const EntrollmentLoader = ({ isOpen }: EntrollmentLoaderProps) => {
           </Text>
         </Column>
         <Loader top="65%" />
-      </StyledEntrollmentLoader>
+      </StyledEnrollmentLoader>
     </BlurBackground>
   );
 };
 
-export default EntrollmentLoader;
+export default EnrollmentLoader;
 
 const BlurBackground = styled.div<{ $isOpen: boolean }>`
   position: fixed;
@@ -40,7 +40,7 @@ const BlurBackground = styled.div<{ $isOpen: boolean }>`
   z-index: 1;
 `;
 
-const StyledEntrollmentLoader = styled.div`
+const StyledEnrollmentLoader = styled.div`
   position: relative;
   ${flex({ flexDirection: 'column', alignItems: 'center' })};
   gap: 48px;
