@@ -1,5 +1,5 @@
 import { EntrollmentDocument } from '@/types/enrollment/remote';
-import { atom, useSetRecoilState } from 'recoil';
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const entrollmentDocumentAtomState = atom<EntrollmentDocument>({
   key: 'entrollment-document',
@@ -11,3 +11,5 @@ const entrollmentDocumentAtomState = atom<EntrollmentDocument>({
 
 export const useSetEntrollmentDocumentStore = () =>
   useSetRecoilState(entrollmentDocumentAtomState);
+export const useEntrollmentDocumentValueStore = () =>
+  useRecoilValue(entrollmentDocumentAtomState);

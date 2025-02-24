@@ -1,2 +1,5 @@
 export { useUserStore } from './user/user';
-export { useSetEntrollmentDocumentStore } from './entrollment/entrollmentDocument';
+export {
+  useSetEntrollmentDocumentStore,
+  useEntrollmentDocumentValueStore,
+} from './entrollment/entrollmentDocument';
