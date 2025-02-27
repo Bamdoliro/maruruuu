@@ -32,4 +32,6 @@ export const KEY = {
   FINAL_RESULT: 'useFinalResult',
   ADMISSION_TICKET: 'useDownloadAdmissionTicket',
   FORM_STATUS: 'useFormStatus',
+  EXPORT_FORM: 'useExportForm',
+  EXPORT_RECIPT: 'useExportRecipt',
 };
