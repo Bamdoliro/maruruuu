@@ -8,10 +8,10 @@ interface CheckingBoxProps {
   title: string;
   subTitle: string;
   onClick: () => void;
-  isIcon: boolean;
+  isIcon?: boolean;
 }
 
-const CheckingBox = ({ title, subTitle, onClick, isIcon }: CheckingBoxProps) => {
+const CheckingBox = ({ title, subTitle, onClick, isIcon = false }: CheckingBoxProps) => {
   return (
     <StyledCheckingBox onClick={onClick}>
       <Row gap={8} alignItems="center">
@@ -41,4 +41,6 @@ const StyledCheckingBox = styled.div`
   padding: 24px 32px;
   border: 1px solid ${color.gray200};
   background-color: ${color.white};
+
+  cursor: pointer;
 `;
