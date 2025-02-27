@@ -7,3 +7,21 @@ export const getFormStatus = async () => {
 
   return data;
 };
+
+export const getExportForm = async () => {
+  const { data } = await maru.get('/form/export', {
+    ...authorization(),
+    responseType: 'blob',
+  });
+
+  return data;
+};
+
+export const getExportRecipt = async () => {
+  const { data } = await maru.get('/form/proof-of-application', {
+    ...authorization(),
+    responseType: 'blob',
+  });
+
+  return data;
+};
