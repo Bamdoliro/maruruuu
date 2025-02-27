@@ -1,7 +1,7 @@
 import { SCHEDULE } from '@/constants/form/constants';
 import dayjs from 'dayjs';
 
-export const getStatusConfig = (status: string, name: string) => {
+export const getStatusConfig = (status?: string, name?: string) => {
   const now = dayjs();
 
   const statusConfig = {

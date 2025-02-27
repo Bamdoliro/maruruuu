@@ -8,7 +8,7 @@ import StatusIcon from './StatusIcon';
 
 interface StatusBoxProps {
   height: string;
-  status: string;
+  status?: string;
 }
 
 const StatusBox = ({ height, status }: StatusBoxProps) => {

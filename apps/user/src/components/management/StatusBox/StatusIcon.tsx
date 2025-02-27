@@ -3,7 +3,7 @@ import { IconCancelCircle, IconCheckCircle, IconGrayCircle, IconGrayIngCircle } 
 import dayjs from 'dayjs';
 
 interface StatusIconProps {
-  status: string;
+  status?: string;
 }
 
 const StatusIcon = ({ status }: StatusIconProps) => {
