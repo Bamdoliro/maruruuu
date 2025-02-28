@@ -26,7 +26,7 @@ export const useExportFormQuery = () => {
 
 export const useExportReciptQuery = () => {
   const { data, ...restQuery } = useQuery({
-    queryKey: [KEY.EXPORT_RECIPT],
+    queryKey: [KEY.EXPORT_RECEIPT],
     queryFn: getExportRecipt,
     retry: 1,
   });

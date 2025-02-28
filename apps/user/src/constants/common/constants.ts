@@ -33,5 +33,5 @@ export const KEY = {
   ADMISSION_TICKET: 'useDownloadAdmissionTicket',
   FORM_STATUS: 'useFormStatus',
   EXPORT_FORM: 'useExportForm',
-  EXPORT_RECIPT: 'useExportRecipt',
+  EXPORT_RECEIPT: 'useExportReceipt',
 };
