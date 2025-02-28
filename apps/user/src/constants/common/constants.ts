@@ -11,7 +11,7 @@ export const ROUTES = {
   FAIR: '/fair',
   FIRST_RESULT: '/result/first',
   FINAL_RESULT: '/result/final',
-  SIMULATOR: '/simulator',
+  SIMULATION: '/simulation',
   LOGIN: '/login',
   CHANGE_PASSWORD: '/change-password',
   SIGNUP: '/signup',
