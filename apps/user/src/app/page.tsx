@@ -7,7 +7,7 @@ import {
   GuidelineBox,
   NoticeBox,
   ScheduleList,
-  SimulatorBox,
+  SimulationBox,
 } from '@/components/main';
 import AppLayout from '@/layouts/AppLayout';
 import { Row } from '@maru/ui';
@@ -26,7 +26,7 @@ export default function Home() {
         <Row gap={48} width="100%" justifyContent="flex-start">
           <GuidelineBox />
           <ApplicationBox />
-          <SimulatorBox />
+          <SimulationBox />
         </Row>
         <Row gap={48} width="100%" justifyContent="flex-start">
           <NoticeBox />
