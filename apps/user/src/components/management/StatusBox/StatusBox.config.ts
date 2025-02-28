@@ -4,20 +4,23 @@ import dayjs from 'dayjs';
 export const getStatusConfig = (status?: string, name?: string) => {
   const now = dayjs();
 
+  const firstResult = now.isAfter(SCHEDULE.일차_합격_발표);
+  const finalResult = now.isAfter(SCHEDULE.최종_합격_발표);
+
   const statusConfig = {
     RECEIVED: {
       text: '승인됨',
       script: `원서가 승인되었습니다.<br />${name}님의 1차 합격을 기원합니다!`,
     },
     FIRST_FAILED: {
-      text: now.isAfter(SCHEDULE.일차_합격_발표) ? '1차 불합격' : '검토중',
-      script: now.isAfter(SCHEDULE.일차_합격_발표)
+      text: firstResult ? '1차 불합격' : '검토중',
+      script: firstResult
         ? `1차 전형에서 불합격하셨습니다.<br />관심을 가지고 지원해 주셔서 감사합니다.`
         : `아직 1차 합격자 발표일이 아닙니다.<br />발표일까지 기다려 주세요.`,
     },
     FAILED: {
-      text: now.isAfter(SCHEDULE.최종_합격_발표) ? '최종 불합격' : '검토중',
-      script: now.isAfter(SCHEDULE.최종_합격_발표)
+      text: finalResult ? '최종 불합격' : '검토중',
+      script: finalResult
         ? `최종 전형에서 불합격하셨습니다.<br />관심을 가지고 지원해 주셔서 감사합니다.`
         : `아직 최종 합격자 발표일이 아닙니다.<br />발표일까지 기다려 주세요.`,
     },
@@ -34,20 +37,20 @@ export const getStatusConfig = (status?: string, name?: string) => {
       script: `원서가 확인 중입니다.<br />담당 선생님의 원서 승인을 기다려주세요.`,
     },
     NO_SHOW: {
-      text: now.isAfter(SCHEDULE.최종_합격_발표) ? '불참' : '검토중',
-      script: now.isAfter(SCHEDULE.최종_합격_발표)
+      text: finalResult ? '불참' : '검토중',
+      script: finalResult
         ? `2차 전형에 참여하지 않으셨기에<br />자동 불합격 처리되셨습니다.`
         : `아직 최종 합격자 발표일이 아닙니다.<br />발표일까지 기다려 주세요.`,
     },
     FIRST_PASSED: {
-      text: now.isAfter(SCHEDULE.일차_합격_발표) ? '1차 합격' : '검토중',
-      script: now.isAfter(SCHEDULE.일차_합격_발표)
+      text: firstResult ? '1차 합격' : '검토중',
+      script: firstResult
         ? `1차 합격하셨습니댜.<br />남은 전형도 힘내시길 바랍니다.`
         : `아직 1차 합격자 발표일이 아닙니다.<br />발표일까지 기다려 주세요.`,
     },
     PASSED: {
-      text: now.isAfter(SCHEDULE.최종_합격_발표) ? '최종합격' : '검토중',
-      script: now.isAfter(SCHEDULE.최종_합격_발표)
+      text: finalResult ? '최종합격' : '검토중',
+      script: finalResult
         ? `최종 합격하셨습니댜.<br />위대한 여정의 시작을 축하드립니다.`
         : `아직 최종 합격자 발표일이 아닙니다.<br />발표일까지 기다려 주세요.`,
     },

@@ -1,5 +1,10 @@
 import { SCHEDULE } from '@/constants/form/constants';
-import { IconCancelCircle, IconCheckCircle, IconGrayCircle, IconGrayIngCircle } from '@maru/icon';
+import {
+  IconCancelCircle,
+  IconCheckCircle,
+  IconGrayCircle,
+  IconGrayIngCircle,
+} from '@maru/icon';
 import dayjs from 'dayjs';
 
 interface StatusIconProps {
@@ -9,14 +14,17 @@ interface StatusIconProps {
 const StatusIcon = ({ status }: StatusIconProps) => {
   const now = dayjs();
 
+  const firstResult = now.isAfter(SCHEDULE.일차_합격_발표);
+  const finalResult = now.isAfter(SCHEDULE.최종_합격_발표);
+
   const iconMap = {
     RECEIVED: <IconCheckCircle width={120} height={120} />,
-    FIRST_FAILED: now.isAfter(SCHEDULE.일차_합격_발표) ? (
+    FIRST_FAILED: firstResult ? (
       <IconCancelCircle width={120} height={120} />
     ) : (
       <IconGrayIngCircle width={120} height={120} />
     ),
-    FAILED: now.isAfter(SCHEDULE.최종_합격_발표) ? (
+    FAILED: finalResult ? (
       <IconCancelCircle width={120} height={120} />
     ) : (
       <IconGrayIngCircle width={120} height={120} />
@@ -24,17 +32,17 @@ const StatusIcon = ({ status }: StatusIconProps) => {
     FINAL_SUBMITTED: <IconCheckCircle width={120} height={120} />,
     SUBMITTED: <IconCheckCircle width={120} height={120} />,
     APPROVED: <IconCheckCircle width={120} height={120} />,
-    NO_SHOW: now.isAfter(SCHEDULE.최종_합격_발표) ? (
+    NO_SHOW: finalResult ? (
       <IconCancelCircle width={120} height={120} />
     ) : (
       <IconGrayIngCircle width={120} height={120} />
     ),
-    FIRST_PASSED: now.isAfter(SCHEDULE.일차_합격_발표) ? (
+    FIRST_PASSED: firstResult ? (
       <IconCheckCircle width={120} height={120} />
     ) : (
       <IconGrayIngCircle width={120} height={120} />
     ),
-    PASSED: now.isAfter(SCHEDULE.최종_합격_발표) ? (
+    PASSED: finalResult ? (
       <IconCheckCircle width={120} height={120} />
     ) : (
       <IconGrayIngCircle width={120} height={120} />
