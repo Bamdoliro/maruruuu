@@ -6,15 +6,15 @@ import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-const SimulatorBox = () => {
+const SimulationBox = () => {
   const router = useRouter();
 
-  const handleMoveSimulator = () => {
-    router.push(ROUTES.SIMULATOR);
+  const handleMoveSimulation = () => {
+    router.push(ROUTES.SIMULATION);
   };
 
   return (
-    <StyledSimulatorBox onClick={handleMoveSimulator}>
+    <StyledSimulationBox onClick={handleMoveSimulation}>
       <Row gap={8} alignItems="flex-start" justifyContent="space-between">
         <Text fontType="H3" color={color.gray900}>
           성적 모의 계산
@@ -26,13 +26,13 @@ const SimulatorBox = () => {
         <br />
         자동으로 계산할 수 있어요
       </Text>
-    </StyledSimulatorBox>
+    </StyledSimulationBox>
   );
 };
 
-export default SimulatorBox;
+export default SimulationBox;
 
-const StyledSimulatorBox = styled.div`
+const StyledSimulationBox = styled.div`
   ${flex({ flexDirection: 'column', justifyContent: 'space-between' })}
   width: 384px;
   height: 180px;
