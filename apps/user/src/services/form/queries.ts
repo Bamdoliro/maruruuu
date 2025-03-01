@@ -1,6 +1,6 @@
 import { KEY, TOKEN } from '@/constants/common/constants';
 import { useQuery } from '@tanstack/react-query';
-import { getFormStatus } from './api';
+import { getExportForm, getExportRecipt, getFormStatus } from './api';
 import { Storage } from '@/apis/storage/storage';
 
 export const useFormStatusQuery = () => {
@@ -12,4 +12,24 @@ export const useFormStatusQuery = () => {
   });
 
   return { data: data?.data, ...restQuery };
+};
+
+export const useExportFormQuery = () => {
+  const { data, ...restQuery } = useQuery({
+    queryKey: [KEY.EXPORT_FORM],
+    queryFn: getExportForm,
+    retry: 1,
+  });
+
+  return { data, ...restQuery };
+};
+
+export const useExportReciptQuery = () => {
+  const { data, ...restQuery } = useQuery({
+    queryKey: [KEY.EXPORT_RECEIPT],
+    queryFn: getExportRecipt,
+    retry: 1,
+  });
+
+  return { data, ...restQuery };
 };
