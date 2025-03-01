@@ -12,6 +12,7 @@ export const useNavigationClick = () => {
 
     if (qualificationExam && nowStep) {
       alert('검정고시 합격자는 기본 점수가 부여돼요.');
+      return;
     }
     setCurrentStep(step);
   };
