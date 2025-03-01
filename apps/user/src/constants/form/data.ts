@@ -1,4 +1,4 @@
-import { Form } from '@/types/form/client';
+import { Form, Subject } from '@/types/form/client';
 
 export const STEP_LIST = ['성적 입력', '출결상황', '봉사시간', '자격증'] as const;
 
@@ -59,3 +59,52 @@ export const FORM: Form = {
   },
   type: 'REGULAR',
 };
+
+export const SUBJECT_LIST: Subject[] = [
+  '국어',
+  '사회',
+  '역사',
+  '도덕',
+  '수학',
+  '과학',
+  '기술가정',
+  '영어',
+  '체육',
+  '음악',
+  '미술',
+  '정보',
+].map((subject, index) => ({
+  id: index,
+  subjectName: subject,
+  achievementLevel21: '-',
+  achievementLevel22: '-',
+  achievementLevel31: '-',
+  score: null,
+}));
+
+export const GED_SUBJECT_LIST: Subject[] = ['국어', '수학', '사회', '과학', '영어'].map(
+  (subject, index) => ({
+    id: index,
+    subjectName: subject,
+    achievementLevel21: null,
+    achievementLevel22: null,
+    achievementLevel31: null,
+    score: 0,
+  })
+);
+
+export const SELECT_GED_SUBJECT_LIST: Subject[] = [
+  '도덕',
+  '기술',
+  '가정',
+  '체육',
+  '음악',
+  '미술',
+].map((subject, index) => ({
+  id: index,
+  subjectName: subject,
+  achievementLevel21: null,
+  achievementLevel22: null,
+  achievementLevel31: null,
+  score: 0,
+}));

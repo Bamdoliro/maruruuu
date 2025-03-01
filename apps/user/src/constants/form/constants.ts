@@ -13,3 +13,20 @@ export const SCHEDULE = {
   입학_등록: dayjs(process.env.NEXT_PUBLIC_REGISTRATION_START),
   입학_등록_마감: dayjs(process.env.NEXT_PUBLIC_REGISTRATION_END),
 };
+
+export const SCORE = {
+  REGULAR_TYPE: 80,
+  SPECIAL_TYPE: 48,
+  ATTENDANCE: 14,
+  VOLUNTEER: 14,
+  MIN_ATTENDANCE: 0,
+  MAX_ATTENDANCE: 18,
+  MIN_VOLUNTEER: 0,
+  MAX_VOLUNTEER: 18,
+};
+
+export const COUNT = {
+  MAX_ABSENCE: 18,
+  MIN_VOLUNTEER: 15,
+  MAX_VOLUNTEER: 30,
+};
