@@ -35,7 +35,7 @@ const GradeCalculatorHeader = () => {
             </Row>
           </Column>
           <Th width="calc(100%/4.77)" height={100}>
-            3학년
+            삭제
           </Th>
         </Row>
       </Column>
