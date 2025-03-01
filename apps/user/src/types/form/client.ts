@@ -109,3 +109,13 @@ export type Certificate =
   | 'CRAFTSMAN_INFORMATION_PROCESSING'
   | 'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION'
   | 'CRAFTSMAN_COMPUTER';
+
+export interface Incomplete {
+  [subjectName: string]: {
+    isIncomplete21: boolean | null;
+    isIncomplete22: boolean | null;
+    isIncomplete31: boolean | null;
+  };
+}
+
+export type AttendanceName = 'attendance1' | 'attendance2' | 'attendance3';
