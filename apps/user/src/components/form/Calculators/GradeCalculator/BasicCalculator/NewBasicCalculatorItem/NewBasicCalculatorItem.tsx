@@ -6,14 +6,25 @@ import { useNewSubjectListValueStore } from '@/stores';
 import color from '@maru/design-system/src/color';
 import { font } from '@maru/design-system';
 import { useDeleteNewSubject, useInput } from './NewBasicCalculatorItem.hook';
+import { Subject } from '@/types/form/client';
 
-interface Props {
+interface NewBasicCalculatorItemProps {
   id: number;
   achievementLevels: string[];
   isError?: boolean[];
 }
 
-const NewBasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) => {
+const ACHIEVEMENT_KEYS: (keyof Subject)[] = [
+  'achievementLevel21',
+  'achievementLevel22',
+  'achievementLevel31',
+];
+
+const NewBasicCalculatorItem = ({
+  id,
+  achievementLevels,
+  isError = [],
+}: NewBasicCalculatorItemProps) => {
   const newSubjectList = useNewSubjectListValueStore();
   const newSubjectIndex = newSubjectList.findIndex((item) => item.id === id);
 
@@ -21,7 +32,7 @@ const NewBasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) 
     useInput(newSubjectIndex);
   const { handleDeleteNewSubject } = useDeleteNewSubject();
 
-  const subject = newSubjectList[newSubjectIndex];
+  const subject = newSubjectList[newSubjectIndex] as Subject;
 
   const isDropdownDisabled =
     !subject.subjectName ||
@@ -46,42 +57,20 @@ const NewBasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) 
           error={sameSubject}
         />
       </Td>
-      <Td width="24%" height={64}>
-        <Dropdown
-          value={subject.achievementLevel21 ?? '미이수'}
-          size="SMALL"
-          data={achievementLevels}
-          width={80}
-          name="achievementLevel21"
-          onChange={handleNewSubjectChange}
-          isError={subject.achievementLevel21 === '-' && (isError[id] ?? false)}
-          disabled={isDropdownDisabled}
-        />
-      </Td>
-      <Td width="24%" height={64}>
-        <Dropdown
-          value={subject.achievementLevel22 ?? '미이수'}
-          size="SMALL"
-          data={achievementLevels}
-          width={80}
-          name="achievementLevel22"
-          onChange={handleNewSubjectChange}
-          isError={subject.achievementLevel22 === '-' && isError[id]}
-          disabled={isDropdownDisabled}
-        />
-      </Td>
-      <Td width="24%" height={64}>
-        <Dropdown
-          value={subject.achievementLevel31 ?? '미이수'}
-          size="SMALL"
-          data={achievementLevels}
-          width={80}
-          name="achievementLevel31"
-          onChange={handleNewSubjectChange}
-          isError={subject.achievementLevel31 === '-' && isError[id]}
-          disabled={isDropdownDisabled}
-        />
-      </Td>
+      {ACHIEVEMENT_KEYS.map((key) => (
+        <Td key={key} width="24%" height={64}>
+          <Dropdown
+            value={String(subject[key] ?? '미이수')}
+            size="SMALL"
+            data={achievementLevels}
+            width={80}
+            name={key}
+            onChange={handleNewSubjectChange}
+            isError={subject[key] === '-' && (isError[id] ?? false)}
+            disabled={isDropdownDisabled}
+          />
+        </Td>
+      ))}
       <Td width="15%" height={64}>
         <Button
           onClick={() => handleDeleteNewSubject(id)}
