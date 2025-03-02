@@ -1,4 +1,4 @@
-import { LEVEL_LIST } from '@/constants/form/data';
+import { LEVEL_LIST } from '@/constants/form/constants';
 import { useFormValueStore } from '@/stores';
 import { CheckBox, Column, Row, Td } from '@maru/ui';
 
@@ -19,7 +19,7 @@ const ComputerSpeciallistItem = ({ onChange }: ComputerSpeciallistItemProps) => 
       </Td>
       <Column width="24.5%">
         {LEVEL_LIST.map((item, key) => (
-          <Row>
+          <Row key={key}>
             <Td width="60%" height={56}>
               {item.name}
             </Td>

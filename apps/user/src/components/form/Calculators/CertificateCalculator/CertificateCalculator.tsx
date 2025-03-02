@@ -6,7 +6,7 @@ import { useInput } from './CertificateCalculator.hook';
 import CertificateCalculatorHeader from './CertificateCalculatorHeader/CertificateCalculatorHeader';
 import CertificateCalculatorItem from './CertificateCalculatorItem/CertificateCalculatorItem';
 import ComputerSpeciallistItem from './CertificateCalculatorItem/ComputerSpeciallistItem/ComputerSpeciallistItem';
-import { CERTIFICATE_LIST } from '@/constants/form/data';
+import { CERTIFICATE_LIST } from '@/constants/form/constants';
 
 const CertificateCalculator = () => {
   const { handleCertificateListChange } = useInput();
