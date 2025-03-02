@@ -6,6 +6,7 @@ import AttendanceCalculatorHeader from './AttendanceCalculatorHeader/AttendanceC
 import { useFormValueStore } from '@/stores';
 import { useInput } from './AttendanceCalculator.hook';
 import AttendanceCalculatorItem from './AttendanceCalculatorItem/AttendanceCalculatorItem';
+import { ATTENDANCE_GRADE } from '@/constants/form/constants';
 
 const AttendanceCalculator = () => {
   const form = useFormValueStore();
@@ -20,7 +21,7 @@ const AttendanceCalculator = () => {
       </Text>
       <Column>
         <AttendanceCalculatorHeader />
-        {['attendance1', 'attendance2', 'attendance3'].map((attendanceName, index) => (
+        {ATTENDANCE_GRADE.map((attendanceName, index) => (
           <AttendanceCalculatorItem
             key={attendanceName}
             attendanceName={attendanceName}
