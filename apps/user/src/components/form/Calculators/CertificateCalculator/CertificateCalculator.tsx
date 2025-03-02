@@ -4,6 +4,36 @@ import { CheckBox, Column, Row, Td, Text, Th } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useInput } from './CertificateCalculator.hook';
+import CertificateCalculatorHeader from './CertificateCalculatorHeader/CertificateCalculatorHeader';
+import CertificateCalculatorItem from './CertificateCalculatorItem/CertificateCalculatorItem';
+import { Certificate } from '@/types/form/client';
+import ComputerSpeciallistItem from './CertificateCalculatorItem/ComputerSpeciallistItem/ComputerSpeciallistItem';
+
+const CERTIFICATE_LIST: {
+  name: string;
+  organization: string;
+  score: string;
+  value: Certificate;
+}[] = [
+  {
+    name: '정보처리기능사',
+    organization: '한국산업인력공단',
+    score: '4점',
+    value: 'CRAFTSMAN_INFORMATION_PROCESSING',
+  },
+  {
+    name: '정보기기운용기능사',
+    organization: '한국산업인력공단',
+    score: '4점',
+    value: 'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION',
+  },
+  {
+    name: '전자계산기기능사',
+    organization: '한국산업인력공단',
+    score: '4점',
+    value: 'CRAFTSMAN_COMPUTER',
+  },
+];
 
 const CertificateCalculator = () => {
   const form = useFormValueStore();
@@ -15,131 +45,19 @@ const CertificateCalculator = () => {
         *자격증을 중복 선택한 경우, 최고 수준의 자격증 1개만 인정됩니다.
       </Text>
       <Column>
-        <Row>
-          <Th borderTopLeftRadius={12} width="51%" height={56}>
-            자격증명
-          </Th>
-          <Th width="24.5%" height={56}>
-            시행기관
-          </Th>
-          <Th width="14.7%" height={56}>
-            반영점수
-          </Th>
-          <Th borderTopRightRadius={12} width="9.8%" height={56}>
-            선택
-          </Th>
-        </Row>
+        <CertificateCalculatorHeader />
         <Column>
-          <Row>
-            <Td width="51%" height={56}>
-              정보처리기능사
-            </Td>
-            <Td width="24.5%" height={56}>
-              한국산업인력공단
-            </Td>
-            <Td width="14.7%" height={56}>
-              4점
-            </Td>
-            <Td width="9.8%" height={56}>
-              <CheckBox
-                checked={form.grade.certificateList?.includes(
-                  'CRAFTSMAN_INFORMATION_PROCESSING'
-                )}
-                value="CRAFTSMAN_INFORMATION_PROCESSING"
-                onChange={handleCertificateListChange}
-              />
-            </Td>
-          </Row>
-          <Row>
-            <Td width="51%" height={56}>
-              정보기기운용기능사
-            </Td>
-            <Td width="24.5%" height={56}>
-              한국산업인력공단
-            </Td>
-            <Td width="14.7%" height={56}>
-              4점
-            </Td>
-            <Td width="9.8%" height={56}>
-              <CheckBox
-                checked={form.grade.certificateList?.includes(
-                  'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION'
-                )}
-                value="CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION"
-                onChange={handleCertificateListChange}
-              />
-            </Td>
-          </Row>
-          <Row>
-            <Td width="51%" height={56}>
-              전자계산기기능사
-            </Td>
-            <Td width="24.5%" height={56}>
-              한국산업인력공단
-            </Td>
-            <Td width="14.7%" height={56}>
-              4점
-            </Td>
-            <Td width="9.8%" height={56}>
-              <CheckBox
-                checked={form.grade.certificateList?.includes('CRAFTSMAN_COMPUTER')}
-                value="CRAFTSMAN_COMPUTER"
-                onChange={handleCertificateListChange}
-              />
-            </Td>
-          </Row>
-          <Row>
-            <Td borderBottomLeftRadius={12} width="51%" height={168}>
-              컴퓨터활용능력
-            </Td>
-            <Td width="24.5%" height={168}>
-              한국산업인력공단
-            </Td>
-            <Column width="24.5%">
-              <Row>
-                <Td width="60%" height={56}>
-                  1급(3점)
-                </Td>
-                <Td width="40%" height={56}>
-                  <CheckBox
-                    checked={form.grade.certificateList?.includes(
-                      'COMPUTER_SPECIALIST_LEVEL_1'
-                    )}
-                    value="COMPUTER_SPECIALIST_LEVEL_1"
-                    onChange={handleCertificateListChange}
-                  />
-                </Td>
-              </Row>
-              <Row>
-                <Td width="60%" height={56}>
-                  2급(2점)
-                </Td>
-                <Td width="40%" height={56}>
-                  <CheckBox
-                    checked={form.grade.certificateList?.includes(
-                      'COMPUTER_SPECIALIST_LEVEL_2'
-                    )}
-                    value="COMPUTER_SPECIALIST_LEVEL_2"
-                    onChange={handleCertificateListChange}
-                  />
-                </Td>
-              </Row>
-              <Row>
-                <Td width="60%" height={56}>
-                  3급(1점)
-                </Td>
-                <Td borderBottomRightRadius={12} width="40%" height={56}>
-                  <CheckBox
-                    checked={form.grade.certificateList?.includes(
-                      'COMPUTER_SPECIALIST_LEVEL_3'
-                    )}
-                    value="COMPUTER_SPECIALIST_LEVEL_3"
-                    onChange={handleCertificateListChange}
-                  />
-                </Td>
-              </Row>
-            </Column>
-          </Row>
+          {CERTIFICATE_LIST.map((item, key) => (
+            <CertificateCalculatorItem
+              key={key}
+              name={item.name}
+              organization={item.organization}
+              score={item.score}
+              value={item.value}
+              onChange={handleCertificateListChange}
+            />
+          ))}
+          <ComputerSpeciallistItem onChange={handleCertificateListChange} />
         </Column>
       </Column>
     </StyledCertificateCalculator>
