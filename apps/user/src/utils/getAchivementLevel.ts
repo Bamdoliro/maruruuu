@@ -1,4 +1,4 @@
-enum AchievementLevel {
+enum AchivementLevel {
   A = 'A',
   B = 'B',
   C = 'C',
@@ -9,15 +9,15 @@ enum AchievementLevel {
 const getAchivementLevel = (score: number) => {
   switch (true) {
     case score >= 90:
-      return AchievementLevel.A;
+      return AchivementLevel.A;
     case score >= 80:
-      return AchievementLevel.B;
+      return AchivementLevel.B;
     case score >= 70:
-      return AchievementLevel.C;
+      return AchivementLevel.C;
     case score >= 60:
-      return AchievementLevel.D;
+      return AchivementLevel.D;
     default:
-      return AchievementLevel.E;
+      return AchivementLevel.E;
   }
 };
 
