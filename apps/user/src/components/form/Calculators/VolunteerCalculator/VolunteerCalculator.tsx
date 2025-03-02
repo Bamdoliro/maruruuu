@@ -10,6 +10,11 @@ const VolunteerCalculator = () => {
   const { handleVolunteerTimeChange } = useInput();
 
   const isReadOnly = form.education.graduationType === 'QUALIFICATION_EXAMINATION';
+  const volunteerData = [
+    { grade: '1학년', name: 'volunteerTime1', value: form.grade.volunteerTime1 },
+    { grade: '2학년', name: 'volunteerTime2', value: form.grade.volunteerTime2 },
+    { grade: '3학년', name: 'volunteerTime3', value: form.grade.volunteerTime3 },
+  ];
 
   return (
     <StyledVolunteerCalculator>
@@ -25,51 +30,32 @@ const VolunteerCalculator = () => {
             봉사시간
           </Th>
         </Row>
-        <Row>
-          <Td width="20%" height={56} styleType="SECONDARY">
-            1학년
-          </Td>
-          <Td width="80%" height={56}>
-            <CellInput
-              name="volunteerTime1"
-              onChange={handleVolunteerTimeChange}
-              value={form.grade.volunteerTime1}
-              isError={Number(form.grade.volunteerTime1) < 0}
-              readOnly={isReadOnly}
-            />
-            <Hour>시간</Hour>
-          </Td>
-        </Row>
-        <Row>
-          <Td width="20%" height={56} styleType="SECONDARY">
-            2학년
-          </Td>
-          <Td width="80%" height={56}>
-            <CellInput
-              name="volunteerTime2"
-              onChange={handleVolunteerTimeChange}
-              value={form.grade.volunteerTime2}
-              isError={Number(form.grade.volunteerTime2) < 0}
-              readOnly={isReadOnly}
-            />
-            <Hour>시간</Hour>
-          </Td>
-        </Row>
-        <Row>
-          <Td borderBottomLeftRadius={12} width="20%" height={56} styleType="SECONDARY">
-            3학년
-          </Td>
-          <Td borderBottomRightRadius={12} width="80%" height={56}>
-            <CellInput
-              name="volunteerTime3"
-              onChange={handleVolunteerTimeChange}
-              value={form.grade.volunteerTime3}
-              isError={Number(form.grade.volunteerTime3) < 0}
-              readOnly={isReadOnly}
-            />
-            <Hour>시간</Hour>
-          </Td>
-        </Row>
+        {volunteerData.map(({ grade, name, value }, index) => (
+          <Row key={name}>
+            <Td
+              width="20%"
+              height={56}
+              styleType="SECONDARY"
+              borderBottomLeftRadius={index === volunteerData.length - 1 ? 12 : 0}
+            >
+              {grade}
+            </Td>
+            <Td
+              width="80%"
+              height={56}
+              borderBottomRightRadius={index === volunteerData.length - 1 ? 12 : 0}
+            >
+              <CellInput
+                name={name}
+                onChange={handleVolunteerTimeChange}
+                value={value}
+                isError={Number(value) < 0}
+                readOnly={isReadOnly}
+              />
+              <Hour>시간</Hour>
+            </Td>
+          </Row>
+        ))}
       </Column>
     </StyledVolunteerCalculator>
   );
