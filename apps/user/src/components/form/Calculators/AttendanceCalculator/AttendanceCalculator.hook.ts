@@ -7,7 +7,7 @@ export const useInput = () => {
 
   const handleAttendanceInfoChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
-    const [attendanceName, countName] = name.split('-');
+    const { attendanceName, countName } = JSON.parse(name);
 
     setForm((prev) => ({
       ...prev,

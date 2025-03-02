@@ -1,10 +1,11 @@
 import { color } from '@maru/design-system';
-import { CellInput, Column, Row, Td, Text } from '@maru/ui';
+import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import AttendanceCalculatorHeader from './AttendanceCalculatorHeader/AttendanceCalculatorHeader';
 import { useFormValueStore } from '@/stores';
 import { useInput } from './AttendanceCalculator.hook';
+import AttendanceCalculatorItem from './AttendanceCalculatorItem/AttendanceCalculatorItem';
 
 const AttendanceCalculator = () => {
   const form = useFormValueStore();
@@ -19,129 +20,17 @@ const AttendanceCalculator = () => {
       </Text>
       <Column>
         <AttendanceCalculatorHeader />
-        <Row>
-          <Td width="20%" height={56} styleType="SECONDARY">
-            1학년
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance1-absenceCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance1.absenceCount}
-              isError={Number(form.grade.attendance1.absenceCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance1-latenessCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance1.latenessCount}
-              isError={Number(form.grade.attendance1.latenessCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance1-earlyLeaveCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance1.earlyLeaveCount}
-              isError={Number(form.grade.attendance1.earlyLeaveCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance1-classAbsenceCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance1.classAbsenceCount}
-              isError={Number(form.grade.attendance1.classAbsenceCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-        </Row>
-        <Row>
-          <Td width="20%" height={56} styleType="SECONDARY">
-            2학년
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance2-absenceCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance2.absenceCount}
-              isError={Number(form.grade.attendance2.absenceCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance2-latenessCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance2.latenessCount}
-              isError={Number(form.grade.attendance2.latenessCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance2-earlyLeaveCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance2.earlyLeaveCount}
-              isError={Number(form.grade.attendance2.earlyLeaveCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance2-classAbsenceCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance2.classAbsenceCount}
-              isError={Number(form.grade.attendance2.classAbsenceCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-        </Row>
-        <Row>
-          <Td borderBottomLeftRadius={12} width="20%" height={56} styleType="SECONDARY">
-            3학년
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance3-absenceCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance3.absenceCount}
-              isError={Number(form.grade.attendance3.absenceCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance3-latenessCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance3.latenessCount}
-              isError={Number(form.grade.attendance3.latenessCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td width="20%" height={56}>
-            <CellInput
-              name="attendance3-earlyLeaveCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance3.earlyLeaveCount}
-              isError={Number(form.grade.attendance3.earlyLeaveCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-          <Td borderBottomRightRadius={12} width="20%" height={56}>
-            <CellInput
-              name="attendance3-classAbsenceCount"
-              onChange={handleAttendanceInfoChange}
-              value={form.grade.attendance3.classAbsenceCount}
-              isError={Number(form.grade.attendance3.classAbsenceCount) < 0}
-              readOnly={isReadOnly}
-            />
-          </Td>
-        </Row>
+        {['attendance1', 'attendance2', 'attendance3'].map((attendanceName, index) => (
+          <AttendanceCalculatorItem
+            key={attendanceName}
+            attendanceName={attendanceName}
+            grade={form.grade}
+            onChange={handleAttendanceInfoChange}
+            isReadOnly={isReadOnly}
+            isFirstRow={index === 0}
+            isLastRow={index === 2}
+          />
+        ))}
       </Column>
     </StyledAttendanceCalculator>
   );
