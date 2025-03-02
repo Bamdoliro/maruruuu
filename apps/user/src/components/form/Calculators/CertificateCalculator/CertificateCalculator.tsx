@@ -1,42 +1,14 @@
-import { useFormValueStore } from '@/stores';
 import { color } from '@maru/design-system';
-import { CheckBox, Column, Row, Td, Text, Th } from '@maru/ui';
+import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useInput } from './CertificateCalculator.hook';
 import CertificateCalculatorHeader from './CertificateCalculatorHeader/CertificateCalculatorHeader';
 import CertificateCalculatorItem from './CertificateCalculatorItem/CertificateCalculatorItem';
-import { Certificate } from '@/types/form/client';
 import ComputerSpeciallistItem from './CertificateCalculatorItem/ComputerSpeciallistItem/ComputerSpeciallistItem';
-
-const CERTIFICATE_LIST: {
-  name: string;
-  organization: string;
-  score: string;
-  value: Certificate;
-}[] = [
-  {
-    name: '정보처리기능사',
-    organization: '한국산업인력공단',
-    score: '4점',
-    value: 'CRAFTSMAN_INFORMATION_PROCESSING',
-  },
-  {
-    name: '정보기기운용기능사',
-    organization: '한국산업인력공단',
-    score: '4점',
-    value: 'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION',
-  },
-  {
-    name: '전자계산기기능사',
-    organization: '한국산업인력공단',
-    score: '4점',
-    value: 'CRAFTSMAN_COMPUTER',
-  },
-];
+import { CERTIFICATE_LIST } from '@/constants/form/data';
 
 const CertificateCalculator = () => {
-  const form = useFormValueStore();
   const { handleCertificateListChange } = useInput();
 
   return (

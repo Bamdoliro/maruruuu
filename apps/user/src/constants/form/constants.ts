@@ -36,4 +36,4 @@ export const WEIGHT = {
   REGULAR_31: 7.2 * 2,
   SPECIAL_21_22: 2.88,
   SPECIAL_31: 4.32 * 2,
-}
+};

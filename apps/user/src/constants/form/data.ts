@@ -1,4 +1,4 @@
-import { Form, Subject } from '@/types/form/client';
+import { Certificate, Form, Subject } from '@/types/form/client';
 
 export const STEP_LIST = ['성적 입력', '출결상황', '봉사시간', '자격증'] as const;
 
@@ -108,3 +108,35 @@ export const SELECT_GED_SUBJECT_LIST: Subject[] = [
   achievementLevel31: null,
   score: 0,
 }));
+
+export const CERTIFICATE_LIST: {
+  name: string;
+  organization: string;
+  score: string;
+  value: Certificate;
+}[] = [
+  {
+    name: '정보처리기능사',
+    organization: '한국산업인력공단',
+    score: '4점',
+    value: 'CRAFTSMAN_INFORMATION_PROCESSING',
+  },
+  {
+    name: '정보기기운용기능사',
+    organization: '한국산업인력공단',
+    score: '4점',
+    value: 'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION',
+  },
+  {
+    name: '전자계산기기능사',
+    organization: '한국산업인력공단',
+    score: '4점',
+    value: 'CRAFTSMAN_COMPUTER',
+  },
+];
+
+export const LEVEL_LIST: { name: string; value: Certificate }[] = [
+  { name: '1급(3점)', value: 'COMPUTER_SPECIALIST_LEVEL_1' },
+  { name: '2급(2점)', value: 'COMPUTER_SPECIALIST_LEVEL_2' },
+  { name: '3급(1점)', value: 'COMPUTER_SPECIALIST_LEVEL_3' },
+];
