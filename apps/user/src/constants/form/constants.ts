@@ -30,3 +30,10 @@ export const COUNT = {
   MIN_VOLUNTEER: 15,
   MAX_VOLUNTEER: 30,
 };
+
+export const WEIGHT = {
+  REGULAR_21_22: 4.8,
+  REGULAR_31: 7.2 * 2,
+  SPECIAL_21_22: 2.88,
+  SPECIAL_31: 4.32 * 2,
+}

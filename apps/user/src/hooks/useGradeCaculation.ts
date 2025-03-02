@@ -1,4 +1,4 @@
-import { COUNT, SCORE } from '@/constants/form/constants';
+import { COUNT, SCORE, WEIGHT } from '@/constants/form/constants';
 import { useFormValueStore } from '@/stores';
 import { getAchivementLevel } from '@/utils';
 
@@ -79,8 +79,8 @@ const useGradeCalculation = () => {
 
     const regularScore =
       SCORE.REGULAR_TYPE +
-      4.8 * (getScoreOf('achievementLevel21') + getScoreOf('achievementLevel22')) +
-      7.2 * 2 * getScoreOf('achievementLevel31');
+      WEIGHT.REGULAR_21_22 * (getScoreOf('achievementLevel21') + getScoreOf('achievementLevel22')) +
+      WEIGHT.REGULAR_31 * getScoreOf('achievementLevel31');
 
     return Number(regularScore.toFixed(3));
   };
@@ -92,8 +92,8 @@ const useGradeCalculation = () => {
 
     const specialScore =
       SCORE.SPECIAL_TYPE +
-      2.88 * (getScoreOf('achievementLevel21') + getScoreOf('achievementLevel22')) +
-      4.32 * 2 * getScoreOf('achievementLevel31');
+      WEIGHT.SPECIAL_21_22 * (getScoreOf('achievementLevel21') + getScoreOf('achievementLevel22')) +
+      WEIGHT.SPECIAL_31 * getScoreOf('achievementLevel31');
 
     return Number(specialScore.toFixed(3));
   };
