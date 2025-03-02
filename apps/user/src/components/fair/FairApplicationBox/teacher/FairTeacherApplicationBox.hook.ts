@@ -16,7 +16,7 @@ export const useInput = () => {
   const [application, setApplication] = useState<FairApplication>({
     schoolName: '',
     name: '',
-    type: '',
+    type: '진로교사',
     phoneNumber: '',
     headcount: 1,
     question: '',
