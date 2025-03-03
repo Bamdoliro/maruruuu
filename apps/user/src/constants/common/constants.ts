@@ -34,4 +34,5 @@ export const KEY = {
   FORM_STATUS: 'useFormStatus',
   EXPORT_FORM: 'useExportForm',
   EXPORT_RECEIPT: 'useExportReceipt',
+  SAVE_FORM: 'useSaveForm',
 };
