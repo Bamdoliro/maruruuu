@@ -1,6 +1,6 @@
 import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
-import { GetFormStatusRes } from '@/types/form/remote';
+import { GetFormStatusRes, GetSaveFormRes } from '@/types/form/remote';
 
 export const getFormStatus = async () => {
   const { data } = await maru.get<GetFormStatusRes>('/form/status', authorization());
@@ -22,6 +22,12 @@ export const getExportRecipt = async () => {
     ...authorization(),
     responseType: 'blob',
   });
+
+  return data;
+};
+
+export const getSaveForm = async () => {
+  const { data } = await maru.get<GetSaveFormRes>('/form/draft', authorization());
 
   return data;
 };

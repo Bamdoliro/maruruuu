@@ -1,6 +1,6 @@
 import { KEY, TOKEN } from '@/constants/common/constants';
 import { useQuery } from '@tanstack/react-query';
-import { getExportForm, getExportRecipt, getFormStatus } from './api';
+import { getExportForm, getExportRecipt, getFormStatus, getSaveForm } from './api';
 import { Storage } from '@/apis/storage/storage';
 
 export const useFormStatusQuery = () => {
@@ -32,4 +32,15 @@ export const useExportReciptQuery = () => {
   });
 
   return { data, ...restQuery };
+};
+
+export const useSaveFormQuery = () => {
+  const { data, ...restQuery } = useQuery({
+    queryKey: [KEY.SAVE_FORM],
+    queryFn: getSaveForm,
+    enabled: !!Storage.getItem(TOKEN.ACCESS),
+    retry: 1,
+  });
+
+  return { data: data?.data, ...restQuery };
 };
