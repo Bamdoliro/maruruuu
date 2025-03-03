@@ -1,7 +1,7 @@
 'use client';
 
 import { FirstResultBox, ResultMainBox } from '@/components/result';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { ResultStep } from '@/types/result/client';
 import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
