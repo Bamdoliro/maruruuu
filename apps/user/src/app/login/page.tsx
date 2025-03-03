@@ -1,7 +1,7 @@
 'use client';
 
 import { ROUTES } from '@/constants/common/constants';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { color, font } from '@maru/design-system';
 import { IconArrowRight } from '@maru/icon';
 import { Button, Column, Input, PreviewInput } from '@maru/ui';

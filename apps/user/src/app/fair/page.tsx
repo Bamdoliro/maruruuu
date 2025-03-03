@@ -1,7 +1,7 @@
 'use client';
 
 import { FairCategory, FairContent } from '@/components/fair';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Column, Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
