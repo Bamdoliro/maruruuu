@@ -17,6 +17,7 @@ const FormStatusManager = () => {
         status === 'FINAL_SUBMITTED'
       )
         setFormStep('최종제출완료');
+      else if (status === 'REJECTED') setFormStep('지원자정보');
     }
   }, [formStatusData, setFormStep]);
 
