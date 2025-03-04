@@ -132,4 +132,6 @@ export type FormStep =
   | '최종제출'
   | '최종제출완료';
 
+export type GradeStep = '교과성적' | '출결상황' | '봉사시간' | '자격증';
+
 export type SaveSubject = Omit<Subject, 'id'>;
