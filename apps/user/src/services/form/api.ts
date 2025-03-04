@@ -1,5 +1,6 @@
 import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
+import { Form } from '@/types/form/client';
 import { GetFormStatusRes, GetSaveFormRes } from '@/types/form/remote';
 
 export const getFormStatus = async () => {
@@ -28,6 +29,12 @@ export const getExportRecipt = async () => {
 
 export const getSaveForm = async () => {
   const { data } = await maru.get<GetSaveFormRes>('/form/draft', authorization());
+
+  return data;
+};
+
+export const postSaveForm = async (formData: Form) => {
+  const { data } = await maru.post('/form/draft', formData, authorization());
 
   return data;
 };
