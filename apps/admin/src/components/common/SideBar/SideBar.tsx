@@ -84,7 +84,7 @@ const commonStyles = css`
   ${font.H5}
   ${flex({ alignItems: 'center' })}
   height: 56px;
-  padding: 0 2rem;
+  padding: 0 36px;
   color: ${color.white};
 `;
 
@@ -98,11 +98,11 @@ const StyledSideBar = styled.div`
 `;
 
 const StyledImageBox = styled.div`
-  margin: 3rem 0 2rem 2rem;
+  margin: 48px 0 36px 36px;
 `;
 
 const StyledLogBox = styled.div`
-  margin-top: 7rem;
+  margin-top: 110px;
 `;
 
 const StyledLink = styled(Link).attrs<{ $active: boolean }>((props) => ({
