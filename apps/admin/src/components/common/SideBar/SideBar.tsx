@@ -44,7 +44,6 @@ const NAVIGATION_DATA = [
 
 const SideBar = () => {
   const pathName = usePathname();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { logoutAdminMutate } = useLogoutAdminMutation();
 
   const handleLogoutAdmin = () => {
@@ -67,13 +66,9 @@ const SideBar = () => {
           </StyledLink>
         ))}
       </Column>
-      <StyledLogBox>
-        {isLoggedIn ? (
-          <LogoutButton onClick={handleLogoutAdmin}>로그아웃</LogoutButton>
-        ) : (
-          <LoginLink href="/">로그인</LoginLink>
-        )}
-      </StyledLogBox>
+      <StyledLogoutBox>
+        <LogoutButton onClick={handleLogoutAdmin}>로그아웃</LogoutButton>
+      </StyledLogoutBox>
     </StyledSideBar>
   );
 };
@@ -101,7 +96,7 @@ const StyledImageBox = styled.div`
   margin: 48px 0 36px 36px;
 `;
 
-const StyledLogBox = styled.div`
+const StyledLogoutBox = styled.div`
   margin-top: 110px;
 `;
 
@@ -138,9 +133,4 @@ const LogoutButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
-`;
-
-const LoginLink = styled(Link)`
-  ${commonStyles}
-  ${font.btn1}
 `;
