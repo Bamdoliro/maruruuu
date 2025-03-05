@@ -1,5 +1,6 @@
 import { useFormStepValueStore } from '@/stores';
 import { color, font } from '@maru/design-system';
+import { IconCheck } from '@maru/icon';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 
@@ -34,7 +35,7 @@ const ProgressSteps = () => {
           $active={index < currentStepIndex}
           $isCurrent={index === currentStepIndex}
         >
-          {index < currentStepIndex ? '✓' : index + 1}
+          {index < currentStepIndex ? <IconCheck width={24} height={24} /> : index + 1}
         </Circle>
       ))}
     </StyledProgressSteps>
@@ -76,8 +77,7 @@ const Circle = styled.div<{ $active: boolean; $isCurrent: boolean; name: string 
 
   &::after {
     ${font.context}
-    color: ${(props) =>
-      props.$active || props.$isCurrent ? color.maruDefault : color.gray600};
+    color: ${(props) => (props.$isCurrent ? color.maruDefault : color.gray600)};
     content: '${(props) => props.name}';
     position: absolute;
     top: calc(100% + 4px);
