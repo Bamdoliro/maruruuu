@@ -4,6 +4,13 @@ export const KEY = {
 
 export const ROUTES = {
   MAIN: '/',
+  FORM: '/form',
+  NOTICE: '/notice',
+  FAQ: '/faq',
+  MESSAGE: '/message',
+  ANALYSIS: '/analysis',
+  FAIR: '/fair',
+  REGISTRATION: '/registration',
 } as const;
 
 export const TOKEN = {
