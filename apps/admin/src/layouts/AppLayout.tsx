@@ -1,6 +1,6 @@
 'use client';
 
-import SideBar from '@/components/common/SideBar/SideBar';
+import { SideBar } from '@/components/common';
 import { flex } from '@maru/utils';
 import type { ReactNode } from 'react';
 import { styled } from 'styled-components';
