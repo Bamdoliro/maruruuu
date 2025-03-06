@@ -4,3 +4,9 @@ export { default as AttendanceCalculator } from './Calculators/AttendanceCalcula
 export { default as VolunteerCalculator } from './Calculators/VolunteerCalculator/VolunteerCalculator';
 export { default as CertificateCalculator } from './Calculators/CertificateCalculator/CertificateCalculator';
 export { default as ProgressStage } from './ProgressStage/ProgressStage';
+export { default as ApplicantInformationContent } from './Contents/ApplicantInformationContent/ApplicantInformationContent';
+export { default as GuardianInformationContent } from './Contents/GuardianInformationContent/GuardianInformationContent';
+export { default as EducationContent } from './Contents/EducationContent/EducationContent';
+export { default as TypeContent } from './Contents/TypeContent/TypeContent';
+export { default as FormController } from './FormController/FormController';
+export { default as IntroductionContent } from './Contents/IntroductionContent/IntroductionContent';
