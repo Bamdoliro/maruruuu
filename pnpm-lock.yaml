@@ -147,6 +147,9 @@ importers:
       react:
         specifier: ^18.2.0
         version: 18.2.0
+      react-daum-postcode:
+        specifier: ^3.2.0
+        version: 3.2.0(react@18.2.0)
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
@@ -2674,6 +2677,14 @@ packages:
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
       universal-cookie: 7.2.2
+    dev: false
+
+  /react-daum-postcode@3.2.0(react@18.2.0):
+    resolution: {integrity: sha512-NHY8TUicZXMqykbKYT8kUo2PEU7xu1DFsdRmyWJrLEUY93Xhd3rEdoJ7vFqrvs+Grl9wIm9Byxh3bI+eZxepMQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-dom@18.2.0(react@18.2.0):
