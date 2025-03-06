@@ -38,4 +38,8 @@ export {
 
 export { useIsSaveFormLoadedStore } from './form/isSave';
 
-export { use성적입력StepStore, useSet성적입력StepStore } from './form/formGradeStep';
+export {
+  useFormGradeStepStore,
+  useSetFormGradeStepStore,
+  useFormGradeStepValueStore,
+} from './form/formGradeStep';
