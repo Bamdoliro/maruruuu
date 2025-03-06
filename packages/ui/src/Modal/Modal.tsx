@@ -2,7 +2,7 @@ import { color } from '@maru/design-system';
 import { IconClose } from '@maru/icon';
 import { flex } from '@maru/utils';
 import type { CSSProperties, ReactNode } from 'react';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import Column from '../Flex/Column';
@@ -68,7 +68,7 @@ const Modal = ({
           {mode === 'complete' ? (
             <>
               <Button styleType="SECONDARY" size="SMALL" onClick={onClose}>
-                취소
+                닫기
               </Button>
               <Button size="SMALL" onClick={onConfirm}>
                 완료
