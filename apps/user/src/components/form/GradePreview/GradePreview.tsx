@@ -1,9 +1,10 @@
 import { useGradeCaculation } from '@/hooks';
+import { GradeStep } from '@/types/form/client';
 import { Row, Td, Th } from '@maru/ui';
 import { styled } from 'styled-components';
 
 interface GradePreviewProps {
-  location?: 'GRADE' | 'ATTENDANCE' | 'VOLUNTEER' | 'CERTIFICATE';
+  location?: GradeStep;
 }
 
 const GradePreview = ({ location }: GradePreviewProps) => {
@@ -46,28 +47,28 @@ const GradePreview = ({ location }: GradePreviewProps) => {
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === 'GRADE' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '교과성적' ? 'FORM' : 'PRIMARY'}
         >
           {regularScore}
         </Td>
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === 'ATTENDANCE' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '출결상황' ? 'FORM' : 'PRIMARY'}
         >
           {attendanceScore}
         </Td>
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === 'VOLUNTEER' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '봉사시간' ? 'FORM' : 'PRIMARY'}
         >
           {volunteerScore}
         </Td>
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === 'CERTIFICATE' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '자격증' ? 'FORM' : 'PRIMARY'}
         >
           {certificateScore}
         </Td>
@@ -87,28 +88,28 @@ const GradePreview = ({ location }: GradePreviewProps) => {
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === 'GRADE' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '교과성적' ? 'FORM' : 'PRIMARY'}
         >
           {specialScore}
         </Td>
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === 'ATTENDANCE' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '출결상황' ? 'FORM' : 'PRIMARY'}
         >
           {attendanceScore}
         </Td>
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === 'VOLUNTEER' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '봉사시간' ? 'FORM' : 'PRIMARY'}
         >
           {volunteerScore}
         </Td>
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === 'CERTIFICATE' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '자격증' ? 'FORM' : 'PRIMARY'}
         >
           {certificateScore}
         </Td>
