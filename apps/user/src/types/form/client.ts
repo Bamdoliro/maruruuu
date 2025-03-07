@@ -135,3 +135,10 @@ export type FormStep =
 export type GradeStep = '교과성적' | '출결상황' | '봉사시간' | '자격증';
 
 export type SaveSubject = Omit<Subject, 'id'>;
+
+export interface School {
+  name: string;
+  location: string;
+  address: string;
+  code: string;
+}

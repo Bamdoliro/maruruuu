@@ -1,4 +1,4 @@
-import { Form, FormStatus } from './client';
+import { Form, FormStatus, School } from './client';
 
 export interface GetFormStatusRes {
   data: FormStatus;
@@ -6,4 +6,8 @@ export interface GetFormStatusRes {
 
 export interface GetSaveFormRes {
   data: Form;
+}
+
+export interface GetSchoolListRes {
+  dataList: School[];
 }
