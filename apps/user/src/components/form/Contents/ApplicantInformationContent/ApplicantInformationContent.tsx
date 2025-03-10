@@ -3,17 +3,25 @@ import { Column, Input, RadioGroup, Row } from '@maru/ui';
 import ProfileUploader from '../../ProfileUploader/ProfileUploader';
 import FormController from '../../FormController/FormController';
 import { useCTAButton, useInput } from './ApplicantInformationContent.hook';
+import { Storage } from '@/apis/storage/storage';
 
 const ApplicantInformationContent = () => {
   const { handleNextStep } = useCTAButton();
   const { handleApplicantInformationChange } = useInput();
   const form = useFormValueStore();
 
+  const handlePhotoUpload = (success: boolean, url?: string) => {
+    if (success && url) {
+      Storage.setItem('isUploadPicture', 'true');
+      Storage.setItem('downloadUrl', url);
+    }
+  };
+
   return (
     <>
       <Row width="100%" justifyContent="space-between">
         <Column gap={40} alignItems="center">
-          <ProfileUploader />
+          <ProfileUploader onPhotoUpload={handlePhotoUpload} />
         </Column>
         <Column gap={30} width={492}>
           <Input
