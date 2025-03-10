@@ -13,3 +13,10 @@ export { default as IntroductionContent } from './Contents/IntroductionContent/I
 export { default as CompleteAlarm } from './CompleteAlarm/CompleteAlarm';
 export { default as DraftCompletedContent } from './Contents/DraftCompletedContent/DraftCompletedContent';
 export { default as DraftFormModal } from './DraftFormModal/DraftFormModal';
+export { default as DraftSubmissionCompletedContent } from './Contents/DraftSubmissionCompletedContent/DraftSubmissionCompletedContent';
+export { default as SideBar } from './SideBar/SideBar';
+export { default as FormDownload } from './FormDownload/FormDownload';
+export { default as FinalFormTable } from './FinalFormTable/FinalFormTable';
+export { default as FinalFormUploader } from './FinalFormUploader/FinalFormUploader';
+export { default as FinalFormConfirm } from './FinalFormConfirm/FinalFormConfirm';
+export { default as PdfDownloadLoader } from './PdfDownloadLoader/PdfDownloadLoader';
