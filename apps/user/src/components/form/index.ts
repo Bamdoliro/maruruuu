@@ -10,3 +10,6 @@ export { default as EducationContent } from './Contents/EducationContent/Educati
 export { default as TypeContent } from './Contents/TypeContent/TypeContent';
 export { default as FormController } from './FormController/FormController';
 export { default as IntroductionContent } from './Contents/IntroductionContent/IntroductionContent';
+export { default as CompleteAlarm } from './CompleteAlarm/CompleteAlarm';
+export { default as DraftCompletedContent } from './Contents/DraftCompletedContent/DraftCompletedContent';
+export { default as DraftFormModal } from './DraftFormModal/DraftFormModal';
