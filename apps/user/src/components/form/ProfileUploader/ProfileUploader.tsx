@@ -1,37 +1,83 @@
 import { color, font } from '@maru/design-system';
+import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled, { css } from 'styled-components';
-import { Button, Column, Text } from '@maru/ui';
+import ProfileUploadLoader from '../ProfileUploadLoader/ProfileUploadLoader';
+import { useProfileUploader } from './ProfileUploader.hook';
+import { useOpenFileUploader } from '@/hooks';
 
-const ProfileUploader = () => {
+type ProfileUploaderProps = {
+  onPhotoUpload: (success: boolean, url?: string) => void;
+  isError?: boolean;
+};
+
+const ProfileUploader = ({ onPhotoUpload, isError }: ProfileUploaderProps) => {
+  const {
+    imageSrc,
+    isUploading,
+    isDragging,
+    setIsDragging,
+    onDrop,
+    handleImageFileChange,
+  } = useProfileUploader(onPhotoUpload);
+  const { openFileUploader, ref: imageUploaderRef } = useOpenFileUploader();
+
   return (
     <StyledProfileUploader>
       <Text fontType="context" color={color.gray700}>
         증명사진
       </Text>
-      <UploadImageBox onDrop={false} $isDragging={false} $isError={false}>
-        <Column gap={12} alignItems="center">
-          <Button size="SMALL" onClick={() => {}}>
-            파일 선택
-          </Button>
-          <Text fontType="p2" color={color.gray500}>
-            또는
-          </Text>
-          <Text fontType="p2" color={color.gray500}>
-            여기로 사진을 끌어오세요
-          </Text>
-        </Column>
-      </UploadImageBox>
-      <Text fontType="p2" color={color.gray500} textAlign='center'>
-        20MB 이하, 3개월 이내의
-        <br />
-        3x4 cm 증명사진
-      </Text>
+      {isUploading ? (
+        <ProfileUploadLoader isOpen={true} />
+      ) : (
+        <>
+          {imageSrc ? (
+            <ImagePreview src={imageSrc} alt="profile-image" />
+          ) : (
+            <UploadImageBox
+              onDragEnter={(e: React.DragEvent<HTMLDivElement>) => {
+                e.preventDefault();
+                setIsDragging(true);
+              }}
+              onDragLeave={(e: React.DragEvent<HTMLDivElement>) => {
+                e.preventDefault();
+                setIsDragging(false);
+              }}
+              onDragOver={(e: React.DragEvent<HTMLDivElement>) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              onDrop={onDrop}
+              $isDragging={isDragging}
+              $isError={isError}
+            >
+              <Column gap={12} alignItems="center">
+                <Button size="SMALL" onClick={openFileUploader}>
+                  파일 선택
+                </Button>
+                <Text fontType="p2" color={color.gray500}>
+                  또는 여기로 사진을 끌어오세요
+                </Text>
+              </Column>
+            </UploadImageBox>
+          )}
+          {imageSrc && (
+            <Button size="SMALL" onClick={openFileUploader}>
+              재업로드
+            </Button>
+          )}
+          <Desc>
+            10MB 이하, 3개월 이내의
+            <br />
+            3x4 cm 증명사진(.jpg, .png)
+          </Desc>
+        </>
+      )}
       <input
         type="file"
-        ref={() => {}}
+        ref={imageUploaderRef}
         accept=".png, .jpg, .jpeg"
-        onChange={() => {}}
+        onChange={handleImageFileChange}
         hidden
       />
     </StyledProfileUploader>
@@ -45,7 +91,7 @@ const StyledProfileUploader = styled.div`
   gap: 8px;
 `;
 
-const UploadImageBox = styled.div<{ $isDragging: boolean; $isError: boolean }>`
+const UploadImageBox = styled.div<{ $isDragging: boolean; $isError?: boolean }>`
   ${flex({ alignItems: 'center', justifyContent: 'center' })};
   width: 225px;
   height: 300px;
