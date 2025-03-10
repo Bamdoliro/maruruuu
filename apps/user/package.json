@@ -31,6 +31,7 @@
     "react-dom": "^18.2.0",
     "react-toastify": "^11.0.3",
     "recoil": "^0.7.7",
+    "smartcrop": "^2.0.5",
     "styled-components": "^6.1.14"
   },
   "devDependencies": {
