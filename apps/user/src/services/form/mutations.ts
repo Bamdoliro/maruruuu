@@ -1,8 +1,16 @@
 import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
-import { patchSubmitFinalForm, postSaveForm, postSubmitDraftFrom } from './api';
+import {
+  patchSubmitFinalForm,
+  postSaveForm,
+  postSubmitDraftFrom,
+  postUploadForm,
+  putUploadForm,
+} from './api';
 import { Form } from '@/types/form/client';
 import { useSetFormStepStore } from '@/stores';
+import { Dispatch, SetStateAction } from 'react';
+import { FormDocument, FormPresignedUrlData } from '@/types/form/remote';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();
@@ -38,5 +46,31 @@ export const useSubmitFinalFormMutation = () => {
     onError: handleError,
   });
 
-  return { submitFinalFormMutate,...restMutation };
+  return { submitFinalFormMutate, ...restMutation };
+};
+
+export const useUploadFormMutation = (
+  setFormDocument: Dispatch<SetStateAction<FormDocument>>
+) => {
+  const { handleError } = useApiError();
+
+  const { mutate: uploadFormMutate, ...restMutation } = useMutation({
+    mutationFn: async (file: File) => {
+      const presignedData = await postUploadForm();
+
+      await putUploadForm(file, presignedData);
+
+      return presignedData;
+    },
+    onSuccess: (presignedData: FormPresignedUrlData) => {
+      setFormDocument((prev) => ({
+        ...prev,
+        formUrl: presignedData.downloadUrl,
+        downloadUrl: presignedData.downloadUrl,
+      }));
+    },
+    onError: handleError,
+  });
+
+  return { uploadFormMutate, ...restMutation };
 };

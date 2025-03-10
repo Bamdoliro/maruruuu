@@ -1,7 +1,13 @@
 import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
 import { Form } from '@/types/form/client';
-import { GetFormStatusRes, GetSaveFormRes, GetSchoolListRes } from '@/types/form/remote';
+import {
+  FormPresignedUrlData,
+  GetFormStatusRes,
+  GetSaveFormRes,
+  GetSchoolListRes,
+} from '@/types/form/remote';
+import axios from 'axios';
 
 export const getFormStatus = async () => {
   const { data } = await maru.get<GetFormStatusRes>('/form/status', authorization());
@@ -53,6 +59,26 @@ export const postSubmitDraftFrom = async (formData: Form) => {
 
 export const patchSubmitFinalForm = async () => {
   const { data } = await maru.patch('/form', {}, authorization());
+
+  return data;
+};
+
+export const postUploadForm = async (): Promise<FormPresignedUrlData> => {
+  const { data } = await maru.post('/form/form-document', null, authorization());
+
+  const { uploadUrl, downloadUrl, fields } = data?.data;
+
+  return { uploadUrl, downloadUrl, fields: fields || {} } as FormPresignedUrlData;
+};
+
+export const putUploadForm = async (file: File, presignedData: FormPresignedUrlData) => {
+  const { uploadUrl } = presignedData;
+
+  const data = axios.put(uploadUrl, file, {
+    headers: {
+      'Content-Type': file.type,
+    },
+  });
 
   return data;
 };
