@@ -1,6 +1,6 @@
 import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
-import { postSaveForm, postSubmitDraftFrom } from './api';
+import { patchSubmitFinalForm, postSaveForm, postSubmitDraftFrom } from './api';
 import { Form } from '@/types/form/client';
 import { useSetFormStepStore } from '@/stores';
 
@@ -26,4 +26,17 @@ export const useSubmitDraftFormMutation = (formData: Form) => {
   });
 
   return { submitDraftFormMutate, ...restMutation };
+};
+
+export const useSubmitFinalFormMutation = () => {
+  const setFormStep = useSetFormStepStore();
+  const { handleError } = useApiError();
+
+  const { mutate: submitFinalFormMutate, ...restMutation } = useMutation({
+    mutationFn: () => patchSubmitFinalForm(),
+    onSuccess: () => setFormStep('최종제출완료'),
+    onError: handleError,
+  });
+
+  return { submitFinalFormMutate,...restMutation };
 };

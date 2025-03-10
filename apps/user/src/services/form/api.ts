@@ -50,3 +50,9 @@ export const postSubmitDraftFrom = async (formData: Form) => {
 
   return data;
 };
+
+export const patchSubmitFinalForm = async () => {
+  const { data } = await maru.patch('/form', {}, authorization());
+
+  return data;
+};
