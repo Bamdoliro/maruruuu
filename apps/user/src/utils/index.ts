@@ -7,3 +7,4 @@ export { default as getAchivementLevel } from './getAchivementLevel';
 export { default as updateSlicedSubjectList } from './updateSlicedSubjectList';
 export { default as formatDate } from './formatDate';
 export { default as useDownloadFile } from './useDownloadFile';
+export { default as bitmapToBlob } from './bitmapToBlob';
