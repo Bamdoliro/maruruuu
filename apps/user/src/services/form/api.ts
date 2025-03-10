@@ -6,6 +6,7 @@ import {
   GetFormStatusRes,
   GetSaveFormRes,
   GetSchoolListRes,
+  PresignedUrlData,
 } from '@/types/form/remote';
 import axios from 'axios';
 
@@ -81,4 +82,36 @@ export const putUploadForm = async (file: File, presignedData: FormPresignedUrlD
   });
 
   return data;
+};
+
+export const postUploadProfileImage = async (): Promise<PresignedUrlData> => {
+  const { data } = await maru.post('/form/identification-picture', null, authorization());
+
+  const { uploadUrl, downloadUrl, fields } = data?.data;
+
+  return {
+    uploadUrl,
+    downloadUrl,
+    fields: fields || {},
+  } as PresignedUrlData;
+};
+
+export const putProfileUpoload = async (file: File, presignedData: PresignedUrlData) => {
+  try {
+    const { uploadUrl } = presignedData;
+    const response = await axios.put(uploadUrl, file, {
+      headers: {
+        'Content-Type': file.type,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getUploadProfile = async (fileUrl: string) => {
+  const { data } = await maru.get(fileUrl, { responseType: 'blob' });
+
+  return URL.createObjectURL(data);
 };

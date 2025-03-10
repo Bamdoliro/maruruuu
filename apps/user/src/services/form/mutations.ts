@@ -1,16 +1,20 @@
 import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import {
+  getUploadProfile,
   patchSubmitFinalForm,
   postSaveForm,
   postSubmitDraftFrom,
   postUploadForm,
+  postUploadProfileImage,
+  putProfileUpoload,
   putUploadForm,
 } from './api';
 import { Form } from '@/types/form/client';
 import { useSetFormStepStore } from '@/stores';
 import { Dispatch, SetStateAction } from 'react';
 import { FormDocument, FormPresignedUrlData } from '@/types/form/remote';
+import { Storage } from '@/apis/storage/storage';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();
@@ -73,4 +77,42 @@ export const useUploadFormMutation = (
   });
 
   return { uploadFormMutate, ...restMutation };
+};
+
+export const useUploadProfileImageMutation = () => {
+  const { handleError } = useApiError();
+
+  const mutation = useMutation({
+    mutationFn: async (file: File) => {
+      const presignedData = await postUploadProfileImage();
+      await putProfileUpoload(file, presignedData);
+
+      if (presignedData.downloadUrl) {
+        const downloadUrl = await getUploadProfile(presignedData.downloadUrl);
+
+        Storage.setItem('downloadUrl', downloadUrl);
+        return downloadUrl;
+      } else {
+        return null;
+      }
+    },
+    onError: handleError,
+  });
+
+  return mutation;
+};
+
+export const useRefreshProfileImageMutation = () => {
+  const { handleError } = useApiError();
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const presignedData = await postUploadProfileImage();
+      const newDownloadUrl = await getUploadProfile(presignedData.downloadUrl);
+      return newDownloadUrl;
+    },
+    onError: handleError,
+  });
+
+  return mutation;
 };

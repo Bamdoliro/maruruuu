@@ -20,6 +20,14 @@ export interface FormPresignedUrlData {
   };
 }
 
+export interface PresignedUrlData {
+  uploadUrl: string;
+  downloadUrl: string;
+  fields: {
+    [key: string]: string | Blob;
+  };
+}
+
 export interface FormDocument {
   fileName: string;
   formUrl: string;
