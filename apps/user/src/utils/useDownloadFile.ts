@@ -1,4 +1,4 @@
-const useDownloadFile = (data: Blob | undefined, fileName: string) => {
+const useDownloadFile = (data: Blob | string | undefined, fileName: string) => {
   if (!data) return;
 
   const fileUrl = window.URL.createObjectURL(new Blob([data]));
