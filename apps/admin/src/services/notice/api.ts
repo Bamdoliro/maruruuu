@@ -4,6 +4,7 @@ import {
   GetNoticeListRes,
   getNoticeDetailRes,
   PostNoticeReq,
+  PutNoticeReq,
 } from '@/types/notice/remote';
 
 export const getNoticeList = async () => {
@@ -21,6 +22,11 @@ export const getNoticeDetail = async (id: number) => {
 export const postNotice = async (params: PostNoticeReq) => {
   const { data } = await maru.post('/notice', { params }, authorization());
   return data;
+};
+
+export const putEditNotice = async (id: number, params: PutNoticeReq) => {
+  const { data } = await maru.put(`/notice/${id}`, { params }, authorization());
+  return { data };
 };
 
 export const deleteNotice = async (id: number) => {

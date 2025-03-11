@@ -13,3 +13,9 @@ export interface PostNoticeReq {
   content: string;
   fileNameList?: Array<string> | null;
 }
+
+export interface PutNoticeReq {
+  title: string;
+  content: string;
+  fileNameList?: Array<string> | null;
+}
