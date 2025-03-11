@@ -1,6 +1,6 @@
 import { PostLoginReq } from '@/types/auth/remote';
 import { useMutation } from '@tanstack/react-query';
-import { postLogin } from './api';
+import { deleteLogout, postLogin } from './api';
 import { AxiosResponse } from 'axios';
 import { Storage } from '@/apis/storage/storage';
 import { ROUTES, TOKEN } from '@/constants/common/constants';
@@ -25,4 +25,25 @@ export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
   });
 
   return { loginMutate, ...restMutation };
+};
+
+export const useLogoutMutation = () => {
+  const router = useRouter();
+
+  const { mutate: logoutMutate, ...restMutation } = useMutation({
+    mutationFn: deleteLogout,
+    onSuccess: () => {
+      router.replace(ROUTES.MAIN);
+      toast('로그아웃 되었습니다.', { type: 'success' });
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+      localStorage.clear();
+    },
+    onError: () => {
+      toast('잠시후 다시 시도해주세요.', { type: 'error' });
+    },
+  });
+
+  return { logoutMutate, ...restMutation };
 };
