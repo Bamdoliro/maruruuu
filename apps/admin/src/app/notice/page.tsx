@@ -1,3 +1,5 @@
+'use client';
+
 import NoticeTable from '@/components/notice/NoticeTable/NoticeTable';
 import AppLayout from '@/layouts/AppLayout';
 import { Button, Column, Loader, Row, Text, SearchInput } from '@maru/ui';
@@ -29,7 +31,7 @@ export default NoticePage;
 
 const StyledNoticePage = styled.div`
   position: relative;
-  ${flex({ flexDirection: 'column', alignItems: 'flex-start' })}
+  ${flex({ flexDirection: 'column' })}
   gap: 40px;
   width: 100%;
   min-height: 100vh;
