@@ -1,5 +1,8 @@
 export const KEY = {
   ADMIN: 'useAdmin',
+
+  NOTICE_LIST: 'useNoticeList',
+  NOTICE_DETAIL: 'useNoticeDetail',
 };
 
 export const ROUTES = {
