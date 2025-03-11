@@ -5,12 +5,12 @@ import { toast } from 'react-toastify';
 import { deleteNotice } from './api';
 import { ROUTES } from '@/constants/common/constant';
 
-export const useDeleteNoticeMutation = (noticeId: number) => {
+export const useDeleteNoticeMutation = (id: number) => {
   const { handleError } = useApiError();
   const router = useRouter();
 
   const { mutate: deleteNoticeMutate, ...restMutation } = useMutation({
-    mutationFn: () => deleteNotice(noticeId),
+    mutationFn: () => deleteNotice(id),
     onSuccess: () => {
       toast('공지사항이 삭제되었습니다.', {
         type: 'success',

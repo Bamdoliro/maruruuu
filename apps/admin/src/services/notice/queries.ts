@@ -11,10 +11,10 @@ export const useNoticeListQuery = () => {
   return { data: data?.dataList, ...restQuery };
 };
 
-export const useNoticeDetailQuery = (noticeId: number) => {
+export const useNoticeDetailQuery = (id: number) => {
   const { data, ...restQuery } = useQuery({
-    queryKey: [KEY.NOTICE_DETAIL, noticeId],
-    queryFn: () => getNoticeDetail(noticeId),
+    queryKey: [KEY.NOTICE_DETAIL, id],
+    queryFn: () => getNoticeDetail(id),
   });
 
   return { data: data?.data, ...restQuery };

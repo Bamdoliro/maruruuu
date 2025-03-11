@@ -12,8 +12,8 @@ export const getNoticeList = async () => {
   return data;
 };
 
-export const getNoticeDetail = async (noticeId: number) => {
-  const { data } = await maru.get<getNoticeDetailRes>(`/notice/${noticeId}`);
+export const getNoticeDetail = async (id: number) => {
+  const { data } = await maru.get<getNoticeDetailRes>(`/notice/${id}`);
 
   return data;
 };
@@ -23,8 +23,8 @@ export const postNotice = async (params: PostNoticeReq) => {
   return data;
 };
 
-export const deleteNotice = async (noticeId: number) => {
-  const { data } = await maru.delete(`/notice/${noticeId}`, authorization());
+export const deleteNotice = async (id: number) => {
+  const { data } = await maru.delete(`/notice/${id}`, authorization());
 
   return data;
 };
