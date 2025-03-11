@@ -15,6 +15,7 @@ export const ROUTES = {
   LOGIN: '/login',
   CHANGE_PASSWORD: '/change-password',
   SIGNUP: '/signup',
+  WITHDRAWAL: '/withdrawal',
 };
 
 export const TOKEN = {
