@@ -12,10 +12,11 @@ export const usePostNoticeMutation = (params: PostNoticeReq) => {
 
   const { mutate: usePostNoticeMutate, ...restMutate } = useMutation({
     mutationFn: (noticeData: PostNoticeReq) => postNotice(noticeData),
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
       toast('공지사항이 게시되었습니다.', {
         type: 'success',
       });
+      router.push(`${ROUTES.NOTICE}/${data.id}`);
     },
     onError: handleError,
   });
