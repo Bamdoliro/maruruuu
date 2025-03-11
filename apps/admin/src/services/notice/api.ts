@@ -13,3 +13,9 @@ export const getNoticeDetail = async (noticeId: number) => {
 
   return data;
 };
+
+export const deleteNotice = async (noticeId: number) => {
+  const { data } = await maru.delete(`/notice/${noticeId}`, authorization());
+
+  return data;
+};
