@@ -24,7 +24,7 @@ export const postNotice = async (params: PostNoticeReq) => {
   return data;
 };
 
-export const putEditNotice = async (id: number, params: PutNoticeReq) => {
+export const putNotice = async (id: number, params: PutNoticeReq) => {
   const { data } = await maru.put(`/notice/${id}`, { params }, authorization());
   return { data };
 };
