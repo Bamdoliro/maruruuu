@@ -7,3 +7,9 @@ export interface GetNoticeListRes {
 export interface getNoticeDetailRes {
   data: NoticeDetail;
 }
+
+export interface PostNoticeReq {
+  title: string;
+  content: string;
+  fileNameList?: Array<string> | null;
+}
