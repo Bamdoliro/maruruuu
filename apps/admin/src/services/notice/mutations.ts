@@ -6,12 +6,12 @@ import { deleteNotice, postNotice } from './api';
 import { ROUTES } from '@/constants/common/constant';
 import { PostNoticeReq } from '@/types/notice/remote';
 
-export const usePostNoticeMutation = (params: PostNoticeReq) => {
+export const usePostNoticeMutation = () => {
   const { handleError } = useApiError();
   const router = useRouter();
 
   const { mutate: usePostNoticeMutate, ...restMutate } = useMutation({
-    mutationFn: (noticeData: PostNoticeReq) => postNotice(noticeData),
+    mutationFn: (params: PostNoticeReq) => postNotice(params),
     onSuccess: ({ data }) => {
       toast('공지사항이 게시되었습니다.', {
         type: 'success',
