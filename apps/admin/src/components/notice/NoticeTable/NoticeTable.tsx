@@ -1,20 +1,19 @@
 import { Column } from '@maru/ui';
 import NoticeTableHeader from './NoticeTableHeader/NoticeTableHeader';
 import NoticeTableItem from './NoticeTableItem/NoticeTableItem';
-
-const tempData = [
-  { id: 1, title: '공지사항 제목 1', updatedAt: '2025-03-07' },
-  { id: 2, title: '공지사항 제목 2', updatedAt: '2025-03-06' },
-  { id: 3, title: '공지사항 제목 3', updatedAt: '2025-03-05' },
-];
+import { useNoticeListQuery } from '@/services/notice/queries';
 
 const NoticeTable = () => {
+  const { data: noticeList } = useNoticeListQuery();
+
   return (
     <Column gap={12}>
       <NoticeTableHeader />
-      {tempData.map((item) => (
-        <NoticeTableItem id={item.id} title={item.title} updatedAt={item.updatedAt} />
-      ))}
+      {noticeList
+        ?.sort((a, b) => a.id - b.id)
+        .map((item) => (
+          <NoticeTableItem id={item.id} title={item.title} updatedAt={item.updatedAt} />
+        ))}
     </Column>
   );
 };
