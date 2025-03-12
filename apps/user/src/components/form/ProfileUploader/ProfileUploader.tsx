@@ -4,7 +4,7 @@ import { flex } from '@maru/utils';
 import styled, { css } from 'styled-components';
 import ProfileUploadLoader from '../ProfileUploadLoader/ProfileUploadLoader';
 import { useProfileUploader } from './ProfileUploader.hook';
-import { useOpenFileUploader } from '@/hooks';
+import { useDragAndDrop, useOpenFileUploader } from '@/hooks';
 
 type ProfileUploaderProps = {
   onPhotoUpload: (success: boolean, url?: string) => void;
@@ -12,15 +12,12 @@ type ProfileUploaderProps = {
 };
 
 const ProfileUploader = ({ onPhotoUpload, isError }: ProfileUploaderProps) => {
-  const {
-    imageSrc,
-    isUploading,
-    isDragging,
-    setIsDragging,
-    onDrop,
-    handleImageFileChange,
-  } = useProfileUploader(onPhotoUpload);
+  const { imgSrc, isUploading, handleImageFileChange } =
+    useProfileUploader(onPhotoUpload);
   const { openFileUploader, ref: imageUploaderRef } = useOpenFileUploader();
+  const { isDragging, onDragOver, onDragLeave, onDrop, onDragEnter } = useDragAndDrop(
+    () => handleImageFileChange
+  );
 
   return (
     <StyledProfileUploader>
@@ -31,22 +28,13 @@ const ProfileUploader = ({ onPhotoUpload, isError }: ProfileUploaderProps) => {
         <ProfileUploadLoader isOpen={true} />
       ) : (
         <>
-          {imageSrc ? (
-            <ImagePreview src={imageSrc} alt="profile-image" />
+          {imgSrc ? (
+            <ImagePreview src={imgSrc} alt="profile-image" />
           ) : (
             <UploadImageBox
-              onDragEnter={(e: React.DragEvent<HTMLDivElement>) => {
-                e.preventDefault();
-                setIsDragging(true);
-              }}
-              onDragLeave={(e: React.DragEvent<HTMLDivElement>) => {
-                e.preventDefault();
-                setIsDragging(false);
-              }}
-              onDragOver={(e: React.DragEvent<HTMLDivElement>) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
+              onDragEnter={onDragEnter}
+              onDragLeave={onDragLeave}
+              onDragOver={onDragOver}
               onDrop={onDrop}
               $isDragging={isDragging}
               $isError={isError}
@@ -61,7 +49,7 @@ const ProfileUploader = ({ onPhotoUpload, isError }: ProfileUploaderProps) => {
               </Column>
             </UploadImageBox>
           )}
-          {imageSrc && (
+          {imgSrc && (
             <Button size="SMALL" onClick={openFileUploader}>
               재업로드
             </Button>

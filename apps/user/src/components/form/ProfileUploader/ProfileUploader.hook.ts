@@ -7,17 +7,18 @@ import {
 } from '@/services/form/mutations';
 import { useFormStatusQuery } from '@/services/form/queries';
 import { bitmapToBlob } from '@/utils';
+import { useUser } from '@/hooks';
 
 export const useProfileUploader = (
   onPhotoUpload: (success: boolean, url?: string) => void
 ) => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const { userData } = useUser();
 
-  const { data: formStatusData } = useFormStatusQuery();
-  const { mutate: uploadProfileImage } = useUploadProfileImageMutation();
-  const { mutate: refreshProfileImage } = useRefreshProfileImageMutation();
+  const { data } = useFormStatusQuery();
+  const { mutate: upload } = useUploadProfileImageMutation();
+  const { mutate: refresh } = useRefreshProfileImageMutation();
 
   const isUploadPictureStored = useMemo(
     () => Storage.getItem('isUploadPicture') === 'true',
@@ -32,7 +33,7 @@ export const useProfileUploader = (
       }
 
       onPhotoUpload(true, downloadUrl);
-      setImageSrc(downloadUrl);
+      setImgSrc(downloadUrl);
       Storage.setItem('downloadUrl', downloadUrl);
       Storage.setItem('isUploadPicture', 'true');
       setIsUploading(false);
@@ -43,7 +44,7 @@ export const useProfileUploader = (
   const startUploading = useCallback(
     (file: File) => {
       setIsUploading(true);
-      uploadProfileImage(file, {
+      upload(file, {
         onSuccess: (data: unknown) => {
           const downloadUrl = typeof data === 'string' ? data : null;
           handleUploadSuccess(downloadUrl);
@@ -54,7 +55,7 @@ export const useProfileUploader = (
         },
       });
     },
-    [uploadProfileImage, handleUploadSuccess, onPhotoUpload]
+    [upload, handleUploadSuccess, onPhotoUpload]
   );
 
   const cropImage = useCallback(
@@ -67,8 +68,8 @@ export const useProfileUploader = (
 
         const bitmap = await createImageBitmap(img, x, y, width, height);
         const croppedBlob = await bitmapToBlob(bitmap);
-        const croppedFile = new File([croppedBlob], 'cropped-image.jpg', {
-          type: 'image/jpeg',
+        const croppedFile = new File([croppedBlob], `${userData.name} profile.png`, {
+          type: 'image/png',
         });
 
         startUploading(croppedFile);
@@ -92,16 +93,6 @@ export const useProfileUploader = (
     [cropImage]
   );
 
-  const onDrop = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      const file = e.dataTransfer.files[0];
-      if (file) processImageFile(file);
-      setIsDragging(false);
-    },
-    [processImageFile]
-  );
-
   const handleImageFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -110,38 +101,28 @@ export const useProfileUploader = (
     [processImageFile]
   );
 
-  useEffect(() => {
-    if (
-      (!isUploadPictureStored && !isUploading) ||
-      formStatusData?.status === 'REJECTED'
-    ) {
-      refreshProfileImage(undefined, {
-        onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
-        onError: () => onPhotoUpload(false),
-      });
-    } else {
-      const storedImageUrl = Storage.getItem('downloadUrl');
-      if (storedImageUrl) setImageSrc(storedImageUrl);
-      refreshProfileImage(undefined, {
-        onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
-        onError: () => onPhotoUpload(false),
-      });
-    }
-  }, [
-    isUploadPictureStored,
-    refreshProfileImage,
-    handleUploadSuccess,
-    onPhotoUpload,
-    isUploading,
-    formStatusData?.status,
-  ]);
+  const refreshProfileImage = useCallback(
+    (file?: File) => {
+      if (file) {
+        refresh(file, {
+          onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
+          onError: () => onPhotoUpload(false),
+        });
+      } else if (!isUploading && data?.status !== 'REJECTED') {
+        const storedImageUrl = Storage.getItem('downloadUrl');
+        if (storedImageUrl) setImgSrc(storedImageUrl);
+      }
+    },
+    [isUploading, refresh, data?.status, handleUploadSuccess, onPhotoUpload]
+  );
 
-  return {
-    imageSrc,
-    isUploading,
-    isDragging,
-    setIsDragging,
-    onDrop,
-    handleImageFileChange,
-  };
+  useEffect(() => {
+    if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
+      refreshProfileImage();
+    } else {
+      refreshProfileImage();
+    }
+  }, [isUploadPictureStored, isUploading, data?.status, refreshProfileImage]);
+
+  return { imgSrc, isUploading, handleImageFileChange };
 };
