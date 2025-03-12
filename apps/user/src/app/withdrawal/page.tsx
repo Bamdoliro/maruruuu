@@ -10,12 +10,13 @@ import { ROUTES } from '@/constants/common/constants';
 import { IconArrowRight } from '@maru/icon';
 import Link from 'next/link';
 import { useOverlay } from '@toss/use-overlay';
-import { useCTAButton } from './withdrawal.hook';
+import { useCTAButton, useWithdrawalAction } from './withdrawal.hook';
 import { WithdrawalModal } from '@/components/withdrawal';
 
 const Withdrawal = () => {
   const overlay = useOverlay();
-  const { handleMoveMain, handleSubmitWithrawal } = useCTAButton();
+  const { handleMoveMain } = useCTAButton();
+  const { handleWithrawal } = useWithdrawalAction();
 
   const openWithdrawalModal = () => {
     overlay.open(({ isOpen, close }) => (
@@ -23,7 +24,7 @@ const Withdrawal = () => {
         isOpen={isOpen}
         onClose={close}
         onConfirm={() => {
-          handleSubmitWithrawal();
+          handleWithrawal();
           close();
         }}
       />

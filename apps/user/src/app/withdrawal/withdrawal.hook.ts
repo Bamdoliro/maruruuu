@@ -1,6 +1,14 @@
 import { ROUTES } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 
+export const useWithdrawalAction = () => {
+  const handleWithrawal = () => {
+    alert('탈퇴할 거임');
+  };
+
+  return { handleWithrawal };
+};
+
 export const useCTAButton = () => {
   const router = useRouter();
 
@@ -8,11 +16,7 @@ export const useCTAButton = () => {
     router.push(ROUTES.MAIN);
   };
 
-  const handleSubmitWithrawal = () => {
-    alert('탈퇴할 거임');
-  };
-
-  return { handleMoveMain, handleSubmitWithrawal };
+  return { handleMoveMain };
 };
 
 export const useInput = () => {};
