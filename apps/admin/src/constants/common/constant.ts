@@ -10,6 +10,7 @@ export const ROUTES = {
   FORM: '/form',
   NOTICE: '/notice',
   NOTICE_POST: '/notice/post',
+  NOTICE_EDIT: '/notice/edit',
   FAQ: '/faq',
   MESSAGE: '/message',
   ANALYSIS: '/analysis',
