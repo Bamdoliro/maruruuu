@@ -7,7 +7,7 @@ import { useOverlay } from '@toss/use-overlay';
 import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
-import { useNoticePostAction } from './NoticePost.hook';
+import { useNoticePostAction } from './NoticePost.hooks';
 
 const NoticePost1 = () => {
   const overlay = useOverlay();
