@@ -32,3 +32,9 @@ export interface FormDocument {
   fileName: string;
   formUrl: string;
 }
+
+export interface FileDocument{
+  fileName: string;
+  mediaType: string;
+  fileSize: number;
+}

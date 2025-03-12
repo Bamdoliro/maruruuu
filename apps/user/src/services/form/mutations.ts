@@ -3,18 +3,18 @@ import { useMutation } from '@tanstack/react-query';
 import {
   getUploadProfile,
   patchSubmitFinalForm,
+  postFormDocument,
   postSaveForm,
   postSubmitDraftFrom,
-  postUploadForm,
   postUploadProfileImage,
   putProfileUpoload,
   putUploadForm,
 } from './api';
 import { Form } from '@/types/form/client';
 import { useSetFormStepStore } from '@/stores';
-import { Dispatch, SetStateAction } from 'react';
-import { FormDocument, FormPresignedUrlData } from '@/types/form/remote';
 import { Storage } from '@/apis/storage/storage';
+import { FormDocument, FormPresignedUrlData } from '@/types/form/remote';
+import { Dispatch, SetStateAction } from 'react';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();
@@ -60,8 +60,13 @@ export const useUploadFormMutation = (
 
   const { mutate: uploadFormMutate, ...restMutation } = useMutation({
     mutationFn: async (file: File) => {
-      const presignedData = await postUploadForm();
+      const fileData = {
+        fileName: file.name,
+        mediaType: file.type,
+        fileSize: file.size,
+      };
 
+      const presignedData = await postFormDocument(fileData);
       await putUploadForm(file, presignedData);
 
       return presignedData;
@@ -84,7 +89,13 @@ export const useUploadProfileImageMutation = () => {
 
   const mutation = useMutation({
     mutationFn: async (file: File) => {
-      const presignedData = await postUploadProfileImage();
+      const fileData = {
+        fileName: file.name,
+        mediaType: file.type,
+        fileSize: file.size,
+      };
+
+      const presignedData = await postUploadProfileImage(fileData);
       await putProfileUpoload(file, presignedData);
 
       if (presignedData.downloadUrl) {
@@ -106,8 +117,14 @@ export const useRefreshProfileImageMutation = () => {
   const { handleError } = useApiError();
 
   const mutation = useMutation({
-    mutationFn: async () => {
-      const presignedData = await postUploadProfileImage();
+    mutationFn: async (file: File) => {
+      const fileData = {
+        fileName: file.name,
+        mediaType: file.type,
+        fileSize: file.size,
+      };
+
+      const presignedData = await postUploadProfileImage(fileData);
       const newDownloadUrl = await getUploadProfile(presignedData.downloadUrl);
       return newDownloadUrl;
     },

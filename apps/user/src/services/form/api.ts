@@ -2,6 +2,7 @@ import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
 import { Form } from '@/types/form/client';
 import {
+  FileDocument,
   FormPresignedUrlData,
   GetFormStatusRes,
   GetSaveFormRes,
@@ -64,12 +65,18 @@ export const patchSubmitFinalForm = async () => {
   return data;
 };
 
-export const postUploadForm = async (): Promise<FormPresignedUrlData> => {
-  const { data } = await maru.post('/form/form-document', null, authorization());
+export const postFormDocument = async (
+  fileData: FileDocument
+): Promise<PresignedUrlData> => {
+  const { data } = await maru.post('/form/form-document', fileData, authorization());
 
   const { uploadUrl, downloadUrl, fields } = data?.data;
 
-  return { uploadUrl, downloadUrl, fields: fields || {} } as FormPresignedUrlData;
+  return {
+    uploadUrl,
+    downloadUrl,
+    fields: fields || {},
+  } as PresignedUrlData;
 };
 
 export const putUploadForm = async (file: File, presignedData: FormPresignedUrlData) => {
@@ -84,8 +91,14 @@ export const putUploadForm = async (file: File, presignedData: FormPresignedUrlD
   return data;
 };
 
-export const postUploadProfileImage = async (): Promise<PresignedUrlData> => {
-  const { data } = await maru.post('/form/identification-picture', null, authorization());
+export const postUploadProfileImage = async (
+  fileData: FileDocument
+): Promise<PresignedUrlData> => {
+  const { data } = await maru.post(
+    '/form/identification-picture',
+    fileData,
+    authorization()
+  );
 
   const { uploadUrl, downloadUrl, fields } = data?.data;
 
@@ -97,17 +110,15 @@ export const postUploadProfileImage = async (): Promise<PresignedUrlData> => {
 };
 
 export const putProfileUpoload = async (file: File, presignedData: PresignedUrlData) => {
-  try {
-    const { uploadUrl } = presignedData;
-    const response = await axios.put(uploadUrl, file, {
-      headers: {
-        'Content-Type': file.type,
-      },
-    });
-    return response;
-  } catch (error) {
-    return error;
-  }
+  const { uploadUrl } = presignedData;
+
+  const response = await axios.put(uploadUrl, file, {
+    headers: {
+      'Content-Type': file.type,
+    },
+  });
+
+  return response;
 };
 
 export const getUploadProfile = async (fileUrl: string) => {
