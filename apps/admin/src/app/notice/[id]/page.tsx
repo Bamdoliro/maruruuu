@@ -10,11 +10,11 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
-interface Props {
+interface NoticeDetailPageProps {
   params: { id: number };
 }
 
-const NoticeDetailPage = ({ params: { id } }: Props) => {
+const NoticeDetailPage = ({ params: { id } }: NoticeDetailPageProps) => {
   return (
     <AppLayout>
       <StyledNoticeDetail>
