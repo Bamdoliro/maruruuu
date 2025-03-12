@@ -10,7 +10,7 @@ export const usePostNoticeMutation = () => {
   const { handleError } = useApiError();
   const router = useRouter();
 
-  const { mutate: usePostNoticeMutate, ...restMutation } = useMutation({
+  const { mutate: postNoticeMutate, ...restMutation } = useMutation({
     mutationFn: (params: PostNoticeReq) => postNotice(params),
     onSuccess: ({ data }) => {
       toast('공지사항이 게시되었습니다.', {
@@ -21,7 +21,7 @@ export const usePostNoticeMutation = () => {
     onError: handleError,
   });
 
-  return { usePostNoticeMutate, ...restMutation };
+  return { postNoticeMutate, ...restMutation };
 };
 
 export const usePutNoticeMutation = (id: number) => {
