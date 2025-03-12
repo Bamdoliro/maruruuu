@@ -2,9 +2,15 @@ import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { deleteNotice, postNotice, putNotice } from './api';
+import {
+  deleteNotice,
+  postNotice,
+  postNoticeFile,
+  putNotice,
+  putNoticeFileUrl,
+} from './api';
 import { ROUTES } from '@/constants/common/constant';
-import { PostNoticeReq, PutNoticeReq } from '@/types/notice/remote';
+import { PostNoticeFileReq, PostNoticeReq, PutNoticeReq } from '@/types/notice/remote';
 
 export const usePostNoticeMutation = () => {
   const { handleError } = useApiError();
@@ -42,6 +48,26 @@ export const usePutNoticeMutation = (id: number) => {
   return { putNoticeMutate, ...restMutation };
 };
 
+export const useNoticeFileUrlMutation = () => {
+  const { handleError } = useApiError();
+
+  const { mutate: noticeFileUrlMutate, ...restMutation } = useMutation({
+    mutationFn: async (params: PostNoticeFileReq) => {
+      const dataList = await postNoticeFile(params);
+      const response = await putNoticeFileUrl(dataList);
+      return response;
+    },
+    onSuccess: () => {
+      toast('파일이 업로드되었습니다.', {
+        type: 'success',
+      });
+    },
+    onError: handleError,
+  });
+
+  return { noticeFileUrlMutate, ...restMutation };
+};
+
 export const useDeleteNoticeMutation = (id: number) => {
   const { handleError } = useApiError();
   const router = useRouter();
@@ -56,5 +82,6 @@ export const useDeleteNoticeMutation = (id: number) => {
     },
     onError: handleError,
   });
+
   return { deleteNoticeMutate, ...restMutation };
 };
