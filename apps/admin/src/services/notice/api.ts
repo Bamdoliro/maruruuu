@@ -29,7 +29,7 @@ export const postNotice = async (params: PostNoticeReq) => {
   return data;
 };
 
-export const postNoticeFile = async (params: PostNoticeFileReq) => {
+export const postNoticeFile = async (params: PostNoticeFileReq[]) => {
   const data = await maru.post<PostNoticeFileRes>(
     '/notice/file',
     { params },

@@ -52,9 +52,10 @@ export const useNoticeFileUrlMutation = () => {
   const { handleError } = useApiError();
 
   const { mutate: noticeFileUrlMutate, ...restMutation } = useMutation({
-    mutationFn: async (params: PostNoticeFileReq) => {
-      const dataList = await postNoticeFile(params);
-      const response = await putNoticeFileUrl(dataList);
+    mutationFn: async (params: PostNoticeFileReq[]) => {
+      const data = await postNoticeFile(params);
+      const response = await putNoticeFileUrl(data);
+
       return response;
     },
     onSuccess: () => {
