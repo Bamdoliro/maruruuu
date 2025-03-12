@@ -11,8 +11,8 @@ const NoticeTable = () => {
       <NoticeTableHeader />
       {noticeList
         ?.sort((a, b) => a.id - b.id)
-        .map((item) => (
-          <NoticeTableItem id={item.id} title={item.title} updatedAt={item.updatedAt} />
+        .map(({ id, title, updatedAt }) => (
+          <NoticeTableItem id={id} title={title} updatedAt={updatedAt} />
         ))}
     </Column>
   );
