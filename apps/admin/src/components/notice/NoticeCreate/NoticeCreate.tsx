@@ -8,7 +8,7 @@ import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
 import { useNoticeCreateAction } from './NoticeCreate.hooks';
-import resizeTextarea from '@/utils/resizeTextArea';
+import { resizeTextarea } from '@/utils';
 
 const NoticeCreate = () => {
   const overlay = useOverlay();

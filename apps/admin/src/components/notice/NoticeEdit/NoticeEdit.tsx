@@ -8,7 +8,7 @@ import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
 import { useNoticeEditAction } from './NoticeEdit.hooks';
-import resizeTextarea from '@/utils/resizeTextArea';
+import { resizeTextarea } from '@/utils';
 
 interface NoticeEditProps {
   id: number;
