@@ -14,3 +14,14 @@ export interface NoticeDetail {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface NoticeFileUrl {
+  uploadUrl: string;
+  downloadUrl: string;
+}
+
+export interface NoticeFileData {
+  url: NoticeFileUrl;
+  fileName: string;
+  type: string;
+}
