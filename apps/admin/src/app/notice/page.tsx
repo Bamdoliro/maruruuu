@@ -12,7 +12,7 @@ import { styled } from 'styled-components';
 const NoticePage = () => {
   const router = useRouter();
 
-  const handleGoNoticeCreatePageButtonClick = () => {
+  const handleMoveNoticeCreatePage = () => {
     router.push(ROUTES.NOTICE_CREATE);
   };
 
@@ -23,11 +23,7 @@ const NoticePage = () => {
         <Column gap={36}>
           <Row justifyContent="space-between" alignItems="center">
             <SearchInput placeholder="검색어를 입력하세요" />
-            <Button
-              size="SMALL"
-              icon="ADD_ICON"
-              onClick={handleGoNoticeCreatePageButtonClick}
-            >
+            <Button size="SMALL" icon="ADD_ICON" onClick={handleMoveNoticeCreatePage}>
               공지사항 작성
             </Button>
           </Row>
