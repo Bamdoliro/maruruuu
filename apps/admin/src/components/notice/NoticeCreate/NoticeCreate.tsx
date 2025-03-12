@@ -8,6 +8,7 @@ import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
 import { useNoticeCreateAction } from './NoticeCreate.hooks';
+import resizeTextarea from '@/utils/resizeTextArea';
 
 const NoticeCreate = () => {
   const overlay = useOverlay();
@@ -31,10 +32,7 @@ const NoticeCreate = () => {
     const { name, value } = e.target;
     setNoticeData({ ...noticeData, [name]: value });
 
-    if (!contentTextareaRef.current) return;
-    contentTextareaRef.current.style.height = 'auto';
-    contentTextareaRef.current.style.height =
-      contentTextareaRef.current.scrollHeight + 'px';
+    resizeTextarea(contentTextareaRef);
   };
 
   const handleNoticeFileModalButtonClick = () => {

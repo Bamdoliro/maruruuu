@@ -8,6 +8,7 @@ import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
 import { useNoticeEditAction } from './NoticeEdit.hooks';
+import resizeTextarea from '@/utils/resizeTextArea';
 
 interface NoticeEditProps {
   id: number;
@@ -35,10 +36,7 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
     const { name, value } = e.target;
     setNoticeData({ ...noticeData, [name]: value });
 
-    if (!contentTextareaRef.current) return;
-    contentTextareaRef.current.style.height = 'auto';
-    contentTextareaRef.current.style.height =
-      contentTextareaRef.current.scrollHeight + 'px';
+    resizeTextarea(contentTextareaRef);
   };
 
   const handleNoticeFileModalButtonClick = () => {
