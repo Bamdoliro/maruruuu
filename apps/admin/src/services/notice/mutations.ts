@@ -52,11 +52,19 @@ export const useNoticeFileUrlMutation = () => {
   const { handleError } = useApiError();
 
   const { mutate: noticeFileUrlMutate, ...restMutation } = useMutation({
-    mutationFn: async (params: PostNoticeFileReq[]) => {
-      const data = await postNoticeFile(params);
-      const response = await putNoticeFileUrl(data);
+    mutationFn: async (files: File[]) => {
+      if (files?.length) {
+        const fileDataList = files.map(({ name, type, size }) => ({
+          fileName: name,
+          mediaType: type,
+          fileSize: size,
+        }));
 
-      return response;
+        const responseList = await postNoticeFile(fileDataList);
+        const data = await putNoticeFileUrl(files, responseList);
+
+        return data;
+      }
     },
     onSuccess: () => {
       toast('파일이 업로드되었습니다.', {

@@ -46,9 +46,9 @@ export const putNotice = async (id: number, params: PutNoticeReq) => {
   return { data };
 };
 
-export const putNoticeFileUrl = async (files: NoticeFileData[]) => {
-  const uploadPromises = files.map((file) => {
-    const url = file.url;
+export const putNoticeFileUrl = async (files: File[], fileDatas: NoticeFileData[]) => {
+  const uploadPromises = files.map((file, index) => {
+    const { url } = fileDatas[index];
 
     return axios.put(url.uploadUrl, file, {
       headers: {

@@ -14,13 +14,7 @@ export const useNoticePostAction = (noticeData: PostNoticeReq) => {
     const fileNameList = noticeData.fileNameList ?? [];
 
     if (fileData?.length) {
-      const fileInfoList = fileData.map(({ name, type, size }) => ({
-        fileName: name,
-        mediaType: type,
-        fileSize: size,
-      }));
-
-      await noticeFileUrlMutate(fileInfoList);
+      await noticeFileUrlMutate(fileData);
     }
 
     postNoticeMutate(
