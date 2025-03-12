@@ -9,6 +9,7 @@ export const ROUTES = {
   MAIN: '/',
   FORM: '/form',
   NOTICE: '/notice',
+  NOTICE_POST: '/notice/post',
   FAQ: '/faq',
   MESSAGE: '/message',
   ANALYSIS: '/analysis',

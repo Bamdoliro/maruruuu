@@ -1,13 +1,21 @@
 'use client';
 
 import NoticeTable from '@/components/notice/NoticeTable/NoticeTable';
+import { ROUTES } from '@/constants/common/constant';
 import AppLayout from '@/layouts/AppLayout';
 import { Button, Column, Loader, Row, Text, SearchInput } from '@maru/ui';
 import { flex } from '@maru/utils';
+import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
 const NoticePage = () => {
+  const router = useRouter();
+
+  const handleGoNoticePostPageButtonClick = () => {
+    router.push(ROUTES.NOTICE_POST);
+  };
+
   return (
     <AppLayout>
       <StyledNoticePage>
@@ -15,7 +23,11 @@ const NoticePage = () => {
         <Column gap={36}>
           <Row justifyContent="space-between" alignItems="center">
             <SearchInput placeholder="검색어를 입력하세요" />
-            <Button size="SMALL" icon="ADD_ICON">
+            <Button
+              size="SMALL"
+              icon="ADD_ICON"
+              onClick={handleGoNoticePostPageButtonClick}
+            >
               공지사항 작성
             </Button>
           </Row>
