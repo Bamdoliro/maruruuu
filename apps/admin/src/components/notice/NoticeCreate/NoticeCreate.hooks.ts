@@ -5,12 +5,12 @@ import {
 import { useNoticeFileStore } from '@/store/notice/noticeFile';
 import type { PostNoticeReq } from '@/types/notice/remote';
 
-export const useNoticePostAction = (noticeData: PostNoticeReq) => {
+export const useNoticeCreateAction = (noticeData: PostNoticeReq) => {
   const { postNoticeMutate } = usePostNoticeMutation();
   const { noticeFileUrlMutate } = useNoticeFileUrlMutation();
   const [fileData, setFileData] = useNoticeFileStore();
 
-  const handleNoticePostButtonClick = async () => {
+  const handleNoticeCreateButtonClick = async () => {
     const fileNameList = noticeData.fileNameList ?? [];
 
     if (fileData?.length) {
@@ -23,5 +23,5 @@ export const useNoticePostAction = (noticeData: PostNoticeReq) => {
     );
   };
 
-  return { handleNoticePostButtonClick };
+  return { handleNoticeCreateButtonClick };
 };

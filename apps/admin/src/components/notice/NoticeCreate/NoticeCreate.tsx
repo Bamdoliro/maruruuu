@@ -7,9 +7,9 @@ import { useOverlay } from '@toss/use-overlay';
 import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
-import { useNoticePostAction } from './NoticePost.hooks';
+import { useNoticeCreateAction } from './NoticeCreate.hooks';
 
-const NoticePost = () => {
+const NoticeCreate = () => {
   const overlay = useOverlay();
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [fileData, setFileData] = useNoticeFileStore();
@@ -23,7 +23,7 @@ const NoticePost = () => {
     fileNameList: [],
   });
 
-  const { handleNoticePostButtonClick } = useNoticePostAction(noticeData);
+  const { handleNoticeCreateButtonClick } = useNoticeCreateAction(noticeData);
 
   const handleNoticeDataChange: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
@@ -63,8 +63,8 @@ const NoticePost = () => {
   };
 
   return (
-    <StyledNoticePost>
-      <NoticePostHeader>
+    <StyledNoticeCreate>
+      <NoticeCreateHeader>
         <TitleInput
           name="title"
           value={noticeData.title}
@@ -82,11 +82,11 @@ const NoticePost = () => {
           >
             <Text fontType="btn2">파일 첨부</Text>
           </Button>
-          <Button size="SMALL" onClick={handleNoticePostButtonClick}>
+          <Button size="SMALL" onClick={handleNoticeCreateButtonClick}>
             게시하기
           </Button>
         </Row>
-      </NoticePostHeader>
+      </NoticeCreateHeader>
       <ContentTextarea
         ref={contentTextareaRef}
         name="content"
@@ -114,19 +114,19 @@ const NoticePost = () => {
           ))}
         </Column>
       )}
-    </StyledNoticePost>
+    </StyledNoticeCreate>
   );
 };
 
-export default NoticePost;
+export default NoticeCreate;
 
-const StyledNoticePost = styled.div`
+const StyledNoticeCreate = styled.div`
   ${flex({ flexDirection: 'column' })}
   width: 100%;
   gap: 36px;
 `;
 
-const NoticePostHeader = styled.div`
+const NoticeCreateHeader = styled.div`
   ${flex({ flexDirection: 'row', justifyContent: 'space-between' })}
   width: 100%;
   gap: 16px;

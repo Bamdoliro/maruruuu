@@ -12,8 +12,8 @@ import { styled } from 'styled-components';
 const NoticePage = () => {
   const router = useRouter();
 
-  const handleGoNoticePostPageButtonClick = () => {
-    router.push(ROUTES.NOTICE_POST);
+  const handleGoNoticeCreatePageButtonClick = () => {
+    router.push(ROUTES.NOTICE_CREATE);
   };
 
   return (
@@ -26,7 +26,7 @@ const NoticePage = () => {
             <Button
               size="SMALL"
               icon="ADD_ICON"
-              onClick={handleGoNoticePostPageButtonClick}
+              onClick={handleGoNoticeCreatePageButtonClick}
             >
               공지사항 작성
             </Button>
