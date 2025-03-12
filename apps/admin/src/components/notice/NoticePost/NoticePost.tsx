@@ -9,7 +9,7 @@ import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
 import { useNoticePostAction } from './NoticePost.hooks';
 
-const NoticePost1 = () => {
+const NoticePost = () => {
   const overlay = useOverlay();
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [fileData, setFileData] = useNoticeFileStore();
@@ -118,7 +118,7 @@ const NoticePost1 = () => {
   );
 };
 
-export default NoticePost1;
+export default NoticePost;
 
 const StyledNoticePost = styled.div`
   ${flex({ flexDirection: 'column' })}
