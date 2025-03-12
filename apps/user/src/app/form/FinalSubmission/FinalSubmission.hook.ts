@@ -63,7 +63,7 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
 
 export const useInput = () => {
   const setFormDocument = useSetFormDocumentStore();
-  const { uploadFormMutate, isPending } = useUploadFormMutation(setFormDocument);
+  const { uploadFormMutate } = useUploadFormMutation(setFormDocument);
   const [isUploadSuccessful, setIsUploadSuccessful] = useState(false);
 
   const handleFormDocumentChange: ChangeEventHandler<HTMLInputElement> = (e) => {
