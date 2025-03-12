@@ -46,6 +46,22 @@ export const putNotice = async (id: number, params: PutNoticeReq) => {
   return { data };
 };
 
+export const putNoticeFileUrl = async (files: NoticeFileData[]) => {
+  const uploadPromises = files.map((file) => {
+    const url = file.url;
+
+    return axios.put(url.uploadUrl, file, {
+      headers: {
+        'Content-Type': file.type,
+      },
+    });
+  });
+
+  const data = await Promise.all(uploadPromises);
+
+  return data;
+};
+
 export const deleteNotice = async (id: number) => {
   const { data } = await maru.delete(`/notice/${id}`, authorization());
 
