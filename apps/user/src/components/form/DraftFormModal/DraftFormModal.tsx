@@ -42,7 +42,7 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
           </Column>
           <CheckInput
             width="100%"
-            placeholder="'확인했습니다'를 정확하게 입력해주세요"
+            placeholder="입력 칸을 채워주세요"
             value={inputValue}
             onChange={handleInputChange}
           />
