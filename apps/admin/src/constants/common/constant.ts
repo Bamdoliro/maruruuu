@@ -3,6 +3,9 @@ export const KEY = {
 
   NOTICE_LIST: 'useNoticeList',
   NOTICE_DETAIL: 'useNoticeDetail',
+
+  FAQ_LIST: 'useFaqList',
+  FAQ_DETAIL: 'useFaqDetail',
 };
 
 export const ROUTES = {
