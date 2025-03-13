@@ -8,6 +8,7 @@ import {
 import { useFormStatusQuery } from '@/services/form/queries';
 import { bitmapToBlob } from '@/utils';
 import { useUser } from '@/hooks';
+import { toast } from 'react-toastify';
 
 export const useProfileUploader = (
   onPhotoUpload: (success: boolean, url?: string) => void
@@ -96,7 +97,21 @@ export const useProfileUploader = (
   const handleImageFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
-      if (file) processImageFile(file);
+      if (file) {
+        if (file.size > 2 * 1024 * 1024) {
+          toast('파일 용량은 2MB 이하로 업로드 해주세요.', { type: 'error' });
+          return;
+        }
+
+        if (!file.name || file.name.length > 20) {
+          toast('파일 이름은 비어 있을 수 없고, 20자 이하이어야 합니다.', {
+            type: 'error',
+          });
+          return;
+        }
+
+        processImageFile(file);
+      }
     },
     [processImageFile]
   );
