@@ -1,5 +1,5 @@
 import { useApiError } from '@/hooks';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { deleteFaq, postFaq, putFaq } from './api';
 import { PostFaqReq, PutFaqReq } from '@/types/faq/remote';
 import { useMutation } from '@tanstack/react-query';
