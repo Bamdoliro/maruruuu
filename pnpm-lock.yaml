@@ -50,6 +50,9 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.66.0
         version: 5.66.0(@tanstack/react-query@5.66.0)(react@18.2.0)
+      '@toss/react':
+        specifier: ^1.8.1
+        version: 1.8.1(react@18.2.0)
       '@toss/use-overlay':
         specifier: ^1.4.2
         version: 1.4.2(react@18.2.0)
