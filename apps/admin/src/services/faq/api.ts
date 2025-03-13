@@ -1,9 +1,8 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
-import { FaqCategory } from '@/types/faq/client';
-import { GetFaqListRes, GetFaqRes } from '@/types/faq/remote';
+import { GetFaqListReq, GetFaqListRes, GetFaqRes } from '@/types/faq/remote';
 
-export const getFaqList = async (category: FaqCategory) => {
+export const getFaqList = async (category: GetFaqListReq) => {
   const { data } = await maru.get<GetFaqListRes>(`/question?category=${category}`);
 
   return data;
