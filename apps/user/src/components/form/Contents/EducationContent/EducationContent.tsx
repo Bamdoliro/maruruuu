@@ -5,6 +5,7 @@ import { useFormValueStore } from '@/stores';
 import { useCTAButton, useInput } from './EducationContent.hook';
 import { useOverlay } from '@toss/use-overlay';
 import FindSchoolModal from '../../FindSchoolModal/FindSchoolModal';
+import { flex } from '@maru/utils';
 
 const EducationContent = () => {
   const overlay = useOverlay();
@@ -19,7 +20,7 @@ const EducationContent = () => {
   };
 
   return (
-    <>
+    <StyledEducationContent>
       <Column width="100%" gap={30}>
         <RadioGroup
           label="졸업 구분"
@@ -131,20 +132,17 @@ const EducationContent = () => {
           )}
         </Row>
       </Column>
-      <StyledFormController graduationType={form.education.graduationType}>
-        <FormController
-          onPrevious={handlePreviousStep}
-          onNext={handleNextStep}
-          step="출신학교및학력"
-        />
-      </StyledFormController>
-    </>
+      <FormController
+        onPrevious={handlePreviousStep}
+        onNext={handleNextStep}
+        step="출신학교및학력"
+      />
+    </StyledEducationContent>
   );
 };
 
 export default EducationContent;
 
-const StyledFormController = styled.div<{ graduationType: string }>`
-  margin-top: ${(props) =>
-    props.graduationType === 'QUALIFICATION_EXAMINATION' ? '290.391px' : '0px'};
+const StyledEducationContent = styled.div`
+  ${flex({ flexDirection: 'column', justifyContent: 'space-between' })}
 `;
