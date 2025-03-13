@@ -66,11 +66,16 @@ const StyledTd = styled.div<{
             ${font.p2}
             background-color: ${color.gray50};
           `
-        : props.styleType === 'FORM' &&
-          css`
-            ${font.p2}
-            background-color: ${color.maruLightBlue};
-          `}
+        : props.styleType === 'FORM'
+          ? css`
+              ${font.p2}
+              background-color: ${color.maruLightBlue};
+            `
+          : props.styleType === 'ANALYSIS' &&
+            css`
+              ${font.caption}
+              background-color: ${color.white};
+            `}
 
   ${(props) =>
     props.isBottom &&
