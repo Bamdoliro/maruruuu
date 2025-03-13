@@ -1,7 +1,6 @@
 import { KEY } from '@/constants/common/constant';
 import { useQuery } from '@tanstack/react-query';
 import { getFaqDetail, getFaqList } from './api';
-import { FaqCategory } from '@/types/faq/client';
 
 export const useFaqListQuery = () => {
   const { data, ...restQuery } = useQuery({

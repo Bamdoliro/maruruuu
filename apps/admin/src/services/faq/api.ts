@@ -1,7 +1,6 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
 import {
-  GetFaqListReq,
   GetFaqListRes,
   GetFaqDetailRes,
   PostFaqReq,
