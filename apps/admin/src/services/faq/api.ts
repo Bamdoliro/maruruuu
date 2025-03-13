@@ -31,3 +31,9 @@ export const putFaq = async (id: number, params: PutFaqReq) => {
 
   return data;
 };
+
+export const deleteFaq = async (id: number) => {
+  const { data } = await maru.delete(`/question/${id}`, authorization());
+
+  return data;
+};
