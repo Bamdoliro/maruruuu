@@ -1,7 +1,7 @@
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import Competition from '../../common/Competition';
+import Competition from './Competition';
 import DetailContent from '../../common/DetailContent';
 
 const DetailTable = () => {

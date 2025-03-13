@@ -7,7 +7,7 @@ import ScoreTable from './ScoreTable';
 const GradeDistributionDetailTable = () => {
   return (
     <Row gap={120}>
-      <ApplicantInfoWrapper>
+      <ScoreInfoWrapper>
         <Column>
           <Column gap={40}>
             <Column>
@@ -23,7 +23,7 @@ const GradeDistributionDetailTable = () => {
         <Column justifyContent="space-between">
           <ScoreTable />
         </Column>
-      </ApplicantInfoWrapper>
+      </ScoreInfoWrapper>
       <DetailContent />
     </Row>
   );
@@ -31,7 +31,7 @@ const GradeDistributionDetailTable = () => {
 
 export default GradeDistributionDetailTable;
 
-const ApplicantInfoWrapper = styled.div`
+const ScoreInfoWrapper = styled.div`
   ${flex({ flexDirection: 'column', justifyContent: 'space-between' })}
   height: 100%;
 `;
