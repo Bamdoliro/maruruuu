@@ -9,3 +9,9 @@ export interface GetFaqListRes {
 export interface GetFaqRes {
   data: Faq;
 }
+
+export interface PostFaqReq {
+  title: string;
+  content: string;
+  category: FaqCategory;
+}
