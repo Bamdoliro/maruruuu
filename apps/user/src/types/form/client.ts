@@ -119,3 +119,26 @@ export interface Incomplete {
 }
 
 export type AttendanceName = 'attendance1' | 'attendance2' | 'attendance3';
+
+export type FormStep =
+  | '지원자정보'
+  | '보호자정보'
+  | '출신학교및학력'
+  | '전형선택'
+  | '성적입력'
+  | '자기소개서'
+  | '초안작성완료'
+  | '초안제출완료'
+  | '최종제출'
+  | '최종제출완료';
+
+export type GradeStep = '교과성적' | '출결상황' | '봉사시간' | '자격증';
+
+export type SaveSubject = Omit<Subject, 'id'>;
+
+export interface School {
+  name: string;
+  location: string;
+  address: string;
+  code: string;
+}

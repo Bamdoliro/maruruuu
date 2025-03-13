@@ -8,7 +8,7 @@ import {
   VolunteerCalculator,
 } from '@/components/form';
 import { STEP_LIST } from '@/constants/form/data';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Column, Text, UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';

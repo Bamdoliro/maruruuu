@@ -1,7 +1,7 @@
 'use client';
 
 import { EnrollmentLoader, ExplainBox, FileUploader } from '@/components/enrollment';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';

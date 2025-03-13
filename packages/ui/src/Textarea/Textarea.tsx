@@ -14,7 +14,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 const Textarea = ({
-  width = 320,
+  width,
   limit,
   label,
   name,

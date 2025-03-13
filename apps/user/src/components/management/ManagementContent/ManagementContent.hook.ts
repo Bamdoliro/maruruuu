@@ -1,7 +1,8 @@
 import { ROUTES } from '@/constants/common/constants';
-import { useDownloadFile, useUser } from '@/hooks';
+import { useUser } from '@/hooks';
 import { useExportFormQuery, useExportReciptQuery } from '@/services/form/queries';
 import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
+import { useDownloadFile } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 export const useBoxClick = (status?: string) => {

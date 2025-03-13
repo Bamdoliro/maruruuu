@@ -2,7 +2,7 @@
 
 import { NoticeDetailContent } from '@/components/notice';
 import { ROUTES } from '@/constants/common/constants';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { IconArrowLeft } from '@maru/icon';
 import { Loader, Text } from '@maru/ui';

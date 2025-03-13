@@ -1,11 +1,9 @@
 import { color } from '@maru/design-system';
 import {
   Button,
-  CellInput,
   Column,
   Input,
   RadioGroup,
-  Row,
   Text,
   Textarea,
 } from '@maru/ui';

@@ -9,7 +9,7 @@ import {
   ScheduleList,
   SimulationBox,
 } from '@/components/main';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { Row } from '@maru/ui';
 import { flex } from '@maru/utils';
 import React from 'react';

@@ -1,7 +1,7 @@
 'use client';
 
 import { FairStudentApplicationBox } from '@/components/fair';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { useFairListQuery } from '@/services/fair/queries';
 import { formatApplicationDate, formatStartDate } from '@/utils';
 import { color } from '@maru/design-system';
