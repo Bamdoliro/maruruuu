@@ -1,6 +1,5 @@
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
-import React from 'react';
 import styled, { css } from 'styled-components';
 import type { TableProps, TableStyleType } from './Table.type';
 
