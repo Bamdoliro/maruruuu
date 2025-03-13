@@ -7,13 +7,12 @@ import AppLayout from '@/layouts/AppLayout';
 import FaqTable from '@/components/faq/FaqTable/FaqTable';
 import { flex } from '@maru/utils';
 import type { FaqCategory } from '@/types/faq/client';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/common/constant';
 
 const FaqPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState<FaqCategory>('ALL_FAQS');
-
   const router = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState<FaqCategory>('ALL_FAQS');
 
   const handleMoveFaqCreatePage = () => {
     router.push(ROUTES.FAQ_CREATE);
