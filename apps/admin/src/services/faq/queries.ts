@@ -1,6 +1,6 @@
 import { KEY } from '@/constants/common/constant';
 import { useQuery } from '@tanstack/react-query';
-import { getFaq, getFaqList } from './api';
+import { getFaqDetail, getFaqList } from './api';
 import { FaqCategory } from '@/types/faq/client';
 
 export const useFaqListQuery = () => {
@@ -12,11 +12,11 @@ export const useFaqListQuery = () => {
   return { data: data?.dataList, ...restQuery };
 };
 
-export const useFaqQuery = (id: number) => {
+export const useFaqDetailQuery = (id: number) => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.FAQ_DETAIL],
-    queryFn: () => getFaq(id),
+    queryFn: () => getFaqDetail(id),
   });
 
-  return { data: data, ...restQuery };
+  return { data: data?.data, ...restQuery };
 };

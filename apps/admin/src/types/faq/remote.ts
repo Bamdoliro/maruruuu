@@ -6,7 +6,7 @@ export interface GetFaqListRes {
   dataList: Faq[];
 }
 
-export interface GetFaqRes {
+export interface GetFaqDetailRes {
   data: Faq;
 }
 

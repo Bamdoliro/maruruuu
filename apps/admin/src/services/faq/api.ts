@@ -3,7 +3,7 @@ import { authorization } from '@/apis/token';
 import {
   GetFaqListReq,
   GetFaqListRes,
-  GetFaqRes,
+  GetFaqDetailRes,
   PostFaqReq,
   PutFaqReq,
 } from '@/types/faq/remote';
@@ -14,8 +14,8 @@ export const getFaqList = async () => {
   return data;
 };
 
-export const getFaq = async (id: number) => {
-  const { data } = await maru.get<GetFaqRes>(`/question/${id}`);
+export const getFaqDetail = async (id: number) => {
+  const { data } = await maru.get<GetFaqDetailRes>(`/question/${id}`);
 
   return data;
 };
