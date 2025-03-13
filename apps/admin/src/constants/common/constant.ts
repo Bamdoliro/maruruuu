@@ -15,6 +15,8 @@ export const ROUTES = {
   NOTICE_CREATE: '/notice/create',
   NOTICE_EDIT: '/notice/edit',
   FAQ: '/faq',
+  FAQ_CREATE: '/faq/create',
+  FAQ_EDIT: '/faq/edit',
   MESSAGE: '/message',
   ANALYSIS: '/analysis',
   FAIR: '/fair',
