@@ -11,11 +11,11 @@ import { Suspense } from 'react';
 import { styled } from 'styled-components';
 import FaqDetail from '@/components/faq/FaqDetail/FaqDetail';
 
-interface Props {
+interface FaqDetailProps {
   params: { id: number };
 }
 
-const FaqDetailPage = ({ params: { id } }: Props) => {
+const FaqDetailPage = ({ params: { id } }: FaqDetailProps) => {
   return (
     <AppLayout>
       <StyledFaqDetail>
