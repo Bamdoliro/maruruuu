@@ -71,11 +71,16 @@ const StyledTd = styled.div<{
               ${font.p2}
               background-color: ${color.maruLightBlue};
             `
-          : props.styleType === 'ANALYSIS' &&
-            css`
-              ${font.caption}
-              background-color: ${color.white};
-            `}
+          : props.styleType === 'ANALYSIS'
+            ? css`
+                ${font.caption}
+                background-color: ${color.white};
+              `
+            : props.styleType === 'ANALYSIS_SECONDARY' &&
+              css`
+                ${font.caption}
+                background-color: ${color.gray50};
+              `}
 
   ${(props) =>
     props.isBottom &&

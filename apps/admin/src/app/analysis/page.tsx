@@ -4,30 +4,44 @@ import AppLayout from '@/layouts/AppLayout';
 import ApplicantCount from '@/components/analysis/ApplicantCount/ApplicantCount';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
-import { Column, Row, Text } from '@maru/ui';
+import { Column, Row } from '@maru/ui';
 import SideMenu from '@/components/common/SideMenu/SideMenu';
 import { ANALYSIS_TYPE } from '@/constants/analysis/data';
 import { useState } from 'react';
+import { SwitchCase } from '@toss/react';
+import ApplicationTypeRatio from '@/components/analysis/ApplicationTypeRatio/ApplicationTypeRatio';
+import GenderRatio from '@/components/analysis/GenderRatio/GenderRatio';
+import GraduatedSchool from '@/components/analysis/GraduatedSchool/GraduatedSchool';
+import GradeDistribution from '@/components/analysis/GradeDistribution/GradeDistribution';
+
 const AnalysisPage = () => {
-  const [selectedAnalysisType, setSelectedAnalysisType] = useState('지원자 수 (경쟁률)');
+  const [currentAnalysisType, setcurrentAnalysisType] = useState('지원자 수 (경쟁률)');
 
   return (
     <AppLayout>
       <StyledAnalysisPage>
-        <Text fontType="H2">분석</Text>
         <Row gap={60}>
           <Column gap={10}>
             {ANALYSIS_TYPE.map((type, index) => (
               <SideMenu
                 key={`anaysis-type ${index}`}
-                isActive={selectedAnalysisType === type}
-                onClick={() => setSelectedAnalysisType(type)}
+                isActive={currentAnalysisType === type}
+                onClick={() => setcurrentAnalysisType(type)}
               >
                 {type}
               </SideMenu>
             ))}
           </Column>
-          <ApplicantCount />
+          <SwitchCase
+            value={currentAnalysisType}
+            caseBy={{
+              '지원자 수 (경쟁률)': <ApplicantCount />,
+              '성적 분포': <GradeDistribution />,
+              '지원 전형 비율': <ApplicationTypeRatio />,
+              '지원자 성비': <GenderRatio />,
+              '출신 학교 현황': <GraduatedSchool />,
+            }}
+          />
         </Row>
       </StyledAnalysisPage>
     </AppLayout>
@@ -41,6 +55,6 @@ const StyledAnalysisPage = styled.div`
   ${flex({ flexDirection: 'column' })}
   gap: 40px;
   width: 100%;
-  min-height: 100vh;
-  padding: 3.5rem 3.25rem;
+  padding: 3.25rem 3.25rem;
+  height: 100vh;
 `;

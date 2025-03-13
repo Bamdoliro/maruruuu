@@ -22,7 +22,7 @@ const Competition = () => {
           </Th>
         </Row>
         <Row>
-          <Td width={88} height={44} styleType="ANALYSIS">
+          <Td width={88} height={44} styleType="ANALYSIS_SECONDARY">
             지원자 수
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
@@ -36,7 +36,12 @@ const Competition = () => {
           </Td>
         </Row>
         <Row>
-          <Td width={88} height={44} styleType="ANALYSIS" borderBottomLeftRadius={12}>
+          <Td
+            width={88}
+            height={44}
+            styleType="ANALYSIS_SECONDARY"
+            borderBottomLeftRadius={12}
+          >
             경쟁률
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">

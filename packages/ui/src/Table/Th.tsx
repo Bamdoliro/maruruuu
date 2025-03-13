@@ -58,24 +58,13 @@ const StyledTh = styled.div<{ styleType: TableStyleType }>`
               border-right: none;
             }
           `
-        : props.styleType === 'ANALYSIS_SECONDARY'
-          ? css`
-              ${font.caption}
-              background-color: ${color.gray100};
-              color: ${color.white};
-              border-right: 1px solid ${color.white};
-              border-bottom: 1px solid ${color.white};
-              &:last-child {
-                border-right: none;
-              }
-            `
-          : css`
-              ${font.p2}
-              background-color: ${color.gray100};
-              color: ${color.gray900};
-              border-left: 1px solid ${color.gray300};
-              &:first-child {
-                border-left: none;
-              }
-            `}
+        : css`
+            ${font.p2}
+            background-color: ${color.gray100};
+            color: ${color.gray900};
+            border-left: 1px solid ${color.gray300};
+            &:first-child {
+              border-left: none;
+            }
+          `}
 `;

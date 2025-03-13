@@ -7,3 +7,5 @@ export const ANALYSIS_TYPE = [
 ] as const;
 
 export const ANALYSIS_STEP = ['변경 전', '변경 후'] as const;
+
+export const ANALYSIS_PASS_STEP = ['1차 합격자', '2차 전형자', '최종 합격자'] as const;

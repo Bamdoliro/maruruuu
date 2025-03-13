@@ -2,7 +2,7 @@ import { font } from '@maru/design-system';
 import { Column, Row, Td, Th } from '@maru/ui';
 import styled from 'styled-components';
 
-const DetailTable = () => {
+const DetailContent = () => {
   const empty = '';
 
   return (
@@ -180,7 +180,7 @@ const DetailTable = () => {
   );
 };
 
-export default DetailTable;
+export default DetailContent;
 
 const StyledDetailTable = styled.div`
   ${font.H2}
