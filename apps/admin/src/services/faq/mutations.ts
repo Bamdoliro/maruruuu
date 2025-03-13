@@ -1,7 +1,7 @@
 import { useApiError } from '@/hooks';
 import { useRouter } from 'next/router';
-import { postFaq } from './api';
-import { PostFaqReq } from '@/types/faq/remote';
+import { postFaq, putFaq } from './api';
+import { PostFaqReq, PutFaqReq } from '@/types/faq/remote';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { ROUTES } from '@/constants/common/constant';
@@ -22,4 +22,22 @@ export const usePostFaqMutation = () => {
   });
 
   return { postFaqMutate, ...restMutation };
+};
+
+export const usePutFaqMutation = (id: number) => {
+  const { handleError } = useApiError();
+  const router = useRouter();
+
+  const { mutate: putFaqMutate, ...restMutation } = useMutation({
+    mutationFn: (params: PutFaqReq) => putFaq(id, params),
+    onSuccess: () => {
+      toast('게시물이 수정되었습니다.', {
+        type: 'success',
+      });
+      router.push(`${ROUTES.FAQ}/${id}`);
+    },
+    onError: handleError,
+  });
+
+  return { putFaqMutate, ...restMutation };
 };
