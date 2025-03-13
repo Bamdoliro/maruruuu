@@ -1,11 +1,16 @@
 export const KEY = {
   ADMIN: 'useAdmin',
+
+  NOTICE_LIST: 'useNoticeList',
+  NOTICE_DETAIL: 'useNoticeDetail',
 };
 
 export const ROUTES = {
   MAIN: '/',
   FORM: '/form',
   NOTICE: '/notice',
+  NOTICE_CREATE: '/notice/create',
+  NOTICE_EDIT: '/notice/edit',
   FAQ: '/faq',
   MESSAGE: '/message',
   ANALYSIS: '/analysis',
