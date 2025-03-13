@@ -1,4 +1,4 @@
-import { Faq, FaqCategory } from './client';
+import { Faq, FaqCategory, FaqInput } from './client';
 
 export interface GetFaqListRes {
   dataList: Faq[];
@@ -8,14 +8,6 @@ export interface GetFaqDetailRes {
   data: Faq;
 }
 
-export interface PostFaqReq {
-  title: string;
-  content: string;
-  category: FaqCategory;
-}
+export type PostFaqReq = FaqInput;
 
-export interface PutFaqReq {
-  title: string;
-  content: string;
-  category: FaqCategory;
-}
+export type PutFaqReq = FaqInput;
