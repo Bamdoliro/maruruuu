@@ -1,4 +1,5 @@
 export type FaqCategory =
+  | 'ALL_FAQS'
   | 'SCHOOL_LIFE'
   | 'SUBMIT_DOCUMENT'
   | 'ADMISSION_PROCESS'
