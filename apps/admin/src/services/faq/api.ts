@@ -1,6 +1,12 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
-import { GetFaqListReq, GetFaqListRes, GetFaqRes, PostFaqReq } from '@/types/faq/remote';
+import {
+  GetFaqListReq,
+  GetFaqListRes,
+  GetFaqRes,
+  PostFaqReq,
+  PutFaqReq,
+} from '@/types/faq/remote';
 
 export const getFaqList = async (category: GetFaqListReq) => {
   const { data } = await maru.get<GetFaqListRes>(`/question?category=${category}`);
@@ -16,6 +22,12 @@ export const getFaq = async (id: number) => {
 
 export const postFaq = async (params: PostFaqReq) => {
   const { data } = await maru.post(`/question`, { params }, authorization());
+
+  return data;
+};
+
+export const putFaq = async (id: number, params: PutFaqReq) => {
+  const { data } = await maru.put(`/question/${id}`, { params }, authorization());
 
   return data;
 };
