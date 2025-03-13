@@ -145,4 +145,6 @@ export default EducationContent;
 
 const StyledEducationContent = styled.div`
   ${flex({ flexDirection: 'column', justifyContent: 'space-between' })}
+  width: 100%;
+  height: 100%;
 `;
