@@ -8,8 +8,8 @@ import {
   PutFaqReq,
 } from '@/types/faq/remote';
 
-export const getFaqList = async (category: GetFaqListReq) => {
-  const { data } = await maru.get<GetFaqListRes>(`/question?category=${category}`);
+export const getFaqList = async () => {
+  const { data } = await maru.get<GetFaqListRes>(`/question`);
 
   return data;
 };

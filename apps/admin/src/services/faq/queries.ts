@@ -3,10 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { getFaq, getFaqList } from './api';
 import { FaqCategory } from '@/types/faq/client';
 
-export const useFaqListQuery = (category: FaqCategory) => {
+export const useFaqListQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.FAQ_LIST],
-    queryFn: () => getFaqList(category),
+    queryFn: getFaqList,
   });
 
   return { data: data?.dataList, ...restQuery };
