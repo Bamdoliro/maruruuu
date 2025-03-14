@@ -39,7 +39,7 @@ const StyledNoticeEdit = styled.div`
   gap: 24px;
   width: 100%;
   min-height: 100vh;
-  padding: 64px 75px;
+  padding: 48px 60px;
 `;
 
 const DirectLink = styled(Link)`

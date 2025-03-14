@@ -35,7 +35,7 @@ const StyledFaqCreate = styled.div`
   gap: 24px;
   width: 100%;
   min-height: 100vh;
-  padding: 64px 60px;
+  padding: 48px 60px;
 `;
 
 const DirectLink = styled(Link)`
