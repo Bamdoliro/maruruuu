@@ -1,7 +1,8 @@
 import { Storage } from '@/apis/storage/storage';
 import { useSubmitDraftFormMutation } from '@/services/form/mutations';
 import { useFormValueStore, useSetFormStepStore } from '@/stores';
-import { useMemo } from 'react';
+import { Form } from '@/types/form/client';
+import { useEffect, useState } from 'react';
 
 export const useCTAButton = () => {
   const form = useFormValueStore();
@@ -19,63 +20,118 @@ export const useCTAButton = () => {
   return { handleCheckAgainForm, handleSubmitDraftForm };
 };
 
-const FIELD_RULES: Record<string, (value: string) => boolean> = {
-  name: (v) => v.length >= 2,
-  phoneNumber: (v) => v.length === 11,
-  address: (v) => v.length <= 100,
-  detailAddress: (v) => v.length <= 100,
-  zoneCode: (v) => v.length === 5,
-  schoolName: (v) => v.length <= 30,
-  schoolLocation: (v) => v.length >= 2,
-  schoolAddress: (v) => v.length >= 2,
-  teacherName: (v) => v.length >= 2,
-  graduationYear: (v) => v.length === 4,
-  schoolCode: (v) => v.length === 7,
-  schoolPhoneNumber: (v) => v.length >= 10,
-  teacherMobilePhoneNumber: (v) => v.length <= 11,
+const useApplicantFieldsCount = (applicant: Form['applicant']) => {
+  return Object.entries(applicant).reduce(
+    (acc, [key, value]) => {
+      if (!value) return acc;
+
+      if (key === 'name' && value.length >= 2) return acc + 1;
+      if (key === 'phoneNumber' && value.length === 11) return acc + 1;
+
+      return acc + 1;
+    },
+    Storage.getItem('isUploadPicture') ? 1 : 0
+  );
 };
 
-const useFieldsCount = (data: Record<string, any>, extraInitialCount = 0) => {
-  return Object.entries(data).reduce(
-    (acc, [key, value]) => acc + (value && FIELD_RULES[key]?.(value) ? 1 : 0),
-    extraInitialCount
-  );
+const useParentFieldsCount = (parent: Form['parent']) =>
+  Object.entries(parent).reduce((acc, [key, value]) => {
+    if (!value) return acc;
+
+    if (key === 'name' && value.length >= 2) return acc + 1;
+    if (key === 'phoneNumber' && value.length === 11) return acc + 1;
+    if ((key === 'address' || key === 'detailAddress') && value.length <= 100)
+      return acc + 1;
+    if (key === 'zoneCode' && value.length === 5) return acc + 1;
+
+    return acc + 1;
+  }, 0);
+
+const useEducationFieldsCount = (education: Form['education']) => {
+  return Object.entries(education).reduce((acc, [key, value]) => {
+    if (education.graduationType === 'QUALIFICATION_EXAMINATION') {
+      if (key === 'graduationType' || key === 'graduationYear') {
+        return acc + 1;
+      }
+      return acc;
+    }
+
+    if (!value) return acc;
+
+    if (key === 'schoolName' && value.length <= 30) return acc + 1;
+    if (
+      (key === 'schoolLocation' || key === 'schoolAddress' || key === 'teacherName') &&
+      value.length >= 2
+    )
+      return acc + 1;
+    if (key === 'graduationYear' && value.length === 4) return acc + 1;
+    if (key === 'schoolCode' && value.length === 7) return acc + 1;
+    if (key === 'schoolPhoneNumber' && value.length >= 10) return acc + 1;
+    if (key === 'teacherMobilePhoneNumber' && value.length <= 11) return acc + 1;
+
+    return acc + 1;
+  }, 0);
 };
 
 export const useCheckFilledForm = () => {
   const form = useFormValueStore();
 
-  const applicantFilledCount = useFieldsCount(
-    form.applicant,
-    Storage.getItem('isUploadPicture') ? 1 : 0
-  );
-  const parentFilledCount = useFieldsCount(form.parent);
-  const educationFilledCount = useMemo(() => {
-    if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
-      return (form.education.graduationYear ? 1 : 0) + 1;
-    }
-    return useFieldsCount(form.education);
-  }, [form.education]);
+  const [formStepCount, setFormStepCount] = useState({
+    isFilledForm: true,
+    applicantFilledCount: 0,
+    parentFilledCount: 0,
+    educationFilledCount: 0,
+    typeFilledCount: 0,
+    documentFilledCount: 0,
+  });
 
-  const typeFilledCount = form.type ? 1 : 0;
-  const documentFilledCount = Object.values(form.document).filter(Boolean).length;
+  const filledApplicantFieldsCount = useApplicantFieldsCount(form.applicant);
+  const filledParentFieldsCount = useParentFieldsCount(form.parent);
+  const filledEducationFieldsCount = useEducationFieldsCount(form.education);
+  const filledTypeFieldCount = form.type ? 1 : 0;
+  const filledDocumentFieldsCount = Object.values(form.document).filter(
+    (value) => !!value
+  ).length;
 
-  const isFilledForm = useMemo(
-    () =>
-      applicantFilledCount === 5 &&
-      parentFilledCount === 6 &&
-      educationFilledCount ===
+  useEffect(() => {
+    const isFormFilled =
+      filledApplicantFieldsCount === 5 &&
+      filledParentFieldsCount === 6 &&
+      filledEducationFieldsCount ===
         (form.education.graduationType === 'QUALIFICATION_EXAMINATION' ? 2 : 9) &&
-      typeFilledCount === 1 &&
-      documentFilledCount === 2,
-    [
-      applicantFilledCount,
-      parentFilledCount,
-      educationFilledCount,
-      typeFilledCount,
-      documentFilledCount,
-    ]
-  );
+      filledTypeFieldCount === 1 &&
+      filledDocumentFieldsCount === 2;
+
+    setFormStepCount((prev) => ({
+      ...prev,
+      isFilledForm: isFormFilled,
+      applicantFilledCount: filledApplicantFieldsCount,
+      parentFilledCount: filledParentFieldsCount,
+      educationFilledCount: filledEducationFieldsCount,
+      typeFilledCount: filledTypeFieldCount,
+      documentFilledCount: filledDocumentFieldsCount,
+    }));
+  }, [
+    filledApplicantFieldsCount,
+    filledDocumentFieldsCount,
+    filledEducationFieldsCount,
+    filledParentFieldsCount,
+    filledTypeFieldCount,
+    form.applicant,
+    form.document,
+    form.education,
+    form.parent,
+    form.type,
+  ]);
+
+  const {
+    applicantFilledCount,
+    parentFilledCount,
+    educationFilledCount,
+    typeFilledCount,
+    documentFilledCount,
+    isFilledForm,
+  } = formStepCount;
 
   return {
     applicantFilledCount,
