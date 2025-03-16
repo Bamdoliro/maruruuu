@@ -19,11 +19,15 @@ const FaqTable = ({ selectedCategory }: FaqTableProps) => {
   return (
     <Column gap={12}>
       <FaqTableHeader />
-      {filteredFaqList
-        ?.sort((a, b) => a.id - b.id)
-        .map(({ id, title, category, createdAt }) => (
-          <FaqTableItem id={id} title={title} category={category} createdAt={createdAt} />
-        ))}
+      {filteredFaqList?.map(({ id, title, category, createdAt }) => (
+        <FaqTableItem
+          key={id}
+          id={id}
+          title={title}
+          category={category}
+          createdAt={createdAt}
+        />
+      ))}
     </Column>
   );
 };

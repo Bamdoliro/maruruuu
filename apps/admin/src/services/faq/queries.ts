@@ -6,6 +6,10 @@ export const useFaqListQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.FAQ_LIST],
     queryFn: getFaqList,
+    select: (response) => ({
+      ...response,
+      dataList: (response.dataList ?? []).sort((a, b) => a.id - b.id),
+    }),
   });
 
   return { data: data?.dataList, ...restQuery };
