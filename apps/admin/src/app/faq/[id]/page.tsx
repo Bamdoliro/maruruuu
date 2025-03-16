@@ -1,6 +1,5 @@
 'use client';
 
-import NoticeEdit from '@/components/notice/NoticeEdit/NoticeEdit';
 import { ROUTES } from '@/constants/common/constant';
 import AppLayout from '@/layouts/AppLayout';
 import { IconArrowLeft } from '@maru/icon';
@@ -9,31 +8,32 @@ import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
+import FaqDetail from '@/components/faq/FaqDetail/FaqDetail';
 
-interface NoticeEditPageProps {
+interface FaqDetailProps {
   params: { id: number };
 }
 
-const NoticeEditPage = ({ params: { id } }: NoticeEditPageProps) => {
+const FaqDetailPage = ({ params: { id } }: FaqDetailProps) => {
   return (
     <AppLayout>
-      <StyledNoticeEdit>
-        <DirectLink href={`${ROUTES.NOTICE}/${id}`}>
+      <StyledFaqDetail>
+        <DirectLink href={ROUTES.FAQ}>
           <IconArrowLeft width={18} height={18} />
           돌아가기
         </DirectLink>
         <Suspense fallback={<Loader />}>
-          <NoticeEdit id={id} />
+          <FaqDetail id={id} />
         </Suspense>
-      </StyledNoticeEdit>
+      </StyledFaqDetail>
     </AppLayout>
   );
 };
 
-export default NoticeEditPage;
+export default FaqDetailPage;
 
-const StyledNoticeEdit = styled.div`
+const StyledFaqDetail = styled.div`
   position: relative;
   ${flex({ flexDirection: 'column' })}
   gap: 24px;
@@ -43,8 +43,8 @@ const StyledNoticeEdit = styled.div`
 `;
 
 const DirectLink = styled(Link)`
-  ${flex({ alignItems: 'center' })}
+  ${flex({ alignItems: 'center' })};
   gap: 2px;
-  ${font.p3}
-  color: ${color.gray900};
+  ${font.p2};
+  color: ${color.gray600};
 `;
