@@ -1,15 +1,16 @@
 export type FaqCategory =
-  | 'ALL_FAQS'
   | 'SCHOOL_LIFE'
   | 'SUBMIT_DOCUMENT'
   | 'ADMISSION_PROCESS'
   | 'TOP_QUESTION';
 
+export type ExtendedFaqCategory = FaqCategory | 'ALL_FAQS';
+
 export interface Faq {
   id: number;
   title: string;
   content: string;
-  category: FaqCategory | string;
+  category: FaqCategory;
   createdAt: string;
 }
 
