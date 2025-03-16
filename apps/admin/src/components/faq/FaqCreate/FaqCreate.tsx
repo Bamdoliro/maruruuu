@@ -1,39 +1,16 @@
 import { FAQ_CATEGORY } from '@/constants/faq/constant';
-import { useFaqDetailQuery } from '@/services/faq/queries';
-import { resizeTextarea } from '@/utils';
 import { color, font } from '@maru/design-system';
 import { Button, Column, Dropdown, Row } from '@maru/ui';
 import { flex } from '@maru/utils';
-import type { ChangeEventHandler } from 'react';
-import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useFaqCreateAction } from './faqCreate.hooks';
-import { FaqCategory, FaqInput } from '@/types/faq/client';
+import { useFaqCreateAction, useFaqCreateData } from './faqCreate.hooks';
+import { FaqCategory } from '@/types/faq/client';
 
 const FaqCreate = () => {
-  const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
-  const [faqData, setFaqData] = useState<FaqInput>({
-    title: '',
-    content: '',
-    category: 'SCHOOL_LIFE',
-  });
+  const { faqData, contentTextareaRef, handleFaqDataChange, handleFaqCategoryChange } =
+    useFaqCreateData();
 
   const { handleFaqCreateButtonClick } = useFaqCreateAction(faqData);
-
-  const handleFaqDataChange: ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (e) => {
-    const { name, value } = e.target;
-    setFaqData({ ...faqData, [name]: value });
-
-    resizeTextarea(contentTextareaRef);
-  };
-
-  const handleFaqCategoryChange = (value: string, name: string) => {
-    setFaqData({ ...faqData, [name]: value });
-  };
-
-  useEffect(() => resizeTextarea(contentTextareaRef), []);
 
   return (
     <StyledFaqCreate>
