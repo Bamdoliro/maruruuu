@@ -1,4 +1,4 @@
-import { FAQ_CATEGORY } from '@/constants/faq/constant';
+import { FAQ_CATEGORY, FAQ_CATEGORY_OPTIONS } from '@/constants/faq/constant';
 import { color, font } from '@maru/design-system';
 import { Button, Column, Dropdown, Row } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -29,12 +29,7 @@ const FaqCreate = () => {
           </Row>
           <Dropdown
             name="category"
-            data={[
-              { value: 'SCHOOL_LIFE', label: '학교생활' },
-              { value: 'SUBMIT_DOCUMENT', label: '관련 제출 서류' },
-              { value: 'ADMISSION_PROCESS', label: '입학 과정' },
-              { value: 'TOP_QUESTION', label: '질문 TOP' },
-            ]}
+            data={FAQ_CATEGORY_OPTIONS}
             size="SMALL"
             width={140}
             value={FAQ_CATEGORY[faqData.category as FaqCategory]}

@@ -15,3 +15,8 @@ export interface Faq {
 }
 
 export type FaqInput = Omit<Faq, 'id' | 'createdAt'>;
+
+export interface FaqCategoryOption {
+  value: FaqCategory;
+  label: string;
+}
