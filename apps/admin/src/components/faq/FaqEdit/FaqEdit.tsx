@@ -1,45 +1,20 @@
-import { FAQ_CATEGORY } from '@/constants/faq/constant';
-import { useFaqDetailQuery } from '@/services/faq/queries';
-import { resizeTextarea } from '@/utils';
+import { FAQ_CATEGORY, FAQ_CATEGORY_OPTIONS } from '@/constants/faq/constant';
 import { color, font } from '@maru/design-system';
 import { Button, Column, Dropdown, Row } from '@maru/ui';
 import { flex } from '@maru/utils';
-import type { ChangeEventHandler } from 'react';
-import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useFaqEditAction } from './faqEdit.hooks';
-import { FaqCategory, FaqInput } from '@/types/faq/client';
+import { useFaqEditAction, useFaqEditData } from './faqEdit.hooks';
+import { FaqCategory } from '@/types/faq/client';
 
 interface FaqEditProps {
   id: number;
 }
 
 const FaqEdit = ({ id }: FaqEditProps) => {
-  const { data: faqDetailData } = useFaqDetailQuery(id);
-
-  const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
-  const [faqData, setFaqData] = useState<FaqInput>({
-    title: faqDetailData?.title ?? '',
-    content: faqDetailData?.content ?? '',
-    category: faqDetailData?.category ?? 'SCHOOL_LIFE',
-  });
+  const { faqData, contentTextareaRef, handleFaqDataChange, handleFaqCategoryChange } =
+    useFaqEditData(id);
 
   const { handleFaqEditButtonClick } = useFaqEditAction(id, faqData);
-
-  const handleFaqDataChange: ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (e) => {
-    const { name, value } = e.target;
-    setFaqData({ ...faqData, [name]: value });
-
-    resizeTextarea(contentTextareaRef);
-  };
-
-  const handleFaqCategoryChange = (value: string, name: string) => {
-    setFaqData({ ...faqData, [name]: value });
-  };
-
-  useEffect(() => resizeTextarea(contentTextareaRef), []);
 
   return (
     <StyledFaqEdit>
@@ -58,12 +33,7 @@ const FaqEdit = ({ id }: FaqEditProps) => {
           </Row>
           <Dropdown
             name="category"
-            data={[
-              { value: 'SCHOOL_LIFE', label: '학교생활' },
-              { value: 'SUBMIT_DOCUMENT', label: '관련 제출 서류' },
-              { value: 'ADMISSION_PROCESS', label: '입학 과정' },
-              { value: 'TOP_QUESTION', label: '질문 TOP' },
-            ]}
+            data={FAQ_CATEGORY_OPTIONS}
             size="SMALL"
             width={140}
             value={FAQ_CATEGORY[faqData.category as FaqCategory]}
