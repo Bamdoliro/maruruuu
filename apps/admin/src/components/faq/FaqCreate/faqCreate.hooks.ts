@@ -17,7 +17,9 @@ export const useFaqCreateData = () => {
     const { name, value } = e.target;
     setFaqData({ ...faqData, [name]: value });
 
-    resizeTextarea(contentTextareaRef);
+    if (name === 'content') {
+      resizeTextarea(contentTextareaRef);
+    }
   };
 
   const handleFaqCategoryChange = (value: string, name: string) => {
