@@ -17,6 +17,10 @@ const FaqDetail = ({ id }: FaqDetailProps) => {
   const { data: faqDetailData } = useFaqDetailQuery(id);
   const { handleDeleteFaqButtonClick } = useFaqDeleteAction(id);
 
+  const handleMoveFaqEditPage = () => {
+    router.push(`${ROUTES.FAQ_EDIT}/${id}`);
+  };
+
   return faqDetailData ? (
     <StyledFaqDetail>
       <FaqDetailHeader>
@@ -38,7 +42,7 @@ const FaqDetail = ({ id }: FaqDetailProps) => {
             styleType="SECONDARY"
             size="SMALL"
             width={60}
-            onClick={() => router.push(`${ROUTES.FAQ_EDIT}/${id}`)}
+            onClick={handleMoveFaqEditPage}
           >
             수정
           </Button>
