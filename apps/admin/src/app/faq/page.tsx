@@ -6,20 +6,21 @@ import { styled } from 'styled-components';
 import AppLayout from '@/layouts/AppLayout';
 import FaqTable from '@/components/faq/FaqTable/FaqTable';
 import { flex } from '@maru/utils';
-import type { FaqCategory } from '@/types/faq/client';
+import type { ExtendedFaqCategory } from '@/types/faq/client';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/common/constant';
 
 const FaqPage = () => {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState<FaqCategory>('ALL_FAQS');
+  const [selectedCategory, setSelectedCategory] =
+    useState<ExtendedFaqCategory>('ALL_FAQS');
 
   const handleMoveFaqCreatePage = () => {
     router.push(ROUTES.FAQ_CREATE);
   };
 
   const handleChangeFaqCategory = (value: string) => {
-    setSelectedCategory(value as FaqCategory);
+    setSelectedCategory(value as ExtendedFaqCategory);
   };
 
   return (
@@ -32,7 +33,7 @@ const FaqPage = () => {
               <SearchInput width={280} placeholder="검색어를 입력하세요" />
               <Dropdown
                 data={[
-                  { value: 'BOARD_ALL', label: '전체 보기' },
+                  { value: 'ALL_FAQS', label: '전체 보기' },
                   { value: 'SCHOOL_LIFE', label: '학교 생활' },
                   { value: 'SUBMIT_DOCUMENT', label: '관련 제출 서류' },
                   { value: 'ADMISSION_PROCESS', label: '입학 과정' },
