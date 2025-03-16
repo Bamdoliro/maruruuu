@@ -1,14 +1,14 @@
 import { Column } from '@maru/ui';
-import NoticeTableHeader from './FaqTableHeader/FaqTableHeader';
-import NoticeTableItem from './FaqTableItem/FaqTableItem';
+import FaqTableHeader from './FaqTableHeader/FaqTableHeader';
+import FaqTableItem from './FaqTableItem/FaqTableItem';
 import { useFaqListQuery } from '@/services/faq/queries';
 import { FaqCategory } from '@/types/faq/client';
 
-interface NoticeTableProps {
+interface FaqTableProps {
   selectedCategory: FaqCategory;
 }
 
-const NoticeTable = ({ selectedCategory }: NoticeTableProps) => {
+const FaqTable = ({ selectedCategory }: FaqTableProps) => {
   const { data: faqList } = useFaqListQuery();
 
   const filteredFaqList =
@@ -18,19 +18,14 @@ const NoticeTable = ({ selectedCategory }: NoticeTableProps) => {
 
   return (
     <Column gap={12}>
-      <NoticeTableHeader />
+      <FaqTableHeader />
       {filteredFaqList
         ?.sort((a, b) => a.id - b.id)
         .map(({ id, title, category, createdAt }) => (
-          <NoticeTableItem
-            id={id}
-            title={title}
-            category={category}
-            createdAt={createdAt}
-          />
+          <FaqTableItem id={id} title={title} category={category} createdAt={createdAt} />
         ))}
     </Column>
   );
 };
 
-export default NoticeTable;
+export default FaqTable;
