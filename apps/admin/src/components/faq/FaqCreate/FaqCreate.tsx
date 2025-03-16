@@ -15,7 +15,7 @@ const FaqCreate = () => {
   const [faqData, setFaqData] = useState<FaqInput>({
     title: '',
     content: '',
-    category: '',
+    category: 'SCHOOL_LIFE',
   });
 
   const { handleFaqCreateButtonClick } = useFaqCreateAction(faqData);
