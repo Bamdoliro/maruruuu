@@ -5,7 +5,7 @@ import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import Image from 'next/image';
-import { Button, Column, Input, PreviewInput } from '@maru/ui';
+import { Button, Column, Input, PreviewInput, Text } from '@maru/ui';
 import { ROUTES } from '@/constants/common/constants';
 import { IconArrowRight } from '@maru/icon';
 import Link from 'next/link';
@@ -68,7 +68,9 @@ const Withdrawal = () => {
                   size="MEDIUM"
                   styleType="WARNING"
                 >
-                  회원 탈퇴
+                  <Text fontType="btn2" color={color.white}>
+                    회원 탈퇴
+                  </Text>
                 </Button>
                 <ChangePasswordLink href={ROUTES.CHANGE_PASSWORD}>
                   비밀번호 변경
