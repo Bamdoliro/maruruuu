@@ -9,6 +9,7 @@ import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
 import { useNoticeEditAction } from './NoticeEdit.hooks';
 import { resizeTextarea } from '@/utils';
+import { useNoticeDetailQuery } from '@/services/notice/queries';
 
 interface NoticeEditProps {
   id: number;
@@ -17,15 +18,17 @@ interface NoticeEditProps {
 const NoticeEdit = ({ id }: NoticeEditProps) => {
   const overlay = useOverlay();
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const { data: noticeDetailData } = useNoticeDetailQuery(id);
+
   const [fileData, setFileData] = useNoticeFileStore();
   const [noticeData, setNoticeData] = useState<{
     title: string;
     content: string;
     fileNameList: string[];
   }>({
-    title: '',
-    content: '',
-    fileNameList: [],
+    title: noticeDetailData?.title ?? '',
+    content: noticeDetailData?.content ?? '',
+    fileNameList: noticeDetailData?.fileList?.map((file) => file.fileName) ?? [],
   });
 
   const { handleNoticeEditButtonClick } = useNoticeEditAction(id, noticeData);
@@ -73,6 +76,11 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
           onChange={handleNoticeDataChange}
           placeholder="제목을 입력해주세요"
         ></TitleInput>
+        <Text fontType="p2" color={color.gray600}>
+          {noticeDetailData?.updatedAt === null
+            ? noticeDetailData?.createdAt
+            : noticeDetailData?.updatedAt}
+        </Text>
         <Row gap="10px">
           <Button
             size="SMALL"
