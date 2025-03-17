@@ -5,9 +5,14 @@ import DetailTable from './ApplicantCountDetailTable/DetailTable';
 import { ANALYSIS_STEP } from '@/constants/analysis/data';
 import { useState } from 'react';
 import { SwitchCase } from '@toss/react';
+import { useApplicantCountQuery } from '@/services/analysis/queries';
+import { AnalysisApplicantCountType } from '@/types/analysis/client';
 
 const ApplicantCount = () => {
   const [currentAnalysisStep, setCurrentAnalysisStep] = useState('변경 전');
+  const { data: formList } = useApplicantCountQuery({
+    type: currentAnalysisStep as AnalysisApplicantCountType,
+  });
 
   return (
     <StyledApplicantCount>
@@ -25,8 +30,8 @@ const ApplicantCount = () => {
       <SwitchCase
         value={currentAnalysisStep}
         caseBy={{
-          '변경 전': <DetailTable />,
-          '변경 후': <DetailTable />,
+          '변경 전': <DetailTable formList={formList} />,
+          '변경 후': <DetailTable formList={formList} />,
         }}
       />
     </StyledApplicantCount>

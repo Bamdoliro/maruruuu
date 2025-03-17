@@ -1,10 +1,16 @@
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import Competition from './Competition';
+import Competition from './Competition/Competition';
 import DetailContent from '../../common/DetailContent';
+import { ApplicantCount } from '@/types/analysis/client';
+import useCompetitionRate from './DetailTable.hooks';
 
-const DetailTable = () => {
+type DetailTableProps = { formList: ApplicantCount[] | undefined };
+
+const DetailTable = ({ formList }: DetailTableProps) => {
+  const { total, competitionRate } = useCompetitionRate(formList);
+
   return (
     <Row gap={40}>
       <ApplicantInfoWrapper>
@@ -12,19 +18,19 @@ const DetailTable = () => {
           <Column gap={40}>
             <Column>
               <Text fontType="btn2">전체 지원자 수</Text>
-              <Text fontType="D2">{121}명</Text>
+              <Text fontType="D2">{total}명</Text>
             </Column>
             <Column>
               <Text fontType="btn2">전체 경쟁률</Text>
-              <Text fontType="D2">1.89 : 1</Text>
+              <Text fontType="D2">{competitionRate} : 1</Text>
             </Column>
           </Column>
         </Column>
         <Column justifyContent="space-between">
-          <Competition />
+          <Competition formList={formList} />
         </Column>
       </ApplicantInfoWrapper>
-      <DetailContent />
+      <DetailContent formList={formList} />
     </Row>
   );
 };

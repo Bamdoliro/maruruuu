@@ -1,5 +1,6 @@
 export const KEY = {
   ADMIN: 'useAdmin',
+  APPLICANT_COUNT : 'useApplicantCount'
 };
 
 export const ROUTES = {

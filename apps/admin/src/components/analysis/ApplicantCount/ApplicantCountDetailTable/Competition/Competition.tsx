@@ -1,7 +1,19 @@
+import { ApplicantCount } from '@/types/analysis/client';
 import { Column, Row, Td, Th, Text } from '@maru/ui';
+import useCompetiton from './Competition.hooks';
 
-const Competition = () => {
+type DetailTableProps = { formList: ApplicantCount[] | undefined };
+
+const Competition = ({ formList }: DetailTableProps) => {
   const empty = '';
+  const {
+    regularCount,
+    specialCount,
+    theOtherCount,
+    regularCompetitionRate,
+    specialCompetitionRate,
+    theOtherCompetitionRate,
+  } = useCompetiton(formList);
 
   return (
     <Column gap={24}>
@@ -26,13 +38,13 @@ const Competition = () => {
             지원자 수
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {regularCount}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            59
+            {specialCount}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            0
+            {theOtherCount}
           </Td>
         </Row>
         <Row>
@@ -45,13 +57,13 @@ const Competition = () => {
             경쟁률
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            103.31
+            {regularCompetitionRate}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            59
+            {specialCompetitionRate}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS" borderBottomRightRadius={12}>
-            0
+            {theOtherCompetitionRate}
           </Td>
         </Row>
       </Column>

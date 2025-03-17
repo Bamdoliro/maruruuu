@@ -1,9 +1,33 @@
+import { ApplicantCount, FormType } from '@/types/analysis/client';
 import { font } from '@maru/design-system';
 import { Column, Row, Td, Th } from '@maru/ui';
 import styled from 'styled-components';
 
-const DetailContent = () => {
+type DetailTableProps = { formList: ApplicantCount[] | undefined };
+
+const DetailContent = ({ formList }: DetailTableProps) => {
   const empty = '';
+
+  const getCountByType = (type: FormType) => {
+    const entry = formList?.find((item) => item.type === type);
+    return entry ? entry.count : 0;
+  };
+
+  const regularApplicant = getCountByType('REGULAR');
+  const meisterTalentApplicant = getCountByType('MEISTER_TALENT');
+  const nationalBasicLivingApplicant = getCountByType('NATIONAL_BASIC_LIVING');
+  const nearPovertyApplicant = getCountByType('NEAR_POVERTY');
+  const nationalVeteransApplicant = getCountByType('NATIONAL_VETERANS');
+  const oneParentApplicant = getCountByType('ONE_PARENT');
+  const fromNorthKoreaApplicant = getCountByType('FROM_NORTH_KOREA');
+  const multiculturalApplicant = getCountByType('MULTICULTURAL');
+  const teenHouseholderApplicant = getCountByType('TEEN_HOUSEHOLDER');
+  const multiChildrenApplicant = getCountByType('MULTI_CHILDREN');
+  const farmingAndFishingApplicant = getCountByType('FARMING_AND_FISHING');
+  const specialAdmissionApplicant = getCountByType('SPECIAL_ADMISSION');
+  const nationalVeteransEducationApplicant = getCountByType(
+    'NATIONAL_VETERANS_EDUCATION'
+  );
 
   return (
     <StyledDetailTable>
@@ -33,7 +57,7 @@ const DetailContent = () => {
             {empty}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {regularApplicant}
           </Td>
         </Row>
         <Row>
@@ -49,7 +73,7 @@ const DetailContent = () => {
                 {empty}
               </Td>
               <Td width={80} height={44} styleType="ANALYSIS">
-                59
+                {meisterTalentApplicant}
               </Td>
             </Row>
             <Row>
@@ -62,7 +86,7 @@ const DetailContent = () => {
                     국민기초생활수급자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    5
+                    {nationalBasicLivingApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -70,7 +94,7 @@ const DetailContent = () => {
                     차상위계층
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    3
+                    {nearPovertyApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -80,7 +104,7 @@ const DetailContent = () => {
                     (국가유공자)
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    4
+                    {nationalBasicLivingApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -88,7 +112,7 @@ const DetailContent = () => {
                     한부모가정보호대상자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    2
+                    {oneParentApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -98,7 +122,7 @@ const DetailContent = () => {
                     또는 그 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    0
+                    {fromNorthKoreaApplicant}
                   </Td>
                 </Row>
               </Column>
@@ -113,7 +137,7 @@ const DetailContent = () => {
                     다문화가정 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    1
+                    {multiChildrenApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -121,7 +145,7 @@ const DetailContent = () => {
                     소년 · 소녀가장
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    2
+                    {teenHouseholderApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -129,7 +153,7 @@ const DetailContent = () => {
                     다자녀 가정 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    0
+                    {multiChildrenApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -137,7 +161,7 @@ const DetailContent = () => {
                     농어촌지역출신자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    6
+                    {farmingAndFishingApplicant}
                   </Td>
                 </Row>
               </Column>
@@ -160,7 +184,7 @@ const DetailContent = () => {
               {empty}
             </Td>
             <Td width={80} height={44} styleType="ANALYSIS">
-              0
+              {nationalBasicLivingApplicant}
             </Td>
           </Row>
           <Row>
@@ -171,7 +195,7 @@ const DetailContent = () => {
               {empty}
             </Td>
             <Td width={80} height={44} borderBottomRightRadius={12} styleType="ANALYSIS">
-              0
+              {specialAdmissionApplicant}
             </Td>
           </Row>
         </Column>
