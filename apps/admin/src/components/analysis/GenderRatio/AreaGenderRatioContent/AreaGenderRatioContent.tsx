@@ -28,9 +28,19 @@ const AreaGenderRatioContent = () => {
         <SwitchCase
           value={currentAnalysisRatioType}
           caseBy={{
-            '일반 전형 성비': <AreaGenderRatioTable />,
-            '특별 전형 성비': <AreaGenderRatioTable />,
-            '정원 외 전형': <AreaGenderRatioTable />,
+            '일반 전형 성비': <AreaGenderRatioTable title="일반 전형 지역별 성비" />,
+            '특별 전형 성비': (
+              <>
+                <AreaGenderRatioTable title="마이스터 인재 전형 지역별 성비" />
+                <AreaGenderRatioTable title="사회통합 - 정원내 지역별 성비" />
+              </>
+            ),
+            '정원 외 전형': (
+              <>
+                <AreaGenderRatioTable title="특례입학" />
+                <AreaGenderRatioTable title="국가보훈대상자 중 교육지원대상자" />
+              </>
+            ),
           }}
         />
       </Column>

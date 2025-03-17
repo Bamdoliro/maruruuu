@@ -35,8 +35,8 @@ const StyledDataBox = styled.div`
   gap: 16px;
 
   border-radius: 12px;
-  border: 1px solid ${color.gray200}
-  background: ${color.white}
+  border: 1px solid ${color.gray200};
+  background: ${color.white};
 `;
 
 const DataUnderlineBox = styled.div<{ lengthType: LengthType }>`

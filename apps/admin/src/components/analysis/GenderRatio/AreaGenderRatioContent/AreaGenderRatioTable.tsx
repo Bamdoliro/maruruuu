@@ -1,13 +1,15 @@
 import { Column, Row, Td, Text, Th } from '@maru/ui';
-import { flex } from '@maru/utils';
-import styled from 'styled-components';
 
-const AreaGenderRatioTable = () => {
+interface AreaGenderRatioTableProps {
+  title: string;
+}
+
+const AreaGenderRatioTable = ({ title }: AreaGenderRatioTableProps) => {
   const empty = '';
 
   return (
     <Column gap={24}>
-      <Text fontType="H5">일반 전형 지역별 성비</Text>
+      <Text fontType="H5">{title}</Text>
       <Column>
         <Row>
           <Th width={88} height={44} borderTopLeftRadius={12} styleType="ANALYSIS">
@@ -60,7 +62,6 @@ const AreaGenderRatioTable = () => {
           >
             평균
           </Td>
-
           <Td width={240} height={44} styleType="ANALYSIS" borderBottomRightRadius={12}>
             0
           </Td>

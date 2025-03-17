@@ -56,5 +56,4 @@ const StyledAnalysisPage = styled.div`
   gap: 40px;
   width: 100%;
   padding: 3.25rem 3.25rem;
-  height: 100vh;
 `;
