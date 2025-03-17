@@ -9,16 +9,13 @@ import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
 import { useNoticeCreateAction } from './NoticeCreate.hooks';
 import { resizeTextarea } from '@/utils';
+import { NoticeData } from '@/types/notice/client';
 
 const NoticeCreate = () => {
   const overlay = useOverlay();
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [fileData, setFileData] = useNoticeFileStore();
-  const [noticeData, setNoticeData] = useState<{
-    title: string;
-    content: string;
-    fileNameList: string[];
-  }>({
+  const [noticeData, setNoticeData] = useState<NoticeData>({
     title: '',
     content: '',
     fileNameList: [],
@@ -44,7 +41,7 @@ const NoticeCreate = () => {
           if (file) {
             setNoticeData((prevData) => ({
               ...prevData,
-              fileNameList: [...prevData.fileNameList, file.name],
+              fileNameList: [...(prevData.fileNameList ?? []), file.name],
             }));
           }
         }}
@@ -55,7 +52,9 @@ const NoticeCreate = () => {
   const handleDeleteNoticeFile = (fileNameToDelete: string) => {
     setNoticeData((prevData) => ({
       ...prevData,
-      fileNameList: prevData.fileNameList.filter((file) => file !== fileNameToDelete),
+      fileNameList: (prevData.fileNameList ?? []).filter(
+        (file) => file !== fileNameToDelete
+      ),
     }));
     setFileData(fileData?.filter((file) => file.name !== fileNameToDelete) ?? []);
   };
@@ -73,10 +72,12 @@ const NoticeCreate = () => {
           <Button
             size="SMALL"
             icon="CLIP_ICON"
-            styleType={noticeData.fileNameList.length >= 3 ? 'DISABLED' : 'SECONDARY'}
+            styleType={
+              (noticeData.fileNameList ?? []).length >= 3 ? 'DISABLED' : 'SECONDARY'
+            }
             width={124}
             onClick={handleNoticeFileModalButtonClick}
-            disabled={noticeData.fileNameList.length >= 3}
+            disabled={(noticeData.fileNameList ?? []).length >= 3}
           >
             <Text fontType="btn2">파일 첨부</Text>
           </Button>
@@ -93,9 +94,9 @@ const NoticeCreate = () => {
         placeholder="내용을 작성해주세요."
         rows={1}
       />
-      {noticeData.fileNameList.length > 0 && (
+      {(noticeData.fileNameList ?? []).length > 0 && (
         <Column gap={12}>
-          {noticeData.fileNameList.map((file, index) => (
+          {(noticeData.fileNameList ?? []).map((file, index) => (
             <Row alignItems="center" gap={12} key={index}>
               <StyledNoticeFile>
                 <Row alignItems="center" gap={10}>
