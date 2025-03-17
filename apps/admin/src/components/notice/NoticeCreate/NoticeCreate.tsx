@@ -4,33 +4,17 @@ import { IconClip } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useOverlay } from '@toss/use-overlay';
-import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
-import { useNoticeCreateAction } from './NoticeCreate.hooks';
-import { resizeTextarea } from '@/utils';
-import { NoticeData } from '@/types/notice/client';
+import { useNoticeCreateAction, useNoticeCreateData } from './NoticeCreate.hooks';
 
 const NoticeCreate = () => {
   const overlay = useOverlay();
-  const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [fileData, setFileData] = useNoticeFileStore();
-  const [noticeData, setNoticeData] = useState<NoticeData>({
-    title: '',
-    content: '',
-    fileNameList: [],
-  });
+  const { noticeData, setNoticeData, contentTextareaRef, handleNoticeDataChange } =
+    useNoticeCreateData();
 
   const { handleNoticeCreateButtonClick } = useNoticeCreateAction(noticeData);
-
-  const handleNoticeDataChange: ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (e) => {
-    const { name, value } = e.target;
-    setNoticeData({ ...noticeData, [name]: value });
-
-    resizeTextarea(contentTextareaRef);
-  };
 
   const handleNoticeFileModalButtonClick = () => {
     overlay.open(({ isOpen, close }) => (
