@@ -15,7 +15,7 @@ export interface NoticeDetail {
   updatedAt: string;
 }
 
-export interface NoticeData {
+export interface NoticeInput {
   title: string;
   content: string;
   fileNameList?: Array<string> | null;

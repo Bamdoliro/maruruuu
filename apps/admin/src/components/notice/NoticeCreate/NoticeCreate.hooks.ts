@@ -3,14 +3,14 @@ import {
   useNoticeFileUrlMutation,
 } from '@/services/notice/mutations';
 import { useNoticeFileStore } from '@/store/notice/noticeFile';
-import { NoticeData } from '@/types/notice/client';
+import { NoticeInput } from '@/types/notice/client';
 import type { PostNoticeReq } from '@/types/notice/remote';
 import { resizeTextarea } from '@/utils';
 import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 
 export const useNoticeCreateData = () => {
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
-  const [noticeData, setNoticeData] = useState<NoticeData>({
+  const [noticeData, setNoticeData] = useState<NoticeInput>({
     title: '',
     content: '',
     fileNameList: [],
