@@ -9,11 +9,9 @@ const NoticeTable = () => {
   return (
     <Column gap={12}>
       <NoticeTableHeader />
-      {noticeList
-        ?.sort((a, b) => a.id - b.id)
-        .map(({ id, title, updatedAt }) => (
-          <NoticeTableItem id={id} title={title} updatedAt={updatedAt} />
-        ))}
+      {noticeList?.map(({ id, title, updatedAt }) => (
+        <NoticeTableItem id={id} title={title} updatedAt={updatedAt} />
+      ))}
     </Column>
   );
 };
