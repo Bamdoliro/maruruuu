@@ -17,11 +17,17 @@ const NoticeDetail = ({ id }: NoticeDetailProps) => {
   const { data: noticeDetailData } = useNoticeDetailQuery(id);
   const { handleDeleteNoticeButtonClick } = useNoticeDeleteAction(id);
 
+  const handleMoveNoticeEditPage = () => {
+    router.push(`${ROUTES.NOTICE_EDIT}/${id}`);
+  };
+
   return noticeDetailData ? (
     <StyledNoticeDetail>
       <NoticeDetailHeader>
         <Column gap={20}>
-          <TitleInput name="title" placeholder="제목을 입력해주세요" />
+          <Text fontType="H1" color={color.gray900}>
+            {noticeDetailData.title}
+          </Text>
           <Text fontType="p2" color={color.gray600}>
             {noticeDetailData.updatedAt === null
               ? noticeDetailData.createdAt
@@ -33,7 +39,7 @@ const NoticeDetail = ({ id }: NoticeDetailProps) => {
             styleType="SECONDARY"
             size="SMALL"
             width={60}
-            onClick={() => router.push(`${ROUTES.NOTICE_EDIT}/${id}`)}
+            onClick={handleMoveNoticeEditPage}
           >
             수정
           </Button>
@@ -83,16 +89,6 @@ const NoticeDetailHeader = styled.div`
   gap: 16px;
   border-bottom: 1px solid ${color.gray300};
   padding-bottom: 16px;
-`;
-
-const TitleInput = styled.input`
-  ${font.H1}
-  color: ${color.gray900};
-  width: 100%;
-
-  &::placeholder {
-    color: ${color.gray400};
-  }
 `;
 
 const Content = styled.div`

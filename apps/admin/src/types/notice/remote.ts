@@ -1,4 +1,4 @@
-import type { Notice, NoticeDetail, NoticeFileData } from './client';
+import type { Notice, NoticeInput, NoticeDetail, NoticeFileData } from './client';
 
 export interface GetNoticeListRes {
   dataList: Notice[];
@@ -8,17 +8,9 @@ export interface getNoticeDetailRes {
   data: NoticeDetail;
 }
 
-export interface PostNoticeReq {
-  title: string;
-  content: string;
-  fileNameList?: Array<string> | null;
-}
+export type PostNoticeReq = NoticeInput;
 
-export interface PutNoticeReq {
-  title: string;
-  content: string;
-  fileNameList?: Array<string> | null;
-}
+export type PutNoticeReq = NoticeInput;
 
 export interface PostNoticeFileReq {
   fileName: string;

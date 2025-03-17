@@ -15,6 +15,12 @@ export interface NoticeDetail {
   updatedAt: string;
 }
 
+export interface NoticeInput {
+  title: string;
+  content: string;
+  fileNameList?: Array<string> | null;
+}
+
 export interface NoticeFileUrl {
   uploadUrl: string;
   downloadUrl: string;

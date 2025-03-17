@@ -4,11 +4,9 @@ import { IconClip } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useOverlay } from '@toss/use-overlay';
-import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
-import { useNoticeEditAction } from './NoticeEdit.hooks';
-import { resizeTextarea } from '@/utils';
+import { useNoticeEditAction, useNoticeEditData } from './NoticeEdit.hooks';
 
 interface NoticeEditProps {
   id: number;
@@ -16,28 +14,12 @@ interface NoticeEditProps {
 
 const NoticeEdit = ({ id }: NoticeEditProps) => {
   const overlay = useOverlay();
-  const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [fileData, setFileData] = useNoticeFileStore();
-  const [noticeData, setNoticeData] = useState<{
-    title: string;
-    content: string;
-    fileNameList: string[];
-  }>({
-    title: '',
-    content: '',
-    fileNameList: [],
-  });
+
+  const { noticeData, setNoticeData, contentTextareaRef, handleNoticeDataChange } =
+    useNoticeEditData(id);
 
   const { handleNoticeEditButtonClick } = useNoticeEditAction(id, noticeData);
-
-  const handleNoticeDataChange: ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (e) => {
-    const { name, value } = e.target;
-    setNoticeData({ ...noticeData, [name]: value });
-
-    resizeTextarea(contentTextareaRef);
-  };
 
   const handleNoticeFileModalButtonClick = () => {
     overlay.open(({ isOpen, close }) => (
@@ -48,7 +30,7 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
           if (file) {
             setNoticeData((prevData) => ({
               ...prevData,
-              fileNameList: [...prevData.fileNameList, file.name],
+              fileNameList: [...(prevData.fileNameList ?? []), file.name],
             }));
           }
         }}
@@ -59,7 +41,9 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
   const handleDeleteNoticeFile = (fileNameToDelete: string) => {
     setNoticeData((prevData) => ({
       ...prevData,
-      fileNameList: prevData.fileNameList.filter((file) => file !== fileNameToDelete),
+      fileNameList: (prevData.fileNameList ?? []).filter(
+        (file) => file !== fileNameToDelete
+      ),
     }));
     setFileData(fileData?.filter((file) => file.name !== fileNameToDelete) ?? []);
   };
@@ -77,10 +61,12 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
           <Button
             size="SMALL"
             icon="CLIP_ICON"
-            styleType={noticeData.fileNameList.length >= 3 ? 'DISABLED' : 'SECONDARY'}
+            styleType={
+              (noticeData.fileNameList ?? []).length >= 3 ? 'DISABLED' : 'SECONDARY'
+            }
             width={124}
             onClick={handleNoticeFileModalButtonClick}
-            disabled={noticeData.fileNameList.length >= 3}
+            disabled={(noticeData.fileNameList ?? []).length >= 3}
           >
             <Text fontType="btn2">파일 첨부</Text>
           </Button>
@@ -97,9 +83,9 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
         placeholder="내용을 작성해주세요."
         rows={1}
       />
-      {noticeData.fileNameList.length > 0 && (
+      {(noticeData.fileNameList ?? []).length > 0 && (
         <Column gap={12}>
-          {noticeData.fileNameList.map((file, index) => (
+          {(noticeData.fileNameList ?? []).map((file, index) => (
             <Row alignItems="center" gap={12} key={index}>
               <StyledNoticeFile>
                 <Row alignItems="center" gap={10}>
@@ -132,7 +118,7 @@ const NoticeEditHeader = styled.div`
   ${flex({ flexDirection: 'row', justifyContent: 'space-between' })}
   width: 100%;
   gap: 16px;
-  border-bottom: 1px solid ${color.gray300};
+  border-bottom: 1px solid ${color.gray200};
   padding-bottom: 16px;
 `;
 
