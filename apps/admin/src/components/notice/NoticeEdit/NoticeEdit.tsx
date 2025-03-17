@@ -4,13 +4,9 @@ import { IconClip } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useOverlay } from '@toss/use-overlay';
-import { ChangeEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
-import { useNoticeEditAction } from './NoticeEdit.hooks';
-import { resizeTextarea } from '@/utils';
-import { useNoticeDetailQuery } from '@/services/notice/queries';
-import { NoticeData } from '@/types/notice/client';
+import { useNoticeEditAction, useNoticeEditData } from './NoticeEdit.hooks';
 
 interface NoticeEditProps {
   id: number;
@@ -18,26 +14,12 @@ interface NoticeEditProps {
 
 const NoticeEdit = ({ id }: NoticeEditProps) => {
   const overlay = useOverlay();
-  const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
-  const { data: noticeDetailData } = useNoticeDetailQuery(id);
-
   const [fileData, setFileData] = useNoticeFileStore();
-  const [noticeData, setNoticeData] = useState<NoticeData>({
-    title: noticeDetailData?.title ?? '',
-    content: noticeDetailData?.content ?? '',
-    fileNameList: noticeDetailData?.fileList?.map((file) => file.fileName) ?? [],
-  });
+
+  const { noticeData, setNoticeData, contentTextareaRef, handleNoticeDataChange } =
+    useNoticeEditData(id);
 
   const { handleNoticeEditButtonClick } = useNoticeEditAction(id, noticeData);
-
-  const handleNoticeDataChange: ChangeEventHandler<
-    HTMLInputElement | HTMLTextAreaElement
-  > = (e) => {
-    const { name, value } = e.target;
-    setNoticeData({ ...noticeData, [name]: value });
-
-    resizeTextarea(contentTextareaRef);
-  };
 
   const handleNoticeFileModalButtonClick = () => {
     overlay.open(({ isOpen, close }) => (
@@ -75,11 +57,6 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
           onChange={handleNoticeDataChange}
           placeholder="제목을 입력해주세요"
         ></TitleInput>
-        <Text fontType="p2" color={color.gray600}>
-          {noticeDetailData?.updatedAt === null
-            ? noticeDetailData?.createdAt
-            : noticeDetailData?.updatedAt}
-        </Text>
         <Row gap="10px">
           <Button
             size="SMALL"
