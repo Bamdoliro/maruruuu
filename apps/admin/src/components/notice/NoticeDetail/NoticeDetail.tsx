@@ -17,6 +17,10 @@ const NoticeDetail = ({ id }: NoticeDetailProps) => {
   const { data: noticeDetailData } = useNoticeDetailQuery(id);
   const { handleDeleteNoticeButtonClick } = useNoticeDeleteAction(id);
 
+  const handleMoveNoticeEditPage = () => {
+    router.push(`${ROUTES.NOTICE_EDIT}/${id}`);
+  };
+
   return noticeDetailData ? (
     <StyledNoticeDetail>
       <NoticeDetailHeader>
@@ -33,7 +37,7 @@ const NoticeDetail = ({ id }: NoticeDetailProps) => {
             styleType="SECONDARY"
             size="SMALL"
             width={60}
-            onClick={() => router.push(`${ROUTES.NOTICE_EDIT}/${id}`)}
+            onClick={handleMoveNoticeEditPage}
           >
             수정
           </Button>
