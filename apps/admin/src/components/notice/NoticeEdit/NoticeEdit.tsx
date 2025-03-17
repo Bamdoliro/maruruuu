@@ -118,7 +118,7 @@ const NoticeEditHeader = styled.div`
   ${flex({ flexDirection: 'row', justifyContent: 'space-between' })}
   width: 100%;
   gap: 16px;
-  border-bottom: 1px solid ${color.gray300};
+  border-bottom: 1px solid ${color.gray200};
   padding-bottom: 16px;
 `;
 
