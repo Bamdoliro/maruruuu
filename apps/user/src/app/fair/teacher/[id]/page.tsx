@@ -10,10 +10,10 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 
 interface FairTeacherApplicationProps {
-  params: { id: number };
+  id: number;
 }
 
-const FairTeacherApplication = ({ params: { id } }: FairTeacherApplicationProps) => {
+const FairTeacherApplication = ({ id }: FairTeacherApplicationProps) => {
   const { data: fairListData } = useFairListQuery();
 
   const selectedFair = fairListData.find((fair) => fair.id === id);
