@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export const postEntrollmentDocument =
   async (): Promise<EntrollmentDocumentPresignedUrlData> => {
-    const { data } = await maru.post('/form/admission-and-pledge', null, authorization());
+    const { data } = await maru.post('/forms/admission-and-pledge', null, authorization());
 
     const { uploadUrl, downloadUrl, fields } = data?.data?.data || {};
 
@@ -26,7 +26,7 @@ export const putEntrollmentDocument = async (
 };
 
 export const patchEnter = async () => {
-  const { data } = await maru.patch('/form/enter', null, authorization());
+  const { data } = await maru.patch('/forms/enter', null, authorization());
 
   return data;
 };
