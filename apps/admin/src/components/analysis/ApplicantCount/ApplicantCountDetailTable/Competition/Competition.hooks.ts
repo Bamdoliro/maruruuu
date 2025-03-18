@@ -1,7 +1,6 @@
-import { ApplicantCount } from '@/types/analysis/client';
-import Competition from './Competition';
+import { ApplicantCountType } from '@/types/analysis/client';
 
-const useCompetiton = (formList: ApplicantCount[] | undefined) => {
+const useCompetiton = (formList: ApplicantCountType[] | undefined) => {
   const regularCount =
     formList
       ?.filter((item) => (item.type = 'REGULAR'))

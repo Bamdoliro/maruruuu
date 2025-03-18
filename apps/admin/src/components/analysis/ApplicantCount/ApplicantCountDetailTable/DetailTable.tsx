@@ -2,11 +2,11 @@ import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import Competition from './Competition/Competition';
-import DetailContent from '../../common/DetailContent';
-import { ApplicantCount } from '@/types/analysis/client';
+import DetailContent from './Competition/DetailContent/common/DetailContent';
+import { ApplicantCountType } from '@/types/analysis/client';
 import useCompetitionRate from './DetailTable.hooks';
 
-type DetailTableProps = { formList: ApplicantCount[] | undefined };
+type DetailTableProps = { formList: ApplicantCountType[] | undefined };
 
 const DetailTable = ({ formList }: DetailTableProps) => {
   const { total, competitionRate } = useCompetitionRate(formList);

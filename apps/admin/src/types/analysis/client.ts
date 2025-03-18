@@ -34,9 +34,28 @@ export type FormType =
   | 'SPECIAL_ADMISSION'
   | 'NATIONAL_VETERANS_EDUCATION';
 
+export type AnalysisApplicantType =
+  | 'FIRST_PASSED'
+  | 'FAILED'
+  | 'PASSED'
+  | 'NO_SHOW'
+  | 'RECEIVED'
+  | 'FIRST_FAILED'
+  | 'ENTERED';
+
 export type AnalysisApplicantCountType = 'CURRENT' | 'ORIGINAL';
 
-export interface ApplicantCount {
+export interface ApplicantCountType {
   type: FormType;
   count: number;
+}
+
+export interface GradeDistributionType {
+  type: FormType;
+  firstRoundMax: number;
+  firstRoundMin: number;
+  firstRoundAvg: number;
+  totalMax: number;
+  totalMin: number;
+  totalAvg: number;
 }

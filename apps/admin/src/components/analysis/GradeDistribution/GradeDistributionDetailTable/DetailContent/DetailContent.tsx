@@ -1,31 +1,37 @@
-import { ApplicantCount, FormType } from '@/types/analysis/client';
+import { FormType, GradeDistributionType } from '@/types/analysis/client';
 import { font } from '@maru/design-system';
 import { Column, Row, Td, Th } from '@maru/ui';
 import styled from 'styled-components';
 
-type DetailTableProps = { formList: ApplicantCount[] | undefined };
+type DetailTableProps = { formList: GradeDistributionType[] | undefined };
 
 const DetailContent = ({ formList }: DetailTableProps) => {
   const empty = '';
 
-  const getCountByType = (type: FormType) => {
-    const entry = formList?.find((item) => item.type === type);
-    return entry ? entry.count : 0;
+  const getMaxMinByType = (type: FormType) => {
+    const entries = formList?.filter((item) => item.type === type);
+    if (!entries || entries.length === 0) {
+      return { max: 0, min: 0 };
+    }
+    const max = Math.max(...entries.map((item) => item.totalMax)).toFixed(3);
+    const min = Math.min(...entries.map((item) => item.totalMin)).toFixed(3);
+
+    return { max, min };
   };
 
-  const regularApplicant = getCountByType('REGULAR');
-  const meisterTalentApplicant = getCountByType('MEISTER_TALENT');
-  const nationalBasicLivingApplicant = getCountByType('NATIONAL_BASIC_LIVING');
-  const nearPovertyApplicant = getCountByType('NEAR_POVERTY');
-  const nationalVeteransApplicant = getCountByType('NATIONAL_VETERANS');
-  const oneParentApplicant = getCountByType('ONE_PARENT');
-  const fromNorthKoreaApplicant = getCountByType('FROM_NORTH_KOREA');
-  const multiculturalApplicant = getCountByType('MULTICULTURAL');
-  const teenHouseholderApplicant = getCountByType('TEEN_HOUSEHOLDER');
-  const multiChildrenApplicant = getCountByType('MULTI_CHILDREN');
-  const farmingAndFishingApplicant = getCountByType('FARMING_AND_FISHING');
-  const specialAdmissionApplicant = getCountByType('SPECIAL_ADMISSION');
-  const nationalVeteransEducationApplicant = getCountByType(
+  const regularApplicant = getMaxMinByType('REGULAR');
+  const meisterTalentApplicant = getMaxMinByType('MEISTER_TALENT');
+  const nationalBasicLivingApplicant = getMaxMinByType('NATIONAL_BASIC_LIVING');
+  const nearPovertyApplicant = getMaxMinByType('NEAR_POVERTY');
+  const nationalVeteransApplicant = getMaxMinByType('NATIONAL_VETERANS');
+  const oneParentApplicant = getMaxMinByType('ONE_PARENT');
+  const fromNorthKoreaApplicant = getMaxMinByType('FROM_NORTH_KOREA');
+  const multiculturalApplicant = getMaxMinByType('MULTICULTURAL');
+  const teenHouseholderApplicant = getMaxMinByType('TEEN_HOUSEHOLDER');
+  const multiChildrenApplicant = getMaxMinByType('MULTI_CHILDREN');
+  const farmingAndFishingApplicant = getMaxMinByType('FARMING_AND_FISHING');
+  const specialAdmissionApplicant = getMaxMinByType('SPECIAL_ADMISSION');
+  const nationalVeteransEducationApplicant = getMaxMinByType(
     'NATIONAL_VETERANS_EDUCATION'
   );
 
@@ -42,8 +48,11 @@ const DetailContent = ({ formList }: DetailTableProps) => {
           <Th width={160} height={44} styleType="ANALYSIS">
             구분
           </Th>
+          <Th width={160} height={44} styleType="ANALYSIS">
+            최고점
+          </Th>
           <Th width={80} height={44} borderTopRightRadius={12} styleType="ANALYSIS">
-            지원자
+            최하점
           </Th>
         </Row>
         <Row>
@@ -57,7 +66,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
             {empty}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            {regularApplicant}
+            {regularApplicant.max}
+          </Td>
+          <Td width={80} height={44} styleType="ANALYSIS">
+            {regularApplicant.min}
           </Td>
         </Row>
         <Row>
@@ -73,7 +85,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                 {empty}
               </Td>
               <Td width={80} height={44} styleType="ANALYSIS">
-                {meisterTalentApplicant}
+                {meisterTalentApplicant.max}
+              </Td>
+              <Td width={80} height={44} styleType="ANALYSIS">
+                {meisterTalentApplicant.min}
               </Td>
             </Row>
             <Row>
@@ -86,7 +101,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     국민기초생활수급자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {nationalBasicLivingApplicant}
+                    {nationalBasicLivingApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {nationalBasicLivingApplicant.min}
                   </Td>
                 </Row>
                 <Row>
@@ -94,7 +112,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     차상위계층
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {nearPovertyApplicant}
+                    {nearPovertyApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {nearPovertyApplicant.min}
                   </Td>
                 </Row>
                 <Row>
@@ -104,7 +125,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     (국가유공자)
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {nationalBasicLivingApplicant}
+                    {nationalVeteransApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {nationalVeteransApplicant.min}
                   </Td>
                 </Row>
                 <Row>
@@ -112,7 +136,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     한부모가정보호대상자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {oneParentApplicant}
+                    {oneParentApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {oneParentApplicant.min}
                   </Td>
                 </Row>
                 <Row>
@@ -122,7 +149,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     또는 그 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {fromNorthKoreaApplicant}
+                    {fromNorthKoreaApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {fromNorthKoreaApplicant.min}
                   </Td>
                 </Row>
               </Column>
@@ -137,7 +167,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     다문화가정 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {multiChildrenApplicant}
+                    {multiculturalApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {multiculturalApplicant.min}
                   </Td>
                 </Row>
                 <Row>
@@ -145,7 +178,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     소년 · 소녀가장
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {teenHouseholderApplicant}
+                    {teenHouseholderApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {teenHouseholderApplicant.min}
                   </Td>
                 </Row>
                 <Row>
@@ -153,7 +189,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     다자녀 가정 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {multiChildrenApplicant}
+                    {multiChildrenApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {multiChildrenApplicant.min}
                   </Td>
                 </Row>
                 <Row>
@@ -161,7 +200,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     농어촌지역출신자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {farmingAndFishingApplicant}
+                    {farmingAndFishingApplicant.max}
+                  </Td>
+                  <Td width={80} height={44} styleType="ANALYSIS">
+                    {farmingAndFishingApplicant.min}
                   </Td>
                 </Row>
               </Column>
@@ -184,7 +226,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
               {empty}
             </Td>
             <Td width={80} height={44} styleType="ANALYSIS">
-              {nationalBasicLivingApplicant}
+              {nationalVeteransEducationApplicant.max}
+            </Td>
+            <Td width={80} height={44} styleType="ANALYSIS">
+              {nationalVeteransEducationApplicant.min}
             </Td>
           </Row>
           <Row>
@@ -195,7 +240,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
               {empty}
             </Td>
             <Td width={80} height={44} borderBottomRightRadius={12} styleType="ANALYSIS">
-              {specialAdmissionApplicant}
+              {specialAdmissionApplicant.max}
+            </Td>
+            <Td width={80} height={44} borderBottomRightRadius={12} styleType="ANALYSIS">
+              {specialAdmissionApplicant.min}
             </Td>
           </Row>
         </Column>

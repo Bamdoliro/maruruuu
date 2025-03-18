@@ -1,8 +1,8 @@
-import { ApplicantCount } from '@/types/analysis/client';
+import { ApplicantCountType } from '@/types/analysis/client';
 import { Column, Row, Td, Th, Text } from '@maru/ui';
 import useCompetiton from './Competition.hooks';
 
-type DetailTableProps = { formList: ApplicantCount[] | undefined };
+type DetailTableProps = { formList: ApplicantCountType[] | undefined };
 
 const Competition = ({ formList }: DetailTableProps) => {
   const empty = '';

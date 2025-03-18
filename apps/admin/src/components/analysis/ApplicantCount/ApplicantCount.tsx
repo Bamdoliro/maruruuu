@@ -9,7 +9,14 @@ import { useApplicantCountQuery } from '@/services/analysis/queries';
 import { AnalysisApplicantCountType } from '@/types/analysis/client';
 
 const ApplicantCount = () => {
-  const [currentAnalysisStep, setCurrentAnalysisStep] = useState('변경 전');
+  const [currentAnalysisStep, setCurrentAnalysisStep] =
+    useState<keyof typeof stepMap>('변경 전');
+
+  const stepMap: Record<string, AnalysisApplicantCountType> = {
+    '변경 전': 'ORIGINAL',
+    '변경 후': 'CURRENT',
+  };
+
   const { data: formList } = useApplicantCountQuery({
     type: currentAnalysisStep as AnalysisApplicantCountType,
   });

@@ -1,10 +1,13 @@
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import DetailContent from '../../common/DetailContent';
 import ScoreTable from './ScoreTable';
+import { GradeDistributionType } from '@/types/analysis/client';
+import DetailContent from './DetailContent/DetailContent';
 
-const GradeDistributionDetailTable = () => {
+type DetailTableProps = { formList: GradeDistributionType[] | undefined };
+
+const GradeDistributionDetailTable = ({ formList }: DetailTableProps) => {
   return (
     <Row gap={120}>
       <ScoreInfoWrapper>
@@ -24,7 +27,7 @@ const GradeDistributionDetailTable = () => {
           <ScoreTable />
         </Column>
       </ScoreInfoWrapper>
-      <DetailContent />
+      <DetailContent formList={formList} />
     </Row>
   );
 };

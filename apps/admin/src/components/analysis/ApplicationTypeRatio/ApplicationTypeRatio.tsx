@@ -1,7 +1,7 @@
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import DetailContent from '../common/DetailContent';
+import DetailContent from '../ApplicantCount/ApplicantCountDetailTable/Competition/DetailContent/common/DetailContent';
 import ScoreTable from '../GradeDistribution/GradeDistributionDetailTable/ScoreTable';
 import RatioTable from './RatioTable/RatioTable';
 
@@ -26,7 +26,7 @@ const ApplicationTypeRatio = () => {
             <RatioTable />
           </Column>
         </RatioInfoWrapper>
-        <DetailContent />
+        {/* <DetailContent formList={formList} /> */}
       </Row>
     </StyledApplicationTypeRatio>
   );

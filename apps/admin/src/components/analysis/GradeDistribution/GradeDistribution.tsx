@@ -5,9 +5,23 @@ import { ANALYSIS_PASS_STEP } from '@/constants/analysis/data';
 import { useState } from 'react';
 import { SwitchCase } from '@toss/react';
 import GradeDistributionDetailTable from './GradeDistributionDetailTable/GradeDistributionDetailTable';
+import { AnalysisApplicantType } from '@/types/analysis/client';
+import { useGradeDistributionListQuery } from '@/services/analysis/queries';
 
 const GradeDistribution = () => {
-  const [currentAnalysisPassStep, setCurrentAnalysisPassStep] = useState('1차 합격자');
+  const [currentAnalysisPassStep, setCurrentAnalysisPassStep] =
+    useState<keyof typeof stepMap>('전체 조회');
+
+  const stepMap: Record<string, string[]> = {
+    '전체 조회': ['RECEIVED', 'FIRST_PASSED', 'FIRST_FAILED', 'FAILED', 'PASSED'],
+    '1차 합격자': ['FIRST_PASSED', 'FAILED', 'PASSED'],
+    '2차 전형자': ['FAILED', 'PASSED'],
+    '최종 합격자': ['PASSED'],
+  };
+
+  const { data: formList } = useGradeDistributionListQuery({
+    statusList: stepMap[currentAnalysisPassStep] as AnalysisApplicantType[],
+  });
 
   return (
     <StyledGradeDistribution>
@@ -25,9 +39,9 @@ const GradeDistribution = () => {
       <SwitchCase
         value={currentAnalysisPassStep}
         caseBy={{
-          '1차 합격자': <GradeDistributionDetailTable />,
-          '2차 전형자': <GradeDistributionDetailTable />,
-          '최종 합격자': <GradeDistributionDetailTable />,
+          '1차 합격자': <GradeDistributionDetailTable formList={formList} />,
+          '2차 전형자': <GradeDistributionDetailTable formList={formList} />,
+          '최종 합격자': <GradeDistributionDetailTable formList={formList} />,
         }}
       />
     </StyledGradeDistribution>
