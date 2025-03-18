@@ -20,6 +20,7 @@ export const ROUTES = {
   MESSAGE: '/message',
   ANALYSIS: '/analysis',
   FAIR: '/fair',
+  FAIR_CREATE: '/fair/create',
   REGISTRATION: '/registration',
 } as const;
 
