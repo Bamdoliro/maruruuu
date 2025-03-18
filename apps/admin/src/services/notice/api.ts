@@ -12,26 +12,26 @@ import {
 import axios from 'axios';
 
 export const getNoticeList = async () => {
-  const { data } = await maru.get<GetNoticeListRes>('/notice');
+  const { data } = await maru.get<GetNoticeListRes>('/notices');
 
   return data;
 };
 
 export const getNoticeDetail = async (id: number) => {
-  const { data } = await maru.get<getNoticeDetailRes>(`/notice/${id}`);
+  const { data } = await maru.get<getNoticeDetailRes>(`/notices/${id}`);
 
   return data;
 };
 
 export const postNotice = async (params: PostNoticeReq) => {
-  const { data } = await maru.post('/notice', { params }, authorization());
+  const { data } = await maru.post('/notices', { params }, authorization());
 
   return data;
 };
 
 export const postNoticeFile = async (params: PostNoticeFileReq[]) => {
   const data = await maru.post<PostNoticeFileRes>(
-    '/notice/file',
+    '/notices/files',
     { params },
     authorization()
   );
@@ -41,7 +41,7 @@ export const postNoticeFile = async (params: PostNoticeFileReq[]) => {
 };
 
 export const putNotice = async (id: number, params: PutNoticeReq) => {
-  const { data } = await maru.put(`/notice/${id}`, { params }, authorization());
+  const { data } = await maru.put(`/notices/${id}`, { params }, authorization());
 
   return { data };
 };
@@ -63,7 +63,7 @@ export const putNoticeFileUrl = async (files: File[], fileDatas: NoticeFileData[
 };
 
 export const deleteNotice = async (id: number) => {
-  const { data } = await maru.delete(`/notice/${id}`, authorization());
+  const { data } = await maru.delete(`/notices/${id}`, authorization());
 
   return data;
 };
