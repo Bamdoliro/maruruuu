@@ -5,10 +5,11 @@ import { styled } from 'styled-components';
 
 interface Props {
   children: ReactNode;
+  onClick?: () => void;
 }
 
-const TableItem = ({ children }: Props) => {
-  return <StyledListItem>{children}</StyledListItem>;
+const TableItem = ({ children, onClick }: Props) => {
+  return <StyledListItem onClick={onClick}>{children}</StyledListItem>;
 };
 
 export default TableItem;
