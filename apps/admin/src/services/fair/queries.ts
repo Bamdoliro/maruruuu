@@ -1,6 +1,6 @@
 import { KEY } from '@/constants/common/constant';
 import { useQuery } from '@tanstack/react-query';
-import { getFairList } from './api';
+import { getFairDetail, getFairList } from './api';
 
 export const useFairListQuery = () => {
   const { data, ...restQuery } = useQuery({
@@ -9,4 +9,13 @@ export const useFairListQuery = () => {
   });
 
   return { data: data?.dataList, ...restQuery };
+};
+
+export const useFairDetailQuery = (id: number) => {
+  const { data, ...restQuery } = useQuery({
+    queryKey: [KEY.FAIR_DETAIL],
+    queryFn: () => getFairDetail(id),
+  });
+
+  return { data: data, ...restQuery };
 };
