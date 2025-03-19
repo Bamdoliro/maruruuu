@@ -4,7 +4,8 @@ export type ButtonStyleType =
   | 'TERTIARY'
   | 'QUATERNARY'
   | 'DELETE'
-  | 'DISABLED';
+  | 'DISABLED'
+  | 'WARNING';
 
 export type ButtonIcon = 'NONE' | 'ADD_ICON' | 'SHORTCUTS_ICON' | 'CLIP_ICON';
 

@@ -7,3 +7,9 @@ export const getUser = async () => {
 
   return data;
 };
+
+export const deleteUser = async (password: string) => {
+  const { data } = await maru.delete('/users', { data: password, ...authorization() });
+
+  return data;
+};
