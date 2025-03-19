@@ -1,39 +1,20 @@
 import { Column } from '@maru/ui';
 import FairTableHeader from './FairTableHeader/FairTableHeader';
 import FairTableItem from './FairTableItem/FairTableItem';
+import { useFairDetailQuery } from '@/services/fair/queries';
 
-const fairList = [
-  {
-    schoolName: '비전중학교',
-    name: '곰밤돌',
-    type: '학생',
-    phoneNumber: '01028610200',
-    headcount: 2,
-    question: '내신 커트라인 몇인가요?',
-  },
-  {
-    schoolName: '비전중학교',
-    name: '곰밤돌',
-    type: '학생',
-    phoneNumber: '01030050921',
-    headcount: 2,
-    question: '내신 커트라인 몇인가요?',
-  },
-  {
-    schoolName: '비전중학교',
-    name: '곰밤돌',
-    type: '학생',
-    phoneNumber: '01049463364',
-    headcount: 2,
-    question: '내신 커트라인 몇인가요?',
-  },
-];
+interface FairTableProps {
+  id: number;
+}
 
-const FairTable = () => {
+const FairTable = ({ id }: FairTableProps) => {
+  const { data: FairDetail } = useFairDetailQuery(id);
+  const FairAttendeeList = FairDetail?.attendeeList;
+
   return (
     <Column gap={12}>
       <FairTableHeader />
-      {fairList.map(
+      {FairAttendeeList?.map(
         ({ schoolName, name, type, phoneNumber, headcount, question }, index) => (
           <FairTableItem
             key={index}
