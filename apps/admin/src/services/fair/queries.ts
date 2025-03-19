@@ -17,5 +17,5 @@ export const useFairDetailQuery = (id: number) => {
     queryFn: () => getFairDetail(id),
   });
 
-  return { data: data, ...restQuery };
+  return { data: data?.data, ...restQuery };
 };
