@@ -3,7 +3,6 @@ import { formatPhoneNumber } from '@/utils';
 import { Row, Text } from '@maru/ui';
 
 interface FairTableItemProps {
-  id: number;
   schoolName: string;
   name: string;
   type: string;
@@ -13,7 +12,6 @@ interface FairTableItemProps {
 }
 
 const FairTableItem = ({
-  id,
   schoolName,
   name,
   type,
@@ -22,7 +20,7 @@ const FairTableItem = ({
   question,
 }: FairTableItemProps) => {
   return (
-    <TableItem key={id}>
+    <TableItem>
       <Row gap={48}>
         <Text fontType="p2" width={60}>
           {name}
