@@ -24,3 +24,21 @@ export interface FairData {
   applicationEndDate: string;
   status: FairStatus;
 }
+
+export interface AttendeeData {
+  schoolName: string;
+  name: string;
+  type: string;
+  phoneNumber: string;
+  headcount: number;
+  question: string;
+}
+
+export interface FairDetailData {
+  start: string;
+  place: string;
+  applicationStartDate: string;
+  applicationEndDate: string;
+  status: FairStatus;
+  attendeeList: AttendeeData[];
+}
