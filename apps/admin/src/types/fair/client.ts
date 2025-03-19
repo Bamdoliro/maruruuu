@@ -1,11 +1,11 @@
 export type FairType = 'STUDENT_AND_PARENT' | 'TEACHER';
 
 export type FairStatus =
-  | 'APPLICATION_ENDED' // 신청 종료됨
-  | 'CLOSED' // 종료됨
-  | 'APPLICATION_IN_PROGRESS' // 신청 진행 중
-  | 'APPLICATION_NOT_STARTED' // 신청 진행 시작 전
-  | 'APPLICATION_EARLY_CLOSED'; // 신청 조기 종료
+  | 'APPLICATION_ENDED'
+  | 'CLOSED'
+  | 'APPLICATION_IN_PROGRESS'
+  | 'APPLICATION_NOT_STARTED'
+  | 'APPLICATION_EARLY_CLOSED';
 
 export interface Fair {
   start: string;
@@ -17,6 +17,7 @@ export interface Fair {
 }
 
 export interface FairData {
+  id: number;
   start: string;
   place: String;
   applicationStartDate: String | null;
