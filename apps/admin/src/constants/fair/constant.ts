@@ -7,3 +7,12 @@ export const FAIR_STATUS: Record<FairStatus, string> = {
   APPLICATION_NOT_STARTED: '신청 시작 전',
   APPLICATION_EARLY_CLOSED: '조기 마감',
 } as const;
+
+export const FAIR_TAP_STATUS: Record<string, string[]> = {
+  '진행 중인 신청': [
+    'APPLICATION_IN_PROGRESS',
+    'APPLICATION_NOT_STARTED',
+    'APPLICATION_ENDED',
+  ],
+  '마감된 신청': ['CLOSED', 'APPLICATION_EARLY_CLOSED'],
+};
