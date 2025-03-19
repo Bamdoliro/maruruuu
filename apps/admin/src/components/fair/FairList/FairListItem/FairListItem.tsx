@@ -1,14 +1,12 @@
 import { ROUTES } from '@/constants/common/constant';
 import { FAIR_STATUS } from '@/constants/fair/constant';
-import { FairStatus } from '@/types/fair/client';
+import { FairStatus, StatusType } from '@/types/fair/client';
 import { formatDate } from '@/utils';
 import { color } from '@maru/design-system';
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
-
-type StatusType = 'open' | 'closed' | 'full';
 
 interface FairListItemProps {
   id: number;

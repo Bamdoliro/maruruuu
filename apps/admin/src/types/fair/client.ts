@@ -1,5 +1,7 @@
 export type FairType = 'STUDENT_AND_PARENT' | 'TEACHER';
 
+export type StatusType = 'open' | 'closed' | 'full';
+
 export type FairStatus =
   | 'APPLICATION_ENDED'
   | 'CLOSED'
