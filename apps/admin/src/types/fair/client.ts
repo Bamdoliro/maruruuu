@@ -20,7 +20,7 @@ export interface FairData {
   id: number;
   start: string;
   place: string;
-  applicationStartDate: string | null;
-  applicationEndDate: string | null;
+  applicationStartDate: string;
+  applicationEndDate: string;
   status: FairStatus;
 }
