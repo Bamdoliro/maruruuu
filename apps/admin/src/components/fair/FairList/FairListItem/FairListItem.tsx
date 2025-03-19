@@ -1,6 +1,7 @@
 import { ROUTES } from '@/constants/common/constant';
 import { FAIR_STATUS } from '@/constants/fair/constant';
 import { FairStatus } from '@/types/fair/client';
+import formatDate from '@/utils/functions/formatDate';
 import { color } from '@maru/design-system';
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -42,7 +43,7 @@ const FairListItem = ({
     <StyledFairListItem onClick={handleMoveFairDetail}>
       <Row justifyContent="space-between" alignItems="center">
         <Text fontType="H3" color={color.gray900}>
-          {start}
+          {formatDate.toDayAndDateTime(start)}
         </Text>
         <ItemStatusBox status={statusType}>
           <Text fontType="context">{FAIR_STATUS[status as FairStatus]}</Text>
@@ -51,7 +52,8 @@ const FairListItem = ({
       <Column>
         <Text fontType="p2" color={color.gray500}>
           장소: {place} <br />
-          신청 기한: {applicationStartDate} ~ {applicationEndDate}
+          신청 기한: {formatDate.toDotDate(applicationStartDate)} ~{' '}
+          {formatDate.toDotDate(applicationEndDate)}
         </Text>
       </Column>
     </StyledFairListItem>
