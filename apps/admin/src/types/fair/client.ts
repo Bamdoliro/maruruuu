@@ -10,17 +10,17 @@ export type FairStatus =
 export interface Fair {
   start: string;
   capacity: number;
-  place: String;
+  place: string;
   type: FairType;
-  applicationStartDate: String | null;
-  applicationEndDate: String | null;
+  applicationStartDate: string | null;
+  applicationEndDate: string | null;
 }
 
 export interface FairData {
   id: number;
   start: string;
-  place: String;
-  applicationStartDate: String | null;
-  applicationEndDate: String | null;
+  place: string;
+  applicationStartDate: string | null;
+  applicationEndDate: string | null;
   status: FairStatus;
 }
