@@ -1,7 +1,7 @@
 import { ROUTES } from '@/constants/common/constant';
 import { FAIR_STATUS } from '@/constants/fair/constant';
 import { FairStatus } from '@/types/fair/client';
-import formatDate from '@/utils/functions/formatDate';
+import { formatDate } from '@/utils';
 import { color } from '@maru/design-system';
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
