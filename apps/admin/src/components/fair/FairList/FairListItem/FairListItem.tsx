@@ -69,7 +69,11 @@ const StyledFairListItem = styled.div`
 `;
 
 const ItemStatusBox = styled.div<{ status: StatusType }>`
-  ${flex({ justifyContent: 'center' })}
+  ${flex({ justifyContent: 'center', alignItems: 'center' })}
+  display: inline-flex;
+  width: max-content;
+  height: 32px;
+  padding: 0 10px;
   gap: 10px;
   border-radius: 100px;
   ${({ status }) => {
