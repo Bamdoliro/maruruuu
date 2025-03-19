@@ -10,13 +10,14 @@ import { ROUTES } from '@/constants/common/constants';
 import { IconArrowRight } from '@maru/icon';
 import Link from 'next/link';
 import { useOverlay } from '@toss/use-overlay';
-import { useCTAButton, useWithdrawalAction } from './withdrawal.hook';
+import { useCTAButton, useInput, useWithdrawalAction } from './withdrawal.hook';
 import { WithdrawalModal } from '@/components/withdrawal';
 
 const Withdrawal = () => {
   const overlay = useOverlay();
   const { handleMoveMain } = useCTAButton();
-  const { handleWithrawal } = useWithdrawalAction();
+  const { withdrawal, handleLoginChange } = useInput();
+  const { handleWithrawal } = useWithdrawalAction(withdrawal.password);
 
   const openWithdrawalModal = () => {
     overlay.open(({ isOpen, close }) => (
@@ -35,7 +36,7 @@ const Withdrawal = () => {
     <AppLayout backgroundColor={color.gray100}>
       <StyledWithdrawal>
         <WithdrawalBox>
-          <Column gap={56} alignItems="center" width={446}>
+          <Column gap={80} alignItems="center" width={446}>
             <Image
               src="/svg/maruLogo.svg"
               onClick={handleMoveMain}
@@ -45,28 +46,19 @@ const Withdrawal = () => {
               alt="logo"
             />
             <Column gap={36} width="100%">
-              <Column gap={24}>
-                <Input
-                  label="전화번호"
-                  placeholder="전화번호를 입력해주세요."
-                  width="100%"
-                  name="phoneNumber"
-                  onChange={() => {}}
-                />
-                <PreviewInput
-                  label="비밀번호"
-                  placeholder="비밀번호를 입력해주세요."
-                  width="100%"
-                  name="password"
-                  onChange={() => {}}
-                />
-              </Column>
+              <PreviewInput
+                label="비밀번호"
+                placeholder="비밀번호를 입력해주세요."
+                width="100%"
+                name="password"
+                onChange={handleLoginChange}
+              />
               <Column gap={16} alignItems="center">
                 <Button
                   width="100%"
                   onClick={openWithdrawalModal}
                   size="MEDIUM"
-                  styleType="WARNING"
+                  styleType={withdrawal.password === '' ? 'DISABLED' : 'WARNING'}
                 >
                   <Text fontType="btn2" color={color.white}>
                     회원 탈퇴

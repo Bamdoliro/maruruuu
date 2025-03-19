@@ -1,9 +1,13 @@
 import { ROUTES } from '@/constants/common/constants';
+import { useWithdrawalMutation } from '@/services/user/mutations';
 import { useRouter } from 'next/navigation';
+import { ChangeEventHandler, useState } from 'react';
 
-export const useWithdrawalAction = () => {
+export const useWithdrawalAction = (password: string) => {
+  const { withdrawalMutate } = useWithdrawalMutation(password);
+
   const handleWithrawal = () => {
-    alert('탈퇴할 거임');
+    withdrawalMutate();
   };
 
   return { handleWithrawal };
@@ -19,4 +23,15 @@ export const useCTAButton = () => {
   return { handleMoveMain };
 };
 
-export const useInput = () => {};
+export const useInput = () => {
+  const [withdrawal, setWithdrawal] = useState({
+    password: '',
+  });
+
+  const handleLoginChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { name, value } = e.target;
+    setWithdrawal({ ...withdrawal, [name]: value });
+  };
+
+  return { withdrawal, handleLoginChange };
+};
