@@ -13,7 +13,7 @@ export const useFairListQuery = () => {
 
 export const useFairDetailQuery = (id: number) => {
   const { data, ...restQuery } = useQuery({
-    queryKey: [KEY.FAIR_DETAIL],
+    queryKey: [KEY.FAIR_DETAIL, id],
     queryFn: () => getFairDetail(id),
   });
 
