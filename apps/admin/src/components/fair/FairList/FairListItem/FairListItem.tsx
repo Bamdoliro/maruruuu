@@ -65,6 +65,9 @@ const StyledFairListItem = styled.div`
   ${flex({ flexDirection: 'column', justifyContent: 'space-between' })}
   width: 400px;
   padding: 24px 32px;
+  border-radius: 12px;
+  border: 1px solid ${color.gray200};
+  background: ${color.white};
 `;
 
 const ItemStatusBox = styled.div<{ status: StatusType }>`
