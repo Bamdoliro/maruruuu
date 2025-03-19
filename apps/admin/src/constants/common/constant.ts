@@ -1,6 +1,8 @@
 export const KEY = {
   ADMIN: 'useAdmin',
 
+  FAIR_LIST: 'useFairList',
+
   NOTICE_LIST: 'useNoticeList',
   NOTICE_DETAIL: 'useNoticeDetail',
 
