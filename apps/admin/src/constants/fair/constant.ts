@@ -1,4 +1,4 @@
-import { FairStatus } from '@/types/fair/client';
+import { FairStatus, StatusType } from '@/types/fair/client';
 
 export const FAIR_STATUS: Record<FairStatus, string> = {
   APPLICATION_ENDED: '신청 종료',
@@ -15,4 +15,12 @@ export const FAIR_TAP_STATUS: Record<string, string[]> = {
     'APPLICATION_ENDED',
   ],
   '마감된 신청': ['CLOSED', 'APPLICATION_EARLY_CLOSED'],
+};
+
+export const FAIR_ITEM_STATUS: Record<FairStatus, StatusType> = {
+  APPLICATION_ENDED: 'full',
+  CLOSED: 'closed',
+  APPLICATION_EARLY_CLOSED: 'closed',
+  APPLICATION_IN_PROGRESS: 'open',
+  APPLICATION_NOT_STARTED: 'open',
 };
