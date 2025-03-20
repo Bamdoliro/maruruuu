@@ -11,7 +11,11 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
-const FairDetailPage = () => {
+interface FairDetailProps {
+  id: number;
+}
+
+const FairDetailPage = ({ id }: FairDetailProps) => {
   return (
     <AppLayout>
       <StyledFairDetail>
@@ -20,7 +24,7 @@ const FairDetailPage = () => {
           돌아가기
         </DirectLink>
         <Suspense fallback={<Loader />}>
-          <FairDetail />
+          <FairDetail id={id} />
         </Suspense>
       </StyledFairDetail>
     </AppLayout>
