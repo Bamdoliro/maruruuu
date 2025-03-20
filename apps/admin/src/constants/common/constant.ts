@@ -1,6 +1,10 @@
 export const KEY = {
   ADMIN: 'useAdmin',
 
+  FAIR_LIST: 'useFairList',
+  FAIR_DETAIL: 'useFairDetail',
+  FAIR_EXPORT_EXCEL: 'useFairExportExcel',
+
   NOTICE_LIST: 'useNoticeList',
   NOTICE_DETAIL: 'useNoticeDetail',
 
@@ -20,6 +24,7 @@ export const ROUTES = {
   MESSAGE: '/message',
   ANALYSIS: '/analysis',
   FAIR: '/fair',
+  FAIR_CREATE: '/fair/create',
   REGISTRATION: '/registration',
 } as const;
 

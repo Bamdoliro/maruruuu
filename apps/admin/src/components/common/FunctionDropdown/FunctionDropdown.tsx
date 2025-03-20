@@ -83,6 +83,10 @@ const DropdownItemList = styled.div`
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
   })}
+  z-index: 1;
+  position: absolute;
+  right: -12px;
+  margin-top: 24px;
   width: 280px;
   padding: 8px;
   background-color: ${color.white};
