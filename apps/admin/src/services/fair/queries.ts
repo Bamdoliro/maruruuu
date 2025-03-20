@@ -1,6 +1,6 @@
 import { KEY } from '@/constants/common/constant';
 import { useQuery } from '@tanstack/react-query';
-import { getFairDetail, getFairList } from './api';
+import { getFairDetail, getFairExportExcel, getFairList } from './api';
 
 export const useFairListQuery = () => {
   const { data, ...restQuery } = useQuery({
@@ -18,4 +18,13 @@ export const useFairDetailQuery = (id: number) => {
   });
 
   return { data: data?.data, ...restQuery };
+};
+
+export const useFairExportExcelQuery = (id: number) => {
+  const { data, ...restQuery } = useQuery({
+    queryKey: [KEY.FAIR_EXPORT_EXCEL, id],
+    queryFn: () => getFairExportExcel(id),
+  });
+
+  return { data: data, ...restQuery };
 };
