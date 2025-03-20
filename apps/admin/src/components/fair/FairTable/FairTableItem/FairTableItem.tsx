@@ -39,7 +39,7 @@ const FairTableItem = ({
         <Text fontType="p2" width={120}>
           {formatPhoneNumber(phoneNumber)}
         </Text>
-        <Text fontType="p2" width={120}>
+        <Text fontType="p2" width={120} ellipsis={true}>
           {question}
         </Text>
       </Row>
