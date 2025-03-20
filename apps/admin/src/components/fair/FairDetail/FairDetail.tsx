@@ -9,50 +9,49 @@ import FairTable from '../FairTable/FairTable';
 import { Suspense } from 'react';
 import { useFairDetailQuery } from '@/services/fair/queries';
 import { formatDate } from '@/utils';
-import { FAIR_STATUS } from '@/constants/fair/constant';
-
-const data = [
-  {
-    icon: <IconUpload color="gray600" width={24} height={24} />,
-    label: '명단 엑셀로 내보내기',
-    value: 'execl',
-    onClick: () => {
-      // 현재 빈 함수
-    },
-  },
-];
+import { FAIR_ITEM_STATUS, FAIR_STATUS } from '@/constants/fair/constant';
+import { useExportExcelAction } from './fairDetail.hooks';
 
 interface FairDetailProps {
   id: number;
 }
 
 const FairDetail = ({ id }: FairDetailProps) => {
-  const { data: FairDetail } = useFairDetailQuery(id);
+  const { data: FairDetailData } = useFairDetailQuery(id);
+
+  const { handleExportExcelButtonClick } = useExportExcelAction(id);
 
   const statusType: StatusType =
-    FairDetail?.status === 'APPLICATION_ENDED'
-      ? 'full'
-      : FairDetail?.status === 'CLOSED' ||
-          FairDetail?.status === 'APPLICATION_EARLY_CLOSED'
-        ? 'closed'
-        : 'open';
+    FAIR_ITEM_STATUS[FairDetailData?.status as FairStatus] ?? 'open';
 
-  const FairAttendeeList = FairDetail?.attendeeList;
+  const Fairtitle = formatDate.toDayAndDateTime(FairDetailData?.start || '');
+  const FairAttendeeList = FairDetailData?.attendeeList;
 
-  return FairDetail ? (
+  return FairDetailData ? (
     <StyledFairDetail>
       <Row justifyContent="space-between">
         <Column gap={4}>
           <ItemStatusBox status={statusType}>
-            {FAIR_STATUS[FairDetail.status as FairStatus]}
+            {FAIR_STATUS[FairDetailData.status as FairStatus]}
           </ItemStatusBox>
           <Text fontType="H1">
-            {formatDate.toDayAndDateTime(FairDetail.start)}
+            {Fairtitle}
             <br />
             입학전형 설명회 조회
           </Text>
         </Column>
-        <FunctionDropdown data={data} />
+        <FunctionDropdown
+          data={[
+            {
+              icon: <IconUpload color="gray600" width={24} height={24} />,
+              label: '명단 엑셀로 내보내기',
+              value: 'execl',
+              onClick: () => {
+                handleExportExcelButtonClick(Fairtitle);
+              },
+            },
+          ]}
+        />
       </Row>
       <Suspense fallback={<Loader />}>
         <FairTable dataList={FairAttendeeList ?? []} />
