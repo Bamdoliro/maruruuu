@@ -34,7 +34,7 @@ const FairListItem = ({
         : 'open';
 
   const handleMoveFairDetail = () => {
-    router.push(`${ROUTES}/${id}`);
+    router.push(`${ROUTES.FAIR}/${id}`);
   };
 
   return (
@@ -66,6 +66,7 @@ const StyledFairListItem = styled.div`
   border-radius: 12px;
   border: 1px solid ${color.gray200};
   background: ${color.white};
+  cursor: pointer;
 `;
 
 const ItemStatusBox = styled.div<{ status: StatusType }>`
