@@ -1,6 +1,8 @@
 import { TableItem } from '@/components/common';
 import { formatPhoneNumber } from '@/utils';
-import { Row, Text } from '@maru/ui';
+import { Row, Text, TextButton } from '@maru/ui';
+import FairQuestionModal from '../FairQuestionModal/FairQuestionModal';
+import { useOverlay } from '@toss/use-overlay';
 
 interface FairTableItemProps {
   schoolName: string;
@@ -19,6 +21,19 @@ const FairTableItem = ({
   headcount,
   question,
 }: FairTableItemProps) => {
+  const overlay = useOverlay();
+
+  const handleFairQuestionModalButtonClick = () => {
+    overlay.open(({ isOpen, close }) => (
+      <FairQuestionModal
+        name={name}
+        question={question}
+        isOpen={isOpen}
+        onClose={close}
+      />
+    ));
+  };
+
   return (
     <TableItem>
       <Row gap={48}>
@@ -39,9 +54,14 @@ const FairTableItem = ({
         <Text fontType="p2" width={120}>
           {formatPhoneNumber(phoneNumber)}
         </Text>
-        <Text fontType="p2" width={120} ellipsis={true}>
+        <TextButton
+          fontType="p2"
+          width={120}
+          ellipsis={true}
+          onClick={handleFairQuestionModalButtonClick}
+        >
           {question}
-        </Text>
+        </TextButton>
       </Row>
     </TableItem>
   );
