@@ -9,7 +9,7 @@ type DetailTableProps = { formList: GradeDistributionType[] | undefined };
 
 const GradeDistributionDetailTable = ({ formList }: DetailTableProps) => {
   return (
-    <Row gap={120}>
+    <Row gap={60}>
       <ScoreInfoWrapper>
         <Column>
           <Column gap={40}>

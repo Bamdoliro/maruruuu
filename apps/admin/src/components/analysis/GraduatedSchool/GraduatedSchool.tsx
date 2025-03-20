@@ -6,9 +6,10 @@ import { useState } from 'react';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import { AreaCategory } from '@/types/analysis/client';
+import GradeDistribution from '../GradeDistribution/GradeDistribution';
 
 const GraduatedSchool = () => {
-  const [currentAnalysisPassStep, setCurrentAnalysisPassStep] = useState('1차 합격자');
+  const [currentAnalysisPassStep, setCurrentAnalysisPassStep] = useState('전체 조회');
   const [areaCategory, setAreaCategory] = useState<AreaCategory>('');
 
   const handleAreaCategoryChange = (selectedValue: string) => {
@@ -67,6 +68,7 @@ const GraduatedSchool = () => {
       <SwitchCase
         value={currentAnalysisPassStep}
         caseBy={{
+          '전체 조회': <GradeDistribution />,
           '1차 합격자': <GraduatedAreaTable />,
           '2차 전형자': <GraduatedAreaTable />,
           '최종 합격자': <GraduatedAreaTable />,

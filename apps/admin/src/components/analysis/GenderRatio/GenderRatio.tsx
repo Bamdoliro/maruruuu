@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import GenderRatioDetailTable from './GenderRatioDetailTable/GenderRatioDetailTable';
 
 const GenderRatio = () => {
-  const [currentAnalysisPassStep, setCurrentAnalysisPassStep] = useState('1차 합격자');
+  const [currentAnalysisPassStep, setCurrentAnalysisPassStep] = useState('전체 조회');
 
   return (
     <StyledGenderRatio>
@@ -25,6 +25,7 @@ const GenderRatio = () => {
       <SwitchCase
         value={currentAnalysisPassStep}
         caseBy={{
+          '전체 조회': <GenderRatioDetailTable />,
           '1차 합격자': <GenderRatioDetailTable />,
           '2차 전형자': <GenderRatioDetailTable />,
           '최종 합격자': <GenderRatioDetailTable />,

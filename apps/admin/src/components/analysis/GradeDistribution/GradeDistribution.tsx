@@ -39,6 +39,7 @@ const GradeDistribution = () => {
       <SwitchCase
         value={currentAnalysisPassStep}
         caseBy={{
+          '전체 조회': <GradeDistributionDetailTable formList={formList} />,
           '1차 합격자': <GradeDistributionDetailTable formList={formList} />,
           '2차 전형자': <GradeDistributionDetailTable formList={formList} />,
           '최종 합격자': <GradeDistributionDetailTable formList={formList} />,

@@ -8,7 +8,12 @@ export const ANALYSIS_TYPE = [
 
 export const ANALYSIS_STEP = ['변경 전', '변경 후'] as const;
 
-export const ANALYSIS_PASS_STEP = ['1차 합격자', '2차 전형자', '최종 합격자'] as const;
+export const ANALYSIS_PASS_STEP = [
+  '전체 조회',
+  '1차 합격자',
+  '2차 전형자',
+  '최종 합격자',
+] as const;
 
 export const ANALYSIS_RATIO_TYPE = [
   '일반 전형 성비',
