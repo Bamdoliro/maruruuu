@@ -2,11 +2,10 @@ import { FairStatus, StatusType } from '@/types/fair/client';
 import { flex } from '@maru/utils';
 import { color } from '@maru/design-system';
 import { styled } from 'styled-components';
-import { Column, Loader, Row, Text } from '@maru/ui';
+import { Column, Row, Text } from '@maru/ui';
 import { FunctionDropdown } from '@/components/common';
 import { IconUpload } from '@maru/icon';
 import FairTable from '../FairTable/FairTable';
-import { Suspense } from 'react';
 import { useFairDetailQuery } from '@/services/fair/queries';
 import { formatDate } from '@/utils';
 import { FAIR_ITEM_STATUS, FAIR_STATUS } from '@/constants/fair/constant';
@@ -53,9 +52,7 @@ const FairDetail = ({ id }: FairDetailProps) => {
           ]}
         />
       </Row>
-      <Suspense fallback={<Loader />}>
-        <FairTable dataList={FairAttendeeList ?? []} />
-      </Suspense>
+      <FairTable dataList={FairAttendeeList ?? []} />
     </StyledFairDetail>
   ) : null;
 };
