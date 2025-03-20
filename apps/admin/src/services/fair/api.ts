@@ -13,3 +13,12 @@ export const getFairDetail = async (id: number) => {
 
   return data;
 };
+
+export const getFairExportExcel = async (id: number) => {
+  const { data } = await maru.get(`/fair/${id}/export`, {
+    ...authorization(),
+    responseType: 'blob',
+  });
+
+  return data;
+};
