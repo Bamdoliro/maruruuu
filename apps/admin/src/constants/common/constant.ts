@@ -3,6 +3,7 @@ export const KEY = {
 
   FAIR_LIST: 'useFairList',
   FAIR_DETAIL: 'useFairDetail',
+  FAIR_EXPORT_EXCEL: 'useFairExportExcel',
 
   NOTICE_LIST: 'useNoticeList',
   NOTICE_DETAIL: 'useNoticeDetail',
