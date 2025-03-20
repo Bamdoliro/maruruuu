@@ -1,11 +1,15 @@
-import { StatusType } from '@/types/fair/client';
+import { FairStatus, StatusType } from '@/types/fair/client';
 import { flex } from '@maru/utils';
 import { color } from '@maru/design-system';
 import { styled } from 'styled-components';
-import { Column, Row, Text } from '@maru/ui';
+import { Column, Loader, Row, Text } from '@maru/ui';
 import { FunctionDropdown } from '@/components/common';
 import { IconUpload } from '@maru/icon';
 import FairTable from '../FairTable/FairTable';
+import { Suspense } from 'react';
+import { useFairDetailQuery } from '@/services/fair/queries';
+import { formatDate } from '@/utils';
+import { FAIR_STATUS } from '@/constants/fair/constant';
 
 const data = [
   {
@@ -18,23 +22,43 @@ const data = [
   },
 ];
 
-const FairDetail = () => {
-  return (
+interface FairDetailProps {
+  id: number;
+}
+
+const FairDetail = ({ id }: FairDetailProps) => {
+  const { data: FairDetail } = useFairDetailQuery(id);
+
+  const statusType: StatusType =
+    FairDetail?.status === 'APPLICATION_ENDED'
+      ? 'full'
+      : FairDetail?.status === 'CLOSED' ||
+          FairDetail?.status === 'APPLICATION_EARLY_CLOSED'
+        ? 'closed'
+        : 'open';
+
+  const FairAttendeeList = FairDetail?.attendeeList;
+
+  return FairDetail ? (
     <StyledFairDetail>
       <Row justifyContent="space-between">
         <Column gap={4}>
-          <ItemStatusBox status="open">신청 가능</ItemStatusBox>
+          <ItemStatusBox status={statusType}>
+            {FAIR_STATUS[FairDetail.status as FairStatus]}
+          </ItemStatusBox>
           <Text fontType="H1">
-            9월 19일
+            {formatDate.toDayAndDateTime(FairDetail.start)}
             <br />
             입학전형 설명회 조회
           </Text>
         </Column>
         <FunctionDropdown data={data} />
       </Row>
-      <FairTable id={1} />
+      <Suspense fallback={<Loader />}>
+        <FairTable dataList={FairAttendeeList ?? []} />
+      </Suspense>
     </StyledFairDetail>
-  );
+  ) : null;
 };
 
 export default FairDetail;
