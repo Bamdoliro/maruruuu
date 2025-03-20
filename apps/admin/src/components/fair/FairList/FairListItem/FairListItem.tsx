@@ -1,5 +1,5 @@
 import { ROUTES } from '@/constants/common/constant';
-import { FAIR_STATUS } from '@/constants/fair/constant';
+import { FAIR_ITEM_STATUS, FAIR_STATUS } from '@/constants/fair/constant';
 import { FairStatus, StatusType } from '@/types/fair/client';
 import { formatDate } from '@/utils';
 import { color } from '@maru/design-system';
@@ -26,12 +26,7 @@ const FairListItem = ({
   status,
 }: FairListItemProps) => {
   const router = useRouter();
-  const statusType: StatusType =
-    status === 'APPLICATION_ENDED'
-      ? 'full'
-      : status === 'CLOSED' || status === 'APPLICATION_EARLY_CLOSED'
-        ? 'closed'
-        : 'open';
+  const statusType: StatusType = FAIR_ITEM_STATUS[status as FairStatus] ?? 'open';
 
   const handleMoveFairDetail = () => {
     router.push(`${ROUTES.FAIR}/${id}`);
