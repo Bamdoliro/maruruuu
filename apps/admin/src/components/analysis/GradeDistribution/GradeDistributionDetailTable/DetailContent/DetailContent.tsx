@@ -48,7 +48,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
           <Th width={160} height={44} styleType="ANALYSIS">
             구분
           </Th>
-          <Th width={160} height={44} styleType="ANALYSIS">
+          <Th width={80} height={44} styleType="ANALYSIS">
             최고점
           </Th>
           <Th width={80} height={44} borderTopRightRadius={12} styleType="ANALYSIS">
@@ -239,7 +239,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
             <Td width={160} height={44} styleType="ANALYSIS">
               {empty}
             </Td>
-            <Td width={80} height={44} borderBottomRightRadius={12} styleType="ANALYSIS">
+            <Td width={80} height={44} styleType="ANALYSIS">
               {specialAdmissionApplicant.max}
             </Td>
             <Td width={80} height={44} borderBottomRightRadius={12} styleType="ANALYSIS">
