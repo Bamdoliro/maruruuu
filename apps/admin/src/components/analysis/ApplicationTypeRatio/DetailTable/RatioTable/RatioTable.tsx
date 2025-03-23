@@ -1,7 +1,14 @@
 import { Column, Row, Td, Text, Th } from '@maru/ui';
+import useScoreRatio from './RatioTable.hooks';
+import { ApplicantCountType } from '@/types/analysis/client';
 
-const RatioTable = () => {
+type RatioTableProps = {
+  formList: ApplicantCountType[] | undefined;
+};
+
+const RatioTable = ({ formList }: RatioTableProps) => {
   const empty = '';
+  const { regularCount, specialAdmissionCount, otherCount, regularRatio, specialAdmissionRatio, otherRatio } = useScoreRatio(formList);
 
   return (
     <Column gap={24}>
@@ -26,13 +33,13 @@ const RatioTable = () => {
             지원자 수
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {regularCount}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            59
+            {specialAdmissionCount}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            0
+            {otherCount}
           </Td>
         </Row>
         <Row>
@@ -45,13 +52,13 @@ const RatioTable = () => {
             지원 비율
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            103.31
+            {regularRatio} %
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            59
+            {specialAdmissionRatio} %
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS" borderBottomRightRadius={12}>
-            0
+            {otherRatio} %
           </Td>
         </Row>
       </Column>
