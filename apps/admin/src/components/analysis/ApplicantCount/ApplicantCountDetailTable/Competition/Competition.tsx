@@ -6,6 +6,7 @@ type DetailTableProps = { formList: ApplicantCountType[] | undefined };
 
 const Competition = ({ formList }: DetailTableProps) => {
   const empty = '';
+
   const {
     regularCount,
     specialCount,

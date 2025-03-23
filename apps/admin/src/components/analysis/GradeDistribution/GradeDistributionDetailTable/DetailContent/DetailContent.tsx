@@ -1,39 +1,29 @@
-import { FormType, GradeDistributionType } from '@/types/analysis/client';
+import { GradeDistributionType } from '@/types/analysis/client';
 import { font } from '@maru/design-system';
 import { Column, Row, Td, Th } from '@maru/ui';
 import styled from 'styled-components';
+import useMaxMinByType from './DetailContent.hooks';
 
 type DetailTableProps = { formList: GradeDistributionType[] | undefined };
 
 const DetailContent = ({ formList }: DetailTableProps) => {
+  const {
+    regularApplicant,
+    meisterTalentApplicant,
+    nationalBasicLivingApplicant,
+    nearPovertyApplicant,
+    nationalVeteransApplicant,
+    oneParentApplicant,
+    fromNorthKoreaApplicant,
+    multiculturalApplicant,
+    teenHouseholderApplicant,
+    multiChildrenApplicant,
+    farmingAndFishingApplicant,
+    specialAdmissionApplicant,
+    nationalVeteransEducationApplicant,
+  } = useMaxMinByType(formList);
+
   const empty = '';
-
-  const getMaxMinByType = (type: FormType) => {
-    const entries = formList?.filter((item) => item.type === type);
-    if (!entries || entries.length === 0) {
-      return { max: 0, min: 0 };
-    }
-    const max = Math.max(...entries.map((item) => item.totalMax)).toFixed(3);
-    const min = Math.min(...entries.map((item) => item.totalMin)).toFixed(3);
-
-    return { max, min };
-  };
-
-  const regularApplicant = getMaxMinByType('REGULAR');
-  const meisterTalentApplicant = getMaxMinByType('MEISTER_TALENT');
-  const nationalBasicLivingApplicant = getMaxMinByType('NATIONAL_BASIC_LIVING');
-  const nearPovertyApplicant = getMaxMinByType('NEAR_POVERTY');
-  const nationalVeteransApplicant = getMaxMinByType('NATIONAL_VETERANS');
-  const oneParentApplicant = getMaxMinByType('ONE_PARENT');
-  const fromNorthKoreaApplicant = getMaxMinByType('FROM_NORTH_KOREA');
-  const multiculturalApplicant = getMaxMinByType('MULTICULTURAL');
-  const teenHouseholderApplicant = getMaxMinByType('TEEN_HOUSEHOLDER');
-  const multiChildrenApplicant = getMaxMinByType('MULTI_CHILDREN');
-  const farmingAndFishingApplicant = getMaxMinByType('FARMING_AND_FISHING');
-  const specialAdmissionApplicant = getMaxMinByType('SPECIAL_ADMISSION');
-  const nationalVeteransEducationApplicant = getMaxMinByType(
-    'NATIONAL_VETERANS_EDUCATION'
-  );
 
   return (
     <StyledDetailTable>
