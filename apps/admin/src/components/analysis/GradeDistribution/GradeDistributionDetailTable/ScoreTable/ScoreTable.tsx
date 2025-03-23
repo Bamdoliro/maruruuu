@@ -1,7 +1,22 @@
+import { GradeDistributionType } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
+import useScoreStatus from './ScoreTable.hooks';
 
-const ScoreTable = () => {
+type ScoreTableProps = {
+  formList: GradeDistributionType[] | undefined;
+};
+
+const ScoreTable = ({ formList }: ScoreTableProps) => {
   const empty = '';
+
+  const {
+    regularRoundMax,
+    SpecialAdmissionRoundMax,
+    regularRoundMin,
+    specialAdmissionRoundMin,
+    regularRoundAvg,
+    SpecialAdmissionRoundAvg,
+  } = useScoreStatus(formList);
 
   return (
     <Column gap={24}>
@@ -23,10 +38,10 @@ const ScoreTable = () => {
             최고 점수
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {regularRoundMax}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            59
+            {SpecialAdmissionRoundMax}
           </Td>
         </Row>
         <Row>
@@ -34,10 +49,10 @@ const ScoreTable = () => {
             최하 점수
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {regularRoundMin}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            59
+            {specialAdmissionRoundMin}
           </Td>
         </Row>
         <Row>
@@ -50,10 +65,10 @@ const ScoreTable = () => {
             평균
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            103.31
+            {regularRoundAvg}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS" borderBottomRightRadius={12}>
-            0
+            {SpecialAdmissionRoundAvg}
           </Td>
         </Row>
       </Column>

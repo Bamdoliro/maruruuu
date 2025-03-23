@@ -27,7 +27,7 @@ const GradeDistributionDetailTable = ({ formList }: DetailTableProps) => {
           </Column>
         </Column>
         <Column justifyContent="space-between">
-          <ScoreTable />
+          <ScoreTable formList={formList} />
         </Column>
       </ScoreInfoWrapper>
       <DetailContent formList={formList} />
@@ -41,4 +41,3 @@ const ScoreInfoWrapper = styled.div`
   ${flex({ flexDirection: 'column', justifyContent: 'space-between' })}
   height: 100%;
 `;
-
