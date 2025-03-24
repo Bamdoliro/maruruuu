@@ -7,10 +7,10 @@ interface FormTableItemProps {
   id: number;
   examinationNumber: number | null;
   name: string;
-  graduationType: string; //GraduationType;
+  graduationType: string;
   school: string;
-  status: string; //FormStatus;
-  type: string; //FormType;
+  status: string;
+  type: string;
   isChangedToRegular: boolean;
   totalScore: number | null;
   firstRoundPassed: boolean | null;
