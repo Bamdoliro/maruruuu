@@ -7,16 +7,16 @@ const FormTableHeader = () => {
     <TableHeader>
       <Row gap={48}>
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
-          번호
+          수험번호
         </Text>
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
-          번호
+          이름
         </Text>
         <Text fontType="p2" width={convertToResponsive(120, 160)}>
-          번호
+          학교
         </Text>
         <Text fontType="p2" width={convertToResponsive(180, 240)}>
-          제목
+          전형
         </Text>
       </Row>
       <Row gap={48}>
