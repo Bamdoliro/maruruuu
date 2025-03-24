@@ -1,6 +1,15 @@
 'use client';
 
+import { FunctionDropdown } from '@/components/common';
 import AppLayout from '@/layouts/AppLayout';
+import {
+  IconAdmission,
+  IconCheckDocument,
+  IconEditAllDocument,
+  IconEditDocument,
+  IconPrint,
+  IconUpload,
+} from '@maru/icon';
 import { Dropdown, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
@@ -74,6 +83,52 @@ const FormPage = () => {
               name="formSort"
             />
           </Row>
+          <FunctionDropdown
+            data={[
+              {
+                icon: <IconCheckDocument width={24} height={24} />,
+                label: '검토해야하는 원서 모아보기',
+                value: 'review_applications',
+                onClick: () => {},
+              },
+              {
+                icon: <IconEditDocument width={24} height={24} />,
+                label: '2차 전형 점수 입력하기',
+                value: 'input_second_round_scores',
+                onClick: () => {},
+              },
+              {
+                icon: <IconEditDocument width={24} height={24} />,
+                label: '2차 합격 여부 변경하기',
+                value: 'update_second_round_result',
+                onClick: () => {},
+              },
+              {
+                icon: <IconEditAllDocument width={24} height={24} />,
+                label: '2차 합격자 자동 선발',
+                value: 'auto_select_second_round',
+                onClick: () => {},
+              },
+              {
+                icon: <IconUpload width={24} height={24} />,
+                label: '명단 엑셀로 내보내기',
+                value: 'export_excel',
+                onClick: () => {},
+              },
+              {
+                icon: <IconPrint width={24} height={24} />,
+                label: '원서 출력하기',
+                value: 'print_applications',
+                onClick: () => {},
+              },
+              {
+                icon: <IconAdmission width={24} height={24} />,
+                label: '수험표 전체 발급하기',
+                value: 'generate_all_exam_tickets',
+                onClick: () => {},
+              },
+            ]}
+          />
         </Row>
       </StyledFormPage>
     </AppLayout>
