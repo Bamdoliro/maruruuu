@@ -38,3 +38,19 @@ export type FormCategory =
   | 'SPECIAL';
 
 export type GraduationType = 'EXPECTED' | 'GRADUATED' | 'QUALIFICATION_EXAMINATION';
+
+export interface Form {
+  id: number;
+  examinationNumber: number | null;
+  name: string;
+  birthday: string;
+  graduationType: GraduationType;
+  school: string;
+  status: FormStatus;
+  type: FormType;
+  isChangedToRegular: boolean;
+  totalScore: number | null;
+  hasDocument: boolean | null;
+  firstRoundPassed: boolean | null;
+  secondRoundPassed: boolean | null;
+}
