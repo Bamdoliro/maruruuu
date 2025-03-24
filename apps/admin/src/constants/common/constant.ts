@@ -2,6 +2,8 @@ export const KEY = {
   ADMIN: 'useAdmin',
   APPLICANT_COUNT: 'useApplicantCount',
   APPLICANT_GRADE_DISTRIBUTION: 'useApplicantGradeDistribution',
+  APPLICANT_GENDER_RATIO: 'useGenderRatio',
+  APPLICANT_GRADUATED_SCHOOL: 'useGraduatedSchool',
 };
 
 export const ROUTES = {

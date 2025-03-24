@@ -45,6 +45,15 @@ export type AnalysisApplicantType =
 
 export type AnalysisApplicantCountType = 'CURRENT' | 'ORIGINAL';
 
+export type FormTypeMainCategory = 'REGULAR' | 'SPECIAL' | 'SUPERNUMERARY';
+
+export type GenderRatioCategory =
+  | 'REGULAR'
+  | 'MEISTER_TALENT'
+  | 'SOCIAL_INTEGRATION'
+  | 'SPECIAL_ADMISSION'
+  | 'NATIONAL_VETERANS_EDUCATION';
+
 export interface ApplicantCountType {
   type: FormType;
   count: number;
@@ -58,4 +67,18 @@ export interface GradeDistributionType {
   totalMax: number;
   totalMin: number;
   totalAvg: number;
+}
+
+export interface GenderRatio {
+  category: GenderRatioCategory;
+  busanMale: number;
+  busanFemail: number;
+  otherLocationMain: number;
+  otherLocationFemale: number;
+}
+
+export interface GraduatedSchoolStatus {
+  applicantName: string;
+  schoolName: string;
+  schoolAddress: string;
 }

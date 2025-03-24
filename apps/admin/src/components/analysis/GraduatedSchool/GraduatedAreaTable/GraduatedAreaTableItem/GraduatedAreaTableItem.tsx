@@ -3,16 +3,16 @@ import { Row, Text } from '@maru/ui';
 
 interface NoticeTableItemProps {
   id: number;
-  title: string;
-  school: string;
-  location: string;
+  applicantName: string;
+  schoolName: string;
+  schoolAddress: string;
 }
 
 const GraduatedAreaTableItem = ({
   id,
-  title,
-  school,
-  location,
+  applicantName,
+  schoolName,
+  schoolAddress,
 }: NoticeTableItemProps) => {
   return (
     <TableItem key={id}>
@@ -21,14 +21,14 @@ const GraduatedAreaTableItem = ({
           {id}
         </Text>
         <Text fontType="p2" width={1}>
-          {title}
+          {applicantName}
         </Text>
       </Row>
       <Row gap={140}>
         <Text fontType="p2" width={50}>
-          {school}
+          {schoolName}
         </Text>
-        <Text fontType="p2">{location}</Text>
+        <Text fontType="p2">{schoolAddress}</Text>
       </Row>
     </TableItem>
   );

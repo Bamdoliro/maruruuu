@@ -5,16 +5,17 @@ import GraduatedAreaTable from './GraduatedAreaTable/GraduatedAreaTable';
 import { useState } from 'react';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import { AreaCategory } from '@/types/analysis/client';
-import GradeDistribution from '../GradeDistribution/GradeDistribution';
+import { AnalysisApplicantType, AreaCategory } from '@/types/analysis/client';
+import { useGraduatedSchoolListQuery } from '@/services/analysis/queries';
+import useGraduatedSchool from './GraduatedSchool.hooks';
 
 const GraduatedSchool = () => {
-  const [currentAnalysisPassStep, setCurrentAnalysisPassStep] = useState('전체 조회');
-  const [areaCategory, setAreaCategory] = useState<AreaCategory>('');
-
-  const handleAreaCategoryChange = (selectedValue: string) => {
-    setAreaCategory(selectedValue as AreaCategory);
-  };
+  const {
+    currentAnalysisPassStep,
+    setCurrentAnalysisPassStep,
+    handleAreaCategoryChange,
+    formList,
+  } = useGraduatedSchool();
 
   return (
     <StyledGenderRatio>
@@ -68,10 +69,10 @@ const GraduatedSchool = () => {
       <SwitchCase
         value={currentAnalysisPassStep}
         caseBy={{
-          '전체 조회': <GraduatedAreaTable />,
-          '1차 합격자': <GraduatedAreaTable />,
-          '2차 전형자': <GraduatedAreaTable />,
-          '최종 합격자': <GraduatedAreaTable />,
+          '전체 조회': <GraduatedAreaTable formList={formList} />,
+          '1차 합격자': <GraduatedAreaTable formList={formList} />,
+          '2차 전형자': <GraduatedAreaTable formList={formList} />,
+          '최종 합격자': <GraduatedAreaTable formList={formList} />,
         }}
       />
     </StyledGenderRatio>
