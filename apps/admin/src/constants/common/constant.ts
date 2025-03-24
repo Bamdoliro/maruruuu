@@ -1,6 +1,8 @@
 export const KEY = {
   ADMIN: 'useAdmin',
 
+  FORM_LIST: 'useFormList',
+
   FAIR_LIST: 'useFairList',
   FAIR_DETAIL: 'useFairDetail',
   FAIR_EXPORT_EXCEL: 'useFairExportExcel',
