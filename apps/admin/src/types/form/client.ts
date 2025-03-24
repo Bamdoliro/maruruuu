@@ -36,3 +36,5 @@ export type FormCategory =
   | 'SUPERNUMERARY'
   | 'SPECIAL_ADMISSION'
   | 'SPECIAL';
+
+export type GraduationType = 'EXPECTED' | 'GRADUATED' | 'QUALIFICATION_EXAMINATION';
