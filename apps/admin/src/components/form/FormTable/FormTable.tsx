@@ -1,32 +1,16 @@
 import { Column } from '@maru/ui';
-
 import FormTableHeader from './FormTableHeader/FormTableHeader';
 import FormTableItem from './FormTableItem/FormTableItem';
-
-const fromList = [
-  {
-    id: 1,
-    examinationNumber: 1001,
-    name: '이민준',
-    birthday: '2007-09-19',
-    graduationType: 'EXPECTED',
-    school: '재송중학교',
-    status: 'SUBMITTED',
-    type: 'REGULAR',
-    isChangedToRegular: false,
-    totalScore: null,
-    hasDocument: false,
-    firstRoundPassed: null,
-    secondRoundPassed: null,
-  },
-];
+import { useFormListQuery } from '@/services/form/queries';
 
 const FormTable = () => {
+  const { data: formList } = useFormListQuery();
+
   return (
     <Column gap={12}>
       <FormTableHeader />
-      {fromList &&
-        fromList.map((item) => (
+      {formList &&
+        formList.map((item) => (
           <FormTableItem
             id={item.id}
             examinationNumber={item.examinationNumber}
