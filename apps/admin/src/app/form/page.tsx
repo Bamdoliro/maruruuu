@@ -74,7 +74,6 @@ const FormPage = () => {
                 { value: 'RESET', label: '정렬 초기화' },
                 { value: 'SCORE_DESC', label: '높은 순' },
                 { value: 'SCORE_ASC', label: '낮은 순' },
-                { value: 'FORM_ID', label: '접수순' },
               ]}
               size="SMALL"
               width={160}
