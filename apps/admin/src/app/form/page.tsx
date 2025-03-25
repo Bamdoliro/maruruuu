@@ -2,7 +2,14 @@
 
 import { FunctionDropdown } from '@/components/common';
 import FormTable from '@/components/form/FormTable/FormTable';
+import {
+  FORM_SORTING_CATEGORY,
+  FORM_STATUS_CATEGORY,
+  FORM_TYPE_CATEGORY,
+} from '@/constants/form/constant';
 import AppLayout from '@/layouts/AppLayout';
+import { useFormListSortingTypeStore, useFormListTypeStore } from '@/store/form/formType';
+import { FormStatus, FormType, FormSort } from '@/types/form/client';
 import {
   IconAdmission,
   IconCheckDocument,
@@ -16,6 +23,41 @@ import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
 const FormPage = () => {
+  const [formListType, setFormListType] = useFormListTypeStore();
+  const [formListSortingType, setFormListSortingType] = useFormListSortingTypeStore();
+
+  const handleSortStatus = (value: string) => {
+    console.log(value);
+    setFormListType('정렬');
+    if (value === 'RESET') {
+      setFormListSortingType((prev) => ({ ...prev, status: null }));
+    } else {
+      setFormListSortingType((prev) => ({ ...prev, status: value as FormStatus }));
+    }
+  };
+
+  const handleSortType = (value: string) => {
+    console.log(value);
+
+    setFormListType('정렬');
+    if (value === 'RESET') {
+      setFormListSortingType((prev) => ({ ...prev, type: null }));
+    } else {
+      setFormListSortingType((prev) => ({ ...prev, type: value as FormType }));
+    }
+  };
+
+  const handleSortForm = (value: string) => {
+    console.log(value);
+
+    setFormListType('정렬');
+    if (value === 'RESET') {
+      setFormListSortingType((prev) => ({ ...prev, sort: null }));
+    } else {
+      setFormListSortingType((prev) => ({ ...prev, sort: value as FormSort }));
+    }
+  };
+
   return (
     <AppLayout>
       <StyledFormPage>
@@ -36,11 +78,17 @@ const FormPage = () => {
                   { value: 'FIRST_PASSED', label: '1차 합격' },
                   { value: 'PASSED', label: '최종 합격' },
                   { value: 'REJECTED', label: '반려' },
+                  { value: 'ENTERED', label: '입학' },
                 ]}
                 size="SMALL"
                 width={160}
                 placeholder="상태 별"
-                onChange={() => {}}
+                onChange={handleSortStatus}
+                value={
+                  formListSortingType.status
+                    ? FORM_STATUS_CATEGORY[formListSortingType.status]
+                    : undefined
+                }
                 name="statusSort"
                 doubled={5}
               />
@@ -67,7 +115,12 @@ const FormPage = () => {
                 size="SMALL"
                 width={160}
                 placeholder="전형 별"
-                onChange={() => {}}
+                onChange={handleSortType}
+                value={
+                  formListSortingType.type
+                    ? FORM_TYPE_CATEGORY[formListSortingType.type]
+                    : undefined
+                }
                 name="typeSort"
                 doubled={5}
               />
@@ -81,7 +134,12 @@ const FormPage = () => {
                 size="SMALL"
                 width={160}
                 placeholder="최종 점수"
-                onChange={() => {}}
+                onChange={handleSortForm}
+                value={
+                  formListSortingType.sort
+                    ? FORM_SORTING_CATEGORY[formListSortingType.sort]
+                    : undefined
+                }
                 name="formSort"
               />
             </Row>
