@@ -1,4 +1,4 @@
-import { ANALYSIS_PASS_STEP } from '@/constants/analysis/data';
+import { ANALYSIS_PASS_STEP } from '@/constants/analysis/constant';
 import { SubDropdown, UnderlineButton } from '@maru/ui';
 import { SwitchCase } from '@toss/react';
 import GraduatedAreaTable from './GraduatedAreaTable/GraduatedAreaTable';

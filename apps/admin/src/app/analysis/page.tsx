@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { flex } from '@maru/utils';
 import { Column, Row } from '@maru/ui';
 import SideMenu from '@/components/common/SideMenu/SideMenu';
-import { ANALYSIS_TYPE } from '@/constants/analysis/data';
+import { ANALYSIS_TYPE } from '@/constants/analysis/constant';
 import { useState } from 'react';
 import { SwitchCase } from '@toss/react';
 import ApplicationTypeRatio from '@/components/analysis/ApplicationTypeRatio/ApplicationTypeRatio';

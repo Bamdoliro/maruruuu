@@ -1,6 +1,7 @@
 import { GenderRatioType } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 import useCalculateGenderRatio from './AreaGenderRatioTable.hooks';
+import { EMPTY_VALUE } from '@/constants/common/constant';
 
 interface AreaGenderRatioTableProps {
   title: string;
@@ -8,8 +9,6 @@ interface AreaGenderRatioTableProps {
 }
 
 const AreaGenderRatioTable = ({ title, formList }: AreaGenderRatioTableProps) => {
-  const empty = '';
-
   const {
     busanMaleTotal,
     busanFemaleTotal,
@@ -24,7 +23,7 @@ const AreaGenderRatioTable = ({ title, formList }: AreaGenderRatioTableProps) =>
       <Column>
         <Row>
           <Th width={88} height={44} borderTopLeftRadius={12} styleType="ANALYSIS">
-            {empty}
+            {EMPTY_VALUE}
           </Th>
           <Th width={80} height={44} styleType="ANALYSIS">
             남학생

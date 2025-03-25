@@ -1,3 +1,4 @@
+import { EMPTY_VALUE } from '@/constants/common/constant';
 import { GenderRatioCount } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 
@@ -5,15 +6,13 @@ interface TypeRatioTableProps {
   totalCounts: GenderRatioCount;
 }
 const TypeRatioTable = ({ totalCounts }: TypeRatioTableProps) => {
-  const empty = '';
-
   return (
     <Column gap={24}>
       <Text fontType="H5">전형별 학생 성비</Text>
       <Column>
         <Row>
           <Th width={120} height={44} borderTopLeftRadius={12} styleType="ANALYSIS">
-            {empty}
+            {EMPTY_VALUE}
           </Th>
           <Th width={120} height={44} styleType="ANALYSIS">
             남학생

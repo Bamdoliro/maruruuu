@@ -1,14 +1,21 @@
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 import useScoreRatio from './RatioTable.hooks';
 import { ApplicantCountType } from '@/types/analysis/client';
+import { EMPTY_VALUE } from '@/constants/common/constant';
 
 type RatioTableProps = {
   formList: ApplicantCountType[] | undefined;
 };
 
 const RatioTable = ({ formList }: RatioTableProps) => {
-  const empty = '';
-  const { regularCount, specialAdmissionCount, otherCount, regularRatio, specialAdmissionRatio, otherRatio } = useScoreRatio(formList);
+  const {
+    regularCount,
+    specialAdmissionCount,
+    otherCount,
+    regularRatio,
+    specialAdmissionRatio,
+    otherRatio,
+  } = useScoreRatio(formList);
 
   return (
     <Column gap={24}>
@@ -16,7 +23,7 @@ const RatioTable = ({ formList }: RatioTableProps) => {
       <Column>
         <Row>
           <Th width={88} height={44} borderTopLeftRadius={12} styleType="ANALYSIS">
-            {empty}
+            {EMPTY_VALUE}
           </Th>
           <Th width={80} height={44} styleType="ANALYSIS">
             일반 전형

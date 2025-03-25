@@ -1,4 +1,4 @@
-import { ANALYSIS_RATIO_TYPE } from '@/constants/analysis/data';
+import { ANALYSIS_RATIO_TYPE } from '@/constants/analysis/constant';
 import { Column, Text, UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { SwitchCase } from '@toss/react';

@@ -3,12 +3,12 @@ import { font } from '@maru/design-system';
 import { Column, Row, Td, Th } from '@maru/ui';
 import styled from 'styled-components';
 import useApplicantRatios from './DetailContent.hooks';
+import DetailHeader from '../DetailHeader/DetailHeader';
+import { EMPTY_VALUE } from '@/constants/common/constant';
 
 type DetailTableProps = { formList: ApplicantCountType[] | undefined };
 
 const DetailContent = ({ formList }: DetailTableProps) => {
-  const empty = '';
-
   const {
     regularApplicant,
     meisterTalentApplicant,
@@ -28,20 +28,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
   return (
     <StyledDetailTable>
       <Column>
-        <Row>
-          <Th width={140} height={44} borderTopLeftRadius={12} styleType="ANALYSIS">
-            전형
-          </Th>
-          <Th width={160} height={44} styleType="ANALYSIS">
-            유형
-          </Th>
-          <Th width={160} height={44} styleType="ANALYSIS">
-            구분
-          </Th>
-          <Th width={80} height={44} borderTopRightRadius={12} styleType="ANALYSIS">
-            비율
-          </Th>
-        </Row>
+        <DetailHeader />
         <Row>
           <Td width={140} height={44} styleType="ANALYSIS">
             일반 전형
@@ -50,10 +37,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
             일반 전형
           </Td>
           <Td width={160} height={44} styleType="ANALYSIS">
-            {empty}
+            {EMPTY_VALUE}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            {regularApplicant} 
+            {regularApplicant}
           </Td>
         </Row>
         <Row>
@@ -66,10 +53,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                 마이스터 인재전형
               </Td>
               <Td width={160} height={44} styleType="ANALYSIS">
-                {empty}
+                {EMPTY_VALUE}
               </Td>
               <Td width={80} height={44} styleType="ANALYSIS">
-                {meisterTalentApplicant} 
+                {meisterTalentApplicant}
               </Td>
             </Row>
             <Row>
@@ -82,7 +69,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     국민기초생활수급자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {nationalBasicLivingApplicant} 
+                    {nationalBasicLivingApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -90,7 +77,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     차상위계층
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {nearPovertyApplicant} 
+                    {nearPovertyApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -100,7 +87,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     (국가유공자)
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {nationalVeteransApplicant} 
+                    {nationalVeteransApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -108,7 +95,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     한부모가정보호대상자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {oneParentApplicant} 
+                    {oneParentApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -118,7 +105,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     또는 그 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {fromNorthKoreaApplicant} 
+                    {fromNorthKoreaApplicant}
                   </Td>
                 </Row>
               </Column>
@@ -133,7 +120,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     다문화가정 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {multiculturalApplicant} 
+                    {multiculturalApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -141,7 +128,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     소년 · 소녀가장
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {teenHouseholderApplicant} 
+                    {teenHouseholderApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -149,7 +136,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     다자녀 가정 자녀
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {multiChildrenApplicant} 
+                    {multiChildrenApplicant}
                   </Td>
                 </Row>
                 <Row>
@@ -157,7 +144,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                     농어촌지역출신자
                   </Td>
                   <Td width={80} height={44} styleType="ANALYSIS">
-                    {farmingAndFishingApplicant} 
+                    {farmingAndFishingApplicant}
                   </Td>
                 </Row>
               </Column>
@@ -177,10 +164,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
               교육지원대상자
             </Td>
             <Td width={160} height={44} styleType="ANALYSIS">
-              {empty}
+              {EMPTY_VALUE}
             </Td>
             <Td width={80} height={44} styleType="ANALYSIS">
-              {nationalVeteransEducationApplicant} 
+              {nationalVeteransEducationApplicant}
             </Td>
           </Row>
           <Row>
@@ -188,10 +175,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
               특례입학 대상자
             </Td>
             <Td width={160} height={44} styleType="ANALYSIS">
-              {empty}
+              {EMPTY_VALUE}
             </Td>
             <Td width={80} height={44} borderBottomRightRadius={12} styleType="ANALYSIS">
-              {specialAdmissionApplicant} 
+              {specialAdmissionApplicant}
             </Td>
           </Row>
         </Column>

@@ -1,12 +1,11 @@
 import { ApplicantCountType } from '@/types/analysis/client';
 import { Column, Row, Td, Th, Text } from '@maru/ui';
 import useCompetiton from './Competition.hooks';
+import { EMPTY_VALUE } from '@/constants/common/constant';
 
 type DetailTableProps = { formList: ApplicantCountType[] | undefined };
 
 const Competition = ({ formList }: DetailTableProps) => {
-  const empty = '';
-
   const {
     regularCount,
     specialCount,
@@ -22,7 +21,7 @@ const Competition = ({ formList }: DetailTableProps) => {
       <Column>
         <Row>
           <Th width={88} height={44} borderTopLeftRadius={12} styleType="ANALYSIS">
-            {empty}
+            {EMPTY_VALUE}
           </Th>
           <Th width={80} height={44} styleType="ANALYSIS">
             일반 전형

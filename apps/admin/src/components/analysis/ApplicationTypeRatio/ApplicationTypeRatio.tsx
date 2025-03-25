@@ -3,11 +3,15 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import DetailTable from './DetailTable/DetailTable';
 import { SwitchCase } from '@toss/react';
-import { ANALYSIS_STEP } from '@/constants/analysis/data';
+import { ANALYSIS_STEP } from '@/constants/analysis/constant';
 import useStepTable from './ApplicationTypeRatio.hooks';
 
 const ApplicationTypeRatio = () => {
   const { currentAnalysisStep, setCurrentAnalysisStep, formList } = useStepTable();
+
+  const handleSetCurrentAnalysisStep = (step: string) => {
+    setCurrentAnalysisStep(step);
+  };
 
   return (
     <StyledApplicationTypeRatio>
@@ -16,7 +20,7 @@ const ApplicationTypeRatio = () => {
           <UnderlineButton
             key={`form-step-tab ${index}`}
             active={step === currentAnalysisStep}
-            onClick={() => setCurrentAnalysisStep(step)}
+            onClick={() => handleSetCurrentAnalysisStep(step)}
           >
             {step}
           </UnderlineButton>

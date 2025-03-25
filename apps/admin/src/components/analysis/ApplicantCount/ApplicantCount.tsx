@@ -2,24 +2,16 @@ import styled from 'styled-components';
 import { UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import DetailTable from './ApplicantCountDetailTable/DetailTable';
-import { ANALYSIS_STEP } from '@/constants/analysis/data';
-import { useState } from 'react';
+import { ANALYSIS_STEP } from '@/constants/analysis/constant';
 import { SwitchCase } from '@toss/react';
-import { useApplicantCountQuery } from '@/services/analysis/queries';
-import { AnalysisApplicantCountType } from '@/types/analysis/client';
+import useApplicantCount from './ApplicantCount.hooks';
 
 const ApplicantCount = () => {
-  const [currentAnalysisStep, setCurrentAnalysisStep] =
-    useState<keyof typeof stepMap>('변경 전');
+  const { currentAnalysisStep, setCurrentAnalysisStep, formList } = useApplicantCount();
 
-  const stepMap: Record<string, AnalysisApplicantCountType> = {
-    '변경 전': 'ORIGINAL',
-    '변경 후': 'CURRENT',
+  const handleSetCurrentAnalysisStep = (step: string) => {
+    setCurrentAnalysisStep(step);
   };
-
-  const { data: formList } = useApplicantCountQuery({
-    type: currentAnalysisStep as AnalysisApplicantCountType,
-  });
 
   return (
     <StyledApplicantCount>
@@ -28,7 +20,7 @@ const ApplicantCount = () => {
           <UnderlineButton
             key={`form-step-tab ${index}`}
             active={step === currentAnalysisStep}
-            onClick={() => setCurrentAnalysisStep(step)}
+            onClick={() => handleSetCurrentAnalysisStep(step)}
           >
             {step}
           </UnderlineButton>

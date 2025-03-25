@@ -3,6 +3,8 @@ import { font } from '@maru/design-system';
 import { Column, Row, Td, Th } from '@maru/ui';
 import styled from 'styled-components';
 import useMaxMinByType from './DetailContent.hooks';
+import DetailHeader from '../DetailHeader/DetailHeader';
+import { EMPTY_VALUE } from '@/constants/common/constant';
 
 type DetailTableProps = { formList: GradeDistributionType[] | undefined };
 
@@ -23,28 +25,10 @@ const DetailContent = ({ formList }: DetailTableProps) => {
     nationalVeteransEducationApplicant,
   } = useMaxMinByType(formList);
 
-  const empty = '';
-
   return (
     <StyledDetailTable>
       <Column>
-        <Row>
-          <Th width={140} height={44} borderTopLeftRadius={12} styleType="ANALYSIS">
-            전형
-          </Th>
-          <Th width={160} height={44} styleType="ANALYSIS">
-            유형
-          </Th>
-          <Th width={160} height={44} styleType="ANALYSIS">
-            구분
-          </Th>
-          <Th width={80} height={44} styleType="ANALYSIS">
-            최고점
-          </Th>
-          <Th width={80} height={44} borderTopRightRadius={12} styleType="ANALYSIS">
-            최하점
-          </Th>
-        </Row>
+        <DetailHeader />
         <Row>
           <Td width={140} height={44} styleType="ANALYSIS">
             일반 전형
@@ -53,7 +37,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
             일반 전형
           </Td>
           <Td width={160} height={44} styleType="ANALYSIS">
-            {empty}
+            {EMPTY_VALUE}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
             {regularApplicant.max}
@@ -72,7 +56,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
                 마이스터 인재전형
               </Td>
               <Td width={160} height={44} styleType="ANALYSIS">
-                {empty}
+                {EMPTY_VALUE}
               </Td>
               <Td width={80} height={44} styleType="ANALYSIS">
                 {meisterTalentApplicant.max}
@@ -213,7 +197,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
               교육지원대상자
             </Td>
             <Td width={160} height={44} styleType="ANALYSIS">
-              {empty}
+              {EMPTY_VALUE}
             </Td>
             <Td width={80} height={44} styleType="ANALYSIS">
               {nationalVeteransEducationApplicant.max}
@@ -227,7 +211,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
               특례입학 대상자
             </Td>
             <Td width={160} height={44} styleType="ANALYSIS">
-              {empty}
+              {EMPTY_VALUE}
             </Td>
             <Td width={80} height={44} styleType="ANALYSIS">
               {specialAdmissionApplicant.max}

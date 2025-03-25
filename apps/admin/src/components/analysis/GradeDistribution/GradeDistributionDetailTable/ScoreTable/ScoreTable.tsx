@@ -1,14 +1,13 @@
 import { GradeDistributionType } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 import useScoreStatus from './ScoreTable.hooks';
+import { EMPTY_VALUE } from '@/constants/common/constant';
 
 type ScoreTableProps = {
   formList: GradeDistributionType[] | undefined;
 };
 
 const ScoreTable = ({ formList }: ScoreTableProps) => {
-  const empty = '';
-
   const {
     regularRoundMax,
     SpecialAdmissionRoundMax,
@@ -24,7 +23,7 @@ const ScoreTable = ({ formList }: ScoreTableProps) => {
       <Column>
         <Row>
           <Th width={88} height={44} borderTopLeftRadius={12} styleType="ANALYSIS">
-            {empty}
+            {EMPTY_VALUE}
           </Th>
           <Th width={80} height={44} styleType="ANALYSIS">
             일반 전형

@@ -1,4 +1,4 @@
-import { ANALYSIS_PASS_STEP } from '@/constants/analysis/data';
+import { ANALYSIS_PASS_STEP } from '@/constants/analysis/constant';
 import { UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { SwitchCase } from '@toss/react';
@@ -26,6 +26,10 @@ const GenderRatio = () => {
     supernumeraryRatio: SupernumeraryRatio,
   };
 
+  const handleSetCurrentAnalysisPassStep = (step: string) => {
+    setCurrentAnalysisPassStep(step);
+  };
+
   return (
     <StyledGenderRatio>
       <NavigatorBar>
@@ -33,7 +37,7 @@ const GenderRatio = () => {
           <UnderlineButton
             key={`form-pass-step-tab ${index}`}
             active={step === currentAnalysisPassStep}
-            onClick={() => setCurrentAnalysisPassStep(step)}
+            onClick={() => handleSetCurrentAnalysisPassStep(step)}
           >
             {step}
           </UnderlineButton>
