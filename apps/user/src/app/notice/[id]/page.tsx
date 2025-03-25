@@ -2,7 +2,7 @@
 
 import { NoticeDetailContent } from '@/components/notice';
 import { ROUTES } from '@/constants/common/constants';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { IconArrowLeft } from '@maru/icon';
 import { Loader, Text } from '@maru/ui';
@@ -12,10 +12,10 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 
 interface NoticeDetailProps {
-  params: { id: number };
+  id: number;
 }
 
-const NoticeDetail = ({ params: { id } }: NoticeDetailProps) => {
+const NoticeDetail = ({ id }: NoticeDetailProps) => {
   const router = useRouter();
 
   const handleMoveBackPage = () => {

@@ -4,6 +4,8 @@ import { color, font } from '@maru/design-system';
 import { IconArrowDropdown } from '@maru/icon';
 import { useBooleanState, useOutsideClick } from '@maru/hooks';
 import { Text } from '@maru/ui';
+import { useUser } from '@/hooks';
+import { useCTAButton } from './Profile.hook';
 
 const Profile = () => {
   const {
@@ -12,12 +14,22 @@ const Profile = () => {
     setFalse: closeMenu,
   } = useBooleanState();
   const profileRef = useOutsideClick(closeMenu);
+  const { userData } = useUser();
+  const {
+    handleMoveForm,
+    handleMoveManagement,
+    handleMoveSimulation,
+    handleMoveInquiry,
+    handleLogout,
+    handleMoveChangePassword,
+    handleMoveWithdrawal,
+  } = useCTAButton();
 
   return (
     <StyledProfile ref={profileRef}>
       <ProfileButton onClick={toggleMenuOpen}>
         <Text fontType="H5" color={color.gray900}>
-          정홍섭 님
+          {userData.name} 님
         </Text>
         <IconArrowDropdown color={color.gray500} width={24} height={24} />
       </ProfileButton>
@@ -26,16 +38,21 @@ const Profile = () => {
           <MenuList>
             <UserInfo>
               <Text fontType="H5" color={color.gray900}>
-                정홍섭 님
+                {userData.name} 님
               </Text>
               <Text fontType="p3" color={color.gray500}>
-                @01082372487
+                @{userData.phoneNumber}
               </Text>
             </UserInfo>
-            <MenuItem>이어서 원서 작성하기</MenuItem>
-            <MenuItem>원서 관리</MenuItem>
-            <MenuItem>성적 모의 계산</MenuItem>
-            <MenuItem>로그아웃</MenuItem>
+            <MenuListItem>
+              <MenuItem onClick={handleMoveForm}>이어서 원서 작성하기</MenuItem>
+              <MenuItem onClick={handleMoveManagement}>원서 관리</MenuItem>
+              <MenuItem onClick={handleMoveSimulation}>성적 모의 계산</MenuItem>
+            </MenuListItem>
+            <MenuItem onClick={handleMoveInquiry}>마루 문의하기</MenuItem>
+            <MenuItem onClick={handleLogout}>로그아웃</MenuItem>
+            <MenuItem onClick={handleMoveChangePassword}>비밀번호 변경</MenuItem>
+            <MenuItem onClick={handleMoveWithdrawal}>회원탈퇴</MenuItem>
           </MenuList>
         </MenuListBox>
       )}
@@ -79,6 +96,15 @@ const UserInfo = styled.div`
   height: 72px;
   padding: 0px 24px;
   gap: 16px;
+  border-bottom: 1px solid ${color.gray200};
+`;
+
+const MenuListItem = styled.div`
+  ${flex({ flexDirection: 'column', alignItems: 'flex-start' })}
+  width: 100%;
+  height: 168px;
+  padding: 12px 0px;
+  margin-bottom: 12px;
   border-bottom: 1px solid ${color.gray200};
 `;
 

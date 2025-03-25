@@ -15,6 +15,7 @@ export const ROUTES = {
   LOGIN: '/login',
   CHANGE_PASSWORD: '/change-password',
   SIGNUP: '/signup',
+  WITHDRAWAL: '/withdrawal',
 };
 
 export const TOKEN = {
@@ -34,4 +35,6 @@ export const KEY = {
   FORM_STATUS: 'useFormStatus',
   EXPORT_FORM: 'useExportForm',
   EXPORT_RECEIPT: 'useExportReceipt',
+  SAVE_FORM: 'useSaveForm',
+  SCHOOL_LIST: 'useSchoolList',
 };

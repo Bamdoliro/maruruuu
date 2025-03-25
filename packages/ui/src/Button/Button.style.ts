@@ -46,6 +46,13 @@ export const getButtonStyle = {
     color: ${color.gray300};
     cursor: auto;
   `,
+  WARNING: css`
+    background-color: ${color.red};
+    color: ${color.white};
+    &:hover {
+      background-color: ${color.red};
+    }
+  `
 };
 
 export const getButtonPadding = {

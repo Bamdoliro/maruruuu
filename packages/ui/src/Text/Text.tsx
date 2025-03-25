@@ -45,6 +45,7 @@ const StyledText = styled.span<{ fontType: Font; ellipsis: boolean }>`
   ${(props) =>
     props.ellipsis &&
     css`
+      display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
     `}

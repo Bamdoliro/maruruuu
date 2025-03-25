@@ -1,7 +1,7 @@
 'use client';
 
 import { CategoryFilter, FaqList } from '@/components/faq';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';

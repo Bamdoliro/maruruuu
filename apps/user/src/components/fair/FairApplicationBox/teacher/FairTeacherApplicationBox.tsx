@@ -1,29 +1,27 @@
 import { color } from '@maru/design-system';
-import {
-  Button,
-  CellInput,
-  Column,
-  Input,
-  RadioGroup,
-  Row,
-  Text,
-  Textarea,
-} from '@maru/ui';
+import { Button, Column, Input, RadioGroup, Text, Textarea } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useAgree, useCTAButton, useInput } from './FairTeacherApplicationBox.hook';
+import { useState } from 'react';
 
 interface FairTeacherApplicationBoxProps {
   id: number;
 }
 
 const FairTeacherApplicationBox = ({ id }: FairTeacherApplicationBoxProps) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { application, handleApplicationChange, handleApplicationTextAreaChange } =
     useInput();
   const { handleSendFairApplication } = useCTAButton(id, application);
   const { agree, handleAgreeChange, handleButtonClick } = useAgree(
     handleSendFairApplication
   );
+
+  const handleClick = () => {
+    setIsSubmitted(true);
+    handleButtonClick();
+  };
 
   return (
     <StyledFairTeacherApplicationBox>
@@ -41,6 +39,8 @@ const FairTeacherApplicationBox = ({ id }: FairTeacherApplicationBoxProps) => {
             width={384}
             name="schoolName"
             onChange={handleApplicationChange}
+            errorMessage="소속학교를 입력해주세요."
+            isError={isSubmitted && application.schoolName === ''}
           />
           <Input
             label={
@@ -54,6 +54,8 @@ const FairTeacherApplicationBox = ({ id }: FairTeacherApplicationBoxProps) => {
             width={384}
             onChange={handleApplicationChange}
             name="name"
+            errorMessage="성함을 입력해주세요."
+            isError={isSubmitted && application.name === ''}
           />
           <RadioGroup
             name="type"
@@ -85,6 +87,8 @@ const FairTeacherApplicationBox = ({ id }: FairTeacherApplicationBoxProps) => {
             width={384}
             onChange={handleApplicationChange}
             name="phoneNumber"
+            errorMessage="연락처를 입력해주세요."
+            isError={isSubmitted && application.phoneNumber === ''}
           />
           <Textarea
             name="question"
@@ -132,7 +136,7 @@ const FairTeacherApplicationBox = ({ id }: FairTeacherApplicationBoxProps) => {
             onChange={(e) => handleAgreeChange(e.target.value)}
           />
         </Column>
-        <Button size="LARGE" width={200} onClick={handleButtonClick}>
+        <Button size="LARGE" width={200} onClick={handleClick}>
           제출하기
         </Button>
       </Column>
@@ -142,7 +146,7 @@ const FairTeacherApplicationBox = ({ id }: FairTeacherApplicationBoxProps) => {
 
 export default FairTeacherApplicationBox;
 
-const StyledFairTeacherApplicationBox= styled.div``;
+const StyledFairTeacherApplicationBox = styled.div``;
 
 const PrivacyConcert = styled.div`
   ${flex({ flexDirection: 'column' })}

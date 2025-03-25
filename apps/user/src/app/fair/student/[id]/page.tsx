@@ -1,7 +1,7 @@
 'use client';
 
 import { FairStudentApplicationBox } from '@/components/fair';
-import AppLayout from '@/layouts/AppLayout';
+import { AppLayout } from '@/layouts';
 import { useFairListQuery } from '@/services/fair/queries';
 import { formatApplicationDate, formatStartDate } from '@/utils';
 import { color } from '@maru/design-system';
@@ -10,10 +10,10 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 
 interface FairStudentApplicationProps {
-  params: { id: number };
+  id: number;
 }
 
-const FairStudentApplication = ({ params: { id } }: FairStudentApplicationProps) => {
+const FairStudentApplication = ({ id }: FairStudentApplicationProps) => {
   const { data: fairListData } = useFairListQuery();
 
   const selectedFair = fairListData.find((fair) => fair.id === id);

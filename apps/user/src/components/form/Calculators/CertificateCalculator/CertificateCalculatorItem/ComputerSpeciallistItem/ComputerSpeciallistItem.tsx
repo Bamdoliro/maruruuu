@@ -18,12 +18,16 @@ const ComputerSpeciallistItem = ({ onChange }: ComputerSpeciallistItemProps) => 
         한국산업인력공단
       </Td>
       <Column width="24.5%">
-        {LEVEL_LIST.map((item, key) => (
-          <Row key={key}>
+        {LEVEL_LIST.map((item, index) => (
+          <Row key={index}>
             <Td width="60%" height={56}>
               {item.name}
             </Td>
-            <Td borderBottomRightRadius={12} width="40%" height={56}>
+            <Td
+              width="40%"
+              height={56}
+              borderBottomRightRadius={index === LEVEL_LIST.length - 1 ? 12 : 0}
+            >
               <CheckBox
                 checked={form.grade.certificateList?.includes(item.value)}
                 value={item.value}
