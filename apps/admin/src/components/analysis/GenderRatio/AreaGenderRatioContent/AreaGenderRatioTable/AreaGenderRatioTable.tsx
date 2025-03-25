@@ -1,5 +1,6 @@
 import { GenderRatioType } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
+import useCalculateGenderRatio from './AreaGenderRatioTable.hooks';
 
 interface AreaGenderRatioTableProps {
   title: string;
@@ -9,44 +10,13 @@ interface AreaGenderRatioTableProps {
 const AreaGenderRatioTable = ({ title, formList }: AreaGenderRatioTableProps) => {
   const empty = '';
 
-  const data = formList || [];
-
-  const calculateTotals = (data: GenderRatioType[]) => {
-    const busanMaleTotal = data.reduce((acc, item) => acc + item.busanMale, 0);
-    const busanFemaleTotal = data.reduce((acc, item) => acc + item.busanFemale, 0);
-    const otherLocationMaleTotal = data.reduce(
-      (acc, item) => acc + item.otherLocationMale,
-      0
-    );
-    const otherLocationFemaleTotal = data.reduce(
-      (acc, item) => acc + item.otherLocationFemale,
-      0
-    );
-
-    const totalMale = busanMaleTotal + otherLocationMaleTotal;
-    const totalFemale = busanFemaleTotal + otherLocationFemaleTotal;
-    const total = totalMale + totalFemale;
-
-    return {
-      busanMaleTotal,
-      busanFemaleTotal,
-      otherLocationMaleTotal,
-      otherLocationFemaleTotal,
-      totalMale,
-      totalFemale,
-      total,
-    };
-  };
-
   const {
     busanMaleTotal,
     busanFemaleTotal,
     otherLocationMaleTotal,
     otherLocationFemaleTotal,
-    totalMale,
-    totalFemale,
     total,
-  } = calculateTotals(data);
+  } = useCalculateGenderRatio(formList);
 
   return (
     <Column gap={24}>
