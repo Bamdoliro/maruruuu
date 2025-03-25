@@ -8,8 +8,6 @@ import {
   FORM_TYPE_CATEGORY,
 } from '@/constants/form/constant';
 import AppLayout from '@/layouts/AppLayout';
-import { useFormListSortingTypeStore, useFormListTypeStore } from '@/store/form/formType';
-import { FormStatus, FormType, FormSort } from '@/types/form/client';
 import {
   IconAdmission,
   IconCheckDocument,
@@ -21,37 +19,10 @@ import {
 import { Column, Dropdown, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
+import { useFormPageState } from './form.hooks';
 
 const FormPage = () => {
-  const [formListType, setFormListType] = useFormListTypeStore();
-  const [formListSortingType, setFormListSortingType] = useFormListSortingTypeStore();
-
-  const handleSortStatus = (value: string) => {
-    setFormListType('정렬');
-    if (value === 'RESET') {
-      setFormListSortingType((prev) => ({ ...prev, status: null }));
-    } else {
-      setFormListSortingType((prev) => ({ ...prev, status: value as FormStatus }));
-    }
-  };
-
-  const handleSortType = (value: string) => {
-    setFormListType('정렬');
-    if (value === 'RESET') {
-      setFormListSortingType((prev) => ({ ...prev, type: null }));
-    } else {
-      setFormListSortingType((prev) => ({ ...prev, type: value as FormType }));
-    }
-  };
-
-  const handleSortForm = (value: string) => {
-    setFormListType('정렬');
-    if (value === 'RESET') {
-      setFormListSortingType((prev) => ({ ...prev, sort: null }));
-    } else {
-      setFormListSortingType((prev) => ({ ...prev, sort: value as FormSort }));
-    }
-  };
+  const { handleCriteriaChange, getCriteriaDropdownValue } = useFormPageState();
 
   return (
     <AppLayout>
@@ -78,13 +49,9 @@ const FormPage = () => {
                 size="SMALL"
                 width={160}
                 placeholder="상태 별"
-                onChange={handleSortStatus}
-                value={
-                  formListSortingType.status
-                    ? FORM_STATUS_CATEGORY[formListSortingType.status]
-                    : undefined
-                }
-                name="statusSort"
+                onChange={handleCriteriaChange}
+                value={getCriteriaDropdownValue('status', FORM_STATUS_CATEGORY)}
+                name="status"
                 doubled={5}
               />
               <Dropdown
@@ -110,13 +77,9 @@ const FormPage = () => {
                 size="SMALL"
                 width={160}
                 placeholder="전형 별"
-                onChange={handleSortType}
-                value={
-                  formListSortingType.type
-                    ? FORM_TYPE_CATEGORY[formListSortingType.type]
-                    : undefined
-                }
-                name="typeSort"
+                onChange={handleCriteriaChange}
+                value={getCriteriaDropdownValue('type', FORM_TYPE_CATEGORY)}
+                name="type"
                 doubled={5}
               />
               <Dropdown
@@ -129,13 +92,9 @@ const FormPage = () => {
                 size="SMALL"
                 width={160}
                 placeholder="최종 점수"
-                onChange={handleSortForm}
-                value={
-                  formListSortingType.sort
-                    ? FORM_SORTING_CATEGORY[formListSortingType.sort]
-                    : undefined
-                }
-                name="formSort"
+                onChange={handleCriteriaChange}
+                value={getCriteriaDropdownValue('sort', FORM_SORTING_CATEGORY)}
+                name="sort"
               />
             </Row>
             <FunctionDropdown
