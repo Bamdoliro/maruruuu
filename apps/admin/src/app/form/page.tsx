@@ -27,7 +27,6 @@ const FormPage = () => {
   const [formListSortingType, setFormListSortingType] = useFormListSortingTypeStore();
 
   const handleSortStatus = (value: string) => {
-    console.log(value);
     setFormListType('정렬');
     if (value === 'RESET') {
       setFormListSortingType((prev) => ({ ...prev, status: null }));
@@ -37,8 +36,6 @@ const FormPage = () => {
   };
 
   const handleSortType = (value: string) => {
-    console.log(value);
-
     setFormListType('정렬');
     if (value === 'RESET') {
       setFormListSortingType((prev) => ({ ...prev, type: null }));
@@ -48,8 +45,6 @@ const FormPage = () => {
   };
 
   const handleSortForm = (value: string) => {
-    console.log(value);
-
     setFormListType('정렬');
     if (value === 'RESET') {
       setFormListSortingType((prev) => ({ ...prev, sort: null }));
