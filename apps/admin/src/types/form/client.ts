@@ -26,17 +26,6 @@ export type FormType =
   | 'NATIONAL_VETERANS'
   | 'TEEN_HOUSEHOLDER';
 
-export type FormCategory =
-  | 'NATIONAL_VETERANS_EDUCATION'
-  | 'REGULAR'
-  | 'SOCIETY_DIVERSITY'
-  | 'MEISTER_TALENT'
-  | 'EQUAL_OPPORTUNITY'
-  | 'SOCIAL_INTEGRATION'
-  | 'SUPERNUMERARY'
-  | 'SPECIAL_ADMISSION'
-  | 'SPECIAL';
-
 export type GraduationType = 'EXPECTED' | 'GRADUATED' | 'QUALIFICATION_EXAMINATION';
 
 export interface Form {
@@ -61,6 +50,6 @@ export type FormSort = 'total-score-asc' | 'total-score-desc' | 'form-id';
 
 export interface FormListSortingType {
   status: FormStatus | null;
-  type: FormCategory | null;
+  type: FormType | null;
   sort: FormSort | null;
 }
