@@ -26,17 +26,6 @@ export type FormType =
   | 'NATIONAL_VETERANS'
   | 'TEEN_HOUSEHOLDER';
 
-export type FormCategory =
-  | 'NATIONAL_VETERANS_EDUCATION'
-  | 'REGULAR'
-  | 'SOCIETY_DIVERSITY'
-  | 'MEISTER_TALENT'
-  | 'EQUAL_OPPORTUNITY'
-  | 'SOCIAL_INTEGRATION'
-  | 'SUPERNUMERARY'
-  | 'SPECIAL_ADMISSION'
-  | 'SPECIAL';
-
 export type GraduationType = 'EXPECTED' | 'GRADUATED' | 'QUALIFICATION_EXAMINATION';
 
 export interface Form {
@@ -53,4 +42,14 @@ export interface Form {
   hasDocument: boolean | null;
   firstRoundPassed: boolean | null;
   secondRoundPassed: boolean | null;
+}
+
+export type FormListType = '모두 보기' | '검토해야 하는 원서 모아보기' | '정렬';
+
+export type FormSort = 'total-score-asc' | 'total-score-desc' | 'form-id';
+
+export interface FormListSortingType {
+  status: FormStatus | null;
+  type: FormType | null;
+  sort: FormSort | null;
 }

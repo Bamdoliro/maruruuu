@@ -2,6 +2,11 @@
 
 import { FunctionDropdown } from '@/components/common';
 import FormTable from '@/components/form/FormTable/FormTable';
+import {
+  FORM_SORTING_CATEGORY,
+  FORM_STATUS_CATEGORY,
+  FORM_TYPE_CATEGORY,
+} from '@/constants/form/constant';
 import AppLayout from '@/layouts/AppLayout';
 import {
   IconAdmission,
@@ -14,8 +19,11 @@ import {
 import { Column, Dropdown, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
+import { useFormPageState } from './form.hooks';
 
 const FormPage = () => {
+  const { handleCriteriaChange, getCriteriaDropdownValue } = useFormPageState();
+
   return (
     <AppLayout>
       <StyledFormPage>
@@ -36,12 +44,14 @@ const FormPage = () => {
                   { value: 'FIRST_PASSED', label: '1차 합격' },
                   { value: 'PASSED', label: '최종 합격' },
                   { value: 'REJECTED', label: '반려' },
+                  { value: 'ENTERED', label: '입학' },
                 ]}
                 size="SMALL"
                 width={160}
                 placeholder="상태 별"
-                onChange={() => {}}
-                name="statusSort"
+                onChange={handleCriteriaChange}
+                value={getCriteriaDropdownValue('status', FORM_STATUS_CATEGORY)}
+                name="status"
                 doubled={5}
               />
               <Dropdown
@@ -67,8 +77,9 @@ const FormPage = () => {
                 size="SMALL"
                 width={160}
                 placeholder="전형 별"
-                onChange={() => {}}
-                name="typeSort"
+                onChange={handleCriteriaChange}
+                value={getCriteriaDropdownValue('type', FORM_TYPE_CATEGORY)}
+                name="type"
                 doubled={5}
               />
               <Dropdown
@@ -81,8 +92,9 @@ const FormPage = () => {
                 size="SMALL"
                 width={160}
                 placeholder="최종 점수"
-                onChange={() => {}}
-                name="formSort"
+                onChange={handleCriteriaChange}
+                value={getCriteriaDropdownValue('sort', FORM_SORTING_CATEGORY)}
+                name="sort"
               />
             </Row>
             <FunctionDropdown
