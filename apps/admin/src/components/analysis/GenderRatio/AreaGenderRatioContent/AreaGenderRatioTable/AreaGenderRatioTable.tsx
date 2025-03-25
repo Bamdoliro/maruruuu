@@ -1,11 +1,52 @@
+import { GenderRatioType } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 
 interface AreaGenderRatioTableProps {
   title: string;
+  formList: GenderRatioType[] | undefined;
 }
 
-const AreaGenderRatioTable = ({ title }: AreaGenderRatioTableProps) => {
+const AreaGenderRatioTable = ({ title, formList }: AreaGenderRatioTableProps) => {
   const empty = '';
+
+  const data = formList || [];
+
+  const calculateTotals = (data: GenderRatioType[]) => {
+    const busanMaleTotal = data.reduce((acc, item) => acc + item.busanMale, 0);
+    const busanFemaleTotal = data.reduce((acc, item) => acc + item.busanFemale, 0);
+    const otherLocationMaleTotal = data.reduce(
+      (acc, item) => acc + item.otherLocationMale,
+      0
+    );
+    const otherLocationFemaleTotal = data.reduce(
+      (acc, item) => acc + item.otherLocationFemale,
+      0
+    );
+
+    const totalMale = busanMaleTotal + otherLocationMaleTotal;
+    const totalFemale = busanFemaleTotal + otherLocationFemaleTotal;
+    const total = totalMale + totalFemale;
+
+    return {
+      busanMaleTotal,
+      busanFemaleTotal,
+      otherLocationMaleTotal,
+      otherLocationFemaleTotal,
+      totalMale,
+      totalFemale,
+      total,
+    };
+  };
+
+  const {
+    busanMaleTotal,
+    busanFemaleTotal,
+    otherLocationMaleTotal,
+    otherLocationFemaleTotal,
+    totalMale,
+    totalFemale,
+    total,
+  } = calculateTotals(data);
 
   return (
     <Column gap={24}>
@@ -27,30 +68,30 @@ const AreaGenderRatioTable = ({ title }: AreaGenderRatioTableProps) => {
         </Row>
         <Row>
           <Td width={88} height={44} styleType="ANALYSIS_SECONDARY">
-            최고 점수
+            부산 지역
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {busanMaleTotal}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {busanFemaleTotal}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {busanMaleTotal + busanFemaleTotal}
           </Td>
         </Row>
         <Row>
           <Td width={88} height={44} styleType="ANALYSIS_SECONDARY">
-            최하 점수
+            타 지역
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {otherLocationMaleTotal}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {otherLocationFemaleTotal}
           </Td>
           <Td width={80} height={44} styleType="ANALYSIS">
-            37
+            {otherLocationMaleTotal + otherLocationFemaleTotal}
           </Td>
         </Row>
         <Row>
@@ -60,10 +101,10 @@ const AreaGenderRatioTable = ({ title }: AreaGenderRatioTableProps) => {
             styleType="ANALYSIS_SECONDARY"
             borderBottomLeftRadius={12}
           >
-            평균
+            지역합계
           </Td>
           <Td width={240} height={44} styleType="ANALYSIS" borderBottomRightRadius={12}>
-            0
+            {total}
           </Td>
         </Row>
       </Column>

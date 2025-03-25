@@ -4,11 +4,31 @@ import { flex } from '@maru/utils';
 import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import AreaGenderRatioTable from './AreaGenderRatioTable';
+import AreaGenderRatioTable from './AreaGenderRatioTable/AreaGenderRatioTable';
+import { FormTypeMainCategory, GenderRatioType } from '@/types/analysis/client';
 
-const AreaGenderRatioContent = () => {
+interface GenderRatioDetailTableProps {
+  onDataUpdate: (newData: FormTypeMainCategory) => void;
+  formList?: GenderRatioType[] | undefined;
+}
+
+const AreaGenderRatioContent: React.FC<GenderRatioDetailTableProps> = ({
+  onDataUpdate,
+  formList,
+}) => {
   const [currentAnalysisRatioType, setCurrentAnalysisRatioType] =
-    useState('일반 전형 성비');
+    useState<keyof typeof stepMap>('일반 전형 성비');
+
+  const stepMap: Record<string, FormTypeMainCategory> = {
+    '일반 전형 성비': 'REGULAR',
+    '특별 전형 성비': 'SPECIAL',
+    '정원 외 전형': 'SUPERNUMERARY',
+  };
+
+  const handleUpdate = (type: string) => {
+    onDataUpdate(stepMap[type]);
+    setCurrentAnalysisRatioType(type);
+  };
 
   return (
     <StyledAreaGenderRatioContent>
@@ -19,7 +39,7 @@ const AreaGenderRatioContent = () => {
             <UnderlineButton
               key={`form-pass-step-tab ${index}`}
               active={type === currentAnalysisRatioType}
-              onClick={() => setCurrentAnalysisRatioType(type)}
+              onClick={() => handleUpdate(type)}
             >
               {type}
             </UnderlineButton>
@@ -28,17 +48,28 @@ const AreaGenderRatioContent = () => {
         <SwitchCase
           value={currentAnalysisRatioType}
           caseBy={{
-            '일반 전형 성비': <AreaGenderRatioTable title="일반 전형 지역별 성비" />,
+            '일반 전형 성비': (
+              <AreaGenderRatioTable title="일반 전형 지역별 성비" formList={formList} />
+            ),
             '특별 전형 성비': (
               <>
-                <AreaGenderRatioTable title="마이스터 인재 전형 지역별 성비" />
-                <AreaGenderRatioTable title="사회통합 - 정원내 지역별 성비" />
+                <AreaGenderRatioTable
+                  title="마이스터 인재 전형 지역별 성비"
+                  formList={formList}
+                />
+                <AreaGenderRatioTable
+                  title="사회통합 - 정원내 지역별 성비"
+                  formList={formList}
+                />
               </>
             ),
             '정원 외 전형': (
               <>
-                <AreaGenderRatioTable title="특례입학" />
-                <AreaGenderRatioTable title="국가보훈대상자 중 교육지원대상자" />
+                <AreaGenderRatioTable title="특례입학" formList={formList} />
+                <AreaGenderRatioTable
+                  title="국가보훈대상자 중 교육지원대상자"
+                  formList={formList}
+                />
               </>
             ),
           }}

@@ -1,12 +1,8 @@
 import { UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import { ANALYSIS_PASS_STEP } from '@/constants/analysis/data';
-import { useState } from 'react';
 import { SwitchCase } from '@toss/react';
 import GradeDistributionDetailTable from './GradeDistributionDetailTable/GradeDistributionDetailTable';
-import { AnalysisApplicantType } from '@/types/analysis/client';
-import { useGradeDistributionListQuery } from '@/services/analysis/queries';
 import useGradeDistribution from './GradeDistribution.hooks';
 
 const GradeDistribution = () => {

@@ -69,11 +69,11 @@ export interface GradeDistributionType {
   totalAvg: number;
 }
 
-export interface GenderRatio {
+export interface GenderRatioType {
   category: GenderRatioCategory;
   busanMale: number;
-  busanFemail: number;
-  otherLocationMain: number;
+  busanFemale: number;
+  otherLocationMale: number;
   otherLocationFemale: number;
 }
 
@@ -81,4 +81,17 @@ export interface GraduatedSchoolStatus {
   applicantName: string;
   schoolName: string;
   schoolAddress: string;
+}
+
+export interface GenderRatioCount {
+  maleCount: number;
+  femaleCount: number;
+  regularRatio: GenderRatio;
+  specialRatio: GenderRatio;
+  supernumeraryRatio: GenderRatio;
+}
+
+export interface GenderRatio {
+  totalMale: number;
+  totalFemale: number;
 }

@@ -1,9 +1,11 @@
 import { Column } from '@maru/ui';
 import GraduatedAreaTableHeader from './GraduatedAreaTableHeader/GraduatedAreaTableHeader';
 import GraduatedAreaTableItem from './GraduatedAreaTableItem/GraduatedAreaTableItem';
-import { GradeDistributionType, GraduatedSchoolStatus } from '@/types/analysis/client';
+import { GraduatedSchoolStatus } from '@/types/analysis/client';
 
-type GraduatedAreaTableProps = { formList: GraduatedSchoolStatus[] | undefined };
+interface GraduatedAreaTableProps {
+  formList: GraduatedSchoolStatus[] | undefined;
+}
 
 const GraduatedAreaTable = ({ formList }: GraduatedAreaTableProps) => {
   return (

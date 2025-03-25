@@ -2,29 +2,48 @@ import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import AreaGenderRatioContent from '../AreaGenderRatioContent/AreaGenderRatioContent';
-import TypeRatioTable from './TypeRatioTable';
+import TypeRatioTable from './TypeRatioTable/TypeRatioTable';
+import {
+  FormTypeMainCategory,
+  GenderRatioCount,
+  GenderRatioType,
+} from '@/types/analysis/client';
 
-const GenderRatioDetailTable = () => {
+interface GenderRatioDetailTableProps {
+  onDataUpdate: (newData: FormTypeMainCategory) => void;
+  formList?: GenderRatioType[] | undefined;
+  totalCounts: GenderRatioCount;
+}
+
+const GenderRatioDetailTable: React.FC<GenderRatioDetailTableProps> = ({
+  onDataUpdate,
+  formList,
+  totalCounts,
+}) => {
+  const handleDataChange = (newData: FormTypeMainCategory) => {
+    onDataUpdate(newData);
+  };
+
   return (
     <Row gap={120}>
       <CountInfoWrapper>
         <Column>
           <Column gap={40}>
             <Column>
-              <Text fontType="H4">최고점 점수</Text>
-              <Text fontType="D2">{121} 점</Text>
+              <Text fontType="H4">전체 남학생 지원 인원</Text>
+              <Text fontType="D2">{totalCounts?.maleCount} 점</Text>
             </Column>
             <Column>
-              <Text fontType="H4">최하점 점수</Text>
-              <Text fontType="D2">{121} 점</Text>
+              <Text fontType="H4">전체 여학생 지원 인원</Text>
+              <Text fontType="D2">{totalCounts?.femaleCount} 점</Text>
             </Column>
           </Column>
         </Column>
         <Column justifyContent="space-between">
-          <TypeRatioTable />
+          <TypeRatioTable totalCounts={totalCounts} />
         </Column>
       </CountInfoWrapper>
-      <AreaGenderRatioContent />
+      <AreaGenderRatioContent onDataUpdate={handleDataChange} formList={formList} />
     </Row>
   );
 };

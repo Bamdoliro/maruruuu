@@ -3,9 +3,10 @@ import { ApplicantCountType, FormType } from '@/types/analysis/client';
 const useApplicantRatios = (formList: ApplicantCountType[] | undefined) => {
   const getRatioByType = (type: FormType) => {
     const totalCount = formList?.reduce((sum, item) => sum + item.count, 0) || 0;
+    if (totalCount === 0) return '0%';
 
     const entry = formList?.find((item) => item.type === type);
-    return entry ? ((entry.count / totalCount) * 100).toFixed(3) + '%' : 0;
+    return entry ? ((entry.count / totalCount) * 100).toFixed(3) + '%' : '0%';
   };
 
   return {

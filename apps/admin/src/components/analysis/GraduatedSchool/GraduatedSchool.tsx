@@ -2,11 +2,8 @@ import { ANALYSIS_PASS_STEP } from '@/constants/analysis/data';
 import { SubDropdown, UnderlineButton } from '@maru/ui';
 import { SwitchCase } from '@toss/react';
 import GraduatedAreaTable from './GraduatedAreaTable/GraduatedAreaTable';
-import { useState } from 'react';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import { AnalysisApplicantType, AreaCategory } from '@/types/analysis/client';
-import { useGraduatedSchoolListQuery } from '@/services/analysis/queries';
 import useGraduatedSchool from './GraduatedSchool.hooks';
 
 const GraduatedSchool = () => {

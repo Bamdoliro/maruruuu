@@ -23,7 +23,7 @@ export const getGradeDistributionList = async ({
   statusList,
 }: AnalysisApplicantTypeReq) => {
   const { data } = await maru.get<GetGradeDistributionRes>(
-    `/analysis/grade-distribution?type=${statusList}`,
+    `/analysis/grade-distribution?statusList=${statusList.join('&statusList=')}`,
     authorization()
   );
   return data;

@@ -3,23 +3,11 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import DetailTable from './DetailTable/DetailTable';
 import { SwitchCase } from '@toss/react';
-import { useState } from 'react';
-import { AnalysisApplicantCountType } from '@/types/analysis/client';
 import { ANALYSIS_STEP } from '@/constants/analysis/data';
-import { useApplicantCountQuery } from '@/services/analysis/queries';
+import useStepTable from './ApplicationTypeRatio.hooks';
 
 const ApplicationTypeRatio = () => {
-  const [currentAnalysisStep, setCurrentAnalysisStep] =
-    useState<keyof typeof stepMap>('변경 전');
-
-  const stepMap: Record<string, AnalysisApplicantCountType> = {
-    '변경 전': 'ORIGINAL',
-    '변경 후': 'CURRENT',
-  };
-
-  const { data: formList } = useApplicantCountQuery({
-    type: currentAnalysisStep as AnalysisApplicantCountType,
-  });
+  const { currentAnalysisStep, setCurrentAnalysisStep, formList } = useStepTable();
 
   return (
     <StyledApplicationTypeRatio>
