@@ -25,7 +25,7 @@ export const postSignUp = async ({ phoneNumber, name, password }: PostSignUpReq)
   return data;
 };
 
-export const postUserVerification = async ({
+export const postRequestVerification = async ({
   phoneNumber,
   type,
 }: PostUserVerificationReq) => {
@@ -34,7 +34,7 @@ export const postUserVerification = async ({
   return data;
 };
 
-export const patchUserVerification = async ({
+export const patchVerification = async ({
   phoneNumber,
   type,
   code,
