@@ -1,10 +1,19 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { deleteUser, postSignUp } from './api';
+import {
+  deleteUser,
+  patchVerification,
+  postRequestVerification,
+  postSignUp,
+} from './api';
 import { toast } from 'react-toastify';
 import { ROUTES } from '@/constants/common/constants';
 import { useApiError } from '@/hooks';
-import { PostSignUpReq } from '@/types/user/remote';
+import {
+  PatchUserVerificationReq,
+  PostSignUpReq,
+  PostUserVerificationReq,
+} from '@/types/user/remote';
 
 export const useWithdrawalMutation = (password: string) => {
   const router = useRouter();
@@ -37,4 +46,37 @@ export const useSignUpMutation = ({ phoneNumber, name, password }: PostSignUpReq
   });
 
   return { signUpMutate, restMutation };
+};
+
+export const useRequestUserVerificationMutation = ({
+  phoneNumber,
+  type,
+}: PostUserVerificationReq) => {
+  const { handleError } = useApiError();
+
+  const { mutate: requestVerificationMutate, ...restMutation } = useMutation({
+    mutationFn: () => postRequestVerification({ phoneNumber, type }),
+    onSuccess: () => {
+      toast('인증번호 전송 성공', { type: 'success' });
+    },
+    onError: handleError,
+  });
+
+  return { requestVerificationMutate, restMutation };
+};
+
+export const useVerificationMutation = ({
+  phoneNumber,
+  type,
+  code,
+}: PatchUserVerificationReq) => {
+  const { handleError } = useApiError();
+
+  const { mutate: verificationMutate, ...restMutation } = useMutation({
+    mutationFn: () => patchVerification({ phoneNumber, type, code }),
+    onSuccess: () => {
+      toast('인증 성공', { type: 'success' });
+    },
+    onError: handleError,
+  });
 };
