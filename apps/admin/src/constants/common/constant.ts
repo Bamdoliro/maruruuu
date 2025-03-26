@@ -1,15 +1,15 @@
 export const KEY = {
   ADMIN: 'useAdmin',
-
+  APPLICANT_COUNT: 'useApplicantCount',
+  APPLICANT_GRADE_DISTRIBUTION: 'useApplicantGradeDistribution',
+  APPLICANT_GENDER_RATIO: 'useGenderRatio',
+  APPLICANT_GRADUATED_SCHOOL: 'useGraduatedSchool',
   FORM_LIST: 'useFormList',
-
   FAIR_LIST: 'useFairList',
   FAIR_DETAIL: 'useFairDetail',
   FAIR_EXPORT_EXCEL: 'useFairExportExcel',
-
   NOTICE_LIST: 'useNoticeList',
   NOTICE_DETAIL: 'useNoticeDetail',
-
   FAQ_LIST: 'useFaqList',
   FAQ_DETAIL: 'useFaqDetail',
 };
@@ -34,3 +34,5 @@ export const TOKEN = {
   ACCESS: 'access-token',
   REFRESH: 'refresh-token',
 } as const;
+
+export const EMPTY_VALUE = '';

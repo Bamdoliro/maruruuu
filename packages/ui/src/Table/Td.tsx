@@ -1,6 +1,5 @@
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
-import React from 'react';
 import styled, { css } from 'styled-components';
 import type { TableProps, TableStyleType } from './Table.type';
 
@@ -67,11 +66,21 @@ const StyledTd = styled.div<{
             ${font.p2}
             background-color: ${color.gray50};
           `
-        : props.styleType === 'FORM' &&
-          css`
-            ${font.p2}
-            background-color: ${color.maruLightBlue};
-          `}
+        : props.styleType === 'FORM'
+          ? css`
+              ${font.p2}
+              background-color: ${color.maruLightBlue};
+            `
+          : props.styleType === 'ANALYSIS'
+            ? css`
+                ${font.caption}
+                background-color: ${color.white};
+              `
+            : props.styleType === 'ANALYSIS_SECONDARY' &&
+              css`
+                ${font.caption}
+                background-color: ${color.gray50};
+              `}
 
   ${(props) =>
     props.isBottom &&

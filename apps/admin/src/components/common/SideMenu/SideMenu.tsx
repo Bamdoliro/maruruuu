@@ -10,25 +10,27 @@ interface SideMenuProps {
 }
 
 const SideMenu = ({ children, isActive, onClick }: SideMenuProps) => {
-  <StyledSideMenu isActive={isActive} onClick={onClick}>
-    {children}
-  </StyledSideMenu>;
+  return (
+    <StyledSideMenu isActive={isActive} onClick={onClick}>
+      {children}
+    </StyledSideMenu>
+  );
 };
+
 export default SideMenu;
 
 const StyledSideMenu = styled.button<{ isActive: boolean }>`
   ${flex({ alignItems: 'center' })}
-  width: 200px;
-  height: 56px;
+  width: 160px;
+  height: 44px;
   padding: 0px 16px;
-  border-radius: 12px;
+  border-radius: 8px;
 
-  ${font.H5}
-  color: ${color.gray600}
+  ${font.btn3}
+  color: ${color.gray600};
 
   &:hover {
-    color: ${color.gray700}
-    background: ${color.gray100}
+    background: ${color.gray100};
   }
 
   ${(props) =>

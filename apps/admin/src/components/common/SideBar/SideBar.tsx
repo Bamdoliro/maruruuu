@@ -8,7 +8,6 @@ import { flex } from '@maru/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 import { css, styled } from 'styled-components';
 
 const NAVIGATION_DATA = [
