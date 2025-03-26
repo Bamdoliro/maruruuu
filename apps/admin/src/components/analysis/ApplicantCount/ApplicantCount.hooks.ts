@@ -12,7 +12,7 @@ const useApplicantCount = () => {
   };
 
   const { data: formList } = useApplicantCountQuery({
-    type: stepMap[currentAnalysisStep] as AnalysisApplicantCountType,
+    type: stepMap[currentAnalysisStep],
   });
 
   return {
