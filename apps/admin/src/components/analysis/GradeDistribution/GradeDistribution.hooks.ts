@@ -7,7 +7,7 @@ const useGradeDistribution = () => {
   const [currentAnalysisPassStep, setCurrentAnalysisPassStep] =
     useState<keyof typeof stepMap>('전체 조회');
 
-  const stepMap: Record<string, string[]> = {
+  const stepMap: Record<string, AnalysisApplicantType[]> = {
     '전체 조회': ['RECEIVED', 'FIRST_PASSED', 'FIRST_FAILED', 'FAILED', 'PASSED'],
     '1차 합격자': ['FIRST_PASSED', 'FAILED', 'PASSED'],
     '2차 전형자': ['FAILED', 'PASSED'],
@@ -15,7 +15,7 @@ const useGradeDistribution = () => {
   };
 
   const { data: formList } = useGradeDistributionListQuery({
-    statusList: stepMap[currentAnalysisPassStep] as AnalysisApplicantType[],
+    statusList: stepMap[currentAnalysisPassStep],
   });
 
   return {

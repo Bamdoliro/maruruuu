@@ -6,7 +6,7 @@ import {
   GenderRatioType,
 } from '@/types/analysis/client';
 
-const stepMap: Record<string, string[]> = {
+const stepMap: Record<string, AnalysisApplicantType[]> = {
   '전체 조회': ['RECEIVED', 'FIRST_PASSED', 'FIRST_FAILED', 'FAILED', 'PASSED'],
   '1차 합격자': ['FIRST_PASSED', 'FAILED', 'PASSED'],
   '2차 전형자': ['FAILED', 'PASSED'],
@@ -25,7 +25,7 @@ const useGenderRatio = () => {
   const fetchGenderRatioData = (category: FormTypeMainCategory) => {
     return (
       useGenderRatioListQuery({
-        statusList: stepMap[currentAnalysisPassStep] as AnalysisApplicantType[],
+        statusList: stepMap[currentAnalysisPassStep],
         mainCategory: category,
         type: currentAnalysisPassStep === '전체 조회' ? 'ORIGINAL' : 'CURRENT',
       }).data || []
