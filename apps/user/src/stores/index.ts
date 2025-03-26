@@ -49,3 +49,5 @@ export {
   useSetFormDocumentStore,
   useFormDocumentValueStore,
 } from './form/formDocument';
+
+export { useSignUpStore } from './user/signup';
