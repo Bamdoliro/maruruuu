@@ -13,7 +13,7 @@ export const getFormList = async (
     url = '/form/review';
   }
   if (formListSortingType) {
-    if (formListType == '검토해야 하는 원서 모아보기') {
+    if (formListType !== '검토해야 하는 원서 모아보기') {
       const params = new URLSearchParams();
       if (formListSortingType.status) params.append('status', formListSortingType.status);
       if (formListSortingType.type) params.append('type', formListSortingType.type);
