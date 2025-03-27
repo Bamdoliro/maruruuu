@@ -26,9 +26,8 @@ import { useFormListTypeStore } from '@/store/form/formType';
 import { color } from '@maru/design-system';
 
 const FormPage = () => {
-  const [formListType, setFormListType] = useFormListTypeStore();
-
   const {
+    formListType,
     handleCriteriaChange,
     handleFormListTypeReview,
     handleFormListTypeAll,

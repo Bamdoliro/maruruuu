@@ -26,6 +26,7 @@ export const useFormPageState = () => {
   };
 
   return {
+    formListType,
     handleCriteriaChange,
     handleFormListTypeReview,
     handleFormListTypeAll,
