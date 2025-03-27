@@ -14,6 +14,9 @@ export const useFormPageState = () => {
     }
   };
 
+  const handleFormListTypeAll = () => setFormListType('모두 보기');
+  const handleFormListTypeReview = () => setFormListType('검토해야 하는 원서 모아보기');
+
   const getCriteriaDropdownValue = (
     key: keyof FormListSortingType,
     category: Record<string, string>
@@ -24,6 +27,8 @@ export const useFormPageState = () => {
 
   return {
     handleCriteriaChange,
+    handleFormListTypeReview,
+    handleFormListTypeAll,
     getCriteriaDropdownValue,
   };
 };
