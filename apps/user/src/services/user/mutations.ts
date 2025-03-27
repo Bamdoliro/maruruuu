@@ -14,6 +14,7 @@ import {
   PostSignUpReq,
   PostUserVerificationReq,
 } from '@/types/user/remote';
+import { Dispatch, SetStateAction } from 'react';
 
 export const useWithdrawalMutation = (password: string) => {
   const router = useRouter();
@@ -65,18 +66,20 @@ export const useRequestUserVerificationMutation = ({
   return { requestVerificationMutate, restMutation };
 };
 
-export const useVerificationMutation = ({
-  phoneNumber,
-  type,
-  code,
-}: PatchUserVerificationReq) => {
+export const useVerificationMutation = (
+  setIsSuccessVerification: Dispatch<SetStateAction<boolean>>
+) => {
   const { handleError } = useApiError();
 
   const { mutate: verificationMutate, ...restMutation } = useMutation({
-    mutationFn: () => patchVerification({ phoneNumber, type, code }),
+    mutationFn: ({ phoneNumber, type, code }: PatchUserVerificationReq) =>
+      patchVerification({ phoneNumber, type, code }),
     onSuccess: () => {
       toast('인증 성공', { type: 'success' });
+      setIsSuccessVerification(true);
     },
     onError: handleError,
   });
+
+  return { verificationMutate, restMutation };
 };
