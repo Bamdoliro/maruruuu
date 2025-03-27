@@ -1,4 +1,3 @@
-import { postUserVerification } from './../../services/user/api';
 import type { User } from './client';
 
 export interface GetUserRes {
