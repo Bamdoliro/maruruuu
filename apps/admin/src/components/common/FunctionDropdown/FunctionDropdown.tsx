@@ -4,7 +4,7 @@ import { flex } from '@maru/utils';
 import { css, styled } from 'styled-components';
 import { ReactNode } from 'react';
 import { IconArrowTop, IconArrowBottom } from '@maru/icon';
-import { useBooleanState } from '@maru/hooks';
+import { useBooleanState, useOutsideClick } from '@maru/hooks';
 
 interface Data {
   icon: ReactNode;
@@ -24,16 +24,20 @@ const FunctionDropdown = ({ data }: FunctionDropdownProps) => {
     toggle: handleToggleButtonClick,
   } = useBooleanState();
 
+  const dropdownRef = useOutsideClick(closeDropdown);
+
   return (
-    <StyledFunctionDropdown isOpen={isOpen} onClick={handleToggleButtonClick}>
-      <Text fontType="p2" color={color.gray700}>
-        추가 기능
-      </Text>
-      {isOpen ? (
-        <IconArrowTop color={color.gray600} width={24} height={24} />
-      ) : (
-        <IconArrowBottom color={color.gray600} width={24} height={24} />
-      )}
+    <div style={{ width: 120 }} ref={dropdownRef}>
+      <StyledFunctionDropdown isOpen={isOpen} onClick={handleToggleButtonClick}>
+        <Text fontType="p2" color={color.gray700}>
+          추가 기능
+        </Text>
+        {isOpen ? (
+          <IconArrowTop color={color.gray600} width={24} height={24} />
+        ) : (
+          <IconArrowBottom color={color.gray600} width={24} height={24} />
+        )}
+      </StyledFunctionDropdown>
       <DropdownItemListBox isOpen={isOpen}>
         <DropdownItemList>
           {data.map((item, index) => (
@@ -52,14 +56,14 @@ const FunctionDropdown = ({ data }: FunctionDropdownProps) => {
           ))}
         </DropdownItemList>
       </DropdownItemListBox>
-    </StyledFunctionDropdown>
+    </div>
   );
 };
 export default FunctionDropdown;
 
 const StyledFunctionDropdown = styled.div<{ isOpen: boolean }>`
   ${flex({ alignItems: 'center', justifyContent: 'space-between' })}
-  width: 120px;
+  width: 100%;
   height: 40px;
   padding: 0 10px 0 16px;
   border-radius: 6px;
@@ -85,8 +89,8 @@ const DropdownItemList = styled.div`
   })}
   z-index: 1;
   position: absolute;
-  right: -12px;
-  margin-top: 24px;
+  right: 0px;
+  margin-top: 8px;
   width: 280px;
   padding: 8px;
   background-color: ${color.white};
@@ -107,4 +111,11 @@ const DropdownItem = styled.button`
   &:hover {
     background-color: ${color.gray100};
   }
+`;
+
+const IconWrapper = styled.div`
+  position: absolute;
+  right: 10px; /* 위치 고정 */
+  top: 50%;
+  transform: translateY(-50%); /* 수직 가운데 정렬 */
 `;

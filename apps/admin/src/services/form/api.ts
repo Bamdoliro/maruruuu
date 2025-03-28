@@ -11,15 +11,17 @@ export const getFormList = async (
 
   if (formListType === '검토해야 하는 원서 모아보기') {
     url = '/form/review';
-  } else if (formListType === '정렬' && formListSortingType) {
-    const params = new URLSearchParams();
+  }
+  if (formListSortingType) {
+    if (formListType !== '검토해야 하는 원서 모아보기') {
+      const params = new URLSearchParams();
+      if (formListSortingType.status) params.append('status', formListSortingType.status);
+      if (formListSortingType.type) params.append('type', formListSortingType.type);
+      if (formListSortingType.sort) params.append('sort', formListSortingType.sort);
 
-    if (formListSortingType.status) params.append('status', formListSortingType.status);
-    if (formListSortingType.type) params.append('type', formListSortingType.type);
-    if (formListSortingType.sort) params.append('sort', formListSortingType.sort);
-
-    const queryString = params.toString();
-    if (queryString) url += `?${queryString}`;
+      const queryString = params.toString();
+      if (queryString) url += `?${queryString}`;
+    }
   }
 
   const { data } = await maru.get<GetFormListRes>(url, authorization());
