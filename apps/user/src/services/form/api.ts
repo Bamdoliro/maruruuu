@@ -36,13 +36,13 @@ export const getExportRecipt = async () => {
 };
 
 export const getSaveForm = async () => {
-  const { data } = await maru.get<GetSaveFormRes>('/forms/draft', authorization());
+  const { data } = await maru.get<GetSaveFormRes>('/form/draft', authorization());
 
   return data;
 };
 
 export const postSaveForm = async (formData: Form) => {
-  const { data } = await maru.post('/forms/draft', formData, authorization());
+  const { data } = await maru.post('/form/draft', formData, authorization());
 
   return data;
 };
