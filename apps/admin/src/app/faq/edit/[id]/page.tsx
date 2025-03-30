@@ -12,10 +12,10 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 
 interface FaqEditProps {
-  id: number;
+  params: { id: number };
 }
 
-const FaqEditPage = ({ id }: FaqEditProps) => {
+const FaqEditPage = ({ params: { id } }: FaqEditProps) => {
   return (
     <AppLayout>
       <StyledFaqEdit>
