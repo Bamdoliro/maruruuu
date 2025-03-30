@@ -16,7 +16,7 @@ interface FairTeacherApplicationProps {
 const FairTeacherApplication = ({ params: { id } }: FairTeacherApplicationProps) => {
   const { data: fairListData } = useFairListQuery();
 
-  const selectedFair = fairListData.find((fair) => fair.id === id);
+  const selectedFair = fairListData?.find((fair) => fair.id === id);
 
   const { start, place, applicationStartDate, applicationEndDate } = selectedFair || {};
 
