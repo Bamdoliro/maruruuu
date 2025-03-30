@@ -22,7 +22,7 @@ const FaqList = ({ category }: FaqListProps) => {
 
   return (
     <StyledFaqList>
-      {faqListData.map(({ title, content }, index) => (
+      {faqListData?.map(({ title, content }, index) => (
         <FaqItem
           key={`faq ${index}`}
           title={title}
