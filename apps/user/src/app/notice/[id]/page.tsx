@@ -12,10 +12,10 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 
 interface NoticeDetailProps {
-  id: number;
+  params: { id: number };
 }
 
-const NoticeDetail = ({ id }: NoticeDetailProps) => {
+const NoticeDetail = ({ params: { id } }: NoticeDetailProps) => {
   const router = useRouter();
 
   const handleMoveBackPage = () => {
