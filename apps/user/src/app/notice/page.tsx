@@ -3,9 +3,8 @@
 import { NoticeList } from '@/components/notice';
 import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
-import { Loader, Text } from '@maru/ui';
+import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { Suspense } from 'react';
 import styled from 'styled-components';
 
 const Notice = () => {
@@ -15,9 +14,7 @@ const Notice = () => {
         <Text fontType="H1" color={color.gray900}>
           공지사항
         </Text>
-        <Suspense fallback={<Loader />}>
-          <NoticeList />
-        </Suspense>
+        <NoticeList />
       </StyledNotice>
     </AppLayout>
   );

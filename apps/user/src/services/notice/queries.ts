@@ -1,9 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
 import { getAllNoticeList, getNoticeDetail } from './api';
 import { KEY } from '@/constants/common/constants';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useNoticeListQuery = () => {
-  const { data, ...restQuery } = useSuspenseQuery({
+  const { data, ...restQuery } = useQuery({
     queryKey: [KEY.NOTICE_LIST] as const,
     queryFn: getAllNoticeList,
     select: (data) => ({
@@ -14,14 +14,14 @@ export const useNoticeListQuery = () => {
     }),
   });
 
-  return { data: data.dataList, ...restQuery };
+  return { data: data?.dataList, ...restQuery };
 };
 
 export const useNoticeDetailQuery = (id: number) => {
-  const { data, ...restQuery } = useSuspenseQuery({
+  const { data, ...restQuery } = useQuery({
     queryKey: [KEY.NOTICE_DETAIL, id],
     queryFn: () => getNoticeDetail(id),
   });
 
-  return { data: data.data, ...restQuery };
+  return { data: data?.data, ...restQuery };
 };
