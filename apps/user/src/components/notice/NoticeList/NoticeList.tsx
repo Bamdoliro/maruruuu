@@ -8,7 +8,7 @@ const NoticeList = () => {
 
   return (
     <StyledNoticeList>
-      {noticeListData.map((props) => (
+      {noticeListData?.map((props) => (
         <NoticeItem id={props.id} title={props.title} updatedAt={props.updatedAt} />
       ))}
     </StyledNoticeList>

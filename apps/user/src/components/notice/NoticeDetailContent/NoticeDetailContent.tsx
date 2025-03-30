@@ -18,15 +18,17 @@ const NoticeDetailContent = ({ id }: NoticeDetailContentProps) => {
     <StyledNoticeDetailContent>
       <NoticeDetailHeader>
         <Text fontType="H3" color={color.gray900}>
-          {noticeDetailDta.title}
+          {noticeDetailDta?.title}
         </Text>
         <Text fontType="p2" color={color.gray750}>
-          {formatCreatedAt(noticeDetailDta.updatedAt)}
+          {formatCreatedAt(noticeDetailDta?.updatedAt ?? '')}
         </Text>
       </NoticeDetailHeader>
       <Column gap={36}>
         <Content
-          dangerouslySetInnerHTML={{ __html: convertLink(noticeDetailDta.content) }}
+          dangerouslySetInnerHTML={{
+            __html: convertLink(noticeDetailDta?.content ?? ''),
+          }}
         />
         {noticeDetailDta?.fileList?.map((file, index) => (
           <DownloadButton

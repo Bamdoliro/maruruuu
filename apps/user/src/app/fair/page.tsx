@@ -3,9 +3,9 @@
 import { FairCategory, FairContent } from '@/components/fair';
 import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
-import { Column, Loader, Text } from '@maru/ui';
+import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const Fair = () => {
@@ -27,9 +27,7 @@ const Fair = () => {
           </Text>
         </Column>
         <FairCategory selectedTab={category} handleTabClick={handleTabClick} />
-        <Suspense fallback={<Loader />}>
-          <FairContent category={category} />
-        </Suspense>
+        <FairContent category={category} />
       </StyledFair>
     </AppLayout>
   );

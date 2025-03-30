@@ -9,5 +9,5 @@ export interface NoticeDetail {
   content: string;
   fileList?: Array<{ downloadUrl: string; fileName: string }>;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }

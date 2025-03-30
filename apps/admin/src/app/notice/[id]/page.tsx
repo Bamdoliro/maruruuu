@@ -11,10 +11,10 @@ import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
 interface NoticeDetailPageProps {
-  id: number;
+  params: { id: number };
 }
 
-const NoticeDetailPage = ({ id }: NoticeDetailPageProps) => {
+const NoticeDetailPage = ({ params: { id } }: NoticeDetailPageProps) => {
   return (
     <AppLayout>
       <StyledNoticeDetail>

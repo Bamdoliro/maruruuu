@@ -3,9 +3,9 @@
 import { CategoryFilter, FaqList } from '@/components/faq';
 import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
-import { Loader, Text } from '@maru/ui';
+import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const Faq = () => {
@@ -18,9 +18,7 @@ const Faq = () => {
           자주 묻는 질문
         </Text>
         <CategoryFilter setCategory={setCategory} />
-        <Suspense fallback={<Loader />}>
-          <FaqList category={category} />
-        </Suspense>
+        <FaqList category={category} />
       </StyledFaq>
     </AppLayout>
   );
