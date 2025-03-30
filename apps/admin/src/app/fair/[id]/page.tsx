@@ -12,10 +12,10 @@ import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
 interface FairDetailProps {
-  id: number;
+  params: { id: number };
 }
 
-const FairDetailPage = ({ id }: FairDetailProps) => {
+const FairDetailPage = ({ params: { id } }: FairDetailProps) => {
   return (
     <AppLayout>
       <StyledFairDetail>
