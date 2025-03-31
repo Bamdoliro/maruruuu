@@ -1,5 +1,5 @@
 import { useUser } from '@/hooks';
-import { applicantSchema } from '@/schemas/applicantSchema';
+import { ApplicantSchema } from '@/schemas/applicantSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
 import { useSaveFormQuery } from '@/services/form/queries';
 import { useFormValueStore, useSetFormStepStore, useSetFormStore } from '@/stores';
@@ -48,7 +48,7 @@ export const useApplicantForm = () => {
 
   const handleNextStep = () => {
     try {
-      applicantSchema.parse(form.applicant);
+      ApplicantSchema.parse(form.applicant);
       setErrors({});
       setFormStep('보호자정보');
       saveFormMutate(form);
