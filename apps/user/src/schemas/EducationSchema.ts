@@ -4,8 +4,8 @@ const qualificationSchema = z.object({
   graduationType: z.literal('QUALIFICATION_EXAMINATION'),
   graduationYear: z
     .string()
-    .nonempty('졸업 연도, 합격 연도를 입력해주세요.')
-    .regex(/^\d{4}$/, '졸업 연도, 합격 연도를 입력해주세요.'),
+    .nonempty('합격 연도를 입력해주세요.')
+    .regex(/^\d{4}$/, '합격 연도를 입력해주세요.'),
 });
 
 const schoolGraduateSchema = z.object({
@@ -16,8 +16,8 @@ const schoolGraduateSchema = z.object({
     .max(30, '출신 학교를 입력해주세요.'),
   graduationYear: z
     .string()
-    .nonempty('졸업 연도, 합격 연도를 입력해주세요.')
-    .regex(/^\d{4}$/, '졸업 연도, 합격 연도를 입력해주세요.'),
+    .nonempty('졸업 연도를 입력해주세요.')
+    .regex(/^\d{4}$/, '졸업 연도를 입력해주세요.'),
   teacherPhoneNumber: z
     .string()
     .min(10, '10자 이상 입력해주세요.')
