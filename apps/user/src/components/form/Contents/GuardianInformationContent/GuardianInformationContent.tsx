@@ -1,15 +1,14 @@
 import { ButtonInput, Column, Input, Row } from '@maru/ui';
 import FormController from '../../FormController/FormController';
-import { useCTAButton, useInput } from './GuardianInformationContent.hook';
 import { useFormValueStore } from '@/stores';
 import { useOverlay } from '@toss/use-overlay';
 import FindAddressModal from '../../FindAddressModal/FindAddressModal';
+import { useGuardianForm } from './GuardianInformationContent.hook';
 
 const GuardianInformationContent = () => {
   const overlay = useOverlay();
   const form = useFormValueStore();
-  const { handleNextStep, handlePreviousStep } = useCTAButton();
-  const { handleGuardianInformationChange } = useInput();
+  const { onFieldChange, handleNextStep, handlePreviousStep, errors } = useGuardianForm();
 
   const openFindAddressModal = () => {
     overlay.open(({ isOpen, close }) => (
@@ -27,7 +26,9 @@ const GuardianInformationContent = () => {
             placeholder="예) 홍길동"
             width="100%"
             value={form.parent.name}
-            onChange={handleGuardianInformationChange}
+            onChange={onFieldChange}
+            isError={!!errors.name?.length}
+            errorMessage={errors.name? errors.name[0] : ''}
           />
           <Input
             name="phoneNumber"
@@ -35,7 +36,9 @@ const GuardianInformationContent = () => {
             placeholder="- 없이 입력해주세요."
             width="100%"
             value={form.parent.phoneNumber}
-            onChange={handleGuardianInformationChange}
+            onChange={onFieldChange}
+            isError={!!errors.phoneNumber?.length}
+            errorMessage={errors.phoneNumber ? errors.phoneNumber[0] : ''}
           />
         </Row>
         <Input
@@ -44,7 +47,9 @@ const GuardianInformationContent = () => {
           placeholder="예) 부, 모"
           width="calc(50% - 24px)"
           value={form.parent.relation}
-          onChange={handleGuardianInformationChange}
+          onChange={onFieldChange}
+          isError={!!errors.relation?.length}
+          errorMessage={errors.relation ? errors.relation[0] : ''}
         />
         <ButtonInput
           label="주소"
@@ -55,6 +60,8 @@ const GuardianInformationContent = () => {
           enabled={true}
           readOnly
           onClick={openFindAddressModal}
+          isError={!!errors.address?.length}
+          errorMessage={errors.address ? errors.address[0] : ''}
         />
         <Row gap={48}>
           <Input
@@ -63,16 +70,18 @@ const GuardianInformationContent = () => {
             placeholder="상세 주소를 입력해주세요."
             width="100%"
             value={form.parent.detailAddress}
-            onChange={handleGuardianInformationChange}
+            onChange={onFieldChange}
+            isError={!!errors.detailAddress?.length}
+            errorMessage={errors.detailAddress ? errors.detailAddress[0] : ''}
           />
           <Input
             name="zoneCode"
             label="우편번호"
-            placeholder="우편번호 5자리를 입력해주세요."
+            placeholder="주소를 선택하면 자동으로 입력됩니다."
             width="100%"
             readOnly
             value={form.parent.zoneCode}
-            onChange={handleGuardianInformationChange}
+            onChange={onFieldChange}
           />
         </Row>
       </Column>
