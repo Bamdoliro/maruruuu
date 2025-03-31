@@ -68,7 +68,7 @@ const GuardianInformationContent = () => {
           <Input
             name="zoneCode"
             label="우편번호"
-            placeholder="우편번호 5자리를 입력해주세요."
+            placeholder="주소를 선택하면 자동으로 입력됩니다."
             width="100%"
             readOnly
             value={form.parent.zoneCode}
