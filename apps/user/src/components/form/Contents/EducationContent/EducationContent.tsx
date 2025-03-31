@@ -2,16 +2,16 @@ import { styled } from 'styled-components';
 import FormController from '../../FormController/FormController';
 import { ButtonInput, Column, Input, RadioGroup, Row } from '@maru/ui';
 import { useFormValueStore } from '@/stores';
-import { useCTAButton, useInput } from './EducationContent.hook';
 import { useOverlay } from '@toss/use-overlay';
 import FindSchoolModal from '../../FindSchoolModal/FindSchoolModal';
 import { flex } from '@maru/utils';
+import { useEducationForm } from './EducationContent.hook';
 
 const EducationContent = () => {
   const overlay = useOverlay();
   const form = useFormValueStore();
-  const { handleNextStep, handlePreviousStep } = useCTAButton();
-  const { handleEducationChange } = useInput();
+  const { onFieldChange, handleNextStep, handlePreviousStep, errors } =
+    useEducationForm();
 
   const openFindSchoolModal = () => {
     overlay.open(({ isOpen, close }) => (
@@ -31,7 +31,7 @@ const EducationContent = () => {
             { value: 'QUALIFICATION_EXAMINATION', label: '고입 검정' },
           ]}
           value={form.education.graduationType}
-          onChange={handleEducationChange}
+          onChange={onFieldChange}
         />
         <Row gap={48} alignItems="center">
           {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
@@ -44,6 +44,8 @@ const EducationContent = () => {
               placeholder="검색 버튼을 눌러 학교를 검색하세요."
               readOnly
               enabled={true}
+              isError={!!errors.schoolName?.length}
+              errorMessage={errors.schoolName ? errors.schoolName[0] : ''}
             />
           )}
           {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
@@ -54,7 +56,7 @@ const EducationContent = () => {
               width="100%"
               readOnly
               value={form.education.schoolAddress ?? ''}
-              onChange={handleEducationChange}
+              onChange={onFieldChange}
             />
           )}
         </Row>
@@ -72,7 +74,10 @@ const EducationContent = () => {
                 ? '50%'
                 : '100%'
             }
-            onChange={handleEducationChange}
+            onChange={onFieldChange}
+            value={form.education.graduationYear ?? ''}
+            isError={!!errors.graduationYear?.length}
+            errorMessage={errors.graduationYear ? errors.graduationYear[0] : ''}
           />
           {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
             <Input
@@ -82,7 +87,7 @@ const EducationContent = () => {
               readOnly
               width="100%"
               value={form.education.schoolLocation ?? ''}
-              onChange={handleEducationChange}
+              onChange={onFieldChange}
             />
           )}
         </Row>
@@ -95,7 +100,7 @@ const EducationContent = () => {
               readOnly
               width="100%"
               value={form.education.schoolCode ?? ''}
-              onChange={handleEducationChange}
+              onChange={onFieldChange}
             />
           )}
           {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
@@ -105,7 +110,9 @@ const EducationContent = () => {
               placeholder="학교의 교무실 연락처를 입력해주세요."
               width="100%"
               value={form.education.teacherPhoneNumber ?? ''}
-              onChange={handleEducationChange}
+              onChange={onFieldChange}
+              isError={!!errors.teacherPhoneNumber?.length}
+              errorMessage={errors.teacherPhoneNumber ? errors.teacherPhoneNumber[0] : ''}
             />
           )}
         </Row>
@@ -117,7 +124,9 @@ const EducationContent = () => {
               placeholder="예) 홍길동"
               width="100%"
               value={form.education.teacherName ?? ''}
-              onChange={handleEducationChange}
+              onChange={onFieldChange}
+              isError={!!errors.teacherName?.length}
+              errorMessage={errors.teacherName ? errors.teacherName[0] : ''}
             />
           )}
           {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
@@ -127,7 +136,11 @@ const EducationContent = () => {
               placeholder="- 없이 입력해 주세요"
               width="100%"
               value={form.education.teacherMobilePhoneNumber ?? ''}
-              onChange={handleEducationChange}
+              onChange={onFieldChange}
+              isError={!!errors.teacherMobilePhoneNumber?.length}
+              errorMessage={
+                errors.teacherMobilePhoneNumber ? errors.teacherMobilePhoneNumber[0] : ''
+              }
             />
           )}
         </Row>
