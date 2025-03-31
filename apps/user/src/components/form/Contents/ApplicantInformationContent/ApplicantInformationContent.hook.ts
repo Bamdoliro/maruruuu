@@ -1,5 +1,5 @@
 import { useUser } from '@/hooks';
-import { ApplicantSchema } from '@/schemas/applicantSchema';
+import { ApplicantSchema } from '@/schemas/ApplicantSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
 import { useSaveFormQuery } from '@/services/form/queries';
 import { useFormValueStore, useSetFormStepStore, useSetFormStore } from '@/stores';
