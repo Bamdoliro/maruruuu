@@ -33,7 +33,7 @@ export interface FormDocument {
   formUrl: string;
 }
 
-export interface FileDocument{
+export interface FileDocument {
   fileName: string;
   mediaType: string;
   fileSize: number;

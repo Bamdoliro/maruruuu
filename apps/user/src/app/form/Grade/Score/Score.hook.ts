@@ -1,10 +1,14 @@
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormValueStore, useSetFormGradeStepStore, useSetFormStepStore } from '@/stores';
+import {
+  useFormValueStore,
+  useSetFormGradeStepStore,
+  useSetFormStepStore,
+} from '@/stores';
 
 export const useCTAButton = () => {
   const form = useFormValueStore();
   const setFormStep = useSetFormStepStore();
-  const setFormGradeStep  =useSetFormGradeStepStore();
+  const setFormGradeStep = useSetFormGradeStepStore();
   const { saveFormMutate } = useSaveFormMutation();
 
   const handleNextStep = () => {

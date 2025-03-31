@@ -61,7 +61,6 @@ const GradeCalculator = ({
         value={form.education.graduationType}
         caseBy={{
           QUALIFICATION_EXAMINATION: <GEDCalculator />,
-
         }}
         defaultComponent={
           <BasicCalculator

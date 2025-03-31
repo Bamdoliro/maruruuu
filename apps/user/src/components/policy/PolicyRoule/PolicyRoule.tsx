@@ -11,10 +11,10 @@ interface PolicyRouleProps {
 const PolicyRoule = ({ title, children }: PolicyRouleProps) => {
   return (
     <Column gap={8}>
-      <Row gap={8} alignItems='center'>
+      <Row gap={8} alignItems="center">
         <IconTerms />
         <Text fontType="H4" color={color.gray900}>
-            {title}
+          {title}
         </Text>
       </Row>
       {children}

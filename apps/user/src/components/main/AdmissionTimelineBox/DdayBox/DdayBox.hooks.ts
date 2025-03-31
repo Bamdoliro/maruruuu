@@ -90,7 +90,7 @@ export const useButtonStatus = () => {
   const buttonStyleType: ButtonStyleType =
     isSubmitPeriod || isPeriodOfViewing ? 'PRIMARY' : 'DISABLED';
 
-  const handleMovePage= () => {
+  const handleMovePage = () => {
     if (isPeriodOfViewing) {
       if (currentTime.isSame(SCHEDULE.일차_합격_발표)) {
         router.push(ROUTES.FIRST_RESULT);

@@ -7,5 +7,4 @@ const useTotal = (formList: ApplicantCountType[] | undefined) => {
   return { total, competitionRate };
 };
 
-
 export default useTotal;

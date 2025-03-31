@@ -26,7 +26,10 @@ const FairContent = ({ category }: FairContentProps) => {
             <Text fontType="H3" color={color.gray900}>
               교사
             </Text>
-            <FairList fairType="TEACHER" status={['APPLICATION_IN_PROGRESS', 'APPLICATION_NOT_STARTED']} />
+            <FairList
+              fairType="TEACHER"
+              status={['APPLICATION_IN_PROGRESS', 'APPLICATION_NOT_STARTED']}
+            />
           </Column>
         </>
       )}
