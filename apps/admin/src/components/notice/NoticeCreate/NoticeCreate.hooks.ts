@@ -37,7 +37,7 @@ export const useNoticeCreateData = () => {
   };
 };
 
-export const useNoticeCreateAction = (noticeData: PostNoticeReq) => {
+export const useNoticeCreateAction = (noticeData: NoticeInput) => {
   const { postNoticeMutate } = usePostNoticeMutation();
   const { noticeFileUrlMutate } = useNoticeFileUrlMutation();
   const [fileData, setFileData] = useNoticeFileStore();
