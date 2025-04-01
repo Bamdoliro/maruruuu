@@ -12,10 +12,10 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 
 interface NoticeEditPageProps {
-  id: number;
+  params: { id: number };
 }
 
-const NoticeEditPage = ({ id }: NoticeEditPageProps) => {
+const NoticeEditPage = ({ params: { id } }: NoticeEditPageProps) => {
   return (
     <AppLayout>
       <StyledNoticeEdit>

@@ -12,10 +12,10 @@ import { styled } from 'styled-components';
 import FaqDetail from '@/components/faq/FaqDetail/FaqDetail';
 
 interface FaqDetailProps {
-  id: number;
+  params: { id: number };
 }
 
-const FaqDetailPage = ({ id }: FaqDetailProps) => {
+const FaqDetailPage = ({ params: { id } }: FaqDetailProps) => {
   return (
     <AppLayout>
       <StyledFaqDetail>

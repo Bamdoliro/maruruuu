@@ -1,10 +1,9 @@
 import { ROUTES } from '@/constants/common/constants';
 import { color } from '@maru/design-system';
 import { IconArrowRight } from '@maru/icon';
-import { Loader, Text } from '@maru/ui';
+import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import styled from 'styled-components';
 import FaqBoxList from './FaqBoxList/FaqBoxList';
 
@@ -17,9 +16,7 @@ const FaqBox = () => {
         </Text>
         <IconArrowRight width={22} height={22} color={color.gray900} />
       </DirectLink>
-      <Suspense fallback={<Loader />}>
-        <FaqBoxList />
-      </Suspense>
+      <FaqBoxList />
     </StyledFaqBox>
   );
 };
