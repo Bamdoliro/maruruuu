@@ -1,6 +1,6 @@
 import { TableItem } from '@/components/common';
 import { Button, Row, Text } from '@maru/ui';
-import { useFile, useFileView } from './RegistrationTableItem.hook';
+import { handleFileDownload, handleFilePreview } from './RegistrationTableItem.hook';
 
 interface FaqTableItemProps {
   examinationNumber: number;
@@ -30,7 +30,7 @@ const RegistrationTableItem = ({
           styleType="SECONDARY"
           size="SMALL"
           onClick={() => {
-            useFileView(admissionAndPledgeUrl);
+            handleFilePreview(admissionAndPledgeUrl);
           }}
         >
           파일 미리보기
@@ -39,7 +39,7 @@ const RegistrationTableItem = ({
           styleType="PRIMARY"
           size="SMALL"
           onClick={() => {
-            useFile(admissionAndPledgeUrl);
+            handleFileDownload(admissionAndPledgeUrl);
           }}
         >
           파일 다운로드
