@@ -5,6 +5,7 @@ export const KEY = {
   APPLICANT_GENDER_RATIO: 'useGenderRatio',
   APPLICANT_GRADUATED_SCHOOL: 'useGraduatedSchool',
   FORM_LIST: 'useFormList',
+  SECOND_SCORE_FORMAT: 'useSecondScoreFormat',
   FAIR_LIST: 'useFairList',
   FAIR_DETAIL: 'useFairDetail',
   FAIR_EXPORT_EXCEL: 'useFairExportExcel',
