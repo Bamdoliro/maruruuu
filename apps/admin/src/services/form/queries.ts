@@ -18,7 +18,7 @@ export const useFormListQuery = () => {
   return { data: data?.dataList, ...restQuery };
 };
 
-export const useDownloadSecondScoreFormatQuery = () => {
+export const useExportSecondScoreFormatQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.SECOND_SCORE_FORMAT],
     queryFn: getSecondScoreFormat,
