@@ -37,13 +37,13 @@ export const useNoticeCreateData = () => {
   };
 };
 
-export const useNoticeCreateAction = (noticeData: PostNoticeReq) => {
+export const useNoticeCreateAction = (noticeData: NoticeInput) => {
   const { postNoticeMutate } = usePostNoticeMutation();
   const { noticeFileUrlMutate } = useNoticeFileUrlMutation();
   const [fileData, setFileData] = useNoticeFileStore();
 
   const handleNoticeCreateButtonClick = async () => {
-    const fileNameList = noticeData.fileNameList ?? [];
+    const fileNameList = noticeData.fileNameList?.length ? noticeData.fileNameList : null;
 
     if (fileData?.length) {
       await noticeFileUrlMutate(fileData);
