@@ -1,3 +1,4 @@
+import { useUploadSecondScoreFormatMutation } from '@/services/form/mutations';
 import { useExportSecondScoreFormatQuery } from '@/services/form/queries';
 
 export const useExportExcelAction = () => {
@@ -17,4 +18,22 @@ export const useExportExcelAction = () => {
   };
 
   return { handleExportSecondScoreFormatButtonClick };
+};
+
+export const useUploadSecondScoreFormatAction = (
+  fileData: File | null,
+  handleCloseModal: () => void
+) => {
+  const { uploadSecondScoreFormat } =
+    useUploadSecondScoreFormatMutation(handleCloseModal);
+
+  const handleUploadSecondScoreFormatButtonClick = () => {
+    if (!fileData) return;
+
+    const formData = new FormData();
+    formData.append('xlsx', fileData);
+    uploadSecondScoreFormat(formData);
+  };
+
+  return { handleUploadSecondScoreFormatButtonClick };
 };

@@ -7,7 +7,10 @@ import SecondScoreUploader from './SecondScoreUploader/SecondScoreUploader';
 import { useEffect } from 'react';
 import type { ChangeEventHandler } from 'react';
 import { useSecondScoreFileStore } from '@/store/form/secondScoreFile';
-import { useExportExcelAction } from './SecondScoreUploadModal.hooks';
+import {
+  useExportExcelAction,
+  useUploadSecondScoreFormatAction,
+} from './SecondScoreUploadModal.hooks';
 
 interface SecondScoreUploadModalProps {
   isOpen: boolean;
@@ -30,14 +33,15 @@ const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps
     if (file) setUploadedFile(file);
   };
 
-  const handleAttachFile = () => {
-    onClose();
-  };
-
   const handleCloseModal = () => {
     setUploadedFile(null);
     onClose();
   };
+
+  const { handleUploadSecondScoreFormatButtonClick } = useUploadSecondScoreFormatAction(
+    uploadedFile,
+    handleCloseModal
+  );
 
   return (
     <BlurBackground isOpen={isOpen}>
@@ -76,7 +80,7 @@ const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps
           <Button
             size="SMALL"
             styleType={uploadedFile ? 'PRIMARY' : 'DISABLED'}
-            onClick={handleAttachFile}
+            onClick={handleUploadSecondScoreFormatButtonClick}
           >
             입력하기
           </Button>
