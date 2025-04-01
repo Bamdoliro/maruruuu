@@ -70,7 +70,7 @@ const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps
           </TextButton>
         </Column>
         <Row justifyContent="flex-end" alignItems="flex-start" gap="16px">
-          <Button size="SMALL" styleType="SECONDARY">
+          <Button size="SMALL" styleType="SECONDARY" onClick={handleCloseModal}>
             취소
           </Button>
           <Button
