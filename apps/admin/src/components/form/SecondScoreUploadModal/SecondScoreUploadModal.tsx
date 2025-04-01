@@ -7,6 +7,7 @@ import SecondScoreUploader from './SecondScoreUploader/SecondScoreUploader';
 import { useEffect } from 'react';
 import type { ChangeEventHandler } from 'react';
 import { useSecondScoreFileStore } from '@/store/form/secondScoreFile';
+import { useExportExcelAction } from './SecondScoreUploadModal.hooks';
 
 interface SecondScoreUploadModalProps {
   isOpen: boolean;
@@ -15,6 +16,8 @@ interface SecondScoreUploadModalProps {
 
 const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps) => {
   const [uploadedFile, setUploadedFile] = useSecondScoreFileStore();
+
+  const { handleExportSecondScoreFormatButtonClick } = useExportExcelAction();
 
   useEffect(() => {
     if (isOpen) {
@@ -58,7 +61,11 @@ const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps
         </Row>
         <Column gap={16}>
           <SecondScoreUploader isOpen={isOpen} />
-          <TextButton fontType="btn2" color={color.gray600} onClick={() => {}}>
+          <TextButton
+            fontType="btn2"
+            color={color.gray600}
+            onClick={handleExportSecondScoreFormatButtonClick}
+          >
             [ 엑셀 포맷 다운로드 ]
           </TextButton>
         </Column>
