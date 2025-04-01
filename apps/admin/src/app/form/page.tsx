@@ -24,7 +24,7 @@ import { styled } from 'styled-components';
 import { useFormPageState } from './form.hooks';
 import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
-import SecondScoreUploadModal from '@/components/form/SecondeScoreUploadModal/SecondScoreUploadModal';
+import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
 
 const FormPage = () => {
   const {
