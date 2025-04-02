@@ -13,7 +13,7 @@ interface NoticeTableItemProps {
 const NoticeTableItem = ({ id, title, updatedAt }: NoticeTableItemProps) => {
   const router = useRouter();
   const handleMoveNoticeDetailPage = () => {
-    router.push(`${ROUTES}/${id}`);
+    router.push(`${ROUTES.NOTICE}/${id}`);
   };
 
   return (
