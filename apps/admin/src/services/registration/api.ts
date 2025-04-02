@@ -1,11 +1,11 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
-import { GetFormListRes } from '@/types/form/remote';
-import { GetRegistrationListRes } from '@/types/registration/remote';
+import type { GetFormListRes } from '@/types/form/remote';
+import type { GetRegistrationListRes } from '@/types/registration/remote';
 
 export const getRegistrationList = async () => {
   const { data } = await maru.get<GetFormListRes>('forms?status=PASSED', authorization());
-  
+
   const idList = data.dataList.map((item) => item.id).join(',');
   const encodedIdList = encodeURIComponent(idList);
 
