@@ -1,7 +1,7 @@
 import { Column } from '@maru/ui';
 import NoticeTableHeader from './NoticeTableHeader/NoticeTableHeader';
 import NoticeTableItem from './NoticeTableItem/NoticeTableItem';
-import { Notice } from '@/types/notice/client';
+import type { Notice } from '@/types/notice/client';
 
 interface NoticeTableProps {
   noticeList: Notice[];
