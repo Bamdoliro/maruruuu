@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGraduatedSchoolListQuery } from '@/services/analysis/queries';
-import { AnalysisApplicantType, AreaCategory } from '@/types/analysis/client';
+import type { AnalysisApplicantType, AreaCategory } from '@/types/analysis/client';
 
 const useGraduatedSchool = () => {
   const [currentAnalysisPassStep, setCurrentAnalysisPassStep] =

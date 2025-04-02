@@ -1,6 +1,6 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
-import {
+import type {
   AnalysisApplicantCountReq,
   GetApplicantCountRes,
   AnalysisApplicantTypeReq,
@@ -35,7 +35,9 @@ export const getGenderRatioList = async ({
   type,
 }: GenderRatioStatusReq) => {
   const { data } = await maru.get<GetGenderRatioRes>(
-    `/analysis/gender-ratio?statusList=${statusList.join('&statusList=')}&mainCategory=${mainCategory}&type=${type}`,
+    `/analysis/gender-ratio?statusList=${statusList.join(
+      '&statusList='
+    )}&mainCategory=${mainCategory}&type=${type}`,
     authorization()
   );
   return data;

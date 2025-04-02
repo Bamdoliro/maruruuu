@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import Category from './Category/Category';
 import { flex } from '@maru/utils';

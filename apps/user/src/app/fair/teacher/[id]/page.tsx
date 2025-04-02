@@ -64,10 +64,3 @@ const StyledFairTeacherApplication = styled.div`
   padding: 82px 312px 240px;
   gap: 48px;
 `;
-
-const PrivacyConcert = styled.div`
-  ${flex({ flexDirection: 'column' })}
-  width: 100%;
-  height: 100%;
-  gap: 16px;
-`;

@@ -1,6 +1,7 @@
 import { useLoginAdminMutation } from '@/services/auth/mutations';
-import { PostLoginAuthReq } from '@/types/auth/remote';
-import { ChangeEvent, useState } from 'react';
+import type { PostLoginAuthReq } from '@/types/auth/remote';
+import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 
 export const useLoginAction = (loginAdminData: PostLoginAuthReq) => {
   const { loginAdminMutate } = useLoginAdminMutation(loginAdminData);

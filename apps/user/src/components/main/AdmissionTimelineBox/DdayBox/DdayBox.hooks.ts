@@ -2,7 +2,7 @@ import { ROUTES } from '@/constants/common/constants';
 import { SCHEDULE } from '@/constants/form/constants';
 import { formatDay } from '@/utils';
 import { useInterval } from '@maru/hooks';
-import { ButtonStyleType } from '@maru/ui';
+import type { ButtonStyleType } from '@maru/ui';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import isBetween from 'dayjs/plugin/isBetween';
@@ -47,7 +47,7 @@ const useDday = () => {
 
   useEffect(() => {
     setRemainDays(currentTime.diff(dayjs().startOf('day'), 'days', true));
-  }, []);
+  }, [currentTime]);
 
   useInterval(() => {
     setRemainDays(currentTime.diff(dayjs(), 'days', true));
@@ -90,7 +90,7 @@ export const useButtonStatus = () => {
   const buttonStyleType: ButtonStyleType =
     isSubmitPeriod || isPeriodOfViewing ? 'PRIMARY' : 'DISABLED';
 
-  const handleMovePage= () => {
+  const handleMovePage = () => {
     if (isPeriodOfViewing) {
       if (currentTime.isSame(SCHEDULE.일차_합격_발표)) {
         router.push(ROUTES.FIRST_RESULT);
@@ -105,8 +105,8 @@ export const useButtonStatus = () => {
   const buttonText = dayjs().isBefore(SCHEDULE.원서_접수_마감)
     ? '원서 접수하기'
     : dayjs().isBetween(SCHEDULE.입학_등록, SCHEDULE.입학_등록_마감)
-      ? '입학 등록하기'
-      : '결과 확인하기';
+    ? '입학 등록하기'
+    : '결과 확인하기';
 
   return {
     buttonStyleType,

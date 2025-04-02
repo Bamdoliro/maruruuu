@@ -1,7 +1,7 @@
 import { Column } from '@maru/ui';
 import GraduatedAreaTableHeader from './GraduatedAreaTableHeader/GraduatedAreaTableHeader';
 import GraduatedAreaTableItem from './GraduatedAreaTableItem/GraduatedAreaTableItem';
-import { GraduatedSchoolStatus } from '@/types/analysis/client';
+import type { GraduatedSchoolStatus } from '@/types/analysis/client';
 
 interface GraduatedAreaTableProps {
   formList: GraduatedSchoolStatus[] | undefined;

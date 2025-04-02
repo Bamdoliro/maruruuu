@@ -1,6 +1,6 @@
 import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface CompleteAlarmProps {
   isComplete: boolean | string;

@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
 import { color } from '@maru/design-system';
-import {
-  Button,
-  CellInput,
-  Column,
-  Input,
-  RadioGroup,
-  Row,
-  Text,
-  Textarea,
-} from '@maru/ui';
+import { Button, CellInput, Column, Input, RadioGroup, Text, Textarea } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useAgree, useCTAButton, useInput } from './FairStudentApplicationBox.hook';

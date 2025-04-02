@@ -1,7 +1,7 @@
 import { Storage } from '@/apis/storage/storage';
 import { useSubmitDraftFormMutation } from '@/services/form/mutations';
 import { useFormValueStore, useSetFormStepStore } from '@/stores';
-import { Form } from '@/types/form/client';
+import type { Form } from '@/types/form/client';
 import { useEffect, useState } from 'react';
 
 export const useCTAButton = () => {

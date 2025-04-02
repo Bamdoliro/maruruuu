@@ -28,7 +28,7 @@ const GuardianInformationContent = () => {
             value={form.parent.name}
             onChange={onFieldChange}
             isError={!!errors.name?.length}
-            errorMessage={errors.name? errors.name[0] : ''}
+            errorMessage={errors.name ? errors.name[0] : ''}
           />
           <Input
             name="phoneNumber"

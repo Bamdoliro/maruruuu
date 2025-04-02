@@ -1,4 +1,4 @@
-import { GenderRatioType } from '@/types/analysis/client';
+import type { GenderRatioType } from '@/types/analysis/client';
 
 const useCalculateGenderRatio = (formList: GenderRatioType[] = []) => {
   const calculateTotals = (data: GenderRatioType[]) => {

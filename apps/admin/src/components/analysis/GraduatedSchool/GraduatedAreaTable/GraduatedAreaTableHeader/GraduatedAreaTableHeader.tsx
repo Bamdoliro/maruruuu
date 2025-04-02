@@ -16,9 +16,7 @@ const GraduatedAreaTableHeader = () => {
         <Text fontType="p2" width={50}>
           출신 학교
         </Text>
-        <Text fontType="p2">
-          학교 위치
-        </Text>
+        <Text fontType="p2">학교 위치</Text>
       </Row>
     </TableHeader>
   );

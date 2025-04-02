@@ -2,7 +2,7 @@ import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import ScoreTable from './ScoreTable/ScoreTable';
-import { GradeDistributionType } from '@/types/analysis/client';
+import type { GradeDistributionType } from '@/types/analysis/client';
 import DetailContent from './DetailContent/DetailContent';
 import useMaxMin from './GradeDistributionDetailTable.hooks';
 

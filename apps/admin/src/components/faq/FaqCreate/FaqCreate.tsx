@@ -4,7 +4,7 @@ import { Button, Column, Dropdown, Row } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import { useFaqCreateAction, useFaqCreateData } from './faqCreate.hooks';
-import { FaqCategory } from '@/types/faq/client';
+import type { FaqCategory } from '@/types/faq/client';
 
 const FaqCreate = () => {
   const { faqData, contentTextareaRef, handleFaqDataChange, handleFaqCategoryChange } =

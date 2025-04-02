@@ -2,7 +2,7 @@ import { Column } from '@maru/ui';
 import FaqTableHeader from './FaqTableHeader/FaqTableHeader';
 import FaqTableItem from './FaqTableItem/FaqTableItem';
 import { useFaqListQuery } from '@/services/faq/queries';
-import { ExtendedFaqCategory } from '@/types/faq/client';
+import type { ExtendedFaqCategory } from '@/types/faq/client';
 
 interface FaqTableProps {
   selectedCategory: ExtendedFaqCategory;

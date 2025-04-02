@@ -1,6 +1,7 @@
 import { useFairApplicationQuery } from '@/services/fair/mutations';
-import { FairApplication } from '@/types/fair/client';
-import { ChangeEventHandler, useState } from 'react';
+import type { FairApplication } from '@/types/fair/client';
+import { useState } from 'react';
+import type { ChangeEventHandler } from 'react';
 
 export const useCTAButton = (id: number, applicationData: FairApplication) => {
   const { postFairApplicationMutate } = useFairApplicationQuery(id, applicationData);

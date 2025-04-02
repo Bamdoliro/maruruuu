@@ -1,6 +1,6 @@
 import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
-import {
+import type {
   GetUserRes,
   PatchUserVerificationReq,
   PostSignUpReq,

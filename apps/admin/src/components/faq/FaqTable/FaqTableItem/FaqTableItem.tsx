@@ -1,6 +1,6 @@
 import { TableItem } from '@/components/common';
 import { FAQ_CATEGORY } from '@/constants/faq/constant';
-import { FaqCategory } from '@/types/faq/client';
+import type { FaqCategory } from '@/types/faq/client';
 import { Row, Text } from '@maru/ui';
 
 interface FaqTableItemProps {

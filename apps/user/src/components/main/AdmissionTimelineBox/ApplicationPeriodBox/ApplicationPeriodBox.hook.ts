@@ -2,7 +2,7 @@ import { ROUTES } from '@/constants/common/constants';
 import { SCHEDULE } from '@/constants/form/constants';
 import { useRouter } from 'next/navigation';
 
-export const schoolRecruitDate = () => {
+export const useSchoolRecruitDate = () => {
   const router = useRouter();
   const applicationStart = SCHEDULE.원서_접수.format('YYYY년 MM월 DD일 (ddd) HH:mm');
   const applicationEnd = SCHEDULE.원서_접수_마감.format('YYYY년 MM월 DD일 (ddd) HH:mm');

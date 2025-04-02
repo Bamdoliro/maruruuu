@@ -1,4 +1,4 @@
-import { SignUp } from '@/types/user/client';
+import type { SignUp } from '@/types/user/client';
 import { atom, useRecoilState } from 'recoil';
 
 const signUpAtomState = atom<SignUp>({

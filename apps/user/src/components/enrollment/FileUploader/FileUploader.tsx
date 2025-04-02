@@ -1,6 +1,7 @@
 import { color } from '@maru/design-system';
 import { Button, Row, Text } from '@maru/ui';
-import { ChangeEventHandler, ForwardedRef, forwardRef } from 'react';
+import { forwardRef } from 'react';
+import type { ChangeEventHandler } from 'react';
 
 interface FileUploaderProps {
   onClick: () => void;

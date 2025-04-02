@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@maru/eslint-config-ts": "workspace:*",
+    "@maru/eslint-config": "workspace:*",
     "@maru/tsconfig": "workspace:*",
     "@types/react": "18.2.13",
     "@types/styled-components": "^5.1.26",

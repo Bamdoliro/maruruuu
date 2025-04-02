@@ -1,4 +1,5 @@
-import { AxiosError, isAxiosError } from 'axios';
+import { isAxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
 interface AxiosErrorResponse {

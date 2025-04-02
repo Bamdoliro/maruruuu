@@ -1,6 +1,6 @@
 import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
-import { GetResultRes } from '@/types/result/remote';
+import type { GetResultRes } from '@/types/result/remote';
 
 export const getFirstResult = async () => {
   const { data } = await maru.get<GetResultRes>('/forms/result/first', authorization());

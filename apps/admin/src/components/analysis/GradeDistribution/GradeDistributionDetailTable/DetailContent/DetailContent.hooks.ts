@@ -1,4 +1,4 @@
-import { FormType, GradeDistributionType } from '@/types/analysis/client';
+import type { FormType, GradeDistributionType } from '@/types/analysis/client';
 
 const useMaxMinByType = (formList: GradeDistributionType[] | undefined) => {
   const getMaxMinByType = (type: FormType) => {

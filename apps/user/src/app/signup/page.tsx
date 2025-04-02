@@ -1,17 +1,8 @@
 'use client';
 
-import { SignUpContent, Terms, Validate } from '@/components/signup';
+import { SignUpContent } from '@/components/signup';
 import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
-import {
-  Button,
-  ButtonInput,
-  Column,
-  Input,
-  PreviewInput,
-  Text,
-  TimeLimitInput,
-} from '@maru/ui';
 import { flex } from '@maru/utils';
 import Image from 'next/image';
 import styled from 'styled-components';
@@ -39,19 +30,4 @@ const StyledSignUp = styled.div`
   ${flex({ alignItems: 'center' })}
   width: 100%;
   height: 100vh;
-`;
-
-const ContentBox = styled.div`
-  display: flex;
-  height: 100%;
-  background-color: ${color.white};
-  padding: 148px 131px 112px;
-  overflow: auto;
-`;
-
-const SignUpBox = styled.div`
-  ${flex({ flexDirection: 'column' })}
-  width: 446px;
-  height: fit-content;
-  gap: 24px;
 `;

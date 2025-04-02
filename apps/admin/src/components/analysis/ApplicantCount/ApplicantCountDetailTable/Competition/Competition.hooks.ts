@@ -1,4 +1,4 @@
-import { ApplicantCountType } from '@/types/analysis/client';
+import type { ApplicantCountType } from '@/types/analysis/client';
 
 const useCompetiton = (formList: ApplicantCountType[] | undefined) => {
   const REGULAR_ADMISSION = 36;

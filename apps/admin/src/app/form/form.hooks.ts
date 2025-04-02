@@ -1,5 +1,5 @@
 import { useFormListSortingTypeStore, useFormListTypeStore } from '@/store/form/formType';
-import { FormListSortingType } from '@/types/form/client';
+import type { FormListSortingType } from '@/types/form/client';
 
 export const useFormPageState = () => {
   const [formListType, setFormListType] = useFormListTypeStore();

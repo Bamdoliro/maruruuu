@@ -10,11 +10,11 @@ import {
   putProfileUpoload,
   putUploadForm,
 } from './api';
-import { Form } from '@/types/form/client';
+import type { Form } from '@/types/form/client';
 import { useSetFormStepStore } from '@/stores';
 import { Storage } from '@/apis/storage/storage';
-import { FormDocument, FormPresignedUrlData } from '@/types/form/remote';
-import { Dispatch, SetStateAction } from 'react';
+import type { FormDocument, FormPresignedUrlData } from '@/types/form/remote';
+import type { Dispatch, SetStateAction } from 'react';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();

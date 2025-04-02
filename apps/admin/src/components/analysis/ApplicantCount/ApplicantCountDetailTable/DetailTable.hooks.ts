@@ -1,4 +1,4 @@
-import { ApplicantCountType } from '@/types/analysis/client';
+import type { ApplicantCountType } from '@/types/analysis/client';
 
 const useTotal = (formList: ApplicantCountType[] | undefined) => {
   const total = formList?.reduce((sum, item) => sum + item.count, 0) || 0;
@@ -6,6 +6,5 @@ const useTotal = (formList: ApplicantCountType[] | undefined) => {
 
   return { total, competitionRate };
 };
-
 
 export default useTotal;

@@ -36,7 +36,7 @@ const CollectionTable = () => {
             필수 : 가입자 이름, 전화번호
           </Td>
           <Td borderBottomRightRadius={12} width="100%" height={56}>
-            선택 : 소속기관 
+            선택 : 소속기관
           </Td>
         </Column>
       </Row>

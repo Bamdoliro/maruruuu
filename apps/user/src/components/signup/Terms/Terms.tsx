@@ -1,9 +1,8 @@
-import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import TermsItem from './TermsItem/TermsItem';
 import { ROUTES } from '@/constants/common/constants';
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { useCheckTerms } from './Terms.hook';
 
 interface TermsProps {
@@ -69,11 +68,4 @@ const StyledTerms = styled.div`
   ${flex({ flexDirection: 'column' })}
   width: 100%;
   gap: 10px;
-`;
-
-const Agreement = styled.div`
-  ${font.btn3};
-  color: ${color.gray500};
-  display: flex;
-  gap: 5px;
 `;

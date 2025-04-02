@@ -1,5 +1,5 @@
 import { useFormStore } from '@/stores';
-import { GraduationType } from '@/types/form/client';
+import type { GraduationType } from '@/types/form/client';
 import { color } from '@maru/design-system';
 import { Row, Switch, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -61,7 +61,6 @@ const GradeCalculator = ({
         value={form.education.graduationType}
         caseBy={{
           QUALIFICATION_EXAMINATION: <GEDCalculator />,
-
         }}
         defaultComponent={
           <BasicCalculator
