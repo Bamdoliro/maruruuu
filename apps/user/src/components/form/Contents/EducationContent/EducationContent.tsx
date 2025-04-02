@@ -3,12 +3,13 @@ import FormController from '../../FormController/FormController';
 import { useFormValueStore } from '@/stores';
 import { useOverlay } from '@toss/use-overlay';
 import FindAddressModal from '../../FindAddressModal/FindAddressModal';
-import { useGuardianForm } from '../GuardianInformationContent/GuardianInformationContent.hook';
+import { useEducationForm } from './EducationContent.hook';
 
-const GuardianInformationContent = () => {
+const EudcationContent = () => {
   const overlay = useOverlay();
   const form = useFormValueStore();
-  const { onFieldChange, handleNextStep, handlePreviousStep, errors } = useGuardianForm();
+  const { onFieldChange, handleNextStep, handlePreviousStep, errors } =
+    useEducationForm();
 
   const openFindAddressModal = () => {
     overlay.open(({ isOpen, close }) => (
@@ -151,4 +152,4 @@ const GuardianInformationContent = () => {
   );
 };
 
-export default GuardianInformationContent;
+export default EudcationContent;
