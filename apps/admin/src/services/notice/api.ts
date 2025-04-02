@@ -24,7 +24,7 @@ export const getNoticeDetail = async (id: number) => {
 };
 
 export const postNotice = async (params: PostNoticeReq) => {
-  const { data } = await maru.post('/notices', { params }, authorization());
+  const { data } = await maru.post('/notices', params, authorization());
 
   return data;
 };
@@ -32,7 +32,7 @@ export const postNotice = async (params: PostNoticeReq) => {
 export const postNoticeFile = async (params: PostNoticeFileReq[]) => {
   const data = await maru.post<PostNoticeFileRes>(
     '/notices/files',
-    { params },
+    params,
     authorization()
   );
   const dataList = data.data.dataList;
@@ -41,7 +41,7 @@ export const postNoticeFile = async (params: PostNoticeFileReq[]) => {
 };
 
 export const putNotice = async (id: number, params: PutNoticeReq) => {
-  const { data } = await maru.put(`/notices/${id}`, { params }, authorization());
+  const { data } = await maru.put(`/notices/${id}`, params, authorization());
 
   return { data };
 };

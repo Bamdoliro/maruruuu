@@ -7,6 +7,7 @@ import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 import { useNoticeDeleteAction, handleFileDownload } from './noticeDetail.hooks';
+import { formatDate } from '@/utils';
 
 interface NoticeDetailProps {
   id: number;
@@ -29,9 +30,9 @@ const NoticeDetail = ({ id }: NoticeDetailProps) => {
             {noticeDetailData.title}
           </Text>
           <Text fontType="p2" color={color.gray600}>
-            {noticeDetailData.updatedAt === null
-              ? noticeDetailData.createdAt
-              : noticeDetailData.updatedAt}
+            {formatDate.toFullDateTime(
+              noticeDetailData.updatedAt ?? noticeDetailData.createdAt
+            )}
           </Text>
         </Column>
         <Row gap={16} alignItems="flex-end">

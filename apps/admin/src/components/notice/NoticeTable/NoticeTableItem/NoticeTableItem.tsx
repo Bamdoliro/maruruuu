@@ -1,5 +1,6 @@
 import { TableItem } from '@/components/common';
 import { ROUTES } from '@/constants/common/constant';
+import { formatDate } from '@/utils';
 import { Row, Text } from '@maru/ui';
 import { useRouter } from 'next/navigation';
 
@@ -12,7 +13,7 @@ interface NoticeTableItemProps {
 const NoticeTableItem = ({ id, title, updatedAt }: NoticeTableItemProps) => {
   const router = useRouter();
   const handleMoveNoticeDetailPage = () => {
-    router.push(`${ROUTES}/${id}`);
+    router.push(`${ROUTES.NOTICE}/${id}`);
   };
 
   return (
@@ -26,7 +27,7 @@ const NoticeTableItem = ({ id, title, updatedAt }: NoticeTableItemProps) => {
         </Text>
       </Row>
       <Text fontType="p2" width={100}>
-        {updatedAt}
+        {formatDate.toDotDate(updatedAt)}
       </Text>
     </TableItem>
   );
