@@ -4,7 +4,8 @@ import { styled } from 'styled-components';
 import { useCTAButton } from './Score.hook';
 
 const Score = () => {
-  const { handleNextStep, handlePreviousStep } = useCTAButton();
+  const { handleNextStep, handlePreviousStep, subjectError, newSubjectError } =
+    useCTAButton();
 
   return (
     <>
@@ -12,7 +13,11 @@ const Score = () => {
         <NavigationBar>
           <UnderlineButton active={true}>교과 성적</UnderlineButton>
         </NavigationBar>
-        <GradeCalculator option="FORM" />
+        <GradeCalculator
+          option="FORM"
+          subjectError={subjectError}
+          newSubjectError={newSubjectError}
+        />
       </Column>
       <FormController
         onNext={handleNextStep}
