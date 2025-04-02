@@ -44,18 +44,10 @@ const Header = () => {
             <Profile />
           ) : (
             <Row gap={10} alignItems="center">
-              <Button
-                styleType="QUATERNARY"
-                size="SMALL"
-                onClick={handleMoveLoginPage}
-              >
+              <Button styleType="QUATERNARY" size="SMALL" onClick={handleMoveLoginPage}>
                 로그인
               </Button>
-              <Button
-                styleType="PRIMARY"
-                size="SMALL"
-                onClick={handleMoveSignupPage}
-              >
+              <Button styleType="PRIMARY" size="SMALL" onClick={handleMoveSignupPage}>
                 회원가입
               </Button>
             </Row>

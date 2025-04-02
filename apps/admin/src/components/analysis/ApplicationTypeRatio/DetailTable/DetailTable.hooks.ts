@@ -1,4 +1,4 @@
-import { ApplicantCountType } from '@/types/analysis/client';
+import type { ApplicantCountType } from '@/types/analysis/client';
 
 const useRatio = (formList: ApplicantCountType[] | undefined) => {
   const totalCount = formList?.reduce((sum, item) => sum + item.count, 0) || 0;

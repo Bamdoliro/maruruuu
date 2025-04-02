@@ -1,4 +1,4 @@
-import { GradeDistributionType } from '@/types/analysis/client';
+import type { GradeDistributionType } from '@/types/analysis/client';
 
 const useScoreStatus = (formList: GradeDistributionType[] | undefined) => {
   const regularRoundMax = formList

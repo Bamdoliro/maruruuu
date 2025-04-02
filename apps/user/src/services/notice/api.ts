@@ -1,5 +1,5 @@
 import { maru } from '@/apis/instance/instance';
-import { NoticeDetailRes, NoticeListRes } from '@/types/notice/remote';
+import type { NoticeDetailRes, NoticeListRes } from '@/types/notice/remote';
 
 export const getAllNoticeList = async () => {
   const { data } = await maru.get<NoticeListRes>('/notices');

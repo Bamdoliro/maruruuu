@@ -1,8 +1,8 @@
-import { ResultStep } from '@/types/result/client';
+import type { ResultStep } from '@/types/result/client';
 import { color } from '@maru/design-system';
-import { Button, Column, Text } from '@maru/ui';
+import { Button, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface ResultMainProps {

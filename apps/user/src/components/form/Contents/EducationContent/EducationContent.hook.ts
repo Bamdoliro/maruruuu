@@ -1,7 +1,8 @@
 import { EducationSchema } from '@/schemas/EducationSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
 import { useFormStore, useSetFormStepStore } from '@/stores';
-import { ChangeEventHandler, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
+import { useState } from 'react';
 import { z } from 'zod';
 
 export const useEducationForm = () => {

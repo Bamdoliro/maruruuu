@@ -4,8 +4,9 @@ import {
   useVerificationMutation,
 } from '@/services/user/mutations';
 import { useSignUpStore } from '@/stores';
-import { SignUp } from '@/types/user/client';
-import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
+import type { SignUp } from '@/types/user/client';
+import { useEffect, useRef, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
 import { toast } from 'react-toastify';
 
 export const useSignUpAction = (signUpData: SignUp, termsAgree: boolean) => {

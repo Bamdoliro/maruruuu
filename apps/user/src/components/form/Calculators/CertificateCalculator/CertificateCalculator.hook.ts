@@ -1,5 +1,5 @@
 import { useSetFormStore } from '@/stores';
-import { Certificate } from '@/types/form/client';
+import type { Certificate } from '@/types/form/client';
 import type { ChangeEventHandler } from 'react';
 
 export const useInput = () => {

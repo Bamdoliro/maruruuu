@@ -5,8 +5,9 @@ import {
 } from '@/services/form/mutations';
 import { useExportFormQuery } from '@/services/form/queries';
 import { useSetFormDocumentStore } from '@/stores';
-import { useDownloadFile } from '@/utils';
-import { ChangeEventHandler, useCallback, useEffect, useState } from 'react';
+import { downloadFile } from '@/utils';
+import { useCallback, useEffect, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
 import { toast } from 'react-toastify';
 
 export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => void) => {
@@ -23,7 +24,7 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
   const downloadPdf = useCallback(() => {
     if (!pdfBlobUrl) return;
 
-    useDownloadFile(
+    downloadFile(
       pdfBlobUrl,
       `${userData.name} 부산소프트웨어마이스터고등학교 원서접수.pdf`
     );

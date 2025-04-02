@@ -3,7 +3,8 @@ import { color } from '@maru/design-system';
 import { IconClose } from '@maru/icon';
 import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { useEffect, useRef, useState, type DragEvent, type ChangeEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { ChangeEvent, DragEvent } from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -21,7 +22,7 @@ const NoticeUploader = ({ isOpen }: Props) => {
     if (isOpen && uploadedFile) {
       setUploadedFile(null);
     }
-  }, [isOpen]);
+  }, [isOpen, uploadedFile, setUploadedFile]);
 
   const handleUploadCancelButtonClick = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';

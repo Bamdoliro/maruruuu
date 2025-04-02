@@ -1,4 +1,4 @@
-import { Form, FormStatus, School } from './client';
+import type { Form, FormStatus, School } from './client';
 
 export interface GetFormStatusRes {
   data: FormStatus;
@@ -33,7 +33,7 @@ export interface FormDocument {
   formUrl: string;
 }
 
-export interface FileDocument{
+export interface FileDocument {
   fileName: string;
   mediaType: string;
   fileSize: number;

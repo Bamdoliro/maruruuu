@@ -1,4 +1,4 @@
-import { ApplicantCountType } from '@/types/analysis/client';
+import type { ApplicantCountType } from '@/types/analysis/client';
 import { Column, Row, Td, Th, Text } from '@maru/ui';
 import useCompetiton from './Competition.hooks';
 import { EMPTY_VALUE } from '@/constants/common/constant';

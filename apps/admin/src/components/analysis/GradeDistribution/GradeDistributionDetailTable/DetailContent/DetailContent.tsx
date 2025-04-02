@@ -1,6 +1,6 @@
-import { GradeDistributionType } from '@/types/analysis/client';
+import type { GradeDistributionType } from '@/types/analysis/client';
 import { font } from '@maru/design-system';
-import { Column, Row, Td, Th } from '@maru/ui';
+import { Column, Row, Td } from '@maru/ui';
 import styled from 'styled-components';
 import useMaxMinByType from './DetailContent.hooks';
 import DetailHeader from '../DetailHeader/DetailHeader';

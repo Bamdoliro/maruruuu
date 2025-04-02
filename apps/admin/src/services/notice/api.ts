@@ -1,7 +1,7 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
-import { NoticeFileData } from '@/types/notice/client';
-import {
+import type { NoticeFileData } from '@/types/notice/client';
+import type {
   GetNoticeListRes,
   getNoticeDetailRes,
   PostNoticeReq,

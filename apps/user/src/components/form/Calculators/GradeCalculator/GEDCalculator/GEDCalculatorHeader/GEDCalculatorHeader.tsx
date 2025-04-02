@@ -1,4 +1,4 @@
-import { Row, Th } from '@maru/ui';
+import { Th } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 

@@ -1,4 +1,4 @@
-import { ApplicantCountType, FormType } from '@/types/analysis/client';
+import type { ApplicantCountType, FormType } from '@/types/analysis/client';
 
 const useApplicantRatios = (formList: ApplicantCountType[] | undefined) => {
   const getRatioByType = (type: FormType) => {

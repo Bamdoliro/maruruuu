@@ -1,4 +1,4 @@
-import { NoticeDetail, NoticeList } from './client';
+import type { NoticeDetail, NoticeList } from './client';
 
 export interface NoticeListRes {
   dataList: NoticeList[];

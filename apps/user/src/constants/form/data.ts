@@ -1,4 +1,4 @@
-import { Form, Subject } from '@/types/form/client';
+import type { Form, Subject } from '@/types/form/client';
 
 export const STEP_LIST = ['성적 입력', '출결상황', '봉사시간', '자격증'] as const;
 

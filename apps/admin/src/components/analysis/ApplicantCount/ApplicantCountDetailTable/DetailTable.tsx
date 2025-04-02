@@ -3,7 +3,7 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import Competition from './Competition/Competition';
 import DetailContent from '../../ApplicationTypeRatio/DetailTable/DetailContent/DetailContent';
-import { ApplicantCountType } from '@/types/analysis/client';
+import type { ApplicantCountType } from '@/types/analysis/client';
 import useCompetitionRate from './DetailTable.hooks';
 
 type DetailTableProps = { formList: ApplicantCountType[] | undefined };

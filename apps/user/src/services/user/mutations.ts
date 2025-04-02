@@ -9,12 +9,12 @@ import {
 import { toast } from 'react-toastify';
 import { ROUTES } from '@/constants/common/constants';
 import { useApiError } from '@/hooks';
-import {
+import type {
   PatchUserVerificationReq,
   PostSignUpReq,
   PostUserVerificationReq,
 } from '@/types/user/remote';
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 export const useWithdrawalMutation = (password: string) => {
   const router = useRouter();

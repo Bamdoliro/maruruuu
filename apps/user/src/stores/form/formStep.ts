@@ -1,4 +1,4 @@
-import { FormStep } from '@/types/form/client';
+import type { FormStep } from '@/types/form/client';
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const formStepAtomState = atom<FormStep>({

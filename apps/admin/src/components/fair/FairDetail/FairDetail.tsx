@@ -1,4 +1,4 @@
-import { FairStatus, StatusType } from '@/types/fair/client';
+import type { FairStatus, StatusType } from '@/types/fair/client';
 import { flex } from '@maru/utils';
 import { color } from '@maru/design-system';
 import { styled } from 'styled-components';

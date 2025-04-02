@@ -1,6 +1,7 @@
 import { color } from '@maru/design-system';
 import { CheckInput, Column, Confirm, Text } from '@maru/ui';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 
 interface DraftFormModalProps {
   isOpen: boolean;

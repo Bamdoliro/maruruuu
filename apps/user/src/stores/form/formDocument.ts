@@ -1,4 +1,4 @@
-import { FormDocument } from '@/types/form/remote';
+import type { FormDocument } from '@/types/form/remote';
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const formDocumentAtomState = atom<FormDocument>({

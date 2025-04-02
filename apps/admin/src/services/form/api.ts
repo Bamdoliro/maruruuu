@@ -1,7 +1,7 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
-import { FormListSortingType, FormListType } from '@/types/form/client';
-import { GetFormListRes } from '@/types/form/remote';
+import type { FormListSortingType, FormListType } from '@/types/form/client';
+import type { GetFormListRes } from '@/types/form/remote';
 
 export const getFormList = async (
   formListType: FormListType,

@@ -1,4 +1,4 @@
-import { GradeDistributionType } from '@/types/analysis/client';
+import type { GradeDistributionType } from '@/types/analysis/client';
 
 const useMaxMin = (formList: GradeDistributionType[] | undefined) => {
   const entireFirstRoundMax =

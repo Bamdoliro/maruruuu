@@ -1,26 +1,23 @@
-import { styled } from 'styled-components';
-import FormController from '../../FormController/FormController';
 import { ButtonInput, Column, Input, RadioGroup, Row } from '@maru/ui';
+import FormController from '../../FormController/FormController';
 import { useFormValueStore } from '@/stores';
 import { useOverlay } from '@toss/use-overlay';
-import FindSchoolModal from '../../FindSchoolModal/FindSchoolModal';
-import { flex } from '@maru/utils';
-import { useEducationForm } from './EducationContent.hook';
+import FindAddressModal from '../../FindAddressModal/FindAddressModal';
+import { useGuardianForm } from '../GuardianInformationContent/GuardianInformationContent.hook';
 
-const EducationContent = () => {
+const GuardianInformationContent = () => {
   const overlay = useOverlay();
   const form = useFormValueStore();
-  const { onFieldChange, handleNextStep, handlePreviousStep, errors } =
-    useEducationForm();
+  const { onFieldChange, handleNextStep, handlePreviousStep, errors } = useGuardianForm();
 
-  const openFindSchoolModal = () => {
+  const openFindAddressModal = () => {
     overlay.open(({ isOpen, close }) => (
-      <FindSchoolModal isOpen={isOpen} onClose={close} />
+      <FindAddressModal isOpen={isOpen} onClose={close} />
     ));
   };
 
   return (
-    <StyledEducationContent>
+    <>
       <Column width="100%" gap={30}>
         <RadioGroup
           label="졸업 구분"
@@ -40,7 +37,7 @@ const EducationContent = () => {
               label="출신학교"
               value={form.education.schoolName ?? ''}
               buttonText="검색"
-              onClick={openFindSchoolModal}
+              onClick={openFindAddressModal}
               placeholder="검색 버튼을 눌러 학교를 검색하세요."
               readOnly
               enabled={true}
@@ -148,16 +145,10 @@ const EducationContent = () => {
       <FormController
         onPrevious={handlePreviousStep}
         onNext={handleNextStep}
-        step="출신학교및학력"
+        step="보호자정보"
       />
-    </StyledEducationContent>
+    </>
   );
 };
 
-export default EducationContent;
-
-const StyledEducationContent = styled.div`
-  ${flex({ flexDirection: 'column', justifyContent: 'space-between' })}
-  width: 100%;
-  height: 100%;
-`;
+export default GuardianInformationContent;

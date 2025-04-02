@@ -1,6 +1,5 @@
 import { font } from '@maru/design-system';
-import React from 'react';
-import { CSSProperties, HTMLAttributes, ReactNode } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 type Font = keyof typeof font;

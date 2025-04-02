@@ -2,7 +2,7 @@ import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { css, styled } from 'styled-components';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { IconArrowTop, IconArrowBottom } from '@maru/icon';
 import { useBooleanState, useOutsideClick } from '@maru/hooks';
 
@@ -111,11 +111,4 @@ const DropdownItem = styled.button`
   &:hover {
     background-color: ${color.gray100};
   }
-`;
-
-const IconWrapper = styled.div`
-  position: absolute;
-  right: 10px; /* 위치 고정 */
-  top: 50%;
-  transform: translateY(-50%); /* 수직 가운데 정렬 */
 `;

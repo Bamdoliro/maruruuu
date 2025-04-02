@@ -1,5 +1,5 @@
 import { EMPTY_VALUE } from '@/constants/common/constant';
-import { GenderRatioCount } from '@/types/analysis/client';
+import type { GenderRatioCount } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 
 interface TypeRatioTableProps {

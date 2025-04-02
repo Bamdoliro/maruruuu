@@ -79,7 +79,8 @@ const useGradeCalculation = () => {
 
     const regularScore =
       SCORE.REGULAR_TYPE +
-      WEIGHT.REGULAR_21_22 * (getScoreOf('achievementLevel21') + getScoreOf('achievementLevel22')) +
+      WEIGHT.REGULAR_21_22 *
+        (getScoreOf('achievementLevel21') + getScoreOf('achievementLevel22')) +
       WEIGHT.REGULAR_31 * getScoreOf('achievementLevel31');
 
     return Number(regularScore.toFixed(3));
@@ -92,7 +93,8 @@ const useGradeCalculation = () => {
 
     const specialScore =
       SCORE.SPECIAL_TYPE +
-      WEIGHT.SPECIAL_21_22 * (getScoreOf('achievementLevel21') + getScoreOf('achievementLevel22')) +
+      WEIGHT.SPECIAL_21_22 *
+        (getScoreOf('achievementLevel21') + getScoreOf('achievementLevel22')) +
       WEIGHT.SPECIAL_31 * getScoreOf('achievementLevel31');
 
     return Number(specialScore.toFixed(3));

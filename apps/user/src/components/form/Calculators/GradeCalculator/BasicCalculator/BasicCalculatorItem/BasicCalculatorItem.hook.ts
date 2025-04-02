@@ -33,15 +33,15 @@ export const useInput = (id: number) => {
       return updatedData;
     });
 
-    setSubjectIncomplete((prev: { [x: string]: any }) => ({
+    setSubjectIncomplete((prev) => ({
       ...prev,
       [subjectName]: {
         ...prev[subjectName],
         [name === 'achievementLevel21'
           ? 'isIncomplete21'
           : name === 'achievementLevel22'
-            ? 'isIncomplete22'
-            : 'isIncomplete31']: isIncomplete,
+          ? 'isIncomplete22'
+          : 'isIncomplete31']: isIncomplete,
       },
     }));
   };

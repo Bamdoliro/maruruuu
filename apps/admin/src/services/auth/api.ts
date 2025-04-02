@@ -1,4 +1,4 @@
-import { PostLoginAuthReq } from '@/types/auth/remote';
+import type { PostLoginAuthReq } from '@/types/auth/remote';
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
 

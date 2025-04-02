@@ -22,7 +22,6 @@ import { Column, Dropdown, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useFormPageState } from './form.hooks';
-import { useFormListTypeStore } from '@/store/form/formType';
 import { color } from '@maru/design-system';
 
 const FormPage = () => {
