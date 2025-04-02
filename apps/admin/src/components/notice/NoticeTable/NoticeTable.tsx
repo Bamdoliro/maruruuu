@@ -1,24 +1,18 @@
 import { Column } from '@maru/ui';
 import NoticeTableHeader from './NoticeTableHeader/NoticeTableHeader';
 import NoticeTableItem from './NoticeTableItem/NoticeTableItem';
-import { useNoticeListQuery } from '@/services/notice/queries';
+import { Notice } from '@/types/notice/client';
 
 interface Props {
-  debouncedNoticeTitle: string;
+  noticeList: Notice[];
 }
 
-const NoticeTable = ({ debouncedNoticeTitle }: Props) => {
-  const { data: noticeList } = useNoticeListQuery();
-
-  const filteredNoticeList = noticeList?.filter((notice) =>
-    (notice.title ?? '').toLowerCase().includes(debouncedNoticeTitle.toLowerCase())
-  );
-
+const NoticeTable = ({ noticeList }: Props) => {
   return (
     <Column gap={12}>
       <NoticeTableHeader />
-      {filteredNoticeList?.map(({ id, title, updatedAt }) => (
-        <NoticeTableItem id={id} title={title} updatedAt={updatedAt} />
+      {noticeList.map(({ id, title, updatedAt }) => (
+        <NoticeTableItem key={id} id={id} title={title} updatedAt={updatedAt} />
       ))}
     </Column>
   );

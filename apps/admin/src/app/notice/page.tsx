@@ -8,21 +8,28 @@ import { useDebounceInput } from '@maru/hooks';
 import { Button, Column, Loader, Row, Text, SearchInput } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import { Suspense } from 'react';
+import { Suspense, useMemo } from 'react';
 import { styled } from 'styled-components';
 
 const NoticePage = () => {
   const router = useRouter();
-
-  const handleMoveNoticeCreatePage = () => {
-    router.push(ROUTES.NOTICE_CREATE);
-  };
+  const { data: noticeList } = useNoticeListQuery();
 
   const {
     value: noticeTitle,
     onChange: handleNoticeTitleDataChange,
     debouncedValue: debouncedNoticeTitle,
   } = useDebounceInput({ initialValue: '' });
+
+  const filteredNoticeList = useMemo(() => {
+    return noticeList?.filter((notice) =>
+      (notice.title ?? '').toLowerCase().includes(debouncedNoticeTitle.toLowerCase())
+    );
+  }, [noticeList, debouncedNoticeTitle]);
+
+  const handleMoveNoticeCreatePage = () => {
+    router.push(ROUTES.NOTICE_CREATE);
+  };
 
   return (
     <AppLayout>
@@ -40,7 +47,7 @@ const NoticePage = () => {
             </Button>
           </Row>
           <Suspense fallback={<Loader />}>
-            <NoticeTable debouncedNoticeTitle={debouncedNoticeTitle} />
+            <NoticeTable noticeList={filteredNoticeList ?? []} />
           </Suspense>
         </Column>
       </StyledNoticePage>
