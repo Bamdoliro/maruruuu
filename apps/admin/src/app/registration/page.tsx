@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
 import RegistartonTable from '@/components/registration/RegistrationTable/RegistrationTable';
 import AppLayout from '@/layouts/AppLayout';
-import { Column, Loader, Row, Text } from '@maru/ui';
+import { Column, Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { Suspense } from 'react';
 import styled from 'styled-components';
