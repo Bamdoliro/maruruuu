@@ -23,6 +23,8 @@ import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useFormPageState } from './form.hooks';
 import { color } from '@maru/design-system';
+import { useOverlay } from '@toss/use-overlay';
+import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
 
 const FormPage = () => {
   const {
@@ -32,6 +34,14 @@ const FormPage = () => {
     handleFormListTypeAll,
     getCriteriaDropdownValue,
   } = useFormPageState();
+
+  const overlay = useOverlay();
+
+  const openSecondScoreUplaodModal = () => {
+    overlay.open(({ isOpen, close }) => (
+      <SecondScoreUploadModal isOpen={isOpen} onClose={close} />
+    ));
+  };
 
   return (
     <AppLayout>
@@ -140,7 +150,7 @@ const FormPage = () => {
                     icon: <IconEditDocument width={24} height={24} />,
                     label: '2차 전형 점수 입력하기',
                     value: 'input_second_round_scores',
-                    onClick: () => {},
+                    onClick: openSecondScoreUplaodModal,
                   },
                   {
                     icon: <IconEditDocument width={24} height={24} />,

@@ -1,5 +1,5 @@
 import { KEY } from '@/constants/common/constant';
-import { getFormList } from './api';
+import { getFormList, getSecondScoreFormat } from './api';
 import { useQuery } from '@tanstack/react-query';
 import {
   useFormListSortingTypeValueStore,
@@ -16,4 +16,13 @@ export const useFormListQuery = () => {
   });
 
   return { data: data?.dataList, ...restQuery };
+};
+
+export const useExportSecondScoreFormatQuery = () => {
+  const { data, ...restQuery } = useQuery({
+    queryKey: [KEY.SECOND_SCORE_FORMAT],
+    queryFn: getSecondScoreFormat,
+  });
+
+  return { data, ...restQuery };
 };

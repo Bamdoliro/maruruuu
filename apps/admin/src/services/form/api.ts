@@ -7,10 +7,10 @@ export const getFormList = async (
   formListType: FormListType,
   formListSortingType?: FormListSortingType
 ) => {
-  let url = '/form';
+  let url = '/forms';
 
   if (formListType === '검토해야 하는 원서 모아보기') {
-    url = '/form/review';
+    url = '/forms/review';
   }
   if (formListSortingType) {
     if (formListType !== '검토해야 하는 원서 모아보기') {
@@ -25,6 +25,25 @@ export const getFormList = async (
   }
 
   const { data } = await maru.get<GetFormListRes>(url, authorization());
+
+  return data;
+};
+
+export const getSecondScoreFormat = async () => {
+  const { data } = await maru.get('/forms/second-round/format', {
+    ...authorization(),
+    responseType: 'blob',
+  });
+
+  return data;
+};
+
+export const patchSecondScoreFormat = async (formData: FormData) => {
+  const { data } = await maru.patch(
+    '/forms/second-round/score',
+    formData,
+    authorization.FormData()
+  );
 
   return data;
 };
