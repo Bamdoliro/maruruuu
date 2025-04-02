@@ -1,7 +1,7 @@
-import { PostLoginReq } from '@/types/auth/remote';
+import type { PostLoginReq } from '@/types/auth/remote';
 import { useMutation } from '@tanstack/react-query';
 import { deleteLogout, postLogin } from './api';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { Storage } from '@/apis/storage/storage';
 import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';

@@ -1,11 +1,11 @@
 import { Button, Column, Text } from '@maru/ui';
-import { schoolRecruitDate } from './ApplicationPeriodBox.hook';
+import { useSchoolRecruitDate } from './ApplicationPeriodBox.hook';
 import { color } from '@maru/design-system';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
 
 const ApplicationPeriodBox = () => {
-  const { applicationStart, applicationEnd, handleMoveFormPage } = schoolRecruitDate();
+  const { applicationStart, applicationEnd, handleMoveFormPage } = useSchoolRecruitDate();
 
   return (
     <StyledApplicationPeriodBox>

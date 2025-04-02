@@ -1,9 +1,9 @@
 import { useApiError } from '@/hooks';
-import { EntrollmentDocument } from '@/types/enrollment/remote';
+import type { EntrollmentDocument } from '@/types/enrollment/remote';
 import { useMutation } from '@tanstack/react-query';
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { patchEnter, postEntrollmentDocument, putEntrollmentDocument } from './api';
-import { EntrollmentDocumentPresignedUrlData } from '@/types/enrollment/client';
+import type { EntrollmentDocumentPresignedUrlData } from '@/types/enrollment/client';
 import { useSetEntrollmentDocumentStore } from '@/stores';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';

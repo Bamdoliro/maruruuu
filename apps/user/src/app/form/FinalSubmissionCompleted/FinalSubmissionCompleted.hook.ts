@@ -1,7 +1,7 @@
 import { ROUTES } from '@/constants/common/constants';
 import { useUser } from '@/hooks';
 import { useExportReciptQuery } from '@/services/form/queries';
-import { useDownloadFile } from '@/utils';
+import { downloadFile } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 export const useCTAButton = () => {
@@ -16,7 +16,7 @@ export const useCTAButton = () => {
   const handleDownloadReciptButtonClick = () => {
     if (!reciptData) return;
 
-    useDownloadFile(reciptData, `${userData.name} 접수증.pdf`);
+    downloadFile(reciptData, `${userData.name} 접수증.pdf`);
   };
 
   return { handleMoveMainPage, handleDownloadReciptButtonClick, userData };

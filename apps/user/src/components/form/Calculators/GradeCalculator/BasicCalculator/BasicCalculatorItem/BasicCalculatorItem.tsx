@@ -3,7 +3,7 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import { useSubjectIncompleteValueStore, useSubjectListValueStore } from '@/stores';
 import { useInput } from './BasicCalculatorItem.hook';
-import { Subject } from '@/types/form/client';
+import type { Subject } from '@/types/form/client';
 
 interface Props {
   id: number;

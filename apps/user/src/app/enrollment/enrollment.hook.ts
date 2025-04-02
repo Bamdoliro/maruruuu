@@ -4,7 +4,8 @@ import {
 } from '@/services/enrollment/mutations';
 import { useFormStatusQuery } from '@/services/form/queries';
 import { useSetEntrollmentDocumentStore } from '@/stores';
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
+import type { ChangeEventHandler } from 'react';
 
 export const useChangeStatusButton = () => {
   const { changeFormEnterStatusMutate } = useChangeFormEnterStatusMutation();
@@ -51,7 +52,7 @@ export const useFileUpload = (openLoader: () => void, closeLoader: () => void) =
 export const useFormStatusCheck = () => {
   const { data: formStatusData } = useFormStatusQuery();
 
-  var isFormPassed = formStatusData?.status === 'PASSED';
+  const isFormPassed = formStatusData?.status === 'PASSED';
 
   return { isFormPassed };
 };

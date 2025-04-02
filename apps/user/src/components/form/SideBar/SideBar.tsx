@@ -1,5 +1,6 @@
 import { color } from '@maru/design-system';
-import { Button, ButtonStyleType, Column, Text } from '@maru/ui';
+import { Button, Column, Text } from '@maru/ui';
+import type { ButtonStyleType } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 

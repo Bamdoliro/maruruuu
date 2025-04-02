@@ -5,7 +5,7 @@ import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import Image from 'next/image';
-import { Button, Column, Input, PreviewInput, Text } from '@maru/ui';
+import { Button, Column, PreviewInput, Text } from '@maru/ui';
 import { ROUTES } from '@/constants/common/constants';
 import { IconArrowRight } from '@maru/icon';
 import Link from 'next/link';

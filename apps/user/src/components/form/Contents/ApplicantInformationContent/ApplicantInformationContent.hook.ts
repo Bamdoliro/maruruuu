@@ -4,7 +4,8 @@ import { useSaveFormMutation } from '@/services/form/mutations';
 import { useSaveFormQuery } from '@/services/form/queries';
 import { useFormValueStore, useSetFormStepStore, useSetFormStore } from '@/stores';
 import { formatDate } from '@/utils';
-import { ChangeEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
 import { z } from 'zod';
 
 export const useApplicantForm = () => {
@@ -30,7 +31,12 @@ export const useApplicantForm = () => {
         phoneNumber: saveFormQuery?.applicant.phoneNumber ?? userData.phoneNumber,
       },
     }));
-  }, [setForm, userData]);
+  }, [
+    saveFormQuery?.applicant.name,
+    saveFormQuery?.applicant.phoneNumber,
+    setForm,
+    userData,
+  ]);
 
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;

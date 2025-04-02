@@ -1,7 +1,7 @@
 import { color } from '@maru/design-system';
 import { IconTerms } from '@maru/icon';
 import { Column, Row, Text } from '@maru/ui';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface PolicyRouleProps {
   title: string;

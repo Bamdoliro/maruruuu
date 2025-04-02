@@ -2,8 +2,8 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import { SchoolItem } from './SchoolItem/SchoolItem';
 import { useSchoolListQuery } from '@/services/form/queries';
-import { School } from '@/types/form/client';
-import { Dispatch, SetStateAction } from 'react';
+import type { School } from '@/types/form/client';
+import type { Dispatch, SetStateAction } from 'react';
 
 interface SchoolListProps {
   school: School;

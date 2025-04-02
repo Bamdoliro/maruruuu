@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler } from 'react';
 import { useSaveFormMutation } from '@/services/form/mutations';
 import { useFormValueStore, useSetFormStepStore, useSetFormStore } from '@/stores';
 

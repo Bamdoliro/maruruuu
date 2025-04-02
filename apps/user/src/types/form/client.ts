@@ -80,6 +80,17 @@ export interface Education {
   teacherMobilePhoneNumber: string | null;
 }
 
+export interface Grade {
+  subjectList: SubjectList[];
+  attendance1: Attendance;
+  attendance2: Attendance;
+  attendance3: Attendance;
+  volunteerTime1: number;
+  volunteerTime2: number;
+  volunteerTime3: number;
+  certificateList: Certificate[];
+}
+
 export type GraduationType = 'QUALIFICATION_EXAMINATION' | 'EXPECTED' | 'GRADUATED';
 
 export type SubjectList = Omit<Subject, 'id'>;

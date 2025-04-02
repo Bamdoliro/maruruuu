@@ -2,7 +2,7 @@ import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { postFairApplication } from './api';
-import { FairApplication } from '@/types/fair/client';
+import type { FairApplication } from '@/types/fair/client';
 import { toast } from 'react-toastify';
 import { ROUTES } from '@/constants/common/constants';
 

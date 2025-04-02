@@ -1,5 +1,5 @@
 import { useSetFormStore } from '@/stores';
-import { School } from '@/types/form/client';
+import type { School } from '@/types/form/client';
 import { useState } from 'react';
 
 export const useFindSchoolModal = (onClose: () => void) => {

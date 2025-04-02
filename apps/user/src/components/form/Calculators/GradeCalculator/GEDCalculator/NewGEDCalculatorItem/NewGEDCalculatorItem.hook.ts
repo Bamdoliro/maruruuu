@@ -23,8 +23,8 @@ export const useInput = (newGEDSubjectIndex: number) => {
       Number(value) === 100
         ? 100
         : value.length > 2
-          ? Number(trimmedValue.slice(1))
-          : Number(trimmedValue);
+        ? Number(trimmedValue.slice(1))
+        : Number(trimmedValue);
 
     setNewGEDSubjectList((prev) => {
       const updatedData = [...prev];

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import FormStatusManager from './FormStatusManager/FormStatusManager';
 import SaveFormManager from './SaveFormManager/SaveFormManager';
 

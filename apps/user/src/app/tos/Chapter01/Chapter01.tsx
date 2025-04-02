@@ -32,7 +32,7 @@ const Chapter01 = () => {
           </ol>
           <StyledText fontType="p3" color={color.maruDefault}>
             <li style={{ marginLeft: '7px' }}>
-              <Link href={'https://maru.bamdoliro.com'}>maru.bamdoliro.com</Link>
+              <Link href="https://maru.bamdoliro.com">maru.bamdoliro.com</Link>
             </li>
           </StyledText>
           <ol start={2} style={{ marginLeft: '20px' }}>

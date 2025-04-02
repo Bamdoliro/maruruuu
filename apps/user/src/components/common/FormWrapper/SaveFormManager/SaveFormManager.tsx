@@ -7,10 +7,10 @@ import {
   useSetNewSubjectListStore,
   useSetSubjectListStore,
 } from '@/stores';
-import { Subject } from '@/types/form/client';
+import type { Subject } from '@/types/form/client';
 import { updateSlicedSubjectList } from '@/utils';
 import { useEffect } from 'react';
-import { SetterOrUpdater } from 'recoil';
+import type { SetterOrUpdater } from 'recoil';
 
 const SaveFormManager = () => {
   const { data: saveFormData } = useSaveFormQuery();
@@ -33,7 +33,7 @@ const SaveFormManager = () => {
       const updateSubjects: [
         SetterOrUpdater<Subject[]>,
         SetterOrUpdater<Subject[]>,
-        number,
+        number
       ] =
         graduationType === 'QUALIFICATION_EXAMINATION'
           ? [setGEDSubjectList, setNewGEDSubjectList, 5]
@@ -44,7 +44,16 @@ const SaveFormManager = () => {
     }
 
     setIsSaveFormLoaded(true);
-  }, [isSaveFormLoaded, saveFormData]);
+  }, [
+    isSaveFormLoaded,
+    saveFormData,
+    setForm,
+    setGEDSubjectList,
+    setIsSaveFormLoaded,
+    setNewGEDSubjectList,
+    setNewSubjectList,
+    setSubjectList,
+  ]);
 
   return null;
 };

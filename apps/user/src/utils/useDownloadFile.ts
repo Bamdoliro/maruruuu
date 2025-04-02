@@ -1,4 +1,4 @@
-const useDownloadFile = (data: string | undefined, fileName: string) => {
+const downloadFile = (data: string | undefined, fileName: string) => {
   if (!data) return;
 
   const link = document.createElement('a');
@@ -9,4 +9,4 @@ const useDownloadFile = (data: string | undefined, fileName: string) => {
   link.remove();
 };
 
-export default useDownloadFile;
+export default downloadFile;

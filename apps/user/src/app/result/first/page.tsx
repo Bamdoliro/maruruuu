@@ -2,7 +2,7 @@
 
 import { FirstResultBox, ResultMainBox } from '@/components/result';
 import { AppLayout } from '@/layouts';
-import { ResultStep } from '@/types/result/client';
+import type { ResultStep } from '@/types/result/client';
 import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';

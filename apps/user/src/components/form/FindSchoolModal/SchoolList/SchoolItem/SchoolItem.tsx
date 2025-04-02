@@ -3,7 +3,7 @@ import { color, font } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled, { css } from 'styled-components';
-import { School } from '@/types/form/client';
+import type { School } from '@/types/form/client';
 
 interface Props {
   school: School;

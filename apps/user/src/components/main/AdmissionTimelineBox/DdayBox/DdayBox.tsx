@@ -6,8 +6,7 @@ import { useButtonStatus, useRemainDate } from './DdayBox.hooks';
 
 const DdayBox = () => {
   const { status, remainTime, targetDate } = useRemainDate();
-  const { buttonText, buttonStyleType, isSubmitPeriod, handleMovePage } =
-    useButtonStatus();
+  const { buttonText, buttonStyleType, handleMovePage } = useButtonStatus();
 
   return (
     <StyledDdayBox>
