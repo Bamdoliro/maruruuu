@@ -3,11 +3,11 @@ import NoticeTableHeader from './NoticeTableHeader/NoticeTableHeader';
 import NoticeTableItem from './NoticeTableItem/NoticeTableItem';
 import { Notice } from '@/types/notice/client';
 
-interface Props {
+interface NoticeTableProps {
   noticeList: Notice[];
 }
 
-const NoticeTable = ({ noticeList }: Props) => {
+const NoticeTable = ({ noticeList }: NoticeTableProps) => {
   return (
     <Column gap={12}>
       <NoticeTableHeader />
