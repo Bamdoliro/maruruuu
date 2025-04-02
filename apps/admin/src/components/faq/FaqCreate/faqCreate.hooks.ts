@@ -1,7 +1,8 @@
 import { usePostFaqMutation } from '@/services/faq/mutations';
-import { useState, useRef, useEffect, ChangeEventHandler } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { resizeTextarea } from '@/utils';
-import { FaqCategory, FaqInput } from '@/types/faq/client';
+import type { FaqCategory, FaqInput } from '@/types/faq/client';
+import type { ChangeEventHandler } from 'react';
 
 export const useFaqCreateData = () => {
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
@@ -22,7 +23,7 @@ export const useFaqCreateData = () => {
     }
   };
 
-  const handleFaqCategoryChange = (value: string, name: string) => {
+  const handleFaqCategoryChange = (value: string) => {
     setFaqData((prev) => ({ ...prev, category: value as FaqCategory }));
   };
 

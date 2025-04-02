@@ -1,5 +1,5 @@
 import { KEY } from '@/constants/common/constant';
-import {
+import type {
   AnalysisApplicantCountReq,
   AnalysisApplicantTypeReq,
   GenderRatioStatusReq,

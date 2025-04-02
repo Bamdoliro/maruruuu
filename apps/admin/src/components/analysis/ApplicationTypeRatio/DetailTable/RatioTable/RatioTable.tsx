@@ -1,6 +1,6 @@
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 import useScoreRatio from './RatioTable.hooks';
-import { ApplicantCountType } from '@/types/analysis/client';
+import type { ApplicantCountType } from '@/types/analysis/client';
 import { EMPTY_VALUE } from '@/constants/common/constant';
 
 type RatioTableProps = {

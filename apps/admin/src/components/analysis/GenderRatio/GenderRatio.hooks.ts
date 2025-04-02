@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGenderRatioListQuery } from '@/services/analysis/queries';
-import {
+import type {
   AnalysisApplicantType,
   FormTypeMainCategory,
   GenderRatioType,
@@ -22,7 +22,7 @@ const useGenderRatio = () => {
     setMainCategory(data);
   };
 
-  const fetchGenderRatioData = (category: FormTypeMainCategory) => {
+  const useFetchGenderRatioData = (category: FormTypeMainCategory) => {
     return (
       useGenderRatioListQuery({
         statusList: stepMap[currentAnalysisPassStep],
@@ -32,9 +32,9 @@ const useGenderRatio = () => {
     );
   };
 
-  const RegularData = fetchGenderRatioData('REGULAR');
-  const SpecialData = fetchGenderRatioData('SPECIAL');
-  const SupernumeraryData = fetchGenderRatioData('SUPERNUMERARY');
+  const RegularData = useFetchGenderRatioData('REGULAR');
+  const SpecialData = useFetchGenderRatioData('SPECIAL');
+  const SupernumeraryData = useFetchGenderRatioData('SUPERNUMERARY');
 
   const calculateGenderRatio = (data: GenderRatioType[]) => {
     const totalMale = data.reduce(

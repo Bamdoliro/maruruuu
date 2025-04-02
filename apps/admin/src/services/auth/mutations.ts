@@ -2,11 +2,11 @@ import { Cookie } from '@/apis/cookie/cookie';
 import { Storage } from '@/apis/storage/storage';
 import { ROUTES, TOKEN } from '@/constants/common/constant';
 import { useApiError } from '@/hooks';
-import { PostLoginAuthReq } from '@/types/auth/remote';
+import type { PostLoginAuthReq } from '@/types/auth/remote';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { deleteLogoutAdmin, postLoginAdmin } from './api';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 
 const saveTokens = (accessToken: string, refreshToken: string) => {
   Storage.setItem(TOKEN.ACCESS, accessToken);

@@ -1,4 +1,4 @@
-import { ApplicantCountType } from '@/types/analysis/client';
+import type { ApplicantCountType } from '@/types/analysis/client';
 
 const useScoreRatio = (formList: ApplicantCountType[] | undefined) => {
   const { totalCount, regularCount, specialAdmissionCount, otherCount } =

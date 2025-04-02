@@ -3,7 +3,7 @@ import DetailContent from './DetailContent/DetailContent';
 import RatioTable from './RatioTable/RatioTable';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
-import { ApplicantCountType } from '@/types/analysis/client';
+import type { ApplicantCountType } from '@/types/analysis/client';
 import useRatio from './DetailTable.hooks';
 
 type DetailTableProps = { formList: ApplicantCountType[] | undefined };

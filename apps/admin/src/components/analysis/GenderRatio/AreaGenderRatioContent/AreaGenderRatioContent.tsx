@@ -5,7 +5,7 @@ import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import AreaGenderRatioTable from './AreaGenderRatioTable/AreaGenderRatioTable';
-import { FormTypeMainCategory, GenderRatioType } from '@/types/analysis/client';
+import type { FormTypeMainCategory, GenderRatioType } from '@/types/analysis/client';
 
 interface GenderRatioDetailTableProps {
   onDataUpdate: (newData: FormTypeMainCategory) => void;

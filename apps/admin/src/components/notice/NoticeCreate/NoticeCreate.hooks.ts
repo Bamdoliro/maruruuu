@@ -3,10 +3,11 @@ import {
   useNoticeFileUrlMutation,
 } from '@/services/notice/mutations';
 import { useNoticeFileStore } from '@/store/notice/noticeFile';
-import { NoticeInput } from '@/types/notice/client';
+import type { NoticeInput } from '@/types/notice/client';
 import type { PostNoticeReq } from '@/types/notice/remote';
 import { resizeTextarea } from '@/utils';
-import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
 
 export const useNoticeCreateData = () => {
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
