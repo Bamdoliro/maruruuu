@@ -13,6 +13,7 @@ export const KEY = {
   NOTICE_DETAIL: 'useNoticeDetail',
   FAQ_LIST: 'useFaqList',
   FAQ_DETAIL: 'useFaqDetail',
+  REGISTRATION_LIST: 'useRegistrationList',
 };
 
 export const ROUTES = {

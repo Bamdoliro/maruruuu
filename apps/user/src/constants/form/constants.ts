@@ -1,4 +1,4 @@
-import { Certificate } from '@/types/form/client';
+import type { Certificate } from '@/types/form/client';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 

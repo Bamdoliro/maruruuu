@@ -1,12 +1,15 @@
+import { useSetFormGradeStepStore } from './../../../../stores/form/formGradeStep';
 import { EducationSchema } from '@/schemas/EducationSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
 import { useFormStore, useSetFormStepStore } from '@/stores';
-import { ChangeEventHandler, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
+import { useState } from 'react';
 import { z } from 'zod';
 
 export const useEducationForm = () => {
   const [form, setForm] = useFormStore();
   const setFormStep = useSetFormStepStore();
+  const setFormGradeStep = useSetFormGradeStepStore();
   const { saveFormMutate } = useSaveFormMutation();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
 
@@ -21,6 +24,7 @@ export const useEducationForm = () => {
       EducationSchema.parse(form.education);
       setErrors({});
       setFormStep('전형선택');
+      setFormGradeStep('교과성적');
       saveFormMutate(form);
     } catch (err) {
       if (err instanceof z.ZodError) {

@@ -6,7 +6,7 @@ import { useNewSubjectListValueStore } from '@/stores';
 import color from '@maru/design-system/src/color';
 import { font } from '@maru/design-system';
 import { useDeleteNewSubject, useInput } from './NewBasicCalculatorItem.hook';
-import { Subject } from '@/types/form/client';
+import type { Subject } from '@/types/form/client';
 
 interface NewBasicCalculatorItemProps {
   id: number;

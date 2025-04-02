@@ -1,5 +1,5 @@
 import { color } from '@maru/design-system';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface BoxProps {

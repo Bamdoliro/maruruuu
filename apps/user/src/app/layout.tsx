@@ -2,7 +2,8 @@ import Provider from '@/components/Provider';
 import GoogleAnalytics from '@/lib/GoogleAnalytics';
 import StyledComponentRegistry from '@/lib/registry';
 import QueryClientProvider from '@/services/QueryClientProvider';
-import React, { ReactNode } from 'react';
+import React from 'react';
+import type { ReactNode } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {

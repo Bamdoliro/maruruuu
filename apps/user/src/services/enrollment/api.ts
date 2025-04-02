@@ -5,7 +5,11 @@ import axios from 'axios';
 
 export const postEntrollmentDocument =
   async (): Promise<EntrollmentDocumentPresignedUrlData> => {
-    const { data } = await maru.post('/forms/admission-and-pledge', null, authorization());
+    const { data } = await maru.post(
+      '/forms/admission-and-pledge',
+      null,
+      authorization()
+    );
 
     const { uploadUrl, downloadUrl, fields } = data?.data?.data || {};
 

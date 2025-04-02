@@ -1,5 +1,5 @@
 import { useFormValueStore } from '@/stores';
-import { Certificate } from '@/types/form/client';
+import type { Certificate } from '@/types/form/client';
 import { CheckBox, Row, Td } from '@maru/ui';
 
 interface CertificateCalculatorItemProps {

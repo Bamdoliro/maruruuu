@@ -1,6 +1,6 @@
 import { Footer, Header } from '@/components/common';
-import { ReactNode } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import type { ReactNode, CSSProperties } from 'react';
+import styled from 'styled-components';
 
 interface AppLayoutProps {
   header?: boolean;

@@ -1,4 +1,4 @@
-import { Form } from './client';
+import type { Form } from './client';
 
 export interface GetFormListRes {
   dataList: Form[];

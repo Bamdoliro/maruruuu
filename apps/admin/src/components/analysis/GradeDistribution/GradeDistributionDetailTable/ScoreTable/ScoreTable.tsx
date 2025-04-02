@@ -1,4 +1,4 @@
-import { GradeDistributionType } from '@/types/analysis/client';
+import type { GradeDistributionType } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 import useScoreStatus from './ScoreTable.hooks';
 import { EMPTY_VALUE } from '@/constants/common/constant';

@@ -76,7 +76,7 @@ export const useProfileUploader = (
         startUploading(croppedFile);
       };
     },
-    [startUploading]
+    [startUploading, userData.name]
   );
 
   const processImageFile = useCallback(

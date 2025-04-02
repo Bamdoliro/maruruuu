@@ -1,6 +1,6 @@
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface CategoryProps {

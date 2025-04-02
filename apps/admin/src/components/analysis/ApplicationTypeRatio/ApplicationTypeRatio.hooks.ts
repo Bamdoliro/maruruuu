@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useApplicantCountQuery } from '@/services/analysis/queries';
-import { AnalysisApplicantCountType } from '@/types/analysis/client';
+import type { AnalysisApplicantCountType } from '@/types/analysis/client';
 
 const useStepTable = () => {
   const [currentAnalysisStep, setCurrentAnalysisStep] =

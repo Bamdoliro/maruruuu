@@ -1,4 +1,4 @@
-import { EntrollmentDocument } from '@/types/enrollment/remote';
+import type { EntrollmentDocument } from '@/types/enrollment/remote';
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const entrollmentDocumentAtomState = atom<EntrollmentDocument>({

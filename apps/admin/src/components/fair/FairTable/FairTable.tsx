@@ -1,7 +1,7 @@
 import { Column } from '@maru/ui';
 import FairTableHeader from './FairTableHeader/FairTableHeader';
 import FairTableItem from './FairTableItem/FairTableItem';
-import { AttendeeData } from '@/types/fair/client';
+import type { AttendeeData } from '@/types/fair/client';
 
 interface FairTableProps {
   dataList: AttendeeData[];

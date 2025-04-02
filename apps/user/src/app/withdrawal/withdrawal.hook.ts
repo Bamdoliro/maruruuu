@@ -1,7 +1,8 @@
 import { ROUTES } from '@/constants/common/constants';
 import { useWithdrawalMutation } from '@/services/user/mutations';
 import { useRouter } from 'next/navigation';
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
+import type { ChangeEventHandler } from 'react';
 
 export const useWithdrawalAction = (password: string) => {
   const { withdrawalMutate } = useWithdrawalMutation(password);

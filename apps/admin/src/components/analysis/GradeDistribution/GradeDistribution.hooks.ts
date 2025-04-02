@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGradeDistributionListQuery } from '@/services/analysis/queries';
-import { AnalysisApplicantType } from '@/types/analysis/client';
+import type { AnalysisApplicantType } from '@/types/analysis/client';
 import { ANALYSIS_PASS_STEP } from '@/constants/analysis/constant';
 
 const useGradeDistribution = () => {

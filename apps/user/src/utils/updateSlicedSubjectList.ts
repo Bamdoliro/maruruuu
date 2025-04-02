@@ -1,4 +1,4 @@
-import { SaveSubject } from '@/types/form/client';
+import type { SaveSubject } from '@/types/form/client';
 
 const updateSlicedSubjectList = (
   subjectList: SaveSubject[],

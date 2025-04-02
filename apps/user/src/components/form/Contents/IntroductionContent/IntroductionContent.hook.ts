@@ -1,14 +1,21 @@
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormValueStore, useSetFormStepStore, useSetFormStore } from '@/stores';
-import { ChangeEventHandler } from 'react';
+import {
+  useFormValueStore,
+  useSetFormGradeStepStore,
+  useSetFormStepStore,
+  useSetFormStore,
+} from '@/stores';
+import type { ChangeEventHandler } from 'react';
 
 export const useCTAButton = () => {
   const form = useFormValueStore();
   const setFormStep = useSetFormStepStore();
+  const setFormGradeStep = useSetFormGradeStepStore();
   const { saveFormMutate } = useSaveFormMutation();
 
   const handleNextStep = () => {
     setFormStep('초안작성완료');
+    setFormGradeStep('자격증');
     saveFormMutate(form);
   };
 

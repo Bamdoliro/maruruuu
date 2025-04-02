@@ -52,7 +52,7 @@ export const getButtonStyle = {
     &:hover {
       background-color: ${color.red};
     }
-  `
+  `,
 };
 
 export const getButtonPadding = {

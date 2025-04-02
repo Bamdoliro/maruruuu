@@ -1,4 +1,4 @@
-import { GradeStep } from '@/types/form/client';
+import type { GradeStep } from '@/types/form/client';
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const formGradeStepAtomState = atom<GradeStep>({

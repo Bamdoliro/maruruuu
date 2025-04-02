@@ -10,7 +10,7 @@ import {
   putNoticeFileUrl,
 } from './api';
 import { ROUTES } from '@/constants/common/constant';
-import { PostNoticeReq, PutNoticeReq } from '@/types/notice/remote';
+import type { PostNoticeReq, PutNoticeReq } from '@/types/notice/remote';
 
 export const usePostNoticeMutation = () => {
   const { handleError } = useApiError();

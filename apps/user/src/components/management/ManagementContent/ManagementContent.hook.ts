@@ -2,7 +2,7 @@ import { ROUTES } from '@/constants/common/constants';
 import { useUser } from '@/hooks';
 import { useExportFormQuery, useExportReciptQuery } from '@/services/form/queries';
 import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
-import { useDownloadFile } from '@/utils';
+import { downloadFile } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 export const useBoxClick = (status?: string) => {
@@ -41,7 +41,7 @@ export const useBoxClick = (status?: string) => {
     if (!accept) {
       alert('원서를 다운로드를 할 수 없습니다.');
     } else {
-      useDownloadFile(
+      downloadFile(
         exportFormData,
         `${userData.name} 부산소프트웨어마이스터고등학교 원서.pdf`
       );
@@ -55,7 +55,7 @@ export const useBoxClick = (status?: string) => {
     if (!accept) {
       alert('접수증을 다운로드할 수 없는 상태입니다.');
     } else {
-      useDownloadFile(reciptData, `${userData.name} 접수증.pdf`);
+      downloadFile(reciptData, `${userData.name} 접수증.pdf`);
     }
   };
 
@@ -63,7 +63,7 @@ export const useBoxClick = (status?: string) => {
     if (!(status === 'FIRST_PASSED')) {
       alert('1차 합격일때만 수험표를 출력할 수 있습니다.');
     } else {
-      useDownloadFile(admissionTicketData, `${userData.name} 수험표.pdf`);
+      downloadFile(admissionTicketData, `${userData.name} 수험표.pdf`);
     }
   };
 

@@ -57,7 +57,7 @@ const SignUpContent = () => {
             width="100%"
             name="phoneNumber"
             label="전화번호 인증"
-            buttonText={'인증번호 전송'}
+            buttonText="인증번호 전송"
             onClick={handleRequestVerificationCode}
             type="phoneNumber"
             placeholder="- 없이 입력해주세요."

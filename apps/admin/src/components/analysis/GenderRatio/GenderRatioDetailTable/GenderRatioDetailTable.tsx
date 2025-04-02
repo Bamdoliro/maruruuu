@@ -3,7 +3,7 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import AreaGenderRatioContent from '../AreaGenderRatioContent/AreaGenderRatioContent';
 import TypeRatioTable from './TypeRatioTable/TypeRatioTable';
-import {
+import type {
   FormTypeMainCategory,
   GenderRatioCount,
   GenderRatioType,

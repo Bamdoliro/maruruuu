@@ -1,6 +1,6 @@
 import { color, font } from '@maru/design-system';
 import { IconAnswer, IconArrowBottom, IconArrowTop, IconFaq } from '@maru/icon';
-import { Row, Text } from '@maru/ui';
+import { Row } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 

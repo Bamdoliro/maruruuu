@@ -1,4 +1,4 @@
-import { GenderRatioType } from '@/types/analysis/client';
+import type { GenderRatioType } from '@/types/analysis/client';
 import { Column, Row, Td, Text, Th } from '@maru/ui';
 import useCalculateGenderRatio from './AreaGenderRatioTable.hooks';
 import { EMPTY_VALUE } from '@/constants/common/constant';

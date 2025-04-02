@@ -1,7 +1,7 @@
 import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
-import { Form } from '@/types/form/client';
-import {
+import type { Form } from '@/types/form/client';
+import type {
   FileDocument,
   FormPresignedUrlData,
   GetFormStatusRes,
