@@ -67,7 +67,7 @@ const NoticeUploadModal = ({ isOpen, onClose, onFileAttach }: NoticeUploadModalP
         </Row>
         <NoticeUploader isOpen={isOpen} />
         <Row justifyContent="flex-end" alignItems="flex-start" gap="16px">
-          <Button size="SMALL" styleType="SECONDARY">
+          <Button size="SMALL" styleType="SECONDARY" onClick={handleCloseModal}>
             취소
           </Button>
           <Button
