@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import RegistartonTable from '@/components/registration/RegistrationTable/RegistrationTable';
 import AppLayout from '@/layouts/AppLayout';
