@@ -8,12 +8,12 @@ import { useDebounceInput } from '@maru/hooks';
 import { Button, Column, Loader, Row, Text, SearchInput } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import { Suspense, useMemo } from 'react';
+import { useMemo } from 'react';
 import { styled } from 'styled-components';
 
 const NoticePage = () => {
   const router = useRouter();
-  const { data: noticeList } = useNoticeListQuery();
+  const { data: noticeList, isLoading } = useNoticeListQuery();
 
   const {
     value: noticeTitle,
@@ -46,9 +46,7 @@ const NoticePage = () => {
               공지사항 작성
             </Button>
           </Row>
-          <Suspense fallback={<Loader />}>
-            <NoticeTable noticeList={filteredNoticeList ?? []} />
-          </Suspense>
+          {isLoading ? <Loader /> : <NoticeTable noticeList={filteredNoticeList ?? []} />}
         </Column>
       </StyledNoticePage>
     </AppLayout>
