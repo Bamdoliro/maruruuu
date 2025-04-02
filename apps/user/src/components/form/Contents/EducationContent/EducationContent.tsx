@@ -1,4 +1,4 @@
-import { ButtonInput, Column, Input, Row } from '@maru/ui';
+import { ButtonInput, Column, Input, RadioGroup, Row } from '@maru/ui';
 import FormController from '../../FormController/FormController';
 import { useFormValueStore } from '@/stores';
 import { useOverlay } from '@toss/use-overlay';
@@ -18,71 +18,128 @@ const GuardianInformationContent = () => {
 
   return (
     <>
-      <Column gap={30}>
-        <Row gap={48}>
-          <Input
-            name="name"
-            label="성명"
-            placeholder="예) 홍길동"
-            width="100%"
-            value={form.parent.name}
-            onChange={onFieldChange}
-            isError={!!errors.name?.length}
-            errorMessage={errors.name ? errors.name[0] : ''}
-          />
-          <Input
-            name="phoneNumber"
-            label="전화번호"
-            placeholder="- 없이 입력해주세요."
-            width="100%"
-            value={form.parent.phoneNumber}
-            onChange={onFieldChange}
-            isError={!!errors.phoneNumber?.length}
-            errorMessage={errors.phoneNumber ? errors.phoneNumber[0] : ''}
-          />
-        </Row>
-        <Input
-          label="학생과의 관계"
-          name="relation"
-          placeholder="예) 부, 모"
-          width="calc(50% - 24px)"
-          value={form.parent.relation}
+      <Column width="100%" gap={30}>
+        <RadioGroup
+          label="졸업 구분"
+          name="graduationType"
+          items={[
+            { value: 'EXPECTED', label: '졸업 예정' },
+            { value: 'GRADUATED', label: '졸업' },
+            { value: 'QUALIFICATION_EXAMINATION', label: '고입 검정' },
+          ]}
+          value={form.education.graduationType}
           onChange={onFieldChange}
-          isError={!!errors.relation?.length}
-          errorMessage={errors.relation ? errors.relation[0] : ''}
         />
-        <ButtonInput
-          label="주소"
-          buttonText="검색"
-          width="100%"
-          value={form.parent.address}
-          placeholder="예) 부산광역시 강서구 가락대로 1393 봉림동 15"
-          enabled={true}
-          readOnly
-          onClick={openFindAddressModal}
-          isError={!!errors.address?.length}
-          errorMessage={errors.address ? errors.address[0] : ''}
-        />
-        <Row gap={48}>
+        <Row gap={48} alignItems="center">
+          {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
+            <ButtonInput
+              name="schoolName"
+              label="출신학교"
+              value={form.education.schoolName ?? ''}
+              buttonText="검색"
+              onClick={openFindAddressModal}
+              placeholder="검색 버튼을 눌러 학교를 검색하세요."
+              readOnly
+              enabled={true}
+              isError={!!errors.schoolName?.length}
+              errorMessage={errors.schoolName ? errors.schoolName[0] : ''}
+            />
+          )}
+          {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
+            <Input
+              name="schoolAddress"
+              label="도로명주소"
+              placeholder="학교를 선택하면 자동완성됩니다."
+              width="100%"
+              readOnly
+              value={form.education.schoolAddress ?? ''}
+              onChange={onFieldChange}
+            />
+          )}
+        </Row>
+        <Row gap={48} alignItems="center">
           <Input
-            name="detailAddress"
-            label="상세 주소"
-            placeholder="상세 주소를 입력해주세요."
-            width="100%"
-            value={form.parent.detailAddress}
+            name="graduationYear"
+            label={
+              form.education.graduationType === 'QUALIFICATION_EXAMINATION'
+                ? '합격연도'
+                : '졸업(예정)연도'
+            }
+            placeholder="예) 2024"
+            width={
+              form.education.graduationType === 'QUALIFICATION_EXAMINATION'
+                ? '50%'
+                : '100%'
+            }
             onChange={onFieldChange}
-            isError={!!errors.detailAddress?.length}
-            errorMessage={errors.detailAddress ? errors.detailAddress[0] : ''}
+            value={form.education.graduationYear ?? ''}
+            isError={!!errors.graduationYear?.length}
+            errorMessage={errors.graduationYear ? errors.graduationYear[0] : ''}
           />
-          <Input
-            name="zoneCode"
-            label="우편번호"
-            placeholder="주소를 선택하면 자동으로 입력됩니다."
-            width="100%"
-            readOnly
-            value={form.parent.zoneCode}
-            onChange={onFieldChange}
-          />
+          {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
+            <Input
+              name="schoolLocation"
+              label="지역"
+              placeholder="학교를 선택하면 자동완성됩니다."
+              readOnly
+              width="100%"
+              value={form.education.schoolLocation ?? ''}
+              onChange={onFieldChange}
+            />
+          )}
+        </Row>
+        <Row gap={48} alignItems="center">
+          {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
+            <Input
+              name="schoolCode"
+              label="표준 학교 코드"
+              placeholder="학교를 선택하면 자동완성됩니다."
+              readOnly
+              width="100%"
+              value={form.education.schoolCode ?? ''}
+              onChange={onFieldChange}
+            />
+          )}
+          {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
+            <Input
+              name="teacherPhoneNumber"
+              label="학교 대표 연락처"
+              placeholder="학교의 교무실 연락처를 입력해주세요."
+              width="100%"
+              value={form.education.teacherPhoneNumber ?? ''}
+              onChange={onFieldChange}
+              isError={!!errors.teacherPhoneNumber?.length}
+              errorMessage={errors.teacherPhoneNumber ? errors.teacherPhoneNumber[0] : ''}
+            />
+          )}
+        </Row>
+        <Row gap={48} alignItems="center">
+          {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
+            <Input
+              name="teacherName"
+              label="작성 교사 이름"
+              placeholder="예) 홍길동"
+              width="100%"
+              value={form.education.teacherName ?? ''}
+              onChange={onFieldChange}
+              isError={!!errors.teacherName?.length}
+              errorMessage={errors.teacherName ? errors.teacherName[0] : ''}
+            />
+          )}
+          {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
+            <Input
+              name="teacherMobilePhoneNumber"
+              label="작성 교사 연락처(휴대전화)"
+              placeholder="- 없이 입력해 주세요"
+              width="100%"
+              value={form.education.teacherMobilePhoneNumber ?? ''}
+              onChange={onFieldChange}
+              isError={!!errors.teacherMobilePhoneNumber?.length}
+              errorMessage={
+                errors.teacherMobilePhoneNumber ? errors.teacherMobilePhoneNumber[0] : ''
+              }
+            />
+          )}
         </Row>
       </Column>
       <FormController
