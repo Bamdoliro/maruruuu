@@ -1,12 +1,12 @@
 import { color } from '@maru/design-system';
 import { Column, Text, Textarea } from '@maru/ui';
 import FormController from '../../FormController/FormController';
-import { useCTAButton, useTextArea } from './IntroductionContent.hook';
 import { useFormValueStore } from '@/stores';
+import { useIntoductionForm } from './IntroductionContent.hook';
 
 const IntroductionContent = () => {
-  const { handleNextStep, handlePreviousStep } = useCTAButton();
-  const { handleIntoductionChange } = useTextArea();
+  const { onFieldChange, handleNextStep, handlePreviousStep, errors } =
+    useIntoductionForm();
   const form = useFormValueStore();
 
   return (
@@ -22,7 +22,9 @@ const IntroductionContent = () => {
             label="자기소개서"
             placeholder="1000자 이내로 작성해주세요."
             value={form.document.coverLetter}
-            onChange={handleIntoductionChange}
+            onChange={onFieldChange}
+            isError={!!errors.coverLetter?.length}
+            errorMessage={errors.coverLetter ? errors.coverLetter[0] : ''}
           />
           <Textarea
             name="statementOfPurpose"
@@ -30,7 +32,9 @@ const IntroductionContent = () => {
             label="학업계획서"
             placeholder="1000자 이내로 작성해주세요."
             value={form.document.statementOfPurpose}
-            onChange={handleIntoductionChange}
+            onChange={onFieldChange}
+            isError={!!errors.statementOfPurpose?.length}
+            errorMessage={errors.statementOfPurpose ? errors.statementOfPurpose[0] : ''}
           />
         </Column>
       </Column>

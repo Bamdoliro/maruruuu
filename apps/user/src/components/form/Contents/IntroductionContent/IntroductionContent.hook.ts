@@ -1,40 +1,59 @@
+import { IntroductionSchema } from '@/schemas/IntroductionSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import {
-  useFormValueStore,
-  useSetFormGradeStepStore,
-  useSetFormStepStore,
-  useSetFormStore,
-} from '@/stores';
-import type { ChangeEventHandler } from 'react';
+import { useFormStore, useSetFormGradeStepStore, useSetFormStepStore } from '@/stores';
+import { useState, type ChangeEventHandler } from 'react';
+import { z } from 'zod';
 
-export const useCTAButton = () => {
-  const form = useFormValueStore();
+export const useIntoductionForm = () => {
+  const [form, setForm] = useFormStore();
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
   const setFormStep = useSetFormStepStore();
   const setFormGradeStep = useSetFormGradeStepStore();
   const { saveFormMutate } = useSaveFormMutation();
 
+  const onFieldChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      document: { ...prev.document, [name]: value },
+    }));
+  };
+
   const handleNextStep = () => {
-    setFormStep('초안작성완료');
-    setFormGradeStep('자격증');
-    saveFormMutate(form);
+    try {
+      IntroductionSchema.parse(form.document);
+      setErrors({});
+      setFormStep('초안작성완료');
+      saveFormMutate(form);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        const fieldErrors = err.flatten().fieldErrors;
+        const normalizedErrors = Object.fromEntries(
+          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
+        );
+        setErrors(normalizedErrors);
+      }
+    }
   };
 
   const handlePreviousStep = () => {
-    setFormStep('성적입력');
-    saveFormMutate(form);
+    try {
+      IntroductionSchema.parse(form.document);
+      setErrors({});
+      setFormStep('성적입력');
+      setFormGradeStep('자격증');
+      saveFormMutate(form);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        const fieldErrors = err.flatten().fieldErrors;
+        const normalizedErrors = Object.fromEntries(
+          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
+        );
+        setErrors(normalizedErrors);
+      }
+    }
   };
 
-  return { handleNextStep, handlePreviousStep };
-};
-
-export const useTextArea = () => {
-  const setForm = useSetFormStore();
-
-  const handleIntoductionChange: ChangeEventHandler<HTMLTextAreaElement> = ({
-    target: { name, value },
-  }) => {
-    setForm((prev) => ({ ...prev, document: { ...prev.document, [name]: value } }));
-  };
-
-  return { handleIntoductionChange };
+  return { onFieldChange, handleNextStep, handlePreviousStep, errors };
 };
