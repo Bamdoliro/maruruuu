@@ -25,6 +25,7 @@ const FormTableItem = ({
   graduationType,
   school,
   status,
+
   totalScore,
   firstRoundPassed,
   secondRoundPassed,
@@ -44,7 +45,7 @@ const FormTableItem = ({
           {name}
         </Text>
         <Text fontType="p2" width={convertToResponsive(120, 160)}>
-          {school}
+          {graduationType === 'QUALIFICATION_EXAMINATION' ? '검정고시' : school}
         </Text>
         <Text fontType="p2" width={convertToResponsive(180, 240)}>
           {graduationType}
