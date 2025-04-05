@@ -1,23 +1,9 @@
 import { TableItem } from '@/components/common';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
-import { Form, FormStatus } from '@/types/form/client';
+import { Form } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { color } from '@maru/design-system';
 import { Row, Text } from '@maru/ui';
-
-interface FormTableItemProps {
-  id: number;
-  examinationNumber: number | null;
-  name: string;
-  graduationType: string;
-  school: string;
-  status: string;
-  type: string;
-  isChangedToRegular: boolean;
-  totalScore: number | null;
-  firstRoundPassed: boolean | null;
-  secondRoundPassed: boolean | null;
-}
 
 const FormTableItem = ({
   id,
