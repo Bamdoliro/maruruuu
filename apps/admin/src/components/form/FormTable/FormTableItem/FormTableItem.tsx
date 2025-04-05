@@ -73,7 +73,11 @@ const FormTableItem = ({
         >
           {getRoundResult(firstRoundPassed)}
         </Text>
-        <Text fontType="p2" width={convertToResponsive(40, 60)}>
+        <Text
+          fontType="p2"
+          width={convertToResponsive(40, 60)}
+          color={typeof totalScore !== 'number' ? color.gray600 : color.black}
+        >
           {typeof totalScore !== 'number' ? '미정' : Number(totalScore.toFixed(3))}
         </Text>
         <Text
