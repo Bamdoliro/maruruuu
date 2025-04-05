@@ -1,4 +1,5 @@
 import { TableItem } from '@/components/common';
+import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
 import { Form } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { color } from '@maru/design-system';
@@ -25,7 +26,7 @@ const FormTableItem = ({
   graduationType,
   school,
   status,
-
+  type,
   totalScore,
   firstRoundPassed,
   secondRoundPassed,
@@ -48,7 +49,7 @@ const FormTableItem = ({
           {graduationType === 'QUALIFICATION_EXAMINATION' ? '검정고시' : school}
         </Text>
         <Text fontType="p2" width={convertToResponsive(180, 240)}>
-          {graduationType}
+          {FORM_TYPE_CATEGORY[type]}
         </Text>
       </Row>
       <Row gap={48}>
