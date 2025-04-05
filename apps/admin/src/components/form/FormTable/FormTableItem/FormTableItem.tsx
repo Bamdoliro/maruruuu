@@ -22,11 +22,11 @@ const FormTableItem = ({
     return status ? color.maruDefault : color.red;
   };
 
-  const getRoundResult = (roundPassed: boolean | null): string => {
-    if (roundPassed === null) {
-      return '미정';
+  const getRoundResult = (roundPassed: boolean | null, FormStatus?: string) => {
+    if (FormStatus === 'NO_SHOW') {
+      return '불참';
     }
-    return roundPassed ? '합격' : '불합격';
+    return roundPassed === null ? '미정' : roundPassed ? '합격' : '불합격';
   };
 
   return (
@@ -71,7 +71,7 @@ const FormTableItem = ({
           width={convertToResponsive(40, 60)}
           color={getStatusColor(secondRoundPassed)}
         >
-          {getRoundResult(secondRoundPassed)}
+          {getRoundResult(secondRoundPassed, status)}
         </Text>
       </Row>
     </TableItem>
