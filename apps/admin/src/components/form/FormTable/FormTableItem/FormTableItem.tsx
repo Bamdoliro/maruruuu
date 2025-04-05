@@ -1,4 +1,5 @@
 import { TableItem } from '@/components/common';
+import { Form } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { color } from '@maru/design-system';
 import { Row, Text } from '@maru/ui';
@@ -21,12 +22,13 @@ const FormTableItem = ({
   id,
   examinationNumber,
   name,
-  school,
   graduationType,
+  school,
+  status,
   totalScore,
   firstRoundPassed,
   secondRoundPassed,
-}: FormTableItemProps) => {
+}: Form) => {
   const getStatusColor = (status: boolean | null) => {
     if (status === null) return color.gray600;
     return status ? color.maruDefault : color.red;
@@ -50,7 +52,7 @@ const FormTableItem = ({
       </Row>
       <Row gap={48}>
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
-          최종 제출
+          {status === 'SUBMITTED' ? '초안 제출' : '최종 제출'}
         </Text>
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
           승인
