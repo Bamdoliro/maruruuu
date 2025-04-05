@@ -1,6 +1,6 @@
 import { TableItem } from '@/components/common';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
-import { Form } from '@/types/form/client';
+import { Form, FormStatus } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { color } from '@maru/design-system';
 import { Row, Text } from '@maru/ui';
@@ -36,6 +36,13 @@ const FormTableItem = ({
     return status ? color.maruDefault : color.red;
   };
 
+  const getRoundResult = (roundPassed: boolean | null): string => {
+    if (roundPassed === null) {
+      return '미정';
+    }
+    return roundPassed ? '합격' : '불합격';
+  };
+
   return (
     <TableItem key={id}>
       <Row gap={48}>
@@ -64,7 +71,7 @@ const FormTableItem = ({
           width={convertToResponsive(40, 60)}
           color={getStatusColor(firstRoundPassed)}
         >
-          합격
+          {getRoundResult(firstRoundPassed)}
         </Text>
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
           {typeof totalScore !== 'number' ? '미정' : Number(totalScore.toFixed(3))}
@@ -74,7 +81,7 @@ const FormTableItem = ({
           width={convertToResponsive(40, 60)}
           color={getStatusColor(secondRoundPassed)}
         >
-          합격
+          {getRoundResult(secondRoundPassed)}
         </Text>
       </Row>
     </TableItem>
