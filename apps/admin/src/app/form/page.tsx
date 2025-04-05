@@ -18,13 +18,14 @@ import {
   IconPrint,
   IconUpload,
 } from '@maru/icon';
-import { Column, Dropdown, Row, Text } from '@maru/ui';
+import { Button, Column, Dropdown, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useFormPageState } from './form.hooks';
 import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
+import { useIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
 
 const FormPage = () => {
   const {
@@ -34,6 +35,14 @@ const FormPage = () => {
     handleFormListTypeAll,
     getCriteriaDropdownValue,
   } = useFormPageState();
+
+  const [isSecondRoundResultEditing, setIsSecondRoundResultEditing] =
+    useIsSecondRoundResultEditingStore();
+
+  const setIsSecondRoundResultEditingTrue = () => setIsSecondRoundResultEditing(true);
+  const setIsSecondRoundResultEditingFalse = () => {
+    setIsSecondRoundResultEditing(false);
+  };
 
   const overlay = useOverlay();
 
@@ -138,52 +147,67 @@ const FormPage = () => {
                   />
                 </ReviewFilterBox>
               ) : null}
-              <FunctionDropdown
-                data={[
-                  {
-                    icon: <IconCheckDocument width={24} height={24} />,
-                    label: '검토해야하는 원서 모아보기',
-                    value: 'review_applications',
-                    onClick: handleFormListTypeReview,
-                  },
-                  {
-                    icon: <IconEditDocument width={24} height={24} />,
-                    label: '2차 전형 점수 입력하기',
-                    value: 'input_second_round_scores',
-                    onClick: openSecondScoreUplaodModal,
-                  },
-                  {
-                    icon: <IconEditDocument width={24} height={24} />,
-                    label: '2차 합격 여부 변경하기',
-                    value: 'update_second_round_result',
-                    onClick: () => {},
-                  },
-                  {
-                    icon: <IconEditAllDocument width={24} height={24} />,
-                    label: '2차 합격자 자동 선발',
-                    value: 'auto_select_second_round',
-                    onClick: () => {},
-                  },
-                  {
-                    icon: <IconUpload width={24} height={24} />,
-                    label: '명단 엑셀로 내보내기',
-                    value: 'export_excel',
-                    onClick: () => {},
-                  },
-                  {
-                    icon: <IconPrint width={24} height={24} />,
-                    label: '원서 출력하기',
-                    value: 'print_applications',
-                    onClick: () => {},
-                  },
-                  {
-                    icon: <IconAdmission width={24} height={24} />,
-                    label: '수험표 전체 발급하기',
-                    value: 'generate_all_exam_tickets',
-                    onClick: () => {},
-                  },
-                ]}
-              />
+              {isSecondRoundResultEditing ? (
+                <Row gap={16}>
+                  <Button
+                    styleType="SECONDARY"
+                    size="SMALL"
+                    onClick={setIsSecondRoundResultEditingFalse}
+                  >
+                    취소
+                  </Button>
+                  <Button size="SMALL" onClick={() => {}}>
+                    완료
+                  </Button>
+                </Row>
+              ) : (
+                <FunctionDropdown
+                  data={[
+                    {
+                      icon: <IconCheckDocument width={24} height={24} />,
+                      label: '검토해야하는 원서 모아보기',
+                      value: 'review_applications',
+                      onClick: handleFormListTypeReview,
+                    },
+                    {
+                      icon: <IconEditDocument width={24} height={24} />,
+                      label: '2차 전형 점수 입력하기',
+                      value: 'input_second_round_scores',
+                      onClick: openSecondScoreUplaodModal,
+                    },
+                    {
+                      icon: <IconEditDocument width={24} height={24} />,
+                      label: '2차 합격 여부 변경하기',
+                      value: 'update_second_round_result',
+                      onClick: setIsSecondRoundResultEditingTrue,
+                    },
+                    {
+                      icon: <IconEditAllDocument width={24} height={24} />,
+                      label: '2차 합격자 자동 선발',
+                      value: 'auto_select_second_round',
+                      onClick: () => {},
+                    },
+                    {
+                      icon: <IconUpload width={24} height={24} />,
+                      label: '명단 엑셀로 내보내기',
+                      value: 'export_excel',
+                      onClick: () => {},
+                    },
+                    {
+                      icon: <IconPrint width={24} height={24} />,
+                      label: '원서 출력하기',
+                      value: 'print_applications',
+                      onClick: () => {},
+                    },
+                    {
+                      icon: <IconAdmission width={24} height={24} />,
+                      label: '수험표 전체 발급하기',
+                      value: 'generate_all_exam_tickets',
+                      onClick: () => {},
+                    },
+                  ]}
+                />
+              )}
             </Row>
           </Row>
           <FormTable />
