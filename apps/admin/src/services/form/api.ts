@@ -1,7 +1,7 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
 import type { FormListSortingType, FormListType } from '@/types/form/client';
-import type { GetFormListRes } from '@/types/form/remote';
+import type { GetFormListRes, PatchSecondRoundResultReq } from '@/types/form/remote';
 
 export const getFormList = async (
   formListType: FormListType,
@@ -43,6 +43,18 @@ export const patchSecondScoreFormat = async (formData: FormData) => {
     '/forms/second-round/score',
     formData,
     authorization.FormData()
+  );
+
+  return data;
+};
+
+export const patchSecondRoundResult = async (
+  secondRoundResultData: PatchSecondRoundResultReq
+) => {
+  const { data } = await maru.patch(
+    '/form/second-round/result',
+    secondRoundResultData,
+    authorization()
   );
 
   return data;
