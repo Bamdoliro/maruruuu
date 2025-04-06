@@ -1,5 +1,9 @@
 import { Storage } from '@/apis/storage/storage';
-import { useSubmitDraftFormMutation } from '@/services/form/mutations';
+import {
+  useCorrectionFormMutation,
+  useSubmitDraftFormMutation,
+} from '@/services/form/mutations';
+import { useFormStatusQuery } from '@/services/form/queries';
 import { useFormValueStore, useSetFormStepStore } from '@/stores';
 import type { Form } from '@/types/form/client';
 import { useEffect, useState } from 'react';
@@ -8,13 +12,19 @@ export const useCTAButton = () => {
   const form = useFormValueStore();
   const setFormStep = useSetFormStepStore();
   const { submitDraftFormMutate } = useSubmitDraftFormMutation(form);
+  const { correctionFormMutate } = useCorrectionFormMutation();
+  const { data: statusData } = useFormStatusQuery();
 
   const handleCheckAgainForm = () => {
     setFormStep('지원자정보');
   };
 
   const handleSubmitDraftForm = () => {
-    submitDraftFormMutate();
+    if (statusData?.status === 'REJECTED') {
+      correctionFormMutate(form);
+    } else {
+      submitDraftFormMutate();
+    }
   };
 
   return { handleCheckAgainForm, handleSubmitDraftForm };
