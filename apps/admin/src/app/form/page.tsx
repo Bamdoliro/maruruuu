@@ -21,7 +21,7 @@ import {
 import { Button, Column, Dropdown, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
-import { useFormPageState } from './form.hooks';
+import { useEditSecondRoundResultActions, useFormPageState } from './form.hooks';
 import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
@@ -36,13 +36,12 @@ const FormPage = () => {
     getCriteriaDropdownValue,
   } = useFormPageState();
 
-  const [isSecondRoundResultEditing, setIsSecondRoundResultEditing] =
-    useIsSecondRoundResultEditingStore();
-
-  const setIsSecondRoundResultEditingTrue = () => setIsSecondRoundResultEditing(true);
-  const setIsSecondRoundResultEditingFalse = () => {
-    setIsSecondRoundResultEditing(false);
-  };
+  const {
+    isSecondRoundResultEditing,
+    setIsSecondRoundResultEditingTrue,
+    setIsSecondRoundResultEditingFalse,
+    handleSecondRoundResultEditCompleteButtonClick,
+  } = useEditSecondRoundResultActions();
 
   const overlay = useOverlay();
 
@@ -156,7 +155,10 @@ const FormPage = () => {
                   >
                     취소
                   </Button>
-                  <Button size="SMALL" onClick={() => {}}>
+                  <Button
+                    size="SMALL"
+                    onClick={handleSecondRoundResultEditCompleteButtonClick}
+                  >
                     완료
                   </Button>
                 </Row>
