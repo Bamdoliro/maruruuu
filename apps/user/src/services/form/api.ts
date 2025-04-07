@@ -126,3 +126,9 @@ export const getUploadProfile = async (fileUrl: string) => {
 
   return URL.createObjectURL(data);
 };
+
+export const putFormCorrection = async (formData: Form) => {
+  const { data } = await maru.put('/forms', formData, authorization());
+
+  return data;
+};

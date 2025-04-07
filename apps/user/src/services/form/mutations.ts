@@ -7,6 +7,7 @@ import {
   postSaveForm,
   postSubmitDraftFrom,
   postUploadProfileImage,
+  putFormCorrection,
   putProfileUpoload,
   putUploadForm,
 } from './api';
@@ -132,4 +133,17 @@ export const useRefreshProfileImageMutation = () => {
   });
 
   return mutation;
+};
+
+export const useCorrectionFormMutation = () => {
+  const { handleError } = useApiError();
+  const setFormStep = useSetFormStepStore();
+
+  const { mutate: correctionFormMutate, ...restMutation } = useMutation({
+    mutationFn: (formData: Form) => putFormCorrection(formData),
+    onSuccess: () => setFormStep('초안제출완료'),
+    onError: handleError,
+  });
+
+  return { correctionFormMutate, ...restMutation };
 };
