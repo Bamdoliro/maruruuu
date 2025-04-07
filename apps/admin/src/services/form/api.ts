@@ -52,7 +52,7 @@ export const patchSecondRoundResult = async (
   secondRoundResultData: PatchSecondRoundResultReq
 ) => {
   const { data } = await maru.patch(
-    '/form/second-round/result',
+    '/forms/second-round/result',
     secondRoundResultData,
     authorization()
   );
