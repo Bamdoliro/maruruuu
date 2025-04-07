@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { patchSecondRoundResult, patchSecondScoreFormat } from './api';
 import { toast } from 'react-toastify';
 import { KEY } from '@/constants/common/constant';
-import { PatchSecondRoundResultReq } from '@/types/form/remote';
+import type { PatchSecondRoundResultReq } from '@/types/form/remote';
 import { useSetIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSetSecondRoundResultStore } from '@/store/form/secondRoundResult';
 

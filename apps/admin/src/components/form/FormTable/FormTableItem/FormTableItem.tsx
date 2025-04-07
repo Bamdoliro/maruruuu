@@ -2,7 +2,7 @@ import { TableItem } from '@/components/common';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
 import { useIsSecondRoundResultEditingValueStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSecondRoundResultStore } from '@/store/form/secondRoundResult';
-import { Form, PassStatusType } from '@/types/form/client';
+import type { Form, PassStatusType } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { color } from '@maru/design-system';
 import { Dropdown, Row, Text } from '@maru/ui';

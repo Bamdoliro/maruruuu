@@ -25,7 +25,6 @@ import { useEditSecondRoundResultActions, useFormPageState } from './form.hooks'
 import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
-import { useIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
 
 const FormPage = () => {
   const {
