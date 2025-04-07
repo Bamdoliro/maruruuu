@@ -19,7 +19,7 @@ const SecondScoreUploader = ({ isOpen }: SecondScoreUploaderProps) => {
     if (isOpen && uploadedFile) {
       setUploadedFile(null);
     }
-  }, [isOpen, setUploadedFile]);
+  }, [isOpen, uploadedFile, setUploadedFile]);
 
   const handleUploadCancelButtonClick = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
