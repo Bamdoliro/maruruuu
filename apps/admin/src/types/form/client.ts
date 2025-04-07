@@ -28,6 +28,8 @@ export type FormType =
 
 export type GraduationType = 'EXPECTED' | 'GRADUATED' | 'QUALIFICATION_EXAMINATION';
 
+export type PassStatusType = '합격' | '불합격' | '미정';
+
 export interface Form {
   id: number;
   examinationNumber: number | null;
