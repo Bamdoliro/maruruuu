@@ -38,7 +38,7 @@ const FormTableHeader = () => {
       </Row>
       <Text
         fontType="p2"
-        width={isSecondRoundResultEditing ? 80 : convertToResponsive(40, 60)}
+        width={isSecondRoundResultEditing ? 100 : convertToResponsive(40, 60)}
       >
         2차 결과
       </Text>

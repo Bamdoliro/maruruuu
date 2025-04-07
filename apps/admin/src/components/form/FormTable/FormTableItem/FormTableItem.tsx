@@ -84,7 +84,7 @@ const FormTableItem = ({
           <Dropdown
             name="pass"
             size="SMALL"
-            width={80}
+            width={100}
             value={secondRoundResult[id] || getRoundResult(secondRoundPassed, status)}
             data={['합격', '불합격']}
             onChange={handleSecondPassResultDropdownChange}
