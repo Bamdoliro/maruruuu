@@ -2,8 +2,12 @@ import {
   useEditSecondRoundResultMutation,
   usePrintFormUrlMutation,
 } from '@/services/form/mutations';
-import { useFormToPrintValueStore } from '@/store/form/formToPrint';
+import {
+  useFormToPrintValueStore,
+  useSetFormToPrintStore,
+} from '@/store/form/formToPrint';
 import { useFormListSortingTypeStore, useFormListTypeStore } from '@/store/form/formType';
+import { useIsFormToPrintSelectingStore } from '@/store/form/isFormToPrintSelecting';
 import { useIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSecondRoundResultValueStore } from '@/store/form/secondRoundResult';
 import type { FormListSortingType } from '@/types/form/client';
@@ -74,7 +78,19 @@ export const useEditSecondRoundResultActions = () => {
   };
 };
 
-export const usePrintFormURLAction = () => {
+export const usePrintFormURLActions = () => {
+  const [isFormToPrintSelecting, setIsFormToPrintSelecting] =
+    useIsFormToPrintSelectingStore();
+  const setFormToPrint = useSetFormToPrintStore();
+
+  const setIsFormToPrintSelectingTrue = () => {
+    setIsFormToPrintSelecting(true);
+  };
+  const setIsFormToPrintSelectingFalse = () => {
+    setIsFormToPrintSelecting(false);
+    setFormToPrint({});
+  };
+
   const formToPrint = useFormToPrintValueStore();
   const formIdList = Object.entries(formToPrint).reduce(
     (acc: number[], [formId, isSelected]) =>
@@ -88,5 +104,10 @@ export const usePrintFormURLAction = () => {
     printFormUrl(formIdList);
   };
 
-  return { handlePrintFormUrlButtonClick };
+  return {
+    isFormToPrintSelecting,
+    setIsFormToPrintSelectingTrue,
+    setIsFormToPrintSelectingFalse,
+    handlePrintFormUrlButtonClick,
+  };
 };

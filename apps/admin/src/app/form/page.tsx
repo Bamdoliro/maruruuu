@@ -24,15 +24,13 @@ import { styled } from 'styled-components';
 import {
   useEditSecondRoundResultActions,
   useFormPageState,
-  usePrintFormURLAction,
+  usePrintFormURLActions,
 } from './form.hooks';
 import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
 import { useAutoSecondRoundResultMutation } from '@/services/form/mutations';
 import ExportExcelModal from '@/components/form/ExportExcelModal/ExportExcelModal';
-import { useIsFormToPrintSelectingStore } from '@/store/form/isFormToPrintSelecting';
-import { useSetFormToPrintStore } from '@/store/form/formToPrint';
 
 const FormPage = () => {
   const {
@@ -49,6 +47,13 @@ const FormPage = () => {
     setIsSecondRoundResultEditingFalse,
     handleSecondRoundResultEditCompleteButtonClick,
   } = useEditSecondRoundResultActions();
+
+  const {
+    isFormToPrintSelecting,
+    setIsFormToPrintSelectingTrue,
+    setIsFormToPrintSelectingFalse,
+    handlePrintFormUrlButtonClick,
+  } = usePrintFormURLActions();
 
   const overlay = useOverlay();
 
@@ -68,20 +73,6 @@ const FormPage = () => {
 
   const handleAutoSecondRoundResult = () => {
     autoSecondRoundResult();
-  };
-
-  const { handlePrintFormUrlButtonClick } = usePrintFormURLAction();
-
-  const [isFormToPrintSelecting, setIsFormToPrintSelecting] =
-    useIsFormToPrintSelectingStore();
-  const setFormToPrint = useSetFormToPrintStore();
-
-  const setIsFormToPrintSelectingTrue = () => {
-    setIsFormToPrintSelecting(true);
-  };
-  const setIsFormToPrintSelectingFalse = () => {
-    setIsFormToPrintSelecting(false);
-    setFormToPrint({});
   };
 
   return (
