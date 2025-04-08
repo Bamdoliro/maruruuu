@@ -1,6 +1,11 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
-import type { FormListSortingType, FormListType } from '@/types/form/client';
+import { EXPORT_EXCEL_TYPE } from '@/constants/form/constant';
+import type {
+  ExportExcelType,
+  FormListSortingType,
+  FormListType,
+} from '@/types/form/client';
 import type { GetFormListRes, PatchSecondRoundResultReq } from '@/types/form/remote';
 
 export const getFormList = async (
@@ -31,6 +36,15 @@ export const getFormList = async (
 
 export const getSecondScoreFormat = async () => {
   const { data } = await maru.get('/forms/second-round/format', {
+    ...authorization(),
+    responseType: 'blob',
+  });
+
+  return data;
+};
+
+export const getExportExcel = async (exportExcelType: ExportExcelType) => {
+  const { data } = await maru.get(`/form/xlsx/${EXPORT_EXCEL_TYPE[exportExcelType]}`, {
     ...authorization(),
     responseType: 'blob',
   });
