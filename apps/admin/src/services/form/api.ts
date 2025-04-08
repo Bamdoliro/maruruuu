@@ -44,7 +44,7 @@ export const getSecondScoreFormat = async () => {
 };
 
 export const getExportExcel = async (exportExcelType: ExportExcelType) => {
-  const { data } = await maru.get(`/form/xlsx/${EXPORT_EXCEL_TYPE[exportExcelType]}`, {
+  const { data } = await maru.get(`/forms/xlsx/${EXPORT_EXCEL_TYPE[exportExcelType]}`, {
     ...authorization(),
     responseType: 'blob',
   });
