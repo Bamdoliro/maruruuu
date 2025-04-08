@@ -6,7 +6,11 @@ import type {
   FormListSortingType,
   FormListType,
 } from '@/types/form/client';
-import type { GetFormListRes, PatchSecondRoundResultReq } from '@/types/form/remote';
+import type {
+  GetFormListRes,
+  GetFormURLRes,
+  PatchSecondRoundResultReq,
+} from '@/types/form/remote';
 
 export const getFormList = async (
   formListType: FormListType,
@@ -50,6 +54,15 @@ export const getExportExcel = async (exportExcelType: ExportExcelType) => {
       ...authorization(),
       responseType: 'blob',
     }
+  );
+
+  return data;
+};
+
+export const getFormUrl = async (formIdList: number[]) => {
+  const { data } = await maru.get<GetFormURLRes>(
+    `/form/form-url?id-list=${formIdList.join('%2C')}`,
+    authorization()
   );
 
   return data;
