@@ -41,7 +41,7 @@ export const FORM_SORTING_CATEGORY: Record<FormSort, string> = {
   'form-id': '접수순',
 } as const;
 
-export const EXPORT_EXCEL_TYPE: Record<ExportExcelType, string> = {
+export const EXPORT_EXCEL_TYPE_VALUE: Record<ExportExcelType, string> = {
   '전체 내보내기': 'result',
   '1차 전형 결과': 'first-round',
   '2차 전형 결과': 'second-round',
