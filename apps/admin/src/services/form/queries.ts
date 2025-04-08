@@ -5,7 +5,7 @@ import {
   useFormListSortingTypeValueStore,
   useFormListTypeValueStore,
 } from '@/store/form/formType';
-import { ExportExcelType } from '@/types/form/client';
+import type { ExportExcelType } from '@/types/form/client';
 
 export const useFormListQuery = () => {
   const formListType = useFormListTypeValueStore();

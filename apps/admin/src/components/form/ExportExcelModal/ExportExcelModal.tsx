@@ -3,7 +3,8 @@ import { color } from '@maru/design-system';
 import { IconClose } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { ChangeEventHandler, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useExportExcelAction } from './exportExcelModal.hooks';
 

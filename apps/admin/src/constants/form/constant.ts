@@ -1,4 +1,9 @@
-import type { ExportExcelType, FormSort, FormStatus, FormType } from '@/types/form/client';
+import type {
+  ExportExcelType,
+  FormSort,
+  FormStatus,
+  FormType,
+} from '@/types/form/client';
 
 export const FORM_STATUS_CATEGORY: Record<FormStatus, string> = {
   APPROVED: '접수',
