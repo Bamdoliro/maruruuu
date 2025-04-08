@@ -25,6 +25,7 @@ import { useEditSecondRoundResultActions, useFormPageState } from './form.hooks'
 import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
+import { useAutoSecondRoundResultMutation } from '@/services/form/mutations';
 
 const FormPage = () => {
   const {
@@ -48,6 +49,12 @@ const FormPage = () => {
     overlay.open(({ isOpen, close }) => (
       <SecondScoreUploadModal isOpen={isOpen} onClose={close} />
     ));
+  };
+
+  const { autoSecondRoundResult } = useAutoSecondRoundResultMutation();
+
+  const handleAutoSecondRoundResult = () => {
+    autoSecondRoundResult();
   };
 
   return (
@@ -186,7 +193,7 @@ const FormPage = () => {
                       icon: <IconEditAllDocument width={24} height={24} />,
                       label: '2차 합격자 자동 선발',
                       value: 'auto_select_second_round',
-                      onClick: () => {},
+                      onClick: handleAutoSecondRoundResult,
                     },
                     {
                       icon: <IconUpload width={24} height={24} />,
