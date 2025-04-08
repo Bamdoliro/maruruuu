@@ -6,6 +6,7 @@ export const KEY = {
   APPLICANT_GRADUATED_SCHOOL: 'useGraduatedSchool',
   FORM_LIST: 'useFormList',
   SECOND_SCORE_FORMAT: 'useSecondScoreFormat',
+  FORM_EXPORT_EXCEL: 'useFormExportExcel',
   FAIR_LIST: 'useFairList',
   FAIR_DETAIL: 'useFairDetail',
   FAIR_EXPORT_EXCEL: 'useFairExportExcel',
