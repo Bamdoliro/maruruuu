@@ -1,12 +1,5 @@
-const isPopupBlocked = () => {
-  const popup = window.open('', '_blank', 'width=1,height=1');
-
-  if (!popup || popup.closed || typeof popup.closed === 'undefined') {
-    return true;
-  } else {
-    popup.close();
-    return false;
-  }
+const isPopupBlocked = (link: Window | null): boolean => {
+  return !!link && !link.closed && typeof link.closed !== 'undefined';
 };
 
 export default isPopupBlocked;
