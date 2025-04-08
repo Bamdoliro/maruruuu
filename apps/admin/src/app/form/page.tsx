@@ -26,6 +26,7 @@ import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
 import { useAutoSecondRoundResultMutation } from '@/services/form/mutations';
+import ExportExcelModal from '@/components/form/ExportExcelModal/ExportExcelModal';
 
 const FormPage = () => {
   const {
@@ -48,6 +49,12 @@ const FormPage = () => {
   const openSecondScoreUplaodModal = () => {
     overlay.open(({ isOpen, close }) => (
       <SecondScoreUploadModal isOpen={isOpen} onClose={close} />
+    ));
+  };
+
+  const openExportExcelModal = () => {
+    overlay.open(({ isOpen, close }) => (
+      <ExportExcelModal isOpen={isOpen} onClose={close} />
     ));
   };
 
@@ -199,7 +206,7 @@ const FormPage = () => {
                       icon: <IconUpload width={24} height={24} />,
                       label: '명단 엑셀로 내보내기',
                       value: 'export_excel',
-                      onClick: () => {},
+                      onClick: openExportExcelModal,
                     },
                     {
                       icon: <IconPrint width={24} height={24} />,
