@@ -27,6 +27,7 @@
     "dayjs": "^1.11.13",
     "next": "^14.0.0",
     "react": "^18.2.0",
+    "react-cookie": "^7.2.2",
     "react-daum-postcode": "^3.2.0",
     "react-dom": "^18.2.0",
     "react-toastify": "^11.0.3",
