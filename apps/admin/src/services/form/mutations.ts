@@ -1,6 +1,10 @@
 import { useApiError } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { patchSecondRoundResult, patchSecondScoreFormat } from './api';
+import {
+  patchSecondRoundResult,
+  patchSecondRoundResultAuto,
+  patchSecondScoreFormat,
+} from './api';
 import { toast } from 'react-toastify';
 import { KEY } from '@/constants/common/constant';
 import type { PatchSecondRoundResultReq } from '@/types/form/remote';
@@ -47,4 +51,22 @@ export const useEditSecondRoundResultMutation = (
   });
 
   return { editSecondRoundResult, ...restMutation };
+};
+
+export const useAutoSecondRoundResultMutation = () => {
+  const { handleError } = useApiError();
+  const queryClient = useQueryClient();
+
+  const { mutate: autoSecondRoundResult, ...restMutation } = useMutation({
+    mutationFn: patchSecondRoundResultAuto,
+    onSuccess: () => {
+      toast('2차 합격 여부가 모두 반영되었습니다.', {
+        type: 'success',
+      });
+      queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
+    },
+    onError: handleError,
+  });
+
+  return { autoSecondRoundResult, ...restMutation };
 };
