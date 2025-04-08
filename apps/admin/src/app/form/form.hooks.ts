@@ -1,4 +1,8 @@
-import { useEditSecondRoundResultMutation } from '@/services/form/mutations';
+import {
+  useEditSecondRoundResultMutation,
+  usePrintFormUrlMutation,
+} from '@/services/form/mutations';
+import { useFormToPrintValueStore } from '@/store/form/formToPrint';
 import { useFormListSortingTypeStore, useFormListTypeStore } from '@/store/form/formType';
 import { useIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSecondRoundResultValueStore } from '@/store/form/secondRoundResult';
@@ -68,4 +72,21 @@ export const useEditSecondRoundResultActions = () => {
     setIsSecondRoundResultEditingFalse,
     handleSecondRoundResultEditCompleteButtonClick,
   };
+};
+
+export const usePrintFormURLAction = () => {
+  const formToPrint = useFormToPrintValueStore();
+  const formIdList = Object.entries(formToPrint).reduce(
+    (acc: number[], [formId, isSelected]) =>
+      isSelected ? [...acc, Number(formId)] : acc,
+    []
+  );
+  const { printFormUrl } = usePrintFormUrlMutation();
+  const handlePrintFormUrlButtonClick = () => {
+    const check = window.open('');
+    check?.close();
+    printFormUrl(formIdList);
+  };
+
+  return { handlePrintFormUrlButtonClick };
 };
