@@ -1,14 +1,37 @@
 import TableHeader from '@/components/common/TableHeader/TableHeader';
+import { useSetFormToPrintStore } from '@/store/form/formToPrint';
+import { useIsFormToPrintSelectingValueStore } from '@/store/form/isFormToPrintSelecting';
 import { useIsSecondRoundResultEditingValueStore } from '@/store/form/isSecondRoundResultEditing';
 import { convertToResponsive } from '@/utils';
-import { Row, Text } from '@maru/ui';
+import { CheckBox, Row, Text } from '@maru/ui';
+import type { ChangeEventHandler } from 'react';
 
-const FormTableHeader = () => {
+interface FormTableHeaderProps {
+  id: number[];
+}
+
+const FormTableHeader = ({ id }: FormTableHeaderProps) => {
   const isSecondRoundResultEditing = useIsSecondRoundResultEditingValueStore();
+  const isFormToPrintSelecting = useIsFormToPrintSelectingValueStore();
+
+  const setFormToPrint = useSetFormToPrintStore();
+
+  const handleAllFormToPrintSelectChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { checked } = e.target;
+
+    if (!id) return;
+
+    id?.forEach((formId) => {
+      setFormToPrint((prev) => ({ ...prev, [formId]: checked }));
+    });
+  };
 
   return (
     <TableHeader>
       <Row gap={48}>
+        {isFormToPrintSelecting ? (
+          <CheckBox onChange={handleAllFormToPrintSelectChange} />
+        ) : null}
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
           수험번호
         </Text>
