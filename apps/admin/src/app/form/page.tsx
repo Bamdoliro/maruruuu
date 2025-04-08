@@ -21,12 +21,18 @@ import {
 import { Button, Column, Dropdown, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
-import { useEditSecondRoundResultActions, useFormPageState } from './form.hooks';
+import {
+  useEditSecondRoundResultActions,
+  useFormPageState,
+  usePrintFormURLAction,
+} from './form.hooks';
 import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
 import { useAutoSecondRoundResultMutation } from '@/services/form/mutations';
 import ExportExcelModal from '@/components/form/ExportExcelModal/ExportExcelModal';
+import { useIsFormToPrintSelectingStore } from '@/store/form/isFormToPrintSelecting';
+import { useSetFormToPrintStore } from '@/store/form/formToPrint';
 
 const FormPage = () => {
   const {
@@ -62,6 +68,20 @@ const FormPage = () => {
 
   const handleAutoSecondRoundResult = () => {
     autoSecondRoundResult();
+  };
+
+  const { handlePrintFormUrlButtonClick } = usePrintFormURLAction();
+
+  const [isFormToPrintSelecting, setIsFormToPrintSelecting] =
+    useIsFormToPrintSelectingStore();
+  const setFormToPrint = useSetFormToPrintStore();
+
+  const setIsFormToPrintSelectingTrue = () => {
+    setIsFormToPrintSelecting(true);
+  };
+  const setIsFormToPrintSelectingFalse = () => {
+    setIsFormToPrintSelecting(false);
+    setFormToPrint({});
   };
 
   return (
@@ -175,6 +195,19 @@ const FormPage = () => {
                     완료
                   </Button>
                 </Row>
+              ) : isFormToPrintSelecting ? (
+                <Row gap={16}>
+                  <Button
+                    styleType="SECONDARY"
+                    size="SMALL"
+                    onClick={setIsFormToPrintSelectingFalse}
+                  >
+                    취소
+                  </Button>
+                  <Button size="SMALL" onClick={handlePrintFormUrlButtonClick}>
+                    출력하기
+                  </Button>
+                </Row>
               ) : (
                 <FunctionDropdown
                   data={[
@@ -212,7 +245,7 @@ const FormPage = () => {
                       icon: <IconPrint width={24} height={24} />,
                       label: '원서 출력하기',
                       value: 'print_applications',
-                      onClick: () => {},
+                      onClick: setIsFormToPrintSelectingTrue,
                     },
                     {
                       icon: <IconAdmission width={24} height={24} />,
