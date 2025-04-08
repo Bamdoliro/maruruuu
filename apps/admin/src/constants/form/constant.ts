@@ -47,3 +47,10 @@ export const EXPORT_EXCEL_TYPE_VALUE: Record<ExportExcelType, string> = {
   '2차 전형 결과': 'second-round',
   '최종 합격자': 'final-passed',
 } as const;
+
+export const EXPORT_EXCEL_TYPE = [
+  '전체 내보내기',
+  '1차 전형 결과',
+  '2차 전형 결과',
+  '최종 합격자',
+] as const;

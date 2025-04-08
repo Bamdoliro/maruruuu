@@ -7,6 +7,7 @@ import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useExportExcelAction } from './exportExcelModal.hooks';
+import { EXPORT_EXCEL_TYPE } from '@/constants/form/constant';
 
 interface ExportExcelModalProps {
   isOpen: boolean;
@@ -45,74 +46,23 @@ const ExportExcelModal = ({ isOpen, onClose }: ExportExcelModalProps) => {
           />
         </Row>
         <Row justifyContent="space-between" gap={12}>
-          <CardRadioBox checked={exportExcelType === '전체 내보내기'}>
-            <Text
-              fontType="context"
-              color={
-                exportExcelType === '전체 내보내기' ? color.maruDefault : color.gray600
-              }
-            >
-              전체 내보내기
-            </Text>
-            <input
-              type="radio"
-              name="exportExcelType"
-              value="전체 내보내기"
-              onChange={handleExportExcelTypeRadioChagne}
-              hidden
-            />
-          </CardRadioBox>
-          <CardRadioBox checked={exportExcelType === '1차 전형 결과'}>
-            <Text
-              fontType="context"
-              color={
-                exportExcelType === '1차 전형 결과' ? color.maruDefault : color.gray600
-              }
-            >
-              1차 전형 결과
-            </Text>
-            <input
-              type="radio"
-              name="exportExcelType"
-              value="1차 전형 결과"
-              onChange={handleExportExcelTypeRadioChagne}
-              hidden
-            />
-          </CardRadioBox>
-          <CardRadioBox checked={exportExcelType === '2차 전형 결과'}>
-            <Text
-              fontType="context"
-              color={
-                exportExcelType === '2차 전형 결과' ? color.maruDefault : color.gray600
-              }
-            >
-              2차 전형 결과
-            </Text>
-            <input
-              type="radio"
-              name="exportExcelType"
-              value="2차 전형 결과"
-              onChange={handleExportExcelTypeRadioChagne}
-              hidden
-            />
-          </CardRadioBox>
-          <CardRadioBox checked={exportExcelType === '최종 합격자'}>
-            <Text
-              fontType="context"
-              color={
-                exportExcelType === '최종 합격자' ? color.maruDefault : color.gray600
-              }
-            >
-              최종 합격자
-            </Text>
-            <input
-              type="radio"
-              name="exportExcelType"
-              value="최종 합격자"
-              onChange={handleExportExcelTypeRadioChagne}
-              hidden
-            />
-          </CardRadioBox>
+          {EXPORT_EXCEL_TYPE.map((type) => (
+            <CardRadioBox checked={exportExcelType === type}>
+              <Text
+                fontType="context"
+                color={exportExcelType === type ? color.maruDefault : color.gray600}
+              >
+                {type}
+              </Text>
+              <input
+                type="radio"
+                name="exportExcelType"
+                value={type}
+                onChange={handleExportExcelTypeRadioChagne}
+                hidden
+              />
+            </CardRadioBox>
+          ))}
         </Row>
         <Row gap={16} style={{ alignSelf: 'flex-end' }}>
           <Button size="SMALL" styleType="SECONDARY" onClick={onClose}>
