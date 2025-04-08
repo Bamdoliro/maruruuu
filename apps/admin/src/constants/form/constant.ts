@@ -1,4 +1,9 @@
-import type { FormSort, FormStatus, FormType } from '@/types/form/client';
+import type {
+  ExportExcelType,
+  FormSort,
+  FormStatus,
+  FormType,
+} from '@/types/form/client';
 
 export const FORM_STATUS_CATEGORY: Record<FormStatus, string> = {
   APPROVED: '접수',
@@ -35,3 +40,17 @@ export const FORM_SORTING_CATEGORY: Record<FormSort, string> = {
   'total-score-asc': '최종 점수 낮은 순',
   'form-id': '접수순',
 } as const;
+
+export const EXPORT_EXCEL_TYPE_VALUE: Record<ExportExcelType, string> = {
+  '전체 내보내기': 'result',
+  '1차 전형 결과': 'first-round',
+  '2차 전형 결과': 'second-round',
+  '최종 합격자': 'final-passed',
+} as const;
+
+export const EXPORT_EXCEL_TYPE = [
+  '전체 내보내기',
+  '1차 전형 결과',
+  '2차 전형 결과',
+  '최종 합격자',
+] as const;

@@ -30,6 +30,12 @@ export type GraduationType = 'EXPECTED' | 'GRADUATED' | 'QUALIFICATION_EXAMINATI
 
 export type PassStatusType = '합격' | '불합격' | '미정';
 
+export type ExportExcelType =
+  | '전체 내보내기'
+  | '1차 전형 결과'
+  | '2차 전형 결과'
+  | '최종 합격자';
+
 export interface Form {
   id: number;
   examinationNumber: number | null;
