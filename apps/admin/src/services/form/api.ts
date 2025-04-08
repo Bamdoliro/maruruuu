@@ -61,7 +61,7 @@ export const getExportExcel = async (exportExcelType: ExportExcelType) => {
 
 export const getFormUrl = async (formIdList: number[]) => {
   const { data } = await maru.get<GetFormURLRes>(
-    `/form/form-url?id-list=${formIdList.join('%2C')}`,
+    `/forms/form-url?id-list=${formIdList.join('%2C')}`,
     authorization()
   );
 
