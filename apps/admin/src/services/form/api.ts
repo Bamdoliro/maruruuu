@@ -7,6 +7,7 @@ import type {
   FormListType,
 } from '@/types/form/client';
 import type {
+  GetFormDetail,
   GetFormListRes,
   GetFormURLRes,
   PatchSecondRoundResultReq,
@@ -73,6 +74,12 @@ export const getAllAdmissionTicket = async () => {
     ...authorization(),
     responseType: 'blob',
   });
+
+  return data;
+};
+
+export const getFormDetail = async (id: number) => {
+  const { data } = await maru.get<GetFormDetail>(`/forms/${id}`, authorization());
 
   return data;
 };

@@ -1,4 +1,4 @@
-import type { Form } from './client';
+import type { Form, FormDetail } from './client';
 
 export interface GetFormListRes {
   dataList: Form[];
@@ -14,4 +14,8 @@ export interface GetFormURLRes {
 
 export interface PatchSecondRoundResultReq {
   formList: { formId: number; pass: boolean | null }[];
+}
+
+export interface GetFormDetail {
+  data: FormDetail;
 }
