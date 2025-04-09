@@ -1,3 +1,4 @@
+import FormDetail from '@/components/form/FormDetail/FormDetail';
 import { ROUTES } from '@/constants/common/constant';
 import AppLayout from '@/layouts/AppLayout';
 import { color, font } from '@maru/design-system';
@@ -18,10 +19,13 @@ const FormDetailPage = ({ params: { id } }: FormDetailPageProps) => {
           <IconArrowLeft width={18} height={18} />
           돌아가기
         </DirectLink>
+        <FormDetail id={id} />
       </StyledFormDetail>
     </AppLayout>
   );
 };
+
+export default FormDetailPage;
 
 const StyledFormDetail = styled.div`
   position: relative;
