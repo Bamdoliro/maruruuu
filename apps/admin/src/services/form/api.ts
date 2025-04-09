@@ -69,7 +69,7 @@ export const getFormUrl = async (formIdList: number[]) => {
 };
 
 export const getAllAdmissionTicket = async () => {
-  const { data } = await maru.get('/forms/admission-ticket/all', {
+  const { data } = await maru.get('/forms/admission-tickets', {
     ...authorization(),
     responseType: 'blob',
   });
