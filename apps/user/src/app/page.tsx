@@ -19,7 +19,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useCTAButton } from './main.hook';
 
-export const Home = () => {
+export default function Home() {
   const searchParams = useSearchParams();
   const overlay = useOverlay();
   const message = searchParams.get('message');
@@ -71,9 +71,7 @@ export const Home = () => {
       </StyledHome>
     </AppLayout>
   );
-};
-
-export default Home;
+}
 
 const StyledHome = styled.div`
   ${flex({ flexDirection: 'column', alignItems: 'center' })}
