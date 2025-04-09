@@ -75,7 +75,7 @@ export const middleware = async (req: NextRequest) => {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            cookie: `refreshtoken=${refreshToken?.value}`,
+            'Refresh-Token': `${refreshToken?.value}`,
           },
           credentials: 'include',
         });
