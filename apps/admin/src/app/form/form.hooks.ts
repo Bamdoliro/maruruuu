@@ -2,6 +2,7 @@ import {
   useEditSecondRoundResultMutation,
   usePrintFormUrlMutation,
 } from '@/services/form/mutations';
+import { useExportAllAddmissionTicket } from '@/services/form/queries';
 import {
   useFormToPrintValueStore,
   useSetFormToPrintStore,
@@ -110,4 +111,23 @@ export const usePrintFormURLActions = () => {
     setIsFormToPrintSelectingFalse,
     handlePrintFormUrlButtonClick,
   };
+};
+
+export const useExportAllAddmissionTicketAction = () => {
+  const { data: exportTicketData } = useExportAllAddmissionTicket();
+
+  const handleExportAllAdmissionTicketButtonClick = () => {
+    if (!exportTicketData) return;
+    const ticketURL = window.URL.createObjectURL(new Blob([exportTicketData]));
+
+    const link = document.createElement('a');
+    link.href = ticketURL;
+    link.download = '전체 접수증.pdf';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(ticketURL);
+  };
+
+  return { handleExportAllAdmissionTicketButtonClick };
 };

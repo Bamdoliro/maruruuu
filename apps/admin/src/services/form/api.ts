@@ -68,6 +68,15 @@ export const getFormUrl = async (formIdList: number[]) => {
   return data;
 };
 
+export const getAllAdmissionTicket = async () => {
+  const { data } = await maru.get('/forms/admission-tickets', {
+    ...authorization(),
+    responseType: 'blob',
+  });
+
+  return data;
+};
+
 export const patchSecondScoreFormat = async (formData: FormData) => {
   const { data } = await maru.patch(
     '/forms/second-round/score',

@@ -23,6 +23,7 @@ import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import {
   useEditSecondRoundResultActions,
+  useExportAllAddmissionTicketAction,
   useFormPageState,
   usePrintFormURLActions,
 } from './form.hooks';
@@ -54,6 +55,9 @@ const FormPage = () => {
     setIsFormToPrintSelectingFalse,
     handlePrintFormUrlButtonClick,
   } = usePrintFormURLActions();
+
+  const { handleExportAllAdmissionTicketButtonClick } =
+    useExportAllAddmissionTicketAction();
 
   const overlay = useOverlay();
 
@@ -241,8 +245,8 @@ const FormPage = () => {
                     {
                       icon: <IconAdmission width={24} height={24} />,
                       label: '수험표 전체 발급하기',
-                      value: 'generate_all_exam_tickets',
-                      onClick: () => {},
+                      value: 'export_all_exam_tickets',
+                      onClick: handleExportAllAdmissionTicketButtonClick,
                     },
                   ]}
                 />

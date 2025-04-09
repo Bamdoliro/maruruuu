@@ -7,6 +7,7 @@ export const KEY = {
   FORM_LIST: 'useFormList',
   SECOND_SCORE_FORMAT: 'useSecondScoreFormat',
   FORM_EXPORT_EXCEL: 'useFormExportExcel',
+  FORM_EXPORT_ALL_ADMISSION_TICKET: 'useFormExportAllAdmissionTicket',
   FAIR_LIST: 'useFairList',
   FAIR_DETAIL: 'useFairDetail',
   FAIR_EXPORT_EXCEL: 'useFairExportExcel',
