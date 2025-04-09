@@ -1,3 +1,5 @@
+'use client';
+
 import FormDetail from '@/components/form/FormDetail/FormDetail';
 import { ROUTES } from '@/constants/common/constant';
 import AppLayout from '@/layouts/AppLayout';
