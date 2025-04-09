@@ -10,7 +10,7 @@ import Row from '../Flex/Row';
 import Text from '../Text/Text';
 
 interface ConfirmProps {
-  title: string;
+  title: string | ReactNode;
   desc?: string;
   content: ReactNode;
   isOpen: boolean;
