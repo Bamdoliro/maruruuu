@@ -1,11 +1,14 @@
 import { TableItem } from '@/components/common';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
+import { useFormToPrintStore } from '@/store/form/formToPrint';
+import { useIsFormToPrintSelectingValueStore } from '@/store/form/isFormToPrintSelecting';
 import { useIsSecondRoundResultEditingValueStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSecondRoundResultStore } from '@/store/form/secondRoundResult';
 import type { Form, PassStatusType } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { color } from '@maru/design-system';
-import { Dropdown, Row, Text } from '@maru/ui';
+import { CheckBox, Dropdown, Row, Text } from '@maru/ui';
+import type { ChangeEventHandler } from 'react';
 
 const FormTableItem = ({
   id,
@@ -41,9 +44,21 @@ const FormTableItem = ({
     return roundPassed === null ? '미정' : roundPassed ? '합격' : '불합격';
   };
 
+  const isFormToPrintSelecting = useIsFormToPrintSelectingValueStore();
+
+  const [formToPrint, setFormToPrint] = useFormToPrintStore();
+
+  const handleFormToPrintSelectChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { checked } = e.target;
+    setFormToPrint((prev) => ({ ...prev, [id]: checked }));
+  };
+
   return (
     <TableItem key={id}>
       <Row gap={48}>
+        {isFormToPrintSelecting ? (
+          <CheckBox checked={formToPrint[id]} onChange={handleFormToPrintSelectChange} />
+        ) : null}
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
           {examinationNumber}
         </Text>

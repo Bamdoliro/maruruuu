@@ -21,7 +21,11 @@ import {
 import { Button, Column, Dropdown, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
-import { useEditSecondRoundResultActions, useFormPageState } from './form.hooks';
+import {
+  useEditSecondRoundResultActions,
+  useFormPageState,
+  usePrintFormURLActions,
+} from './form.hooks';
 import { color } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
@@ -43,6 +47,13 @@ const FormPage = () => {
     setIsSecondRoundResultEditingFalse,
     handleSecondRoundResultEditCompleteButtonClick,
   } = useEditSecondRoundResultActions();
+
+  const {
+    isFormToPrintSelecting,
+    setIsFormToPrintSelectingTrue,
+    setIsFormToPrintSelectingFalse,
+    handlePrintFormUrlButtonClick,
+  } = usePrintFormURLActions();
 
   const overlay = useOverlay();
 
@@ -175,6 +186,19 @@ const FormPage = () => {
                     완료
                   </Button>
                 </Row>
+              ) : isFormToPrintSelecting ? (
+                <Row gap={16}>
+                  <Button
+                    styleType="SECONDARY"
+                    size="SMALL"
+                    onClick={setIsFormToPrintSelectingFalse}
+                  >
+                    취소
+                  </Button>
+                  <Button size="SMALL" onClick={handlePrintFormUrlButtonClick}>
+                    출력하기
+                  </Button>
+                </Row>
               ) : (
                 <FunctionDropdown
                   data={[
@@ -212,7 +236,7 @@ const FormPage = () => {
                       icon: <IconPrint width={24} height={24} />,
                       label: '원서 출력하기',
                       value: 'print_applications',
-                      onClick: () => {},
+                      onClick: setIsFormToPrintSelectingTrue,
                     },
                     {
                       icon: <IconAdmission width={24} height={24} />,

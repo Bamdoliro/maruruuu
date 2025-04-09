@@ -5,10 +5,11 @@ import { useFormListQuery } from '@/services/form/queries';
 
 const FormTable = () => {
   const { data: formList } = useFormListQuery();
+  const formIdList = formList?.map((form) => form.id);
 
   return (
     <Column gap={12}>
-      <FormTableHeader />
+      <FormTableHeader id={formIdList ?? []} />
       {formList &&
         formList.map((item) => (
           <FormTableItem

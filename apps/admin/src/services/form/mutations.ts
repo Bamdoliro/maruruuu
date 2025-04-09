@@ -1,6 +1,7 @@
 import { useApiError } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
+  getFormUrl,
   patchSecondRoundResult,
   patchSecondRoundResultAuto,
   patchSecondScoreFormat,
@@ -10,6 +11,7 @@ import { KEY } from '@/constants/common/constant';
 import type { PatchSecondRoundResultReq } from '@/types/form/remote';
 import { useSetIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSetSecondRoundResultStore } from '@/store/form/secondRoundResult';
+import isPopupBlocked from '@/utils/functions/isPopupBlocked';
 
 export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void) => {
   const { handleError } = useApiError();
@@ -69,4 +71,26 @@ export const useAutoSecondRoundResultMutation = () => {
   });
 
   return { autoSecondRoundResult, ...restMutation };
+};
+
+export const usePrintFormUrlMutation = () => {
+  const { handleError } = useApiError();
+
+  const { mutate: printFormUrl, ...restMutation } = useMutation({
+    mutationFn: (formIdList: number[]) => getFormUrl(formIdList),
+    onSuccess: (data) => {
+      let hasShownAlert = false;
+      data.dataList.forEach((form) => {
+        const link = window.open(form.formUrl);
+
+        if (isPopupBlocked(link) && !hasShownAlert) {
+          alert('팝업 및 리디렉션을 허용해주세요');
+          hasShownAlert = true;
+        }
+      });
+    },
+    onError: handleError,
+  });
+
+  return { printFormUrl, ...restMutation };
 };
