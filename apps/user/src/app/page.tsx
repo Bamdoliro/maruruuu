@@ -33,8 +33,8 @@ export default function Home() {
           title={message}
           isOpen={isOpen}
           onClose={() => {
-            handleClose();
             close();
+            handleClose();
           }}
         />
       ));
