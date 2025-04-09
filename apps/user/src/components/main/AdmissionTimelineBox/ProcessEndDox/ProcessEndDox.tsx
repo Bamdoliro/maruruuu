@@ -12,8 +12,6 @@ const ProcessEndBox = () => {
       <Column gap={16}>
         <Column gap={8}>
           <Text fontType="H2" color={color.gray400}>
-            부산소프트웨어마이스터고등학교
-            <br />
             입학 전형 종료
           </Text>
           <Text fontType="D1" color={color.white}>

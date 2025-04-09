@@ -2,10 +2,10 @@ import type { PostLoginReq } from '@/types/auth/remote';
 import { useMutation } from '@tanstack/react-query';
 import { deleteLogout, postLogin } from './api';
 import type { AxiosResponse } from 'axios';
-import { Storage } from '@/apis/storage/storage';
 import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { Cookie } from '@/apis/cookie/cookie';
 
 export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
   const router = useRouter();
@@ -14,8 +14,8 @@ export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
     mutationFn: () => postLogin({ phoneNumber, password }),
     onSuccess: (res: AxiosResponse) => {
       const { accessToken, refreshToken } = res.data;
-      Storage.setItem(TOKEN.ACCESS, accessToken);
-      Storage.setItem(TOKEN.REFRESH, refreshToken);
+      Cookie.setItem(TOKEN.ACCESS, accessToken);
+      Cookie.setItem(TOKEN.REFRESH, refreshToken);
       router.replace(ROUTES.MAIN);
     },
     onError: () => {
