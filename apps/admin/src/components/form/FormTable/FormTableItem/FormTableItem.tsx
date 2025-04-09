@@ -1,4 +1,5 @@
 import { TableItem } from '@/components/common';
+import { ROUTES } from '@/constants/common/constant';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
 import { useFormToPrintStore } from '@/store/form/formToPrint';
 import { useIsFormToPrintSelectingValueStore } from '@/store/form/isFormToPrintSelecting';
@@ -8,6 +9,7 @@ import type { Form, PassStatusType } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { color } from '@maru/design-system';
 import { CheckBox, Dropdown, Row, Text } from '@maru/ui';
+import { useRouter } from 'next/navigation';
 import type { ChangeEventHandler } from 'react';
 
 const FormTableItem = ({
@@ -22,6 +24,8 @@ const FormTableItem = ({
   firstRoundPassed,
   secondRoundPassed,
 }: Form) => {
+  const router = useRouter();
+
   const isSecondRoundResultEditing = useIsSecondRoundResultEditingValueStore();
   const [secondRoundResult, setSecondRoundResult] = useSecondRoundResultStore();
 
@@ -54,7 +58,7 @@ const FormTableItem = ({
   };
 
   return (
-    <TableItem key={id}>
+    <TableItem key={id} onClick={router.push(`${ROUTES.FORM}/${id}`)}>
       <Row gap={48}>
         {isFormToPrintSelecting ? (
           <CheckBox checked={formToPrint[id]} onChange={handleFormToPrintSelectChange} />
