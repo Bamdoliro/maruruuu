@@ -3,6 +3,7 @@ import type {
   FormSort,
   FormStatus,
   FormType,
+  Gender,
 } from '@/types/form/client';
 
 export const FORM_STATUS_CATEGORY: Record<FormStatus, string> = {
@@ -63,3 +64,8 @@ export const FORM_DETAIL_STEP_LIST = [
   '성적',
   '자기소개서',
 ] as const;
+
+const GENDER: Record<Gender, string> = {
+  MALE: '남자',
+  FEMALE: '여자',
+} as const;
