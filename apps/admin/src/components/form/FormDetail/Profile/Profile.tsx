@@ -1,5 +1,6 @@
 import { color } from '@maru/design-system';
-import { Column, Text } from '@maru/ui';
+import { IconBadge, IconCall, IconPerson, IconSchool } from '@maru/icon';
+import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import Image from 'next/image';
 import { styled } from 'styled-components';
@@ -16,6 +17,25 @@ interface ProfileProps {
 }
 
 const Profile = ({ profileData }: ProfileProps) => {
+  const profileDetails = [
+    {
+      icon: <IconBadge width={24} height={24} />,
+      value: profileData.examinationNumber,
+    },
+    {
+      icon: <IconPerson width={24} height={24} />,
+      value: profileData.type,
+    },
+    {
+      icon: <IconSchool width={24} height={24} />,
+      value: profileData.schoolName,
+    },
+    {
+      icon: <IconCall width={24} height={24} />,
+      value: profileData.phoneNumber,
+    },
+  ];
+
   return (
     <StyledProfile>
       <ProfileImageBox>
@@ -31,7 +51,16 @@ const Profile = ({ profileData }: ProfileProps) => {
         <Text fontType="H2" color={color.gray900}>
           {profileData.name}
         </Text>
-        <Column gap={8}>{`번호, 전형, 학교, 전번`}</Column>
+        <Column gap={8}>
+          {profileDetails.map((detail, index) => (
+            <Row key={index} gap={10}>
+              {detail.icon}
+              <Text fontType="p2" color={color.gray900}>
+                {detail.value}
+              </Text>
+            </Row>
+          ))}
+        </Column>
       </Column>
     </StyledProfile>
   );
