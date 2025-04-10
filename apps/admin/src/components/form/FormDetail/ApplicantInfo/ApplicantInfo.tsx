@@ -1,18 +1,37 @@
 import { DataBox } from '@/components/common';
-import { Row } from '@maru/ui';
+import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
+interface ApplicantInfoProps {
+  applicantData?: {
+    name: string;
+    birthday: string;
+    gender: string;
+    phoneNumber: string;
+    profileImageUrl: string;
+  };
+}
 
+const ApplicantInfo = ({ applicantData }: ApplicantInfoProps) => {
+  if (!applicantData) return <Loader />;
 
-const ApplicantInfo = () => {
+  const applicantDetails = [
+    { label: '이름', data: applicantData.name },
+    { label: '생년월일', data: applicantData.birthday },
+    { label: '성별', data: applicantData.gender },
+    { label: '전화번호', data: applicantData.phoneNumber },
+  ];
+
   return (
     <StyledApplicantInfo>
-      {applicantData.map((item, index) => (
-        <GridItem key={index}>
-          <DataBox label={item.label} data={item.data} />
-        </GridItem>
-      ))}
+      <GridContainer>
+        {applicantDetails.map((item, index) => (
+          <GridItem key={index}>
+            <DataBox label={item.label} data={item.data} />
+          </GridItem>
+        ))}
+      </GridContainer>
     </StyledApplicantInfo>
   );
 };
@@ -24,8 +43,10 @@ const StyledApplicantInfo = styled.div`
   gap: 24px;
 `;
 
-const GridItem = styled.div`
+const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 `;
+
+const GridItem = styled.div``;
