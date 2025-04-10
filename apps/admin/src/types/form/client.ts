@@ -88,12 +88,14 @@ export interface FormDetail {
   changedToRegular: boolean;
 }
 
+export type Gender = 'MALE' | 'FEMALE';
+
 export interface UserInfo {
   identificationPictureUri: string;
   name: string;
   phoneNumber: string;
   birthday: string;
-  gender: 'MALE' | 'FEMALE';
+  gender: Gender;
 }
 
 export interface ParentInfo {
