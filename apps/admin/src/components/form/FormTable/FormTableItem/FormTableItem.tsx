@@ -1,4 +1,5 @@
 import { TableItem } from '@/components/common';
+import { ROUTES } from '@/constants/common/constant';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
 import { useFormToPrintStore } from '@/store/form/formToPrint';
 import { useIsFormToPrintSelectingValueStore } from '@/store/form/isFormToPrintSelecting';
@@ -8,7 +9,9 @@ import type { Form, PassStatusType } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { color } from '@maru/design-system';
 import { CheckBox, Dropdown, Row, Text } from '@maru/ui';
+import { useRouter } from 'next/navigation';
 import type { ChangeEventHandler } from 'react';
+import { styled } from 'styled-components';
 
 const FormTableItem = ({
   id,
@@ -22,6 +25,8 @@ const FormTableItem = ({
   firstRoundPassed,
   secondRoundPassed,
 }: Form) => {
+  const router = useRouter();
+
   const isSecondRoundResultEditing = useIsSecondRoundResultEditingValueStore();
   const [secondRoundResult, setSecondRoundResult] = useSecondRoundResultStore();
 
@@ -45,7 +50,6 @@ const FormTableItem = ({
   };
 
   const isFormToPrintSelecting = useIsFormToPrintSelectingValueStore();
-
   const [formToPrint, setFormToPrint] = useFormToPrintStore();
 
   const handleFormToPrintSelectChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -53,69 +57,89 @@ const FormTableItem = ({
     setFormToPrint((prev) => ({ ...prev, [id]: checked }));
   };
 
+  const isDisabled = isSecondRoundResultEditing || isFormToPrintSelecting;
+  const handleMoveFormDetailPage = () => {
+    if (isDisabled) return;
+    router.push(`${ROUTES.FORM}/${id}`);
+  };
+
   return (
-    <TableItem key={id}>
-      <Row gap={48}>
-        {isFormToPrintSelecting ? (
-          <CheckBox checked={formToPrint[id]} onChange={handleFormToPrintSelectChange} />
-        ) : null}
-        <Text fontType="p2" width={convertToResponsive(40, 60)}>
-          {examinationNumber}
-        </Text>
-        <Text fontType="p2" width={convertToResponsive(40, 60)}>
-          {name}
-        </Text>
-        <Text fontType="p2" width={convertToResponsive(120, 160)}>
-          {graduationType === 'QUALIFICATION_EXAMINATION' ? '검정고시' : school}
-        </Text>
-        <Text fontType="p2" width={convertToResponsive(180, 240)}>
-          {FORM_TYPE_CATEGORY[type]}
-        </Text>
-      </Row>
-      <Row gap={48} justify-content="flex-end">
-        <Text fontType="p2" width={convertToResponsive(40, 60)}>
-          {status === 'SUBMITTED' ? '초안 제출' : '최종 제출'}
-        </Text>
-        <Text fontType="p2" width={convertToResponsive(40, 60)}>
-          승인
-        </Text>
-        <Text
-          fontType="p2"
-          width={convertToResponsive(40, 60)}
-          color={getStatusColor(firstRoundPassed)}
-        >
-          {getRoundResult(firstRoundPassed)}
-        </Text>
-        <Text
-          fontType="p2"
-          width={convertToResponsive(40, 60)}
-          color={typeof totalScore !== 'number' ? color.gray600 : color.black}
-        >
-          {typeof totalScore !== 'number' ? '미정' : Number(totalScore.toFixed(3))}
-        </Text>
-      </Row>
-      <Row>
-        {isSecondRoundResultEditing ? (
-          <Dropdown
-            name="pass"
-            size="SMALL"
-            width={100}
-            value={secondRoundResult[id] || getRoundResult(secondRoundPassed, status)}
-            data={['합격', '불합격']}
-            onChange={handleSecondPassResultDropdownChange}
-          />
-        ) : (
+    <DirectButton
+      style={{
+        cursor: isDisabled ? 'default' : 'pointer',
+      }}
+      onClick={handleMoveFormDetailPage}
+    >
+      <TableItem key={id}>
+        <Row gap={48}>
+          {isFormToPrintSelecting ? (
+            <CheckBox
+              checked={formToPrint[id]}
+              onChange={handleFormToPrintSelectChange}
+            />
+          ) : null}
+          <Text fontType="p2" width={convertToResponsive(40, 60)}>
+            {examinationNumber}
+          </Text>
+          <Text fontType="p2" width={convertToResponsive(40, 60)}>
+            {name}
+          </Text>
+          <Text fontType="p2" width={convertToResponsive(120, 160)}>
+            {graduationType === 'QUALIFICATION_EXAMINATION' ? '검정고시' : school}
+          </Text>
+          <Text fontType="p2" width={convertToResponsive(180, 240)}>
+            {FORM_TYPE_CATEGORY[type]}
+          </Text>
+        </Row>
+        <Row gap={48} justify-content="flex-end">
+          <Text fontType="p2" width={convertToResponsive(40, 60)}>
+            {status === 'SUBMITTED' ? '초안 제출' : '최종 제출'}
+          </Text>
+          <Text fontType="p2" width={convertToResponsive(40, 60)}>
+            승인
+          </Text>
           <Text
             fontType="p2"
             width={convertToResponsive(40, 60)}
-            color={getStatusColor(secondRoundPassed)}
+            color={getStatusColor(firstRoundPassed)}
           >
-            {getRoundResult(secondRoundPassed, status)}
+            {getRoundResult(firstRoundPassed)}
           </Text>
-        )}
-      </Row>
-    </TableItem>
+          <Text
+            fontType="p2"
+            width={convertToResponsive(40, 60)}
+            color={typeof totalScore !== 'number' ? color.gray600 : color.black}
+          >
+            {typeof totalScore !== 'number' ? '미정' : Number(totalScore.toFixed(3))}
+          </Text>
+        </Row>
+        <Row>
+          {isSecondRoundResultEditing ? (
+            <Dropdown
+              name="pass"
+              size="SMALL"
+              width={100}
+              value={secondRoundResult[id] || getRoundResult(secondRoundPassed, status)}
+              data={['합격', '불합격']}
+              onChange={handleSecondPassResultDropdownChange}
+            />
+          ) : (
+            <Text
+              fontType="p2"
+              width={convertToResponsive(40, 60)}
+              color={getStatusColor(secondRoundPassed)}
+            >
+              {getRoundResult(secondRoundPassed, status)}
+            </Text>
+          )}
+        </Row>
+      </TableItem>
+    </DirectButton>
   );
 };
 
 export default FormTableItem;
+
+const DirectButton = styled.button`
+  text-align: start;
+`;
