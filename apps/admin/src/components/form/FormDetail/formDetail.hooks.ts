@@ -1,4 +1,8 @@
-import { FORM_TYPE_CATEGORY, GENDER } from '@/constants/form/constant';
+import {
+  FORM_TYPE_CATEGORY,
+  GENDER,
+  GRADUATION_TYPE_VALUE,
+} from '@/constants/form/constant';
 import { useFormDetailQuery } from '@/services/form/queries';
 import { formatDate, formatPhoneNumber } from '@/utils';
 
@@ -37,5 +41,18 @@ export const useFormDetailDataDecomposition = (id: number) => {
     detailAddress: formDetailData.parent.detailAddress,
   };
 
-  return { profileData, applicantData, parentData };
+  const educationData = formDetailData && {
+    graduationType: GRADUATION_TYPE_VALUE[formDetailData.education.graduationType],
+    schoolName: formDetailData.education.schoolName,
+    graduationYear: formDetailData.education.graduationYear,
+    schoolLocation: formDetailData.education.schoolLocation,
+    schoolCode: formDetailData.education.schoolCode,
+    teacherPhoneNumber: formatPhoneNumber(formDetailData.education.teacherPhoneNumber),
+    teacherName: formDetailData.education.teacherName,
+    teacherMobilePhoneNumber: formatPhoneNumber(
+      formDetailData.education.teacherMobilePhoneNumber
+    ),
+  };
+
+  return { profileData, applicantData, parentData, educationData };
 };
