@@ -54,11 +54,11 @@ const Profile = ({ profileData }: ProfileProps) => {
           {profileData.name}
         </Text>
         <Column gap={8}>
-          {profileDetails.map((detail, index) => (
+          {profileDetails.map((item, index) => (
             <Row key={index} gap={10}>
-              {detail.icon}
+              {item.icon}
               <Text fontType="p2" color={color.gray900}>
-                {detail.value}
+                {item.value}
               </Text>
             </Row>
           ))}

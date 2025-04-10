@@ -13,7 +13,7 @@ interface DataBoxProps {
 
 const DataBox = ({ label, data, lengthType = 'SHORT' }: DataBoxProps) => {
   return (
-    <StyledDataBox>
+    <StyledDataBox lengthType={lengthType}>
       <Text fontType="H4" color={color.gray900}>
         {label}
       </Text>
@@ -27,9 +27,9 @@ const DataBox = ({ label, data, lengthType = 'SHORT' }: DataBoxProps) => {
 };
 export default DataBox;
 
-const StyledDataBox = styled.div`
+const StyledDataBox = styled.div<{ lengthType: LengthType }>`
   ${flex({ flexDirection: 'column', alignItems: 'flex-start' })}
-  width: 604px;
+  width: ${(props) => (props.lengthType === 'SHORT' ? '100%' : 'fit-content')};
   min-width: 400px;
   padding: 24px;
   gap: 16px;
@@ -41,7 +41,7 @@ const StyledDataBox = styled.div`
 
 const DataUnderlineBox = styled.div<{ lengthType: LengthType }>`
   ${flex({ alignItems: 'flex-start' })}
-  width: ${(props) => (props.lengthType === 'SHORT' ? '360px' : '100%')};
+  width: ${(props) => (props.lengthType === 'SHORT' ? '60%' : '100%')};
   padding-bottom: 4px;
   border-bottom: 1px solid ${color.gray200};
 `;
