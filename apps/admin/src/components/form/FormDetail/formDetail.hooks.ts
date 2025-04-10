@@ -1,5 +1,6 @@
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
 import { useFormDetailQuery } from '@/services/form/queries';
+import { formatDate, formatPhoneNumber } from '@/utils';
 
 export const useFormDetailDataDecomposition = (id: number) => {
   const { data: formDetailData } = useFormDetailQuery(id);
@@ -19,5 +20,13 @@ export const useFormDetailDataDecomposition = (id: number) => {
         : '검정고시',
   };
 
-  return { profileData };
+  const applicantData = formDetailData && {
+    name: formDetailData.applicant.name,
+    birthday: formatDate.toShortDateTime(formDetailData.applicant.birthday),
+    gender: formDetailData.applicant.gender,
+    phoneNumber: formatPhoneNumber(formDetailData.applicant.phoneNumber),
+    profileImageUrl: formDetailData.applicant.identificationPictureUri,
+  };
+
+  return { profileData, applicantData };
 };
