@@ -11,13 +11,15 @@ import ApplicantInfo from './ApplicantInfo/ApplicantInfo';
 import ParentInfo from './ParentInfo/ParentInfo';
 import EducationInfo from './EducationInfo/EducationInfo';
 import TypeInfo from './TypeInfo/TypeInfo';
+import type { FormDetailStep } from '@/types/form/client';
 
 interface FormDetailProps {
   id: number;
 }
 
 const FormDetail = ({ id }: FormDetailProps) => {
-  const [currentFormDetailStep, setCurrentFormDetailStep] = useState('지원자 정보');
+  const [currentFormDetailStep, setCurrentFormDetailStep] =
+    useState<FormDetailStep>('지원자 정보');
 
   const { profileData, applicantData, parentData, educationData, typeData } =
     useFormDetailDataDecomposition(id);
