@@ -1,12 +1,12 @@
 import { color } from '@maru/design-system';
 import { IconBadge, IconCall, IconPerson, IconSchool } from '@maru/icon';
-import { Column, Row, Text } from '@maru/ui';
+import { Column, Loader, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import Image from 'next/image';
 import { styled } from 'styled-components';
 
 interface ProfileProps {
-  profileData: {
+  profileData?: {
     profileImageUrl: string;
     name: string;
     phoneNumber: string;
@@ -17,6 +17,8 @@ interface ProfileProps {
 }
 
 const Profile = ({ profileData }: ProfileProps) => {
+  if (!profileData) return <Loader />;
+
   const profileDetails = [
     {
       icon: <IconBadge width={24} height={24} />,

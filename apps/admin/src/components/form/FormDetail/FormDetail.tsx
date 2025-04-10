@@ -1,10 +1,11 @@
 import { FORM_DETAIL_STEP_LIST } from '@/constants/form/constant';
 import { color } from '@maru/design-system';
-import { Column, UnderlineButton } from '@maru/ui';
+import { Column, Loader, UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import { useFormDetailDataDecomposition } from './formDetail.hooks';
+import Profile from './Profile/Profile';
 
 interface FormDetailProps {
   id: number;
@@ -18,8 +19,8 @@ const FormDetail = ({ id }: FormDetailProps) => {
   return (
     <StyledFormDetail>
       <Column gap={36}>
-        {`프로필`}
-        {`원서상태`}
+        <Profile profileData={profileData} />
+        {`원서상태 백엔드 수정되면 개발`}
       </Column>
       <Column gap={48}>
         <NavigationBar>
