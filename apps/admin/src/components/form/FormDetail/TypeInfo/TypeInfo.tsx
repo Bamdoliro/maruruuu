@@ -10,9 +10,17 @@ interface TypeInfoProps {
 const TypeInfo = ({ typeData }: TypeInfoProps) => {
   if (!typeData) return <Loader />;
 
+  const typeDetails = [{ label: '전형 선택', data: typeData }];
+
   return (
     <StyledTypeInfo>
-      <GridContainer></GridContainer>
+      <GridContainer>
+        {typeDetails.map((item, index) => (
+          <GridItem key={index}>
+            <DataBox label={item.label} data={item.data} />
+          </GridItem>
+        ))}
+      </GridContainer>
     </StyledTypeInfo>
   );
 };
