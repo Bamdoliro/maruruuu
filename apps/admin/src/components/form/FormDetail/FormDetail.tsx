@@ -8,6 +8,7 @@ import { useFormDetailDataDecomposition } from './formDetail.hooks';
 import Profile from './Profile/Profile';
 import { SwitchCase } from '@toss/react';
 import ApplicantInfo from './ApplicantInfo/ApplicantInfo';
+import ParentInfo from './ParentInfo/ParentInfo';
 
 interface FormDetailProps {
   id: number;
@@ -16,7 +17,7 @@ interface FormDetailProps {
 const FormDetail = ({ id }: FormDetailProps) => {
   const [currentFormDetailStep, setCurrentFormDetailStep] = useState('지원자 정보');
 
-  const { profileData, applicantData } = useFormDetailDataDecomposition(id);
+  const { profileData, applicantData, parentData } = useFormDetailDataDecomposition(id);
 
   return (
     <StyledFormDetail>
@@ -40,6 +41,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
           value={currentFormDetailStep}
           caseBy={{
             '지원자 정보': <ApplicantInfo applicantData={applicantData} />,
+            '보호자 정보': <ParentInfo parentData={parentData} />,
           }}
         />
       </Column>
