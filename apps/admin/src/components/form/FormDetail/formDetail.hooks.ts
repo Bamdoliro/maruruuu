@@ -28,5 +28,14 @@ export const useFormDetailDataDecomposition = (id: number) => {
     profileImageUrl: formDetailData.applicant.identificationPictureUri,
   };
 
-  return { profileData, applicantData };
+  const parentData = formDetailData && {
+    name: formDetailData.parent.name,
+    phoneNumber: formatPhoneNumber(formDetailData.parent.phoneNumber),
+    relation: formDetailData.parent.relation,
+    address: formDetailData.parent.address,
+    zoneCode: formDetailData.parent.zoneCode,
+    detailAddress: formDetailData.parent.detailAddress,
+  };
+
+  return { profileData, applicantData, parentData };
 };
