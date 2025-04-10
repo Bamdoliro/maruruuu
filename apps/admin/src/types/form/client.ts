@@ -113,9 +113,9 @@ export interface EducationInfo {
   schoolName: string;
   schoolLocation: string;
   schoolCode: string;
-  schoolPhoneNumber: string;
   schoolAddress: string;
   teacherName: string;
+  teacherPhoneNumber: string;
   teacherMobilePhoneNumber: string;
 }
 

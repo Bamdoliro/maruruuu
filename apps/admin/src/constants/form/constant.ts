@@ -4,6 +4,7 @@ import type {
   FormStatus,
   FormType,
   Gender,
+  GraduationType,
 } from '@/types/form/client';
 
 export const FORM_STATUS_CATEGORY: Record<FormStatus, string> = {
@@ -68,4 +69,10 @@ export const FORM_DETAIL_STEP_LIST = [
 export const GENDER: Record<Gender, string> = {
   MALE: '남자',
   FEMALE: '여자',
+} as const;
+
+export const GRADUATION_TYPE_VALUE: Record<GraduationType, string> = {
+  QUALIFICATION_EXAMINATION: '검정고시',
+  EXPECTED: '졸업 예정',
+  GRADUATED: '졸업',
 } as const;
