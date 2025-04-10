@@ -3,7 +3,21 @@ import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
-const EducationInfo = () => {
+interface EducationInfoProps {
+  educationData?: {
+    graduationType: string;
+    schoolName: string;
+    graduationYear: string;
+    schoolLocation: string;
+    schoolCode: string;
+    teacherPhoneNumber: string;
+    teacherName: string;
+    teacherMobilePhoneNumber: string;
+  };
+}
+
+const EducationInfo = ({ educationData }: EducationInfoProps) => {
+  if (!educationData) return <Loader />;
   return (
     <StyledEducationInfo>
       <GridContainer></GridContainer>
