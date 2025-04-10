@@ -2,7 +2,18 @@ import { DataBox } from '@/components/common';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
-const ParentInfo = () => {
+interface ParentInfoProps {
+  parentData?: {
+    name: string;
+    phoneNumber: string;
+    relation: string;
+    address: string;
+    zoneCode: string;
+    detailAddress: string;
+  };
+}
+
+const ParentInfo = ({ parentData }: ParentInfoProps) => {
   return (
     <StyledParentInfo>
       <GridContainer></GridContainer>
