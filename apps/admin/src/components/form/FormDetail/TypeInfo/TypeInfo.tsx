@@ -4,11 +4,11 @@ import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
 interface TypeInfoProps {
-  type: string;
+  typeData?: string;
 }
 
-const TypeInfo = ({ type }: TypeInfoProps) => {
-  if (!type) return <Loader />;
+const TypeInfo = ({ typeData }: TypeInfoProps) => {
+  if (!typeData) return <Loader />;
 
   return (
     <StyledTypeInfo>

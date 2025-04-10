@@ -10,6 +10,7 @@ import { SwitchCase } from '@toss/react';
 import ApplicantInfo from './ApplicantInfo/ApplicantInfo';
 import ParentInfo from './ParentInfo/ParentInfo';
 import EducationInfo from './EducationInfo/EducationInfo';
+import TypeInfo from './TypeInfo/TypeInfo';
 
 interface FormDetailProps {
   id: number;
@@ -18,7 +19,7 @@ interface FormDetailProps {
 const FormDetail = ({ id }: FormDetailProps) => {
   const [currentFormDetailStep, setCurrentFormDetailStep] = useState('지원자 정보');
 
-  const { profileData, applicantData, parentData, educationData } =
+  const { profileData, applicantData, parentData, educationData, typeData } =
     useFormDetailDataDecomposition(id);
 
   return (
@@ -45,6 +46,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
             '지원자 정보': <ApplicantInfo applicantData={applicantData} />,
             '보호자 정보': <ParentInfo parentData={parentData} />,
             '출신학교 및 학력': <EducationInfo educationData={educationData} />,
+            전형: <TypeInfo typeData={typeData} />,
           }}
         />
       </Column>

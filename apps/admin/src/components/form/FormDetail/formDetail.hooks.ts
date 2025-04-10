@@ -54,5 +54,7 @@ export const useFormDetailDataDecomposition = (id: number) => {
     ),
   };
 
-  return { profileData, applicantData, parentData, educationData };
+  const typeData = formDetailData?.type;
+
+  return { profileData, applicantData, parentData, educationData, typeData };
 };
