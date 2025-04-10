@@ -29,6 +29,15 @@ const formatDate = {
     return `${year}년 ${month}월 ${day}일 ${hours}:${minutes}`;
   },
 
+  toShortDateTime: (dateString: string) => {
+    const date = new Date(formatDate.normalizeDate(dateString));
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    return `${year}년 ${month}월 ${day}일`;
+  },
+
   toDayAndDateTime: (dateString: string) => {
     const date = new Date(formatDate.normalizeDate(dateString));
     const month = date.getMonth() + 1;
