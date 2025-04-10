@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 import { useFormDetailDataDecomposition } from './formDetail.hooks';
 import Profile from './Profile/Profile';
+import { SwitchCase } from '@toss/react';
+import ApplicantInfo from './ApplicantInfo/ApplicantInfo';
 
 interface FormDetailProps {
   id: number;
@@ -14,7 +16,7 @@ interface FormDetailProps {
 const FormDetail = ({ id }: FormDetailProps) => {
   const [currentFormDetailStep, setCurrentFormDetailStep] = useState('지원자 정보');
 
-  const { profileData } = useFormDetailDataDecomposition(id);
+  const { profileData, applicantData } = useFormDetailDataDecomposition(id);
 
   return (
     <StyledFormDetail>
@@ -34,6 +36,12 @@ const FormDetail = ({ id }: FormDetailProps) => {
             </UnderlineButton>
           ))}
         </NavigationBar>
+        <SwitchCase
+          value={currentFormDetailStep}
+          caseBy={{
+            '지원자 정보': <ApplicantInfo applicantData={applicantData} />,
+          }}
+        />
       </Column>
     </StyledFormDetail>
   );
