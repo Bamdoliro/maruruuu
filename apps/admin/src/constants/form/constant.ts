@@ -65,7 +65,7 @@ export const FORM_DETAIL_STEP_LIST = [
   '자기소개서',
 ] as const;
 
-const GENDER: Record<Gender, string> = {
+export const GENDER: Record<Gender, string> = {
   MALE: '남자',
   FEMALE: '여자',
 } as const;
