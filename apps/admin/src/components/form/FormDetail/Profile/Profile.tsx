@@ -10,7 +10,7 @@ interface ProfileProps {
     profileImageUrl: string;
     name: string;
     phoneNumber: string;
-    examinationNumber: number;
+    examinationNumber: number | string;
     type: string;
     schoolName: string;
   };

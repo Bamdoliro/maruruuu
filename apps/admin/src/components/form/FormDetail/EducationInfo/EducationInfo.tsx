@@ -10,7 +10,7 @@ interface EducationInfoProps {
     graduationYear: string;
     schoolLocation: string;
     schoolCode: string;
-    teacherPhoneNumber: string;
+    schoolPhoneNumber: string;
     teacherName: string;
     teacherMobilePhoneNumber: string;
   };
@@ -25,7 +25,7 @@ const EducationInfo = ({ educationData }: EducationInfoProps) => {
     { label: '졸업년도, 합격년도', data: educationData.graduationYear },
     { label: '학교 지역', data: educationData.schoolLocation },
     { label: '표준학교코드', data: educationData.schoolCode },
-    { label: '학교 연락처', data: educationData.teacherPhoneNumber },
+    { label: '학교 연락처', data: educationData.schoolPhoneNumber },
     { label: '작성교사 이름', data: educationData.teacherName },
     { label: '작성교사 연락처', data: educationData.teacherMobilePhoneNumber },
   ];
