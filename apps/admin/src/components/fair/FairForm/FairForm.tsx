@@ -7,7 +7,7 @@ import IconCalender from "@maru/icon/src/IconCalender";
 import IconClock from "@maru/icon/src/IconClock";
 
 const FairForm = () => {
-    return (
+        return (
         <CreateFairForm>
             <CreateFormSort>
                 <Text fontType="H6">대상선택</Text>
@@ -83,9 +83,9 @@ const CreateFormSort = styled.div`
 const CreateFairButton = styled.button`
     background-color: ${color.maruDefault};
     color: ${color.white};
-    padding: 22px;
     border-radius: 6px;
     margin-top: 24px;
+    padding:22px 0px;
 `;
 
 const RadioGroup = styled.div`
