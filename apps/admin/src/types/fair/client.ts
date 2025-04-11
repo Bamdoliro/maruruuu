@@ -45,11 +45,11 @@ export interface FairDetailData {
   attendeeList: AttendeeData[];
 }
 
-export interface FairFormData{
-  start: string
-  capacity: Number
-  place: string
-  type: string
-  applicationStartDate: string
-  applicationEndDate: string
+export interface FairFormData {
+  start: string;
+  capacity: Number;
+  place: string;
+  type: string;
+  applicationStartDate: string;
+  applicationEndDate: string;
 }

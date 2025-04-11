@@ -8,6 +8,6 @@ export interface GetFairDetailRes {
   data: FairDetailData;
 }
 
-export interface  PostFairDetail{
+export interface PostFairDetail {
   data: FairFormData;
 }

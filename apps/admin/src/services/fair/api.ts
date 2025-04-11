@@ -1,6 +1,10 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
-import type { GetFairListRes, GetFairDetailRes, PostFairDetail} from '@/types/fair/remote';
+import type {
+  GetFairListRes,
+  GetFairDetailRes,
+  PostFairDetail,
+} from '@/types/fair/remote';
 
 export const getFairList = async () => {
   const { data } = await maru.get<GetFairListRes>(`/fairs`);
