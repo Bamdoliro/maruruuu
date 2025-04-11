@@ -30,7 +30,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
         <Profile profileData={profileData} />
         {/**원서상태 백엔드 수정되면 개발**/}
       </Column>
-      <Column gap={48}>
+      <Column>
         <NavigationBar>
           {FORM_DETAIL_STEP_LIST.map((formDetailStep, index) => (
             <UnderlineButton
