@@ -44,3 +44,12 @@ export interface FairDetailData {
   status: FairStatus;
   attendeeList: AttendeeData[];
 }
+
+export interface FairForm{
+  target: string;
+  place: string;
+  entranceDate: string;
+  time: string;
+  applicationStartDate: string;
+  applicationEndDate: string;
+}
