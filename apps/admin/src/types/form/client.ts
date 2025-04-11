@@ -114,8 +114,8 @@ export interface EducationInfo {
   schoolLocation: string;
   schoolCode: string;
   schoolAddress: string;
+  schoolPhoneNumber: string;
   teacherName: string;
-  teacherPhoneNumber: string;
   teacherMobilePhoneNumber: string;
 }
 
