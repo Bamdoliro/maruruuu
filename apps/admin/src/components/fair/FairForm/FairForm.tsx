@@ -3,55 +3,94 @@
 import { color, font } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { styled } from 'styled-components';
-import IconCalender from "@maru/icon/src/IconCalender";
-import IconClock from "@maru/icon/src/IconClock";
+import IconCalender from '@maru/icon/src/IconCalender';
+import IconClock from '@maru/icon/src/IconClock';
+import { postFairDetail } from '@/services/fair/api';
+import useFairForm from "@/hooks/useFairForm";
 
 const FairForm = () => {
-        return (
+    const { form, handleChange, getRequestBody } = useFairForm();
+
+    const handleSubmit = async () => {
+        try {
+            const body = { data: getRequestBody() };
+            const res = await postFairDetail(body);
+            console.log('success:', res);
+        } catch (err) {
+            console.error('error', err);
+        }
+    };
+
+    return (
         <CreateFairForm>
             <CreateFormSort>
                 <Text fontType="H6">대상선택</Text>
                 <RadioGroup>
                     <RadioOption>
-                        <RadioInput type="radio" name="target" id="all" value="all"/>
+                        <RadioInput type="radio" name="target" id="all" defaultChecked />
                         <RadioLabel htmlFor="all">전체</RadioLabel>
                     </RadioOption>
                     <RadioOption>
-                        <RadioInput type="radio"  name="target" id="student" value="student"/>
+                        <RadioInput type="radio" name="target" id="student" />
                         <RadioLabel htmlFor="student">학생만</RadioLabel>
                     </RadioOption>
                 </RadioGroup>
             </CreateFormSort>
+
             <CreateFormSort>
                 <Text fontType="H6">장소</Text>
-                <FormInput placeholder="장소를 입력해주세요." />
+                <FormInput
+                    placeholder="장소를 입력해주세요."
+                    value={form.place}
+                    onChange={handleChange('place')}
+                />
             </CreateFormSort>
+
             <CreateFormSort>
                 <Text fontType="H6">입학 설명회 날짜 (8자리)</Text>
                 <InputWrapper>
-                    <FormInput placeholder="날짜를 입력해주세요." />
+                    <FormInput
+                        placeholder="날짜를 입력해주세요."
+                        value={form.date}
+                        onChange={handleChange('date')}
+                    />
                     <InputIconWrapper>
                         <IconCalender width={24} height={24} />
                     </InputIconWrapper>
                 </InputWrapper>
             </CreateFormSort>
+
             <CreateFormSort>
                 <Text fontType="H6">시간 (4자리)</Text>
                 <InputWrapper>
-                    <FormInput placeholder="시간 입력해주세요." />
+                    <FormInput
+                        placeholder="시간을 입력해주세요."
+                        value={form.time}
+                        onChange={handleChange('time')}
+                    />
                     <InputIconWrapper>
                         <IconClock width={24} height={24} />
                     </InputIconWrapper>
                 </InputWrapper>
             </CreateFormSort>
+
             <CreateFormSort>
                 <Text fontType="H6">신청 기한 (8자리)</Text>
                 <CreateInputSort>
-                    <FormInput placeholder="시작일" />
-                    <FormInput placeholder="종료일" />
+                    <FormInput
+                        placeholder="시작일"
+                        value={form.startDate}
+                        onChange={handleChange('startDate')}
+                    />
+                    <FormInput
+                        placeholder="종료일"
+                        value={form.endDate}
+                        onChange={handleChange('endDate')}
+                    />
                 </CreateInputSort>
             </CreateFormSort>
-            <CreateFairButton>
+
+            <CreateFairButton onClick={handleSubmit}>
                 <Text fontType="btn1">새로운 입학전형 설명회 생성하기</Text>
             </CreateFairButton>
         </CreateFairForm>
@@ -85,7 +124,7 @@ const CreateFairButton = styled.button`
     color: ${color.white};
     border-radius: 6px;
     margin-top: 24px;
-    padding:22px 0px;
+    padding: 22px 0px;
 `;
 
 const RadioGroup = styled.div`
