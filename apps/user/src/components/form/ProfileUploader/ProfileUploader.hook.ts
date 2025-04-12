@@ -35,7 +35,6 @@ export const useProfileUploader = (
 
       onPhotoUpload(true, downloadUrl);
       setImgSrc(downloadUrl);
-      Storage.setItem('downloadUrl', downloadUrl);
       Storage.setItem('isUploadPicture', 'true');
       setIsUploading(false);
     },
@@ -75,6 +74,7 @@ export const useProfileUploader = (
 
         startUploading(croppedFile);
       };
+      URL.revokeObjectURL(img.src);
     },
     [startUploading, userData.name]
   );
@@ -116,20 +116,28 @@ export const useProfileUploader = (
     [processImageFile]
   );
 
-  const refreshProfileImage = useCallback(
-    (file?: File) => {
-      if (file) {
-        refresh(file, {
-          onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
-          onError: () => onPhotoUpload(false),
-        });
-      } else if (!isUploading && data?.status !== 'REJECTED') {
-        const storedImageUrl = Storage.getItem('downloadUrl');
-        if (storedImageUrl) setImgSrc(storedImageUrl);
-      }
-    },
-    [isUploading, refresh, data?.status, handleUploadSuccess, onPhotoUpload]
-  );
+  const refreshProfileImage = useCallback(() => {
+    if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
+      refresh(undefined, {
+        onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
+        onError: () => onPhotoUpload(false),
+      });
+    } else {
+      const storedImageUrl = Storage.getItem('downloadUrl');
+      if (storedImageUrl) setImgSrc(storedImageUrl);
+      refresh(undefined, {
+        onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
+        onError: () => onPhotoUpload(false),
+      });
+    }
+  }, [
+    isUploadPictureStored,
+    isUploading,
+    data?.status,
+    refresh,
+    handleUploadSuccess,
+    onPhotoUpload,
+  ]);
 
   useEffect(() => {
     if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
