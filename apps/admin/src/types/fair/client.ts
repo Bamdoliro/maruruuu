@@ -47,7 +47,7 @@ export interface FairDetailData {
 
 export interface FairFormData {
   start: string;
-  capacity: Number;
+  capacity: number;
   place: string;
   type: string;
   applicationStartDate: string;
