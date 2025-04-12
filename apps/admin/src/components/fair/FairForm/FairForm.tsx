@@ -41,8 +41,9 @@ const FairForm = () => {
         <Text fontType="H6">장소</Text>
         <FormInput
           placeholder="장소를 입력해주세요."
+          name="place"
           value={form.place}
-          onChange={handleChange('place')}
+          onChange={handleChange}
         />
       </CreateFormSort>
 
@@ -51,8 +52,9 @@ const FairForm = () => {
         <InputWrapper>
           <FormInput
             placeholder="날짜를 입력해주세요."
+            name="date"
             value={form.date}
-            onChange={handleChange('date')}
+            onChange={handleChange}
           />
           <InputIconWrapper>
             <IconCalender width={24} height={24} />
@@ -65,8 +67,9 @@ const FairForm = () => {
         <InputWrapper>
           <FormInput
             placeholder="시간을 입력해주세요."
+            name={'time'}
             value={form.time}
-            onChange={handleChange('time')}
+            onChange={handleChange}
           />
           <InputIconWrapper>
             <IconClock width={24} height={24} />
@@ -79,13 +82,15 @@ const FairForm = () => {
         <CreateInputSort>
           <FormInput
             placeholder="시작일"
+            name="startDate"
             value={form.startDate}
-            onChange={handleChange('startDate')}
+            onChange={handleChange}
           />
           <FormInput
             placeholder="종료일"
+            name="endDate"
             value={form.endDate}
-            onChange={handleChange('endDate')}
+            onChange={handleChange}
           />
         </CreateInputSort>
       </CreateFormSort>
@@ -109,6 +114,9 @@ const CreateFairForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (min-width: 768px) {
+    padding: 56px 70px;
+  }
 `;
 
 const CreateFormSort = styled.div`
@@ -125,6 +133,9 @@ const CreateFairButton = styled.button`
   border-radius: 6px;
   margin-top: 24px;
   padding: 22px 0px;
+  @media (min-width: 768px) {
+    padding: 22px 0px;
+  }
 `;
 
 const RadioGroup = styled.div`
@@ -172,6 +183,11 @@ const CreateInputSort = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 const InputWrapper = styled.div`
