@@ -103,6 +103,8 @@ const ChangePassword = () => {
                   placeholder="비밀번호를 다시 입력해주세요."
                   name="password_confirm"
                   onChange={handleChangePasswordChange}
+                  isError={changePassword.password != changePassword.password_confirm}
+                  errorMessage="비밀번호가 일치하지 않습니다"
                 />
               </Column>
               <Button

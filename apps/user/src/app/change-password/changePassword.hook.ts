@@ -1,7 +1,11 @@
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import { useChangePasswordStore } from '@/stores/user/changePassword';
-import { useRequestUserVerificationMutation } from '@/services/user/mutations';
+import {
+  useChangePasswordMutation,
+  useRequestUserVerificationMutation,
+  useVerificationMutation,
+} from '@/services/user/mutations';
 import type { SignUp } from '@/types/user/client';
 
 export const useInput = () => {
@@ -26,6 +30,8 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
   const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
   const [isVerificationCodeConfirmed, setIsVerificationCodeConfirmed] = useState(false);
 
+  const { verificationMutate } = useVerificationMutation(setIsVerificationCodeConfirmed);
+
   const { requestVerificationMutate } = useRequestUserVerificationMutation({
     phoneNumber: changePasswordData.phoneNumber,
     type: 'UPDATE_PASSWORD',
@@ -44,7 +50,16 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
   };
 
   const handleVerificationConfirm = () => {
-    setIsVerificationCodeConfirmed(true);
+    if (!changePasswordData.code) {
+      alert('인증 코드를 입력해주세요');
+      return;
+    }
+
+    verificationMutate({
+      phoneNumber: changePasswordData.phoneNumber,
+      type: changePasswordData.type,
+      code: changePasswordData.code,
+    });
   };
 
   return {
@@ -57,9 +72,11 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
 };
 
 export const useChangePasswordAction = (changePasswordData: SignUp) => {
+  const { changePasswordMutate } = useChangePasswordMutation(changePasswordData);
+
   const handleChangePassword = () => {
     if (changePasswordData.password == changePasswordData.password_confirm) {
-      console.log(changePasswordData);
+      changePasswordMutate();
     } else {
       alert('비밀번호가 다릅니다');
     }

@@ -2,6 +2,7 @@ import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
 import type {
   GetUserRes,
+  PatchPasswordReq,
   PatchUserVerificationReq,
   PostSignUpReq,
   PostUserVerificationReq,
@@ -21,6 +22,12 @@ export const deleteUser = async (password: string) => {
 
 export const postSignUp = async ({ phoneNumber, name, password }: PostSignUpReq) => {
   const { data } = await maru.post('/users', { phoneNumber, name, password });
+
+  return data;
+};
+
+export const patchPassword = async ({ phoneNumber, password }: PatchPasswordReq) => {
+  const { data } = await maru.patch('/users/password', { phoneNumber, password });
 
   return data;
 };

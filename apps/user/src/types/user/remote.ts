@@ -16,6 +16,11 @@ export interface PatchUserVerificationReq {
   type: Type;
 }
 
+export interface PatchPasswordReq {
+  phoneNumber: string;
+  password: string;
+}
+
 export type PostUserVerificationReq = Omit<PatchUserVerificationReq, 'code'>;
 
 export type Type = 'SIGNUP' | 'UPDATE_PASSWORD';
