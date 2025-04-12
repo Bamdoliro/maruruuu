@@ -11,10 +11,33 @@ import {
   Input,
   PreviewInput,
   Text,
+  TimeLimitInput,
 } from '@maru/ui';
 import { Validate } from '@/components/signup';
+import {
+  useInput,
+  useVerificationCodeAction,
+  useChangePasswordAction,
+} from './changePassword.hook';
+import { useState } from 'react';
 
 const ChangePassword = () => {
+  const { changePassword, handleChangePasswordChange } = useInput();
+  const [timerTime, setTimerTime] = useState(0);
+  const { handleChangePassword } = useChangePasswordAction(changePassword);
+
+  const resetTimerTime = () => {
+    setTimerTime(300);
+  };
+
+  const {
+    isVerificationCodeDisabled,
+    isVerificationCodeSent,
+    isVerificationCodeConfirmed,
+    handleRequestVerificationCode,
+    handleVerificationConfirm,
+  } = useVerificationCodeAction(changePassword);
+
   return (
     <AppLayout backgroundColor={color.gray100}>
       <StyledChangePassword>
@@ -25,39 +48,70 @@ const ChangePassword = () => {
             </Text>
             <Column gap="128px">
               <Column gap="32px">
-                <Input label="이름" placeholder="예) 홍길동" width="100%" />
+                <Input
+                  label="이름"
+                  placeholder="예) 홍길동"
+                  width="100%"
+                  name="name"
+                  onChange={handleChangePasswordChange}
+                />
                 <ButtonInput
                   label="전화번호 인증"
                   placeholder="- 없이 입력해주세요."
                   width="100%"
-                  buttonText="인증번호 전송"
-                  onClick={() => {}}
+                  buttonText={isVerificationCodeSent ? '재전송' : '인증번호 전송'}
+                  onClick={() => {
+                    handleRequestVerificationCode();
+                    resetTimerTime();
+                  }}
                   type="phoneNumber"
+                  name="phoneNumber"
+                  onChange={handleChangePasswordChange}
+                  value={changePassword.phoneNumber}
+                  enabled={!isVerificationCodeDisabled}
                 />
-                <ButtonInput
-                  width="100%"
-                  label="인증번호 입력"
-                  placeholder="인증번호를 입력해주세요."
-                  buttonText="인증번호 확인"
-                  onClick={() => {}}
-                />
+
+                {isVerificationCodeSent && (
+                  <TimeLimitInput
+                    width="100%"
+                    label="인증번호 입력"
+                    maxLength={6}
+                    placeholder="인증번호를 입력해주세요."
+                    buttonText="인증번호 확인"
+                    onClick={handleVerificationConfirm}
+                    name="code"
+                    enabled={isVerificationCodeConfirmed}
+                    timerTime={timerTime}
+                    setTimerTime={setTimerTime}
+                    isError={!(changePassword.code.length == 6)}
+                    onChange={handleChangePasswordChange}
+                  />
+                )}
                 <Column gap="6px">
                   <PreviewInput
                     width="100%"
                     label="새 비밀번호"
                     placeholder="새 비밀번호를 입력해주세요."
-                    onClick={() => {}}
+                    name="password"
+                    onChange={handleChangePasswordChange}
                   />
-                  {Validate('비밀번호')}
+                  {Validate(changePassword.password)}
                 </Column>
                 <PreviewInput
                   width="100%"
                   label="비밀번호 재입력"
                   placeholder="비밀번호를 다시 입력해주세요."
-                  onClick={() => {}}
+                  name="password_confirm"
+                  onChange={handleChangePasswordChange}
                 />
               </Column>
-              <Button width="100%">비밀번호 변경</Button>
+              <Button
+                width="100%"
+                disabled={!isVerificationCodeConfirmed}
+                onClick={handleChangePassword}
+              >
+                비밀번호 변경
+              </Button>
             </Column>
           </Column>
         </ChangePasswordBox>
