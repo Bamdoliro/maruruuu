@@ -1,3 +1,4 @@
+import { Storage } from '@/apis/storage/storage';
 import { useUser } from '@/hooks';
 import { ApplicantSchema } from '@/schemas/ApplicantSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
@@ -16,6 +17,12 @@ export const useApplicantForm = () => {
   const { saveFormMutate } = useSaveFormMutation();
   const { data: saveFormQuery } = useSaveFormQuery();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
+
+  const fileName = Storage.getItem('fileName');
+  const mediaType = Storage.getItem('mediaType');
+  const fileSize = Storage.getItem('fileSize');
+
+  const notUploadFile = !fileName || !mediaType || !fileSize;
 
   const formatter: Record<string, (value: string) => string> = {
     birthday: (value) => formatDate(value.replace(/\D/g, '')),
@@ -53,6 +60,10 @@ export const useApplicantForm = () => {
   };
 
   const handleNextStep = () => {
+    if (!fileName || !mediaType || !fileSize) {
+      return;
+    }
+
     try {
       ApplicantSchema.parse(form.applicant);
       setErrors({});
@@ -69,5 +80,5 @@ export const useApplicantForm = () => {
     }
   };
 
-  return { onFieldChange, handleNextStep, errors };
+  return { onFieldChange, handleNextStep, errors, notUploadFile };
 };
