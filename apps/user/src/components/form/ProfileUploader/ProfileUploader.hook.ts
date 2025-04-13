@@ -117,18 +117,19 @@ export const useProfileUploader = (
   );
 
   const refreshProfileImage = useCallback(() => {
-    if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
+    const handleRefreshImage = () => {
       refresh(undefined, {
         onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
         onError: () => onPhotoUpload(false),
       });
+    };
+
+    if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
+      handleRefreshImage();
     } else {
       const storedImageUrl = Storage.getItem('downloadUrl');
       if (storedImageUrl) setImgSrc(storedImageUrl);
-      refresh(undefined, {
-        onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
-        onError: () => onPhotoUpload(false),
-      });
+      handleRefreshImage();
     }
   }, [
     isUploadPictureStored,
