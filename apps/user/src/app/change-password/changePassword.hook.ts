@@ -50,7 +50,7 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
   };
 
   const handleVerificationConfirm = () => {
-    if (!changePasswordData.code) {
+    if (changePasswordData.code.length == 0) {
       alert('인증 코드를 입력해주세요');
       return;
     }
@@ -78,7 +78,7 @@ export const useChangePasswordAction = (changePasswordData: SignUp) => {
     if (changePasswordData.password == changePasswordData.password_confirm) {
       changePasswordMutate();
     } else {
-      alert('비밀번호가 다릅니다');
+      alert('비밀번호가 일치하지 않습니다.');
     }
   };
 
