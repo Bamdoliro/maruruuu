@@ -2,8 +2,8 @@ import { ButtonInput, Column, Input, RadioGroup, Row } from '@maru/ui';
 import FormController from '../../FormController/FormController';
 import { useFormValueStore } from '@/stores';
 import { useOverlay } from '@toss/use-overlay';
-import FindAddressModal from '../../FindAddressModal/FindAddressModal';
 import { useEducationForm } from './EducationContent.hook';
+import FindSchoolModal from '../../FindSchoolModal/FindSchoolModal';
 
 const EudcationContent = () => {
   const overlay = useOverlay();
@@ -13,7 +13,7 @@ const EudcationContent = () => {
 
   const openFindAddressModal = () => {
     overlay.open(({ isOpen, close }) => (
-      <FindAddressModal isOpen={isOpen} onClose={close} />
+      <FindSchoolModal isOpen={isOpen} onClose={close} />
     ));
   };
 
