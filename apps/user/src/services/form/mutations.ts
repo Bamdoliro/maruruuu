@@ -96,6 +96,10 @@ export const useUploadProfileImageMutation = () => {
         fileSize: file.size,
       };
 
+      Storage.setItem('fileName', fileData.fileName);
+      Storage.setItem('mediaType', fileData.mediaType);
+      Storage.setItem('fileSize', fileData.fileSize.toString());
+
       const presignedData = await postUploadProfileImage(fileData);
       await putProfileUpoload(file, presignedData);
 
@@ -118,11 +122,15 @@ export const useRefreshProfileImageMutation = () => {
   const { handleError } = useApiError();
 
   const mutation = useMutation({
-    mutationFn: async (file: File) => {
+    mutationFn: async () => {
+      const fileName = Storage.getItem('fileName');
+      const mediaType = Storage.getItem('mediaType');
+      const fileSize = Storage.getItem('fileSize');
+
       const fileData = {
-        fileName: file.name,
-        mediaType: file.type,
-        fileSize: file.size,
+        fileName: fileName ?? '',
+        mediaType: mediaType ?? '',
+        fileSize: Number(fileSize ?? '0'),
       };
 
       const presignedData = await postUploadProfileImage(fileData);

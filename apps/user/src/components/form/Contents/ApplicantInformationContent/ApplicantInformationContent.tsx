@@ -6,13 +6,12 @@ import { Storage } from '@/apis/storage/storage';
 import { useApplicantForm } from './ApplicantInformationContent.hook';
 
 const ApplicantInformationContent = () => {
-  const { onFieldChange, handleNextStep, errors } = useApplicantForm();
+  const { onFieldChange, handleNextStep, errors, notUploadFile } = useApplicantForm();
   const form = useFormValueStore();
 
   const handlePhotoUpload = (success: boolean, url?: string) => {
     if (success && url) {
       Storage.setItem('isUploadPicture', 'true');
-      Storage.setItem('downloadUrl', url);
     }
   };
 
@@ -20,7 +19,7 @@ const ApplicantInformationContent = () => {
     <>
       <Row width="100%" justifyContent="space-between">
         <Column gap={40} alignItems="center">
-          <ProfileUploader onPhotoUpload={handlePhotoUpload} />
+          <ProfileUploader onPhotoUpload={handlePhotoUpload} isError={notUploadFile} />
         </Column>
         <Column gap={30} width={492}>
           <Input
