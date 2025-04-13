@@ -75,11 +75,16 @@ export const useChangePasswordAction = (changePasswordData: SignUp) => {
   const { changePasswordMutate } = useChangePasswordMutation(changePasswordData);
 
   const handleChangePassword = () => {
-    if (changePasswordData.password == changePasswordData.password_confirm) {
-      changePasswordMutate();
-    } else {
-      alert('비밀번호가 일치하지 않습니다.');
+    if (changePasswordData.name.length == 0) {
+      alert('이름을 입력해주세요');
+      return;
     }
+    if (changePasswordData.password != changePasswordData.password_confirm) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    changePasswordMutate();
   };
 
   return { handleChangePassword };
