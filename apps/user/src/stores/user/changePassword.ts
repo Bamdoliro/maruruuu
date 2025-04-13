@@ -2,7 +2,7 @@ import { atom, useRecoilState } from 'recoil';
 import type { SignUp } from '@/types/user/client';
 
 const changePasswordAtomState = atom<SignUp>({
-  key: 'signUpAtom',
+  key: 'changePasswordAtom',
   default: {
     password_confirm: '',
     phoneNumber: '',
