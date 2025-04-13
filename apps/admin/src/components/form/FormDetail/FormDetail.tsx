@@ -10,15 +10,18 @@ import { SwitchCase } from '@toss/react';
 import ApplicantInfo from './ApplicantInfo/ApplicantInfo';
 import ParentInfo from './ParentInfo/ParentInfo';
 import EducationInfo from './EducationInfo/EducationInfo';
+import TypeInfo from './TypeInfo/TypeInfo';
+import type { FormDetailStep } from '@/types/form/client';
 
 interface FormDetailProps {
   id: number;
 }
 
 const FormDetail = ({ id }: FormDetailProps) => {
-  const [currentFormDetailStep, setCurrentFormDetailStep] = useState('지원자 정보');
+  const [currentFormDetailStep, setCurrentFormDetailStep] =
+    useState<FormDetailStep>('지원자 정보');
 
-  const { profileData, applicantData, parentData, educationData } =
+  const { profileData, applicantData, parentData, educationData, typeData } =
     useFormDetailDataDecomposition(id);
 
   return (
@@ -27,7 +30,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
         <Profile profileData={profileData} />
         {/**원서상태 백엔드 수정되면 개발**/}
       </Column>
-      <Column gap={48}>
+      <Column>
         <NavigationBar>
           {FORM_DETAIL_STEP_LIST.map((formDetailStep, index) => (
             <UnderlineButton
@@ -45,6 +48,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
             '지원자 정보': <ApplicantInfo applicantData={applicantData} />,
             '보호자 정보': <ParentInfo parentData={parentData} />,
             '출신학교 및 학력': <EducationInfo educationData={educationData} />,
+            전형: <TypeInfo typeData={typeData} />,
           }}
         />
       </Column>
@@ -65,4 +69,5 @@ const NavigationBar = styled.div`
   width: 100%;
   height: 60px;
   background-color: ${color.white};
+  border-bottom: 2px solid ${color.gray200};
 `;
