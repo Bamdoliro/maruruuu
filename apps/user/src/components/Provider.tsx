@@ -6,6 +6,8 @@ import { OverlayProvider } from '@toss/use-overlay';
 import type { ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import { Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
   children: ReactNode;
@@ -17,6 +19,7 @@ const Provider = ({ children }: Props) => {
       <OverlayProvider>
         <GlobalStyle />
         <Suspense fallback={<Loader />}>{children}</Suspense>
+        <ToastContainer />
       </OverlayProvider>
     </RecoilRoot>
   );
