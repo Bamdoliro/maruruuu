@@ -1,9 +1,10 @@
 'use client';
 
-import { AppLayout } from '@/layouts';
 import styled from 'styled-components';
-import { flex } from '@maru/utils';
 import { color } from '@maru/design-system';
+import { flex } from '@maru/utils';
+
+import { AppLayout } from '@/layouts';
 import {
   Button,
   ButtonInput,
@@ -14,6 +15,7 @@ import {
   TimeLimitInput,
 } from '@maru/ui';
 import { Validate } from '@/components/signup';
+
 import {
   useInput,
   useVerificationCodeAction,
