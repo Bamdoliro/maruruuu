@@ -67,7 +67,7 @@ export const useChangePasswordMutation = ({
     onError: handleError,
   });
 
-  return { changePasswordMutate, restMutation };
+  return { changePasswordMutate, ...restMutation };
 };
 
 export const useRequestUserVerificationMutation = ({
