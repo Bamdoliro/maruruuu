@@ -3,7 +3,12 @@ import { useUser } from '@/hooks';
 import { ApplicantSchema } from '@/schemas/ApplicantSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
 import { useSaveFormQuery } from '@/services/form/queries';
-import { useFormValueStore, useSetFormStepStore, useSetFormStore } from '@/stores';
+import {
+  useCorrectStore,
+  useFormValueStore,
+  useSetFormStepStore,
+  useSetFormStore,
+} from '@/stores';
 import { formatDate } from '@/utils';
 import { useEffect, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
@@ -17,6 +22,7 @@ export const useApplicantForm = () => {
   const { saveFormMutate } = useSaveFormMutation();
   const { data: saveFormQuery } = useSaveFormQuery();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const [correct, setCorrect] = useCorrectStore();
 
   const fileName = Storage.getItem('fileName');
   const mediaType = Storage.getItem('mediaType');
@@ -62,6 +68,14 @@ export const useApplicantForm = () => {
   const handleNextStep = () => {
     if (!fileName || !mediaType || !fileSize) {
       return;
+    }
+
+    if (correct === true) {
+      ApplicantSchema.parse(form.applicant);
+      setErrors({});
+      setFormStep('초안작성완료');
+      saveFormMutate(form);
+      setCorrect(false);
     }
 
     try {

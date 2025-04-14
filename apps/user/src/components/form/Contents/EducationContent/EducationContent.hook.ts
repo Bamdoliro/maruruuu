@@ -1,13 +1,14 @@
 import { useSetFormGradeStepStore } from './../../../../stores/form/formGradeStep';
 import { EducationSchema } from '@/schemas/EducationSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormStore, useSetFormStepStore } from '@/stores';
+import { useCorrectStore, useFormStore, useSetFormStepStore } from '@/stores';
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';
 
 export const useEducationForm = () => {
   const [form, setForm] = useFormStore();
+  const [correct, setCorrect] = useCorrectStore();
   const setFormStep = useSetFormStepStore();
   const setFormGradeStep = useSetFormGradeStepStore();
   const { saveFormMutate } = useSaveFormMutation();
@@ -20,6 +21,14 @@ export const useEducationForm = () => {
   ];
 
   const handleNextStep = () => {
+    if (correct === true) {
+      EducationSchema.parse(form.education);
+      setErrors({});
+      setFormStep('초안작성완료');
+      saveFormMutate(form);
+      setCorrect(false);
+    }
+
     try {
       EducationSchema.parse(form.education);
       setErrors({});
