@@ -57,7 +57,7 @@ export const EXPORT_EXCEL_TYPE = [
   '최종 합격자',
 ] as const;
 
-export const FORM_DETAIL_STEP_LIST = [
+export const FORM_DETAIL_FIELDS = [
   '지원자 정보',
   '보호자 정보',
   '출신학교 및 학력',
@@ -76,3 +76,5 @@ export const GRADUATION_TYPE_VALUE: Record<GraduationType, string> = {
   EXPECTED: '졸업 예정',
   GRADUATED: '졸업',
 } as const;
+
+export const GRADES_FIELDS = ['교과 성적', '출결 상황', '봉사 시간', '자격증'] as const;

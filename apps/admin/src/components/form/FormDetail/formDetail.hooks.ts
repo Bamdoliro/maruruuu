@@ -65,5 +65,9 @@ export const useFormDetailDataDecomposition = (id: number) => {
       ? FORM_TYPE_CATEGORY[formDetailData.type]
       : '전형 정보 없음';
 
-  return { profileData, applicantData, parentData, educationData, typeData };
+  const gradesData = formDetailData && {
+    grade: formDetailData.grade.subjectList || [],
+  };
+
+  return { profileData, applicantData, parentData, educationData, typeData, gradesData };
 };
