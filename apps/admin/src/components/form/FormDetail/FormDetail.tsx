@@ -12,6 +12,7 @@ import ParentInfo from './ParentInfo/ParentInfo';
 import EducationInfo from './EducationInfo/EducationInfo';
 import TypeInfo from './TypeInfo/TypeInfo';
 import type { FormDetailStep } from '@/types/form/client';
+import GradesInfo from './GradesInfo/GradesInfo';
 
 interface FormDetailProps {
   id: number;
@@ -49,6 +50,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
             '보호자 정보': <ParentInfo parentData={parentData} />,
             '출신학교 및 학력': <EducationInfo educationData={educationData} />,
             전형: <TypeInfo typeData={typeData} />,
+            성적: <GradesInfo />,
           }}
         />
       </Column>
