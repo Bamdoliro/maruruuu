@@ -7,8 +7,6 @@ import { ChangeEvent, useState } from 'react';
 import { useSendMessageByStatusMutation, useSendMessageByTypeMutation, useSendMessageToAllMutation } from '@/services/message/mutations';
 import { toast } from 'react-toastify';
 
-type RecipientType = 'APPROVED' | 'REJECTED' | 'FINAL_SUBMITTED' | 'FINAL_PASSED' | 'MEISTER_TALENT' | 'REGULAR' | 'REGULAR_CHANGED' | 'ALL';
-
 interface MessageCreateProps {
   title: string;
   recipient: string;
@@ -79,7 +77,7 @@ const MessageCreate = ({
       onRecipientChange('');
       onContentChange({ target: { value: '' } } as ChangeEvent<HTMLTextAreaElement>);
       onSubmit();
-    } catch (e) {
+    } catch (error) {
       toast('메시지 전송에 실패했습니다.', {
         type: 'error'
       });

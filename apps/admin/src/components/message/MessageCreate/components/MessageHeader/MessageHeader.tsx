@@ -1,8 +1,8 @@
 import { Button } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import TitleInput from '@/components/message/MessageForm/TitleInput';
-import RecipientDropdown from '@/components/message/MessageForm/RecipientDropdown';
+import TitleInput from '../TitleInput/TitleInput';
+import RecipientDropdown from '../RecipientDropdown/RecipientDropdown';
 import { ChangeEvent } from 'react';
 
 interface MessageHeaderProps {

@@ -21,7 +21,7 @@ const TitleInput = ({ value, onChange }: TitleInputProps) => {
 export default TitleInput;
 
 const StyledInput = styled.input`
-  ${font.H1}
+  ${font.H2}
   width: 100%;
   border: none;
   color: ${color.gray900};

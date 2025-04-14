@@ -3,7 +3,6 @@
 import { Text } from '@maru/ui';
 import AppLayout from '@/layouts/AppLayout';
 import MessageCreate from '@/components/message/MessageCreate/MessageCreate';
-import MessageConfirmModal from '@/components/message/MessageCreate/components/MessageConfirmModal/MessageConfirmModal';
 import { useState, type ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
@@ -13,7 +12,6 @@ const MessagePage = () => {
   const [title, setTitle] = useState('');
   const [recipient, setRecipient] = useState('');
   const [content, setContent] = useState('');
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -28,15 +26,9 @@ const MessagePage = () => {
   };
 
   const handleSubmit = () => {
-    setIsConfirmModalOpen(true);
-  };
-
-  const handleConfirmModalClose = () => {
-    setIsConfirmModalOpen(false);
-  };
-
-  const handleConfirmModalConfirm = () => {
-    setIsConfirmModalOpen(false);
+    setTitle('');
+    setRecipient('');
+    setContent('');
   };
 
   return (
@@ -51,11 +43,6 @@ const MessagePage = () => {
           onRecipientChange={handleRecipientChange}
           onContentChange={handleContentChange}
           onSubmit={handleSubmit}
-        />
-        <MessageConfirmModal
-          isOpen={isConfirmModalOpen}
-          onClose={handleConfirmModalClose}
-          onConfirm={handleConfirmModalConfirm}
         />
       </StyledMessagePage>
     </AppLayout>

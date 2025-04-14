@@ -10,6 +10,7 @@ interface RecipientDropdownProps {
 }
 
 const MAIN_OPTIONS = [
+  { value: 'FINAL_SUBMITTED', label: '최종 제출된 원서' },
   { value: 'APPROVED', label: '원서 승인 완료자' },
   { value: 'REJECTED', label: '원서 반려자' },
   {
@@ -17,9 +18,9 @@ const MAIN_OPTIONS = [
     label: '1차 합격자',
     hasSubMenu: true,
     subOptions: [
-      { value: 'FIRST_PASSED_MEISTER_TALENT', label: '마이스터인재전형' },
-      { value: 'FIRST_PASSED_EXCEPT_MEISTER', label: '마이스터 제외 합격자' },
-      { value: 'ALL_FIRST_PASSED', label: '전체 1차 합격자' },
+      { value: 'MEISTER_TALENT', label: '마이스터인재전형' },
+      { value: 'REGULAR', label: '일반전형' },
+      { value: 'ALL', label: '전체 1차 합격자' },
     ],
   },
   { value: 'FINAL_PASSED', label: '최종 합격자' },
@@ -41,6 +42,17 @@ const RecipientDropdown = ({ value, onChange }: RecipientDropdownProps) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const getSelectedLabel = () => {
+    for (const option of MAIN_OPTIONS) {
+      if (option.value === value) return option.label;
+      if (option.subOptions) {
+        const subOption = option.subOptions.find((sub) => sub.value === value);
+        if (subOption) return subOption.label;
+      }
+    }
+    return '';
+  };
 
   return (
     <Container ref={dropdownRef}>
@@ -107,7 +119,6 @@ const Button = styled.button<{ $isOpen: boolean; $hasValue: boolean }>`
   border-radius: 6px;
   color: ${({ $hasValue }) => ($hasValue ? color.gray900 : color.gray500)};
   text-align: left;
-  font-weight: 400;
 
   &:hover {
     border-color: ${color.maruDefault};
@@ -146,7 +157,6 @@ const MenuButton = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-weight: 400;
 
   &:hover {
     background-color: ${color.gray50};
