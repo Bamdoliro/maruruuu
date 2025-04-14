@@ -1,7 +1,7 @@
 import { Attendance } from '@/types/form/client';
 import { CellInput, Column, Row, Td, Th } from '@maru/ui';
 
-interface AttendanceProps {
+interface AttendanceStatusProps {
   attendanceRecords: {
     attendance1: Attendance;
     attendance2: Attendance;
@@ -9,7 +9,7 @@ interface AttendanceProps {
   };
 }
 
-const AttendanceStatus = ({ attendanceRecords }: AttendanceProps) => {
+const AttendanceStatus = ({ attendanceRecords }: AttendanceStatusProps) => {
   const attendanceData = [
     { gradeLabel: '1학년', data: attendanceRecords.attendance1 },
     { gradeLabel: '2학년', data: attendanceRecords.attendance2 },
