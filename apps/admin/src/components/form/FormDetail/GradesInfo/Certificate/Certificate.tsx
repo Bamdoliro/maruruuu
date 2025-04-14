@@ -23,7 +23,7 @@ const Certificate = ({ certificateList }: CertificateProps) => {
         <Th width={convertToResponsive(80, 120)} height={56}>
           반영점수
         </Th>
-        <Th width={80} height={56} borderTopRightRadius={12}>
+        <Th width={convertToResponsive(60, 80)} height={56} borderTopRightRadius={12}>
           선택
         </Th>
       </Row>
@@ -37,7 +37,7 @@ const Certificate = ({ certificateList }: CertificateProps) => {
         <Td width={convertToResponsive(80, 120)} height={56}>
           4점
         </Td>
-        <Td width={80} height={56}>
+        <Td width={convertToResponsive(60, 80)} height={56}>
           <CheckBox checked={isCraftsmanIncluded} />
         </Td>
       </Row>
@@ -57,7 +57,7 @@ const Certificate = ({ certificateList }: CertificateProps) => {
             <Td width={convertToResponsive(80, 120)} height={56}>
               1급(3점)
             </Td>
-            <Td width={80} height={56}>
+            <Td width={convertToResponsive(60, 80)} height={56}>
               <CheckBox
                 checked={certificateList.includes('COMPUTER_SPECIALIST_LEVEL_1')}
               />
@@ -67,7 +67,7 @@ const Certificate = ({ certificateList }: CertificateProps) => {
             <Td width={convertToResponsive(80, 120)} height={56}>
               2급(2점)
             </Td>
-            <Td width={80} height={56}>
+            <Td width={convertToResponsive(60, 80)} height={56}>
               <CheckBox
                 checked={certificateList.includes('COMPUTER_SPECIALIST_LEVEL_2')}
               />
@@ -77,7 +77,11 @@ const Certificate = ({ certificateList }: CertificateProps) => {
             <Td width={convertToResponsive(80, 120)} height={56}>
               3급(1점)
             </Td>
-            <Td width={80} height={56} borderBottomRightRadius={12}>
+            <Td
+              width={convertToResponsive(60, 80)}
+              height={56}
+              borderBottomRightRadius={12}
+            >
               <CheckBox
                 checked={certificateList.includes('COMPUTER_SPECIALIST_LEVEL_3')}
               />
