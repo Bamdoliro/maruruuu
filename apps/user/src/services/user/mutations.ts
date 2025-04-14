@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import {
   deleteUser,
-  patchPassword,
+  patchChangePassword,
   patchVerification,
   postRequestVerification,
   postSignUp,
@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { ROUTES } from '@/constants/common/constants';
 import { useApiError } from '@/hooks';
 import type {
-  PatchPasswordReq,
+  patchChangePasswordReq,
   PatchUserVerificationReq,
   PostSignUpReq,
   PostUserVerificationReq,
@@ -54,12 +54,12 @@ export const useSignUpMutation = ({ phoneNumber, name, password }: PostSignUpReq
 export const useChangePasswordMutation = ({
   phoneNumber,
   password,
-}: PatchPasswordReq) => {
+}: patchChangePasswordReq) => {
   const router = useRouter();
   const { handleError } = useApiError();
 
   const { mutate: changePasswordMutate, ...restMutation } = useMutation({
-    mutationFn: () => patchPassword({ phoneNumber, password }),
+    mutationFn: () => patchChangePassword({ phoneNumber, password }),
     onSuccess: () => {
       toast('비밀번호 변경 성공', { type: 'success' });
       router.replace(ROUTES.MAIN);

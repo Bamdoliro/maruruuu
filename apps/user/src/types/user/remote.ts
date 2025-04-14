@@ -16,7 +16,7 @@ export interface PatchUserVerificationReq {
   type: Type;
 }
 
-export interface PatchPasswordReq {
+export interface patchChangePasswordReq {
   phoneNumber: string;
   password: string;
 }
