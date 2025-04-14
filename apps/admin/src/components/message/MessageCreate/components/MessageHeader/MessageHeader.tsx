@@ -3,7 +3,7 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import TitleInput from '../TitleInput/TitleInput';
 import RecipientDropdown from '../RecipientDropdown/RecipientDropdown';
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 
 interface MessageHeaderProps {
   title: string;
