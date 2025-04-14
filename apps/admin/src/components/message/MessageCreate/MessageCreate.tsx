@@ -6,51 +6,33 @@ import { ChangeEvent } from 'react';
 
 interface MessageCreateProps {
   title: string;
-  text: string;
-  messageType: 'status' | 'type' | 'all';
-  status?: string;
-  formType?: 'MEISTER_TALENT' | 'REGULAR';
-  isChangeToRegular?: boolean;
+  recipient: string;
+  content: string;
   onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onTextChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  onMessageTypeChange: (type: 'status' | 'type' | 'all') => void;
-  onStatusChange?: (status: string) => void;
-  onFormTypeChange?: (formType: 'MEISTER_TALENT' | 'REGULAR') => void;
-  onIsChangeToRegularChange?: (value: boolean) => void;
+  onRecipientChange: (value: string) => void;
+  onContentChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   onSubmit: () => void;
 }
 
 const MessageCreate = ({
   title,
-  text,
-  messageType,
-  status,
-  formType,
-  isChangeToRegular,
+  recipient,
+  content,
   onTitleChange,
-  onTextChange,
-  onMessageTypeChange,
-  onStatusChange,
-  onFormTypeChange,
-  onIsChangeToRegularChange,
+  onRecipientChange,
+  onContentChange,
   onSubmit,
 }: MessageCreateProps) => {
   return (
     <Container>
       <MessageHeader
         title={title}
-        messageType={messageType}
-        status={status}
-        formType={formType}
-        isChangeToRegular={isChangeToRegular}
+        recipient={recipient}
         onTitleChange={onTitleChange}
-        onMessageTypeChange={onMessageTypeChange}
-        onStatusChange={onStatusChange}
-        onFormTypeChange={onFormTypeChange}
-        onIsChangeToRegularChange={onIsChangeToRegularChange}
+        onRecipientChange={onRecipientChange}
         onSubmit={onSubmit}
       />
-      <ContentTextarea value={text} onChange={onTextChange} />
+      <ContentTextarea value={content} onChange={onContentChange} />
     </Container>
   );
 };
