@@ -1,15 +1,15 @@
 import { flex } from '@maru/utils';
 import type { InputHTMLAttributes } from 'react';
-import React from 'react';
 import { styled } from 'styled-components';
 
 type RadioProps = InputHTMLAttributes<HTMLInputElement>;
 
-const Radio = ({ value, name, checked, onChange, disabled }: RadioProps) => {
+const Radio = ({ id, value, name, checked, onChange, disabled }: RadioProps) => {
   return (
     <StyledRadio>
       <RadioInput
         type="radio"
+        id={id}
         value={value}
         name={name}
         checked={checked}
