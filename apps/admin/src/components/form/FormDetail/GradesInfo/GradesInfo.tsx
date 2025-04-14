@@ -8,12 +8,14 @@ import Grade from './Grade/Grade';
 import type { Attendance, Subject } from '@/types/form/client';
 import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 import Volunteer from './Volunteer/Volunteer';
+import Certificate from './Certificate/Certificate';
 
 interface GradesInfoProps {
   gradesData?: {
-    gradeData: Subject[];
-    attendanceData: Attendance[];
-    volunteerData: number[];
+    subjectList: Subject[];
+    attendanceList: Attendance[];
+    volunteerList: number[];
+    certificateList: string[];
   };
 }
 
@@ -38,9 +40,10 @@ const GradesInfo = ({ gradesData }: GradesInfoProps) => {
       <SwitchCase
         value={currentGradeField}
         caseBy={{
-          '교과 성적': <Grade subjectList={gradesData.gradeData} />,
-          '출결 상황': <AttendanceStatus attendanceList={gradesData.attendanceData} />,
-          '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerData} />,
+          '교과 성적': <Grade subjectList={gradesData.subjectList} />,
+          '출결 상황': <AttendanceStatus attendanceList={gradesData.attendanceList} />,
+          '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerList} />,
+          자격증: <Certificate certificateList={gradesData.certificateList} />,
         }}
       />
     </StyledGradesInfo>
