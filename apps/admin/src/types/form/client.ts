@@ -123,9 +123,9 @@ export type AchievementLevel = 'A' | 'B' | 'C' | 'D' | 'E' | '-';
 
 export interface AchievementLevelsGroup {
   subjectName: string;
-  achievementLevels: AchievementLevel[];
   grades: number[];
   semesters: number[];
+  achievementLevels: AchievementLevel[];
 }
 
 export interface Subject {
