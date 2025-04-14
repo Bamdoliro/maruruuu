@@ -20,7 +20,7 @@ import {
   useInput,
   useVerificationCodeAction,
   useChangePasswordAction,
-} from './changePassword.hook';
+} from './password.hook';
 import { useState } from 'react';
 
 const ChangePassword = () => {
