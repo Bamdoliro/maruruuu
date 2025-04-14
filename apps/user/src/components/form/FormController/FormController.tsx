@@ -1,3 +1,4 @@
+import { useCorrectValueStore, useFormGradeStepValueStore } from '@/stores';
 import type { FormStep } from '@/types/form/client';
 import { Button } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -10,9 +11,18 @@ interface FormControllerProps {
 }
 
 const FormController = ({ onPrevious, onNext, step }: FormControllerProps) => {
+  const correct = useCorrectValueStore();
+  const formGradeStep = useFormGradeStepValueStore();
+
   return (
     <StyledControllerArea>
-      {step === '지원자정보' ? (
+      {step === '지원자정보' ||
+      (correct === true &&
+        (formGradeStep === '교과성적' ||
+          step === '보호자정보' ||
+          step === '자기소개서' ||
+          step === '전형선택' ||
+          step === '출신학교및학력')) ? (
         <Button styleType="PRIMARY" size="MEDIUM" width={150} onClick={onNext}>
           다음
         </Button>
