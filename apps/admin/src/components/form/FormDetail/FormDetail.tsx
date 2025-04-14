@@ -22,7 +22,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
   const [currentFormDetailStep, setCurrentFormDetailStep] =
     useState<FormDetailStep>('지원자 정보');
 
-  const { profileData, applicantData, parentData, educationData, typeData } =
+  const { profileData, applicantData, parentData, educationData, typeData, gradesData } =
     useFormDetailDataDecomposition(id);
 
   return (
@@ -50,7 +50,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
             '보호자 정보': <ParentInfo parentData={parentData} />,
             '출신학교 및 학력': <EducationInfo educationData={educationData} />,
             전형: <TypeInfo typeData={typeData} />,
-            성적: <GradesInfo />,
+            성적: <GradesInfo gradesData={gradesData} />,
           }}
         />
       </Column>

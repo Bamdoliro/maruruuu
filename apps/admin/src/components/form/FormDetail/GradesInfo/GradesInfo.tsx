@@ -1,12 +1,21 @@
 import { SideMenu } from '@/components/common';
 import { GRADES_FIELDS } from '@/constants/form/constant';
-import { Column } from '@maru/ui';
+import { Column, Loader } from '@maru/ui';
 import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import Grade from './Grade/Grade';
+import { Subject } from '@/types/form/client';
 
-const GradesInfo = () => {
+interface GradesInfoProps {
+  gradesData?: {
+    grade: Subject[];
+  };
+}
+
+const GradesInfo = ({ gradesData }: GradesInfoProps) => {
+  if (!gradesData) return <Loader />;
+
   const [currentGradeField, setCurrentGradeField] = useState('교과 성적');
 
   return (
@@ -25,7 +34,7 @@ const GradesInfo = () => {
       <SwitchCase
         value={currentGradeField}
         caseBy={{
-          '교과 성적': <Grade subjectList={[]} />,
+          '교과 성적': <Grade subjectList={gradesData.grade} />,
         }}
       />
     </StyledGradesInfo>
