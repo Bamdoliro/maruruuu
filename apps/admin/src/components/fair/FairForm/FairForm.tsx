@@ -10,8 +10,8 @@ import type { FairType } from '@/types/fair/client';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import FormInput from '@maru/ui/src/Input/FormInput';
-import { FairFormInput } from '@/utils/functions/getRequestBody';
-import type { formatFairRequestBody } from '@/utils/functions/getRequestBody';
+import type { FairFormInput } from '@/utils/functions/getRequestBody';
+import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
 
 const FairForm = () => {
   const { form, handleChange } = useFairForm();
