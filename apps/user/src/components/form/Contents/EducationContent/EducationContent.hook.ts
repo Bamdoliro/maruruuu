@@ -1,17 +1,18 @@
 import { useSetFormGradeStepStore } from './../../../../stores/form/formGradeStep';
 import { EducationSchema } from '@/schemas/EducationSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormStore, useSetFormStepStore } from '@/stores';
+import { useCorrectStore, useFormStore, useSetFormStepStore } from '@/stores';
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';
 
 export const useEducationForm = () => {
   const [form, setForm] = useFormStore();
+  const [correct, setCorrect] = useCorrectStore();
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
   const setFormStep = useSetFormStepStore();
   const setFormGradeStep = useSetFormGradeStepStore();
   const { saveFormMutate } = useSaveFormMutation();
-  const [errors, setErrors] = useState<Record<string, string[]>>({});
 
   const numberFiled = [
     'graduationYear',
@@ -38,6 +39,14 @@ export const useEducationForm = () => {
   };
 
   const handlePreviousStep = () => {
+    if (correct === true) {
+      EducationSchema.parse(form.education);
+      setErrors({});
+      setFormStep('보호자정보');
+      saveFormMutate(form);
+      setCorrect(false);
+    }
+
     try {
       EducationSchema.parse(form.education);
       setErrors({});

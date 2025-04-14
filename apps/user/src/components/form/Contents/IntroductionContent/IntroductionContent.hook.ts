@@ -1,11 +1,17 @@
 import { IntroductionSchema } from '@/schemas/IntroductionSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormStore, useSetFormGradeStepStore, useSetFormStepStore } from '@/stores';
+import {
+  useCorrectStore,
+  useFormStore,
+  useSetFormGradeStepStore,
+  useSetFormStepStore,
+} from '@/stores';
 import { useState, type ChangeEventHandler } from 'react';
 import { z } from 'zod';
 
 export const useIntoductionForm = () => {
   const [form, setForm] = useFormStore();
+  const [correct, setCorrect] = useCorrectStore();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const setFormStep = useSetFormStepStore();
   const setFormGradeStep = useSetFormGradeStepStore();
@@ -21,6 +27,14 @@ export const useIntoductionForm = () => {
   };
 
   const handleNextStep = () => {
+    if (correct === true) {
+      IntroductionSchema.parse(form.document);
+      setErrors({});
+      setFormStep('초안작성완료');
+      saveFormMutate(form);
+      setCorrect(false);
+    }
+
     try {
       IntroductionSchema.parse(form.document);
       setErrors({});

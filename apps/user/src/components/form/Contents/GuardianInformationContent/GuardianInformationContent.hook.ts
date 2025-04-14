@@ -1,11 +1,12 @@
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormStore, useSetFormStepStore } from '@/stores';
+import { useCorrectStore, useFormStore, useSetFormStepStore } from '@/stores';
 import { GuardianSchema } from '@/schemas/GuardianSchema';
 import { z } from 'zod';
 
 export const useGuardianForm = () => {
+  const [correct, setCorrect] = useCorrectStore();
   const [form, setForm] = useFormStore();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const setFormStep = useSetFormStepStore();
@@ -32,6 +33,14 @@ export const useGuardianForm = () => {
   };
 
   const handleNextStep = () => {
+    if (correct === true) {
+      GuardianSchema.parse(form.parent);
+      setErrors({});
+      setFormStep('초안작성완료');
+      saveFormMutate(form);
+      setCorrect(false);
+    }
+
     try {
       GuardianSchema.parse(form.parent);
       setErrors({});
