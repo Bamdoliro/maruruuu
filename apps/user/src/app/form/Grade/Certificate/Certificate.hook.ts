@@ -1,19 +1,28 @@
 import { useSaveFormMutation } from '@/services/form/mutations';
 import {
+  useCorrectValueStore,
   useFormValueStore,
   useSetFormGradeStepStore,
-  useSetFormStepStore,
 } from '@/stores';
+import { useFormStep } from '@/utils';
 
 export const useCTAButton = () => {
+  const correct = useCorrectValueStore();
   const form = useFormValueStore();
-  const setFormStep = useSetFormStepStore();
   const setFormGradeStep = useSetFormGradeStepStore();
   const { saveFormMutate } = useSaveFormMutation();
+  const { run: FormStep } = useFormStep();
 
   const handleNextStep = () => {
-    setFormStep('자기소개서');
-    saveFormMutate(form);
+    if (correct === true) {
+      FormStep({
+        nextStep: '초안작성완료',
+      });
+    }
+
+    FormStep({
+      nextStep: '자기소개서',
+    });
   };
 
   const handlePreviousStep = () => {
