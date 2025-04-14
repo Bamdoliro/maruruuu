@@ -4,6 +4,8 @@ import { Button, CellInput, Column, Input, RadioGroup, Text, Textarea } from '@m
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useAgree, useCTAButton, useInput } from './FairStudentApplicationBox.hook';
+import Link from 'next/link';
+import { ROUTES } from '@/constants/common/constants';
 
 interface FairStudentApplicationBoxProps {
   id: number;
@@ -129,15 +131,19 @@ const FairStudentApplicationBox = ({ id }: FairStudentApplicationBoxProps) => {
             </Text>
             <Text fontType="p2" color={color.gray600} tag="p">
               입학설명회 진행을 위해 수집한 개인정보는 부산소프트웨어마이스터고등학교
-              홍보자료 발송 및 입학안내
               <br />
-              이외의 용도로 사용되지 않습니다.
+              홍보자료 발송 및 입학안내 이외의 용도로 사용되지 않습니다.
               <br />
-              [개인정보 보호법] 제 15조 및 제 17조 에 따라 개인정보를 수집, 이용 및
-              제공하는 것을 동의합니다.
+              <Link href={ROUTES.PRIVACY_POLCY} style={{ color: color.maruDefault }}>
+                [개인정보처리방침]
+              </Link>{' '}
+              제 1조, 제 2조에 따라 개인정보를 수집, 이용 및 제공하는 것을 동의합니다.
               <br />
               또한 개인정보를 다음과 같이 보관하며, 수집, 이용 및 제공목적이 달성된 경우
-              [개인정보 보호법] 제 21조에 따라 처리합니다.
+              <Link href={ROUTES.PRIVACY_POLCY} style={{ color: color.maruDefault }}>
+                [개인정보처리방침]
+              </Link>{' '}
+              제 6조에 따라 처리합니다.
               <br />
               단, 개인정보 비동의 시 홍보자료 및 안내자료 발송에 제한이 있습니다.
             </Text>
