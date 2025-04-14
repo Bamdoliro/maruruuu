@@ -1,4 +1,4 @@
-import { Attendance } from '@/types/form/client';
+import type { Attendance } from '@/types/form/client';
 import { convertToResponsive } from '@/utils';
 import { CellInput, Column, Row, Td, Th } from '@maru/ui';
 
