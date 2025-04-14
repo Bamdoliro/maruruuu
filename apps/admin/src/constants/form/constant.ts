@@ -76,3 +76,5 @@ export const GRADUATION_TYPE_VALUE: Record<GraduationType, string> = {
   EXPECTED: '졸업 예정',
   GRADUATED: '졸업',
 } as const;
+
+export const GRADES_FIELDS = ['교과 성적', '출결 상황', '봉사 시간', '자격증'] as const;
