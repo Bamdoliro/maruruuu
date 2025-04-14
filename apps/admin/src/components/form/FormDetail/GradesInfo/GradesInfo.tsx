@@ -4,6 +4,7 @@ import { Column } from '@maru/ui';
 import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
 import { styled } from 'styled-components';
+import Grade from './Grade/Grade';
 
 const GradesInfo = () => {
   const [currentGradeField, setCurrentGradeField] = useState('교과 성적');
@@ -21,7 +22,12 @@ const GradesInfo = () => {
           </SideMenu>
         ))}
       </Column>
-      <SwitchCase value={currentGradeField} caseBy={{}} />
+      <SwitchCase
+        value={currentGradeField}
+        caseBy={{
+          '교과 성적': <Grade subjectList={[]} />,
+        }}
+      />
     </StyledGradesInfo>
   );
 };
