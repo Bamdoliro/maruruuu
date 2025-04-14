@@ -142,7 +142,7 @@ export interface Attendance {
   classAbsenceCount: number;
 }
 
-export type FormDetailStep =
+export type FormDetailField =
   | '지원자 정보'
   | '보호자 정보'
   | '출신학교 및 학력'
