@@ -7,11 +7,13 @@ import { styled } from 'styled-components';
 import Grade from './Grade/Grade';
 import type { Attendance, Subject } from '@/types/form/client';
 import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
+import Volunteer from './Volunteer/Volunteer';
 
 interface GradesInfoProps {
   gradesData?: {
     gradeData: Subject[];
     attendanceData: Attendance[];
+    volunteerData: number[];
   };
 }
 
@@ -38,6 +40,7 @@ const GradesInfo = ({ gradesData }: GradesInfoProps) => {
         caseBy={{
           '교과 성적': <Grade subjectList={gradesData.gradeData} />,
           '출결 상황': <AttendanceStatus attendanceList={gradesData.attendanceData} />,
+          '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerData} />,
         }}
       />
     </StyledGradesInfo>
