@@ -1,4 +1,4 @@
-import { Subject } from '@/types/form/client';
+import type { Subject } from '@/types/form/client';
 import getAchievementLevelsGroupList from './grade.hook';
 import { Column } from '@maru/ui';
 import GradeHeader from './GradeHeader/GradeHeader';

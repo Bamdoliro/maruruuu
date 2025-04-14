@@ -5,7 +5,7 @@ import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import Grade from './Grade/Grade';
-import { Subject } from '@/types/form/client';
+import type { Subject } from '@/types/form/client';
 
 interface GradesInfoProps {
   gradesData?: {
