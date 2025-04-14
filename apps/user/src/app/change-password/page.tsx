@@ -126,6 +126,8 @@ const ChangePassword = () => {
   );
 };
 
+export default ChangePassword;
+
 const StyledChangePassword = styled.div`
   ${flex({ justifyContent: 'center', alignItems: 'center' })}
   width: 100%;
@@ -147,5 +149,3 @@ const ScrollArea = styled.div`
   width: 90%;
   height: fit-content;
 `;
-
-export default ChangePassword;
