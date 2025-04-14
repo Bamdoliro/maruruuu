@@ -32,12 +32,13 @@ const RadioGroup = ({ label, items, name, value, onChange }: RadioGroupProps) =>
           return (
             <Row key={`radio ${name} ${index}`} gap={8} alignItems="center">
               <Radio
+                id={`radio-${name}-${index}`}
                 name={name}
                 value={radioValue}
                 checked={isChecked}
                 onChange={onChange}
               />
-              <RadioLabel>{radioLabel}</RadioLabel>
+              <RadioLabel htmlFor={`radio-${name}-${index}`}>{radioLabel}</RadioLabel>
             </Row>
           );
         })}
@@ -58,7 +59,7 @@ const Label = styled.p`
   margin-bottom: 12px;
 `;
 
-const RadioLabel = styled.p`
+const RadioLabel = styled.label`
   ${font.p2};
   color: ${color.gray900};
 `;
