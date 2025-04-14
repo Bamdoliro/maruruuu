@@ -1,7 +1,11 @@
 import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { sendMessageByStatus, sendMessageByType, sendMessageToAll } from './api';
-import type { SendMessageByStatusRequest, SendMessageByTypeRequest, SendMessageToAllRequest } from './api';
+import type {
+  SendMessageByStatusRequest,
+  SendMessageByTypeRequest,
+  SendMessageToAllRequest,
+} from './api';
 
 export const useSendMessageByStatusMutation = () => {
   const { handleError } = useApiError();
@@ -34,4 +38,4 @@ export const useSendMessageToAllMutation = () => {
   });
 
   return { sendMessageToAllMutate, ...restMutation };
-}; 
+};

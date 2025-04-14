@@ -4,7 +4,11 @@ import MessageHeader from './components/MessageHeader/MessageHeader';
 import ContentTextarea from './components/ContentTextarea/ContentTextarea';
 import MessageConfirmModal from './components/MessageConfirmModal/MessageConfirmModal';
 import { ChangeEvent, useState } from 'react';
-import { useSendMessageByStatusMutation, useSendMessageByTypeMutation, useSendMessageToAllMutation } from '@/services/message/mutations';
+import {
+  useSendMessageByStatusMutation,
+  useSendMessageByTypeMutation,
+  useSendMessageToAllMutation,
+} from '@/services/message/mutations';
 import { toast } from 'react-toastify';
 
 interface MessageCreateProps {
@@ -35,7 +39,12 @@ const MessageCreate = ({
     if (!title || !content || !recipient) return;
 
     try {
-      if (recipient === 'APPROVED' || recipient === 'REJECTED' || recipient === 'FINAL_SUBMITTED' || recipient === 'FINAL_PASSED') {
+      if (
+        recipient === 'APPROVED' ||
+        recipient === 'REJECTED' ||
+        recipient === 'FINAL_SUBMITTED' ||
+        recipient === 'FINAL_PASSED'
+      ) {
         await sendMessageByStatusMutate({
           title,
           text: content,
@@ -70,7 +79,7 @@ const MessageCreate = ({
       }
 
       toast('메시지를 성공적으로 전송했습니다.', {
-        type: 'success'
+        type: 'success',
       });
       setIsConfirmModalOpen(false);
       onTitleChange({ target: { value: '' } } as ChangeEvent<HTMLInputElement>);
@@ -79,7 +88,7 @@ const MessageCreate = ({
       onSubmit();
     } catch (error) {
       toast('메시지 전송에 실패했습니다.', {
-        type: 'error'
+        type: 'error',
       });
     }
   };

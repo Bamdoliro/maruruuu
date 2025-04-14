@@ -32,4 +32,4 @@ export const sendMessageByType = async (params: SendMessageByTypeRequest) => {
 export const sendMessageToAll = async (params: SendMessageToAllRequest) => {
   const { data } = await maru.post('/messages/all', params, authorization());
   return data;
-}; 
+};
