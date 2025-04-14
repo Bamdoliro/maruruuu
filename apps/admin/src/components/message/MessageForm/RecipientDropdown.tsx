@@ -20,8 +20,7 @@ const MAIN_OPTIONS = [
     subOptions: [
       { value: 'MEISTER_TALENT', label: '마이스터인재전형' },
       { value: 'REGULAR', label: '일반전형' },
-      { value: 'REGULAR_CHANGED', label: '마이스터→일반 전환' },
-      { value: 'ALL', label: '전체 발송' },
+      { value: 'ALL', label: '전체 1차 합격자' },
     ],
   },
   { value: 'FINAL_PASSED', label: '최종 합격자' },
