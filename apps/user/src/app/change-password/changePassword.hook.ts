@@ -7,6 +7,7 @@ import {
   useVerificationMutation,
 } from '@/services/user/mutations';
 import type { SignUp } from '@/types/user/client';
+import { toast } from 'react-toastify';
 
 export const useInput = () => {
   const [changePassword, setChangePassword] = useChangePasswordStore();
@@ -51,7 +52,7 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
 
   const handleVerificationConfirm = () => {
     if (changePasswordData.code.length == 0) {
-      alert('인증 코드를 입력해주세요');
+      toast('인증 코드를 입력해주세요', { type: 'error' });
       return;
     }
 
@@ -76,11 +77,11 @@ export const useChangePasswordAction = (changePasswordData: SignUp) => {
 
   const handleChangePassword = () => {
     if (changePasswordData.name.length == 0) {
-      alert('이름을 입력해주세요');
+      toast('이름을 입력해주세요.', { type: 'error' });
       return;
     }
     if (changePasswordData.password != changePasswordData.password_confirm) {
-      alert('비밀번호가 일치하지 않습니다.');
+      toast('비밀번호가 일치하지 않습니다.', { type: 'error' });
       return;
     }
 
