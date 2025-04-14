@@ -6,7 +6,6 @@ import MessageCreate from '@/components/message/MessageCreate/MessageCreate';
 import { useState, type ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
-import { color, font } from '@maru/design-system';
 
 const MessagePage = () => {
   const [title, setTitle] = useState('');
@@ -57,25 +56,4 @@ const StyledMessagePage = styled.div`
   width: 100%;
   min-height: 100vh;
   padding: 64px 60px;
-`;
-
-const StyledHeader = styled.div`
-  ${flex({ flexDirection: 'column' })}
-  gap: 24px;
-  margin-bottom: 40px;
-`;
-
-const StyledDivider = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: ${color.gray300};
-`;
-
-const StyledMessageContent = styled.div`
-  max-width: 800px;
-`;
-
-const StyledMessageHeading = styled.h1`
-  ${font.H1}
-  color: ${color.gray900};
 `;

@@ -43,17 +43,6 @@ const RecipientDropdown = ({ value, onChange }: RecipientDropdownProps) => {
     };
   }, []);
 
-  const getSelectedLabel = () => {
-    for (const option of MAIN_OPTIONS) {
-      if (option.value === value) return option.label;
-      if (option.subOptions) {
-        const subOption = option.subOptions.find((sub) => sub.value === value);
-        if (subOption) return subOption.label;
-      }
-    }
-    return '';
-  };
-
   return (
     <Container ref={dropdownRef}>
       <Button onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen} $hasValue={!!value}>

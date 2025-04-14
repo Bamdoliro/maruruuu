@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MessageHeader from './components/MessageHeader/MessageHeader';
 import ContentTextarea from './components/ContentTextarea/ContentTextarea';
 import MessageConfirmModal from './components/MessageConfirmModal/MessageConfirmModal';
-import { ChangeEvent, useState } from 'react';
+import { useState, type ChangeEvent } from 'react';
 import {
   useSendMessageByStatusMutation,
   useSendMessageByTypeMutation,

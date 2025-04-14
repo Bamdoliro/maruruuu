@@ -1,5 +1,5 @@
 import { color, font } from '@maru/design-system';
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 interface ContentTextareaProps {
