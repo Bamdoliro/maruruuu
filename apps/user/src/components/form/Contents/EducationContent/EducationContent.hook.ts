@@ -1,7 +1,11 @@
-import { useSetFormGradeStepStore } from './../../../../stores/form/formGradeStep';
 import { EducationSchema } from '@/schemas/EducationSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useCorrectStore, useFormStore, useSetFormStepStore } from '@/stores';
+import {
+  useCorrectStore,
+  useFormStore,
+  useSetFormGradeStepStore,
+  useSetFormStepStore,
+} from '@/stores';
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';

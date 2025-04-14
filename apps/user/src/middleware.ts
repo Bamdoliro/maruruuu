@@ -121,6 +121,7 @@ export const config = {
     '/form-management',
     '/result/first',
     '/result/final',
+    '/regist',
     '/((?!api|_next/static|_next/image|favicon.ico|svg).*)',
   ],
 };
