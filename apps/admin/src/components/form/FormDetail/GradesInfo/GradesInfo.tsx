@@ -5,11 +5,13 @@ import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import Grade from './Grade/Grade';
-import type { Subject } from '@/types/form/client';
+import type { Attendance, Subject } from '@/types/form/client';
+import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 
 interface GradesInfoProps {
   gradesData?: {
-    grade: Subject[];
+    gradeData: Subject[];
+    attendanceData: Attendance[];
   };
 }
 
@@ -34,7 +36,8 @@ const GradesInfo = ({ gradesData }: GradesInfoProps) => {
       <SwitchCase
         value={currentGradeField}
         caseBy={{
-          '교과 성적': <Grade subjectList={gradesData.grade} />,
+          '교과 성적': <Grade subjectList={gradesData.gradeData} />,
+          '출결 상황': <AttendanceStatus attendanceList={gradesData.attendanceData} />,
         }}
       />
     </StyledGradesInfo>

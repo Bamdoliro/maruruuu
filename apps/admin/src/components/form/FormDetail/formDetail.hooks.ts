@@ -66,7 +66,12 @@ export const useFormDetailDataDecomposition = (id: number) => {
       : '전형 정보 없음';
 
   const gradesData = formDetailData && {
-    grade: formDetailData.grade.subjectList || [],
+    gradeData: formDetailData.grade.subjectList || [],
+    attendanceData: [
+      formDetailData.grade.attendance1,
+      formDetailData.grade.attendance2,
+      formDetailData.grade.attendance3,
+    ],
   };
 
   return { profileData, applicantData, parentData, educationData, typeData, gradesData };
