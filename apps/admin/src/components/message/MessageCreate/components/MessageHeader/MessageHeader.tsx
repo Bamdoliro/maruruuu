@@ -25,7 +25,7 @@ const MessageHeader = ({
       <Content>
         <TitleInput value={title} onChange={onTitleChange} />
         <RecipientDropdown value={recipient} onChange={onRecipientChange} />
-        <Button onClick={onSubmit} size="SMALL">
+        <Button onClick={onSubmit} size="SMALL" disabled={!recipient}>
           발송하기
         </Button>
       </Content>

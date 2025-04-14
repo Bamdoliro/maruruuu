@@ -37,7 +37,6 @@ const MessagePage = () => {
 
   const handleConfirmModalConfirm = () => {
     setIsConfirmModalOpen(false);
-    // TODO: API 호출
   };
 
   return (

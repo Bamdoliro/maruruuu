@@ -10,6 +10,7 @@ interface RecipientDropdownProps {
 }
 
 const MAIN_OPTIONS = [
+  { value: 'FINAL_SUBMITTED', label: '최종 제출된 원서' },
   { value: 'APPROVED', label: '원서 승인 완료자' },
   { value: 'REJECTED', label: '원서 반려자' },
   {
@@ -17,9 +18,10 @@ const MAIN_OPTIONS = [
     label: '1차 합격자',
     hasSubMenu: true,
     subOptions: [
-      { value: 'FIRST_PASSED_MEISTER_TALENT', label: '마이스터인재전형' },
-      { value: 'FIRST_PASSED_EXCEPT_MEISTER', label: '마이스터 제외 합격자' },
-      { value: 'ALL_FIRST_PASSED', label: '전체 1차 합격자' },
+      { value: 'MEISTER_TALENT', label: '마이스터인재전형' },
+      { value: 'REGULAR', label: '일반전형' },
+      { value: 'REGULAR_CHANGED', label: '마이스터→일반 전환' },
+      { value: 'ALL', label: '전체 발송' },
     ],
   },
   { value: 'FINAL_PASSED', label: '최종 합격자' },
