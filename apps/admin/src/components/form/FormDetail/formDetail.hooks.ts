@@ -67,11 +67,11 @@ export const useFormDetailDataDecomposition = (id: number) => {
 
   const gradesData = formDetailData && {
     gradeData: formDetailData.grade.subjectList || [],
-    attendanceData: {
-      attendance1: formDetailData.grade.attendance1,
-      attendance2: formDetailData.grade.attendance2,
-      attendance3: formDetailData.grade.attendance3,
-    },
+    attendanceData: [
+      formDetailData.grade.attendance1,
+      formDetailData.grade.attendance2,
+      formDetailData.grade.attendance3,
+    ],
   };
 
   return { profileData, applicantData, parentData, educationData, typeData, gradesData };

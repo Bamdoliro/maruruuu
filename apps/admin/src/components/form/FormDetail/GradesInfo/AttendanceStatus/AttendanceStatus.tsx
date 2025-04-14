@@ -3,18 +3,14 @@ import { convertToResponsive } from '@/utils';
 import { CellInput, Column, Row, Td, Th } from '@maru/ui';
 
 interface AttendanceStatusProps {
-  attendanceRecords: {
-    attendance1: Attendance;
-    attendance2: Attendance;
-    attendance3: Attendance;
-  };
+  attendanceList: Attendance[];
 }
 
-const AttendanceStatus = ({ attendanceRecords }: AttendanceStatusProps) => {
+const AttendanceStatus = ({ attendanceList }: AttendanceStatusProps) => {
   const attendanceData = [
-    { gradeLabel: '1학년', data: attendanceRecords.attendance1 },
-    { gradeLabel: '2학년', data: attendanceRecords.attendance2 },
-    { gradeLabel: '3학년', data: attendanceRecords.attendance3 },
+    { gradeLabel: '1학년', data: attendanceList[0] },
+    { gradeLabel: '2학년', data: attendanceList[1] },
+    { gradeLabel: '3학년', data: attendanceList[2] },
   ];
 
   const responsiveWidth = convertToResponsive(80, 140);

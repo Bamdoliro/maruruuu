@@ -11,11 +11,7 @@ import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 interface GradesInfoProps {
   gradesData?: {
     gradeData: Subject[];
-    attendanceData: {
-      attendance1: Attendance;
-      attendance2: Attendance;
-      attendance3: Attendance;
-    };
+    attendanceData: Attendance[];
   };
 }
 
@@ -41,7 +37,7 @@ const GradesInfo = ({ gradesData }: GradesInfoProps) => {
         value={currentGradeField}
         caseBy={{
           '교과 성적': <Grade subjectList={gradesData.gradeData} />,
-          '출결 상황': <AttendanceStatus attendanceRecords={gradesData.attendanceData} />,
+          '출결 상황': <AttendanceStatus attendanceList={gradesData.attendanceData} />,
         }}
       />
     </StyledGradesInfo>
