@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
-import { FairType } from '@/types/fair/client';
-import { FairDataInput } from '@/types/fair/client';
+import type { FairType } from '@/types/fair/client';
+import type { FairDataInput } from '@/types/fair/client';
 
 export const fairTypeAtom = atom<FairType>({
   key: 'fair-type',

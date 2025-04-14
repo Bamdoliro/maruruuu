@@ -1,4 +1,4 @@
-import { FairType } from '@/types/fair/client';
+import type { FairType } from '@/types/fair/client';
 
 export interface FairFormInput {
   start: string;
