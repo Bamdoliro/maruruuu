@@ -45,12 +45,12 @@ const ChangePassword = () => {
       <StyledChangePassword>
         <ChangePasswordBox>
           <ScrollArea>
-            <Column gap="24px">
+            <Column gap="24">
               <Text fontType="H2" color={color.gray900}>
                 비밀번호 변경
               </Text>
-              <Column gap="128px">
-                <Column gap="32px">
+              <Column gap="128">
+                <Column gap="32">
                   <Input
                     label="이름"
                     placeholder="예) 홍길동"
@@ -90,7 +90,7 @@ const ChangePassword = () => {
                       onChange={handleChangePasswordChange}
                     />
                   )}
-                  <Column gap="6px">
+                  <Column gap="6">
                     <PreviewInput
                       width="100%"
                       label="새 비밀번호"
