@@ -14,9 +14,9 @@ interface GradesInfoProps {
 }
 
 const GradesInfo = ({ gradesData }: GradesInfoProps) => {
-  if (!gradesData) return <Loader />;
-
   const [currentGradeField, setCurrentGradeField] = useState('교과 성적');
+
+  if (!gradesData) return <Loader />;
 
   return (
     <StyledGradesInfo>
