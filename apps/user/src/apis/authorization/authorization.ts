@@ -1,10 +1,10 @@
 import { TOKEN } from '@/constants/common/constants';
-import { Storage } from '../storage/storage';
+import { Cookie } from '../cookie/cookie';
 
 const authorization = () => {
   return {
     headers: {
-      Authorization: `Bearer ${Storage.getItem(TOKEN.ACCESS)}`,
+      Authorization: `Bearer ${Cookie.getItem(TOKEN.ACCESS)}`,
     },
   };
 };
@@ -12,7 +12,7 @@ const authorization = () => {
 authorization.ForData = () => {
   return {
     headers: {
-      Authorization: `Bearer ${Storage.getItem(TOKEN.ACCESS)}`,
+      Authorization: `Bearer ${Cookie.getItem(TOKEN.ACCESS)}`,
       'Content-Type': 'multipart/form-data',
     },
   };

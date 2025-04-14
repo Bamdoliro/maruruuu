@@ -7,13 +7,13 @@ import {
   getSaveForm,
   getSchoolList,
 } from './api';
-import { Storage } from '@/apis/storage/storage';
+import { Cookie } from '@/apis/cookie/cookie';
 
 export const useFormStatusQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.FORM_STATUS],
     queryFn: getFormStatus,
-    enabled: !!Storage.getItem(TOKEN.ACCESS),
+    enabled: !!Cookie.getItem(TOKEN.ACCESS),
     retry: 1,
   });
 
@@ -44,7 +44,7 @@ export const useSaveFormQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.SAVE_FORM],
     queryFn: getSaveForm,
-    enabled: !!Storage.getItem(TOKEN.ACCESS),
+    enabled: !!Cookie.getItem(TOKEN.ACCESS),
     retry: 1,
   });
 
