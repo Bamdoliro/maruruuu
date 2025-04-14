@@ -51,7 +51,7 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
   };
 
   const handleVerificationConfirm = () => {
-    if (changePasswordData.code.length == 0) {
+    if (changePasswordData.code.trim().length === 0) {
       toast('인증 코드를 입력해주세요', { type: 'error' });
       return;
     }
@@ -76,7 +76,7 @@ export const useChangePasswordAction = (changePasswordData: SignUp) => {
   const { changePasswordMutate } = useChangePasswordMutation(changePasswordData);
 
   const handleChangePassword = () => {
-    if (changePasswordData.name.length == 0) {
+    if (changePasswordData.name.trim().length === 0) {
       toast('이름을 입력해주세요.', { type: 'error' });
       return;
     }
