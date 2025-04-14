@@ -1,15 +1,9 @@
 import { Storage } from '@/apis/storage/storage';
 import { useUser } from '@/hooks';
 import { ApplicantSchema } from '@/schemas/ApplicantSchema';
-import { useSaveFormMutation } from '@/services/form/mutations';
 import { useSaveFormQuery } from '@/services/form/queries';
-import {
-  useCorrectStore,
-  useFormValueStore,
-  useSetFormStepStore,
-  useSetFormStore,
-} from '@/stores';
-import { formatDate } from '@/utils';
+import { useCorrectValueStore, useFormValueStore, useSetFormStore } from '@/stores';
+import { formatDate, useFormStep } from '@/utils';
 import { useEffect, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
 import { z } from 'zod';
@@ -17,12 +11,11 @@ import { z } from 'zod';
 export const useApplicantForm = () => {
   const form = useFormValueStore();
   const setForm = useSetFormStore();
-  const setFormStep = useSetFormStepStore();
   const { userData } = useUser();
-  const { saveFormMutate } = useSaveFormMutation();
   const { data: saveFormQuery } = useSaveFormQuery();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
-  const [correct, setCorrect] = useCorrectStore();
+  const correct = useCorrectValueStore();
+  const { run: FormStep } = useFormStep();
 
   const fileName = Storage.getItem('fileName');
   const mediaType = Storage.getItem('mediaType');
@@ -71,18 +64,21 @@ export const useApplicantForm = () => {
     }
 
     if (correct === true) {
-      ApplicantSchema.parse(form.applicant);
-      setErrors({});
-      setFormStep('초안작성완료');
-      saveFormMutate(form);
-      setCorrect(false);
+      FormStep({
+        schema: ApplicantSchema,
+        formData: form.applicant,
+        nextStep: '초안작성완료',
+        setErrors,
+      });
     }
 
     try {
-      ApplicantSchema.parse(form.applicant);
-      setErrors({});
-      setFormStep('보호자정보');
-      saveFormMutate(form);
+      FormStep({
+        schema: ApplicantSchema,
+        formData: form.applicant,
+        nextStep: '보호자정보',
+        setErrors,
+      });
     } catch (err) {
       if (err instanceof z.ZodError) {
         const fieldErrors = err.flatten().fieldErrors;

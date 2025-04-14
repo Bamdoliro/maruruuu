@@ -1,27 +1,30 @@
 import { useSaveFormMutation } from '@/services/form/mutations';
 import {
-  useCorrectStore,
+  useCorrectValueStore,
   useFormValueStore,
   useSetFormStepStore,
   useSetFormStore,
 } from '@/stores';
+import { useFormStep } from '@/utils';
 import type { ChangeEventHandler } from 'react';
 
 export const useCTAButton = () => {
   const form = useFormValueStore();
-  const [correct, setCorrect] = useCorrectStore();
+  const correct = useCorrectValueStore();
   const setFormStep = useSetFormStepStore();
   const { saveFormMutate } = useSaveFormMutation();
+  const { run: FormStep } = useFormStep();
 
   const handleNextStep = () => {
     if (correct === true) {
-      setFormStep('초안작성완료');
-      saveFormMutate(form);
-      setCorrect(false);
+      FormStep({
+        nextStep: '초안작성완료',
+      });
     }
 
-    setFormStep('성적입력');
-    saveFormMutate(form);
+    FormStep({
+      nextStep: '초안작성완료',
+    });
   };
 
   const handlePreviousStep = () => {

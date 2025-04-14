@@ -1,22 +1,24 @@
 import { EducationSchema } from '@/schemas/EducationSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
 import {
-  useCorrectStore,
+  useCorrectValueStore,
   useFormStore,
   useSetFormGradeStepStore,
   useSetFormStepStore,
 } from '@/stores';
+import { useFormStep } from '@/utils';
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';
 
 export const useEducationForm = () => {
   const [form, setForm] = useFormStore();
-  const [correct, setCorrect] = useCorrectStore();
+  const correct = useCorrectValueStore();
   const setFormStep = useSetFormStepStore();
   const setFormGradeStep = useSetFormGradeStepStore();
   const { saveFormMutate } = useSaveFormMutation();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const { run: FormStep } = useFormStep();
 
   const numberFiled = [
     'graduationYear',
@@ -26,19 +28,22 @@ export const useEducationForm = () => {
 
   const handleNextStep = () => {
     if (correct === true) {
-      EducationSchema.parse(form.education);
-      setErrors({});
-      setFormStep('초안작성완료');
-      saveFormMutate(form);
-      setCorrect(false);
+      FormStep({
+        schema: EducationSchema,
+        formData: form.education,
+        nextStep: '초안작성완료',
+        setErrors,
+      });
     }
 
     try {
-      EducationSchema.parse(form.education);
-      setErrors({});
-      setFormStep('전형선택');
+      FormStep({
+        schema: EducationSchema,
+        formData: form.education,
+        nextStep: '전형선택',
+        setErrors,
+      });
       setFormGradeStep('교과성적');
-      saveFormMutate(form);
     } catch (err) {
       if (err instanceof z.ZodError) {
         const fieldErrors = err.flatten().fieldErrors;
