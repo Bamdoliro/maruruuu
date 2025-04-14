@@ -3,7 +3,7 @@
 import AppLayout from '@/layouts/AppLayout';
 import { Text } from '@maru/ui';
 import { styled } from 'styled-components';
-import FairForm from '../../../components/fair/FairForm/FairForm';
+import FairForm from '@/components/fair/FairForm/FairForm';
 import { flex } from '@maru/utils';
 
 const FairCreatePage = () => {
@@ -26,9 +26,8 @@ const StyledFairCreate = styled.div`
   height: 100%;
   padding: 64px 0 60px 60px;
   position: relative;
-  ${flex({ flexDirection: 'column' })}
+  ${flex({ flexDirection: 'column', alignItems: 'center' })}
   gap: 65px;
-  align-items: center;
 `;
 
 const StyledFairText = styled.div`

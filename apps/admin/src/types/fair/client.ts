@@ -13,7 +13,7 @@ export interface Fair {
   start: string;
   capacity: number;
   place: string;
-  type: FairType;
+  type: string;
   applicationStartDate: string | null;
   applicationEndDate: string | null;
 }
@@ -44,12 +44,13 @@ export interface FairDetailData {
   status: FairStatus;
   attendeeList: AttendeeData[];
 }
-
-export interface FairFormData {
+export interface FairDataInput {
   start: string;
   capacity: number;
   place: string;
   type: string;
-  applicationStartDate: string;
-  applicationEndDate: string;
+  applicationStartDate: string | null;
+  applicationEndDate: string | null;
+  date: string;
+  time: string;
 }

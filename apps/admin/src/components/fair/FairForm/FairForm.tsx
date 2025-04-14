@@ -1,75 +1,95 @@
-'use client';
-
-import { color, font } from '@maru/design-system';
-import { Text } from '@maru/ui';
+import { color } from '@maru/design-system';
+import { Text, RadioGroup } from '@maru/ui';
+import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
-import IconCalender from '@maru/icon/src/IconCalender';
-import IconClock from '@maru/icon/src/IconClock';
-import { postFairDetail } from '@/services/fair/api';
-import useFairForm from '@/hooks/useFairForm';
+import { IconClock } from '@maru/icon';
+import { IconCalendar } from '@maru/icon';
+import { postFairReq } from '@/services/fair/api';
+import { useFairForm } from '@/components/fair/FairForm/useFairForm.hook';
+import { FairType } from '@/types/fair/client';
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+import FormInput from '@maru/ui/src/Input/FormInput';
+import { FairFormInput } from '@/utils/functions/getRequestBody';
+import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
 
 const FairForm = () => {
-  const { form, handleChange, getRequestBody } = useFairForm();
+  const { form, handleChange } = useFairForm();
+  const [type, setType] = useState<FairType>('STUDENT_AND_PARENT');
 
-  const handleSubmit = async () => {
-    try {
-      const body = { data: getRequestBody() };
-      const res = await postFairDetail(body);
-      console.log('success:', res);
-    } catch (err) {
-      console.error('error', err);
-    }
+  const handleTargetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value as FairType;
+    setType(value);
+  };
+
+  const mutation = useMutation({
+    mutationFn: postFairReq,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name as keyof FairFormInput;
+    const value = e.target.value;
+    handleChange(name, value);
+  };
+
+  const handleSubmit = () => {
+    const body = formatFairRequestBody({
+      ...form,
+      type,
+      applicationStartDate: form.applicationStartDate || '',
+      applicationEndDate: form.applicationEndDate || '',
+    });
+    mutation.mutate(body);
   };
 
   return (
-    <CreateFairForm>
+    <StyledFairForm>
       <CreateFormSort>
-        <Text fontType="H6">대상선택</Text>
-        <RadioGroup>
-          <RadioOption>
-            <RadioInput type="radio" name="target" id="all" defaultChecked />
-            <RadioLabel htmlFor="all">전체</RadioLabel>
-          </RadioOption>
-          <RadioOption>
-            <RadioInput type="radio" name="target" id="student" />
-            <RadioLabel htmlFor="student">학생만</RadioLabel>
-          </RadioOption>
-        </RadioGroup>
-      </CreateFormSort>
-
-      <CreateFormSort>
-        <Text fontType="H6">장소</Text>
-        <FormInput
-          placeholder="장소를 입력해주세요."
-          name="place"
-          value={form.place}
-          onChange={handleChange}
+        <Text fontType="context">대상선택</Text>
+        <RadioGroup
+          name="target"
+          value={type}
+          onChange={handleTargetChange}
+          items={[
+            { label: '학생/학부모', value: 'STUDENT_AND_PARENT' },
+            { label: '교사', value: 'TEACHER' },
+          ]}
         />
       </CreateFormSort>
 
       <CreateFormSort>
-        <Text fontType="H6">입학 설명회 날짜 (8자리)</Text>
+        <Text fontType="context">장소</Text>
+        <FormInput
+          placeholder="장소를 입력해주세요."
+          name="place"
+          value={form.place}
+          onChange={handleInputChange}
+        />
+      </CreateFormSort>
+
+      <CreateFormSort>
+        <Text fontType="context">입학 설명회 날짜 (8자리)</Text>
         <InputWrapper>
           <FormInput
             placeholder="날짜를 입력해주세요."
             name="date"
             value={form.date}
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
           <InputIconWrapper>
-            <IconCalender width={24} height={24} />
+            <IconCalendar width={24} height={24} />
           </InputIconWrapper>
         </InputWrapper>
       </CreateFormSort>
 
       <CreateFormSort>
-        <Text fontType="H6">시간 (4자리)</Text>
+        <Text fontType="context">시간 (4자리)</Text>
         <InputWrapper>
           <FormInput
             placeholder="시간을 입력해주세요."
-            name={'time'}
+            name="time"
             value={form.time}
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
           <InputIconWrapper>
             <IconClock width={24} height={24} />
@@ -78,19 +98,19 @@ const FairForm = () => {
       </CreateFormSort>
 
       <CreateFormSort>
-        <Text fontType="H6">신청 기한 (8자리)</Text>
+        <Text fontType="context">신청 기한 (8자리)</Text>
         <CreateInputSort>
           <FormInput
             placeholder="시작일"
-            name="startDate"
-            value={form.startDate}
-            onChange={handleChange}
+            name="applicationStartDate"
+            value={form.applicationStartDate || ''}
+            onChange={handleInputChange}
           />
           <FormInput
             placeholder="종료일"
-            name="endDate"
-            value={form.endDate}
-            onChange={handleChange}
+            name="applicationEndDate"
+            value={form.applicationEndDate || ''}
+            onChange={handleInputChange}
           />
         </CreateInputSort>
       </CreateFormSort>
@@ -98,22 +118,20 @@ const FairForm = () => {
       <CreateFairButton onClick={handleSubmit}>
         <Text fontType="btn1">새로운 입학전형 설명회 생성하기</Text>
       </CreateFairButton>
-    </CreateFairForm>
+    </StyledFairForm>
   );
 };
 
 export default FairForm;
 
-const CreateFairForm = styled.div`
+const StyledFairForm = styled.div`
   width: 500px;
   height: 703px;
   background-color: ${color.gray50};
   border-radius: 12px;
   border: 1px solid ${color.gray250};
   padding: 56px 70px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  ${flex({ flexDirection: 'column', alignItems: 'center' })};
   @media (min-width: 768px) {
     padding: 56px 70px;
   }
@@ -121,7 +139,7 @@ const CreateFairForm = styled.div`
 
 const CreateFormSort = styled.div`
   display: flex;
-  flex-direction: column;
+  ${flex({ flexDirection: 'column' })};
   gap: 8px;
   width: 100%;
   margin-bottom: 24px;
@@ -132,49 +150,9 @@ const CreateFairButton = styled.button`
   color: ${color.white};
   border-radius: 6px;
   margin-top: 24px;
-  padding: 22px 0px;
+  padding: 22px;
   @media (min-width: 768px) {
-    padding: 22px 0px;
-  }
-`;
-
-const RadioGroup = styled.div`
-  display: flex;
-  gap: 16px;
-`;
-
-const RadioOption = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const RadioInput = styled.input`
-  width: 24px;
-  height: 24px;
-`;
-
-const RadioLabel = styled.label`
-  font: ${font.p3};
-  color: ${color.gray700};
-`;
-
-const FormInput = styled.input`
-  width: 100%;
-  padding: 12px 40px 12px 16px;
-  font: ${font.p2};
-  border: 1px solid ${color.gray400};
-  border-radius: 6px;
-  background-color: ${color.white};
-  color: ${color.gray900};
-  outline: none;
-
-  &::placeholder {
-    color: ${color.gray400};
-  }
-
-  &:focus {
-    border-color: ${color.maruDefault};
+    padding: 22px;
   }
 `;
 
