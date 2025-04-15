@@ -14,4 +14,4 @@ export interface PostSendMessageByTypeRequest {
 export interface PostSendMessageToAllRequest {
   title: string;
   text: string;
-} 
+}

@@ -9,9 +9,7 @@ import {
   usePostMessageByTypeMutation,
   usePostMessageToAllMutation,
 } from '@/services/message/mutations';
-import type {
-  PostSendMessageByTypeRequest,
-} from '@/types/message/remote';
+import type { PostSendMessageByTypeRequest } from '@/types/message/remote';
 
 interface MessageCreateProps {
   title: string;
@@ -24,14 +22,14 @@ interface MessageCreateProps {
 }
 
 const MessageCreate = ({
-                         title,
-                         recipient,
-                         content,
-                         onTitleChange,
-                         onRecipientChange,
-                         onContentChange,
-                         onSubmit,
-                       }: MessageCreateProps) => {
+  title,
+  recipient,
+  content,
+  onTitleChange,
+  onRecipientChange,
+  onContentChange,
+  onSubmit,
+}: MessageCreateProps) => {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const { postMessageByStatusMutate } = usePostMessageByStatusMutation();
   const { postMessageByTypeMutate } = usePostMessageByTypeMutation();
@@ -116,7 +114,7 @@ const MessageCreate = ({
 export default MessageCreate;
 
 const StyledContainer = styled.div`
-    ${flex({ flexDirection: 'column' })}
-    width: 100%;
-    margin: 0 auto;
+  ${flex({ flexDirection: 'column' })}
+  width: 100%;
+  margin: 0 auto;
 `;
