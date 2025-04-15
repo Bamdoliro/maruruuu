@@ -1,5 +1,5 @@
 import { color, font } from '@maru/design-system';
-import { IconArrowBottom, IconArrowTop } from '@maru/icon';
+import { IconArrowBottom, IconArrowTop } from '../../../../../../../packages/icon';
 import { flex } from '@maru/utils';
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
@@ -44,7 +44,7 @@ const RecipientDropdown = ({ value, onChange }: RecipientDropdownProps) => {
   }, []);
 
   return (
-    <Container ref={dropdownRef}>
+    <StyledContainer ref={dropdownRef}>
       <Button onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen} $hasValue={!!value}>
         <span>받는 사람</span>
         {isOpen ? (
@@ -86,13 +86,13 @@ const RecipientDropdown = ({ value, onChange }: RecipientDropdownProps) => {
           ))}
         </Menu>
       )}
-    </Container>
+    </StyledContainer>
   );
 };
 
 export default RecipientDropdown;
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   position: relative;
   width: 200px;
 `;

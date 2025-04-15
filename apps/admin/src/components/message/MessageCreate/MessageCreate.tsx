@@ -1,14 +1,17 @@
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import MessageHeader from './components/MessageHeader/MessageHeader';
-import ContentTextarea from './components/ContentTextarea/ContentTextarea';
-import MessageConfirmModal from './MessageConfirmModal';
+import MessageHeader from '@/components/message/MessageCreate/MessageHeader/MessageHeader';
+import ContentTextarea from '@/components/message/MessageCreate/ContentTextarea/ContentTextarea';
+import MessageConfirmModal from '@/components/message/MessageCreate/MessageConfirmModal/MessageConfirmModal';
 import { useState, type ChangeEvent } from 'react';
 import {
   usePostMessageByStatusMutation,
   usePostMessageByTypeMutation,
   usePostMessageToAllMutation,
 } from '@/services/message/mutations';
+import type {
+  PostSendMessageByTypeRequest,
+} from '@/types/message/remote';
 
 interface MessageCreateProps {
   title: string;
@@ -21,14 +24,14 @@ interface MessageCreateProps {
 }
 
 const MessageCreate = ({
-  title,
-  recipient,
-  content,
-  onTitleChange,
-  onRecipientChange,
-  onContentChange,
-  onSubmit,
-}: MessageCreateProps) => {
+                         title,
+                         recipient,
+                         content,
+                         onTitleChange,
+                         onRecipientChange,
+                         onContentChange,
+                         onSubmit,
+                       }: MessageCreateProps) => {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const { postMessageByStatusMutate } = usePostMessageByStatusMutation();
   const { postMessageByTypeMutate } = usePostMessageByTypeMutation();
@@ -41,7 +44,7 @@ const MessageCreate = ({
     onSubmit();
   };
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     if (!title || !content || !recipient) return;
 
     if (
@@ -50,34 +53,34 @@ const MessageCreate = ({
       recipient === 'FINAL_SUBMITTED' ||
       recipient === 'FINAL_PASSED'
     ) {
-      await postMessageByStatusMutate({
+      postMessageByStatusMutate({
         title,
         text: content,
         status: recipient,
       });
     } else if (recipient === 'MEISTER_TALENT') {
-      await postMessageByTypeMutate({
+      postMessageByTypeMutate({
         title,
         text: content,
         formType: 'MEISTER_TALENT',
         isChangeToRegular: false,
-      });
+      } as PostSendMessageByTypeRequest);
     } else if (recipient === 'REGULAR') {
-      await postMessageByTypeMutate({
+      postMessageByTypeMutate({
         title,
         text: content,
         formType: 'REGULAR',
         isChangeToRegular: false,
-      });
+      } as PostSendMessageByTypeRequest);
     } else if (recipient === 'REGULAR_CHANGED') {
-      await postMessageByTypeMutate({
+      postMessageByTypeMutate({
         title,
         text: content,
         formType: 'REGULAR',
         isChangeToRegular: true,
-      });
+      } as PostSendMessageByTypeRequest);
     } else if (recipient === 'ALL') {
-      await postMessageToAllMutate({
+      postMessageToAllMutate({
         title,
         text: content,
       });
@@ -92,7 +95,7 @@ const MessageCreate = ({
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <MessageHeader
         title={title}
         recipient={recipient}
@@ -106,14 +109,14 @@ const MessageCreate = ({
         onClose={() => setIsConfirmModalOpen(false)}
         onConfirm={handleConfirm}
       />
-    </Container>
+    </StyledContainer>
   );
 };
 
 export default MessageCreate;
 
-const Container = styled.div`
-  ${flex({ flexDirection: 'column' })}
-  width: 100%;
-  margin: 0 auto;
+const StyledContainer = styled.div`
+    ${flex({ flexDirection: 'column' })}
+    width: 100%;
+    margin: 0 auto;
 `;

@@ -9,19 +9,19 @@ interface ContentTextareaProps {
 
 const ContentTextarea = ({ value, onChange }: ContentTextareaProps) => {
   return (
-    <Container>
+    <StyledContainer>
       <StyledTextarea
         value={value}
         onChange={onChange}
         placeholder="내용을 입력해주세요"
       />
-    </Container>
+    </StyledContainer>
   );
 };
 
 export default ContentTextarea;
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
   height: 480px;
   padding: 0;
@@ -46,4 +46,4 @@ const StyledTextarea = styled.textarea`
   &:focus {
     outline: none;
   }
-`; 
+`;
