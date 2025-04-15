@@ -59,7 +59,7 @@ const SideBar = () => {
           <StyledLink
             key={`navigation ${name}`}
             href={route}
-            $active={route === pathName}
+            $active={pathName === route || pathName.startsWith(`${route}/`)}
           >
             {name}
           </StyledLink>
