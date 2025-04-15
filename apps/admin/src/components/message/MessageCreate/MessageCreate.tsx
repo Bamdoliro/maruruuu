@@ -2,14 +2,13 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import MessageHeader from './components/MessageHeader/MessageHeader';
 import ContentTextarea from './components/ContentTextarea/ContentTextarea';
-import MessageConfirmModal from './components/MessageConfirmModal/MessageConfirmModal';
+import MessageConfirmModal from './MessageConfirmModal';
 import { useState, type ChangeEvent } from 'react';
 import {
-  useSendMessageByStatusMutation,
-  useSendMessageByTypeMutation,
-  useSendMessageToAllMutation,
+  usePostMessageByStatusMutation,
+  usePostMessageByTypeMutation,
+  usePostMessageToAllMutation,
 } from '@/services/message/mutations';
-import { toast } from 'react-toastify';
 
 interface MessageCreateProps {
   title: string;
@@ -31,66 +30,61 @@ const MessageCreate = ({
   onSubmit,
 }: MessageCreateProps) => {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const { sendMessageByStatusMutate } = useSendMessageByStatusMutation();
-  const { sendMessageByTypeMutate } = useSendMessageByTypeMutation();
-  const { sendMessageToAllMutate } = useSendMessageToAllMutation();
+  const { postMessageByStatusMutate } = usePostMessageByStatusMutation();
+  const { postMessageByTypeMutate } = usePostMessageByTypeMutation();
+  const { postMessageToAllMutate } = usePostMessageToAllMutation();
+
+  const resetForm = () => {
+    onTitleChange({ target: { value: '' } } as ChangeEvent<HTMLInputElement>);
+    onRecipientChange('');
+    onContentChange({ target: { value: '' } } as ChangeEvent<HTMLTextAreaElement>);
+    onSubmit();
+  };
 
   const handleConfirm = async () => {
     if (!title || !content || !recipient) return;
 
-    try {
-      if (
-        recipient === 'APPROVED' ||
-        recipient === 'REJECTED' ||
-        recipient === 'FINAL_SUBMITTED' ||
-        recipient === 'FINAL_PASSED'
-      ) {
-        await sendMessageByStatusMutate({
-          title,
-          text: content,
-          status: recipient,
-        });
-      } else if (recipient === 'MEISTER_TALENT') {
-        await sendMessageByTypeMutate({
-          title,
-          text: content,
-          formType: 'MEISTER_TALENT',
-          isChangeToRegular: false,
-        });
-      } else if (recipient === 'REGULAR') {
-        await sendMessageByTypeMutate({
-          title,
-          text: content,
-          formType: 'REGULAR',
-          isChangeToRegular: false,
-        });
-      } else if (recipient === 'REGULAR_CHANGED') {
-        await sendMessageByTypeMutate({
-          title,
-          text: content,
-          formType: 'REGULAR',
-          isChangeToRegular: true,
-        });
-      } else if (recipient === 'ALL') {
-        await sendMessageToAllMutate({
-          title,
-          text: content,
-        });
-      }
-
-      toast('메시지를 성공적으로 전송했습니다.', {
-        type: 'success',
+    if (
+      recipient === 'APPROVED' ||
+      recipient === 'REJECTED' ||
+      recipient === 'FINAL_SUBMITTED' ||
+      recipient === 'FINAL_PASSED'
+    ) {
+      await postMessageByStatusMutate({
+        title,
+        text: content,
+        status: recipient,
       });
-      setIsConfirmModalOpen(false);
-      onTitleChange({ target: { value: '' } } as ChangeEvent<HTMLInputElement>);
-      onRecipientChange('');
-      onContentChange({ target: { value: '' } } as ChangeEvent<HTMLTextAreaElement>);
-      onSubmit();
-    } catch (error) {
-      toast('메시지 전송에 실패했습니다.', {
-        type: 'error',
+    } else if (recipient === 'MEISTER_TALENT') {
+      await postMessageByTypeMutate({
+        title,
+        text: content,
+        formType: 'MEISTER_TALENT',
+        isChangeToRegular: false,
+      });
+    } else if (recipient === 'REGULAR') {
+      await postMessageByTypeMutate({
+        title,
+        text: content,
+        formType: 'REGULAR',
+        isChangeToRegular: false,
+      });
+    } else if (recipient === 'REGULAR_CHANGED') {
+      await postMessageByTypeMutate({
+        title,
+        text: content,
+        formType: 'REGULAR',
+        isChangeToRegular: true,
+      });
+    } else if (recipient === 'ALL') {
+      await postMessageToAllMutate({
+        title,
+        text: content,
       });
     }
+
+    setIsConfirmModalOpen(false);
+    resetForm();
   };
 
   const handleSubmit = () => {

@@ -1,35 +1,19 @@
 import { maru } from '@/apis/instance/instance';
 import { authorization } from '@/apis/token';
+import type {
+  PostSendMessageByStatusRequest,
+  PostSendMessageByTypeRequest,
+  PostSendMessageToAllRequest,
+} from '@/types/message/remote';
 
-export interface SendMessageByStatusRequest {
-  title: string;
-  text: string;
-  status: string;
-}
-
-export interface SendMessageByTypeRequest {
-  title: string;
-  text: string;
-  formType: 'MEISTER_TALENT' | 'REGULAR';
-  isChangeToRegular: boolean;
-}
-
-export interface SendMessageToAllRequest {
-  title: string;
-  text: string;
-}
-
-export const sendMessageByStatus = async (params: SendMessageByStatusRequest) => {
-  const { data } = await maru.post('/messages/status', params, authorization());
-  return data;
+export const postMessageByStatus = (params: PostSendMessageByStatusRequest) => {
+  return maru.post('/message/status', params, authorization());
 };
 
-export const sendMessageByType = async (params: SendMessageByTypeRequest) => {
-  const { data } = await maru.post('/messages/type', params, authorization());
-  return data;
+export const postMessageByType = (params: PostSendMessageByTypeRequest) => {
+  return maru.post('/message/type', params, authorization());
 };
 
-export const sendMessageToAll = async (params: SendMessageToAllRequest) => {
-  const { data } = await maru.post('/messages/all', params, authorization());
-  return data;
+export const postMessageToAll = (params: PostSendMessageToAllRequest) => {
+  return maru.post('/message/all', params, authorization());
 };

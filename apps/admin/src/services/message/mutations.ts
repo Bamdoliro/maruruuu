@@ -1,41 +1,51 @@
-import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
-import { sendMessageByStatus, sendMessageByType, sendMessageToAll } from './api';
+import { toast } from 'react-toastify';
+import { useApiError } from '@/hooks';
 import type {
-  SendMessageByStatusRequest,
-  SendMessageByTypeRequest,
-  SendMessageToAllRequest,
-} from './api';
+  PostSendMessageByStatusRequest,
+  PostSendMessageByTypeRequest,
+  PostSendMessageToAllRequest,
+} from '@/types/message/remote';
+import { postMessageByStatus, postMessageByType, postMessageToAll } from './api';
 
-export const useSendMessageByStatusMutation = () => {
+export const usePostMessageByStatusMutation = () => {
   const { handleError } = useApiError();
 
-  const { mutate: sendMessageByStatusMutate, ...restMutation } = useMutation({
-    mutationFn: (params: SendMessageByStatusRequest) => sendMessageByStatus(params),
+  const { mutate: postMessageByStatusMutate, ...restMutation } = useMutation({
+    mutationFn: (params: PostSendMessageByStatusRequest) => postMessageByStatus(params),
+    onSuccess: () => {
+      toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+    },
     onError: handleError,
   });
 
-  return { sendMessageByStatusMutate, ...restMutation };
+  return { postMessageByStatusMutate, ...restMutation };
 };
 
-export const useSendMessageByTypeMutation = () => {
+export const usePostMessageByTypeMutation = () => {
   const { handleError } = useApiError();
 
-  const { mutate: sendMessageByTypeMutate, ...restMutation } = useMutation({
-    mutationFn: (params: SendMessageByTypeRequest) => sendMessageByType(params),
+  const { mutate: postMessageByTypeMutate, ...restMutation } = useMutation({
+    mutationFn: (params: PostSendMessageByTypeRequest) => postMessageByType(params),
+    onSuccess: () => {
+      toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+    },
     onError: handleError,
   });
 
-  return { sendMessageByTypeMutate, ...restMutation };
+  return { postMessageByTypeMutate, ...restMutation };
 };
 
-export const useSendMessageToAllMutation = () => {
+export const usePostMessageToAllMutation = () => {
   const { handleError } = useApiError();
 
-  const { mutate: sendMessageToAllMutate, ...restMutation } = useMutation({
-    mutationFn: (params: SendMessageToAllRequest) => sendMessageToAll(params),
+  const { mutate: postMessageToAllMutate, ...restMutation } = useMutation({
+    mutationFn: (params: PostSendMessageToAllRequest) => postMessageToAll(params),
+    onSuccess: () => {
+      toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+    },
     onError: handleError,
   });
 
-  return { sendMessageToAllMutate, ...restMutation };
+  return { postMessageToAllMutate, ...restMutation };
 };
