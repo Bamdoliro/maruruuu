@@ -13,6 +13,7 @@ import EducationInfo from './EducationInfo/EducationInfo';
 import TypeInfo from './TypeInfo/TypeInfo';
 import type { FormDetailField } from '@/types/form/client';
 import GradesInfo from './GradesInfo/GradesInfo';
+import DocumentInfo from './DocumentInfo/DocumentInfo';
 
 interface FormDetailProps {
   id: number;
@@ -22,8 +23,15 @@ const FormDetail = ({ id }: FormDetailProps) => {
   const [currentFormDetailField, setCurrentFormDetailField] =
     useState<FormDetailField>('지원자 정보');
 
-  const { profileData, applicantData, parentData, educationData, typeData, gradesData } =
-    useFormDetailDataDecomposition(id);
+  const {
+    profileData,
+    applicantData,
+    parentData,
+    educationData,
+    typeData,
+    gradesData,
+    documentData,
+  } = useFormDetailDataDecomposition(id);
 
   return (
     <StyledFormDetail>
@@ -51,6 +59,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
             '출신학교 및 학력': <EducationInfo educationData={educationData} />,
             전형: <TypeInfo typeData={typeData} />,
             성적: <GradesInfo gradesData={gradesData} />,
+            자기소개서: <DocumentInfo documentData={documentData} />,
           }}
         />
       </Column>

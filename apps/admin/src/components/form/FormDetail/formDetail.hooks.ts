@@ -80,5 +80,18 @@ export const useFormDetailDataDecomposition = (id: number) => {
     certificateList: formDetailData.grade.certificateList,
   };
 
-  return { profileData, applicantData, parentData, educationData, typeData, gradesData };
+  const documentData = formDetailData && {
+    coverLetter: formDetailData?.document.coverLetter,
+    statementOfPurpose: formDetailData?.document.statementOfPurpose,
+  };
+
+  return {
+    profileData,
+    applicantData,
+    parentData,
+    educationData,
+    typeData,
+    gradesData,
+    documentData,
+  };
 };
