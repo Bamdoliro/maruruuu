@@ -28,6 +28,11 @@ const PasswordContent = () => {
     handleVerificationConfirm,
   } = useVerificationCodeAction(changePassword);
 
+  const handleSendVerificationCode = () => {
+    handleRequestVerificationCode();
+    setTimerTime(300);
+  };
+
   return (
     <Column gap={128}>
       <Column gap={32}>
@@ -43,10 +48,7 @@ const PasswordContent = () => {
           placeholder="- 없이 입력해주세요."
           width="100%"
           buttonText={isVerificationCodeSent ? '재전송' : '인증번호 전송'}
-          onClick={() => {
-            setTimerTime(300);
-            handleRequestVerificationCode();
-          }}
+          onClick={handleSendVerificationCode}
           type="phoneNumber"
           name="phoneNumber"
           onChange={handleChangePasswordChange}
