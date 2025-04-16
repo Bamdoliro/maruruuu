@@ -12,17 +12,15 @@ interface MessageHeaderProps {
   onSubmit: () => void;
 }
 
-const MessageHeader = ({
-  title,
-  recipient,
-  onChange,
-  onSubmit,
-}: MessageHeaderProps) => {
+const MessageHeader = ({ title, recipient, onChange, onSubmit }: MessageHeaderProps) => {
   return (
     <StyledWrapper>
       <Content>
         <TitleInput name="title" value={title} handleChange={onChange} />
-        <RecipientDropdown value={recipient} onChange={(value) => onChange({ target: { name: 'recipient', value } })} />
+        <RecipientDropdown
+          value={recipient}
+          onChange={(value) => onChange({ target: { name: 'recipient', value } })}
+        />
         <Button onClick={onSubmit} size="SMALL" disabled={!recipient}>
           발송하기
         </Button>

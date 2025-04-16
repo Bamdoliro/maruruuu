@@ -23,11 +23,7 @@ const MessageCreate = () => {
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
-      <ContentTextarea
-        name="content"
-        value={form.content}
-        onChange={handleChange}
-      />
+      <ContentTextarea name="content" value={form.content} onChange={handleChange} />
       <MessageConfirmModal
         isOpen={isConfirmModalOpen}
         onClose={() => setIsConfirmModalOpen(false)}
