@@ -3,17 +3,16 @@ import { Text, RadioGroup } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { IconClock, IconCalendar } from '@maru/icon';
-import { postFairReq } from '@/services/fair/api';
-import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
 import FormInput from '@maru/ui/src/Input/FormInput';
+import { useState } from 'react';
 import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
-import formatDate from '@/utils/functions/formatDate';
 import type { FairFormInput } from '@/utils/functions/getRequestBody';
 import type { FairType } from '@/types/fair/client';
-import {createFairMutation} from '@/services/form/mutations';
+import { useCreateFairMutation } from '@/services/form/mutations';
 
 const FairForm = () => {
+  const createFairMutation = useCreateFairMutation();
+
   const [form, setForm] = useState<FairFormInput>({
     start: '',
     place: '',
@@ -22,78 +21,22 @@ const FairForm = () => {
     applicationEndDate: null,
     type: 'STUDENT_AND_PARENT',
   });
-  const [type, setType] = useState<FairType>('STUDENT_AND_PARENT');
 
-  const handleChange = (key: keyof FairFormInput, value: string) => {
+  const handleChange = (key: keyof FairFormInput, value: any) => {
     setForm((prev) => ({
       ...prev,
       [key]: value,
     }));
   };
 
-  const handleCreateFair = () => {
-    const requestBody = formatFairRequestBody({
-      ...form,
-      type,
-    });
-
-    createFairMutation.mutate(requestBody);
-  };
-
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const date = e.target.value;
-    if (!date) {
-      return;
-    }
-
-    const time = form.start.split('T')[1]?.slice(0, 5) || '00:00';
-    const formatted = `${formatDate.toDashedDate(date)}T${time}:00`;
-    const isValidDate = !isNaN(new Date(formatted).getTime());
-    if (isValidDate) {
-      setForm((prev) => ({ ...prev, start: formatted }));
-    } else {
-    }
-  };
-
-  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value;
-    if (!raw) {
-      return;
-    }
-
-    const hh = raw.slice(0, 2);
-    const mm = raw.slice(2, 4);
-    const date = form.start.split('T')[0] || '0000-00-00';
-    const formatted = `${date}T${hh}:${mm}:00`;
-
-    const isValidDate = !isNaN(new Date(formatted).getTime());
-    if (isValidDate) {
-      setForm((prev) => ({ ...prev, start: formatted }));
-    }
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name as keyof FairFormInput;
-    const value = e.target.value;
-    handleChange(name, value);
+    const { name, value } = e.target;
+    handleChange(name as keyof FairFormInput, value);
   };
-
-  const handleTargetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value as FairType;
-    setType(value);
-  };
-
-  const mutation = useMutation({
-    mutationFn: postFairReq,
-  });
 
   const handleSubmit = () => {
-    const body = formatFairRequestBody({
-      ...form,
-      type,
-    });
-
-    mutation.mutate(body);
+    const body = formatFairRequestBody(form);
+    createFairMutation.mutate(body);
   };
 
   return (
@@ -101,9 +44,9 @@ const FairForm = () => {
       <CreateFormSort>
         <Text fontType="context">대상선택</Text>
         <RadioGroup
-          name="target"
-          value={type}
-          onChange={handleTargetChange}
+          name="type"
+          value={form.type}
+          onChange={(e) => handleChange('type', e.target.value as FairType)}
           items={[
             { label: '학생/학부모', value: 'STUDENT_AND_PARENT' },
             { label: '교사', value: 'TEACHER' },
@@ -122,20 +65,16 @@ const FairForm = () => {
       </CreateFormSort>
 
       <CreateFormSort>
-        <Text fontType="context">입학 설명회 날짜 (8자리)</Text>
+        <Text fontType="context">입학 설명회 날짜 및 시간 (YYYYMMDDHHmm)</Text>
         <InputWrapper>
-          <FormInput placeholder="날짜를 입력해주세요." onChange={handleDateChange} />
+          <FormInput
+            placeholder="202504161300"
+            name="start"
+            value={form.start}
+            onChange={handleInputChange}
+          />
           <InputIconWrapper>
             <IconCalendar width={24} height={24} />
-          </InputIconWrapper>
-        </InputWrapper>
-      </CreateFormSort>
-
-      <CreateFormSort>
-        <Text fontType="context">시간 (4자리)</Text>
-        <InputWrapper>
-          <FormInput placeholder="시간을 입력해주세요." onChange={handleTimeChange} />
-          <InputIconWrapper>
             <IconClock width={24} height={24} />
           </InputIconWrapper>
         </InputWrapper>
@@ -145,13 +84,13 @@ const FairForm = () => {
         <Text fontType="context">신청 기한 (8자리)</Text>
         <CreateInputSort>
           <FormInput
-            placeholder="시작일"
+            placeholder="시작일 (YYYYMMDD)"
             name="applicationStartDate"
             value={form.applicationStartDate ?? ''}
             onChange={handleInputChange}
           />
           <FormInput
-            placeholder="종료일"
+            placeholder="종료일 (YYYYMMDD)"
             name="applicationEndDate"
             value={form.applicationEndDate ?? ''}
             onChange={handleInputChange}
@@ -212,5 +151,6 @@ const InputIconWrapper = styled.div`
   right: 12px;
   transform: translateY(-50%);
   display: flex;
+  gap: 4px;
   align-items: center;
 `;

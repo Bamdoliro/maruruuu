@@ -13,7 +13,7 @@ import { useSetIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoun
 import { useSetSecondRoundResultStore } from '@/store/form/secondRoundResult';
 import isPopupBlocked from '@/utils/functions/isPopupBlocked';
 import { postFairReq } from '@/services/fair/api';
-import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
+import type { FairApiRequestBody } from '@/utils/functions/getRequestBody';
 
 export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void) => {
   const { handleError } = useApiError();
@@ -97,8 +97,8 @@ export const usePrintFormUrlMutation = () => {
   return { printFormUrl, ...restMutation };
 };
 
-export const createFairMutation = useMutation({
-  mutationFn: postFairReq,
-});
-
-
+export const useCreateFairMutation = () => {
+  return useMutation({
+    mutationFn: (data: FairApiRequestBody) => postFairReq(data),
+  });
+};

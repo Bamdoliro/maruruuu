@@ -9,15 +9,6 @@ export interface FairFormInput {
   applicationEndDate: string | null;
 }
 
-export interface FairApiRequestBody {
-  start: string;
-  capacity: number;
-  place: string;
-  type: FairType;
-  applicationStartDate: string;
-  applicationEndDate: string;
-}
-
 export const formatFairRequestBody = ({
   start,
   type,
@@ -25,7 +16,7 @@ export const formatFairRequestBody = ({
   capacity,
   applicationStartDate,
   applicationEndDate,
-}: FairFormInput): FairApiRequestBody => {
+}: FairFormInput) => {
   const convertToApiDateFormat = (dateStr: string | null): string => {
     if (!dateStr) return '';
     if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
@@ -47,3 +38,5 @@ export const formatFairRequestBody = ({
     applicationEndDate: convertToApiDateFormat(applicationEndDate),
   };
 };
+
+export type FairApiRequestBody = ReturnType<typeof formatFairRequestBody>;
