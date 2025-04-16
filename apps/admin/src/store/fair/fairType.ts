@@ -16,7 +16,5 @@ export const fairFormAtom = atom<FairDataInput>({
     type: 'STUDENT_AND_PARENT',
     applicationStartDate: '',
     applicationEndDate: '',
-    date: '',
-    time: '',
   },
 });

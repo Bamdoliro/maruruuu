@@ -10,10 +10,10 @@ export type FairStatus =
   | 'APPLICATION_EARLY_CLOSED';
 
 export interface Fair {
-  start: string | null;
+  start: string;
   capacity: number;
   place: string;
-  type: string;
+  type: FairType;
   applicationStartDate: string | null;
   applicationEndDate: string | null;
 }
@@ -51,6 +51,4 @@ export interface FairDataInput {
   type: string;
   applicationStartDate: string | null;
   applicationEndDate: string | null;
-  date: string;
-  time: string;
 }
