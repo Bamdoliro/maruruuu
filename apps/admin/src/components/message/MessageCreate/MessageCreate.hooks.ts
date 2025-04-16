@@ -1,25 +1,57 @@
-import { useState, type ChangeEvent } from 'react';
+import { useState } from 'react';
 import {
   usePostMessageByStatusMutation,
   usePostMessageByTypeMutation,
   usePostMessageToAllMutation,
 } from '@/services/message/mutations';
+import type { PostSendMessageByTypeRequest } from '@/types/message/remote';
 
-export const useMessageCreateAction = (
-  title: string,
-  recipient: string,
-  content: string,
-  onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void,
-  onRecipientChange: (value: string) => void,
-  onContentChange: (e: ChangeEvent<HTMLTextAreaElement>) => void,
-  onSubmit: () => void
-) => {
+type RecipientType =
+  | 'APPROVED'
+  | 'REJECTED'
+  | 'FINAL_SUBMITTED'
+  | 'FINAL_PASSED'
+  | 'MEISTER_TALENT'
+  | 'REGULAR'
+  | 'REGULAR_CHANGED'
+  | 'ALL';
+
+export interface MessageForm {
+  title: string;
+  recipient: RecipientType;
+  content: string;
+}
+
+export const useMessage = () => {
+  const [form, setForm] = useState<MessageForm>({
+    title: '',
+    recipient: '' as RecipientType,
+    content: '',
+  });
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const { mutateAsync: postMessageByStatusMutate } = usePostMessageByStatusMutation();
-  const { mutateAsync: postMessageByTypeMutate } = usePostMessageByTypeMutation();
-  const { mutateAsync: postMessageToAllMutate } = usePostMessageToAllMutation();
 
-  const handleConfirm = async () => {
+  const { postMessageByStatusMutate } = usePostMessageByStatusMutation();
+  const { postMessageByTypeMutate } = usePostMessageByTypeMutation();
+  const { postMessageToAllMutate } = usePostMessageToAllMutation();
+
+  const handleChange = (e: { target: { name: keyof MessageForm; value: string } }) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: name === 'recipient' ? (value as RecipientType) : value,
+    }));
+  };
+
+  const resetForm = () => {
+    setForm({
+      title: '',
+      recipient: '' as RecipientType,
+      content: '',
+    });
+  };
+
+  const handleConfirm = () => {
+    const { title, content, recipient } = form;
     if (!title || !content || !recipient) return;
 
     if (
@@ -28,44 +60,41 @@ export const useMessageCreateAction = (
       recipient === 'FINAL_SUBMITTED' ||
       recipient === 'FINAL_PASSED'
     ) {
-      await postMessageByStatusMutate({
+      postMessageByStatusMutate({
         title,
         text: content,
         status: recipient,
       });
     } else if (recipient === 'MEISTER_TALENT') {
-      await postMessageByTypeMutate({
+      postMessageByTypeMutate({
         title,
         text: content,
         formType: 'MEISTER_TALENT',
         isChangeToRegular: false,
-      });
+      } as PostSendMessageByTypeRequest);
     } else if (recipient === 'REGULAR') {
-      await postMessageByTypeMutate({
+      postMessageByTypeMutate({
         title,
         text: content,
         formType: 'REGULAR',
         isChangeToRegular: false,
-      });
+      } as PostSendMessageByTypeRequest);
     } else if (recipient === 'REGULAR_CHANGED') {
-      await postMessageByTypeMutate({
+      postMessageByTypeMutate({
         title,
         text: content,
         formType: 'REGULAR',
         isChangeToRegular: true,
-      });
+      } as PostSendMessageByTypeRequest);
     } else if (recipient === 'ALL') {
-      await postMessageToAllMutate({
+      postMessageToAllMutate({
         title,
         text: content,
       });
     }
 
     setIsConfirmModalOpen(false);
-    onTitleChange({ target: { value: '' } } as ChangeEvent<HTMLInputElement>);
-    onRecipientChange('');
-    onContentChange({ target: { value: '' } } as ChangeEvent<HTMLTextAreaElement>);
-    onSubmit();
+    resetForm();
   };
 
   const handleSubmit = () => {
@@ -73,9 +102,11 @@ export const useMessageCreateAction = (
   };
 
   return {
+    form,
     isConfirmModalOpen,
-    setIsConfirmModalOpen,
+    handleChange,
     handleConfirm,
     handleSubmit,
+    setIsConfirmModalOpen,
   };
 };

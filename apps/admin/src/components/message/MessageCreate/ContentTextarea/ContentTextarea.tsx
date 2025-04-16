@@ -1,18 +1,30 @@
 import { color, font } from '@maru/design-system';
 import type { ChangeEvent } from 'react';
 import styled from 'styled-components';
+import type { MessageForm } from '../MessageCreate.hooks';
 
 interface ContentTextareaProps {
+  name: keyof MessageForm;
   value: string;
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (e: { target: { name: keyof MessageForm; value: string } }) => void;
 }
 
-const ContentTextarea = ({ value, onChange }: ContentTextareaProps) => {
+const ContentTextarea = ({ name, value, onChange }: ContentTextareaProps) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    onChange({
+      target: {
+        name,
+        value: e.target.value,
+      },
+    });
+  };
+
   return (
     <StyledContainer>
       <StyledTextarea
+        name={name}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         placeholder="내용을 입력해주세요"
       />
     </StyledContainer>

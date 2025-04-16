@@ -1,18 +1,30 @@
 import { color, font } from '@maru/design-system';
 import type { ChangeEvent } from 'react';
 import styled from 'styled-components';
+import type { MessageForm } from '../MessageCreate.hooks';
 
 interface TitleInputProps {
+  name: keyof MessageForm;
   value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (e: { target: { name: keyof MessageForm; value: string } }) => void;
 }
 
-const TitleInput = ({ value, onChange }: TitleInputProps) => {
+const TitleInput = ({ name, value, handleChange }: TitleInputProps) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChange({
+      target: {
+        name,
+        value: e.target.value,
+      },
+    });
+  };
+
   return (
     <StyledInput
       type="text"
+      name={name}
       value={value}
-      onChange={onChange}
+      onChange={handleInputChange}
       placeholder="제목을 입력해주세요"
     />
   );

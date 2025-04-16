@@ -3,28 +3,26 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import TitleInput from '../TitleInput/TitleInput';
 import RecipientDropdown from '../RecipientDropdown/RecipientDropdown';
-import type { ChangeEvent } from 'react';
+import type { MessageForm } from '../MessageCreate.hooks';
 
 interface MessageHeaderProps {
   title: string;
-  recipient: string;
-  onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onRecipientChange: (value: string) => void;
+  recipient: MessageForm['recipient'];
+  onChange: (e: { target: { name: keyof MessageForm; value: string } }) => void;
   onSubmit: () => void;
 }
 
 const MessageHeader = ({
   title,
   recipient,
-  onTitleChange,
-  onRecipientChange,
+  onChange,
   onSubmit,
 }: MessageHeaderProps) => {
   return (
     <StyledWrapper>
       <Content>
-        <TitleInput value={title} onChange={onTitleChange} />
-        <RecipientDropdown value={recipient} onChange={onRecipientChange} />
+        <TitleInput name="title" value={title} handleChange={onChange} />
+        <RecipientDropdown value={recipient} onChange={(value) => onChange({ target: { name: 'recipient', value } })} />
         <Button onClick={onSubmit} size="SMALL" disabled={!recipient}>
           발송하기
         </Button>

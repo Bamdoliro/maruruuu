@@ -144,8 +144,6 @@ const MenuButton = styled.button`
   border: none;
   color: ${color.gray900};
   cursor: pointer;
-  display: flex;
-  align-items: center;
 
   &:hover {
     background-color: ${color.gray50};
