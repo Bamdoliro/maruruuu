@@ -1,7 +1,7 @@
 import { color, font } from '@maru/design-system';
 import type { ChangeEvent } from 'react';
 import styled from 'styled-components';
-import type { MessageForm } from '../MessageCreate.hooks';
+import type { MessageForm } from '@/types/message/client';
 
 interface ContentTextareaProps {
   name: keyof MessageForm;

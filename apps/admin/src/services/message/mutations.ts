@@ -1,20 +1,16 @@
+import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { useApiError } from '@/hooks';
-import type {
-  PostSendMessageByStatusRequest,
-  PostSendMessageByTypeRequest,
-  PostSendMessageToAllRequest,
-} from '@/types/message/remote';
 import { postMessageByStatus, postMessageByType, postMessageToAll } from './api';
 
-export const usePostMessageByStatusMutation = () => {
+export const usePostMessageByStatusMutation = (options?: { onSuccess?: () => void }) => {
   const { handleError } = useApiError();
 
   const { mutate: postMessageByStatusMutate, ...restMutation } = useMutation({
-    mutationFn: (params: PostSendMessageByStatusRequest) => postMessageByStatus(params),
+    mutationFn: postMessageByStatus,
     onSuccess: () => {
       toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+      options?.onSuccess?.();
     },
     onError: handleError,
   });
@@ -22,13 +18,14 @@ export const usePostMessageByStatusMutation = () => {
   return { postMessageByStatusMutate, ...restMutation };
 };
 
-export const usePostMessageByTypeMutation = () => {
+export const usePostMessageByTypeMutation = (options?: { onSuccess?: () => void }) => {
   const { handleError } = useApiError();
 
   const { mutate: postMessageByTypeMutate, ...restMutation } = useMutation({
-    mutationFn: (params: PostSendMessageByTypeRequest) => postMessageByType(params),
+    mutationFn: postMessageByType,
     onSuccess: () => {
       toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+      options?.onSuccess?.();
     },
     onError: handleError,
   });
@@ -36,13 +33,14 @@ export const usePostMessageByTypeMutation = () => {
   return { postMessageByTypeMutate, ...restMutation };
 };
 
-export const usePostMessageToAllMutation = () => {
+export const usePostMessageToAllMutation = (options?: { onSuccess?: () => void }) => {
   const { handleError } = useApiError();
 
   const { mutate: postMessageToAllMutate, ...restMutation } = useMutation({
-    mutationFn: (params: PostSendMessageToAllRequest) => postMessageToAll(params),
+    mutationFn: postMessageToAll,
     onSuccess: () => {
       toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+      options?.onSuccess?.();
     },
     onError: handleError,
   });

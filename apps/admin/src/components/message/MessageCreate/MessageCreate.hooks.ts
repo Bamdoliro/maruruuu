@@ -2,52 +2,43 @@ import { useState } from 'react';
 import {
   usePostMessageByStatusMutation,
   usePostMessageByTypeMutation,
-  usePostMessageToAllMutation,
 } from '@/services/message/mutations';
 import type { PostSendMessageByTypeRequest } from '@/types/message/remote';
-
-type RecipientType =
-  | 'APPROVED'
-  | 'REJECTED'
-  | 'FINAL_SUBMITTED'
-  | 'FINAL_PASSED'
-  | 'MEISTER_TALENT'
-  | 'REGULAR'
-  | 'REGULAR_CHANGED'
-  | 'ALL';
-
-export interface MessageForm {
-  title: string;
-  recipient: RecipientType;
-  content: string;
-}
+import type { MessageForm } from '@/types/message/client';
 
 export const useMessage = () => {
   const [form, setForm] = useState<MessageForm>({
     title: '',
-    recipient: '' as RecipientType,
+    recipient: '' as MessageForm['recipient'],
     content: '',
   });
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
-  const { postMessageByStatusMutate } = usePostMessageByStatusMutation();
-  const { postMessageByTypeMutate } = usePostMessageByTypeMutation();
-  const { postMessageToAllMutate } = usePostMessageToAllMutation();
+  const resetForm = () => {
+    setForm({
+      title: '',
+      recipient: '' as MessageForm['recipient'],
+      content: '',
+    });
+  };
+
+  const commonOnSuccess = () => {
+    resetForm();
+  };
+
+  const { postMessageByStatusMutate } = usePostMessageByStatusMutation({
+    onSuccess: commonOnSuccess,
+  });
+
+  const { postMessageByTypeMutate } = usePostMessageByTypeMutation({
+    onSuccess: commonOnSuccess,
+  });
 
   const handleChange = (e: { target: { name: keyof MessageForm; value: string } }) => {
     const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
-      [name]: name === 'recipient' ? (value as RecipientType) : value,
+      [name]: value,
     }));
-  };
-
-  const resetForm = () => {
-    setForm({
-      title: '',
-      recipient: '' as RecipientType,
-      content: '',
-    });
   };
 
   const handleConfirm = () => {
@@ -55,10 +46,11 @@ export const useMessage = () => {
     if (!title || !content || !recipient) return;
 
     if (
-      recipient === 'APPROVED' ||
-      recipient === 'REJECTED' ||
       recipient === 'FINAL_SUBMITTED' ||
-      recipient === 'FINAL_PASSED'
+      recipient === 'RECEIVED' ||
+      recipient === 'REJECTED' ||
+      recipient === 'FIRST_PASSED' ||
+      recipient === 'PASSED'
     ) {
       postMessageByStatusMutate({
         title,
@@ -79,34 +71,12 @@ export const useMessage = () => {
         formType: 'REGULAR',
         isChangeToRegular: false,
       } as PostSendMessageByTypeRequest);
-    } else if (recipient === 'REGULAR_CHANGED') {
-      postMessageByTypeMutate({
-        title,
-        text: content,
-        formType: 'REGULAR',
-        isChangeToRegular: true,
-      } as PostSendMessageByTypeRequest);
-    } else if (recipient === 'ALL') {
-      postMessageToAllMutate({
-        title,
-        text: content,
-      });
     }
-
-    setIsConfirmModalOpen(false);
-    resetForm();
-  };
-
-  const handleSubmit = () => {
-    setIsConfirmModalOpen(true);
   };
 
   return {
     form,
-    isConfirmModalOpen,
     handleChange,
     handleConfirm,
-    handleSubmit,
-    setIsConfirmModalOpen,
   };
 };

@@ -3,7 +3,7 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import TitleInput from '../TitleInput/TitleInput';
 import RecipientDropdown from '../RecipientDropdown/RecipientDropdown';
-import type { MessageForm } from '../MessageCreate.hooks';
+import type { MessageForm } from '@/types/message/client';
 
 interface MessageHeaderProps {
   title: string;

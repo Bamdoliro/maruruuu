@@ -1,15 +1,21 @@
 import { color, font } from '@maru/design-system';
 import type { ChangeEvent } from 'react';
 import styled from 'styled-components';
-import type { MessageForm } from '../MessageCreate.hooks';
+import type { MessageForm } from '@/types/message/client';
 
 interface TitleInputProps {
   name: keyof MessageForm;
   value: string;
   handleChange: (e: { target: { name: keyof MessageForm; value: string } }) => void;
+  placeholder?: string;
 }
 
-const TitleInput = ({ name, value, handleChange }: TitleInputProps) => {
+const TitleInput = ({
+  name,
+  value,
+  handleChange,
+  placeholder = '제목을 입력해주세요',
+}: TitleInputProps) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChange({
       target: {
@@ -25,7 +31,7 @@ const TitleInput = ({ name, value, handleChange }: TitleInputProps) => {
       name={name}
       value={value}
       onChange={handleInputChange}
-      placeholder="제목을 입력해주세요"
+      placeholder={placeholder}
     />
   );
 };
@@ -37,6 +43,7 @@ const StyledInput = styled.input`
   width: 100%;
   border: none;
   color: ${color.gray900};
+  padding: 8px 0;
 
   &::placeholder {
     color: ${color.gray400};

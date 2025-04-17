@@ -1,19 +1,28 @@
+import { color } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
+import { useOverlay } from '@toss/use-overlay';
 import MessageHeader from './MessageHeader/MessageHeader';
 import ContentTextarea from './ContentTextarea/ContentTextarea';
 import MessageConfirmModal from './MessageConfirmModal/MessageConfirmModal';
 import { useMessage } from './MessageCreate.hooks';
 
 const MessageCreate = () => {
-  const {
-    form,
-    isConfirmModalOpen,
-    handleChange,
-    handleConfirm,
-    handleSubmit,
-    setIsConfirmModalOpen,
-  } = useMessage();
+  const overlay = useOverlay();
+  const { form, handleChange, handleConfirm } = useMessage();
+
+  const openConfirmModal = () => {
+    overlay.open(({ isOpen, close }) => (
+      <MessageConfirmModal
+        isOpen={isOpen}
+        onClose={close}
+        onConfirm={() => {
+          handleConfirm();
+          close();
+        }}
+      />
+    ));
+  };
 
   return (
     <StyledContainer>
@@ -21,14 +30,9 @@ const MessageCreate = () => {
         title={form.title}
         recipient={form.recipient}
         onChange={handleChange}
-        onSubmit={handleSubmit}
+        onSubmit={openConfirmModal}
       />
       <ContentTextarea name="content" value={form.content} onChange={handleChange} />
-      <MessageConfirmModal
-        isOpen={isConfirmModalOpen}
-        onClose={() => setIsConfirmModalOpen(false)}
-        onConfirm={handleConfirm}
-      />
     </StyledContainer>
   );
 };
