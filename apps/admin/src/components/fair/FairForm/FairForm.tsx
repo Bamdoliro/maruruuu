@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
 import type { FairFormInput } from '@/utils/functions/getRequestBody';
 import type { FairType } from '@/types/fair/client';
-import { useCreateFairMutation } from '@/services/form/mutations';
+import { useCreateFairMutation } from '@/services/fair/mutations';
 
 const FairForm = () => {
   const createFairMutation = useCreateFairMutation();
