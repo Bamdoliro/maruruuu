@@ -13,7 +13,6 @@ import { useSetIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoun
 import { useSetSecondRoundResultStore } from '@/store/form/secondRoundResult';
 import isPopupBlocked from '@/utils/functions/isPopupBlocked';
 
-
 export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void) => {
   const { handleError } = useApiError();
   const queryClient = useQueryClient();
@@ -95,4 +94,3 @@ export const usePrintFormUrlMutation = () => {
 
   return { printFormUrl, ...restMutation };
 };
-
