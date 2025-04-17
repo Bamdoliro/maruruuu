@@ -58,7 +58,7 @@ const Login = () => {
                 <Button width="100%" onClick={handleLogin}>
                   로그인
                 </Button>
-                <ChangePasswordLink href={ROUTES.CHANGE_PASSWORD}>
+                <ChangePasswordLink href={ROUTES.PASSWORD}>
                   비밀번호 변경
                   <IconArrowRight color={color.gray500} width={16} height={16} />
                 </ChangePasswordLink>
