@@ -26,7 +26,7 @@ const DROPDOWN_DATA = [
 ];
 
 const RecipientDropdown = ({ value, onChange }: RecipientDropdownProps) => {
-  const handleChange = (value: string, _: string) => {
+  const handleChange = (value: string) => {
     onChange(value);
   };
 
