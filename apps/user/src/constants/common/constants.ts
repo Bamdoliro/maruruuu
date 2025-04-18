@@ -13,7 +13,7 @@ export const ROUTES = {
   FINAL_RESULT: '/result/final',
   SIMULATION: '/simulation',
   LOGIN: '/login',
-  CHANGE_PASSWORD: '/change-password',
+  PASSWORD: '/password',
   SIGNUP: '/signup',
   WITHDRAWAL: '/withdrawal',
 };

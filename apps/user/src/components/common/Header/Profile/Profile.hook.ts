@@ -27,7 +27,7 @@ export const useCTAButton = () => {
   };
 
   const handleMoveChangePassword = () => {
-    router.push(ROUTES.CHANGE_PASSWORD);
+    router.push(ROUTES.PASSWORD);
   };
 
   const handleMoveWithdrawal = () => {
