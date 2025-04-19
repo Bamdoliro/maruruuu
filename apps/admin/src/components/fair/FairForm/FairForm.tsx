@@ -9,13 +9,13 @@ import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
 import type { FairFormInput } from '@/utils/functions/getRequestBody';
 import type { FairType } from '@/types/fair/client';
 import { useCreateFairMutation } from '@/services/fair/mutations';
-import { FairFormAtom } from '@/store/fair/fairType';
 import { useRecoilState } from 'recoil';
+import { useFairFormDefalut} from '@/store/fair/fairType';
 
 const FairForm = () => {
   const createFairMutation = useCreateFairMutation();
 
-  const [form, setForm] = useRecoilState(FairFormAtom);
+  const [form, setForm] = useFairFormDefalut();
 
   const handleChange = (key: keyof FairFormInput, value: any) => {
     setForm((prev) => ({
