@@ -4,18 +4,17 @@ import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { IconClock, IconCalendar } from '@maru/icon';
 import FormInput from '@maru/ui/src/Input/FormInput';
-import { useState } from 'react';
 import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
 import type { FairFormInput } from '@/utils/functions/getRequestBody';
 import type { FairType } from '@/types/fair/client';
 import { useCreateFairMutation } from '@/services/fair/mutations';
 import { useRecoilState } from 'recoil';
-import { useFairFormDefalut} from '@/store/fair/fairType';
+import { useFairFormStore} from '@/store/fair/fairType';
 
 const FairForm = () => {
   const createFairMutation = useCreateFairMutation();
 
-  const [form, setForm] = useFairFormDefalut();
+  const [form, setForm] = useFairFormStore();
 
   const handleChange = (key: keyof FairFormInput, value: any) => {
     setForm((prev) => ({

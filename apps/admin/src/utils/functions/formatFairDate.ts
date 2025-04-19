@@ -1,12 +1,11 @@
 import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
 import type { FairFormInput } from '@/utils/functions/getRequestBody';
-import { useRecoilState } from 'recoil';
-import { fairFormAtom, fairTypeAtom } from '@/store/fair/fairType';
+import { useFairTypeStore, useFairFormStore } from '@/store/fair/fairType';
 import formatDate from './formatDate';
 
 const useFairForm = () => {
-  const [form, setForm] = useRecoilState(fairFormAtom);
-  const [type, setType] = useRecoilState(fairTypeAtom);
+  const [form, setForm] = useFairTypeStore();
+  const [type, setType] = useFairFormStore();
 
   const handleChange = (key: keyof FairFormInput, value: string) => {
     setForm((prev) => ({
