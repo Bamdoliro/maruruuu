@@ -19,7 +19,7 @@ const useFairForm = () => {
       start: form.start ?? '',
       capacity: Number(form.capacity),
       place: form.place,
-      type: type,
+      type: form.type,
       applicationStartDate: formatDate.toDashedDate(form.applicationStartDate ?? ''),
       applicationEndDate: formatDate.toDashedDate(form.applicationEndDate ?? ''),
     });

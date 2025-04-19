@@ -24,5 +24,5 @@ const fairFormState = atom<Fair>({
     applicationEndDate: null,
   },
 });
-export const useFairTypeStore = () => useRecoilState(fairTypeState)
-export const useFairFormStore=()=>useRecoilState(fairFormState);
+export const useFairTypeStore = () => useRecoilState(fairTypeState);
+export const useFairFormStore = () => useRecoilState(fairFormState);
