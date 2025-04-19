@@ -9,18 +9,13 @@ import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
 import type { FairFormInput } from '@/utils/functions/getRequestBody';
 import type { FairType } from '@/types/fair/client';
 import { useCreateFairMutation } from '@/services/fair/mutations';
+import { FairFormAtom } from '@/store/fair/fairType';
+import { useRecoilState } from 'recoil';
 
 const FairForm = () => {
   const createFairMutation = useCreateFairMutation();
 
-  const [form, setForm] = useState<FairFormInput>({
-    start: '',
-    place: '',
-    capacity: 120,
-    applicationStartDate: null,
-    applicationEndDate: null,
-    type: 'STUDENT_AND_PARENT',
-  });
+  const [form, setForm] = useRecoilState(FairFormAtom);
 
   const handleChange = (key: keyof FairFormInput, value: any) => {
     setForm((prev) => ({
@@ -32,6 +27,16 @@ const FairForm = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     handleChange(name as keyof FairFormInput, value);
+  };
+
+  const handleDateChange = (value: string) => {
+    const newStart = value + form.start.slice(8);
+    setForm((prev) => ({ ...prev, start: newStart }));
+  };
+
+  const handleTimeChange = (value: string) => {
+    const newStart = form.start.slice(0, 8) + value;
+    setForm((prev) => ({ ...prev, start: newStart }));
   };
 
   const handleSubmit = () => {
@@ -65,16 +70,30 @@ const FairForm = () => {
       </CreateFormSort>
 
       <CreateFormSort>
-        <Text fontType="context">입학 설명회 날짜 및 시간 (YYYYMMDDHHmm)</Text>
+        <Text fontType="context">입학 설명회 날짜 (8자리)</Text>
         <InputWrapper>
           <FormInput
-            placeholder="202504161300"
-            name="start"
-            value={form.start}
-            onChange={handleInputChange}
+            placeholder="날짜를 입력해주세요."
+            name="start-date"
+            value={form.start.slice(0, 8)}
+            onChange={(e) => handleDateChange(e.target.value)}
           />
           <InputIconWrapper>
             <IconCalendar width={24} height={24} />
+          </InputIconWrapper>
+        </InputWrapper>
+      </CreateFormSort>
+
+      <CreateFormSort>
+        <Text fontType="context">시간 (4자리)</Text>
+        <InputWrapper>
+          <FormInput
+            placeholder="시간을 입력해주세요."
+            name="start-time"
+            value={form.start.slice(8)}
+            onChange={(e) => handleTimeChange(e.target.value)}
+          />
+          <InputIconWrapper>
             <IconClock width={24} height={24} />
           </InputIconWrapper>
         </InputWrapper>
@@ -84,13 +103,13 @@ const FairForm = () => {
         <Text fontType="context">신청 기한 (8자리)</Text>
         <CreateInputSort>
           <FormInput
-            placeholder="시작일 (YYYYMMDD)"
+            placeholder="시작일"
             name="applicationStartDate"
             value={form.applicationStartDate ?? ''}
             onChange={handleInputChange}
           />
           <FormInput
-            placeholder="종료일 (YYYYMMDD)"
+            placeholder="종료일"
             name="applicationEndDate"
             value={form.applicationEndDate ?? ''}
             onChange={handleInputChange}

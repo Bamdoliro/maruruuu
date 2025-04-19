@@ -44,11 +44,3 @@ export interface FairDetailData {
   status: FairStatus;
   attendeeList: AttendeeData[];
 }
-export interface FairDataInput {
-  start: string;
-  capacity: number;
-  place: string;
-  type: string;
-  applicationStartDate: string | null;
-  applicationEndDate: string | null;
-}

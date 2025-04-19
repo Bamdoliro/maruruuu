@@ -1,20 +1,19 @@
 import { atom } from 'recoil';
-import type { FairType } from '@/types/fair/client';
-import type { FairDataInput } from '@/types/fair/client';
+import type { Fair, FairType } from '@/types/fair/client';
 
 export const fairTypeAtom = atom<FairType>({
-  key: 'fair-type',
+  key: 'FairTypeAtom',
   default: 'STUDENT_AND_PARENT',
 });
 
-export const fairFormAtom = atom<FairDataInput>({
-  key: 'fair-form',
+export const FairFormAtom = atom<Fair>({
+  key: 'FairFormAtom',
   default: {
     start: '',
-    capacity: 0,
+    capacity: 120,
     place: '',
     type: 'STUDENT_AND_PARENT',
-    applicationStartDate: '',
-    applicationEndDate: '',
+    applicationStartDate: null,
+    applicationEndDate: null,
   },
 });
