@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import type { InputProps } from './Input.type';
 
 const FormInput = ({
-  width = '100%',
+  width = 360,
   height,
   label,
   placeholder,
@@ -41,7 +41,6 @@ const StyledInput = styled.input`
   background-color: ${color.white};
   border: 1px solid ${color.gray400};
   border-radius: 6px;
-
   &::placeholder {
     color: ${color.gray500};
   }

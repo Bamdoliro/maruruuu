@@ -1,12 +1,17 @@
 import { useFairFormStore } from '@/store/fair/fairType';
+import { useCreateFairMutation } from '@/services/fair/mutations';
 import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
-import formatDate from './formatDate';
 import type { FairFormInput } from '@/utils/functions/getRequestBody';
+//import type { FairType } from '@/types/fair/client';
 
-const useFairForm = () => {
+export const useFairForm = () => {
+  const createFairMutation = useCreateFairMutation();
   const [form, setForm] = useFairFormStore();
 
-  const handleChange = (key: keyof FairFormInput, value: string) => {
+  const handleChange = <K extends keyof FairFormInput>(
+    key: K,
+    value: FairFormInput[K]
+  ) => {
     setForm((prev) => ({
       ...prev,
       [key]: value,
@@ -28,23 +33,17 @@ const useFairForm = () => {
     setForm((prev) => ({ ...prev, start: newStart }));
   };
 
-  const getRequestBody = () => {
-    return formatFairRequestBody({
-      ...form,
-      applicationStartDate: formatDate.toDashedDate(form.applicationStartDate ?? ''),
-      applicationEndDate: formatDate.toDashedDate(form.applicationEndDate ?? ''),
-    });
+  const handleSubmit = () => {
+    const body = formatFairRequestBody(form);
+    createFairMutation.mutate(body);
   };
 
   return {
     form,
-    setForm,
     handleChange,
     handleInputChange,
     handleDateChange,
     handleTimeChange,
-    getRequestBody,
+    handleSubmit,
   };
 };
-
-export default useFairForm;
