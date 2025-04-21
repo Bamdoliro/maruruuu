@@ -1,8 +1,6 @@
 import { useFairFormStore } from '@/store/fair/fairType';
 import { useCreateFairMutation } from '@/services/fair/mutations';
-//import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
-//import type { FairFormInput } from '@/utils/functions/getRequestBody';
-import { FairType } from '@/types/fair/client';
+import type { FairType } from '@/types/fair/client';
 import convertToApiDateFormat from '@/utils/functions/convertToApiDateFormat';
 import convertToApiDateTimeFormat from '@/utils/functions/convertToApiDateTimeFormat';
 
