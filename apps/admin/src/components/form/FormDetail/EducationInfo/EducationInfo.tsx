@@ -1,33 +1,37 @@
 import { DataBox } from '@/components/common';
+import { GRADUATION_TYPE_VALUE } from '@/constants/form/constant';
+import { useFormDetailQuery } from '@/services/form/queries';
+import { formatPhoneNumber } from '@/utils';
 import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
 interface EducationInfoProps {
-  educationData?: {
-    graduationType: string;
-    schoolName: string;
-    graduationYear: string;
-    schoolLocation: string;
-    schoolCode: string;
-    schoolPhoneNumber: string;
-    teacherName: string;
-    teacherMobilePhoneNumber: string;
-  };
+  id: number;
 }
 
-const EducationInfo = ({ educationData }: EducationInfoProps) => {
-  if (!educationData) return <Loader />;
+const EducationInfo = ({ id }: EducationInfoProps) => {
+  const { data: formDetailData } = useFormDetailQuery(id);
+  if (!formDetailData) return <Loader />;
 
   const educationDetails = [
-    { label: '졸업 구분', data: educationData.graduationType },
-    { label: '출신 학교명', data: educationData.schoolName },
-    { label: '졸업년도, 합격년도', data: educationData.graduationYear },
-    { label: '학교 지역', data: educationData.schoolLocation },
-    { label: '표준학교코드', data: educationData.schoolCode },
-    { label: '학교 연락처', data: educationData.schoolPhoneNumber },
-    { label: '작성교사 이름', data: educationData.teacherName },
-    { label: '작성교사 연락처', data: educationData.teacherMobilePhoneNumber },
+    {
+      label: '졸업 구분',
+      data: GRADUATION_TYPE_VALUE[formDetailData.education.graduationType],
+    },
+    { label: '출신 학교명', data: formDetailData.education.schoolName },
+    { label: '졸업년도, 합격년도', data: formDetailData.education.graduationYear },
+    { label: '학교 지역', data: formDetailData.education.schoolLocation },
+    { label: '표준학교코드', data: formDetailData.education.schoolCode },
+    {
+      label: '학교 연락처',
+      data: formatPhoneNumber(formDetailData.education.schoolPhoneNumber),
+    },
+    { label: '작성교사 이름', data: formDetailData.education.teacherName },
+    {
+      label: '작성교사 연락처',
+      data: formatPhoneNumber(formDetailData.education.teacherMobilePhoneNumber),
+    },
   ];
 
   return (

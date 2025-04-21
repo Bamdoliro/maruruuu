@@ -1,29 +1,25 @@
 import { DataBox } from '@/components/common';
+import { useFormDetailQuery } from '@/services/form/queries';
+import { formatPhoneNumber } from '@/utils';
 import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
 interface ParentInfoProps {
-  parentData?: {
-    name: string;
-    phoneNumber: string;
-    relation: string;
-    address: string;
-    detailAddress: string;
-    zoneCode: string;
-  };
+  id: number;
 }
 
-const ParentInfo = ({ parentData }: ParentInfoProps) => {
-  if (!parentData) return <Loader />;
+const ParentInfo = ({ id }: ParentInfoProps) => {
+  const { data: formDetailData } = useFormDetailQuery(id);
+  if (!formDetailData) return <Loader />;
 
   const parentDetails = [
-    { label: '이름', data: parentData.name },
-    { label: '전화번호', data: parentData.phoneNumber },
-    { label: '보호자 관계', data: parentData.relation },
-    { label: '주소', data: parentData.address },
-    { label: '상세 주소', data: parentData.detailAddress },
-    { label: '우편 번호', data: parentData.zoneCode },
+    { label: '이름', data: formDetailData.parent.name },
+    { label: '전화번호', data: formatPhoneNumber(formDetailData.parent.phoneNumber) },
+    { label: '보호자 관계', data: formDetailData.parent.relation },
+    { label: '주소', data: formDetailData.parent.address },
+    { label: '상세 주소', data: formDetailData.parent.detailAddress },
+    { label: '우편 번호', data: formDetailData.parent.zoneCode },
   ];
 
   return (

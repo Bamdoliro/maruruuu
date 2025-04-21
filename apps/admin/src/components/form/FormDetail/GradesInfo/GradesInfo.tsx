@@ -9,20 +9,32 @@ import type { Attendance, Subject } from '@/types/form/client';
 import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 import Volunteer from './Volunteer/Volunteer';
 import Certificate from './Certificate/Certificate';
+import { useFormDetailQuery } from '@/services/form/queries';
 
 interface GradesInfoProps {
-  gradesData?: {
-    subjectList: Subject[];
-    attendanceList: Attendance[];
-    volunteerList: number[];
-    certificateList: string[];
-  };
+  id: number;
 }
 
-const GradesInfo = ({ gradesData }: GradesInfoProps) => {
+const GradesInfo = ({ id }: GradesInfoProps) => {
   const [currentGradeField, setCurrentGradeField] = useState('교과 성적');
 
-  if (!gradesData) return <Loader />;
+  const { data: formDetailData } = useFormDetailQuery(id);
+  if (!formDetailData) return <Loader />;
+
+  const gradesData = formDetailData && {
+    subjectList: formDetailData.grade.subjectList,
+    attendanceList: [
+      formDetailData.grade.attendance1,
+      formDetailData.grade.attendance2,
+      formDetailData.grade.attendance3,
+    ],
+    volunteerList: [
+      formDetailData.grade.volunteerTime1,
+      formDetailData.grade.volunteerTime2,
+      formDetailData.grade.volunteerTime3,
+    ],
+    certificateList: formDetailData.grade.certificateList,
+  };
 
   return (
     <StyledGradesInfo>

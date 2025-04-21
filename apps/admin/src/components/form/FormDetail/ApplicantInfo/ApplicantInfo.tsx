@@ -1,4 +1,7 @@
 import { DataBox } from '@/components/common';
+import { GENDER } from '@/constants/form/constant';
+import { useFormDetailQuery } from '@/services/form/queries';
+import { formatDate, formatPhoneNumber } from '@/utils';
 import { color } from '@maru/design-system';
 import { Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -6,23 +9,21 @@ import Image from 'next/image';
 import { styled } from 'styled-components';
 
 interface ApplicantInfoProps {
-  applicantData?: {
-    name: string;
-    birthday: string;
-    gender: string;
-    phoneNumber: string;
-    profileImageUrl: string;
-  };
+  id: number;
 }
 
-const ApplicantInfo = ({ applicantData }: ApplicantInfoProps) => {
-  if (!applicantData) return <Loader />;
+const ApplicantInfo = ({ id }: ApplicantInfoProps) => {
+  const { data: formDetailData } = useFormDetailQuery(id);
+  if (!formDetailData) return <Loader />;
 
   const applicantDetails = [
-    { label: '이름', data: applicantData.name },
-    { label: '생년월일', data: applicantData.birthday },
-    { label: '성별', data: applicantData.gender },
-    { label: '전화번호', data: applicantData.phoneNumber },
+    { label: '이름', data: formDetailData.applicant.name },
+    {
+      label: '생년월일',
+      data: formatDate.toShortDateTime(formDetailData.applicant.birthday),
+    },
+    { label: '성별', data: GENDER[formDetailData.applicant.gender] },
+    { label: '전화번호', data: formatPhoneNumber(formDetailData.applicant.phoneNumber) },
   ];
 
   return (
@@ -38,7 +39,7 @@ const ApplicantInfo = ({ applicantData }: ApplicantInfoProps) => {
             증명사진
           </Text>
           <ProfileImage
-            src={applicantData.profileImageUrl}
+            src={formDetailData.applicant.identificationPictureUri}
             alt="profile-image"
             width={280}
             height={354}
