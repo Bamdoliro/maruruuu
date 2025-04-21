@@ -6,7 +6,6 @@ import { FairType } from '@/types/fair/client';
 import convertToApiDateFormat from '@/utils/functions/convertToApiDateFormat';
 import convertToApiDateTimeFormat from '@/utils/functions/convertToApiDateTimeFormat';
 
-
 export interface FairFormInput {
   start: string;
   place: string;
@@ -57,19 +56,16 @@ export const useFairForm = () => {
     handleTimeChange,
     handleSubmit,
   };
-
 };
 
-
-
 export const formatFairRequestBody = ({
-                                        start,
-                                        type,
-                                        place,
-                                        capacity,
-                                        applicationStartDate,
-                                        applicationEndDate,
-                                      }: FairFormInput) => {
+  start,
+  type,
+  place,
+  capacity,
+  applicationStartDate,
+  applicationEndDate,
+}: FairFormInput) => {
   return {
     start: convertToApiDateTimeFormat(start),
     capacity: Number(capacity),
