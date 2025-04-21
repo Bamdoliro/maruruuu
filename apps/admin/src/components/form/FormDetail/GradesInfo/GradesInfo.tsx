@@ -5,7 +5,6 @@ import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import Grade from './Grade/Grade';
-import type { Attendance, Subject } from '@/types/form/client';
 import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 import Volunteer from './Volunteer/Volunteer';
 import Certificate from './Certificate/Certificate';
