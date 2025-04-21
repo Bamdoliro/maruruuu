@@ -1,13 +1,24 @@
 import { useFairFormStore } from '@/store/fair/fairType';
 import { useCreateFairMutation } from '@/services/fair/mutations';
-import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
-import type { FairFormInput } from '@/utils/functions/getRequestBody';
-//import type { FairType } from '@/types/fair/client';
+//import { formatFairRequestBody } from '@/utils/functions/getRequestBody';
+//import type { FairFormInput } from '@/utils/functions/getRequestBody';
+import { FairType } from '@/types/fair/client';
+import convertToApiDateFormat from '@/utils/functions/convertToApiDateFormat';
+import convertToApiDateTimeFormat from '@/utils/functions/convertToApiDateTimeFormat';
+
+
+export interface FairFormInput {
+  start: string;
+  place: string;
+  capacity: number;
+  type: FairType;
+  applicationStartDate: string | null;
+  applicationEndDate: string | null;
+}
 
 export const useFairForm = () => {
   const createFairMutation = useCreateFairMutation();
   const [form, setForm] = useFairFormStore();
-
   const handleChange = <K extends keyof FairFormInput>(
     key: K,
     value: FairFormInput[K]
@@ -46,4 +57,27 @@ export const useFairForm = () => {
     handleTimeChange,
     handleSubmit,
   };
+
 };
+
+
+
+export const formatFairRequestBody = ({
+                                        start,
+                                        type,
+                                        place,
+                                        capacity,
+                                        applicationStartDate,
+                                        applicationEndDate,
+                                      }: FairFormInput) => {
+  return {
+    start: convertToApiDateTimeFormat(start),
+    capacity: Number(capacity),
+    place,
+    type,
+    applicationStartDate: convertToApiDateFormat(applicationStartDate),
+    applicationEndDate: convertToApiDateFormat(applicationEndDate),
+  };
+};
+
+export type FairApiRequestBody = ReturnType<typeof formatFairRequestBody>;

@@ -26,7 +26,6 @@ export const getFairExportExcel = async (id: number) => {
 
 export const postFairReq = async (fairdata: Fair) => {
   const { data } = await maru.post(`/fairs`, fairdata);
-  console.log(data);
 
   return data;
 };
