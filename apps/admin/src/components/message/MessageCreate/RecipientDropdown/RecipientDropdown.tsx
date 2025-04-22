@@ -7,6 +7,24 @@ interface RecipientDropdownProps {
 }
 
 const RecipientDropdown = ({ value, onChange }: RecipientDropdownProps) => {
+  const getLabelByValue = (value: string) => {
+    const item = DROPDOWN_DATA.find((item) => {
+      if (item.children) {
+        return item.children.some((child) => child.value === value);
+      }
+      return item.value === value;
+    });
+
+    if (!item) return value;
+
+    if (item.children) {
+      const child = item.children.find((child) => child.value === value);
+      return child?.label || value;
+    }
+
+    return item.label;
+  };
+
   const handleChange = (value: string) => {
     onChange(value);
   };
@@ -14,7 +32,7 @@ const RecipientDropdown = ({ value, onChange }: RecipientDropdownProps) => {
   return (
     <SubDropdown
       data={DROPDOWN_DATA}
-      value={value}
+      value={value ? getLabelByValue(value) : ''}
       onChange={handleChange}
       name="recipient"
       placeholder="받는 사람"
