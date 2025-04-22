@@ -1,3 +1,6 @@
+import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
+import { useFormDetailQuery } from '@/services/form/queries';
+import { formatPhoneNumber } from '@/utils';
 import { color } from '@maru/design-system';
 import { IconBadge, IconCall, IconPerson, IconSchool } from '@maru/icon';
 import { Column, Loader, Row, Text } from '@maru/ui';
@@ -6,35 +9,36 @@ import Image from 'next/image';
 import { styled } from 'styled-components';
 
 interface ProfileProps {
-  profileData?: {
-    profileImageUrl: string;
-    name: string;
-    phoneNumber: string;
-    examinationNumber: number | string;
-    type: string;
-    schoolName: string;
-  };
+  id: number;
 }
 
-const Profile = ({ profileData }: ProfileProps) => {
-  if (!profileData) return <Loader />;
+const Profile = ({ id }: ProfileProps) => {
+  const { data: formDetailData } = useFormDetailQuery(id);
+  if (!formDetailData) return <Loader />;
 
   const profileDetails = [
     {
       icon: <IconBadge width={24} height={24} />,
-      value: profileData.examinationNumber,
+      value: formDetailData.examinationNumber,
     },
     {
       icon: <IconPerson width={24} height={24} />,
-      value: profileData.type,
+      value: formDetailData.type
+        ? formDetailData.changedToRegular && formDetailData?.type === 'REGULAR'
+          ? '특별전형 -> 일반전형'
+          : FORM_TYPE_CATEGORY[formDetailData.type]
+        : null,
     },
     {
       icon: <IconSchool width={24} height={24} />,
-      value: profileData.schoolName,
+      value:
+        formDetailData.education.graduationType !== 'QUALIFICATION_EXAMINATION'
+          ? formDetailData.education.schoolName || '학교 이름 없음'
+          : '검정고시',
     },
     {
       icon: <IconCall width={24} height={24} />,
-      value: profileData.phoneNumber,
+      value: formatPhoneNumber(formDetailData.applicant.phoneNumber),
     },
   ];
 
@@ -42,7 +46,7 @@ const Profile = ({ profileData }: ProfileProps) => {
     <StyledProfile>
       <ProfileImageBox>
         <ProfileImage
-          src={profileData.profileImageUrl}
+          src={formDetailData.applicant.identificationPictureUri}
           alt="profile-image"
           width={280}
           height={280}
@@ -51,7 +55,7 @@ const Profile = ({ profileData }: ProfileProps) => {
       </ProfileImageBox>
       <Column gap={16}>
         <Text fontType="H2" color={color.gray900}>
-          {profileData.name}
+          {formDetailData.applicant.name}
         </Text>
         <Column gap={8}>
           {profileDetails.map((item, index) => (

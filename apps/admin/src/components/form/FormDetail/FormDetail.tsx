@@ -4,7 +4,6 @@ import { Column, UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useState } from 'react';
 import { styled } from 'styled-components';
-import { useFormDetailDataDecomposition } from './formDetail.hooks';
 import Profile from './Profile/Profile';
 import { SwitchCase } from '@toss/react';
 import ApplicantInfo from './ApplicantInfo/ApplicantInfo';
@@ -23,20 +22,10 @@ const FormDetail = ({ id }: FormDetailProps) => {
   const [currentFormDetailField, setCurrentFormDetailField] =
     useState<FormDetailField>('지원자 정보');
 
-  const {
-    profileData,
-    applicantData,
-    parentData,
-    educationData,
-    typeData,
-    gradesData,
-    documentData,
-  } = useFormDetailDataDecomposition(id);
-
   return (
     <StyledFormDetail>
       <Column gap={36}>
-        <Profile profileData={profileData} />
+        <Profile id={id} />
         {/**원서상태 백엔드 수정되면 개발**/}
       </Column>
       <Column>
@@ -54,12 +43,12 @@ const FormDetail = ({ id }: FormDetailProps) => {
         <SwitchCase
           value={currentFormDetailField}
           caseBy={{
-            '지원자 정보': <ApplicantInfo applicantData={applicantData} />,
-            '보호자 정보': <ParentInfo parentData={parentData} />,
-            '출신학교 및 학력': <EducationInfo educationData={educationData} />,
-            전형: <TypeInfo typeData={typeData} />,
-            성적: <GradesInfo gradesData={gradesData} />,
-            자기소개서: <DocumentInfo documentData={documentData} />,
+            '지원자 정보': <ApplicantInfo id={id} />,
+            '보호자 정보': <ParentInfo id={id} />,
+            '출신학교 및 학력': <EducationInfo id={id} />,
+            전형: <TypeInfo id={id} />,
+            성적: <GradesInfo id={id} />,
+            자기소개서: <DocumentInfo id={id} />,
           }}
         />
       </Column>

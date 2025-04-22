@@ -1,21 +1,20 @@
 import DataBox from '@/components/common/DataBox/DataBox';
+import { useFormDetailQuery } from '@/services/form/queries';
 import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
 interface DocumentInfoProps {
-  documentData?: {
-    coverLetter: string;
-    statementOfPurpose: string;
-  };
+  id: number;
 }
 
-const DocumentInfo = ({ documentData }: DocumentInfoProps) => {
-  if (!documentData) return <Loader />;
+const DocumentInfo = ({ id }: DocumentInfoProps) => {
+  const { data: formDetailData } = useFormDetailQuery(id);
+  if (!formDetailData) return <Loader />;
 
   const documentDetails = [
-    { label: '자기소개서', data: documentData.coverLetter },
-    { label: '학업계획서', data: documentData.statementOfPurpose },
+    { label: '자기소개서', data: formDetailData.document.coverLetter },
+    { label: '학업계획서', data: formDetailData.document.statementOfPurpose },
   ];
 
   return (

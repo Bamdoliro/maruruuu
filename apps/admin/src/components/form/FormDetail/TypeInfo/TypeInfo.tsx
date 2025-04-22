@@ -1,16 +1,21 @@
 import { DataBox } from '@/components/common';
+import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
+import { useFormDetailQuery } from '@/services/form/queries';
 import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 
 interface TypeInfoProps {
-  typeData?: string;
+  id: number;
 }
 
-const TypeInfo = ({ typeData }: TypeInfoProps) => {
-  if (!typeData) return <Loader />;
+const TypeInfo = ({ id }: TypeInfoProps) => {
+  const { data: formDetailData } = useFormDetailQuery(id);
+  if (!formDetailData) return <Loader />;
 
-  const typeDetails = [{ label: '전형 선택', data: typeData }];
+  const typeDetails = [
+    { label: '전형 선택', data: FORM_TYPE_CATEGORY[formDetailData.type] },
+  ];
 
   return (
     <StyledTypeInfo>
