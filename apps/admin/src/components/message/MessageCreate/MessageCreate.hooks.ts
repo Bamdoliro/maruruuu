@@ -9,26 +9,8 @@ import { useMessageFormStore } from '@/store/message/messageForm';
 
 export const useMessage = () => {
   const [form, setForm] = useMessageFormStore();
-
-  const { postMessageByStatusMutate } = usePostMessageByStatusMutation({
-    onSuccess: () => {
-      setForm({
-        title: '',
-        recipient: '' as MessageForm['recipient'],
-        content: '',
-      });
-    },
-  });
-
-  const { postMessageByTypeMutate } = usePostMessageByTypeMutation({
-    onSuccess: () => {
-      setForm({
-        title: '',
-        recipient: '' as MessageForm['recipient'],
-        content: '',
-      });
-    },
-  });
+  const { postMessageByStatusMutate } = usePostMessageByStatusMutation();
+  const { postMessageByTypeMutate } = usePostMessageByTypeMutation();
 
   const handleChange = (e: { target: { name: keyof MessageForm; value: string } }) => {
     const { name, value } = e.target;

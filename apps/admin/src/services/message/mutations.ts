@@ -2,15 +2,22 @@ import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { postMessageByStatus, postMessageByType, postMessageToAll } from './api';
+import { useSetMessageFormStore } from '@/store/message/messageForm';
+import type { MessageForm } from '@/types/message/client';
 
-export const usePostMessageByStatusMutation = (options?: { onSuccess?: () => void }) => {
+export const usePostMessageByStatusMutation = () => {
   const { handleError } = useApiError();
+  const setMessageForm = useSetMessageFormStore();
 
   const { mutate: postMessageByStatusMutate, ...restMutation } = useMutation({
     mutationFn: postMessageByStatus,
     onSuccess: () => {
       toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
-      options?.onSuccess?.();
+      setMessageForm({
+        title: '',
+        recipient: '' as MessageForm['recipient'],
+        content: '',
+      });
     },
     onError: handleError,
   });
@@ -18,14 +25,19 @@ export const usePostMessageByStatusMutation = (options?: { onSuccess?: () => voi
   return { postMessageByStatusMutate, ...restMutation };
 };
 
-export const usePostMessageByTypeMutation = (options?: { onSuccess?: () => void }) => {
+export const usePostMessageByTypeMutation = () => {
   const { handleError } = useApiError();
+  const setMessageForm = useSetMessageFormStore();
 
   const { mutate: postMessageByTypeMutate, ...restMutation } = useMutation({
     mutationFn: postMessageByType,
     onSuccess: () => {
       toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
-      options?.onSuccess?.();
+      setMessageForm({
+        title: '',
+        recipient: '' as MessageForm['recipient'],
+        content: '',
+      });
     },
     onError: handleError,
   });
@@ -33,14 +45,19 @@ export const usePostMessageByTypeMutation = (options?: { onSuccess?: () => void 
   return { postMessageByTypeMutate, ...restMutation };
 };
 
-export const usePostMessageToAllMutation = (options?: { onSuccess?: () => void }) => {
+export const usePostMessageToAllMutation = () => {
   const { handleError } = useApiError();
+  const setMessageForm = useSetMessageFormStore();
 
   const { mutate: postMessageToAllMutate, ...restMutation } = useMutation({
     mutationFn: postMessageToAll,
     onSuccess: () => {
       toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
-      options?.onSuccess?.();
+      setMessageForm({
+        title: '',
+        recipient: '' as MessageForm['recipient'],
+        content: '',
+      });
     },
     onError: handleError,
   });
