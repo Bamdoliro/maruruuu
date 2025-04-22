@@ -13,3 +13,11 @@ export const DROPDOWN_DATA = [
   },
   { value: 'PASSED', label: '최종 합격자' },
 ];
+
+export const MESSAGE_STATUS_VALUES = [
+  'FINAL_SUBMITTED',
+  'RECEIVED',
+  'REJECTED',
+  'FIRST_PASSED',
+  'PASSED',
+];

@@ -1,36 +1,33 @@
-import { useState } from 'react';
 import {
   usePostMessageByStatusMutation,
   usePostMessageByTypeMutation,
 } from '@/services/message/mutations';
 import type { PostSendMessageByTypeRequest } from '@/types/message/remote';
 import type { MessageForm } from '@/types/message/client';
+import { MESSAGE_STATUS_VALUES } from '@/constants/message/constant';
+import { useMessageFormStore } from '@/store/message/messageForm';
 
 export const useMessage = () => {
-  const [form, setForm] = useState<MessageForm>({
-    title: '',
-    recipient: '' as MessageForm['recipient'],
-    content: '',
-  });
-
-  const resetForm = () => {
-    setForm({
-      title: '',
-      recipient: '' as MessageForm['recipient'],
-      content: '',
-    });
-  };
-
-  const commonOnSuccess = () => {
-    resetForm();
-  };
+  const [form, setForm] = useMessageFormStore();
 
   const { postMessageByStatusMutate } = usePostMessageByStatusMutation({
-    onSuccess: commonOnSuccess,
+    onSuccess: () => {
+      setForm({
+        title: '',
+        recipient: '' as MessageForm['recipient'],
+        content: '',
+      });
+    },
   });
 
   const { postMessageByTypeMutate } = usePostMessageByTypeMutation({
-    onSuccess: commonOnSuccess,
+    onSuccess: () => {
+      setForm({
+        title: '',
+        recipient: '' as MessageForm['recipient'],
+        content: '',
+      });
+    },
   });
 
   const handleChange = (e: { target: { name: keyof MessageForm; value: string } }) => {
@@ -45,13 +42,7 @@ export const useMessage = () => {
     const { title, content, recipient } = form;
     if (!title || !content || !recipient) return;
 
-    if (
-      recipient === 'FINAL_SUBMITTED' ||
-      recipient === 'RECEIVED' ||
-      recipient === 'REJECTED' ||
-      recipient === 'FIRST_PASSED' ||
-      recipient === 'PASSED'
-    ) {
+    if (MESSAGE_STATUS_VALUES.includes(recipient)) {
       postMessageByStatusMutate({
         title,
         text: content,
