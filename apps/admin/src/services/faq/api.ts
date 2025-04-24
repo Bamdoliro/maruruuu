@@ -20,13 +20,13 @@ export const getFaqDetail = async (id: number) => {
 };
 
 export const postFaq = async (params: PostFaqReq) => {
-  const { data } = await maru.post(`/questions`, { params }, authorization());
+  const { data } = await maru.post(`/questions`, params, authorization());
 
   return data;
 };
 
 export const putFaq = async (id: number, params: PutFaqReq) => {
-  const { data } = await maru.put(`/questions/${id}`, { params }, authorization());
+  const { data } = await maru.put(`/questions/${id}`, params, authorization());
 
   return data;
 };
