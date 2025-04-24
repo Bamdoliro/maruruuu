@@ -6,11 +6,11 @@ import { useIsFormToPrintSelectingValueStore } from '@/store/form/isFormToPrintS
 import { useIsSecondRoundResultEditingValueStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSecondRoundResultStore } from '@/store/form/secondRoundResult';
 import type { Form, PassStatusType } from '@/types/form/client';
-import { convertToResponsive } from '@/utils';
+import { convertToResponsive, maskName } from '@/utils';
 import { color } from '@maru/design-system';
 import { CheckBox, Dropdown, Row, Text } from '@maru/ui';
 import { useRouter } from 'next/navigation';
-import type { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import { styled } from 'styled-components';
 
 const FormTableItem = ({
@@ -29,6 +29,8 @@ const FormTableItem = ({
 
   const isSecondRoundResultEditing = useIsSecondRoundResultEditingValueStore();
   const [secondRoundResult, setSecondRoundResult] = useSecondRoundResultStore();
+
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleSecondPassResultDropdownChange = (value: string) => {
     setSecondRoundResult((prev) => ({
@@ -69,6 +71,8 @@ const FormTableItem = ({
         cursor: isDisabled ? 'default' : 'pointer',
       }}
       onClick={handleMoveFormDetailPage}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <TableItem key={id}>
         <Row gap={48}>
@@ -82,7 +86,7 @@ const FormTableItem = ({
             {examinationNumber}
           </Text>
           <Text fontType="p2" width={convertToResponsive(40, 60)}>
-            {name}
+            {isHovered ? name : maskName(name)}
           </Text>
           <Text fontType="p2" width={convertToResponsive(120, 160)}>
             {graduationType === 'QUALIFICATION_EXAMINATION' ? '검정고시' : school}
