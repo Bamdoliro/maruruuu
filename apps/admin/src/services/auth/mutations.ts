@@ -27,7 +27,7 @@ export const useLoginAdminMutation = ({ phoneNumber, password }: PostLoginAuthRe
     onSuccess: (res: AxiosResponse) => {
       const { accessToken, refreshToken } = res.data;
       saveTokens(accessToken, refreshToken);
-      router.replace(ROUTES.MAIN);
+      router.replace(ROUTES.FORM);
     },
     onError: handleError,
   });
