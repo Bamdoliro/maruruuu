@@ -10,7 +10,8 @@ import { convertToResponsive, maskName } from '@/utils';
 import { color } from '@maru/design-system';
 import { CheckBox, Dropdown, Row, Text } from '@maru/ui';
 import { useRouter } from 'next/navigation';
-import { ChangeEventHandler, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
+import { useState } from 'react';
 import { styled } from 'styled-components';
 
 const FormTableItem = ({
