@@ -1,7 +1,10 @@
 import { TableItem } from '@/components/common';
+import { ROUTES } from '@/constants/common/constant';
 import { FAQ_CATEGORY } from '@/constants/faq/constant';
 import type { FaqCategory } from '@/types/faq/client';
 import { Row, Text } from '@maru/ui';
+import { useRouter } from 'next/navigation';
+import { styled } from 'styled-components';
 
 interface FaqTableItemProps {
   id: number;
@@ -11,26 +14,38 @@ interface FaqTableItemProps {
 }
 
 const FaqTableItem = ({ id, title, category, createdAt }: FaqTableItemProps) => {
+  const router = useRouter();
+  const handleMoveFaqDetailPage = () => {
+    router.push(`${ROUTES.FAQ}/${id}`);
+  };
+
   return (
-    <TableItem key={id}>
-      <Row gap={60}>
-        <Row gap={48}>
-          <Text fontType="p2" width={50} ellipsis>
-            {id}
-          </Text>
-          <Text fontType="p2" width={400} ellipsis>
-            {title}
+    <DirectButton onClick={handleMoveFaqDetailPage}>
+      <TableItem key={id}>
+        <Row gap={60}>
+          <Row gap={48}>
+            <Text fontType="p2" width={50} ellipsis>
+              {id}
+            </Text>
+            <Text fontType="p2" width={400} ellipsis>
+              {title}
+            </Text>
+          </Row>
+          <Text fontType="p2" width={120} ellipsis>
+            {FAQ_CATEGORY[category]}
           </Text>
         </Row>
-        <Text fontType="p2" width={120} ellipsis>
-          {FAQ_CATEGORY[category]}
+        <Text fontType="p2" width={100} ellipsis>
+          {createdAt}
         </Text>
-      </Row>
-      <Text fontType="p2" width={100} ellipsis>
-        {createdAt}
-      </Text>
-    </TableItem>
+      </TableItem>
+    </DirectButton>
   );
 };
 
 export default FaqTableItem;
+
+const DirectButton = styled.button`
+  text-align: start;
+  cursor: pointer;
+`;
