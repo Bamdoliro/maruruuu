@@ -2,6 +2,7 @@ import { TableItem } from '@/components/common';
 import { ROUTES } from '@/constants/common/constant';
 import { FAQ_CATEGORY } from '@/constants/faq/constant';
 import type { FaqCategory } from '@/types/faq/client';
+import { formatDate } from '@/utils';
 import { Row, Text } from '@maru/ui';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
@@ -35,8 +36,8 @@ const FaqTableItem = ({ id, title, category, createdAt }: FaqTableItemProps) => 
             {FAQ_CATEGORY[category]}
           </Text>
         </Row>
-        <Text fontType="p2" width={100} ellipsis>
-          {createdAt}
+        <Text fontType="p2" width={100}>
+          {formatDate.toDotDate(createdAt)}
         </Text>
       </TableItem>
     </DirectButton>
