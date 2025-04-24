@@ -7,6 +7,7 @@ import { styled } from 'styled-components';
 import { useFaqDetailQuery } from '@/services/faq/queries';
 import { FAQ_CATEGORY } from '@/constants/faq/constant';
 import { useFaqDeleteAction } from './faqDetail.hooks';
+import { formatDate } from '@/utils';
 
 interface FaqDetailProps {
   id: number;
@@ -33,7 +34,7 @@ const FaqDetail = ({ id }: FaqDetailProps) => {
               {FAQ_CATEGORY[faqDetailData.category]}
             </Text>
             <Text fontType="p2" color={color.gray600}>
-              {faqDetailData.createdAt}
+              {formatDate.toFullDateTime(faqDetailData.createdAt)}
             </Text>
           </Row>
         </Column>
