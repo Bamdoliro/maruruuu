@@ -1,17 +1,27 @@
 'use client';
 
-import { useState } from 'react';
-import { Button, Column, Dropdown, Row, SearchInput, Text } from '@maru/ui';
+import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
 import { styled } from 'styled-components';
 import AppLayout from '@/layouts/AppLayout';
 import FaqTable from '@/components/faq/FaqTable/FaqTable';
+import { useFaqListQuery } from '@/services/faq/queries';
+import { ROUTES } from '@/constants/common/constant';
+import { useDebounceInput } from '@maru/hooks';
+import { Button, Column, Dropdown, Row, SearchInput, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import type { ExtendedFaqCategory } from '@/types/faq/client';
-import { useRouter } from 'next/navigation';
-import { ROUTES } from '@/constants/common/constant';
 
 const FaqPage = () => {
   const router = useRouter();
+  const { data: faqList } = useFaqListQuery();
+
+  const {
+    value: faqKeyword,
+    onChange: handleFaqKeywordChange,
+    debouncedValue: debouncedFaqTitle,
+  } = useDebounceInput({ initialValue: '' });
+
   const [selectedCategory, setSelectedCategory] =
     useState<ExtendedFaqCategory>('ALL_FAQS');
 
@@ -23,14 +33,30 @@ const FaqPage = () => {
     setSelectedCategory(value as ExtendedFaqCategory);
   };
 
+  const filteredFaqList = useMemo(() => {
+    const byCategory =
+      selectedCategory === 'ALL_FAQS'
+        ? faqList
+        : faqList?.filter((item) => item.category === selectedCategory);
+
+    return byCategory?.filter((item) =>
+      (item.title ?? '').toLowerCase().includes(debouncedFaqTitle.toLowerCase())
+    );
+  }, [faqList, selectedCategory, debouncedFaqTitle]);
+
   return (
     <AppLayout>
       <StyledFaqPage>
         <Text fontType="H1">자주 묻는 질문</Text>
         <Column gap={36}>
-          <Row justifyContent="space-between">
+          <Row justifyContent="space-between" alignItems="center">
             <Row gap={16}>
-              <SearchInput width={280} placeholder="검색어를 입력하세요" />
+              <SearchInput
+                width={280}
+                placeholder="검색어를 입력하세요"
+                value={faqKeyword}
+                onChange={handleFaqKeywordChange}
+              />
               <Dropdown
                 data={[
                   { value: 'ALL_FAQS', label: '전체 보기' },
@@ -50,8 +76,8 @@ const FaqPage = () => {
               자주 묻는 질문 작성
             </Button>
           </Row>
+          <FaqTable faqList={filteredFaqList ?? []} />
         </Column>
-        <FaqTable selectedCategory={selectedCategory} />
       </StyledFaqPage>
     </AppLayout>
   );
@@ -64,5 +90,5 @@ const StyledFaqPage = styled.div`
   gap: 40px;
   width: 100%;
   min-height: 100vh;
-  padding: 64px 60px;
+  padding: 64px 60px 0 60px;
 `;
