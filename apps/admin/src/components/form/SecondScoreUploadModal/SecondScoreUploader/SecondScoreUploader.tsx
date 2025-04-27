@@ -19,7 +19,7 @@ const SecondScoreUploader = ({ isOpen }: SecondScoreUploaderProps) => {
     if (isOpen && uploadedFile) {
       setUploadedFile(null);
     }
-  }, [isOpen, uploadedFile, setUploadedFile]);
+  }, [isOpen, setUploadedFile]);
 
   const handleUploadCancelButtonClick = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -33,12 +33,17 @@ const SecondScoreUploader = ({ isOpen }: SecondScoreUploaderProps) => {
 
   const onDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsDragging(false);
 
     const droppedFile = e.dataTransfer.files[0];
 
     if (!droppedFile) return;
     setUploadedFile(droppedFile);
+  };
+
+  const onDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
   };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +57,7 @@ const SecondScoreUploader = ({ isOpen }: SecondScoreUploaderProps) => {
     <StyledSecondScoreUploader
       onDragEnter={(e) => handleDragState(e, true)}
       onDragLeave={(e) => handleDragState(e, false)}
-      onDragOver={(e) => e.preventDefault()}
+      onDragOver={onDragOver}
       onDrop={onDrop}
       isDragging={isDragging}
     >
