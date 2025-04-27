@@ -38,7 +38,7 @@ const WithdrawalModal = ({ isOpen, onClose, onConfirm }: WithdrawalModalProps) =
       }
       onClose={onClose}
       onConfirm={onConfirm}
-      confirmButtonText="최종 제출하기"
+      confirmButtonText="확인"
       confirmButtonStyle={{ backgroundColor: `${color.red}` }}
     />
   );
