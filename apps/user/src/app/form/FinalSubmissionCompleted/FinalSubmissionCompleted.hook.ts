@@ -9,15 +9,13 @@ export const useCTAButton = () => {
   const { data: reciptData } = useExportReciptQuery();
   const { userData } = useUser();
 
-  const handleMoveMainPage = () => {
-    router.push(ROUTES.MAIN);
-  };
-
   const handleDownloadReciptButtonClick = () => {
     if (!reciptData) return;
 
     downloadFile(reciptData, `${userData.name} 접수증.pdf`);
+
+    router.push(ROUTES.FORM_MANAGEMENT);
   };
 
-  return { handleMoveMainPage, handleDownloadReciptButtonClick, userData };
+  return { handleDownloadReciptButtonClick, userData };
 };

@@ -8,8 +8,7 @@ import { styled } from 'styled-components';
 import { useCTAButton } from './FinalSubmissionCompleted.hook';
 
 const FinalSubmissionCompleted = () => {
-  const { handleMoveMainPage, handleDownloadReciptButtonClick, userData } =
-    useCTAButton();
+  const { handleDownloadReciptButtonClick, userData } = useCTAButton();
 
   return (
     <AppLayout header footer>
@@ -41,18 +40,13 @@ const FinalSubmissionCompleted = () => {
               {userData.name}님의 1차 합격을 기원합니다.
             </Text>
           </Column>
-          <Row alignItems="center" gap={16}>
-            <Button
-              onClick={handleDownloadReciptButtonClick}
-              size="SMALL"
-              styleType="SECONDARY"
-            >
-              접수증 출력하기
-            </Button>
-            <Button onClick={handleMoveMainPage} size="SMALL">
-              홈으로 돌아가기
-            </Button>
-          </Row>
+          <Button
+            onClick={handleDownloadReciptButtonClick}
+            size="SMALL"
+            styleType="PRIMARY"
+          >
+            접수증 다운로드
+          </Button>
         </Column>
       </StyledFinalSubmissionCompleted>
     </AppLayout>
