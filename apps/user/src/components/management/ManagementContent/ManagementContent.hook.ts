@@ -53,7 +53,7 @@ export const useBoxClick = (status?: string) => {
       status === 'FINAL_SUBMITTED' || status === 'APPROVED' || status === 'RECEIVED';
 
     if (!accept) {
-      alert('원서를 최종 제출하지 않아, 접수증을 다운로드할 수 없는 상태입니다.');
+      alert('원서가 미제출 상태이거나 확인 중에 있어, 다운로드할 수 없습니다.');
     } else {
       downloadFile(reciptData, `${userData.name} 접수증.pdf`);
     }
