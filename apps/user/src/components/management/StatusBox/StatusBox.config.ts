@@ -26,11 +26,11 @@ export const getStatusConfig = (status?: string, name?: string) => {
     },
     FINAL_SUBMITTED: {
       text: '최종 제출됨',
-      script: `원서가 최종제출되었습니다.<br />담당 선생님의 원서 승인을 기다려주세요.`,
+      script: `원서가 최종 제출되었습니다.<br />담당 선생님의 원서 승인을 기다려주세요.`,
     },
     SUBMITTED: {
       text: '초안 제출됨',
-      script: `원서가 초안제출되었습니다.<br />최종제출까지 해주시길 바랍니다.`,
+      script: `원서 초안이 제출되었습니다.<br />담당 선생님의 원서 승인을 기다려주세요.`,
     },
     APPROVED: {
       text: '확인중',
