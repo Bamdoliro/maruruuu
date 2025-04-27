@@ -7,12 +7,14 @@ import styled from 'styled-components';
 import Profile from './Profile/Profile';
 import { useUser } from '@/hooks';
 import { useCTAButton } from './Header.hook';
+import { useFormStatusQuery } from '@/services/form/queries';
 
 const Header = () => {
   const router = useRouter();
   const pathName = usePathname();
   const { isLogIn } = useUser();
   const { handleMoveLoginPage, handleMoveSignupPage } = useCTAButton();
+  const { data: status } = useFormStatusQuery();
 
   const NAVIGATION_LIST = [
     { name: '홈', route: ROUTES.MAIN },
@@ -54,15 +56,23 @@ const Header = () => {
           )}
         </Row>
         <Row style={{ padding: '0px 96px' }} alignItems="center">
-          {NAVIGATION_LIST.map(({ route, name }, index) => (
-            <UnderlineButton
-              key={`navigation ${index}`}
-              active={pathName === route || pathName.startsWith(`${route}/`)}
-              onClick={() => router.push(route)}
-            >
-              {name}
-            </UnderlineButton>
-          ))}
+          {NAVIGATION_LIST.map(({ route, name }, index) => {
+            if (
+              route === ROUTES.ADMISSION_REGISTRATION &&
+              status?.status !== 'FIRST_PASSED'
+            ) {
+              return null;
+            }
+            return (
+              <UnderlineButton
+                key={`navigation ${index}`}
+                active={pathName === route || pathName.startsWith(`${route}/`)}
+                onClick={() => router.push(route)}
+              >
+                {name}
+              </UnderlineButton>
+            );
+          })}
         </Row>
       </HeaderBox>
     </StyledHeader>
