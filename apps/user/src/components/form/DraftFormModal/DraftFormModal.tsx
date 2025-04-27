@@ -22,7 +22,7 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
   return (
     <Confirm
       isOpen={isOpen}
-      title="입학 원서를 제출하시겠습니까?"
+      title="원서 초안을 제출하시겠습니까?"
       content={
         <Column gap={28}>
           <Column gap={20}>
@@ -51,7 +51,7 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
       }
       onClose={onClose}
       onConfirm={isInputValid ? onConfirm : () => {}}
-      confirmButtonText="원서 제출하기"
+      confirmButtonText="제출"
       confirmButtonStyle={{
         backgroundColor: isInputValid ? color.maruDefault : color.gray500,
         cursor: isInputValid ? 'pointer' : 'not-allowed',
