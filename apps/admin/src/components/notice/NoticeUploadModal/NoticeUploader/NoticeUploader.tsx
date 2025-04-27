@@ -22,7 +22,7 @@ const NoticeUploader = ({ isOpen }: Props) => {
     if (isOpen && uploadedFile) {
       setUploadedFile(null);
     }
-  }, [isOpen, uploadedFile, setUploadedFile]);
+  }, [isOpen, setUploadedFile]);
 
   const handleUploadCancelButtonClick = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
