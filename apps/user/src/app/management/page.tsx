@@ -32,6 +32,6 @@ const StyledManagement = styled.div`
   max-width: 1440px;
   height: 100%;
   margin: 0 auto;
-  padding: 82px 204px 222px;
+  padding: 82px 204px 200px;
   gap: 36px;
 `;
