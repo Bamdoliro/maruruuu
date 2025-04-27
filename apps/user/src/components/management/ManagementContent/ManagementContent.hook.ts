@@ -39,7 +39,7 @@ export const useBoxClick = (status?: string) => {
       status === 'REJECTED';
 
     if (!accept) {
-      alert('원서를 다운로드를 할 수 없습니다.');
+      alert('원서를 제출하지 않아, 다운로드 할 수 없습니다.');
     } else {
       downloadFile(
         exportFormData,
@@ -53,7 +53,7 @@ export const useBoxClick = (status?: string) => {
       status === 'FINAL_SUBMITTED' || status === 'APPROVED' || status === 'RECEIVED';
 
     if (!accept) {
-      alert('접수증을 다운로드할 수 없는 상태입니다.');
+      alert('원서를 최종 제출하지 않아, 접수증을 다운로드할 수 없는 상태입니다.');
     } else {
       downloadFile(reciptData, `${userData.name} 접수증.pdf`);
     }
