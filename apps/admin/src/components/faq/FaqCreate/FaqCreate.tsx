@@ -24,7 +24,7 @@ const FaqCreate = () => {
               placeholder="제목을 입력해주세요"
             />
             <Button size="SMALL" onClick={handleFaqCreateButtonClick}>
-              생성하기
+              게시
             </Button>
           </Row>
           <Dropdown

@@ -75,7 +75,7 @@ const NoticeUploadModal = ({ isOpen, onClose, onFileAttach }: NoticeUploadModalP
             styleType={uploadedFile ? 'PRIMARY' : 'DISABLED'}
             onClick={handleAttachFile}
           >
-            첨부하기
+            첨부
           </Button>
         </Row>
       </StyledNoticeUploadModal>

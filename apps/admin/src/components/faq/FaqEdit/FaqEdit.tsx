@@ -28,7 +28,7 @@ const FaqEdit = ({ id }: FaqEditProps) => {
               placeholder="제목을 입력해주세요"
             />
             <Button size="SMALL" onClick={handleFaqEditButtonClick}>
-              수정하기
+              수정 완료
             </Button>
           </Row>
           <Dropdown
