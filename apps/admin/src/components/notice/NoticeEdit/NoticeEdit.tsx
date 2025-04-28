@@ -71,7 +71,7 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
             <Text fontType="btn2">파일 첨부</Text>
           </Button>
           <Button size="SMALL" onClick={handleNoticeEditButtonClick}>
-            게시하기
+            게시
           </Button>
         </Row>
       </NoticeEditHeader>
