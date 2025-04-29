@@ -74,7 +74,7 @@ const StyledSimulation = styled.div`
   ${flex({ flexDirection: 'column' })}
   width: 100%;
   height: 100%;
-  padding: 82px 312px 177px;
+  padding: 82px 312px 180px;
   margin: 0 auto;
   gap: 48px;
 `;

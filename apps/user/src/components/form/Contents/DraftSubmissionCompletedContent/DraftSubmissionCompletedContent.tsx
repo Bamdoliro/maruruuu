@@ -13,14 +13,13 @@ const DraftSubmissionCompletedContent = () => {
       <Row gap={8} alignItems="center">
         <IconCheckCircle width={64} height={64} />
         <Text fontType="H1" color={color.gray900}>
-          입학 서류 제출하기
+          원서 최종 제출
         </Text>
       </Row>
       <Column gap={12}>
         <Text fontType="p1" color={color.gray900}>
-          작성한 입학 원서를 출력하여 학교장 직인을 날인 후 추가 서류와 함께 인터넷
-          접수하여 입학원서 접수를 완료하여 주시
-          <br />기 바랍니다.
+          작성한 원서 초안을 출력하여 학교장 직인을 받은 후, 추가 서류와 함께 인터넷으로
+          접수해 주시기 바랍니다.
         </Text>
         <Text fontType="p1" color={color.gray900}>
           최종 접수한 모든 서류는 우편 또는 방문 접수하여 주시기 바랍니다.
@@ -34,7 +33,7 @@ const DraftSubmissionCompletedContent = () => {
           홈으로 돌아가기
         </Button>
         <Button onClick={handleMoveFinalSubmit} size="LARGE">
-          최종 제출 페이지로 이동하기
+          최종 제출 페이지로 이동
         </Button>
       </Row>
     </StyledDraftSubmissionCompletedContent>

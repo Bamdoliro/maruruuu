@@ -9,7 +9,7 @@ const DraftSubmissionCompleted = () => {
       <CompleteAlarmBox>
         <CompleteAlarm
           isComplete={true}
-          completeText="입학원서 제출 완료"
+          completeText="원서 초안 제출 완료"
           completeIcon={<IconCheckCircle width={150} height={150} />}
         />
       </CompleteAlarmBox>

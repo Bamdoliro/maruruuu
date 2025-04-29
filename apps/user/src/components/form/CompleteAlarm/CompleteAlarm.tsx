@@ -3,7 +3,7 @@ import { Column, Text } from '@maru/ui';
 import type { ReactNode } from 'react';
 
 interface CompleteAlarmProps {
-  isComplete: boolean | string;
+  isComplete?: boolean | string;
   completeText: string;
   inCompleteText?: string;
   completeIcon: ReactNode;
