@@ -36,7 +36,7 @@ const MessageConfirmModal = ({
       onClose={onClose}
       onConfirm={onConfirm}
       closeButtonText="취소"
-      confirmButtonText="문자 메시지 발송하기"
+      confirmButtonText="문자 메시지 발송"
       height={350}
     />
   );
@@ -45,5 +45,6 @@ const MessageConfirmModal = ({
 export default MessageConfirmModal;
 
 const RedTextWrapper = styled.div`
+  margin-top: 10px;
   ${flex({ flexDirection: 'column' })}
 `;
