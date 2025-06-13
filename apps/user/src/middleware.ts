@@ -1,8 +1,6 @@
 import dayjs from 'dayjs';
 import { NextResponse, type NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
-import isValidToken from './lib/isValidToken';
-import { ResponseCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 
 const SCHEDULE = {
   원서_접수: dayjs(process.env.NEXT_PUBLIC_FORM_START),
@@ -51,57 +49,16 @@ const ROUTE_RULES = [
 export const middleware = async (req: NextRequest) => {
   const url = req.nextUrl.pathname;
   const now = dayjs();
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accesstoken');
-  const refreshToken = cookieStore.get('refreshtoken');
-
-  const { isAccessTokenValid, isRefreshTokenValid } = isValidToken({
-    accesstoken: accessToken?.value,
-    refreshtoken: refreshToken?.value,
-  });
 
   for (const rule of ROUTE_RULES) {
     if (url === rule.path) {
-      if (!isRefreshTokenValid) {
+      if (!accessToken) {
         const redirectUrl = new URL('/', req.url);
         redirectUrl.searchParams.set('warning', '로그인이 필요합니다.');
         return NextResponse.redirect(redirectUrl);
-      }
-
-      if (!isAccessTokenValid) {
-        const response = await fetch(`${BASE_URL}/auth`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Refresh-Token': `${refreshToken?.value}`,
-          },
-          credentials: 'include',
-        });
-
-        if (!response.ok) {
-          return NextResponse.redirect(new URL('/', req.url));
-        }
-
-        if (response.ok) {
-          const res = NextResponse.next();
-          const responseCookies = new ResponseCookies(response.headers);
-
-          const accessToken = responseCookies.get('accesstoken');
-
-          const refreshToken = responseCookies.get('refreshtoken');
-
-          if (accessToken) {
-            res.cookies.set('accesstoken', accessToken.value);
-          }
-
-          if (refreshToken) {
-            res.cookies.set('refreshtoken', refreshToken.value);
-          }
-
-          return res;
-        }
       }
 
       if (!now.isBetween(rule.start, rule.end)) {
