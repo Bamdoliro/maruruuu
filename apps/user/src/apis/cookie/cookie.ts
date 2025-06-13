@@ -9,11 +9,7 @@ export class Cookie {
 
   static setItem(key: string, value: string) {
     if (typeof window === 'undefined') return;
-    cookies.set(key, value, {
-      path: '/',
-      secure: true,
-      sameSite: 'none',
-    });
+    cookies.set(key, value, { path: '/' });
   }
 
   static removeItem(key: string) {
