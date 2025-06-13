@@ -7,7 +7,6 @@ import {
 } from '@/services/form/mutations';
 import { useFormStatusQuery } from '@/services/form/queries';
 import { bitmapToBlob } from '@/utils';
-import { useUser } from '@/hooks';
 import { toast } from 'react-toastify';
 
 export const useProfileUploader = (
@@ -15,7 +14,6 @@ export const useProfileUploader = (
 ) => {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
-  const { userData } = useUser();
 
   const { data } = useFormStatusQuery();
   const { mutate: upload } = useUploadProfileImageMutation();
@@ -68,7 +66,7 @@ export const useProfileUploader = (
 
         const bitmap = await createImageBitmap(img, x, y, width, height);
         const croppedBlob = await bitmapToBlob(bitmap);
-        const croppedFile = new File([croppedBlob], `${userData.name} profile.png`, {
+        const croppedFile = new File([croppedBlob], `profile.png`, {
           type: 'image/png',
         });
 
@@ -76,7 +74,7 @@ export const useProfileUploader = (
       };
       URL.revokeObjectURL(img.src);
     },
-    [startUploading, userData.name]
+    [startUploading]
   );
 
   const processImageFile = useCallback(
