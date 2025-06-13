@@ -1,5 +1,8 @@
 import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
 import { NextResponse, type NextRequest } from 'next/server';
+
+dayjs.extend(isBetween);
 
 const SCHEDULE = {
   원서_접수: dayjs(process.env.NEXT_PUBLIC_FORM_START),
