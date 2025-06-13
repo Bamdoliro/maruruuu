@@ -38,7 +38,8 @@ export const useLogoutMutation = () => {
       setTimeout(() => {
         window.location.reload();
       }, 500);
-      localStorage.clear();
+      Cookie.removeItem(TOKEN.ACCESS);
+      Cookie.removeItem(TOKEN.REFRESH);
     },
     onError: () => {
       toast('잠시후 다시 시도해주세요.', { type: 'error' });
