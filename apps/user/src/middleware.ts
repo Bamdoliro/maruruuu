@@ -72,7 +72,7 @@ export const middleware = async (req: NextRequest) => {
         return NextResponse.redirect(redirectUrl);
       }
 
-      return NextResponse.rewrite(new URL(rule.path));
+      return NextResponse.rewrite(new URL(rule.path, req.nextUrl.origin));
     }
   }
 };
