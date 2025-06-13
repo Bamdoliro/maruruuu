@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import { NextResponse, type NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
 
 const SCHEDULE = {
   원서_접수: dayjs(process.env.NEXT_PUBLIC_FORM_START),
@@ -50,8 +49,11 @@ export const middleware = async (req: NextRequest) => {
   const url = req.nextUrl.pathname;
   const now = dayjs();
 
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get('accesstoken');
+  const cookies = req.headers.get('cookie');
+  const accessToken = cookies
+    ?.split('; ')
+    .find((row) => row.startsWith('access-token='))
+    ?.split('=')[1];
 
   for (const rule of ROUTE_RULES) {
     if (url === rule.path) {
