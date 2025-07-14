@@ -5,6 +5,7 @@ import { useApiError } from '@/hooks';
 import type { PostLoginAuthReq } from '@/types/auth/remote';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 import { deleteLogoutAdmin, postLoginAdmin } from './api';
 import type { AxiosResponse } from 'axios';
 
@@ -14,8 +15,8 @@ const saveTokens = (accessToken: string, refreshToken: string) => {
 };
 
 const removeTokens = () => {
-  localStorage.clear();
-  Cookie.removeItem('refresh-token');
+  Storage.removeItem(TOKEN.ACCESS);
+  Cookie.removeItem(TOKEN.REFRESH);
 };
 
 export const useLoginAdminMutation = ({ phoneNumber, password }: PostLoginAuthReq) => {
@@ -41,12 +42,12 @@ export const useLogoutAdminMutation = () => {
   const { mutate: logoutAdminMutate, ...restMutation } = useMutation({
     mutationFn: deleteLogoutAdmin,
     onSuccess: () => {
+      toast('로그아웃 되었습니다.', { type: 'success' });
       removeTokens();
       router.replace(ROUTES.MAIN);
     },
     onError: () => {
-      removeTokens;
-      router.replace(ROUTES.MAIN);
+      toast('잠시후 다시 시도해주세요.', { type: 'error' });
     },
   });
   return { logoutAdminMutate, ...restMutation };
