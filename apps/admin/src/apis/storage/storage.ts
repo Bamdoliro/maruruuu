@@ -9,4 +9,9 @@ export class Storage {
     if (typeof window === 'undefined') return;
     localStorage.setItem(key, value);
   }
+
+  static removeItem(key: LocalStorageKey) {
+    if (typeof window === 'undefined') return;
+    localStorage.removeItem(key);
+  }
 }
