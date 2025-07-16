@@ -83,7 +83,7 @@ maru.interceptors.response.use(
         const newAccessToken = res.data.data.accessToken;
 
         if (!newAccessToken) {
-          alert('새로운 엑세스 토큰을 받지 못했습니다.');
+          alert('다시 로그인 해주세요');
         }
 
         Storage.setItem(TOKEN.ACCESS, newAccessToken);
@@ -98,7 +98,7 @@ maru.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError, null);
         localStorage.clear();
-        window.location.href = '/';
+        window.location.href = '/signup';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
