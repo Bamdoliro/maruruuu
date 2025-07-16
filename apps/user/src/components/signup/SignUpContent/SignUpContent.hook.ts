@@ -7,7 +7,6 @@ import { useSignUpStore } from '@/stores';
 import type { SignUp } from '@/types/user/client';
 import { useEffect, useRef, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
-import { toast } from 'react-toastify';
 
 export const useSignUpAction = (signUpData: SignUp, termsAgree: boolean) => {
   const { signUpMutate } = useSignUpMutation(signUpData);
@@ -17,7 +16,7 @@ export const useSignUpAction = (signUpData: SignUp, termsAgree: boolean) => {
       if (termsAgree) {
         signUpMutate();
       } else {
-        alert('이용약관 동의를 해주세요');
+        alert('이용약관 동의를 해주세요.');
       }
     } else {
       alert('비밀번호를 한번만 확인해주세요');
@@ -61,7 +60,7 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
 
   const handleVerificationCodeConfirm = () => {
     if (!signUpData.code) {
-      toast('인증번호를 입력해주세요', { type: 'error' });
+      // toast('인증번호를 입력해주세요', { type: 'error' });
       return;
     }
 

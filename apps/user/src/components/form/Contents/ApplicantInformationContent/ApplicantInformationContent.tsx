@@ -2,24 +2,17 @@ import { useFormValueStore } from '@/stores';
 import { Column, Input, RadioGroup, Row } from '@maru/ui';
 import ProfileUploader from '../../ProfileUploader/ProfileUploader';
 import FormController from '../../FormController/FormController';
-import { Storage } from '@/apis/storage/storage';
 import { useApplicantForm } from './ApplicantInformationContent.hook';
 
 const ApplicantInformationContent = () => {
   const { onFieldChange, handleNextStep, errors, notUploadFile } = useApplicantForm();
   const form = useFormValueStore();
 
-  const handlePhotoUpload = (success: boolean, url?: string) => {
-    if (success && url) {
-      Storage.setItem('isUploadPicture', 'true');
-    }
-  };
-
   return (
     <>
       <Row width="100%" justifyContent="space-between">
         <Column gap={40} alignItems="center">
-          <ProfileUploader onPhotoUpload={handlePhotoUpload} isError={notUploadFile} />
+          <ProfileUploader onPhotoUpload={() => {}} isError={notUploadFile} />
         </Column>
         <Column gap={30} width={492}>
           <Input
