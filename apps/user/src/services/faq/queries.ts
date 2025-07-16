@@ -6,6 +6,7 @@ export const useFaqListQuery = (category: string) => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.FAQ_LIST, category] as const,
     queryFn: () => getFaqList(category),
+    retry: false,
   });
 
   return { data: data?.dataList, ...restQuery };

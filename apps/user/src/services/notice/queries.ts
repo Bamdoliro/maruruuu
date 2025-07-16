@@ -12,6 +12,7 @@ export const useNoticeListQuery = () => {
         (a, b) => new Date(b.updatedAt).getDate() - new Date(a.updatedAt).getDate()
       ),
     }),
+    retry: false,
   });
 
   return { data: data?.dataList, ...restQuery };
@@ -21,6 +22,7 @@ export const useNoticeDetailQuery = (id: number) => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.NOTICE_DETAIL, id],
     queryFn: () => getNoticeDetail(id),
+    retry: false,
   });
 
   return { data: data?.data, ...restQuery };
