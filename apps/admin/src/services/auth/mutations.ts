@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { deleteLogoutAdmin, postLoginAdmin } from './api';
 import type { AxiosResponse } from 'axios';
-import { checkIsAdmin } from '@/utils/functions/checkIsAdmin';
+import checkIsAdmin from '@/utils/functions/checkIsAdmin';
 
 const saveTokens = (accessToken: string, refreshToken: string) => {
   Storage.setItem(TOKEN.ACCESS, accessToken);
