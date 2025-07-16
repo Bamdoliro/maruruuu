@@ -31,7 +31,7 @@ const Enrollment = () => {
 
   const onCheckPassFileUploader = () => {
     if (!isFormPassed) {
-      alert('최종 합격자만 업로드 가능합니다.');
+      alert('최종 합격자만 업로드 가능합니다');
     } else {
       openPdfFileUploader();
     }
