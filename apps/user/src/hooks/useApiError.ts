@@ -1,6 +1,6 @@
 import { isAxiosError } from 'axios';
 import type { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
+import useToast from './useToast';
 
 interface AxiosErrorResponse {
   code: string;
@@ -16,6 +16,8 @@ const ERROR: Record<ErrorStatus, string> = {
 };
 
 const useApiError = () => {
+  const { toast } = useToast();
+
   const handleError = (error: AxiosError<AxiosErrorResponse>) => {
     let errorMessage = '';
     if (isAxiosError(error)) {
@@ -30,7 +32,7 @@ const useApiError = () => {
     } else {
       errorMessage = '알 수 없는 오류가 발생했습니다.';
     }
-    errorMessage && toast(errorMessage);
+    errorMessage && toast(errorMessage, 'ERROR');
   };
 
   return { handleError };

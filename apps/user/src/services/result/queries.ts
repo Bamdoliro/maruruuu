@@ -8,6 +8,7 @@ export const useFirstResultQuery = () => {
     queryKey: [KEY.FIRST_RESULT] as const,
     queryFn: getFirstResult,
     enabled: !!Storage.getItem(TOKEN.ACCESS),
+    retry: false,
   });
 
   return { data: data?.data, ...restQuery };
@@ -18,6 +19,7 @@ export const useFinalResultQuery = () => {
     queryKey: [KEY.FINAL_RESULT] as const,
     queryFn: getFinalResult,
     enabled: !!Storage.getItem(TOKEN.ACCESS),
+    retry: false,
   });
 
   return { data: data?.data, ...restQuery };
@@ -28,6 +30,7 @@ export const useDownloadAdmissionTicketQuery = () => {
     queryKey: [KEY.ADMISSION_TICKET] as const,
     queryFn: getAdmissionTicket,
     enabled: !!Storage.getItem(TOKEN.ACCESS),
+    retry: false,
   });
 
   return { data, ...restQuery };

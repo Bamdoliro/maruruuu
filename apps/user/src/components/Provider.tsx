@@ -1,17 +1,22 @@
 'use client';
 
 import { GlobalStyle } from '@maru/design-system';
-import { Loader } from '@maru/ui';
+import { Loader, Toast } from '@maru/ui';
 import { OverlayProvider } from '@toss/use-overlay';
 import type { ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import { Suspense } from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useToast } from '@/hooks';
 
 interface Props {
   children: ReactNode;
 }
+
+const GlobalToast = () => {
+  const { showToast, toastMessage, toastType } = useToast();
+
+  return showToast ? <Toast type={toastType}>{toastMessage}</Toast> : null;
+};
 
 const Provider = ({ children }: Props) => {
   return (
@@ -19,8 +24,8 @@ const Provider = ({ children }: Props) => {
       <OverlayProvider>
         <GlobalStyle />
         <Suspense fallback={<Loader />}>{children}</Suspense>
-        <ToastContainer />
       </OverlayProvider>
+      <GlobalToast />
     </RecoilRoot>
   );
 };

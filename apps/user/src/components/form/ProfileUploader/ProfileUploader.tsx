@@ -7,13 +7,11 @@ import { useProfileUploader } from './ProfileUploader.hook';
 import { useDragAndDrop, useOpenFileUploader } from '@/hooks';
 
 type ProfileUploaderProps = {
-  onPhotoUpload: (success: boolean, url?: string) => void;
   isError?: boolean;
 };
 
-const ProfileUploader = ({ onPhotoUpload, isError }: ProfileUploaderProps) => {
-  const { imgSrc, isUploading, handleImageFileChange } =
-    useProfileUploader(onPhotoUpload);
+const ProfileUploader = ({ isError }: ProfileUploaderProps) => {
+  const { imgSrc, isUploading, handleImageFileChange } = useProfileUploader();
   const { openFileUploader, ref: imageUploaderRef } = useOpenFileUploader();
   const { isDragging, onDragOver, onDragLeave, onDrop, onDragEnter } = useDragAndDrop(
     () => handleImageFileChange

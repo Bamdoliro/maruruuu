@@ -1,76 +1,19 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
-import SmartCrop from 'smartcrop';
-import { Storage } from '@/apis/storage/storage';
-import {
-  useUploadProfileImageMutation,
-  useRefreshProfileImageMutation,
-} from '@/services/form/mutations';
-import { useFormStatusQuery } from '@/services/form/queries';
-import { bitmapToBlob } from '@/utils';
-import { toast } from 'react-toastify';
+import { useState, useCallback } from 'react';
 
-export const useProfileUploader = (
-  onPhotoUpload: (success: boolean, url?: string) => void
-) => {
+export const useProfileUploader = () => {
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
 
-  const { data } = useFormStatusQuery();
-  const { mutate: upload } = useUploadProfileImageMutation();
-  const { mutate: refresh } = useRefreshProfileImageMutation();
-
-  const isUploadPictureStored = useMemo(
-    () => Storage.getItem('isUploadPicture') === 'true',
-    []
-  );
-
-  const handleUploadSuccess = useCallback(
-    (downloadUrl: string | null) => {
-      if (!downloadUrl) {
-        setIsUploading(false);
-        return;
-      }
-
-      onPhotoUpload(true, downloadUrl);
-      setImgSrc(downloadUrl);
-      Storage.setItem('isUploadPicture', 'true');
-      setIsUploading(false);
-    },
-    [onPhotoUpload]
-  );
-
-  const startUploading = useCallback(
-    (file: File) => {
-      setIsUploading(true);
-      upload(file, {
-        onSuccess: (data: unknown) => {
-          const downloadUrl = typeof data === 'string' ? data : null;
-          handleUploadSuccess(downloadUrl);
-        },
-        onError: () => {
-          setIsUploading(false);
-          onPhotoUpload(false);
-        },
-      });
-    },
-    [upload, handleUploadSuccess, onPhotoUpload]
-  );
+  const startUploading = useCallback(() => {
+    setIsUploading(true);
+  }, []);
 
   const cropImage = useCallback(
     (file: File) => {
       const img = new Image();
       img.src = URL.createObjectURL(file);
       img.onload = async () => {
-        const cropResult = await SmartCrop.crop(img, { width: 117, height: 156 });
-        const { x, y, width, height } = cropResult.topCrop;
-
-        const bitmap = await createImageBitmap(img, x, y, width, height);
-        const croppedBlob = await bitmapToBlob(bitmap);
-        const croppedFile = new File([croppedBlob], `profile.png`, {
-          type: 'image/png',
-        });
-
-        startUploading(croppedFile);
+        startUploading();
       };
       URL.revokeObjectURL(img.src);
     },
@@ -97,14 +40,12 @@ export const useProfileUploader = (
       const file = e.target.files?.[0];
       if (file) {
         if (file.size > 2 * 1024 * 1024) {
-          toast('파일 용량은 2MB 이하로 업로드 해주세요.', { type: 'error' });
+          alert('2MB 이하의 파일을 업로드 해주세요.');
           return;
         }
 
         if (!file.name || file.name.length > 20) {
-          toast('파일 이름은 비어 있을 수 없고, 20자 이하이어야 합니다.', {
-            type: 'error',
-          });
+          alert('파일 이름은 비어 있을 수 없고, 20자 이하이어야 합니다.');
           return;
         }
 
@@ -113,38 +54,6 @@ export const useProfileUploader = (
     },
     [processImageFile]
   );
-
-  const refreshProfileImage = useCallback(() => {
-    const handleRefreshImage = () => {
-      refresh(undefined, {
-        onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
-        onError: () => onPhotoUpload(false),
-      });
-    };
-
-    if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
-      handleRefreshImage();
-    } else {
-      const storedImageUrl = Storage.getItem('downloadUrl');
-      if (storedImageUrl) setImgSrc(storedImageUrl);
-      handleRefreshImage();
-    }
-  }, [
-    isUploadPictureStored,
-    isUploading,
-    data?.status,
-    refresh,
-    handleUploadSuccess,
-    onPhotoUpload,
-  ]);
-
-  useEffect(() => {
-    if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
-      refreshProfileImage();
-    } else {
-      refreshProfileImage();
-    }
-  }, [isUploadPictureStored, isUploading, data?.status, refreshProfileImage]);
 
   return { imgSrc, isUploading, handleImageFileChange };
 };

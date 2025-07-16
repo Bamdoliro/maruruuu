@@ -8,6 +8,7 @@ export const useUserQuery = () => {
     queryKey: [KEY.USER],
     queryFn: getUser,
     enabled: !!Storage.getItem(TOKEN.ACCESS),
+    retry: false,
   });
 
   return { data: data?.data, ...restQuery };

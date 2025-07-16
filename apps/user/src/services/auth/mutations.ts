@@ -4,7 +4,6 @@ import { deleteLogout, postLogin } from './api';
 import type { AxiosResponse } from 'axios';
 import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
 import { Storage } from '@/apis/storage/storage';
 
 export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
@@ -19,7 +18,6 @@ export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
       router.replace(ROUTES.MAIN);
     },
     onError: () => {
-      toast('아이디또는 비밀번호가 틀렸습니다.', { type: 'error' });
       localStorage.clear();
     },
   });
@@ -34,15 +32,12 @@ export const useLogoutMutation = () => {
     mutationFn: deleteLogout,
     onSuccess: () => {
       router.replace(ROUTES.MAIN);
-      toast('로그아웃 되었습니다.', { type: 'success' });
       setTimeout(() => {
         window.location.reload();
       }, 500);
       localStorage.clear();
     },
-    onError: () => {
-      toast('잠시후 다시 시도해주세요.', { type: 'error' });
-    },
+    onError: () => {},
   });
 
   return { logoutMutate, ...restMutation };

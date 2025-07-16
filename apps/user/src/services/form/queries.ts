@@ -24,6 +24,7 @@ export const useExportFormQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.EXPORT_FORM],
     queryFn: getExportForm,
+    enabled: !!Storage.getItem(TOKEN.ACCESS),
     retry: false,
   });
 
@@ -34,6 +35,7 @@ export const useExportReciptQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.EXPORT_RECEIPT],
     queryFn: getExportRecipt,
+    enabled: !!Storage.getItem(TOKEN.ACCESS),
     retry: false,
   });
 
@@ -55,6 +57,7 @@ export const useSchoolListQuery = (school: string) => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.SCHOOL_LIST, school],
     queryFn: () => getSchoolList(school),
+    retry: false,
   });
 
   return { data: data?.dataList, ...restQuery };

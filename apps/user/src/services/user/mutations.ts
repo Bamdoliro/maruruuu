@@ -7,9 +7,8 @@ import {
   postRequestVerification,
   postSignUp,
 } from './api';
-import { toast } from 'react-toastify';
 import { ROUTES } from '@/constants/common/constants';
-import { useApiError } from '@/hooks';
+import { useApiError, useToast } from '@/hooks';
 import type {
   patchChangePasswordReq,
   PatchUserVerificationReq,
@@ -21,11 +20,12 @@ import type { Dispatch, SetStateAction } from 'react';
 export const useWithdrawalMutation = (password: string) => {
   const router = useRouter();
   const { handleError } = useApiError();
+  const { toast } = useToast();
 
   const { mutate: withdrawalMutate, ...restMutation } = useMutation({
     mutationFn: () => deleteUser(password),
     onSuccess: () => {
-      toast('회원탈퇴가 성공되었습니다.', { type: 'success' });
+      toast('회원탈퇴에 성공했습니다.', 'SUCCESS');
       localStorage.clear();
       router.replace(ROUTES.MAIN);
     },
@@ -38,11 +38,12 @@ export const useWithdrawalMutation = (password: string) => {
 export const useSignUpMutation = ({ phoneNumber, name, password }: PostSignUpReq) => {
   const router = useRouter();
   const { handleError } = useApiError();
+  const { toast } = useToast();
 
   const { mutate: signUpMutate, ...restMutation } = useMutation({
     mutationFn: () => postSignUp({ phoneNumber, name, password }),
     onSuccess: () => {
-      toast('회원가입 성공', { type: 'success' });
+      toast('회원가입에 성공했습니다.', 'SUCCESS');
       router.replace(ROUTES.LOGIN);
     },
     onError: handleError,
@@ -57,11 +58,12 @@ export const useChangePasswordMutation = ({
 }: patchChangePasswordReq) => {
   const router = useRouter();
   const { handleError } = useApiError();
+  const { toast } = useToast();
 
   const { mutate: changePasswordMutate, ...restMutation } = useMutation({
     mutationFn: () => patchChangePassword({ phoneNumber, password }),
     onSuccess: () => {
-      toast('비밀번호 변경 성공', { type: 'success' });
+      toast('비밀번호 변경에 성공했습니다.', 'SUCCESS');
       router.replace(ROUTES.MAIN);
     },
     onError: handleError,
@@ -75,11 +77,12 @@ export const useRequestUserVerificationMutation = ({
   type,
 }: PostUserVerificationReq) => {
   const { handleError } = useApiError();
+  const { toast } = useToast();
 
   const { mutate: requestVerificationMutate, ...restMutation } = useMutation({
     mutationFn: () => postRequestVerification({ phoneNumber, type }),
     onSuccess: () => {
-      toast('인증번호 전송 성공', { type: 'success' });
+      toast('문자 전송에 성공했습니다.', 'SUCCESS');
     },
     onError: handleError,
   });
@@ -91,12 +94,13 @@ export const useVerificationMutation = (
   setIsSuccessVerification: Dispatch<SetStateAction<boolean>>
 ) => {
   const { handleError } = useApiError();
+  const { toast } = useToast();
 
   const { mutate: verificationMutate, ...restMutation } = useMutation({
     mutationFn: ({ phoneNumber, type, code }: PatchUserVerificationReq) =>
       patchVerification({ phoneNumber, type, code }),
     onSuccess: () => {
-      toast('인증 성공', { type: 'success' });
+      toast('인증에 성공했습니다.', 'SUCCESS');
       setIsSuccessVerification(true);
     },
     onError: handleError,
