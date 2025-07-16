@@ -53,6 +53,20 @@ button {
   color: ${color.maruDefault};
   text-decoration: underline;
 }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 `;
 
 export default GlobalStyle;

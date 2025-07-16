@@ -5,7 +5,7 @@ import type { AxiosResponse } from 'axios';
 import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { Cookie } from '@/apis/cookie/cookie';
+import { Storage } from '@/apis/storage/storage';
 
 export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
   const router = useRouter();
@@ -14,8 +14,8 @@ export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
     mutationFn: () => postLogin({ phoneNumber, password }),
     onSuccess: (res: AxiosResponse) => {
       const { accessToken, refreshToken } = res.data;
-      Cookie.setItem(TOKEN.ACCESS, accessToken);
-      Cookie.setItem(TOKEN.REFRESH, refreshToken);
+      Storage.setItem(TOKEN.ACCESS, accessToken);
+      Storage.setItem(TOKEN.REFRESH, refreshToken);
       router.replace(ROUTES.MAIN);
     },
     onError: () => {
@@ -38,8 +38,7 @@ export const useLogoutMutation = () => {
       setTimeout(() => {
         window.location.reload();
       }, 500);
-      Cookie.removeItem(TOKEN.ACCESS);
-      Cookie.removeItem(TOKEN.REFRESH);
+      localStorage.clear();
     },
     onError: () => {
       toast('잠시후 다시 시도해주세요.', { type: 'error' });
