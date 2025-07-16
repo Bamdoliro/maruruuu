@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { deleteLogoutAdmin, postLoginAdmin } from './api';
 import type { AxiosResponse } from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 const saveTokens = (accessToken: string, refreshToken: string) => {
   Storage.setItem(TOKEN.ACCESS, accessToken);
@@ -27,7 +28,14 @@ export const useLoginAdminMutation = ({ phoneNumber, password }: PostLoginAuthRe
     mutationFn: () => postLoginAdmin({ phoneNumber, password }),
     onSuccess: (res: AxiosResponse) => {
       const { accessToken, refreshToken } = res.data;
+      const decodeToken = jwtDecode<{ role: string }>(accessToken);
       saveTokens(accessToken, refreshToken);
+      if (decodeToken.role === 'ADMIN') {
+        toast.error('어드민 권한이 없습니다.');
+        removeTokens();
+        router.replace(ROUTES.MAIN);
+        return;
+      }
       router.replace(ROUTES.FORM);
     },
     onError: handleError,
