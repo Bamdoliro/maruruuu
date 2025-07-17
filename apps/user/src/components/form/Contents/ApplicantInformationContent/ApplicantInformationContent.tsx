@@ -5,14 +5,14 @@ import FormController from '../../FormController/FormController';
 import { useApplicantForm } from './ApplicantInformationContent.hook';
 
 const ApplicantInformationContent = () => {
-  const { onFieldChange, handleNextStep, errors, notUploadFile } = useApplicantForm();
+  const { onFieldChange, handleNextStep, errors } = useApplicantForm();
   const form = useFormValueStore();
 
   return (
     <>
       <Row width="100%" justifyContent="space-between">
         <Column gap={40} alignItems="center">
-          <ProfileUploader onPhotoUpload={() => {}} isError={notUploadFile} />
+          <ProfileUploader />
         </Column>
         <Column gap={30} width={492}>
           <Input
