@@ -57,10 +57,7 @@ const Header = () => {
         </Row>
         <Row style={{ padding: '0px 96px' }} alignItems="center">
           {NAVIGATION_LIST.map(({ route, name }, index) => {
-            if (
-              route === ROUTES.ADMISSION_REGISTRATION &&
-              status?.status !== 'FIRST_PASSED'
-            ) {
+            if (route === ROUTES.ADMISSION_REGISTRATION && status?.status !== 'PASSED') {
               return null;
             }
             return (
