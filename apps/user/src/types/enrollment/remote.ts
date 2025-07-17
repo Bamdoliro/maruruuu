@@ -1,4 +1,6 @@
 export interface EntrollmentDocument {
-  fileName: string;
-  formUrl: string;
+  fileName?: string | null;
+  mediaType?: string | null;
+  fileSize?: number | null;
+  file?: File | null;
 }

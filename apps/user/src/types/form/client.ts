@@ -153,3 +153,17 @@ export interface School {
   address: string;
   code: string;
 }
+
+export interface Profile {
+  fileName?: string | null;
+  mediaType?: string | null;
+  fileSize?: number | null;
+  file?: File | null;
+}
+
+export interface FinalForm {
+  fileName?: string | null;
+  mediaType?: string | null;
+  fileSize?: number | null;
+  file?: File | null;
+}
