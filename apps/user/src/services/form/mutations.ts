@@ -1,13 +1,19 @@
 import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import {
+  getUploadProfile,
   patchSubmitFinalForm,
+  postFormDocument,
   postSaveForm,
   postSubmitDraftFrom,
+  postUploadProfileImage,
   putFormCorrection,
+  putProfileUpoload,
+  putUploadForm,
 } from './api';
 import type { Form } from '@/types/form/client';
 import { useSetFormStepStore } from '@/stores';
+import type { FileDocument } from '@/types/form/remote';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();
@@ -57,4 +63,65 @@ export const useCorrectionFormMutation = () => {
   });
 
   return { correctionFormMutate, ...restMutation };
+};
+
+export const usePutProfileImageMutation = (file: File | null) => {
+  const { mutate: profileImageMutate, ...restMutation } = useMutation({
+    mutationFn: (url: string) => putProfileUpoload(file, url),
+  });
+
+  return { profileImageMutate, ...restMutation };
+};
+
+export const useUploadProfileMutation = (fileData: FileDocument, file: File | null) => {
+  const { profileImageMutate } = usePutProfileImageMutation(file);
+
+  const { mutate: uploadProfileMutate, ...restMutation } = useMutation({
+    mutationFn: () => postUploadProfileImage(fileData),
+    onSuccess: (res) => {
+      const { uploadUrl } = res.data;
+      profileImageMutate(uploadUrl);
+    },
+  });
+
+  return { uploadProfileMutate, ...restMutation };
+};
+
+export const useRefreshProfileMutation = (fileData: FileDocument) => {
+  const { mutate: refreshProfileMutate, ...restMutation } = useMutation({
+    mutationFn: () => postUploadProfileImage(fileData),
+    onSuccess: (res) => {
+      const { downloadUrl } = res.data;
+      getUploadProfile(downloadUrl);
+    },
+  });
+
+  return { refreshProfileMutate, ...restMutation };
+};
+
+export const usePutFormMutation = (file: File | null) => {
+  const { submitFinalFormMutate } = useSubmitFinalFormMutation();
+
+  const { mutate: formMutate, ...restMutation } = useMutation({
+    mutationFn: (url: string) => putUploadForm(file, url),
+    onSuccess: () => {
+      submitFinalFormMutate();
+    },
+  });
+
+  return { formMutate, ...restMutation };
+};
+
+export const useUploadFormMutation = (fileData: FileDocument, file: File | null) => {
+  const { formMutate } = usePutFormMutation(file);
+
+  const { mutate: uploadFormMutate, ...restMutation } = useMutation({
+    mutationFn: () => postFormDocument(fileData),
+    onSuccess: (res) => {
+      const { uploadUrl } = res.data;
+      formMutate(uploadUrl);
+    },
+  });
+
+  return { uploadFormMutate, ...restMutation };
 };
