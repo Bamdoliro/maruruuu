@@ -26,7 +26,7 @@ export const useWithdrawalMutation = (password: string) => {
     mutationFn: () => deleteUser(password),
     onSuccess: () => {
       toast('회원탈퇴에 성공했습니다.', 'SUCCESS');
-      localStorage.clear();
+      window.location.reload();
       router.replace(ROUTES.MAIN);
     },
     onError: handleError,
