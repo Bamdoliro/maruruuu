@@ -1,28 +1,22 @@
 import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
-import type { EntrollmentDocumentPresignedUrlData } from '@/types/enrollment/client';
+import type { FileDocument } from '@/types/form/remote';
 import axios from 'axios';
 
-export const postEntrollmentDocument =
-  async (): Promise<EntrollmentDocumentPresignedUrlData> => {
-    const { data } = await maru.post(
-      '/forms/admission-and-pledge',
-      null,
-      authorization()
-    );
+export const postEntrollmentDocument = async (fileData: FileDocument) => {
+  const { data } = await maru.post(
+    '/forms/admission-and-pledge',
+    fileData,
+    authorization()
+  );
 
-    const { uploadUrl, downloadUrl, fields } = data?.data?.data || {};
+  return data;
+};
 
-    return { uploadUrl, downloadUrl, fields };
-  };
-
-export const putEntrollmentDocument = async (
-  file: File,
-  { uploadUrl }: EntrollmentDocumentPresignedUrlData
-) => {
-  const { data } = await axios.put(uploadUrl, file, {
+export const putEntrollmentDocument = async (file: File | null, url: string) => {
+  const { data } = await axios.put(url, file, {
     headers: {
-      'Content-Type': file.type,
+      'Content-Type': file?.type,
     },
   });
 

@@ -28,8 +28,8 @@ const DraftCompleted = () => {
     <AppLayout header>
       <CompleteAlarmBox>
         <CompleteAlarm
-          completeText="입학 원서 작성 중"
-          completeIcon={<IconLoader width={150} height={150} />}
+          text="입학 원서 작성 중"
+          icon={<IconLoader width={150} height={150} />}
         />
       </CompleteAlarmBox>
       <DraftCompletedContent onClick={handleCheckAgainForm} check={openDraftFormModal} />

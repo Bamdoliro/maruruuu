@@ -1,45 +1,54 @@
 'use client';
 
-import { EnrollmentLoader, ExplainBox, FileUploader } from '@/components/enrollment';
+import { ExplainBox, FileUploader } from '@/components/enrollment';
 import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import {
-  useChangeStatusButton,
-  useFileUpload,
-  useFormStatusCheck,
-} from './enrollment.hook';
-import { useEntrollmentDocumentValueStore } from '@/stores';
-import { useBooleanState } from '@maru/hooks';
 import { useOpenFileUploader } from '@/hooks';
+import { useFormStatusQuery } from '@/services/form/queries';
+import { useEntrollmentDocumentStore } from '@/stores/entrollment/entrollmentDocument';
+import { useUploadDocumentMutation } from '@/services/enrollment/mutations';
 
 const Enrollment = () => {
-  const { setTrue: openPdfGeneratedLoader, setFalse: closePdfGeneratedLoader } =
-    useBooleanState();
   const { openFileUploader: openPdfFileUploader, ref: pdfFileUploaderRef } =
     useOpenFileUploader();
 
-  const entrollmentDocument = useEntrollmentDocumentValueStore();
-  const { handleChangeStatusButtonClick } = useChangeStatusButton();
-  const { isUploadSuccessful, handleDocumentChange, isPending } = useFileUpload(
-    openPdfGeneratedLoader,
-    closePdfGeneratedLoader
+  const [entrollmentDocument, setEntrollmentDocument] = useEntrollmentDocumentStore();
+  const { data: formStatusData } = useFormStatusQuery();
+  const { uploadProfileMutate } = useUploadDocumentMutation(
+    {
+      fileName: entrollmentDocument.fileName ?? '',
+      mediaType: entrollmentDocument.mediaType ?? '',
+      fileSize: entrollmentDocument.fileSize ?? 0,
+    },
+    entrollmentDocument.file ?? null
   );
-  const { isFormPassed } = useFormStatusCheck();
 
   const onCheckPassFileUploader = () => {
-    if (!isFormPassed) {
+    if (formStatusData?.status !== 'PASSED') {
       alert('최종 합격자만 업로드 가능합니다');
     } else {
       openPdfFileUploader();
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setEntrollmentDocument({
+      file,
+      fileName: file.name,
+    });
+  };
+
+  const handleSubmitDocument = () => {
+    uploadProfileMutate();
+  };
+
   return (
     <AppLayout header footer>
-      <EnrollmentLoader isOpen={isPending} />
       <StyledEnrollment>
         <Text fontType="H1" color={color.gray900}>
           입학 등록원 제출
@@ -48,24 +57,27 @@ const Enrollment = () => {
         <Column gap={100}>
           <FileUploader
             onClick={onCheckPassFileUploader}
-            onChange={handleDocumentChange}
-            document={entrollmentDocument.fileName}
+            onChange={handleFileChange}
+            document={entrollmentDocument.fileName ?? ''}
             ref={pdfFileUploaderRef}
           />
           <Button
             size="LARGE"
-            styleType={
-              !entrollmentDocument.fileName || !isUploadSuccessful
-                ? 'DISABLED'
-                : 'PRIMARY'
-            }
+            styleType={!entrollmentDocument.fileName ? 'DISABLED' : 'PRIMARY'}
             width={111}
-            onClick={handleChangeStatusButtonClick}
+            onClick={handleSubmitDocument}
           >
             서류 제출
           </Button>
         </Column>
       </StyledEnrollment>
+      <input
+        ref={pdfFileUploaderRef}
+        onChange={handleFileChange}
+        type="file"
+        accept=".pdf"
+        hidden
+      />
     </AppLayout>
   );
 };

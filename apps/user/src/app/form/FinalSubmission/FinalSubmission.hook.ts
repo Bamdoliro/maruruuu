@@ -1,16 +1,28 @@
 import { useUser } from '@/hooks';
+import { useUploadFormMutation } from '@/services/form/mutations';
 import { useExportFormQuery } from '@/services/form/queries';
+import { useFinalFormStore, useFinalFormValueStore } from '@/stores/form/finalForm';
 import { downloadFile } from '@/utils';
 import { useCallback, useEffect, useState } from 'react';
-import type { ChangeEventHandler } from 'react';
 
 export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => void) => {
   const { userData } = useUser();
   const { data: exportFormData } = useExportFormQuery();
   const [pdfBlobUrl, setPdfBlobUrl] = useState('');
   const [hasDownloaded, setHasDownloaded] = useState(false);
+  const final = useFinalFormValueStore();
+  const { uploadFormMutate } = useUploadFormMutation(
+    {
+      fileName: final.fileName ?? '',
+      mediaType: final.mediaType ?? '',
+      fileSize: final.fileSize ?? 0,
+    },
+    final.file ?? null
+  );
 
-  const handleSubmitFinalForm = () => {};
+  const handleSubmitFinalForm = () => {
+    uploadFormMutate();
+  };
 
   const downloadPdf = useCallback(() => {
     if (!pdfBlobUrl) return;
@@ -54,12 +66,18 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
 };
 
 export const useInput = () => {
-  const [isUploadSuccessful, setIsUploadSuccessful] = useState(false);
+  const [final, setFinal] = useFinalFormStore();
 
-  const handleFormDocumentChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { files } = e.target;
-    if (!files || files.length === 0) return;
+  const handleFormDocumentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setFinal({
+      fileName: file.name,
+      mediaType: file.type,
+      fileSize: file.size,
+      file: file,
+    });
   };
 
-  return { handleFormDocumentChange, isUploadSuccessful };
+  return { handleFormDocumentChange, final };
 };

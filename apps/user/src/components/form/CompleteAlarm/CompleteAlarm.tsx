@@ -2,21 +2,12 @@ import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import type { ReactNode } from 'react';
 
-interface CompleteAlarmProps {
-  isComplete?: boolean | string;
-  completeText: string;
-  inCompleteText?: string;
-  completeIcon: ReactNode;
-  inCompleteIcon?: ReactNode;
+interface Props {
+  icon: ReactNode;
+  text: string;
 }
 
-const CompleteAlarm = ({
-  isComplete,
-  completeText,
-  inCompleteText,
-  completeIcon,
-  inCompleteIcon,
-}: CompleteAlarmProps) => {
+const CompleteAlarm = ({ text, icon }: Props) => {
   return (
     <Column
       style={{ marginTop: '173px' }}
@@ -25,9 +16,9 @@ const CompleteAlarm = ({
       gap={34}
       alignItems="center"
     >
-      {isComplete ? completeIcon : inCompleteIcon}
+      {icon}
       <Text fontType="D2" color={color.gray900}>
-        {isComplete ? completeText : inCompleteText}
+        {text}
       </Text>
     </Column>
   );

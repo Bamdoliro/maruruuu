@@ -14,9 +14,8 @@ const FinalSubmissionCompleted = () => {
     <AppLayout header footer>
       <CompleteAlarmBox>
         <CompleteAlarm
-          isComplete="check"
-          completeText="원서 최종 제출 완료"
-          completeIcon={<IconCheckCircle width={150} height={150} />}
+          text="원서 최종 제출 완료"
+          icon={<IconCheckCircle width={150} height={150} />}
         />
       </CompleteAlarmBox>
       <StyledFinalSubmissionCompleted>

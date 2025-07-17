@@ -1,7 +1,5 @@
-export interface EntrollmentDocumentPresignedUrlData {
-  uploadUrl: string;
-  downloadUrl: string;
-  fields: {
-    [key: string]: string | Blob;
-  };
+export interface FileDocument {
+  fileName: string;
+  mediaType: string;
+  fileSize: number;
 }

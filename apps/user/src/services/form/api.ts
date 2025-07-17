@@ -3,11 +3,9 @@ import { maru } from '@/apis/instance/instance';
 import type { Form } from '@/types/form/client';
 import type {
   FileDocument,
-  FormPresignedUrlData,
   GetFormStatusRes,
   GetSaveFormRes,
   GetSchoolListRes,
-  PresignedUrlData,
 } from '@/types/form/remote';
 import axios from 'axios';
 
@@ -65,64 +63,44 @@ export const patchSubmitFinalForm = async () => {
   return data;
 };
 
-export const postFormDocument = async (
-  fileData: FileDocument
-): Promise<PresignedUrlData> => {
+export const postFormDocument = async (fileData: FileDocument) => {
   const { data } = await maru.post('/forms/form-document', fileData, authorization());
 
-  const { uploadUrl, downloadUrl, fields } = data?.data;
-
-  return {
-    uploadUrl,
-    downloadUrl,
-    fields: fields || {},
-  } as PresignedUrlData;
+  return data;
 };
 
-export const putUploadForm = async (file: File, presignedData: FormPresignedUrlData) => {
-  const { uploadUrl } = presignedData;
-
-  const data = axios.put(uploadUrl, file, {
+export const putUploadForm = async (file: File | null, url: string) => {
+  const data = axios.put(url, file, {
     headers: {
-      'Content-Type': file.type,
+      'Content-Type': file?.type,
     },
   });
 
   return data;
 };
 
-export const postUploadProfileImage = async (
-  fileData: FileDocument
-): Promise<PresignedUrlData> => {
+export const postUploadProfileImage = async (fileData: FileDocument) => {
   const { data } = await maru.post(
     '/forms/identification-picture',
     fileData,
     authorization()
   );
 
-  const { uploadUrl, downloadUrl, fields } = data?.data;
-
-  return {
-    uploadUrl,
-    downloadUrl,
-    fields: fields || {},
-  } as PresignedUrlData;
+  return data;
 };
 
-export const putProfileUpoload = async (file: File, presignedData: PresignedUrlData) => {
-  const { uploadUrl } = presignedData;
-
-  const response = await axios.put(uploadUrl, file, {
+export const putProfileUpoload = async (file: File | null, url: string) => {
+  const response = await axios.put(url, file, {
     headers: {
-      'Content-Type': file.type,
+      'Content-Type': file?.type,
     },
   });
 
   return response;
 };
 
-export const getUploadProfile = async (fileUrl: string) => {
-  const { data } = await maru.get(fileUrl, { responseType: 'blob' });
+export const getUploadProfile = async (url: string) => {
+  const { data } = await maru.get(url, { responseType: 'blob' });
 
   return URL.createObjectURL(data);
 };
