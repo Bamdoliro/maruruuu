@@ -76,7 +76,7 @@ maru.interceptors.response.use(
 
         const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth`, null, {
           headers: {
-            Authorization: `Bearer ${refreshToken}`,
+            'Refresh-Token': `${refreshToken}`,
           },
         });
 
@@ -98,7 +98,7 @@ maru.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError, null);
         localStorage.clear();
-        window.location.href = '/signup';
+        window.location.href = '/login';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
