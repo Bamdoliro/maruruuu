@@ -8,7 +8,6 @@ import {
 } from '@/components/form';
 import { useOpenFileUploader } from '@/hooks';
 import { AppLayout } from '@/layouts';
-import { useFormDocumentValueStore } from '@/stores';
 import { useBooleanState } from '@maru/hooks';
 import { Column, Row } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -18,7 +17,6 @@ import { useOverlay } from '@toss/use-overlay';
 
 const FinalSubmission = () => {
   const overlay = useOverlay();
-  const formDocument = useFormDocumentValueStore();
   const {
     value: isOpenPdfLoader,
     setTrue: openPdfLoader,
@@ -31,7 +29,7 @@ const FinalSubmission = () => {
     openPdfLoader,
     closePdfLoader
   );
-  const { handleFormDocumentChange, isUploadSuccessful } = useInput();
+  const { handleFormDocumentChange, final } = useInput();
 
   const openFinalFormConfirm = () => {
     overlay.open(({ isOpen, close }) => (
@@ -55,15 +53,13 @@ const FinalSubmission = () => {
             <FormDownload onClick={handleExportForm} />
             <FinalFormUploader
               onClick={openPdfFileUploader}
-              fileName={formDocument.fileName}
+              fileName={final.fileName ?? ''}
             />
             <FinalFormTable />
           </Column>
           <SideBar
             onClick={openFinalFormConfirm}
-            styleType={
-              !formDocument.fileName || !isUploadSuccessful ? 'DISABLED' : 'PRIMARY'
-            }
+            styleType={!final.fileName ? 'DISABLED' : 'PRIMARY'}
           />
         </Row>
       </StyledFinalSubmission>
