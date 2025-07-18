@@ -61,21 +61,25 @@ export const useProfileUploader = (
       const img = new Image();
       img.src = URL.createObjectURL(file);
       img.onload = async () => {
-        const cropResult = await SmartCrop.crop(img, { width: 117, height: 156 });
-        const { x, y, width, height } = cropResult.topCrop;
+        try {
+          const cropResult = await SmartCrop.crop(img, { width: 117, height: 156 });
+          const { x, y, width, height } = cropResult.topCrop;
 
-        const bitmap = await createImageBitmap(img, x, y, width, height);
-        const croppedBlob = await bitmapToBlob(bitmap);
-        const croppedFile = new File([croppedBlob], `profile.png`, {
-          type: 'image/png',
-        });
+          const bitmap = await createImageBitmap(img, x, y, width, height);
+          const croppedBlob = await bitmapToBlob(bitmap);
+          const croppedFile = new File([croppedBlob], `profile.png`, {
+            type: 'image/png',
+          });
 
-        startUploading(croppedFile);
+          startUploading(croppedFile);
+        } finally {
+          URL.revokeObjectURL(img.src);
+        }
       };
-      URL.revokeObjectURL(img.src);
     },
     [startUploading]
   );
+
 
   const processImageFile = useCallback(
     (file: File) => {
@@ -115,6 +119,13 @@ export const useProfileUploader = (
   );
 
   const refreshProfileImage = useCallback(() => {
+    const fileName = Storage.getItem('fileName');
+    const mediaType = Storage.getItem('mediaType');
+    const fileSize = Storage.getItem('fileSize');
+    const storedImageUrl = Storage.getItem('downloadUrl');
+
+    const isValidStoredFile =
+      Boolean(fileName) && Boolean(mediaType) && Boolean(fileSize);
     const handleRefreshImage = () => {
       refresh(undefined, {
         onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
@@ -122,11 +133,15 @@ export const useProfileUploader = (
       });
     };
 
+    if (storedImageUrl) {
+      setImgSrc(storedImageUrl);
+    }
+
+    if (!isValidStoredFile) {
+      return;
+    }
+
     if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
-      handleRefreshImage();
-    } else {
-      const storedImageUrl = Storage.getItem('downloadUrl');
-      if (storedImageUrl) setImgSrc(storedImageUrl);
       handleRefreshImage();
     }
   }, [
@@ -139,12 +154,8 @@ export const useProfileUploader = (
   ]);
 
   useEffect(() => {
-    if ((!isUploadPictureStored && !isUploading) || data?.status === 'REJECTED') {
-      refreshProfileImage();
-    } else {
-      refreshProfileImage();
-    }
-  }, [isUploadPictureStored, isUploading, data?.status, refreshProfileImage]);
+    refreshProfileImage();
+  }, [refreshProfileImage]);
 
   return { imgSrc, isUploading, handleImageFileChange };
 };
