@@ -80,7 +80,6 @@ export const useProfileUploader = (
     [startUploading]
   );
 
-
   const processImageFile = useCallback(
     (file: File) => {
       const img = new Image();
@@ -128,7 +127,7 @@ export const useProfileUploader = (
       Boolean(fileName) && Boolean(mediaType) && Boolean(fileSize);
     const handleRefreshImage = () => {
       refresh(undefined, {
-        onSuccess: (newDownloadUrl) => handleUploadSuccess(newDownloadUrl),
+        onSuccess: (newDownloadUrl: string) => handleUploadSuccess(newDownloadUrl),
         onError: () => onPhotoUpload(false),
       });
     };
