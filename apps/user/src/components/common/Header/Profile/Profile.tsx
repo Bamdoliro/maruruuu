@@ -7,7 +7,11 @@ import { Text } from '@maru/ui';
 import { useUser } from '@/hooks';
 import { useCTAButton } from './Profile.hook';
 
-const Profile = () => {
+interface ProfileProps {
+  status?: string;
+}
+
+const Profile = ({ status }: ProfileProps) => {
   const {
     value: isMenuOpen,
     toggle: toggleMenuOpen,
@@ -23,7 +27,7 @@ const Profile = () => {
     handleLogout,
     handleMoveChangePassword,
     handleMoveWithdrawal,
-  } = useCTAButton();
+  } = useCTAButton(status);
 
   return (
     <StyledProfile ref={profileRef}>
