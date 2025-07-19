@@ -46,6 +46,8 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
             placeholder="입력 칸을 채워주세요"
             value={inputValue}
             onChange={handleInputChange}
+            onPaste={(e) => e.preventDefault()}
+            onDrop={(e) => e.preventDefault()}
           />
         </Column>
       }
