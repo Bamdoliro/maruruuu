@@ -1,4 +1,13 @@
-const formatApplicationDate = (applicationDate: string) =>
-  new Date(applicationDate).toISOString().split('T')[0].replace(/-/g, '.');
+import dayjs from 'dayjs';
+
+const formatApplicationDate = (applicationDate: string) => {
+  const date = dayjs(applicationDate);
+
+  if (!date.isValid()) {
+    return '';
+  }
+
+  return date.format('YYYY.MM.DD');
+};
 
 export default formatApplicationDate;
