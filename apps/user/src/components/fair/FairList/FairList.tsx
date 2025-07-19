@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/common/constants';
 
 interface FairListProps {
-  fairType: string;
+  fairType: 'STUDENT_AND_PARENT' | 'TEACHER';
   status: string[];
 }
 

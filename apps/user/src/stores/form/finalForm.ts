@@ -4,9 +4,9 @@ import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 const finalFormAtomState = atom<FinalForm>({
   key: 'profile',
   default: {
-    fileName: null,
-    mediaType: null,
-    fileSize: null,
+    fileName: '',
+    mediaType: '',
+    fileSize: 0,
     file: null,
   },
 });

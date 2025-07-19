@@ -40,7 +40,7 @@ const StyledToast = styled.div`
   top: 150px;
   right: 48px;
   background-color: #fff;
-  width: 257px;
+  width: auto;
   padding: 20px 16px;
   border-radius: 8px;
   z-index: 1000;

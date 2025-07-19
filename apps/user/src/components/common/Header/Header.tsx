@@ -43,7 +43,7 @@ const Header = () => {
             onClick={() => router.push(ROUTES.MAIN)}
           />
           {isLogIn ? (
-            <Profile />
+            <Profile status={status?.status} />
           ) : (
             <Row gap={10} alignItems="center">
               <Button styleType="QUATERNARY" size="SMALL" onClick={handleMoveLoginPage}>
@@ -60,11 +60,31 @@ const Header = () => {
             if (route === ROUTES.ADMISSION_REGISTRATION && status?.status !== 'PASSED') {
               return null;
             }
+
+            const banStatus =
+              status?.status === 'APPROVED' ||
+              status?.status === 'FINAL_SUBMITTED' ||
+              status?.status === 'PASSED' ||
+              status?.status === 'RECEIVED' ||
+              status?.status === 'FIRST_PASSED' ||
+              status?.status === 'FAILED' ||
+              status?.status === 'FIRST_FAILED' ||
+              status?.status === 'NO_SHOW' ||
+              status?.status === 'ENTERED';
+
+            const handleClick = () => {
+              if (route === ROUTES.FORM && banStatus) {
+                alert('현재 상태에서는 원서 작성 페이지로 이동할 수 없습니다.');
+                return;
+              }
+              router.push(route);
+            };
+
             return (
               <UnderlineButton
                 key={`navigation ${index}`}
                 active={pathName === route || pathName.startsWith(`${route}/`)}
-                onClick={() => router.push(route)}
+                onClick={handleClick}
               >
                 {name}
               </UnderlineButton>

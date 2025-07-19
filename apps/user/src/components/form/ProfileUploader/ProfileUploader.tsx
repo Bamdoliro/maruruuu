@@ -3,19 +3,58 @@ import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled, { css } from 'styled-components';
 import { useDragAndDrop, useOpenFileUploader } from '@/hooks';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import SmartCrop from 'smartcrop';
-import { useSetProfileStore } from '@/stores/form/profile';
+import { useProfileStore } from '@/stores/form/profile';
 import { Storage } from '@/apis/storage/storage';
+import {
+  useRefreshProfileMutation,
+  useUploadProfileMutation,
+} from '@/services/form/mutations';
+import { useFormProfileValueStore } from '@/stores/form/formProfile';
 
 const MIN_WIDTH = 113.4;
 const MIN_HEIGHT = 151.2;
 const MAX_SIZE = 2 * 1024 * 1024;
 
 const ProfileUploader = () => {
-  const setProfile = useSetProfileStore();
+  const [profile, setProfile] = useProfileStore();
+  const profileUrl = useFormProfileValueStore();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { openFileUploader, ref: imageUploaderRef } = useOpenFileUploader();
+
+  const fileName = Storage.getItem('fileName');
+  const mediaType = Storage.getItem('mediaType');
+  const fileSize = Storage.getItem('fileSize');
+
+  const { refreshProfileMutate } = useRefreshProfileMutation({
+    fileName: fileName ?? '',
+    mediaType: mediaType ?? '',
+    fileSize: Number(fileSize),
+  });
+
+  const { uploadProfileMutate } = useUploadProfileMutation(
+    {
+      fileName: profile.fileName ?? '',
+      mediaType: profile.mediaType ?? '',
+      fileSize: profile.fileSize ?? 0,
+    },
+    profile.file ?? null
+  );
+
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    const upload = Storage.getItem('upload');
+    if (mountedRef.current) return;
+    mountedRef.current = true;
+
+    if (upload === 'true') {
+      refreshProfileMutate();
+    }
+
+    return;
+  }, [refreshProfileMutate]);
 
   const handleFile = useCallback(
     async (file: File) => {
@@ -30,25 +69,26 @@ const ProfileUploader = () => {
         const img = new window.Image();
         img.onload = async () => {
           if (img.width < MIN_WIDTH || img.height < MIN_HEIGHT) {
-            alert('사진 크기가 작습니다.');
+            alert('사진 크기가 너무 작습니다.');
             setPreviewUrl(null);
             return;
           }
+
           const cropResult = await SmartCrop.crop(img, { width: 3, height: 4 });
           const crop = cropResult.topCrop;
 
-          const canvas = document.createElement('canvas');
-          canvas.width = crop.width;
-          canvas.height = crop.height;
+          const cropCanvas = document.createElement('canvas');
+          cropCanvas.width = crop.width;
+          cropCanvas.height = crop.height;
 
-          const ctx = canvas.getContext('2d');
-          if (!ctx) {
+          const cropCtx = cropCanvas.getContext('2d');
+          if (!cropCtx) {
             alert('이미지 편집을 지원하지 않는 브라우저입니다.');
             setPreviewUrl(null);
             return;
           }
 
-          ctx.drawImage(
+          cropCtx.drawImage(
             img,
             crop.x,
             crop.y,
@@ -59,28 +99,74 @@ const ProfileUploader = () => {
             crop.width,
             crop.height
           );
-          const dataUrl = canvas.toDataURL('image/jpeg');
+
+          const TARGET_WIDTH = 117;
+          const TARGET_HEIGHT = 156;
+          const outputCanvas = document.createElement('canvas');
+          outputCanvas.width = TARGET_WIDTH;
+          outputCanvas.height = TARGET_HEIGHT;
+
+          const outputCtx = outputCanvas.getContext('2d');
+          if (!outputCtx) {
+            alert('이미지 편집을 지원하지 않는 브라우저입니다.');
+            setPreviewUrl(null);
+            return;
+          }
+
+          outputCtx.imageSmoothingEnabled = true;
+          outputCtx.imageSmoothingQuality = 'high';
+          outputCtx.drawImage(
+            cropCanvas,
+            0,
+            0,
+            crop.width,
+            crop.height,
+            0,
+            0,
+            TARGET_WIDTH,
+            TARGET_HEIGHT
+          );
+
+          const dataUrl = outputCanvas.toDataURL('image/jpeg', 1.0);
           setPreviewUrl(dataUrl);
-          setProfile({
-            fileName: file.name,
-            mediaType: file.type,
-            fileSize: file.size,
-            file: file,
-          });
-          Storage.setItem('fileName', file.name);
-          Storage.setItem('mediaType', file.type);
-          Storage.setItem('fileSize', file.size.toString());
-          Storage.setItem('upload', 'true');
+
+          outputCanvas.toBlob((blob) => {
+            if (!blob) {
+              alert('이미지 처리 실패');
+              return;
+            }
+
+            const croppedFile = new File([blob], file.name, {
+              type: 'image/jpeg',
+            });
+
+            setProfile({
+              fileName: croppedFile.name,
+              mediaType: croppedFile.type,
+              fileSize: croppedFile.size,
+              file: croppedFile,
+            });
+
+            Storage.setItem('fileName', croppedFile.name);
+            Storage.setItem('mediaType', croppedFile.type);
+            Storage.setItem('fileSize', croppedFile.size.toString());
+            Storage.setItem('upload', 'true');
+
+            uploadProfileMutate();
+          }, 'image/jpeg');
         };
+
         img.onerror = () => {
-          alert('이미지 파일을 읽을 수 없습니다.');
+          alert('이미지 파일을 불러올 수 없습니다.');
           setPreviewUrl(null);
         };
+
         img.src = ev.target?.result as string;
       };
+
       reader.readAsDataURL(file);
     },
-    [setProfile]
+    [setProfile, uploadProfileMutate]
   );
 
   const { isDragging, onDragOver, onDragLeave, onDrop, onDragEnter } =
@@ -101,7 +187,9 @@ const ProfileUploader = () => {
         증명사진
       </Text>
       {previewUrl ? (
-        <ImagePreview src={previewUrl} alt="profile-image" />
+        <ImagePreview src={previewUrl} alt="preview-image" />
+      ) : profileUrl ? (
+        <ImagePreview src={profileUrl.downloadUrl} alt="profile-image" />
       ) : (
         <UploadImageBox
           onDragEnter={onDragEnter}
@@ -120,7 +208,7 @@ const ProfileUploader = () => {
           </Column>
         </UploadImageBox>
       )}
-      {previewUrl && (
+      {(previewUrl || profileUrl) && (
         <Button size="SMALL" onClick={openFileUploader}>
           재업로드
         </Button>
@@ -128,7 +216,7 @@ const ProfileUploader = () => {
       <Desc>
         2MB 이하, 3개월 이내의
         <br />
-        3x4 cm 증명사진(.jpg, .png)
+        3x4 cm 증명사진 (.jpg, .png)
       </Desc>
       <input
         type="file"
@@ -168,6 +256,7 @@ const ImagePreview = styled.img`
   width: 225px;
   height: 300px;
   border-radius: 6px;
+  object-fit: cover;
 `;
 
 const Desc = styled.p`

@@ -1,9 +1,7 @@
 import { useUser } from '@/hooks';
 import { ApplicantSchema } from '@/schemas/ApplicantSchema';
-import { useUploadProfileMutation } from '@/services/form/mutations';
 import { useSaveFormQuery } from '@/services/form/queries';
 import { useFormValueStore, useSetFormStore } from '@/stores';
-import { useProfileValueStore } from '@/stores/form/profile';
 import { formatDate, useFormStep } from '@/utils';
 import { useEffect, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
@@ -16,15 +14,6 @@ export const useApplicantForm = () => {
   const { data: saveFormQuery } = useSaveFormQuery();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const { run: FormStep } = useFormStep();
-  const profile = useProfileValueStore();
-  const { uploadProfileMutate } = useUploadProfileMutation(
-    {
-      fileName: profile.fileName ?? '',
-      mediaType: profile.mediaType ?? '',
-      fileSize: profile.fileSize ?? 0,
-    },
-    profile.file ?? null
-  );
 
   const formatter: Record<string, (value: string) => string> = {
     birthday: (value) => formatDate(value.replace(/\D/g, '')),
@@ -69,7 +58,6 @@ export const useApplicantForm = () => {
         nextStep: '보호자정보',
         setErrors,
       });
-      uploadProfileMutate();
     } catch (err) {
       if (err instanceof z.ZodError) {
         const fieldErrors = err.flatten().fieldErrors;

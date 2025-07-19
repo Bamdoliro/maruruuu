@@ -8,6 +8,11 @@ import {
   getSchoolList,
 } from './api';
 import { Storage } from '@/apis/storage/storage';
+import dayjs from 'dayjs';
+import { SCHEDULE } from '@/constants/form/constants';
+import isBetween from 'dayjs/plugin/isBetween';
+
+dayjs.extend(isBetween);
 
 export const useFormStatusQuery = () => {
   const { data, ...restQuery } = useQuery({
@@ -21,10 +26,14 @@ export const useFormStatusQuery = () => {
 };
 
 export const useExportFormQuery = () => {
+  const day = dayjs();
+
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.EXPORT_FORM],
     queryFn: getExportForm,
-    enabled: !!Storage.getItem(TOKEN.ACCESS),
+    enabled:
+      !!Storage.getItem(TOKEN.ACCESS) &&
+      day.isBetween(SCHEDULE.원서_접수, SCHEDULE.원서_접수_마감),
     retry: false,
   });
 
@@ -32,10 +41,14 @@ export const useExportFormQuery = () => {
 };
 
 export const useExportReciptQuery = () => {
+  const day = dayjs();
+
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.EXPORT_RECEIPT],
     queryFn: getExportRecipt,
-    enabled: !!Storage.getItem(TOKEN.ACCESS),
+    enabled:
+      !!Storage.getItem(TOKEN.ACCESS) &&
+      day.isBetween(SCHEDULE.원서_접수, SCHEDULE.원서_접수_마감),
     retry: false,
   });
 

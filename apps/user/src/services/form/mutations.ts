@@ -14,6 +14,7 @@ import {
 import type { Form } from '@/types/form/client';
 import { useSetFormStepStore } from '@/stores';
 import type { FileDocument } from '@/types/form/remote';
+import { useSetFormProfileStore } from '@/stores/form/formProfile';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();
@@ -74,12 +75,17 @@ export const usePutProfileImageMutation = (file: File | null) => {
 };
 
 export const useUploadProfileMutation = (fileData: FileDocument, file: File | null) => {
+  const setFormProfile = useSetFormProfileStore();
   const { profileImageMutate } = usePutProfileImageMutation(file);
 
   const { mutate: uploadProfileMutate, ...restMutation } = useMutation({
     mutationFn: () => postUploadProfileImage(fileData),
     onSuccess: (res) => {
-      const { uploadUrl } = res.data;
+      const { uploadUrl, downloadUrl } = res.data;
+      setFormProfile({
+        uploadUrl: uploadUrl,
+        downloadUrl: downloadUrl,
+      });
       profileImageMutate(uploadUrl);
     },
   });
@@ -87,12 +93,27 @@ export const useUploadProfileMutation = (fileData: FileDocument, file: File | nu
   return { uploadProfileMutate, ...restMutation };
 };
 
+export const useGetRefreshProfileMutation = () => {
+  const { mutate: getRefreshProfileMutate, ...restMutation } = useMutation({
+    mutationFn: (downloadUrl: string) => getUploadProfile(downloadUrl),
+  });
+
+  return { getRefreshProfileMutate, ...restMutation };
+};
+
 export const useRefreshProfileMutation = (fileData: FileDocument) => {
+  const setFormProfile = useSetFormProfileStore();
+  const { getRefreshProfileMutate } = useGetRefreshProfileMutation();
+
   const { mutate: refreshProfileMutate, ...restMutation } = useMutation({
     mutationFn: () => postUploadProfileImage(fileData),
     onSuccess: (res) => {
-      const { downloadUrl } = res.data;
-      getUploadProfile(downloadUrl);
+      const { uploadUrl, downloadUrl } = res.data;
+      setFormProfile({
+        uploadUrl: uploadUrl,
+        downloadUrl: downloadUrl,
+      });
+      getRefreshProfileMutate(downloadUrl);
     },
   });
 
