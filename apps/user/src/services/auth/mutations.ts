@@ -35,7 +35,8 @@ export const useLogoutMutation = () => {
       setTimeout(() => {
         window.location.reload();
       }, 500);
-      localStorage.clear();
+      Storage.removeItem(TOKEN.ACCESS);
+      Storage.removeItem(TOKEN.REFRESH);
     },
     onError: () => {},
   });
