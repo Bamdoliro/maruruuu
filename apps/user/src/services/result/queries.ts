@@ -2,6 +2,8 @@ import { KEY, TOKEN } from '@/constants/common/constants';
 import { useQuery } from '@tanstack/react-query';
 import { getAdmissionTicket, getFinalResult, getFirstResult } from './api';
 import { Storage } from '@/apis/storage/storage';
+import dayjs from 'dayjs';
+import { SCHEDULE } from '@/constants/form/constants';
 
 export const useFirstResultQuery = () => {
   const { data, ...restQuery } = useQuery({
@@ -26,10 +28,14 @@ export const useFinalResultQuery = () => {
 };
 
 export const useDownloadAdmissionTicketQuery = () => {
+  const day = dayjs();
+
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.ADMISSION_TICKET] as const,
     queryFn: getAdmissionTicket,
-    enabled: !!Storage.getItem(TOKEN.ACCESS),
+    enabled:
+      !!Storage.getItem(TOKEN.ACCESS) &&
+      day.isBetween(SCHEDULE.일차_합격_발표, SCHEDULE.이차_면접),
     retry: false,
   });
 
