@@ -82,8 +82,11 @@ export const useUploadProfileMutation = (fileData: FileDocument, file: File | nu
     mutationFn: () => postUploadProfileImage(fileData),
     onSuccess: (res) => {
       const { uploadUrl, downloadUrl } = res.data;
+      setFormProfile({
+        uploadUrl: uploadUrl,
+        downloadUrl: downloadUrl,
+      });
       profileImageMutate(uploadUrl);
-      setFormProfile({ uploadUrl, downloadUrl });
     },
   });
 
@@ -106,7 +109,10 @@ export const useRefreshProfileMutation = (fileData: FileDocument) => {
     mutationFn: () => postUploadProfileImage(fileData),
     onSuccess: (res) => {
       const { uploadUrl, downloadUrl } = res.data;
-      setFormProfile({ uploadUrl, downloadUrl });
+      setFormProfile({
+        uploadUrl: uploadUrl,
+        downloadUrl: downloadUrl,
+      });
       getRefreshProfileMutate(downloadUrl);
     },
   });

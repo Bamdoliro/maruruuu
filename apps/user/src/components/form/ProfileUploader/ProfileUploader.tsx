@@ -41,6 +41,7 @@ const ProfileUploader = () => {
     },
     profile.file ?? null
   );
+
   const mountedRef = useRef(false);
 
   useEffect(() => {
@@ -76,18 +77,18 @@ const ProfileUploader = () => {
           const cropResult = await SmartCrop.crop(img, { width: 3, height: 4 });
           const crop = cropResult.topCrop;
 
-          const canvas = document.createElement('canvas');
-          canvas.width = crop.width;
-          canvas.height = crop.height;
+          const cropCanvas = document.createElement('canvas');
+          cropCanvas.width = crop.width;
+          cropCanvas.height = crop.height;
 
-          const ctx = canvas.getContext('2d');
-          if (!ctx) {
+          const cropCtx = cropCanvas.getContext('2d');
+          if (!cropCtx) {
             alert('이미지 편집을 지원하지 않는 브라우저입니다.');
             setPreviewUrl(null);
             return;
           }
 
-          ctx.drawImage(
+          cropCtx.drawImage(
             img,
             crop.x,
             crop.y,
@@ -99,29 +100,70 @@ const ProfileUploader = () => {
             crop.height
           );
 
-          const dataUrl = canvas.toDataURL('image/jpeg');
+          const TARGET_WIDTH = 117;
+          const TARGET_HEIGHT = 156;
+          const outputCanvas = document.createElement('canvas');
+          outputCanvas.width = TARGET_WIDTH;
+          outputCanvas.height = TARGET_HEIGHT;
+
+          const outputCtx = outputCanvas.getContext('2d');
+          if (!outputCtx) {
+            alert('이미지 편집을 지원하지 않는 브라우저입니다.');
+            setPreviewUrl(null);
+            return;
+          }
+
+          outputCtx.imageSmoothingEnabled = true;
+          outputCtx.imageSmoothingQuality = 'high';
+          outputCtx.drawImage(
+            cropCanvas,
+            0,
+            0,
+            crop.width,
+            crop.height,
+            0,
+            0,
+            TARGET_WIDTH,
+            TARGET_HEIGHT
+          );
+
+          const dataUrl = outputCanvas.toDataURL('image/jpeg', 1.0);
           setPreviewUrl(dataUrl);
 
-          setProfile({
-            fileName: file.name,
-            mediaType: file.type,
-            fileSize: file.size,
-            file: file,
-          });
+          outputCanvas.toBlob((blob) => {
+            if (!blob) {
+              alert('이미지 처리 실패');
+              return;
+            }
 
-          Storage.setItem('fileName', file.name);
-          Storage.setItem('mediaType', file.type);
-          Storage.setItem('fileSize', file.size.toString());
-          Storage.setItem('upload', 'true');
+            const croppedFile = new File([blob], file.name, {
+              type: 'image/jpeg',
+            });
 
-          uploadProfileMutate();
+            setProfile({
+              fileName: croppedFile.name,
+              mediaType: croppedFile.type,
+              fileSize: croppedFile.size,
+              file: croppedFile,
+            });
+
+            Storage.setItem('fileName', croppedFile.name);
+            Storage.setItem('mediaType', croppedFile.type);
+            Storage.setItem('fileSize', croppedFile.size.toString());
+            Storage.setItem('upload', 'true');
+
+            uploadProfileMutate();
+          }, 'image/jpeg');
         };
+
         img.onerror = () => {
           alert('이미지 파일을 불러올 수 없습니다.');
           setPreviewUrl(null);
         };
+
         img.src = ev.target?.result as string;
       };
+
       reader.readAsDataURL(file);
     },
     [setProfile, uploadProfileMutate]
@@ -144,7 +186,9 @@ const ProfileUploader = () => {
       <Text fontType="context" color={color.gray700}>
         증명사진
       </Text>
-      {profileUrl ? (
+      {previewUrl ? (
+        <ImagePreview src={previewUrl} alt="preview-image" />
+      ) : profileUrl ? (
         <ImagePreview src={profileUrl.downloadUrl} alt="profile-image" />
       ) : (
         <UploadImageBox

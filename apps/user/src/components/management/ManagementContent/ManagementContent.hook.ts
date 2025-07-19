@@ -32,13 +32,9 @@ export const useBoxClick = (status?: string) => {
   };
 
   const handleDownloadForm = () => {
-    const accept =
-      status === 'FINAL_SUBMITTED' ||
-      status === 'APPROVED' ||
-      status === 'RECEIVED' ||
-      status === 'REJECTED';
+    const accept = ['FINAL_SUBMITTED', 'APPROVED', 'RECEIVED', 'REJECTED'];
 
-    if (!accept) {
+    if (!status || !accept.includes(status)) {
       alert('원서를 제출하지 않아, 다운로드 할 수 없습니다.');
     } else {
       downloadFile(
