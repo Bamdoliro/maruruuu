@@ -20,13 +20,13 @@ const GradeItem = ({
         {subjectName}
       </Td>
       <Td width={140} height="100%">
-        <CellInput type="text" value={achievementLevel21 || '미이수'} readOnly />
+        <CellInput type="text" value={achievementLevel21 || '-'} readOnly />
       </Td>
       <Td width={140} height="100%">
-        <CellInput type="text" value={achievementLevel22 || '미이수'} readOnly />
+        <CellInput type="text" value={achievementLevel22 || '-'} readOnly />
       </Td>
       <Td width={140} height="100%">
-        <CellInput type="text" value={achievementLevel31 || '미이수'} readOnly />
+        <CellInput type="text" value={achievementLevel31 || '-'} readOnly />
       </Td>
     </Row>
   );
