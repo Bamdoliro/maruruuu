@@ -1,6 +1,5 @@
 import { color, font } from '@maru/design-system';
 import { IconError } from '@maru/icon';
-import React from 'react';
 import styled, { css } from 'styled-components';
 import ConditionalMessage from './ConditionalMessage';
 import type { InputProps } from './Input.type';
@@ -18,6 +17,7 @@ const CheckInput = ({
   readOnly,
   textAlign,
   isError = false,
+  ...rest
 }: InputProps) => {
   return (
     <div style={{ width }}>
@@ -32,6 +32,7 @@ const CheckInput = ({
           readOnly={readOnly}
           style={{ textAlign }}
           $isError={isError}
+          {...rest}
         />
         {isError && (
           <IconError
