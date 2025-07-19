@@ -167,3 +167,8 @@ export interface FinalForm {
   fileSize?: number | null;
   file?: File | null;
 }
+
+export interface FormProfile {
+  uploadUrl: string;
+  downloadUrl: string;
+}
