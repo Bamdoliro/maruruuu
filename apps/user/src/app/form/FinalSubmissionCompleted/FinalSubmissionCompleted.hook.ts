@@ -1,13 +1,13 @@
 import { ROUTES } from '@/constants/common/constants';
-import { useUser } from '@/hooks';
+import { useUser, useDownloadFile } from '@/hooks';
 import { useExportReciptQuery } from '@/services/form/queries';
-import { downloadFile } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 export const useCTAButton = () => {
   const router = useRouter();
   const { data: reciptData } = useExportReciptQuery();
   const { userData } = useUser();
+  const downloadFile = useDownloadFile();
 
   const handleDownloadReciptButtonClick = () => {
     if (!reciptData) return;
