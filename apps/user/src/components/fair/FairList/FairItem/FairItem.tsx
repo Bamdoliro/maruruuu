@@ -36,7 +36,7 @@ const FairItem = ({
         </StatusBox>
       </Row>
       <Text fontType="p2" color={color.gray500}>
-        장소: {place}
+        <EllipsisText as="span">장소: {place}</EllipsisText>
         <br />
         신청 기한: {formatApplicationDate(applicationStartDate)} ~{' '}
         {formatApplicationDate(applicationEndDate)}
@@ -73,4 +73,13 @@ const StatusBox = styled.div<{ status: string }>`
     status === 'APPLICATION_IN_PROGRESS'
       ? 'rgba(37, 124, 255, 0.1)'
       : 'rgba(244, 67, 54, 0.1)'};
+`;
+
+const EllipsisText = styled(Text)`
+  display: inline-block;
+  max-width: 336px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
 `;
