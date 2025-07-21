@@ -67,7 +67,7 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
       toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
       closePdfLoader();
     }
-  }, [downloadPdf, openPdfLoader, exportFormData, pdfBlobUrl]);
+  }, [downloadPdf, openPdfLoader, exportFormData, pdfBlobUrl, exportFormDataLoading, toast, closePdfLoader]);
 
   return { handleSubmitFinalForm, handleExportForm };
 };
