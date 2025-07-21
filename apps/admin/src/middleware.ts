@@ -10,6 +10,7 @@ export const middleware = (request: NextRequest) => {
 
   if (!accessToken) {
     const redirectUrl = new URL('/', request.url);
+
     redirectUrl.searchParams.set('message', '로그인 후 시도해주세요');
     return NextResponse.redirect(redirectUrl);
   }
