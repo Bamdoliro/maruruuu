@@ -1,8 +1,7 @@
-import { useUser } from '@/hooks';
+import { useUser, useDownloadFile } from '@/hooks';
 import { useUploadFormMutation } from '@/services/form/mutations';
 import { useExportFormQuery } from '@/services/form/queries';
 import { useFinalFormStore, useFinalFormValueStore } from '@/stores/form/finalForm';
-import { downloadFile } from '@/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => void) => {
@@ -10,6 +9,7 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
   const { data: exportFormData } = useExportFormQuery();
   const [pdfBlobUrl, setPdfBlobUrl] = useState('');
   const [hasDownloaded, setHasDownloaded] = useState(false);
+  const downloadFile = useDownloadFile();
   const final = useFinalFormValueStore();
   const { uploadFormMutate } = useUploadFormMutation(
     {

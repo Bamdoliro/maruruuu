@@ -1,13 +1,13 @@
 import { ROUTES } from '@/constants/common/constants';
-import { useUser } from '@/hooks';
+import { useUser, useDownloadFile } from '@/hooks';
 import { useExportFormQuery, useExportReciptQuery } from '@/services/form/queries';
 import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
-import { downloadFile } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 export const useBoxClick = (status?: string) => {
   const router = useRouter();
   const { userData } = useUser();
+  const downloadFile = useDownloadFile();
   const { data: exportFormData } = useExportFormQuery();
   const { data: reciptData } = useExportReciptQuery();
   const { data: admissionTicketData } = useDownloadAdmissionTicketQuery();
