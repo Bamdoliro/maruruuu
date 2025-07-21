@@ -188,7 +188,7 @@ const ProfileUploader = () => {
       </Text>
       {previewUrl ? (
         <ImagePreview src={previewUrl} alt="preview-image" />
-      ) : profileUrl ? (
+      ) : profileUrl?.downloadUrl ? (
         <ImagePreview src={profileUrl.downloadUrl} alt="profile-image" />
       ) : (
         <UploadImageBox
@@ -208,7 +208,7 @@ const ProfileUploader = () => {
           </Column>
         </UploadImageBox>
       )}
-      {(previewUrl || profileUrl) && (
+      {(previewUrl || profileUrl?.downloadUrl) && (
         <Button size="SMALL" onClick={openFileUploader}>
           재업로드
         </Button>
