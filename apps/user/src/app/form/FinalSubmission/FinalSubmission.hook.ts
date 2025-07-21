@@ -34,22 +34,27 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
     );
     setPdfBlobUrl('');
     setHasDownloaded(true);
-  }, [pdfBlobUrl, userData.name]);
+  }, [pdfBlobUrl, userData.name, downloadFile]);
+
+  const processFormData = useCallback(() => {
+    if (!exportFormData) return;
+    const blob = new Blob([exportFormData]);
+    const blobUrl = window.URL.createObjectURL(blob);
+    setPdfBlobUrl(blobUrl);
+    downloadPdf();
+    closePdfLoader();
+  }, [exportFormData, downloadPdf, closePdfLoader]);
 
   useEffect(() => {
     if (exportFormDataLoading) {
       openPdfLoader();
     } else if (exportFormData && !hasDownloaded) {
-      const blob = new Blob([exportFormData]);
-      const blobUrl = window.URL.createObjectURL(blob);
-      setPdfBlobUrl(blobUrl);
-      downloadPdf();
-      closePdfLoader();
+      processFormData();
     } else if (!exportFormData && !exportFormDataLoading) {
       toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
       closePdfLoader();
     }
-  }, [exportFormData, exportFormDataLoading, hasDownloaded, openPdfLoader, downloadPdf, closePdfLoader, toast]);
+  }, [exportFormData, exportFormDataLoading, hasDownloaded, openPdfLoader, processFormData, closePdfLoader, toast]);
 
 
   const handleExportForm = useCallback(() => {
@@ -58,16 +63,12 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
     } else if (pdfBlobUrl) {
       downloadPdf();
     } else if (exportFormData) {
-      const blob = new Blob([exportFormData]);
-      const blobUrl = window.URL.createObjectURL(blob);
-
-      setPdfBlobUrl(blobUrl);
-      downloadPdf();
+      processFormData();
     } else if (!exportFormData && !exportFormDataLoading) {
       toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
       closePdfLoader();
     }
-  }, [downloadPdf, openPdfLoader, exportFormData, pdfBlobUrl, exportFormDataLoading, toast, closePdfLoader]);
+  }, [exportFormDataLoading, pdfBlobUrl, downloadPdf, processFormData, openPdfLoader, exportFormData, toast, closePdfLoader]);
 
   return { handleSubmitFinalForm, handleExportForm };
 };
