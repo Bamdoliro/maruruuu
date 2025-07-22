@@ -54,8 +54,15 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
       toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
       closePdfLoader();
     }
-  }, [exportFormData, exportFormDataLoading, hasDownloaded, openPdfLoader, processFormData, closePdfLoader, toast]);
-
+  }, [
+    exportFormData,
+    exportFormDataLoading,
+    hasDownloaded,
+    openPdfLoader,
+    processFormData,
+    closePdfLoader,
+    toast,
+  ]);
 
   const handleExportForm = useCallback(() => {
     if (exportFormDataLoading) {
@@ -68,7 +75,16 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
       toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
       closePdfLoader();
     }
-  }, [exportFormDataLoading, pdfBlobUrl, downloadPdf, processFormData, openPdfLoader, exportFormData, toast, closePdfLoader]);
+  }, [
+    exportFormDataLoading,
+    pdfBlobUrl,
+    downloadPdf,
+    processFormData,
+    openPdfLoader,
+    exportFormData,
+    toast,
+    closePdfLoader,
+  ]);
 
   return { handleSubmitFinalForm, handleExportForm };
 };
