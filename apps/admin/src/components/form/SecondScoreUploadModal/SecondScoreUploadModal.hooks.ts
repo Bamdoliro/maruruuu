@@ -33,6 +33,7 @@ export const useUploadSecondScoreFormatAction = (
     const formData = new FormData();
     formData.append('xlsx', fileData);
     uploadSecondScoreFormat(formData);
+    console.log('fileData:', fileData);
   };
 
   return { handleUploadSecondScoreFormatButtonClick };
