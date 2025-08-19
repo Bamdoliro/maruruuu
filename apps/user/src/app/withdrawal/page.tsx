@@ -4,7 +4,6 @@ import AppLayout from '@/layouts/AppLayout';
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import Image from 'next/image';
 import { Button, Column, PreviewInput, Text } from '@maru/ui';
 import { ROUTES } from '@/constants/common/constants';
 import { IconArrowRight } from '@maru/icon';
@@ -37,7 +36,8 @@ const Withdrawal = () => {
       <StyledWithdrawal>
         <WithdrawalBox>
           <Column gap={80} alignItems="center" width={446}>
-            <Image
+            <img
+              loading="lazy"
               src="/svg/maruLogo.svg"
               onClick={handleMoveMain}
               style={{ cursor: 'pointer' }}

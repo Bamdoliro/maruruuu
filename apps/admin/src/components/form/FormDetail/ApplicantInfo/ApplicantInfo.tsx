@@ -5,7 +5,6 @@ import { formatDate, formatPhoneNumber } from '@/utils';
 import { color } from '@maru/design-system';
 import { Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import Image from 'next/image';
 import { styled } from 'styled-components';
 
 interface ApplicantInfoProps {
@@ -78,6 +77,6 @@ const ProfileImageBox = styled.div`
   background: ${color.white};
 `;
 
-const ProfileImage = styled(Image)`
+const ProfileImage = styled.img`
   background: ${color.gray100};
 `;

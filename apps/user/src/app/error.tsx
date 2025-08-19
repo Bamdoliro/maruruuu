@@ -4,7 +4,6 @@ import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
@@ -22,7 +21,13 @@ const Error = () => {
   return (
     <AppLayout header footer>
       <StyledError>
-        <Image width={363.75} height={155.4} alt="500" src="/svg/error.svg" />
+        <img
+          loading="lazy"
+          width={363.75}
+          height={155.4}
+          alt="500"
+          src="/svg/error.svg"
+        />
         <Column gap={24}>
           <Text fontType="H1" color={color.gray900}>
             페이지가 작동하지 않습니다

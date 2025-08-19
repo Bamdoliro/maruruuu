@@ -5,7 +5,6 @@ import { useLogoutAdminMutation } from '@/services/auth/mutations';
 import { color, font } from '@maru/design-system';
 import { Column } from '@maru/ui';
 import { flex } from '@maru/utils';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { css, styled } from 'styled-components';
@@ -52,7 +51,13 @@ const SideBar = () => {
   return (
     <StyledSideBar>
       <StyledImageBox>
-        <Image src="/svg/maruLogoDark.svg" width={120} height={36} alt="logo" />
+        <img
+          loading="lazy"
+          src="/svg/maruLogoDark.svg"
+          width={120}
+          height={36}
+          alt="logo"
+        />
       </StyledImageBox>
       <Column alignItems="flex-start">
         {NAVIGATION_DATA.map(({ route, name }) => (
