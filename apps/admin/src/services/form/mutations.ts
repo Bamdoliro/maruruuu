@@ -14,15 +14,32 @@ import { useSetSecondRoundResultStore } from '@/store/form/secondRoundResult';
 import { isPopupBlocked } from '@/utils';
 
 export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void) => {
-  const { handleError } = useApiError();
   const queryClient = useQueryClient();
-
+  const { handleError } = useApiError();
   const { mutate: uploadSecondScoreFormat, ...restMutation } = useMutation({
-    mutationFn: (formData: FormData) => patchSecondScoreFormat(formData),
-    onSuccess: () => {
-      toast('파일이 입력되었습니다.', { type: 'success' });
-      queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
-      handleCloseModal();
+    mutationFn: patchSecondScoreFormat,
+    onSuccess: async (data) => {
+      const contentType = data.headers?.['content-type'];
+      const blob = data.data;
+      if (data.status === 204) {
+        toast('파일이 입력되었습니다.', { type: 'success' });
+        queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
+        handleCloseModal();
+      } else if (contentType?.includes('application/json')) {
+        toast.error('잘못된 파일입니다.');
+        handleCloseModal();
+      } else if (data.status === 400) {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = '점수입력_오류결과.xlsx';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+        toast.error('오류가 있는 파일이 다운로드되었습니다.');
+        handleCloseModal();
+      }
     },
     onError: handleError,
   });
