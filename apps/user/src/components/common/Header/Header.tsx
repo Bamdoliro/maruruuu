@@ -1,7 +1,6 @@
 import { ROUTES } from '@/constants/common/constants';
 import { color } from '@maru/design-system';
 import { Button, Row, UnderlineButton } from '@maru/ui';
-import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import Profile from './Profile/Profile';
@@ -34,7 +33,8 @@ const Header = () => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Image
+          <img
+            loading="lazy"
             src="/svg/maruLogo.svg"
             width={106}
             height={32}

@@ -4,7 +4,6 @@ import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
@@ -18,7 +17,13 @@ const NotFound = () => {
   return (
     <AppLayout header footer>
       <StyledNotFound>
-        <Image width={388.7} height={155.4} alt="404" src="/svg/notFound.svg" />
+        <img
+          loading="lazy"
+          width={388.7}
+          height={155.4}
+          alt="404"
+          src="/svg/notFound.svg"
+        />
         <Column gap={24}>
           <Text fontType="H1" color={color.gray900}>
             페이지를 찾을 수 없습니다

@@ -5,7 +5,6 @@ import { color } from '@maru/design-system';
 import { IconBadge, IconCall, IconPerson, IconSchool } from '@maru/icon';
 import { Column, Loader, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import Image from 'next/image';
 import { styled } from 'styled-components';
 
 interface ProfileProps {
@@ -83,6 +82,6 @@ const ProfileImageBox = styled.div`
   height: 280px;
 `;
 
-const ProfileImage = styled(Image)`
+const ProfileImage = styled.img`
   border-radius: 999px;
 `;
