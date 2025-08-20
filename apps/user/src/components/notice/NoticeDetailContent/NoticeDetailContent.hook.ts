@@ -1,5 +1,3 @@
-import formatFileName from '@/utils/formatFileName';
-
 export const useNoticeFile = () => {
   const handleFileDownload = async (fileUrl: string, fileName: string) => {
     const res = await fetch(fileUrl);
@@ -8,7 +6,7 @@ export const useNoticeFile = () => {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = formatFileName(fileName || '');
+    link.download = fileName;
 
     document.body.appendChild(link);
     link.click();
