@@ -39,7 +39,7 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
             <IconBox>
               <IconAnswer width={24} height={24} color={color.gray400} />
             </IconBox>
-            <Text fontType="p2" csolor={color.gray900} whiteSpace="break-spaces">
+            <Text fontType="p2" color={color.gray900} whiteSpace="break-spaces">
               {content}
             </Text>
           </Row>
