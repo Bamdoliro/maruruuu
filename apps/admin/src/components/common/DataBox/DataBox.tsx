@@ -29,7 +29,7 @@ export default DataBox;
 
 const StyledDataBox = styled.div<{ lengthType: LengthType }>`
   ${flex({ flexDirection: 'column', alignItems: 'flex-start' })}
-  width: ${(props) => (props.lengthType === 'SHORT' ? '100%' : 'fit-content')};
+  width: ${(props) => (props.lengthType === 'SHORT' ? 'fit-content' : '100%')};
   min-width: 400px;
   padding: 24px;
   gap: 16px;
