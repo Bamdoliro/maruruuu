@@ -7,11 +7,9 @@ import styled from 'styled-components';
 
 const GuidelineBox = () => {
   const router = useRouter();
-
+  const url = process.env.NEXT_PUBLIC_ADMISSION_GUIDELINES || '/';
   const handleMoveGuidelinePdf = () => {
-    router.push(
-      'https://school.busanedu.net/viewer/doc.html?fn=b25ea8f05bc715f06fc798cd9e58f42cee9eb81e421c5f6da1c1217364cda834&rs=/upload/temp/convertToHtml/202502/bssm-h/'
-    );
+    router.push(url);
   };
 
   return (
