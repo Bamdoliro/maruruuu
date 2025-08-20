@@ -31,11 +31,11 @@ const GenderRatioDetailTable: React.FC<GenderRatioDetailTableProps> = ({
           <Column gap={40}>
             <Column>
               <Text fontType="H4">전체 남학생 지원 인원</Text>
-              <Text fontType="D2">{totalCounts?.maleCount} 점</Text>
+              <Text fontType="D2">{totalCounts?.maleCount} 명</Text>
             </Column>
             <Column>
               <Text fontType="H4">전체 여학생 지원 인원</Text>
-              <Text fontType="D2">{totalCounts?.femaleCount} 점</Text>
+              <Text fontType="D2">{totalCounts?.femaleCount} 명</Text>
             </Column>
           </Column>
         </Column>
