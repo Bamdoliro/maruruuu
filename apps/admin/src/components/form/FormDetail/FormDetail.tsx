@@ -28,7 +28,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
         <Profile id={id} />
         {/**원서상태 백엔드 수정되면 개발**/}
       </Column>
-      <Column>
+      <Column width={'100%'}>
         <NavigationBar>
           {FORM_DETAIL_FIELDS.map((formDetailField) => (
             <UnderlineButton
@@ -68,6 +68,7 @@ const NavigationBar = styled.div`
   ${flex({ alignItems: 'center' })}
   width: 100%;
   height: 60px;
+  padding-bottom: 1px;
   background-color: ${color.white};
   border-bottom: 2px solid ${color.gray200};
 `;
