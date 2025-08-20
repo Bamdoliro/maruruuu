@@ -44,6 +44,9 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
 export default FaqItem;
 
 const StyledFaqItem = styled.div`
+  ${flex({ flexDirection: 'column' })}
+  gap: 24px;
+	padding: 24px;
   width: 100%;
   border-bottom: 1px solid ${color.gray300};
 `;
@@ -51,10 +54,9 @@ const StyledFaqItem = styled.div`
 const QuestionBox = styled.div`
   ${flex({ alignItems: 'center', justifyContent: 'space-between' })}
   height: fit-content;
-  min-height: 77px;
-  padding: 0 24px;
   background-color: ${color.white};
   cursor: pointer;
+	gap: 10px;
 `;
 
 const AnswerBox = styled.div``;
