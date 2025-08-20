@@ -21,7 +21,9 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
             width={24}
             height={24}
           />
-	        <Text fontType='p1' color={color.gray900} whiteSpace='break-spaces'>{title}</Text>
+          <Text fontType="p1" color={color.gray900} whiteSpace="break-spaces">
+            {title}
+          </Text>
         </Row>
         {isOpen ? (
           <IconArrowTop color={color.gray600} width={24} height={24} />
@@ -33,7 +35,9 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
         <AnswerBox>
           <Row alignItems="flex-start" gap={12}>
             <IconAnswer width={24} height={24} color={color.gray400} />
-	          <Text fontType='p2' color={color.gray900} whiteSpace='break-spaces'>{content}</Text>
+            <Text fontType="p2" color={color.gray900} whiteSpace="break-spaces">
+              {content}
+            </Text>
           </Row>
         </AnswerBox>
       )}
@@ -46,7 +50,7 @@ export default FaqItem;
 const StyledFaqItem = styled.div`
   ${flex({ flexDirection: 'column' })}
   gap: 24px;
-	padding: 24px;
+  padding: 24px;
   width: 100%;
   border-bottom: 1px solid ${color.gray300};
 `;
@@ -56,7 +60,7 @@ const QuestionBox = styled.div`
   height: fit-content;
   background-color: ${color.white};
   cursor: pointer;
-	gap: 10px;
+  gap: 10px;
 `;
 
 const AnswerBox = styled.div``;
