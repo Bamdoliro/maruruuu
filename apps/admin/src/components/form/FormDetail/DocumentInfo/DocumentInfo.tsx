@@ -20,7 +20,7 @@ const DocumentInfo = ({ id }: DocumentInfoProps) => {
   return (
     <StyledDocumentInfo>
       {documentDetails.map((item, index) => (
-        <DataBox key={index} label={item.label} data={item.data}/>
+        <DataBox key={index} label={item.label} data={item.data} />
       ))}
     </StyledDocumentInfo>
   );
