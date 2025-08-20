@@ -1,8 +1,8 @@
-import { color, font } from '@maru/design-system';
-import { IconAnswer, IconArrowBottom, IconArrowTop, IconFaq } from '@maru/icon';
-import { Row, Text } from '@maru/ui';
-import { flex } from '@maru/utils';
 import styled from 'styled-components';
+import { color } from '@maru/design-system';
+import { flex } from '@maru/utils';
+import { Row, Text } from '@maru/ui';
+import { IconAnswer, IconArrowBottom, IconArrowTop, IconFaq } from '@maru/icon';
 
 interface FaqItemProps {
   title: string;
