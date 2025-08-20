@@ -68,6 +68,7 @@ const NavigationBar = styled.div`
   ${flex({ alignItems: 'center' })}
   width: 100%;
   height: 60px;
+  padding-bottom: 1px;
   background-color: ${color.white};
   border-bottom: 2px solid ${color.gray200};
 `;
