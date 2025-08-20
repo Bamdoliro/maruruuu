@@ -1,8 +1,8 @@
-import { color, font } from '@maru/design-system';
-import { IconAnswer, IconArrowBottom, IconArrowTop, IconFaq } from '@maru/icon';
-import { Row } from '@maru/ui';
-import { flex } from '@maru/utils';
 import styled from 'styled-components';
+import { color } from '@maru/design-system';
+import { flex } from '@maru/utils';
+import { Row, Text } from '@maru/ui';
+import { IconAnswer, IconArrowBottom, IconArrowTop, IconFaq } from '@maru/icon';
 
 interface FaqItemProps {
   title: string;
@@ -21,7 +21,9 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
             width={24}
             height={24}
           />
-          <Question>{title}</Question>
+          <Text fontType="p1" color={color.gray900} whiteSpace="break-spaces">
+            {title}
+          </Text>
         </Row>
         {isOpen ? (
           <IconArrowTop color={color.gray600} width={24} height={24} />
@@ -33,7 +35,9 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
         <AnswerBox>
           <Row alignItems="flex-start" gap={12}>
             <IconAnswer width={24} height={24} color={color.gray400} />
-            <Answer>{content}</Answer>
+            <Text fontType="p2" color={color.gray900} whiteSpace="break-spaces">
+              {content}
+            </Text>
           </Row>
         </AnswerBox>
       )}
@@ -44,6 +48,9 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
 export default FaqItem;
 
 const StyledFaqItem = styled.div`
+  ${flex({ flexDirection: 'column' })}
+  gap: 24px;
+  padding: 24px;
   width: 100%;
   border-bottom: 1px solid ${color.gray300};
 `;
@@ -51,22 +58,9 @@ const StyledFaqItem = styled.div`
 const QuestionBox = styled.div`
   ${flex({ alignItems: 'center', justifyContent: 'space-between' })}
   height: fit-content;
-  min-height: 77px;
-  padding: 0 24px;
   background-color: ${color.white};
   cursor: pointer;
+  gap: 10px;
 `;
 
 const AnswerBox = styled.div``;
-
-const Question = styled.p`
-  ${font.p1}
-  color: ${color.gray900};
-`;
-
-const Answer = styled.p`
-  ${font.p2};
-  color: ${color.gray900};
-  width: calc(100%);
-  margin-top: 2px;
-`;
