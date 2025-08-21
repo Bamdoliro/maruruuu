@@ -16,18 +16,20 @@ const GraduatedAreaTableItem = ({
 }: NoticeTableItemProps) => {
   return (
     <TableItem key={id}>
-      <Row gap={48}>
-        <Text fontType="p2" width={50}>
-          {id}
-        </Text>
-        <Text fontType="p2" width={1}>
-          {applicantName}
-        </Text>
-      </Row>
-      <Row gap={140}>
-        <Text fontType="p2" width={50}>
-          {schoolName}
-        </Text>
+      <Row gap={120}>
+        <Row gap={480}>
+          <Row gap={48}>
+            <Text fontType="p2" width={50}>
+              {id}
+            </Text>
+            <Text fontType="p2" width={1}>
+              {applicantName}
+            </Text>
+          </Row>
+          <Text fontType="p2" width={50}>
+            {schoolName}
+          </Text>
+        </Row>
         <Text fontType="p2">{schoolAddress}</Text>
       </Row>
     </TableItem>
