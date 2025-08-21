@@ -16,11 +16,13 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
     <StyledFaqItem>
       <QuestionBox onClick={onToggle}>
         <Row alignItems="center" gap={12}>
-          <IconFaq
-            color={isOpen ? color.maruDefault : color.gray400}
-            width={24}
-            height={24}
-          />
+          <IconBox>
+            <IconFaq
+              color={isOpen ? color.maruDefault : color.gray400}
+              width={24}
+              height={24}
+            />
+          </IconBox>
           <Text fontType="p1" color={color.gray900} whiteSpace="break-spaces">
             {title}
           </Text>
@@ -34,7 +36,9 @@ const FaqItem = ({ title, content, isOpen, onToggle }: FaqItemProps) => {
       {isOpen && (
         <AnswerBox>
           <Row alignItems="flex-start" gap={12}>
-            <IconAnswer width={24} height={24} color={color.gray400} />
+            <IconBox>
+              <IconAnswer width={24} height={24} color={color.gray400} />
+            </IconBox>
             <Text fontType="p2" color={color.gray900} whiteSpace="break-spaces">
               {content}
             </Text>
@@ -61,6 +65,13 @@ const QuestionBox = styled.div`
   background-color: ${color.white};
   cursor: pointer;
   gap: 10px;
+`;
+
+const IconBox = styled.div`
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
 `;
 
 const AnswerBox = styled.div``;
