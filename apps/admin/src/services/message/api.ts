@@ -7,16 +7,16 @@ import type {
 } from '@/types/message/remote';
 
 export const postMessageByStatus = async (params: PostSendMessageByStatusRequest) => {
-  const { data } = await maru.post('/message/status', params, authorization());
+  const { data } = await maru.post('/messages/status', params, authorization());
   return data;
 };
 
 export const postMessageByType = async (params: PostSendMessageByTypeRequest) => {
-  const { data } = await maru.post('/message/type', params, authorization());
+  const { data } = await maru.post('/messages/type', params, authorization());
   return data;
 };
 
 export const postMessageToAll = async (params: PostSendMessageToAllRequest) => {
-  const { data } = await maru.post('/message/all', params, authorization());
+  const { data } = await maru.post('/messages/all', params, authorization());
   return data;
 };
