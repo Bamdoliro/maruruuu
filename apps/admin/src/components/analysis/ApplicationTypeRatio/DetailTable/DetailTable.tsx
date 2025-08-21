@@ -18,11 +18,11 @@ const DetailTable = ({ formList }: DetailTableProps) => {
           <Column gap={40}>
             <Column>
               <Text fontType="btn2">일반 전형 지원 비율</Text>
-              <Text fontType="D2">{regularRatio} %</Text>
+              <Text fontType="D2">{regularRatio}</Text>
             </Column>
             <Column>
               <Text fontType="btn2">특별 전형 지원 비율</Text>
-              <Text fontType="D2">{specialAdmissionRatio} %</Text>
+              <Text fontType="D2">{specialAdmissionRatio}</Text>
             </Column>
           </Column>
         </Column>
