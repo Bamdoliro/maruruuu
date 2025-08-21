@@ -44,12 +44,14 @@ const LoginContent = () => {
             <Column gap={24}>
               <Input
                 label="전화번호"
+                placeholder="전화번호를 입력해주세요."
                 width="100%"
                 name="phoneNumber"
                 onChange={handleLoginAdminDataChange}
               />
               <PreviewInput
                 label="비밀번호"
+                placeholder="비밀번호를 입력해주세요."
                 width="100%"
                 name="password"
                 onChange={handleLoginAdminDataChange}
