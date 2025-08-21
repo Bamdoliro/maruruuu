@@ -1,5 +1,5 @@
 import { ROUTES } from '@/constants/common/constant';
-import { color, font } from '@maru/design-system';
+import { color } from '@maru/design-system';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
@@ -26,7 +26,7 @@ const FaqDetail = ({ id }: FaqDetailProps) => {
     <StyledFaqDetail>
       <FaqDetailHeader>
         <Column gap={20}>
-          <Text fontType="H1" color={color.gray900}>
+          <Text fontType="H1" color={color.gray900} whiteSpace="break-spaces">
             {faqDetailData.title}
           </Text>
           <Row gap={16} alignItems="center">
@@ -57,7 +57,9 @@ const FaqDetail = ({ id }: FaqDetailProps) => {
           </Button>
         </Row>
       </FaqDetailHeader>
-      <Content>{faqDetailData.content}</Content>
+      <Text fontType="p2" color={color.gray900} whiteSpace="break-spaces">
+        {faqDetailData.content}
+      </Text>
     </StyledFaqDetail>
   ) : null;
 };
@@ -76,9 +78,4 @@ const FaqDetailHeader = styled.div`
   gap: 16px;
   border-bottom: 1px solid ${color.gray300};
   padding-bottom: 16px;
-`;
-
-const Content = styled.div`
-  ${font.p2};
-  color: ${color.gray900};
 `;
