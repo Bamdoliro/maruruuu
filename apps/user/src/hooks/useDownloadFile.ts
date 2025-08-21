@@ -1,26 +1,39 @@
+import { useToast } from '@/hooks';
+import { useCallback } from 'react';
+
 const useDownloadFile = () => {
-  const downloadFile = (data: string | Blob | undefined, fileName: string) => {
-    if (!data) return;
+  const { toast } = useToast();
 
-    let url: string;
+  const downloadFile = useCallback(
+    (data: string | Blob | undefined, fileName: string) => {
+      try {
+        if (!data) return;
 
-    if (data instanceof Blob) {
-      url = window.URL.createObjectURL(data);
-    } else {
-      url = data;
-    }
+        let url: string;
 
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+        if (data instanceof Blob) {
+          url = window.URL.createObjectURL(data);
+        } else {
+          url = data;
+        }
 
-    if (data instanceof Blob) {
-      window.URL.revokeObjectURL(url);
-    }
-  };
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', fileName);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        if (data instanceof Blob) {
+          window.URL.revokeObjectURL(url);
+        }
+      } catch (error) {
+        toast('파일 다운로드에 실패하였습니다.', 'ERROR');
+      }
+    },
+    [toast]
+  );
+
   return downloadFile;
 };
 

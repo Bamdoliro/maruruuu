@@ -1,4 +1,4 @@
-import { useUser, useDownloadFile } from '@/hooks';
+import { useUser, useDownloadFile, useToast } from '@/hooks';
 import { useUploadFormMutation } from '@/services/form/mutations';
 import { useExportFormQuery } from '@/services/form/queries';
 import { useFinalFormStore, useFinalFormValueStore } from '@/stores/form/finalForm';
@@ -6,7 +6,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => void) => {
   const { userData } = useUser();
-  const { data: exportFormData } = useExportFormQuery();
+  const { toast } = useToast();
+  const { data: exportFormData, isLoading: exportFormDataLoading } = useExportFormQuery();
   const [pdfBlobUrl, setPdfBlobUrl] = useState('');
   const [hasDownloaded, setHasDownloaded] = useState(false);
   const downloadFile = useDownloadFile();
@@ -33,34 +34,57 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
     );
     setPdfBlobUrl('');
     setHasDownloaded(true);
-  }, [pdfBlobUrl, userData.name]);
+  }, [pdfBlobUrl, userData.name, downloadFile]);
+
+  const processFormData = useCallback(() => {
+    if (!exportFormData) return;
+    const blob = new Blob([exportFormData]);
+    const blobUrl = window.URL.createObjectURL(blob);
+    setPdfBlobUrl(blobUrl);
+    downloadPdf();
+    closePdfLoader();
+  }, [exportFormData, downloadPdf, closePdfLoader]);
 
   useEffect(() => {
-    if (exportFormData && !hasDownloaded) {
-      const blob = new Blob([exportFormData]);
-      const blobUrl = window.URL.createObjectURL(blob);
-
-      setPdfBlobUrl(blobUrl);
-      downloadPdf();
-      closePdfLoader();
-    } else if (!exportFormData) {
+    if (exportFormDataLoading) {
       openPdfLoader();
+    } else if (exportFormData && !hasDownloaded) {
+      processFormData();
+    } else if (!exportFormData && !exportFormDataLoading) {
+      toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
+      closePdfLoader();
     }
-  }, [exportFormData, hasDownloaded, closePdfLoader, openPdfLoader, downloadPdf]);
+  }, [
+    exportFormData,
+    exportFormDataLoading,
+    hasDownloaded,
+    openPdfLoader,
+    processFormData,
+    closePdfLoader,
+    toast,
+  ]);
 
   const handleExportForm = useCallback(() => {
-    if (pdfBlobUrl) {
+    if (exportFormDataLoading) {
+      openPdfLoader();
+    } else if (pdfBlobUrl) {
       downloadPdf();
     } else if (exportFormData) {
-      const blob = new Blob([exportFormData]);
-      const blobUrl = window.URL.createObjectURL(blob);
-
-      setPdfBlobUrl(blobUrl);
-      downloadPdf();
-    } else {
-      openPdfLoader();
+      processFormData();
+    } else if (!exportFormData && !exportFormDataLoading) {
+      toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
+      closePdfLoader();
     }
-  }, [downloadPdf, openPdfLoader, exportFormData, pdfBlobUrl]);
+  }, [
+    exportFormDataLoading,
+    pdfBlobUrl,
+    downloadPdf,
+    processFormData,
+    openPdfLoader,
+    exportFormData,
+    toast,
+    closePdfLoader,
+  ]);
 
   return { handleSubmitFinalForm, handleExportForm };
 };
