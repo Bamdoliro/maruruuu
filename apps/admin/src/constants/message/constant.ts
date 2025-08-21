@@ -1,5 +1,5 @@
 export const DROPDOWN_DATA = [
-  { value: 'RECEIVED', label: '원서 승인 완료자' },
+  { value: 'APPROVED', label: '원서 승인 완료자' },
   { value: 'REJECTED', label: '원서 반려자' },
   {
     value: 'FIRST_PASSED',
@@ -14,8 +14,7 @@ export const DROPDOWN_DATA = [
 ];
 
 export const MESSAGE_STATUS_VALUES = [
-  'FINAL_SUBMITTED',
-  'RECEIVED',
+  'APPROVED',
   'REJECTED',
   'FIRST_PASSED',
   'PASSED',
