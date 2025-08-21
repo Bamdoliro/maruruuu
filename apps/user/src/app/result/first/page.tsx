@@ -1,8 +1,10 @@
 'use client';
 
 import { FirstResultBox, ResultMainBox } from '@/components/result';
+import { SCHEDULE } from '@/constants/form/constants';
 import { AppLayout } from '@/layouts';
 import type { ResultStep } from '@/types/result/client';
+import { formatFormYear } from '@/utils';
 import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -18,7 +20,7 @@ const ResultFirst = () => {
       <StyledResultFirst>
         <Column alignItems="center" gap={12}>
           <Text fontType="H6" color={color.gray900}>
-            2024학년도 부산소프트웨어마이스터고등학교
+            {formatFormYear(SCHEDULE.원서_접수)}학년도 부산소프트웨어마이스터고등학교
           </Text>
           <Text fontType="D3" color={color.gray900}>
             1차 합격자 발표

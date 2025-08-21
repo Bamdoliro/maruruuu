@@ -1,9 +1,10 @@
 'use client';
 
 import { FairStudentApplicationBox } from '@/components/fair';
+import { SCHEDULE } from '@/constants/form/constants';
 import { AppLayout } from '@/layouts';
 import { useFairListQuery } from '@/services/fair/queries';
-import { formatApplicationDate, formatStartDate } from '@/utils';
+import { formatApplicationDate, formatFormYear, formatStartDate } from '@/utils';
 import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -26,7 +27,7 @@ const FairStudentApplication = ({ params: { id } }: FairStudentApplicationProps)
       <StyledFairStudentApplication>
         <Column gap={36}>
           <Text fontType="H1" color={color.gray900}>
-            2024학년도 부산소프트웨어마이스터고등학교
+            {formatFormYear(SCHEDULE.원서_접수)}학년도 부산소프트웨어마이스터고등학교
             <br />
             입학전형 설명회 참가 신청 (학생, 학부모)
           </Text>
