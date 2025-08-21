@@ -3,6 +3,8 @@ import { useSchoolRecruitDate } from './ApplicationPeriodBox.hook';
 import { color } from '@maru/design-system';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
+import { formatFormYear } from '@/utils';
+import { SCHEDULE } from '@/constants/form/constants';
 
 const ApplicationPeriodBox = () => {
   const { applicationStart, applicationEnd, handleMoveFormPage } = useSchoolRecruitDate();
@@ -12,7 +14,7 @@ const ApplicationPeriodBox = () => {
       <Column gap={36}>
         <Text fontType="H1" color={color.white}>
           부산소프트웨어마이스터고등학교 <br />
-          2025학년도 신입생 모집
+          {formatFormYear(SCHEDULE.원서_접수)}학년도 신입생 모집
         </Text>
         <Text fontType="p2" color={color.gray300}>
           {applicationStart} ~ {applicationEnd}
