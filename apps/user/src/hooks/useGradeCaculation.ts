@@ -40,10 +40,12 @@ const useGradeCalculation = () => {
 			return acc + (subject.subjectName === '수학' ? 2*score : score);
     }, 0);
     const scoreLength = form.grade.subjectList?.reduce((acc, subject) => {
-      if (subject[achievementLevelKey] !== null && subject[achievementLevelKey] !== '-') {
-        return acc + (subject.subjectName === '수학' ? 2 : 1);
+	    const achievementLevel = subject[achievementLevelKey];
+			const subjectName = subject.subjectName;
+      if ((!CORE_SUBJECTS.includes(subjectName) && achievementLevel === null) || achievementLevel === '-') {
+	      return acc;
       }
-      return acc;
+	    return acc + (subject.subjectName === '수학' ? 2 : 1);
     }, 0);
 
     if (scoreLength === 0) {
