@@ -13,8 +13,17 @@ import DraftCompleted from './DraftCompleted/DraftCompleted';
 import DraftSubmissionCompleted from './DraftSubmissionCompleted/DraftSubmissionCompleted';
 import FinalSubmission from './FinalSubmission/FinalSubmission';
 import FinalSubmissionCompleted from './FinalSubmissionCompleted/FinalSubmissionCompleted';
+import { SCHEDULE } from '@/constants/form/constants';
+import { usePageAccessGuard } from '@/hooks';
 
 const Form = () => {
+  usePageAccessGuard({
+    period: { start: SCHEDULE.원서_접수, end: SCHEDULE.원서_접수_마감 },
+    title: '원서 접수 기간이 아닙니다',
+    content:
+      '원서 접수 기간에만 원서 작성이 가능합니다.\n원서 접수 기간까지 조금만 기다려 주세요.',
+  });
+
   const formStep = useFormStepValueStore();
 
   return (

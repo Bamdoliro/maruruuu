@@ -5,9 +5,11 @@ import type { AxiosResponse } from 'axios';
 import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 import { Storage } from '@/apis/storage/storage';
+import { useApiError, useToast } from '@/hooks';
 
 export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
   const router = useRouter();
+  const { toast } = useToast();
 
   const { mutate: loginMutate, ...restMutation } = useMutation({
     mutationFn: () => postLogin({ phoneNumber, password }),
@@ -15,9 +17,11 @@ export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
       const { accessToken, refreshToken } = res.data;
       Storage.setItem(TOKEN.ACCESS, accessToken);
       Storage.setItem(TOKEN.REFRESH, refreshToken);
+      toast('로그인 되었습니다.', 'SUCCESS');
       router.replace(ROUTES.MAIN);
     },
     onError: () => {
+      toast('전화번호나 비밀번호를 다시 확인해주세요.', 'ERROR');
       localStorage.clear();
     },
   });
@@ -27,6 +31,7 @@ export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
 
 export const useLogoutMutation = () => {
   const router = useRouter();
+  const { handleError } = useApiError();
 
   const { mutate: logoutMutate, ...restMutation } = useMutation({
     mutationFn: deleteLogout,
@@ -38,7 +43,7 @@ export const useLogoutMutation = () => {
       Storage.removeItem(TOKEN.ACCESS);
       Storage.removeItem(TOKEN.REFRESH);
     },
-    onError: () => {},
+    onError: handleError,
   });
 
   return { logoutMutate, ...restMutation };

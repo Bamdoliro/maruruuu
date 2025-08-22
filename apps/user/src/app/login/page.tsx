@@ -1,16 +1,62 @@
 'use client';
 
-import { ROUTES } from '@/constants/common/constants';
+import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { AppLayout } from '@/layouts';
 import { color, font } from '@maru/design-system';
 import { IconArrowRight } from '@maru/icon';
-import { Button, Column, Input, PreviewInput } from '@maru/ui';
+import { Button, Column, Input, PreviewInput, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useCTAButton, useInput, useKeyDown, useLoginAction } from './login.hook';
+import { useEffect } from 'react';
+import { Storage } from '@/apis/storage/storage';
+import { jwtDecode } from 'jwt-decode';
+import { useRouter } from 'next/navigation';
+import { useOverlay } from '@toss/use-overlay';
+import { AlertStyleModal } from '@/components/common';
 
 const Login = () => {
+  const router = useRouter();
+  const overlay = useOverlay();
+
+  useEffect(() => {
+    const token = Storage.getItem(TOKEN.ACCESS) || undefined;
+
+    const isTokenValid = (token?: string) => {
+      if (!token) return false;
+
+      try {
+        const decoded: { exp: number } = jwtDecode(token);
+        const now = Date.now() / 1000;
+        return decoded.exp > now;
+      } catch (e) {
+        return false;
+      }
+    };
+
+    if (isTokenValid(token)) {
+      overlay.open(({ close, isOpen }) => (
+        <AlertStyleModal
+          isOpen={isOpen}
+          onClose={() => {
+            router.replace(ROUTES.MAIN);
+            close();
+          }}
+          title="이미 로그인되어 있습니다."
+          content={
+            <Text fontType="p2" whiteSpace="pre-line">
+              로그인이 되어 있지 않은 경우에 로그인이 가능합니다.
+              <br />
+              로그아웃 후 접속해주세요.
+            </Text>
+          }
+          height={350}
+        />
+      ));
+    }
+  }, [overlay, router]);
+
   const { handleMoveMainPage } = useCTAButton();
   const { login, handleLoginChange } = useInput();
   const { handleLogin } = useLoginAction(login);

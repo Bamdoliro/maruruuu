@@ -5,3 +5,5 @@ export { default as useGradeCaculation } from './useGradeCaculation';
 export { default as useDragAndDrop } from './useDragAndDrop';
 export { default as useToast } from './useToast';
 export { default as useDownloadFile } from './useDownloadFile';
+export { default as usePageAccessGuard } from './usePageAccessGuard';
+export { default as useLoginGuard } from './useLoginGuard';

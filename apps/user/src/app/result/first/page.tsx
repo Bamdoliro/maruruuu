@@ -2,9 +2,10 @@
 
 import { FirstResultBox, ResultMainBox } from '@/components/result';
 import { SCHEDULE } from '@/constants/form/constants';
+import { usePageAccessGuard } from '@/hooks';
 import { AppLayout } from '@/layouts';
 import type { ResultStep } from '@/types/result/client';
-import { formatFormYear } from '@/utils';
+import { formatFormYear, formatResultDateTime } from '@/utils';
 import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -13,6 +14,13 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 
 const ResultFirst = () => {
+  usePageAccessGuard({
+    period: { start: SCHEDULE.일차_합격_발표, end: SCHEDULE.이차_면접 },
+    title: '1차 합격 발표 기간이 아닙니다',
+    content:
+      '1차 합격 발표 기간에만 확인이 가능합니다.\n1차 합격 발표 기간까지 조금만 기다려 주세요.',
+  });
+
   const [firstResultStep, setFirstResultStep] = useState<ResultStep>('MAIN');
 
   return (
@@ -31,7 +39,7 @@ const ResultFirst = () => {
           caseBy={{
             MAIN: (
               <ResultMainBox
-                date="2024년 10월 23일 (월) 15:00"
+                date={formatResultDateTime(SCHEDULE.일차_합격_발표)}
                 capacity="일반전형 및 특별전형 각각 모집정원의 130% 이내"
                 setResultStep={setFirstResultStep}
               />

@@ -11,8 +11,11 @@ import Link from 'next/link';
 import { useOverlay } from '@toss/use-overlay';
 import { useCTAButton, useInput, useWithdrawalAction } from './withdrawal.hook';
 import { WithdrawalModal } from '@/components/withdrawal';
+import { useLoginGuard } from '@/hooks';
 
 const Withdrawal = () => {
+  useLoginGuard();
+
   const overlay = useOverlay();
   const { handleMoveMain } = useCTAButton();
   const { withdrawal, handleLoginChange } = useInput();

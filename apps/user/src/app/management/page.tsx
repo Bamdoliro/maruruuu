@@ -1,6 +1,8 @@
 'use client';
 
 import { ManagementContent } from '@/components/management';
+import { SCHEDULE } from '@/constants/form/constants';
+import { usePageAccessGuard } from '@/hooks';
 import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Loader, Text } from '@maru/ui';
@@ -9,6 +11,13 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 
 const Management = () => {
+  usePageAccessGuard({
+    period: { start: SCHEDULE.원서_접수, end: SCHEDULE.입학_등록_마감 },
+    title: '입학 전형 기간이 아닙니다',
+    content:
+      '입학 전형 기간에만 원서 관리가 가능합니다.\n입학 전형 기간에만 접속해주세요.',
+  });
+
   return (
     <AppLayout header footer>
       <StyledManagement>
