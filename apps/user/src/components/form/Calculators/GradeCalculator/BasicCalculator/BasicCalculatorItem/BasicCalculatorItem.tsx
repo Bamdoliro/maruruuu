@@ -3,7 +3,6 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import { useSubjectListValueStore } from '@/stores';
 import { useInput } from './BasicCalculatorItem.hook';
-import type { Subject } from '@/types/form/client';
 
 interface Props {
   id: number;
@@ -11,22 +10,17 @@ interface Props {
   isError?: boolean[];
 }
 
-const ACHIEVEMENT_KEYS: (keyof Subject)[] = [
+const ACHIEVEMENT_KEYS = [
   'achievementLevel21',
   'achievementLevel22',
   'achievementLevel31',
-];
+] as const;
 
 const BasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) => {
   const subjectList = useSubjectListValueStore();
   const { handleSubjectChange } = useInput(id);
 
   const subject = subjectList[id];
-
-  const getDisplayValue = (value: string | number | null) => {
-    if (value === null) return '미이수';
-    return value as string;
-  };
 
   return (
     <StyledBasicCalculatorItem>
@@ -36,7 +30,7 @@ const BasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) => 
       {ACHIEVEMENT_KEYS.map((key) => (
         <Td key={key} width="24%" height={64}>
           <Dropdown
-            value={getDisplayValue(subject[key])}
+            value={subject[key]}
             size="SMALL"
             data={achievementLevels}
             width={80}

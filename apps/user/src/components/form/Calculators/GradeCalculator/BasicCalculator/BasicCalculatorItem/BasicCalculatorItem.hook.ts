@@ -13,17 +13,11 @@ export const useInput = (id: number) => {
       const updatedData = [...prev];
       const subject = updatedData[id];
 
-      let newValue: string | null;
       subjectName = subject.subjectName;
-      if (data === '미이수') {
-          newValue = null;
-      } else {
-        newValue = data;
-      }
 
       updatedData[id] = {
         ...subject,
-        [name]: newValue,
+        [name]: data,
       };
       return updatedData;
     });

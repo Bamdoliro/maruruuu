@@ -98,13 +98,13 @@ export type SubjectList = Omit<Subject, 'id'>;
 export interface Subject {
   id: number;
   subjectName: string;
-  achievementLevel21: AchievementLevel | null;
-  achievementLevel22: AchievementLevel | null;
-  achievementLevel31: AchievementLevel | null;
+  achievementLevel21: AchievementLevel;
+  achievementLevel22: AchievementLevel;
+  achievementLevel31: AchievementLevel;
   score: number | null;
 }
 
-export type AchievementLevel = '-' | 'A' | 'B' | 'C' | 'D' | 'E';
+export type AchievementLevel = '-' | '미이수' | 'A' | 'B' | 'C' | 'D' | 'E';
 
 export interface Attendance {
   absenceCount: number;
