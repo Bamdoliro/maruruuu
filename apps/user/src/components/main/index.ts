@@ -5,5 +5,3 @@ export { default as SimulationBox } from './SimulationBox/SimulationBox';
 export { default as AdmissionTimelineBox } from './AdmissionTimelineBox/AdmissionTimelineBox';
 export { default as FaqBox } from './FaqBox/FaqBox';
 export { default as NoticeBox } from './NoticeBox/NoticeBox';
-export { default as NeedLoginModal } from './NeedLoginModal/NeedLoginModal';
-export { default as AlertStyleModal } from './AlertStyleModal/AlertStyleModal';
