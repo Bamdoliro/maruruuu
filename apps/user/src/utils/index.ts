@@ -10,3 +10,4 @@ export { default as bitmapToBlob } from './bitmapToBlob';
 export { default as useFormStep } from './formStep';
 export { default as formatScheduleDate } from './formatScheduleDate';
 export { default as formatFormYear } from './formatFormYear';
+export { default as formatResultDateTime } from './formatResultDateTime';
