@@ -16,12 +16,7 @@ export const useInput = (id: number) => {
       let newValue: string | null;
       subjectName = subject.subjectName;
       if (data === '미이수') {
-        if (CORE_SUBJECTS.includes(subjectName)) {
-          newValue = 'C';
-          isIncomplete = true;
-        } else {
           newValue = null;
-        }
       } else {
         newValue = data;
       }
