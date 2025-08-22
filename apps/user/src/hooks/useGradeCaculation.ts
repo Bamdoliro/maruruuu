@@ -21,6 +21,8 @@ type AttenedanceKey =
   | 'earlyLeaveCount'
   | 'classAbsenceCount';
 
+const CORE_SUBJECTS = ['국어', '영어', '수학'];
+
 const useGradeCalculation = () => {
   const form = useFormValueStore();
 
@@ -28,19 +30,14 @@ const useGradeCalculation = () => {
     const scoreTotal = form.grade.subjectList?.reduce((acc, subject) => {
       const achievementLevel = subject[achievementLevelKey];
       const subjectName = subject.subjectName;
-      if (
-        (subjectName === '국어' || subjectName === '영어') &&
-        achievementLevel === null
-      ) {
-        return acc + AchievementScore['C'];
-      } else if (subjectName === '수학' && achievementLevel === null) {
-        return acc + AchievementScore['C'] * 2;
-      }
-      if (subjectName === '수학' && achievementLevel !== null) {
-        return acc + AchievementScore[achievementLevel] * 2;
-      } else {
-        return acc + (achievementLevel ? AchievementScore[achievementLevel] : 0);
-      }
+			let score: number;
+			if (CORE_SUBJECTS.includes(subjectName) && achievementLevel === null) {
+				score = AchievementScore['C'];
+			} else {
+				score = achievementLevel ? AchievementScore[achievementLevel] : 0;
+			}
+
+			return acc + (subject.subjectName === '수학' ? 2*score : score);
     }, 0);
     const scoreLength = form.grade.subjectList?.reduce((acc, subject) => {
       if (subject[achievementLevelKey] !== null && subject[achievementLevelKey] !== '-') {
