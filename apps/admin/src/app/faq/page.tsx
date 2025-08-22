@@ -7,6 +7,7 @@ import AppLayout from '@/layouts/AppLayout';
 import FaqTable from '@/components/faq/FaqTable/FaqTable';
 import { useFaqListQuery } from '@/services/faq/queries';
 import { ROUTES } from '@/constants/common/constant';
+import { EXTENDED_FAQ_CATEGORY, FAQ_CATEGORY_OPTIONS } from '@/constants/faq/constant';
 import { useDebounceInput } from '@maru/hooks';
 import { Button, Column, Dropdown, Row, SearchInput, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -25,12 +26,21 @@ const FaqPage = () => {
   const [selectedCategory, setSelectedCategory] =
     useState<ExtendedFaqCategory>('ALL_FAQS');
 
+  const categoryData = [
+    { value: 'ALL_FAQS', label: '전체 보기' },
+    ...FAQ_CATEGORY_OPTIONS,
+  ];
+
   const handleMoveFaqCreatePage = () => {
     router.push(ROUTES.FAQ_CREATE);
   };
 
   const handleChangeFaqCategory = (value: string) => {
     setSelectedCategory(value as ExtendedFaqCategory);
+  };
+
+  const getCategoryDropdownValue = (category: Record<string, string>) => {
+    return selectedCategory === 'ALL_FAQS' ? undefined : category[selectedCategory];
   };
 
   const filteredFaqList = useMemo(() => {
@@ -58,16 +68,11 @@ const FaqPage = () => {
                 onChange={handleFaqKeywordChange}
               />
               <Dropdown
-                data={[
-                  { value: 'ALL_FAQS', label: '전체 보기' },
-                  { value: 'SCHOOL_LIFE', label: '학교 생활' },
-                  { value: 'SUBMIT_DOCUMENT', label: '관련 제출 서류' },
-                  { value: 'ADMISSION_PROCESS', label: '입학 과정' },
-                  { value: 'TOP_QUESTION', label: '질문 TOP' },
-                ]}
+                data={categoryData}
                 size="SMALL"
                 width={140}
                 placeholder="카테고리"
+                value={getCategoryDropdownValue(EXTENDED_FAQ_CATEGORY)}
                 onChange={handleChangeFaqCategory}
                 name="category"
               />
