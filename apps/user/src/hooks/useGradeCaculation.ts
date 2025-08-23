@@ -4,6 +4,7 @@ import { getAchivementLevel } from '@/utils';
 
 enum AchievementScore {
   '-' = 0,
+  '미이수' = 0,
   'A' = 5,
   'B' = 4,
   'C' = 3,
@@ -30,22 +31,25 @@ const useGradeCalculation = () => {
     const scoreTotal = form.grade.subjectList?.reduce((acc, subject) => {
       const achievementLevel = subject[achievementLevelKey];
       const subjectName = subject.subjectName;
-			let score: number;
-			if (CORE_SUBJECTS.includes(subjectName) && achievementLevel === null) {
-				score = AchievementScore['C'];
-			} else {
-				score = achievementLevel ? AchievementScore[achievementLevel] : 0;
-			}
+      let score: number;
+      if (CORE_SUBJECTS.includes(subjectName) && achievementLevel === '미이수') {
+        score = AchievementScore['C'];
+      } else {
+        score = AchievementScore[achievementLevel];
+      }
 
-			return acc + (subject.subjectName === '수학' ? 2*score : score);
+      return acc + (subject.subjectName === '수학' ? 2 * score : score);
     }, 0);
     const scoreLength = form.grade.subjectList?.reduce((acc, subject) => {
-	    const achievementLevel = subject[achievementLevelKey];
-			const subjectName = subject.subjectName;
-      if ((!CORE_SUBJECTS.includes(subjectName) && achievementLevel === null) || achievementLevel === '-') {
-	      return acc;
+      const achievementLevel = subject[achievementLevelKey];
+      const subjectName = subject.subjectName;
+      if (
+        (!CORE_SUBJECTS.includes(subjectName) && achievementLevel === null) ||
+        achievementLevel === '-'
+      ) {
+        return acc;
       }
-	    return acc + (subject.subjectName === '수학' ? 2 : 1);
+      return acc + (subject.subjectName === '수학' ? 2 : 1);
     }, 0);
 
     if (scoreLength === 0) {
