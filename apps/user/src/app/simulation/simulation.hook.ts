@@ -30,7 +30,6 @@ export const useNavigationClick = () => {
 
       if (hasEmptyAchievementLevel) {
         alert('미입력 값이 있어요. 성적 입력을 먼저 완료해주세요.');
-        return;
       }
     }
 
