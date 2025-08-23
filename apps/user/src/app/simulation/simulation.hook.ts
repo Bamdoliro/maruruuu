@@ -21,7 +21,7 @@ export const useNavigationClick = () => {
       currentStep === '성적 입력' &&
       (step === '출결상황' || step === '봉사시간' || step === '자격증')
     ) {
-      const hasEmptyAchievementLevel = form.grade.subjectList.some(
+      const hasEmptyAchievementLevel = form.grade.subjectList?.some(
         (subject) =>
           subject.achievementLevel21 === '-' ||
           subject.achievementLevel22 === '-' ||
