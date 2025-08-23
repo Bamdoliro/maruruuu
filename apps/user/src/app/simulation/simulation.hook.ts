@@ -29,7 +29,7 @@ export const useNavigationClick = () => {
       );
 
       if (hasEmptyAchievementLevel) {
-        alert('미입력 값이 있어요. 성적 입력을 먼저 완료해주세요.');
+        alert('성적 미입력 값이 있어요. 성적을 모두 입력해야 정확한 계산이 가능해요.');
       }
     }
 
