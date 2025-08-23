@@ -16,7 +16,7 @@ type AchievementLevelKey =
   | 'achievementLevel21'
   | 'achievementLevel22'
   | 'achievementLevel31';
-type AttenedanceKey =
+type AttendanceKey =
   | 'absenceCount'
   | 'latenessCount'
   | 'earlyLeaveCount'
@@ -108,7 +108,7 @@ const useGradeCalculation = () => {
       return SCORE.ATTENDANCE;
     }
 
-    const getAttendanceCount = (type: AttenedanceKey) => {
+    const getAttendanceCount = (type: AttendanceKey) => {
       const attendanceCount =
         form.grade.attendance1[type] +
         form.grade.attendance2[type] +
