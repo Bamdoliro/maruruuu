@@ -14,11 +14,11 @@ interface NewBasicCalculatorItemProps {
   isError?: boolean[];
 }
 
-const ACHIEVEMENT_KEYS: (keyof Subject)[] = [
+const ACHIEVEMENT_KEYS = [
   'achievementLevel21',
   'achievementLevel22',
   'achievementLevel31',
-];
+] as const;
 
 const NewBasicCalculatorItem = ({
   id,
@@ -60,7 +60,7 @@ const NewBasicCalculatorItem = ({
       {ACHIEVEMENT_KEYS.map((key) => (
         <Td key={key} width="24%" height={64}>
           <Dropdown
-            value={String(subject[key] ?? '미이수')}
+            value={subject[key]}
             size="SMALL"
             data={achievementLevels}
             width={80}
