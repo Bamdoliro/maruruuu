@@ -3,6 +3,7 @@ import { Button } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import { useFormProfileValueStore } from '@/stores/form/formProfile';
+import { useSetFormStepStore } from '@/stores/form/formStep';
 
 interface FormControllerProps {
   onPrevious?: () => void;
@@ -12,10 +13,16 @@ interface FormControllerProps {
 
 const FormController = ({ onPrevious, onNext, step }: FormControllerProps) => {
   const profileUrl = useFormProfileValueStore();
+  const setFormStep = useSetFormStepStore();
 
   const handleNext = () => {
     if (step === '자기소개서' && !profileUrl?.downloadUrl) {
-      alert('증명사진 업로드가 필요합니다. 지원자 정보를 확인해주세요.');
+      const result = confirm(
+        '증명사진 업로드가 필요합니다. 지원자 정보로 이동하시겠습니까?'
+      );
+      if (result) {
+        setFormStep('지원자정보');
+      }
       return;
     }
     onNext();
