@@ -3,7 +3,6 @@ import { CheckInput, Column, Confirm, Text } from '@maru/ui';
 import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { useFormProfileValueStore } from '@/stores/form/formProfile';
-import { useSetFormStepStore } from '@/stores/form/formStep';
 
 interface DraftFormModalProps {
   isOpen: boolean;
@@ -15,7 +14,6 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
   const [inputValue, setInputValue] = useState('');
   const [isInputValid, setIsInputValid] = useState(false);
   const profileUrl = useFormProfileValueStore();
-  const setFormStep = useSetFormStepStore();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -26,13 +24,9 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
   const handleConfirm = () => {
     if (!isInputValid) return;
     if (!profileUrl?.downloadUrl) {
-      const result = confirm(
-        '증명사진 업로드가 필요합니다. 지원자 정보 페이지로 이동하시겠습니까?'
+      alert(
+        '증명사진 업로드가 필요합니다. 원서 작성으로 돌아가서 증명사진을 추가해주세요.'
       );
-      if (result) {
-        onClose();
-        setFormStep('지원자정보');
-      }
       return;
     }
     onConfirm();
