@@ -16,12 +16,6 @@ export {
 } from './form/subjectList';
 
 export {
-  useFormSubjectIncompleteStore,
-  useSetmSubjectIncompleteStore,
-  useSubjectIncompleteValueStore,
-} from './form/formSubjectIncomplete';
-
-export {
   useGEDSubjectListStore,
   useGEDSubjectListValueStore,
   useSetGEDSubjectListStore,
