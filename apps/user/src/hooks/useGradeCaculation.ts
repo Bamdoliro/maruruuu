@@ -116,10 +116,12 @@ const useGradeCalculation = () => {
 
     const absenceCount =
       getAttendanceCount('absenceCount') +
-      (getAttendanceCount('latenessCount') +
-        getAttendanceCount('earlyLeaveCount') +
-        getAttendanceCount('classAbsenceCount')) /
-        3;
+      Math.floor(
+        (getAttendanceCount('latenessCount') +
+          getAttendanceCount('earlyLeaveCount') +
+          getAttendanceCount('classAbsenceCount')) /
+          3
+      );
 
     const attendanceScore =
       absenceCount > COUNT.MAX_ABSENCE
