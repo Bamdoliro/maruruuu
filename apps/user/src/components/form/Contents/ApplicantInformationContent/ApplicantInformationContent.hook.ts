@@ -1,19 +1,23 @@
-import { useUser } from '@/hooks';
+import type { ChangeEventHandler } from 'react';
+import { useEffect, useState } from 'react';
+import { useSaveFormMutation } from '@/services/form/mutations';
+import { useFormStore, useSetFormStepStore } from '@/stores';
+import { useFormProfileValueStore } from '@/stores/form/formProfile';
 import { ApplicantSchema } from '@/schemas/ApplicantSchema';
 import { useSaveFormQuery } from '@/services/form/queries';
-import { useFormValueStore, useSetFormStore } from '@/stores';
+import { useUser } from '@/hooks';
 import { formatDate, useFormStep } from '@/utils';
-import { useEffect, useState } from 'react';
-import type { ChangeEventHandler } from 'react';
 import { z } from 'zod';
 
 export const useApplicantForm = () => {
-  const form = useFormValueStore();
-  const setForm = useSetFormStore();
+  const [form, setForm] = useFormStore();
+  const profileUrl = useFormProfileValueStore();
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const setFormStep = useSetFormStepStore();
+  const { saveFormMutate } = useSaveFormMutation();
+  const { run: FormStep } = useFormStep();
   const { userData } = useUser();
   const { data: saveFormQuery } = useSaveFormQuery();
-  const [errors, setErrors] = useState<Record<string, string[]>>({});
-  const { run: FormStep } = useFormStep();
 
   const formatter: Record<string, (value: string) => string> = {
     birthday: (value) => formatDate(value.replace(/\D/g, '')),
@@ -36,6 +40,17 @@ export const useApplicantForm = () => {
     userData,
   ]);
 
+  // 증명사진 URL이 변경되면 form에 반영
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,
+      applicant: {
+        ...prev.applicant,
+        profile: profileUrl?.downloadUrl || '',
+      },
+    }));
+  }, [profileUrl?.downloadUrl, setForm]);
+
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({
@@ -52,6 +67,7 @@ export const useApplicantForm = () => {
 
   const handleNextStep = () => {
     try {
+      ApplicantSchema.parse(form.applicant);
       FormStep({
         schema: ApplicantSchema,
         formData: form.applicant,
@@ -69,5 +85,22 @@ export const useApplicantForm = () => {
     }
   };
 
-  return { onFieldChange, handleNextStep, errors };
+  const handlePreviousStep = () => {
+    try {
+      ApplicantSchema.parse(form.applicant);
+      setErrors({});
+      setFormStep('지원유형선택');
+      saveFormMutate(form);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        const fieldErrors = err.flatten().fieldErrors;
+        const normalizedErrors = Object.fromEntries(
+          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
+        );
+        setErrors(normalizedErrors);
+      }
+    }
+  };
+
+  return { onFieldChange, handleNextStep, handlePreviousStep, errors };
 };

@@ -12,7 +12,10 @@ const ApplicantInformationContent = () => {
     <>
       <Row width="100%" justifyContent="space-between">
         <Column gap={40} alignItems="center">
-          <ProfileUploader />
+          <ProfileUploader
+            isError={!!errors.profile?.length}
+            errorMessage={errors.profile ? errors.profile[0] : ''}
+          />
         </Column>
         <Column gap={30} width={492}>
           <Input

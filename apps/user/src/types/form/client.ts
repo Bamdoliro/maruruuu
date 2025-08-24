@@ -57,6 +57,7 @@ export interface User {
   phoneNumber: string;
   birthday: string;
   gender: 'FEMALE' | 'MALE';
+  profile: string;
 }
 
 export interface Parent {

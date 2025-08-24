@@ -8,6 +8,7 @@ export const FORM: Form = {
     phoneNumber: '',
     birthday: '',
     gender: 'MALE',
+    profile: '',
   },
   parent: {
     name: '',

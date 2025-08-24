@@ -13,4 +13,5 @@ export const ApplicantSchema = z.object({
     .trim()
     .nonempty('전화번호를 입력해주세요.')
     .regex(/^\d{11}$/, '전화번호는 11자리를 입력해주세요.'),
+  profile: z.string().nonempty('증명사진을 업로드해 주세요.'),
 });

@@ -17,7 +17,15 @@ const MIN_WIDTH = 113.4;
 const MIN_HEIGHT = 151.2;
 const MAX_SIZE = 2 * 1024 * 1024;
 
-const ProfileUploader = () => {
+interface ProfileUploaderProps {
+  isError?: boolean;
+  errorMessage?: string;
+}
+
+const ProfileUploader = ({
+  isError = false,
+  errorMessage = '',
+}: ProfileUploaderProps) => {
   const [profile, setProfile] = useProfileStore();
   const profileUrl = useFormProfileValueStore();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -197,6 +205,7 @@ const ProfileUploader = () => {
           onDragOver={onDragOver}
           onDrop={onDrop}
           $isDragging={isDragging}
+          $isError={isError}
         >
           <Column gap={12} alignItems="center">
             <Button size="SMALL" onClick={openFileUploader}>
@@ -213,6 +222,7 @@ const ProfileUploader = () => {
           재업로드
         </Button>
       )}
+      {isError && errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <Desc>
         2MB 이하, 3개월 이내의
         <br />
@@ -262,6 +272,13 @@ const ImagePreview = styled.img`
 const Desc = styled.p`
   ${font.p2};
   color: ${color.gray500};
+  margin: 0 auto;
+  text-align: center;
+`;
+
+const ErrorMessage = styled.p`
+  ${font.p2};
+  color: ${color.red};
   margin: 0 auto;
   text-align: center;
 `;
