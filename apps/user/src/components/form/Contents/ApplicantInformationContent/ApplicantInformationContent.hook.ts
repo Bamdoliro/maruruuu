@@ -89,7 +89,7 @@ export const useApplicantForm = () => {
     try {
       ApplicantSchema.parse(form.applicant);
       setErrors({});
-      setFormStep('지원유형선택');
+      setFormStep('전형선택');
       saveFormMutate(form);
     } catch (err) {
       if (err instanceof z.ZodError) {

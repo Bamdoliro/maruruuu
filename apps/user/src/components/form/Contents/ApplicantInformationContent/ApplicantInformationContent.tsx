@@ -1,4 +1,5 @@
 import { useFormValueStore } from '@/stores';
+import { useFormProfileValueStore } from '@/stores/form/formProfile';
 import { Column, Input, RadioGroup, Row } from '@maru/ui';
 import ProfileUploader from '../../ProfileUploader/ProfileUploader';
 import FormController from '../../FormController/FormController';
@@ -7,6 +8,7 @@ import { useApplicantForm } from './ApplicantInformationContent.hook';
 const ApplicantInformationContent = () => {
   const { onFieldChange, handleNextStep, errors } = useApplicantForm();
   const form = useFormValueStore();
+  const profileUrl = useFormProfileValueStore();
 
   return (
     <>
@@ -62,7 +64,7 @@ const ApplicantInformationContent = () => {
           />
         </Column>
       </Row>
-      <FormController onNext={handleNextStep} step="지원자정보" />
+      <FormController onNext={handleNextStep} step="지원자정보" profileUrl={profileUrl} />
     </>
   );
 };

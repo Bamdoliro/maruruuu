@@ -10,17 +10,8 @@ interface FormControllerProps {
   profileUrl?: { downloadUrl?: string };
 }
 
-const FormController = ({
-  onPrevious,
-  onNext,
-  step,
-  profileUrl,
-}: FormControllerProps) => {
+const FormController = ({ onPrevious, onNext, step }: FormControllerProps) => {
   const handleNext = () => {
-    if (step === '지원자정보' && !profileUrl?.downloadUrl) {
-      alert('증명사진 업로드가 필요합니다.');
-      return;
-    }
     onNext();
   };
   return (
