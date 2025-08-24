@@ -19,13 +19,9 @@ const MAX_SIZE = 2 * 1024 * 1024;
 
 interface ProfileUploaderProps {
   isError?: boolean;
-  errorMessage?: string;
 }
 
-const ProfileUploader = ({
-  isError = false,
-  errorMessage = '',
-}: ProfileUploaderProps) => {
+const ProfileUploader = ({ isError = false }: ProfileUploaderProps) => {
   const [profile, setProfile] = useProfileStore();
   const profileUrl = useFormProfileValueStore();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -222,7 +218,6 @@ const ProfileUploader = ({
           재업로드
         </Button>
       )}
-      {isError && errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <Desc>
         2MB 이하, 3개월 이내의
         <br />
@@ -272,13 +267,6 @@ const ImagePreview = styled.img`
 const Desc = styled.p`
   ${font.p2};
   color: ${color.gray500};
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const ErrorMessage = styled.p`
-  ${font.p2};
-  color: ${color.red};
   margin: 0 auto;
   text-align: center;
 `;
