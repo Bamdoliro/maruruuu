@@ -4,6 +4,7 @@ import { getAchivementLevel } from '@/utils';
 
 enum AchievementScore {
   '-' = 0,
+  '미이수' = 0,
   'A' = 5,
   'B' = 4,
   'C' = 3,
@@ -15,11 +16,13 @@ type AchievementLevelKey =
   | 'achievementLevel21'
   | 'achievementLevel22'
   | 'achievementLevel31';
-type AttenedanceKey =
+type AttendanceKey =
   | 'absenceCount'
   | 'latenessCount'
   | 'earlyLeaveCount'
   | 'classAbsenceCount';
+
+const CORE_SUBJECTS = ['국어', '영어', '수학'];
 
 const useGradeCalculation = () => {
   const form = useFormValueStore();
@@ -28,25 +31,25 @@ const useGradeCalculation = () => {
     const scoreTotal = form.grade.subjectList?.reduce((acc, subject) => {
       const achievementLevel = subject[achievementLevelKey];
       const subjectName = subject.subjectName;
-      if (
-        (subjectName === '국어' || subjectName === '영어') &&
-        achievementLevel === null
-      ) {
-        return acc + AchievementScore['C'];
-      } else if (subjectName === '수학' && achievementLevel === null) {
-        return acc + AchievementScore['C'] * 2;
-      }
-      if (subjectName === '수학' && achievementLevel !== null) {
-        return acc + AchievementScore[achievementLevel] * 2;
+      let score: number;
+      if (CORE_SUBJECTS.includes(subjectName) && achievementLevel === '미이수') {
+        score = AchievementScore['C'];
       } else {
-        return acc + (achievementLevel ? AchievementScore[achievementLevel] : 0);
+        score = AchievementScore[achievementLevel];
       }
+
+      return acc + (subject.subjectName === '수학' ? 2 * score : score);
     }, 0);
     const scoreLength = form.grade.subjectList?.reduce((acc, subject) => {
-      if (subject[achievementLevelKey] !== null && subject[achievementLevelKey] !== '-') {
-        return acc + (subject.subjectName === '수학' ? 2 : 1);
+      const achievementLevel = subject[achievementLevelKey];
+      const subjectName = subject.subjectName;
+      if (
+        (!CORE_SUBJECTS.includes(subjectName) && achievementLevel === null) ||
+        achievementLevel === '-'
+      ) {
+        return acc;
       }
-      return acc;
+      return acc + (subject.subjectName === '수학' ? 2 : 1);
     }, 0);
 
     if (scoreLength === 0) {
@@ -105,7 +108,7 @@ const useGradeCalculation = () => {
       return SCORE.ATTENDANCE;
     }
 
-    const getAttendanceCount = (type: AttenedanceKey) => {
+    const getAttendanceCount = (type: AttendanceKey) => {
       const attendanceCount =
         form.grade.attendance1[type] +
         form.grade.attendance2[type] +

@@ -86,9 +86,9 @@ export const GED_SUBJECT_LIST: Subject[] = ['국어', '수학', '사회', '과�
   (subject, index) => ({
     id: index,
     subjectName: subject,
-    achievementLevel21: null,
-    achievementLevel22: null,
-    achievementLevel31: null,
+    achievementLevel21: '미이수',
+    achievementLevel22: '미이수',
+    achievementLevel31: '미이수',
     score: 0,
   })
 );
@@ -103,8 +103,8 @@ export const SELECT_GED_SUBJECT_LIST: Subject[] = [
 ].map((subject, index) => ({
   id: index,
   subjectName: subject,
-  achievementLevel21: null,
-  achievementLevel22: null,
-  achievementLevel31: null,
+  achievementLevel21: '미이수',
+  achievementLevel22: '미이수',
+  achievementLevel31: '미이수',
   score: 0,
 }));
