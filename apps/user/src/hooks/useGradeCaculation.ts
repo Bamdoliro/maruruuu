@@ -108,6 +108,7 @@ const useGradeCalculation = () => {
       return SCORE.ATTENDANCE;
     }
 
+    const getAttendanceCount = (type: AttendanceKey) => {
       return (
         form.grade.attendance1[type] +
         form.grade.attendance2[type] +
