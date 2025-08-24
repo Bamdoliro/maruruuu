@@ -31,6 +31,7 @@ export const useApplicantForm = () => {
         ...prev.applicant,
         name: saveFormQuery?.applicant.name ?? userData.name,
         phoneNumber: saveFormQuery?.applicant.phoneNumber ?? userData.phoneNumber,
+        profile: prev.applicant.profile || '',
       },
     }));
   }, [
