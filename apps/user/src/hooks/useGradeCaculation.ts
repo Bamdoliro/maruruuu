@@ -126,7 +126,7 @@ const useGradeCalculation = () => {
       );
 
     const attendanceScore =
-      absenceCount > COUNT.MAX_ABSENCE
+      absenceCount >= COUNT.MIN_ABSENCE_FOR_ZERO
         ? SCORE.MIN_ATTENDANCE
         : SCORE.MAX_ATTENDANCE - absenceCount;
 
