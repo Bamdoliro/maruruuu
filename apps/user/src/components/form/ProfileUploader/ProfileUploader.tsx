@@ -17,7 +17,11 @@ const MIN_WIDTH = 113.4;
 const MIN_HEIGHT = 151.2;
 const MAX_SIZE = 2 * 1024 * 1024;
 
-const ProfileUploader = () => {
+interface ProfileUploaderProps {
+  isError?: boolean;
+}
+
+const ProfileUploader = ({ isError = false }: ProfileUploaderProps) => {
   const [profile, setProfile] = useProfileStore();
   const profileUrl = useFormProfileValueStore();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -197,6 +201,7 @@ const ProfileUploader = () => {
           onDragOver={onDragOver}
           onDrop={onDrop}
           $isDragging={isDragging}
+          $isError={isError}
         >
           <Column gap={12} alignItems="center">
             <Button size="SMALL" onClick={openFileUploader}>

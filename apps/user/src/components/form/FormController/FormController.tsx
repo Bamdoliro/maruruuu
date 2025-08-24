@@ -7,13 +7,17 @@ interface FormControllerProps {
   onPrevious?: () => void;
   onNext: () => void;
   step: FormStep;
+  profileUrl?: { downloadUrl?: string };
 }
 
 const FormController = ({ onPrevious, onNext, step }: FormControllerProps) => {
+  const handleNext = () => {
+    onNext();
+  };
   return (
     <StyledControllerArea>
       {step === '지원자정보' ? (
-        <Button styleType="PRIMARY" size="MEDIUM" width={150} onClick={onNext}>
+        <Button styleType="PRIMARY" size="MEDIUM" width={150} onClick={handleNext}>
           다음
         </Button>
       ) : (

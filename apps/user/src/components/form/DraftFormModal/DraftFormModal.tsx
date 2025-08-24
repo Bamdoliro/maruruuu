@@ -52,7 +52,7 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
         </Column>
       }
       onClose={onClose}
-      onConfirm={isInputValid ? onConfirm : () => {}}
+      onConfirm={onConfirm}
       confirmButtonText="제출"
       confirmButtonStyle={{
         backgroundColor: isInputValid ? color.maruDefault : color.gray500,
