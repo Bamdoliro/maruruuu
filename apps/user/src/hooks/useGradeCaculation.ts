@@ -106,12 +106,11 @@ const useGradeCalculation = () => {
     }
 
     const getAttendanceCount = (type: AttenedanceKey) => {
-      const attendanceCount =
+      return (
         form.grade.attendance1[type] +
         form.grade.attendance2[type] +
-        form.grade.attendance3[type];
-
-      return attendanceCount;
+        form.grade.attendance3[type]
+      );
     };
 
     const absenceCount =
