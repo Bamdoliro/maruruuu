@@ -60,6 +60,9 @@ const FinalFormTable = () => {
             <ul>
               <li>서약서 1부 ([서식3])</li>
             </ul>
+            <ul>
+              <li>개인정보 수집·이용·제공 동의서 1부</li>
+            </ul>
           </Td>
         </Tr>
         <Tr>
