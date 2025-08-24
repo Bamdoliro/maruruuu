@@ -109,23 +109,24 @@ const useGradeCalculation = () => {
     }
 
     const getAttendanceCount = (type: AttendanceKey) => {
-      const attendanceCount =
+      return (
         form.grade.attendance1[type] +
         form.grade.attendance2[type] +
-        form.grade.attendance3[type];
-
-      return attendanceCount;
+        form.grade.attendance3[type]
+      );
     };
 
     const absenceCount =
       getAttendanceCount('absenceCount') +
-      (getAttendanceCount('latenessCount') +
-        getAttendanceCount('earlyLeaveCount') +
-        getAttendanceCount('classAbsenceCount')) /
-        3;
+      Math.floor(
+        (getAttendanceCount('latenessCount') +
+          getAttendanceCount('earlyLeaveCount') +
+          getAttendanceCount('classAbsenceCount')) /
+          3
+      );
 
     const attendanceScore =
-      absenceCount > COUNT.MAX_ABSENCE
+      absenceCount >= COUNT.MIN_ABSENCE_FOR_ZERO
         ? SCORE.MIN_ATTENDANCE
         : SCORE.MAX_ATTENDANCE - absenceCount;
 
