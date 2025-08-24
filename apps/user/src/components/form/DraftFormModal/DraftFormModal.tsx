@@ -2,7 +2,6 @@ import { color } from '@maru/design-system';
 import { CheckInput, Column, Confirm, Text } from '@maru/ui';
 import { useState } from 'react';
 import type { ChangeEvent } from 'react';
-import { useFormProfileValueStore } from '@/stores/form/formProfile';
 
 interface DraftFormModalProps {
   isOpen: boolean;
@@ -13,23 +12,11 @@ interface DraftFormModalProps {
 const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => {
   const [inputValue, setInputValue] = useState('');
   const [isInputValid, setIsInputValid] = useState(false);
-  const profileUrl = useFormProfileValueStore();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
     setIsInputValid(value === '확인했습니다');
-  };
-
-  const handleConfirm = () => {
-    if (!isInputValid) return;
-    if (!profileUrl?.downloadUrl) {
-      alert(
-        '증명사진 업로드가 필요합니다. 원서 작성으로 돌아가서 증명사진을 추가해주세요.'
-      );
-      return;
-    }
-    onConfirm();
   };
 
   return (
@@ -65,7 +52,7 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
         </Column>
       }
       onClose={onClose}
-      onConfirm={isInputValid ? handleConfirm : () => {}}
+      onConfirm={onConfirm}
       confirmButtonText="제출"
       confirmButtonStyle={{
         backgroundColor: isInputValid ? color.maruDefault : color.gray500,

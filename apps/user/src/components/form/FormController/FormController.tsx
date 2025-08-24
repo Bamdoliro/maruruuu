@@ -7,13 +7,26 @@ interface FormControllerProps {
   onPrevious?: () => void;
   onNext: () => void;
   step: FormStep;
+  profileUrl?: { downloadUrl?: string };
 }
 
-const FormController = ({ onPrevious, onNext, step }: FormControllerProps) => {
+const FormController = ({
+  onPrevious,
+  onNext,
+  step,
+  profileUrl,
+}: FormControllerProps) => {
+  const handleNext = () => {
+    if (step === '지원자정보' && !profileUrl?.downloadUrl) {
+      alert('증명사진 업로드가 필요합니다.');
+      return;
+    }
+    onNext();
+  };
   return (
     <StyledControllerArea>
       {step === '지원자정보' ? (
-        <Button styleType="PRIMARY" size="MEDIUM" width={150} onClick={onNext}>
+        <Button styleType="PRIMARY" size="MEDIUM" width={150} onClick={handleNext}>
           다음
         </Button>
       ) : (
