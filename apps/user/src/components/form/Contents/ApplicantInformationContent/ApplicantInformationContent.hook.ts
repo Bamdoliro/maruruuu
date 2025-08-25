@@ -71,13 +71,11 @@ export const useApplicantForm = () => {
   };
 
   const handleNextStep = () => {
-    console.log('hasUploadedImage:', hasUploadedImage);
     const hasValidProfile =
       hasUploadedImage && (profileUrl?.downloadUrl || profileUrl?.uploadUrl);
     const profileValue = hasValidProfile
       ? profileUrl?.downloadUrl || profileUrl?.uploadUrl || 'uploaded'
       : '';
-    console.log('profileValue:', profileValue);
 
     const currentApplicantData = {
       ...form.applicant,
@@ -131,7 +129,6 @@ export const useApplicantForm = () => {
   };
 
   const handleUploadStateChange = (hasImage: boolean) => {
-    console.log('handleUploadStateChange called with:', hasImage);
     setHasUploadedImage(hasImage);
   };
 
