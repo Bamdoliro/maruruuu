@@ -24,7 +24,7 @@ const NoticeTableItem = ({ id, title, updatedAt }: NoticeTableItemProps) => {
           <Text fontType="p2" width={50}>
             {id}
           </Text>
-          <Text fontType="p2" width={540}>
+          <Text fontType="p2" width={540} ellipsis>
             {title}
           </Text>
         </Row>
