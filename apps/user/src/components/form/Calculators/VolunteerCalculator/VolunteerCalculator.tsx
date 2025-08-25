@@ -5,7 +5,6 @@ import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useInput } from './VolunteerCalculator.hook';
 import { SCHEDULE } from '@/constants/form/constants';
-import { formatFormYear } from '@/utils';
 
 const VolunteerCalculator = () => {
   const form = useFormValueStore();

@@ -7,7 +7,6 @@ import { useFormValueStore } from '@/stores';
 import { useInput } from './AttendanceCalculator.hook';
 import AttendanceCalculatorItem from './AttendanceCalculatorItem/AttendanceCalculatorItem';
 import { ATTENDANCE_GRADE, SCHEDULE } from '@/constants/form/constants';
-import { formatFormYear } from '@/utils';
 
 const AttendanceCalculator = () => {
   const form = useFormValueStore();
