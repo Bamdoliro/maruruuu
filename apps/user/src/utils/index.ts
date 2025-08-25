@@ -9,6 +9,5 @@ export { default as formatDate } from './formatDate';
 export { default as bitmapToBlob } from './bitmapToBlob';
 export { default as useFormStep } from './formStep';
 export { default as formatScheduleDate } from './formatScheduleDate';
-export { default as formatFormYear } from './formatFormYear';
 export { default as formatYear } from './formatYear';
 export { default as formatResultDateTime } from './formatResultDateTime';

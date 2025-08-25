@@ -3,7 +3,7 @@
 import { FairCategory, FairContent } from '@/components/fair';
 import { SCHEDULE } from '@/constants/form/constants';
 import { AppLayout } from '@/layouts';
-import { formatFormYear } from '@/utils';
+import { formatYear } from '@/utils';
 import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -22,7 +22,7 @@ const Fair = () => {
       <StyledFair>
         <Column>
           <Text fontType="H1" color={color.gray900}>
-            {formatFormYear(SCHEDULE.원서_접수)}학년도 부산소프트웨어마이스터고등학교
+            {formatYear(SCHEDULE.원서_접수, true)}학년도 부산소프트웨어마이스터고등학교
           </Text>
           <Text fontType="H1" color={color.gray900}>
             입학전형 설명회 참가 신청
