@@ -6,7 +6,8 @@ import FormController from '../../FormController/FormController';
 import { useApplicantForm } from './ApplicantInformationContent.hook';
 
 const ApplicantInformationContent = () => {
-  const { onFieldChange, handleNextStep, errors } = useApplicantForm();
+  const { onFieldChange, handleNextStep, errors, handleUploadStateChange } =
+    useApplicantForm();
   const form = useFormValueStore();
   const profileUrl = useFormProfileValueStore();
 
@@ -14,7 +15,10 @@ const ApplicantInformationContent = () => {
     <>
       <Row width="100%" justifyContent="space-between">
         <Column gap={40} alignItems="center">
-          <ProfileUploader isError={!!errors.profile?.length} />
+          <ProfileUploader
+            isError={!!errors.profile?.length}
+            onUploadStateChange={handleUploadStateChange}
+          />
         </Column>
         <Column gap={30} width={492}>
           <Input

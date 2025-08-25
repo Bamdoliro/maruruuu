@@ -13,6 +13,7 @@ export const useApplicantForm = () => {
   const [form, setForm] = useFormStore();
   const profileUrl = useFormProfileValueStore();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const [hasUploadedImage, setHasUploadedImage] = useState(false);
   const setFormStep = useSetFormStepStore();
   const { saveFormMutate } = useSaveFormMutation();
   const { run: FormStep } = useFormStep();
@@ -31,26 +32,29 @@ export const useApplicantForm = () => {
         ...prev.applicant,
         name: saveFormQuery?.applicant.name ?? userData.name,
         phoneNumber: saveFormQuery?.applicant.phoneNumber ?? userData.phoneNumber,
-        profile: prev.applicant.profile || '',
+        profile: saveFormQuery?.applicant.profile || prev.applicant.profile,
       },
     }));
   }, [
     saveFormQuery?.applicant.name,
     saveFormQuery?.applicant.phoneNumber,
+    saveFormQuery?.applicant.profile,
     setForm,
-    userData,
+    userData.name,
+    userData.phoneNumber,
   ]);
 
-  // 증명사진 URL이 변경되면 form에 반영
   useEffect(() => {
-    setForm((prev) => ({
-      ...prev,
-      applicant: {
-        ...prev.applicant,
-        profile: profileUrl?.downloadUrl || '',
-      },
-    }));
-  }, [profileUrl?.downloadUrl, setForm]);
+    if (profileUrl?.downloadUrl && profileUrl.downloadUrl !== form.applicant.profile) {
+      setForm((prev) => ({
+        ...prev,
+        applicant: {
+          ...prev.applicant,
+          profile: profileUrl.downloadUrl,
+        },
+      }));
+    }
+  }, [profileUrl?.downloadUrl, form.applicant.profile, setForm]);
 
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
@@ -67,11 +71,32 @@ export const useApplicantForm = () => {
   };
 
   const handleNextStep = () => {
+    const hasValidProfile =
+      hasUploadedImage && (profileUrl?.downloadUrl || profileUrl?.uploadUrl);
+    const profileValue = hasValidProfile
+      ? profileUrl?.downloadUrl || profileUrl?.uploadUrl || 'uploaded'
+      : '';
+
+    const currentApplicantData = {
+      ...form.applicant,
+      profile: profileValue,
+    };
+
+    if (hasValidProfile && form.applicant.profile !== profileValue) {
+      setForm((prev) => ({
+        ...prev,
+        applicant: {
+          ...prev.applicant,
+          profile: profileValue,
+        },
+      }));
+    }
+
     try {
-      ApplicantSchema.parse(form.applicant);
+      ApplicantSchema.parse(currentApplicantData);
       FormStep({
         schema: ApplicantSchema,
-        formData: form.applicant,
+        formData: currentApplicantData,
         nextStep: '보호자정보',
         setErrors,
       });
@@ -103,5 +128,15 @@ export const useApplicantForm = () => {
     }
   };
 
-  return { onFieldChange, handleNextStep, handlePreviousStep, errors };
+  const handleUploadStateChange = (hasImage: boolean) => {
+    setHasUploadedImage(hasImage);
+  };
+
+  return {
+    onFieldChange,
+    handleNextStep,
+    handlePreviousStep,
+    errors,
+    handleUploadStateChange,
+  };
 };

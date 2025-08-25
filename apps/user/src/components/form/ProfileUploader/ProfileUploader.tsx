@@ -19,9 +19,13 @@ const MAX_SIZE = 2 * 1024 * 1024;
 
 interface ProfileUploaderProps {
   isError?: boolean;
+  onUploadStateChange?: (hasImage: boolean) => void;
 }
 
-const ProfileUploader = ({ isError = false }: ProfileUploaderProps) => {
+const ProfileUploader = ({
+  isError = false,
+  onUploadStateChange,
+}: ProfileUploaderProps) => {
   const [profile, setProfile] = useProfileStore();
   const profileUrl = useFormProfileValueStore();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -59,6 +63,13 @@ const ProfileUploader = ({ isError = false }: ProfileUploaderProps) => {
 
     return;
   }, [refreshProfileMutate]);
+
+  useEffect(() => {
+    const hasImage = !!(previewUrl || profileUrl?.downloadUrl);
+    if (onUploadStateChange) {
+      onUploadStateChange(hasImage);
+    }
+  }, [previewUrl, profileUrl?.downloadUrl, onUploadStateChange]);
 
   const handleFile = useCallback(
     async (file: File) => {
