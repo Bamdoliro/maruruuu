@@ -5,13 +5,14 @@ import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useInput } from './VolunteerCalculator.hook';
 import { SCHEDULE } from '@/constants/form/constants';
+import { formatYear } from '@/utils';
 
 const VolunteerCalculator = () => {
   const form = useFormValueStore();
   const { handleVolunteerTimeChange } = useInput();
 
   const isReadOnly = form.education.graduationType === 'QUALIFICATION_EXAMINATION';
-  const scoreEndYear = SCHEDULE.원서_접수.format('YYYY');
+  const scoreEndYear = formatYear(SCHEDULE.원서_접수);
   const volunteerData = [
     { grade: '1학년', name: 'volunteerTime1', value: form.grade.volunteerTime1 },
     { grade: '2학년', name: 'volunteerTime2', value: form.grade.volunteerTime2 },

@@ -7,13 +7,14 @@ import { useFormValueStore } from '@/stores';
 import { useInput } from './AttendanceCalculator.hook';
 import AttendanceCalculatorItem from './AttendanceCalculatorItem/AttendanceCalculatorItem';
 import { ATTENDANCE_GRADE, SCHEDULE } from '@/constants/form/constants';
+import { formatYear } from '@/utils';
 
 const AttendanceCalculator = () => {
   const form = useFormValueStore();
   const { handleAttendanceInfoChange } = useInput();
 
   const isReadOnly = form.education.graduationType === 'QUALIFICATION_EXAMINATION';
-  const scoreEndYear = SCHEDULE.원서_접수.format('YYYY');
+  const scoreEndYear = formatYear(SCHEDULE.원서_접수);
 
   return (
     <StyledAttendanceCalculator>
