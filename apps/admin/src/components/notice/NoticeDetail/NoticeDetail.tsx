@@ -26,7 +26,7 @@ const NoticeDetail = ({ id }: NoticeDetailProps) => {
     <StyledNoticeDetail>
       <NoticeDetailHeader>
         <Column gap={20}>
-          <Text fontType="H1" color={color.gray900}>
+          <Text fontType="H1" color={color.gray900} whiteSpace="break-spaces">
             {noticeDetailData.title}
           </Text>
           <Text fontType="p2" color={color.gray600}>
