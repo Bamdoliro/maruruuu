@@ -1,5 +1,5 @@
 import { SCHEDULE } from '@/constants/form/constants';
-import { formatFormYear } from '@/utils';
+import { formatYear } from '@/utils';
 import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -11,8 +11,8 @@ const ExplainBox = () => {
       <Text fontType="p2" color={color.gray900}>
         기간 내에 서류를 제출하지 않으면 자동으로 <b>입학 포기 처리</b>됩니다.
         <br />
-        입학을 포기할 경우, {formatFormYear(SCHEDULE.원서_접수)}학년도에는 타 학교 진학이
-        불가합니다.
+        입학을 포기할 경우, {formatYear(SCHEDULE.원서_접수, true)}학년도에는 타 학교
+        진학이 불가합니다.
       </Text>
       <Text fontType="p2" color={color.gray900}>
         서류는 <b>가장 최근 제출</b>된 것을 기준으로 반영되며,

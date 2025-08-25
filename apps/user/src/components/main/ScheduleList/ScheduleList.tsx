@@ -5,7 +5,7 @@ import { flex } from '@maru/utils';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import ScheduleItem from './ScheduleItem/ScheduleItem';
-import { formatFormYear, formatScheduleDate } from '@/utils';
+import { formatYear, formatScheduleDate } from '@/utils';
 
 const ScheduleList = () => {
   const SCHEDULE_LIST = [
@@ -55,7 +55,7 @@ const ScheduleList = () => {
   return (
     <StyledScheduleList>
       <Text fontType="H3" color={color.gray900}>
-        {formatFormYear(SCHEDULE.원서_접수)}학년도 신입생 입학 일정
+        {formatYear(SCHEDULE.원서_접수, true)}학년도 신입생 입학 일정
       </Text>
       <ScheduleListBox>
         {SCHEDULE_LIST.map((item) => (
