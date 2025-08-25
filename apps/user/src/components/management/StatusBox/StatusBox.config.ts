@@ -8,7 +8,7 @@ export const getStatusConfig = (status?: string, name?: string) => {
   const finalResult = now.isAfter(SCHEDULE.최종_합격_발표);
 
   const statusConfig = {
-    RECEIVED: {
+    APPROVED: {
       text: '승인됨',
       script: `원서가 승인되었습니다.<br />${name}님의 1차 합격을 기원합니다!`,
     },
@@ -32,7 +32,7 @@ export const getStatusConfig = (status?: string, name?: string) => {
       text: '초안 제출됨',
       script: `원서 초안이 제출되었습니다.<br />담당 선생님의 원서 승인을 기다려주세요.`,
     },
-    APPROVED: {
+    RECEIVED: {
       text: '확인중',
       script: `원서가 확인 중입니다.<br />담당 선생님의 원서 승인을 기다려주세요.`,
     },
