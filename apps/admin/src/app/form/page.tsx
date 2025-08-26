@@ -94,7 +94,7 @@ const FormPage = () => {
                     { value: 'FIRST_FAILED', label: '1차 불합격' },
                     { value: 'FAILED', label: '불합격' },
                     { value: 'FINAL_SUBMITTED', label: '최종 제출' },
-                    { value: 'SUBMITTED', label: '제출' },
+                    { value: 'SUBMITTED', label: '초안 제출' },
                     { value: 'APPROVED', label: '승인' },
                     { value: 'NO_SHOW', label: '불참' },
                     { value: 'FIRST_PASSED', label: '1차 합격' },

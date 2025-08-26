@@ -12,7 +12,7 @@ export const FORM_STATUS_CATEGORY: Record<FormStatus, string> = {
   FIRST_FAILED: '1차 불합격',
   FAILED: '불합격',
   FINAL_SUBMITTED: '최종 제출',
-  SUBMITTED: '제출',
+  SUBMITTED: '초안 제출',
   APPROVED: '승인',
   NO_SHOW: '불참',
   FIRST_PASSED: '1차 합격',
