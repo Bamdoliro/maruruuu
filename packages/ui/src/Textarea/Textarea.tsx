@@ -23,6 +23,7 @@ const Textarea = ({
   isError = false,
   errorMessage,
   message,
+  placeholder,
 }: TextareaProps) => {
   const textValue = value as string;
 
@@ -34,7 +35,7 @@ const Textarea = ({
           value={textValue}
           name={name}
           onChange={onChange}
-          placeholder={`${limit}자 이내로 작성해주세요.`}
+          placeholder={placeholder}
           maxLength={limit}
           $isError={isError}
         />
