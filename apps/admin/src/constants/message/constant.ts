@@ -13,9 +13,4 @@ export const DROPDOWN_DATA = [
   { value: 'PASSED', label: '최종 합격자' },
 ];
 
-export const MESSAGE_STATUS_VALUES = [
-  'APPROVED',
-  'REJECTED',
-  'FIRST_PASSED',
-  'PASSED',
-];
+export const MESSAGE_STATUS_VALUES = ['APPROVED', 'REJECTED', 'FIRST_PASSED', 'PASSED'];
