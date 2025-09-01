@@ -13,6 +13,7 @@ import TypeInfo from './TypeInfo/TypeInfo';
 import type { FormDetailField } from '@/types/form/client';
 import GradesInfo from './GradesInfo/GradesInfo';
 import DocumentInfo from './DocumentInfo/DocumentInfo';
+import StatusManager from './StatusManager/StatusManager';
 
 interface FormDetailProps {
   id: number;
@@ -26,7 +27,7 @@ const FormDetail = ({ id }: FormDetailProps) => {
     <StyledFormDetail>
       <Column gap={36}>
         <Profile id={id} />
-        {/**원서상태 백엔드 수정되면 개발**/}
+        <StatusManager id={id} />
       </Column>
       <Column width="100%">
         <NavigationBar>
