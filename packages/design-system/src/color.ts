@@ -26,7 +26,7 @@ const color = {
   red: '#F44336',
   lightRed: '#FEE8E7',
   green: '#00BF40',
-  lightGreen: '#556055',
+  lightGreen: '#ECF8EC',
 };
 
 export default color;
