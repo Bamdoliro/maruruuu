@@ -149,3 +149,5 @@ export type FormDetailField =
   | '전형'
   | '성적'
   | '자기소개서';
+
+export type ReceiveStatusValue = 'approve' | 'reject' | 'receive';
