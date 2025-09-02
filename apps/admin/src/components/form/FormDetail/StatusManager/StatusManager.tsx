@@ -13,11 +13,13 @@ interface StatusManagerProps {
 
 const StatusManager = ({ id }: StatusManagerProps) => {
   const { data: formDetailData } = useFormDetailQuery(id);
-  const { getSubmissionDocumentStatus, getFirstRoundStatus, getSecondRoundStatus } =
-    useStatusFormatter();
   const overlay = useOverlay();
 
   if (!formDetailData) return <Loader />;
+
+  const { submissionStatus, firstRoundStatus, secondRoundStatus } = useStatusFormatter(
+    formDetailData.status
+  );
 
   const openReceivedStatusChangeModal = () => {
     overlay.open(({ isOpen, close }) => (
@@ -30,10 +32,6 @@ const StatusManager = ({ id }: StatusManagerProps) => {
       window.open(formDetailData.formUrl, '_blank');
     }
   };
-
-  const submissionStatus = getSubmissionDocumentStatus(formDetailData?.status);
-  const firstRoundStatus = getFirstRoundStatus(formDetailData?.status);
-  const secondRoundStatus = getSecondRoundStatus(formDetailData?.status);
 
   return (
     <Column gap={16}>
