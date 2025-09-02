@@ -82,10 +82,10 @@ export interface FormDetail {
     coverLetter: string;
     statementOfPurpose: string;
   };
-	score: {
-		firstRoundScore: number;
-		totalScore: number;
-	}
+  score: {
+    firstRoundScore: number;
+    totalScore: number;
+  };
   formUrl: string;
   type: FormType;
   status: FormStatus;

@@ -5,7 +5,7 @@ import { Button, Column, Row, Text } from '@maru/ui';
 import { IconClose } from '@maru/icon';
 import { useState } from 'react';
 import { RECEIVED_STATUS_LIST } from '@/constants/form/constant';
-import { ReceiveStatusValue } from '@/types/form/client';
+import { type ReceiveStatusValue } from '@/types/form/client';
 import { useReceiveStatusChangeModalAction } from '@/components/form/FormDetail/ReceiveStatusChangeModal/ReceiveStatusChangeModal.hook';
 
 interface ReceivedStatusChangeModalProps {
