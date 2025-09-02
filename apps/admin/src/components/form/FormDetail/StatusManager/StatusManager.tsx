@@ -15,11 +15,11 @@ const StatusManager = ({ id }: StatusManagerProps) => {
   const { data: formDetailData } = useFormDetailQuery(id);
   const overlay = useOverlay();
 
-  if (!formDetailData) return <Loader />;
-
   const { submissionStatus, firstRoundStatus, secondRoundStatus } = useStatusFormatter(
-    formDetailData.status
+    formDetailData?.status || 'SUBMITTED'
   );
+
+  if (!formDetailData) return <Loader />;
 
   const openReceivedStatusChangeModal = () => {
     overlay.open(({ isOpen, close }) => (
