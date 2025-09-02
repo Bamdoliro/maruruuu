@@ -58,7 +58,11 @@ const StatusManager = ({ id }: StatusManagerProps) => {
           <Text fontType="p2" width={60}>
             최종 점수
           </Text>
-          <Text fontType="p2" width={60}>
+          <Text
+            fontType="p2"
+            width={60}
+            color={formDetailData.score.totalScore ? color.black : color.gray600}
+          >
             {formDetailData.score.totalScore || '미정'}
           </Text>
         </StyledStatusItem>
@@ -73,7 +77,7 @@ const StatusManager = ({ id }: StatusManagerProps) => {
       </StyledStatusList>
       <Column gap={8}>
         <Button
-          styleType="PRIMARY"
+          styleType={formDetailData.status === 'SUBMITTED' ? 'DISABLED' : 'PRIMARY'}
           size="SMALL"
           onClick={openReceivedStatusChangeModal}
           disabled={formDetailData.status === 'SUBMITTED'}
@@ -81,7 +85,11 @@ const StatusManager = ({ id }: StatusManagerProps) => {
           최종 접수 상태 변경
         </Button>
         <Button
-          styleType="SECONDARY"
+          styleType={
+            !formDetailData?.formUrl || formDetailData?.status === 'SUBMITTED'
+              ? 'DISABLED'
+              : 'SECONDARY'
+          }
           size="SMALL"
           onClick={handleSubmissionDocumentButtonClick}
           disabled={!formDetailData?.formUrl || formDetailData?.status === 'SUBMITTED'}
