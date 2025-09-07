@@ -5,6 +5,7 @@ import type {
   ExportExcelType,
   FormListSortingType,
   FormListType,
+  ReceiveStatusValue,
 } from '@/types/form/client';
 import type {
   GetFormDetail,
@@ -109,5 +110,17 @@ export const patchSecondRoundResult = async (
 export const patchSecondRoundResultAuto = async () => {
   const { data } = await maru.patch('/forms/second-round/select', null, authorization());
 
+  return data;
+};
+
+export const patchReceiveStatus = async (
+  formId: number,
+  receiveStatus: ReceiveStatusValue
+) => {
+  const { data } = await maru.patch(
+    `/forms/${formId}/${receiveStatus}`,
+    {},
+    authorization()
+  );
   return data;
 };

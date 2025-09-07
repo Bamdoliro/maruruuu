@@ -82,6 +82,10 @@ export interface FormDetail {
     coverLetter: string;
     statementOfPurpose: string;
   };
+  score: {
+    firstRoundScore: number;
+    totalScore: number;
+  };
   formUrl: string;
   type: FormType;
   status: FormStatus;
@@ -149,3 +153,5 @@ export type FormDetailField =
   | '전형'
   | '성적'
   | '자기소개서';
+
+export type ReceiveStatusValue = 'approve' | 'reject' | 'receive';

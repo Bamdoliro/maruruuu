@@ -2,6 +2,7 @@ import { useApiError } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   getFormUrl,
+  patchReceiveStatus,
   patchSecondRoundResult,
   patchSecondRoundResultAuto,
   patchSecondScoreFormat,
@@ -12,6 +13,7 @@ import type { PatchSecondRoundResultReq } from '@/types/form/remote';
 import { useSetIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSetSecondRoundResultStore } from '@/store/form/secondRoundResult';
 import { isPopupBlocked } from '@/utils';
+import type { ReceiveStatusValue } from '@/types/form/client';
 
 export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void) => {
   const queryClient = useQueryClient();
@@ -110,4 +112,24 @@ export const usePrintFormUrlMutation = () => {
   });
 
   return { printFormUrl, ...restMutation };
+};
+
+export const useReceiveStatusChangeMutation = (formId: number, onClose: () => void) => {
+  const { handleError } = useApiError();
+  const queryClient = useQueryClient();
+
+  const { mutate: changeReceiveStatus, ...restMutation } = useMutation({
+    mutationFn: (status: ReceiveStatusValue) => patchReceiveStatus(formId, status),
+    onSuccess: () => {
+      toast('접수 상태가 변경되었습니다.', {
+        type: 'success',
+      });
+      queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
+      queryClient.invalidateQueries({ queryKey: [KEY.FORM_DETAIL, formId] });
+      onClose();
+    },
+    onError: handleError,
+  });
+
+  return { changeReceiveStatus, ...restMutation };
 };
