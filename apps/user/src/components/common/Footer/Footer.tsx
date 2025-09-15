@@ -30,7 +30,7 @@ const Footer = () => {
                 교무실(입학처): 051-971-2153, Fax: 051-971-2061
               </Text>
               <Text fontType="p2" color={color.gray600}>
-                입학담당자: 051-970-1725, Fax: 051-971-2061
+                입학담당자: 051-970-1792, Fax: 051-971-2061
               </Text>
               <Text fontType="p2" color={color.gray600}>
                 행정실: 051-971-2152, Fax: 051-971-6325
