@@ -105,7 +105,7 @@ export interface Subject {
   score: number | null;
 }
 
-export type AchievementLevel = '-' | 'F' | 'A' | 'B' | 'C' | 'D' | 'E';
+export type AchievementLevel = '-' | '미이수' | 'A' | 'B' | 'C' | 'D' | 'E';
 
 export interface Attendance {
   absenceCount: number;
