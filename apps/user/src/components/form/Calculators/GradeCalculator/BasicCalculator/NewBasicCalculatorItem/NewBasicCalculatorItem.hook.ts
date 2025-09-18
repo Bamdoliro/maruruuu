@@ -5,12 +5,11 @@ export const useInput = (newSubjectIndex: number) => {
   const setNewSubjectList = useSetNewSubjectListStore();
 
   const handleNewSubjectChange = (data: string, name: string) => {
-    const value = data === '미이수' ? 'F' : data;
     setNewSubjectList((prev) => {
       const updatedData = [...prev];
       updatedData[newSubjectIndex] = {
         ...updatedData[newSubjectIndex],
-        [name]: value,
+        [name]: data,
       };
       return updatedData;
     });

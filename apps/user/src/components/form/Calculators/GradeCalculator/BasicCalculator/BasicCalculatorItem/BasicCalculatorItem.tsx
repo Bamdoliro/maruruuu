@@ -22,11 +22,6 @@ const BasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) => 
 
   const subject = subjectList[id];
 
-  const getDisplayValue = (value: string) => {
-    if (value === 'F') return '미이수';
-    return value;
-  };
-
   return (
     <StyledBasicCalculatorItem>
       <Td styleType="SECONDARY" width="15.3%" height={64}>
@@ -35,7 +30,7 @@ const BasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) => 
       {ACHIEVEMENT_KEYS.map((key) => (
         <Td key={key} width="24%" height={64}>
           <Dropdown
-            value={getDisplayValue(subject[key])}
+            value={subject[key]}
             size="SMALL"
             data={achievementLevels}
             width={80}
