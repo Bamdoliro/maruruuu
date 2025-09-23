@@ -83,7 +83,7 @@ export const useEducationForm = () => {
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
 
-    if ((NUMBER_FIELDS as readonly string[]).includes(name) && /\D/.test(value)) return;
+    if (NUMBER_FIELDS.includes(name) && /\D/.test(value)) return;
 
     setForm((prev) => ({
       ...prev,
