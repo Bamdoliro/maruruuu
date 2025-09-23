@@ -7,8 +7,9 @@ import {
   postRequestVerification,
   postSignUp,
 } from './api';
-import { ROUTES } from '@/constants/common/constants';
 import { useApiError, useToast } from '@/hooks';
+import { ROUTES, TOKEN } from '@/constants/common/constants';
+import { Storage } from '@/apis/storage/storage';
 import type {
   patchChangePasswordReq,
   PatchUserVerificationReq,
@@ -30,6 +31,8 @@ export const useWithdrawalMutation = (password: string) => {
       setTimeout(() => {
         window.location.reload();
       }, 500);
+      Storage.removeItem(TOKEN.ACCESS);
+      Storage.removeItem(TOKEN.REFRESH);
     },
     onError: handleError,
   });
