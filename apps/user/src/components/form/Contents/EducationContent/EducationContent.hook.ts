@@ -64,21 +64,31 @@ export const useEducationForm = () => {
 
   useEffect(() => {
     if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
-      setForm((prev) => ({
-        ...prev,
-        education: {
-          ...prev.education,
-          schoolName: null,
-          schoolLocation: null,
-          schoolAddress: null,
-          schoolCode: null,
-          teacherName: null,
-          teacherPhoneNumber: null,
-          teacherMobilePhoneNumber: null,
-        },
-      }));
+      const schoolFieldsAreNotNull =
+        form.education.schoolName !== null ||
+        form.education.schoolLocation !== null ||
+        form.education.schoolCode !== null ||
+        form.education.teacherName !== null ||
+        form.education.teacherPhoneNumber !== null ||
+        form.education.teacherMobilePhoneNumber !== null;
+
+      if (schoolFieldsAreNotNull) {
+        setForm((prev) => ({
+          ...prev,
+          education: {
+            ...prev.education,
+            schoolName: null,
+            schoolLocation: null,
+            schoolAddress: null,
+            schoolCode: null,
+            teacherName: null,
+            teacherPhoneNumber: null,
+            teacherMobilePhoneNumber: null,
+          },
+        }));
+      }
     }
-  }, [form.education.graduationType, setForm]);
+  }, [form.education, setForm]);
 
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
