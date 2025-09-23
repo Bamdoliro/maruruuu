@@ -10,7 +10,7 @@ export const useCTAButton = () => {
   const form = useFormValueStore();
   const setProfile = useSetProfileStore();
   const setFormStep = useSetFormStepStore();
-  const { submitDraftFormMutate } = useSubmitDraftFormMutation(form);
+  const { submitDraftFormMutate } = useSubmitDraftFormMutation();
   const { correctionFormMutate } = useCorrectionFormMutation();
   const { data: statusData } = useFormStatusQuery();
 
@@ -23,7 +23,7 @@ export const useCTAButton = () => {
       correctionFormMutate(form);
       setProfile({ fileName: '' });
     } else {
-      submitDraftFormMutate();
+      submitDraftFormMutate(form);
       setProfile({ fileName: '' });
     }
   };
