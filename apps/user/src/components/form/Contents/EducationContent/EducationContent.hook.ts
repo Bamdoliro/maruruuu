@@ -3,7 +3,7 @@ import { useSaveFormMutation } from '@/services/form/mutations';
 import { useFormStore, useSetFormGradeStepStore, useSetFormStepStore } from '@/stores';
 import { useFormStep } from '@/utils';
 import type { ChangeEventHandler } from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { z } from 'zod';
 
 const NUMBER_FIELDS = [
@@ -12,22 +12,15 @@ const NUMBER_FIELDS = [
   'teacherMobilePhoneNumber',
 ] as const;
 
-const handleZodError = (
-  err: unknown,
-  setErrors: (
-    value:
-      | Record<string, string[]>
-      | ((prev: Record<string, string[]>) => Record<string, string[]>)
-  ) => void
-) => {
-  if (err instanceof z.ZodError) {
-    const fieldErrors = err.flatten().fieldErrors;
-    const normalizedErrors = Object.fromEntries(
-      Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
-    );
-    setErrors(normalizedErrors);
-  }
-};
+const SCHOOL_INFO_FIELDS_TO_RESET = [
+  'schoolName',
+  'schoolLocation',
+  'schoolAddress',
+  'schoolCode',
+  'teacherName',
+  'teacherPhoneNumber',
+  'teacherMobilePhoneNumber',
+] as const;
 
 export const useEducationForm = () => {
   const [form, setForm] = useFormStore();
@@ -37,58 +30,60 @@ export const useEducationForm = () => {
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const { run: FormStep } = useFormStep();
 
+  const getCleanedEducationData = () => {
+    if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
+      const cleanedEducation = { ...form.education };
+      SCHOOL_INFO_FIELDS_TO_RESET.forEach((field) => {
+        cleanedEducation[field] = null;
+      });
+      return cleanedEducation;
+    }
+    return form.education;
+  };
+
   const handleNextStep = () => {
     try {
+      const cleanedEducationData = getCleanedEducationData();
       FormStep({
         schema: EducationSchema,
-        formData: form.education,
+        formData: cleanedEducationData,
         nextStep: '전형선택',
         setErrors,
       });
       setFormGradeStep('교과성적');
     } catch (err) {
-      handleZodError(err, setErrors);
+      if (err instanceof z.ZodError) {
+        const fieldErrors = err.flatten().fieldErrors;
+        const normalizedErrors = Object.fromEntries(
+          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
+        );
+        setErrors(normalizedErrors);
+      }
     }
   };
 
   const handlePreviousStep = () => {
     try {
-      EducationSchema.parse(form.education);
+      const cleanedEducationData = getCleanedEducationData();
+      EducationSchema.parse(cleanedEducationData);
       setErrors({});
       setFormStep('보호자정보');
-      saveFormMutate(form);
+
+      const cleanedForm = {
+        ...form,
+        education: cleanedEducationData,
+      };
+      saveFormMutate(cleanedForm);
     } catch (err) {
-      handleZodError(err, setErrors);
-    }
-  };
-
-  useEffect(() => {
-    if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
-      const schoolFieldsAreNotNull =
-        form.education.schoolName !== null ||
-        form.education.schoolLocation !== null ||
-        form.education.schoolCode !== null ||
-        form.education.teacherName !== null ||
-        form.education.teacherPhoneNumber !== null ||
-        form.education.teacherMobilePhoneNumber !== null;
-
-      if (schoolFieldsAreNotNull) {
-        setForm((prev) => ({
-          ...prev,
-          education: {
-            ...prev.education,
-            schoolName: null,
-            schoolLocation: null,
-            schoolAddress: null,
-            schoolCode: null,
-            teacherName: null,
-            teacherPhoneNumber: null,
-            teacherMobilePhoneNumber: null,
-          },
-        }));
+      if (err instanceof z.ZodError) {
+        const fieldErrors = err.flatten().fieldErrors;
+        const normalizedErrors = Object.fromEntries(
+          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
+        );
+        setErrors(normalizedErrors);
       }
     }
-  }, [form.education, setForm]);
+  };
 
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
