@@ -83,7 +83,11 @@ export const useEducationForm = () => {
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
 
-    if (NUMBER_FIELDS.includes(name) && /\D/.test(value)) return;
+    if (
+      NUMBER_FIELDS.includes(name as (typeof NUMBER_FIELDS)[number]) &&
+      /\D/.test(value)
+    )
+      return;
 
     setForm((prev) => ({
       ...prev,
