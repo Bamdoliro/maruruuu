@@ -8,7 +8,6 @@ import { Column, Text } from '@maru/ui';
 import PasswordContent from '@/components/password/passwordContent/passwordContent';
 
 const ChangePassword = () => {
-
   return (
     <AppLayout backgroundColor={color.gray100}>
       <StyledChangePassword>

@@ -6,6 +6,12 @@ import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';
 
+const NUMBER_FIELDS = [
+  'graduationYear',
+  'teacherPhoneNumber',
+  'teacherMobilePhoneNumber',
+] as const;
+
 export const useEducationForm = () => {
   const [form, setForm] = useFormStore();
   const setFormStep = useSetFormStepStore();
@@ -13,12 +19,6 @@ export const useEducationForm = () => {
   const { saveFormMutate } = useSaveFormMutation();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const { run: FormStep } = useFormStep();
-
-  const numberFiled = [
-    'graduationYear',
-    'teacherPhoneNumber',
-    'teacherMobilePhoneNumber',
-  ];
 
   const handleNextStep = () => {
     try {
@@ -60,7 +60,11 @@ export const useEducationForm = () => {
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
 
-    if (numberFiled.includes(name) && /\D/.test(value)) return;
+    if (
+      NUMBER_FIELDS.includes(name as (typeof NUMBER_FIELDS)[number]) &&
+      /\D/.test(value)
+    )
+      return;
 
     setForm((prev) => ({
       ...prev,
