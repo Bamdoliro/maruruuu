@@ -12,16 +12,6 @@ const NUMBER_FIELDS = [
   'teacherMobilePhoneNumber',
 ] as const;
 
-const SCHOOL_INFO_FIELDS_TO_RESET = [
-  'schoolName',
-  'schoolLocation',
-  'schoolAddress',
-  'schoolCode',
-  'teacherName',
-  'teacherPhoneNumber',
-  'teacherMobilePhoneNumber',
-] as const;
-
 export const useEducationForm = () => {
   const [form, setForm] = useFormStore();
   const setFormStep = useSetFormStepStore();
@@ -30,23 +20,11 @@ export const useEducationForm = () => {
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const { run: FormStep } = useFormStep();
 
-  const getCleanedEducationData = () => {
-    if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
-      const cleanedEducation = { ...form.education };
-      SCHOOL_INFO_FIELDS_TO_RESET.forEach((field) => {
-        cleanedEducation[field] = null;
-      });
-      return cleanedEducation;
-    }
-    return form.education;
-  };
-
   const handleNextStep = () => {
     try {
-      const cleanedEducationData = getCleanedEducationData();
       FormStep({
         schema: EducationSchema,
-        formData: cleanedEducationData,
+        formData: form.education,
         nextStep: '전형선택',
         setErrors,
       });
@@ -64,16 +42,10 @@ export const useEducationForm = () => {
 
   const handlePreviousStep = () => {
     try {
-      const cleanedEducationData = getCleanedEducationData();
-      EducationSchema.parse(cleanedEducationData);
+      EducationSchema.parse(form.education);
       setErrors({});
       setFormStep('보호자정보');
-
-      const cleanedForm = {
-        ...form,
-        education: cleanedEducationData,
-      };
-      saveFormMutate(cleanedForm);
+      saveFormMutate(form);
     } catch (err) {
       if (err instanceof z.ZodError) {
         const fieldErrors = err.flatten().fieldErrors;
