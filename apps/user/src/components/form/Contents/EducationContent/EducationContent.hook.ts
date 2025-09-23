@@ -3,7 +3,7 @@ import { useSaveFormMutation } from '@/services/form/mutations';
 import { useFormStore, useSetFormGradeStepStore, useSetFormStepStore } from '@/stores';
 import { useFormStep } from '@/utils';
 import type { ChangeEventHandler } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { z } from 'zod';
 
 export const useEducationForm = () => {
@@ -56,6 +56,24 @@ export const useEducationForm = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
+      setForm((prev) => ({
+        ...prev,
+        education: {
+          ...prev.education,
+          schoolName: null,
+          schoolLocation: null,
+          schoolAddress: null,
+          schoolCode: null,
+          teacherName: null,
+          teacherPhoneNumber: null,
+          teacherMobilePhoneNumber: null,
+        },
+      }));
+    }
+  }, [form.education.graduationType, setForm]);
 
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
