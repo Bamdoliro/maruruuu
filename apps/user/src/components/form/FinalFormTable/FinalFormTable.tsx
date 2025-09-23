@@ -35,14 +35,18 @@ const FinalFormTable = () => {
             <li>3개월 이내 증명사진 스캔 후 입력</li>
             <li>
               <Text fontType="form" color={color.red}>
-                인터넷 접수(maru.bamdoliro.com) 후 출력하여 출신 중학교장 직인 날인 후
-                제출
+                인터넷 접수
+                <a href={'https://maru.bamdoliro.com/'}>(maru.bamdoliro.com)</a>후
+                출력하여 출신 중학교장 직인 날인 후 제출
               </Text>
             </li>
             <ul>
               <li>자기소개서 및 학업계획서 1부 ([서식2])</li>
             </ul>
-            <li>인터넷 접수(마루도메인) 후 출력</li>
+            <li>
+              인터넷 접수
+              <a href={'https://maru.bamdoliro.com/'}>(maru.bamdoliro.com)</a>후 출력
+            </li>
             <ul>
               <li>학교생활기록부 || 사본 1부 </li>
             </ul>
