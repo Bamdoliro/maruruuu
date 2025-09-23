@@ -6,6 +6,29 @@ import type { ChangeEventHandler } from 'react';
 import { useState, useEffect } from 'react';
 import { z } from 'zod';
 
+const NUMBER_FIELDS = [
+  'graduationYear',
+  'teacherPhoneNumber',
+  'teacherMobilePhoneNumber',
+] as const;
+
+const handleZodError = (
+  err: unknown,
+  setErrors: (
+    value:
+      | Record<string, string[]>
+      | ((prev: Record<string, string[]>) => Record<string, string[]>)
+  ) => void
+) => {
+  if (err instanceof z.ZodError) {
+    const fieldErrors = err.flatten().fieldErrors;
+    const normalizedErrors = Object.fromEntries(
+      Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
+    );
+    setErrors(normalizedErrors);
+  }
+};
+
 export const useEducationForm = () => {
   const [form, setForm] = useFormStore();
   const setFormStep = useSetFormStepStore();
@@ -13,12 +36,6 @@ export const useEducationForm = () => {
   const { saveFormMutate } = useSaveFormMutation();
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const { run: FormStep } = useFormStep();
-
-  const numberFiled = [
-    'graduationYear',
-    'teacherPhoneNumber',
-    'teacherMobilePhoneNumber',
-  ];
 
   const handleNextStep = () => {
     try {
@@ -30,13 +47,7 @@ export const useEducationForm = () => {
       });
       setFormGradeStep('교과성적');
     } catch (err) {
-      if (err instanceof z.ZodError) {
-        const fieldErrors = err.flatten().fieldErrors;
-        const normalizedErrors = Object.fromEntries(
-          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
-        );
-        setErrors(normalizedErrors);
-      }
+      handleZodError(err, setErrors);
     }
   };
 
@@ -47,13 +58,7 @@ export const useEducationForm = () => {
       setFormStep('보호자정보');
       saveFormMutate(form);
     } catch (err) {
-      if (err instanceof z.ZodError) {
-        const fieldErrors = err.flatten().fieldErrors;
-        const normalizedErrors = Object.fromEntries(
-          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
-        );
-        setErrors(normalizedErrors);
-      }
+      handleZodError(err, setErrors);
     }
   };
 
@@ -78,7 +83,7 @@ export const useEducationForm = () => {
   const onFieldChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
 
-    if (numberFiled.includes(name) && /\D/.test(value)) return;
+    if ((NUMBER_FIELDS as readonly string[]).includes(name) && /\D/.test(value)) return;
 
     setForm((prev) => ({
       ...prev,
