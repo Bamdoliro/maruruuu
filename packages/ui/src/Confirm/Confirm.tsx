@@ -20,6 +20,7 @@ interface ConfirmProps {
   closeButtonText?: string;
   height?: CSSProperties['height'];
   confirmButtonStyle?: CSSProperties;
+  isConfirmDisabled?: boolean;
 }
 
 const Confirm = ({
@@ -33,6 +34,7 @@ const Confirm = ({
   closeButtonText = '취소',
   height = 449,
   confirmButtonStyle,
+  isConfirmDisabled,
 }: ConfirmProps) => {
   return (
     <BlurBackground $isOpen={isOpen}>
@@ -68,7 +70,12 @@ const Confirm = ({
           <Button styleType="SECONDARY" size="SMALL" onClick={onClose}>
             {closeButtonText}
           </Button>
-          <Button size="SMALL" onClick={onConfirm} style={confirmButtonStyle}>
+          <Button
+            size="SMALL"
+            onClick={onConfirm}
+            style={confirmButtonStyle}
+            disabled={isConfirmDisabled}
+          >
             {confirmButtonText}
           </Button>
         </Row>
