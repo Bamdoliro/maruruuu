@@ -7,19 +7,20 @@ import { useSignUpStore } from '@/stores';
 import type { SignUp } from '@/types/user/client';
 import { useEffect, useRef, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
+import { useToast } from '@/hooks';
 
 export const useSignUpAction = (signUpData: SignUp, termsAgree: boolean) => {
   const { signUpMutate } = useSignUpMutation(signUpData);
-
+  const { toast } = useToast();
   const handleSignUp = () => {
     if (signUpData.password === signUpData.password_confirm) {
       if (termsAgree) {
         signUpMutate();
       } else {
-        alert('이용약관 동의를 해주세요.');
+        toast('이용약관 동의를 해주세요.', 'ERROR');
       }
     } else {
-      alert('비밀번호를 한번만 확인해주세요');
+      toast('비밀번호를 한번만 확인해주세요', 'ERROR');
     }
   };
 
@@ -30,7 +31,7 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
   const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
   const [isVerificationCodeDisabled, setIsVerificationCodeDisabled] = useState(false);
   const [isVerificationCodeConfirmed, setIsVerificationCodeConfirmed] = useState(false);
-
+  const { toast } = useToast();
   const { requestVerificationMutate } = useRequestUserVerificationMutation({
     phoneNumber: signUpData.phoneNumber,
     type: 'SIGNUP',
@@ -60,7 +61,7 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
 
   const handleVerificationCodeConfirm = () => {
     if (!signUpData.code) {
-      // toast('인증번호를 입력해주세요', { type: 'error' });
+      toast('인증번호를 입력해주세요.', 'ERROR');
       return;
     }
 
