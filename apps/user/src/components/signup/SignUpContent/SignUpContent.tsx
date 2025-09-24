@@ -67,6 +67,7 @@ const SignUpContent = () => {
               handleRequestVerificationCode();
               startTimer();
             }}
+            maxLength={11}
             type="phoneNumber"
             placeholder="- 없이 입력해주세요."
             onChange={handleSignUpChange}
@@ -93,6 +94,7 @@ const SignUpContent = () => {
             <PreviewInput
               width="100%"
               name="password"
+              maxLength={20}
               label="비밀번호"
               placeholder="비밀번호를 입력해주세요."
               onChange={handleSignUpChange}
@@ -103,6 +105,7 @@ const SignUpContent = () => {
             width="100%"
             name="password_confirm"
             label="비밀번호 재확인"
+            maxLength={20}
             placeholder="비밀번호를 다시 입력해주세요."
             onChange={handleSignUpChange}
             isError={signUp.password !== signUp.password_confirm}

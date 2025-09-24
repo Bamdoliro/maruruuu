@@ -20,7 +20,7 @@ export const useSignUpAction = (signUpData: SignUp, termsAgree: boolean) => {
         toast('이용약관 동의를 해주세요.', 'ERROR');
       }
     } else {
-      toast('비밀번호를 한번만 확인해주세요', 'ERROR');
+      toast('비밀번호를 확인해주세요', 'ERROR');
     }
   };
 
@@ -93,6 +93,9 @@ export const useInput = () => {
 
     if (name === 'phoneNumber') {
       const numOnly = value.replace(/\D/g, '');
+      if (numOnly.length > 11) {
+        toast('전화번호는 11자리 숫자만 입력 가능합니다.', 'ERROR');
+      }
       setSignUp((prev) => ({ ...prev, [name]: numOnly }));
     } else if (name === 'name') {
       const hangulOnly = value.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
