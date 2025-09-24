@@ -87,7 +87,7 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
 
 export const useInput = () => {
   const [signUp, setSignUp] = useSignUpStore();
-
+  const { toast } = useToast();
   const handleSignUpChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
 
@@ -96,6 +96,9 @@ export const useInput = () => {
       setSignUp((prev) => ({ ...prev, [name]: numOnly }));
     } else if (name === 'name') {
       const hangulOnly = value.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+      if (/[^ㄱ-ㅎㅏ-ㅣ가-힣]/.test(value)) {
+        toast('이름은 한글만 입력 가능합니다.', 'ERROR');
+      }
       setSignUp((prev) => ({ ...prev, [name]: hangulOnly }));
     } else {
       setSignUp((prev) => ({ ...prev, [name]: value }));
