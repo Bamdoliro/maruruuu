@@ -10,6 +10,7 @@ const FormInput = ({
   type = 'text',
   name,
   value,
+  maxLength,
   onChange,
   textAlign,
 }: InputProps) => {
@@ -22,6 +23,7 @@ const FormInput = ({
           placeholder={placeholder}
           type={type}
           name={name}
+          maxLength={maxLength}
           value={value}
           style={{ textAlign }}
         />

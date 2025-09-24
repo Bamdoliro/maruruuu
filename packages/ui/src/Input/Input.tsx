@@ -14,6 +14,7 @@ const Input = ({
   value,
   onChange,
   errorMessage,
+  maxLength,
   message,
   readOnly,
   textAlign,
@@ -29,6 +30,7 @@ const Input = ({
           type={type}
           name={name}
           value={value}
+          maxLength={maxLength}
           readOnly={readOnly}
           style={{ textAlign }}
           $isError={isError}

@@ -7,19 +7,20 @@ import { useSignUpStore } from '@/stores';
 import type { SignUp } from '@/types/user/client';
 import { useEffect, useRef, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
+import { useToast } from '@/hooks';
 
 export const useSignUpAction = (signUpData: SignUp, termsAgree: boolean) => {
   const { signUpMutate } = useSignUpMutation(signUpData);
-
+  const { toast } = useToast();
   const handleSignUp = () => {
     if (signUpData.password === signUpData.password_confirm) {
       if (termsAgree) {
         signUpMutate();
       } else {
-        alert('이용약관 동의를 해주세요.');
+        toast('이용약관 동의를 해주세요.', 'ERROR');
       }
     } else {
-      alert('비밀번호를 한번만 확인해주세요');
+      toast('비밀번호를 확인해주세요', 'ERROR');
     }
   };
 
@@ -30,24 +31,28 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
   const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
   const [isVerificationCodeDisabled, setIsVerificationCodeDisabled] = useState(false);
   const [isVerificationCodeConfirmed, setIsVerificationCodeConfirmed] = useState(false);
-
+  const { toast } = useToast();
   const { requestVerificationMutate } = useRequestUserVerificationMutation({
     phoneNumber: signUpData.phoneNumber,
     type: 'SIGNUP',
   });
+  const [signUp] = useSignUpStore();
   const { verificationMutate } = useVerificationMutation(setIsVerificationCodeConfirmed);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleRequestVerificationCode = () => {
-    requestVerificationMutate();
-    setIsVerificationCodeDisabled(true);
-    setIsVerificationCodeSent(true);
-    setIsVerificationCodeConfirmed(false);
-
-    timerRef.current = setTimeout(() => {
-      setIsVerificationCodeDisabled(false);
-    }, 5000);
+    if (signUp.phoneNumber.replace(/\D/g, '').length < 11) {
+      toast('올바른 전화번호를 입력해주세요.', 'ERROR');
+    } else {
+      timerRef.current = setTimeout(() => {
+        requestVerificationMutate();
+        setIsVerificationCodeDisabled(false);
+        setIsVerificationCodeDisabled(true);
+        setIsVerificationCodeSent(true);
+        setIsVerificationCodeConfirmed(false);
+      }, 5000);
+    }
   };
 
   useEffect(() => {
@@ -60,7 +65,7 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
 
   const handleVerificationCodeConfirm = () => {
     if (!signUpData.code) {
-      // toast('인증번호를 입력해주세요', { type: 'error' });
+      toast('인증번호를 입력해주세요.', 'ERROR');
       return;
     }
 
@@ -82,13 +87,22 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
 
 export const useInput = () => {
   const [signUp, setSignUp] = useSignUpStore();
-
+  const { toast } = useToast();
   const handleSignUpChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
 
     if (name === 'phoneNumber') {
       const numOnly = value.replace(/\D/g, '');
+      if (numOnly.length > 11) {
+        toast('전화번호는 11자리 숫자만 입력 가능합니다.', 'ERROR');
+      }
       setSignUp((prev) => ({ ...prev, [name]: numOnly }));
+    } else if (name === 'name') {
+      const hangulOnly = value.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+      if (/[^ㄱ-ㅎㅏ-ㅣ가-힣]/.test(value)) {
+        toast('이름은 한글만 입력 가능합니다.', 'ERROR');
+      }
+      setSignUp((prev) => ({ ...prev, [name]: hangulOnly }));
     } else {
       setSignUp((prev) => ({ ...prev, [name]: value }));
     }

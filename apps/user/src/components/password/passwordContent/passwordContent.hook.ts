@@ -7,6 +7,7 @@ import {
   useVerificationMutation,
 } from '@/services/user/mutations';
 import type { SignUp } from '@/types/user/client';
+import { useToast } from '@/hooks';
 
 export const useInput = () => {
   const [changePassword, setChangePassword] = useChangePasswordStore();
@@ -29,8 +30,8 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
   const [isVerificationCodeDisabled, setIsVerificationCodeDisabled] = useState(false);
   const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
   const [isVerificationCodeConfirmed, setIsVerificationCodeConfirmed] = useState(false);
-
   const { verificationMutate } = useVerificationMutation(setIsVerificationCodeConfirmed);
+  const { toast } = useToast();
 
   const { requestVerificationMutate } = useRequestUserVerificationMutation({
     phoneNumber: changePasswordData.phoneNumber,
@@ -38,20 +39,24 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
   });
 
   const handleRequestVerificationCode = () => {
-    requestVerificationMutate();
+    if (changePasswordData.phoneNumber.replace(/\D/g, '').length < 11) {
+      toast('올바른 전화번호를 입력해주세요.', 'ERROR');
+    } else {
+      requestVerificationMutate();
 
-    setIsVerificationCodeDisabled(true);
-    setIsVerificationCodeSent(true);
-    setIsVerificationCodeConfirmed(false);
+      setIsVerificationCodeDisabled(true);
+      setIsVerificationCodeSent(true);
+      setIsVerificationCodeConfirmed(false);
 
-    setTimeout(() => {
-      setIsVerificationCodeDisabled(false);
-    }, 5000);
+      setTimeout(() => {
+        setIsVerificationCodeDisabled(false);
+      }, 5000);
+    }
   };
 
   const handleVerificationConfirm = () => {
     if (changePasswordData.code.trim().length === 0) {
-      // toast('인증 코드를 입력해주세요', { type: 'error' });
+      toast('인증 코드를 입력해주세요', 'ERROR');
       return;
     }
 
