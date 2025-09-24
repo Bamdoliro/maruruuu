@@ -11,3 +11,4 @@ export { default as useFormStep } from './formStep';
 export { default as formatScheduleDate } from './formatScheduleDate';
 export { default as formatYear } from './formatYear';
 export { default as formatResultDateTime } from './formatResultDateTime';
+export { default as formatMonthDay } from './formatMonthDay';
