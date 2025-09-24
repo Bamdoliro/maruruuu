@@ -54,6 +54,7 @@ const DraftFormModal = ({ isOpen, onClose, onConfirm }: DraftFormModalProps) => 
       onClose={onClose}
       onConfirm={onConfirm}
       confirmButtonText="제출"
+      isConfirmDisabled={!isInputValid}
       confirmButtonStyle={{
         backgroundColor: isInputValid ? color.maruDefault : color.gray500,
         cursor: isInputValid ? 'pointer' : 'not-allowed',
