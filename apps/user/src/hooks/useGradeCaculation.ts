@@ -90,9 +90,25 @@ const useGradeCalculation = () => {
   };
 
   const calculateSpecialScore = () => {
-    if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
-      return 0;
-    }
+	  if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
+		  const regularTotal = form.grade.subjectList.reduce((acc, subject) => {
+			  const achievementLevel = subject.score ? getAchivementLevel(subject.score) : 'E';
+
+			  if (achievementLevel) {
+				  if (subject.subjectName === '수학') {
+					  return acc + AchievementScore[achievementLevel] * 2;
+				  }
+				  return acc + AchievementScore[achievementLevel];
+			  }
+			  return acc;
+		  }, 0);
+
+		  const regularLength = form.grade.subjectList.length + 1;
+
+		  const regularScore = SCORE.SPECIAL_TYPE + (7.2 * 2 * regularTotal) / regularLength;
+
+		  return Number(regularScore.toFixed(3));
+	  }
 
     const specialScore =
       SCORE.SPECIAL_TYPE +
