@@ -11,8 +11,8 @@ const Validate = (password: string) => {
       <ValidateItem condition={/[a-zA-Z]/.test(password)} text="영어" />
       <ValidateItem condition={/\d/.test(password)} text="숫자" />
       <ValidateItem
-        condition={/[!@#$%*?_:^+=-]/.test(password)}
-        text="특수문자(!@#$%*?_:^+=- 중에서만 입력)"
+        condition={/[!@#$%&*?]/.test(password)}
+        text="특수문자(!@#$%&*? 중에서만 입력)"
       />
     </Row>
   );
