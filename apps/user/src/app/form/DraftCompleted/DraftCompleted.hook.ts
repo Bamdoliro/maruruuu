@@ -31,7 +31,7 @@ export const useCTAButton = () => {
               schoolAddress: null,
               schoolCode: null,
               teacherName: null,
-              teacherPhoneNumber: null,
+              schoolPhoneNumber: null,
               teacherMobilePhoneNumber: null,
             },
           }

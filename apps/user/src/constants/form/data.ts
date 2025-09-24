@@ -26,7 +26,7 @@ export const FORM: Form = {
     schoolAddress: '',
     schoolCode: '',
     teacherName: '',
-    teacherPhoneNumber: '',
+    schoolPhoneNumber: '',
     teacherMobilePhoneNumber: '',
   },
   grade: {
