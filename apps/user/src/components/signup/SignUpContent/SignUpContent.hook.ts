@@ -94,6 +94,9 @@ export const useInput = () => {
     if (name === 'phoneNumber') {
       const numOnly = value.replace(/\D/g, '');
       setSignUp((prev) => ({ ...prev, [name]: numOnly }));
+    } else if (name === 'name') {
+      const hangulOnly = value.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+      setSignUp((prev) => ({ ...prev, [name]: hangulOnly }));
     } else {
       setSignUp((prev) => ({ ...prev, [name]: value }));
     }

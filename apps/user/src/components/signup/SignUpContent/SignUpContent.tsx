@@ -53,6 +53,7 @@ const SignUpContent = () => {
             width="100%"
             name="name"
             label="이름"
+            maxLength={50}
             placeholder="예) 홍길동"
             onChange={handleSignUpChange}
             value={signUp.name}

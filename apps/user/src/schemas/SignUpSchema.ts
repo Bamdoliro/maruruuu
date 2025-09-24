@@ -1,7 +1,5 @@
-// schemas/SignUpSchema.ts
 import z from 'zod';
 
-// 입력 형식 정의
 export const SignUpBaseSchema = z.object({
   name: z
     .string()
@@ -19,11 +17,3 @@ export const SignUpBaseSchema = z.object({
     .regex(/[^\w\s]/, '비밀번호에 특수문자를 포함해야 합니다.'),
   password_confirm: z.string(),
 });
-
-// 제출용: 비밀번호 일치까지 포함
-export const SignUpSchema = SignUpBaseSchema.refine(
-  (v) => v.password === v.password_confirm,
-  { path: ['password_confirm'], message: '비밀번호가 일치하지 않습니다.' }
-);
-
-export type SignUpSchemaType = z.infer<typeof SignUpSchema>;
