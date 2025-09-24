@@ -6,6 +6,8 @@ import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useCTAButton } from './FinalSubmissionCompleted.hook';
+import { SCHEDULE } from '@/constants/form/constants';
+import { formatMonthDay } from '@/utils';
 
 const FinalSubmissionCompleted = () => {
   const { handleDownloadReciptButtonClick, userData } = useCTAButton();
@@ -34,7 +36,7 @@ const FinalSubmissionCompleted = () => {
               {userData.name}님, 부산소프트웨어마이스터고에 지원해주셔서 대단히
               감사드립니다.
               <br />
-              1차 합격자는 10월 21일에 발표됩니다.
+              1차 합격자는 {formatMonthDay(SCHEDULE.일차_합격_발표)}에 발표됩니다.
               <br />
               {userData.name}님의 1차 합격을 기원합니다.
             </Text>
