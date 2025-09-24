@@ -36,19 +36,23 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
     phoneNumber: signUpData.phoneNumber,
     type: 'SIGNUP',
   });
+  const [signUp] = useSignUpStore();
   const { verificationMutate } = useVerificationMutation(setIsVerificationCodeConfirmed);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleRequestVerificationCode = () => {
-    requestVerificationMutate();
-    setIsVerificationCodeDisabled(true);
-    setIsVerificationCodeSent(true);
-    setIsVerificationCodeConfirmed(false);
-
-    timerRef.current = setTimeout(() => {
-      setIsVerificationCodeDisabled(false);
-    }, 5000);
+    if (signUp.phoneNumber.replace(/\D/g, '').length < 11) {
+      toast('올바른 전화번호를 입력해주세요.', 'ERROR');
+    } else {
+      timerRef.current = setTimeout(() => {
+        requestVerificationMutate();
+        setIsVerificationCodeDisabled(false);
+        setIsVerificationCodeDisabled(true);
+        setIsVerificationCodeSent(true);
+        setIsVerificationCodeConfirmed(false);
+      }, 5000);
+    }
   };
 
   useEffect(() => {
