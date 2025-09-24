@@ -25,8 +25,13 @@ const schoolGraduateSchema = z.object({
     .string()
     .trim()
     .min(10, '10자 이상 입력해주세요.')
-    .max(20, '20자 이하로 입력해주세요.')
+    .max(11, '11자 이하로 입력해주세요.')
     .nonempty('전화번호를 입력해주세요.'),
+  schoolPhoneNumber: z
+    .string()
+    .trim()
+    .max(11, '11자 이하로 입력해주세요.')
+    .nonempty('학교 전화번호를 입력해주세요.'),
   teacherName: z
     .string()
     .trim()
