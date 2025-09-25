@@ -103,14 +103,14 @@ const EudcationContent = () => {
           )}
           {form.education.graduationType !== 'QUALIFICATION_EXAMINATION' && (
             <Input
-              name="teacherPhoneNumber"
+              name="schoolPhoneNumber"
               label="학교 대표 연락처"
               placeholder="학교의 교무실 연락처를 입력해주세요."
               width="100%"
-              value={form.education.teacherPhoneNumber ?? ''}
+              value={form.education.schoolPhoneNumber ?? ''}
               onChange={onFieldChange}
-              isError={!!errors.teacherPhoneNumber?.length}
-              errorMessage={errors.teacherPhoneNumber ? errors.teacherPhoneNumber[0] : ''}
+              isError={!!errors.schoolPhoneNumber?.length}
+              errorMessage={errors.schoolPhoneNumber ? errors.schoolPhoneNumber[0] : ''}
             />
           )}
         </Row>

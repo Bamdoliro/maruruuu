@@ -77,7 +77,7 @@ export interface Education {
   schoolAddress: string | null;
   schoolCode: string | null;
   teacherName: string | null;
-  teacherPhoneNumber: string | null;
+  schoolPhoneNumber: string | null;
   teacherMobilePhoneNumber: string | null;
 }
 
