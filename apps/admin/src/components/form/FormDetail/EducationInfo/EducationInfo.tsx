@@ -37,11 +37,14 @@ const EducationInfo = ({ id }: EducationInfoProps) => {
   return (
     <StyledEducationInfo>
       <GridContainer>
-        {educationDetails.map((item, index) => (
-          <GridItem key={index}>
-            <DataBox label={item.label} data={item.data} />
-          </GridItem>
-        ))}
+        {educationDetails.map(
+          (item, index) =>
+            item.data && (
+              <GridItem key={`education-info-${index}`}>
+                <DataBox label={item.label} data={item.data} />
+              </GridItem>
+            )
+        )}
       </GridContainer>
     </StyledEducationInfo>
   );
