@@ -24,7 +24,6 @@ import { styled } from 'styled-components';
 import {
   useEditSecondRoundResultActions,
   useExportAllAddmissionTicketAction,
-  useExportFirstScoreAction,
   useFormPageState,
   usePrintFormURLActions,
 } from './form.hooks';
@@ -59,8 +58,6 @@ const FormPage = () => {
 
   const { handleExportAllAdmissionTicketButtonClick } =
     useExportAllAddmissionTicketAction();
-
-  const { handleExportFirstScoreButtonClick } = useExportFirstScoreAction();
   const overlay = useOverlay();
 
   const openSecondScoreUplaodModal = () => {
@@ -213,12 +210,6 @@ const FormPage = () => {
                       label: '검토해야하는 원서 모아보기',
                       value: 'review_applications',
                       onClick: handleFormListTypeReview,
-                    },
-                    {
-                      icon: <IconUpload width={24} height={24} />,
-                      label: '1차 전형 점수 엑셀로 내보내기',
-                      value: 'first-score',
-                      onClick: handleExportFirstScoreButtonClick,
                     },
                     {
                       icon: <IconEditDocument width={24} height={24} />,

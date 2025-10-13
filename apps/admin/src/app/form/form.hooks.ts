@@ -2,10 +2,7 @@ import {
   useEditSecondRoundResultMutation,
   usePrintFormUrlMutation,
 } from '@/services/form/mutations';
-import {
-  useExportAllAddmissionTicket,
-  useExportFirstScoreExcel,
-} from '@/services/form/queries';
+import { useExportAllAddmissionTicket } from '@/services/form/queries';
 import {
   useFormToPrintValueStore,
   useSetFormToPrintStore,
@@ -133,22 +130,4 @@ export const useExportAllAddmissionTicketAction = () => {
   };
 
   return { handleExportAllAdmissionTicketButtonClick };
-};
-
-export const useExportFirstScoreAction = () => {
-  const { data: exportFirstScoreData } = useExportFirstScoreExcel();
-
-  const handleExportFirstScoreButtonClick = () => {
-    if (!exportFirstScoreData) return;
-    const scoreURL = window.URL.createObjectURL(new Blob([exportFirstScoreData]));
-
-    const link = document.createElement('a');
-    link.href = scoreURL;
-    link.download = '1차 점수.pdf';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(scoreURL);
-  };
-  return { handleExportFirstScoreButtonClick };
 };

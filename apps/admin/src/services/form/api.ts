@@ -79,14 +79,6 @@ export const getAllAdmissionTicket = async () => {
   return data;
 };
 
-export const getFirstScoreExcel = async () => {
-  const { data } = await maru.get('/forms/xlsx/first-score', {
-    ...authorization(),
-    responseType: 'blob',
-  });
-  return data;
-};
-
 export const getFormDetail = async (id: number) => {
   const { data } = await maru.get<GetFormDetail>(`/forms/${id}`, authorization());
 

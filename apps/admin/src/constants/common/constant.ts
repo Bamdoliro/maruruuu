@@ -8,7 +8,6 @@ export const KEY = {
   FORM_DETAIL: 'useFormDetail',
   SECOND_SCORE_FORMAT: 'useSecondScoreFormat',
   FORM_EXPORT_EXCEL: 'useFormExportExcel',
-  FORM_EXPORT_FIRST_SCORE_EXCEL: 'useFormExportFirstScoreExcel',
   FORM_EXPORT_ALL_ADMISSION_TICKET: 'useFormExportAllAdmissionTicket',
   FAIR_LIST: 'useFairList',
   FAIR_DETAIL: 'useFairDetail',
