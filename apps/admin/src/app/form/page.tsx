@@ -58,7 +58,6 @@ const FormPage = () => {
 
   const { handleExportAllAdmissionTicketButtonClick } =
     useExportAllAddmissionTicketAction();
-
   const overlay = useOverlay();
 
   const openSecondScoreUplaodModal = () => {
