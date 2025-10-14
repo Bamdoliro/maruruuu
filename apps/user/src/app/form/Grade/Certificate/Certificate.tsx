@@ -10,7 +10,7 @@ const Certificate = () => {
     <>
       <Column gap={24}>
         <NavigationBar>
-          <UnderlineButton active={true}>봉사시간</UnderlineButton>
+          <UnderlineButton active={true}>자격증</UnderlineButton>
         </NavigationBar>
         <CertificateCalculator />
       </Column>
