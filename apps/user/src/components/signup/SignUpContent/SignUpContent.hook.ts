@@ -109,7 +109,7 @@ export const useInput = () => {
         return;
       }
       if (/[^0-9A-Za-z\s!@#$%*?]/g.test(value)) {
-        toast('비밀번호에는 특수문자(!@#$%*?)만 포함되어야 합니다.', 'ERROR');
+        toast('비밀번호를 다시 한 번 확인해주세요.', 'ERROR');
       }
       setSignUp((prev) => ({ ...prev, [name]: value }));
     } else {
