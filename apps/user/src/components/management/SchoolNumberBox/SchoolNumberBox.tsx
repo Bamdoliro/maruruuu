@@ -29,7 +29,9 @@ const SchoolNumberBox = ({ size }: SchoolNumberBoxProps) => {
           </Text>
         )}
         <Text fontType={size === 'big' ? 'H1' : 'H4'} color={color.gray900}>
-          051-971-2153
+          051-970-1791
+          <br />
+          051-970-1792
         </Text>
       </Column>
     </StyledSchoolNumberBox>
