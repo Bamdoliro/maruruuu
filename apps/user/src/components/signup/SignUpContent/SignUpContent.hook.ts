@@ -103,6 +103,14 @@ export const useInput = () => {
         toast('이름은 한글만 입력 가능합니다.', 'ERROR');
       }
       setSignUp((prev) => ({ ...prev, [name]: hangulOnly }));
+    } else if (name === 'password' || name === 'password_confirm') {
+      if (/\s/.test(value)) {
+        toast('비밀번호는 공백 없이 입력해주세요.', 'ERROR');
+        return;
+      } else if (!/[.,&~`=+-_'":;></|()^\\]/.test(value)) {
+        toast('비밀번호에는 특수문자(!@#$%*?)만 포함되어야 합니다.', 'ERROR');
+      }
+      setSignUp((prev) => ({ ...prev, [name]: value }));
     } else {
       setSignUp((prev) => ({ ...prev, [name]: value }));
     }
