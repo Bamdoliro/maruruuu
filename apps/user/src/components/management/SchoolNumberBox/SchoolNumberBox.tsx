@@ -18,18 +18,18 @@ const SchoolNumberBox = ({ size }: SchoolNumberBoxProps) => {
         </Text>
         {size === 'small' && (
           <Text fontType="H4" color={color.gray600}>
-            교무실
+            입학담당관
           </Text>
         )}
       </Row>
       <Column alignItems="flex-start" gap={4}>
         {size === 'big' && (
           <Text fontType="H4" color={color.gray600}>
-            교무실
+            입학담당관
           </Text>
         )}
         <Text fontType={size === 'big' ? 'H1' : 'H4'} color={color.gray900}>
-          051-971-2153
+          051-970-1792
         </Text>
       </Column>
     </StyledSchoolNumberBox>
