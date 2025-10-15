@@ -1,5 +1,5 @@
 const formatDay = (remainDays: number) => {
-  remainDays = Math.round(remainDays);
+  remainDays = Math.ceil(remainDays);
 
   if (remainDays > 0) {
     return `D-${remainDays}`;
