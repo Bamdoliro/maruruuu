@@ -28,7 +28,7 @@ const VolunteerModal = ({ isOpen, onClose }: VolunteerModalProps) => {
             cursor="pointer"
           />
         </Row>
-        <ScolledContent>
+        <ScrollContent>
           <Text fontType="p2">
             [안내] 1365자원봉사포털 서비스 중단에 따른 봉사활동 실적 확인 안내
             <br />
@@ -62,7 +62,7 @@ const VolunteerModal = ({ isOpen, onClose }: VolunteerModalProps) => {
             이에 해당하는 학생 및 학교는 입학담당관번호(051-970-1791, 051-970-1792)로 전화
             부탁드립니다.
           </Text>
-        </ScolledContent>
+        </ScrollContent>
         <Row justifyContent="flex-end">
           <Button size="SMALL" styleType="PRIMARY" width={88} onClick={onClose}>
             확인
@@ -98,7 +98,7 @@ const StyledVolunteerModal = styled.div`
   border-radius: 16px;
 `;
 
-const ScolledContent = styled.div`
+const ScrollContent = styled.div`
   height: 280px;
   overflow-y: scroll;
   margin-right: -8px;
