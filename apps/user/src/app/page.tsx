@@ -12,10 +12,20 @@ import {
 import { AppLayout } from '@/layouts';
 import { Row } from '@maru/ui';
 import { flex } from '@maru/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useOverlay } from '@toss/use-overlay';
+import NoticeModal from '@/components/main/NoticeModal/NoticeModal';
 
 const Home = () => {
+	const overlay = useOverlay();
+	useEffect(() => {
+		overlay.open(({ isOpen, close }) => (
+			<NoticeModal isOpen={isOpen} onClose={close}/>
+		));
+	}, [overlay]);
+
+
   return (
     <AppLayout header footer>
       <StyledHome>
