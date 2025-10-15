@@ -18,13 +18,10 @@ import { useOverlay } from '@toss/use-overlay';
 import NoticeModal from '@/components/main/NoticeModal/NoticeModal';
 
 const Home = () => {
-	const overlay = useOverlay();
-	useEffect(() => {
-		overlay.open(({ isOpen, close }) => (
-			<NoticeModal isOpen={isOpen} onClose={close}/>
-		));
-	}, [overlay]);
-
+  const overlay = useOverlay();
+  useEffect(() => {
+    overlay.open(({ isOpen, close }) => <NoticeModal isOpen={isOpen} onClose={close} />);
+  }, [overlay]);
 
   return (
     <AppLayout header footer>
