@@ -1,9 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import styled from 'styled-components';
 import { Button, Column, Text } from '@maru/ui';
+import styled from 'styled-components';
 import { color } from '@maru/design-system';
 
 interface Props {
@@ -12,6 +13,12 @@ interface Props {
 
 const MobileAccessController = ({ children }: Props) => {
   const [isMobile, setIsMobile] = useState(false);
+
+  const router = useRouter();
+
+  const handleButtonClick = () => {
+    router.back();
+  };
 
   useEffect(() => {
     const checkMobile = () => {
@@ -43,7 +50,7 @@ const MobileAccessController = ({ children }: Props) => {
               접속하시는 것을 권장드립니다
             </Text>
           </Column>
-          <Button styleType="PRIMARY" width={106}>
+          <Button styleType="PRIMARY" width={106} onClick={handleButtonClick}>
             <Text fontType="btn2">페이지 닫기</Text>
           </Button>
         </Column>
