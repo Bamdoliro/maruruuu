@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Button, Column, Text } from '@maru/ui';
 import { color } from '@maru/design-system';
