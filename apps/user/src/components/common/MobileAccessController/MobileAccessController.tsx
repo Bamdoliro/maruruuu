@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Button, Column, Text } from '@maru/ui';
 import styled from 'styled-components';
@@ -12,7 +11,6 @@ interface Props {
 }
 
 const MobileAccessController = ({ children }: Props) => {
-  const [isMobile, setIsMobile] = useState(false);
 
   const router = useRouter();
 
@@ -20,18 +18,8 @@ const MobileAccessController = ({ children }: Props) => {
     router.back();
   };
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 700);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  if (isMobile) {
-    return (
+  return (
+		<>
       <StyledMobileBlocker>
         <Column gap={36} alignItems="center" height={420}>
           <img src="/svg/maruLogo.svg" width={160} alt="logo" loading="lazy" />
@@ -55,19 +43,32 @@ const MobileAccessController = ({ children }: Props) => {
           </Button>
         </Column>
       </StyledMobileBlocker>
-    );
-  }
-
-  return children;
+			<StyledDesktopContent>{children}</StyledDesktopContent>
+		</>
+  );
 };
 
 const StyledMobileBlocker = styled.div`
-  width: 100%;
-  height: 100%;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: none;
+
+    @media (max-width: 700px) {
+        display: flex;
+        width: 100%;
+        min-height: 100vh;
+        background: white;
+        align-items: center;
+        justify-content: center;
+		    z-index: 9999;
+    }
 `;
+
+const StyledDesktopContent = styled.div`
+  display: block;
+  
+  @media (max-width: 700px) {
+    display: none;
+  }
+`;
+
 
 export default MobileAccessController;
