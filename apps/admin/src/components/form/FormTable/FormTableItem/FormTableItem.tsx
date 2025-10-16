@@ -55,14 +55,20 @@ const FormTableItem = ({
 
   const getDocumentStatus = (documentStatus: boolean | null, FormStatus?: string) => {
     if (FormStatus === 'REJECTED') return '반려';
-    else if (FormStatus === 'APPROVED') return '승인';
-    else if (documentStatus) return '학교도착';
-    return '미도착';
+    else if (FormStatus === 'RECEIVED') return '학교도착';
+    else if (FormStatus === 'FINAL_SUBMITTED' || FormStatus === 'SUBMITTED')
+      return '미도착';
+    return '승인';
   };
   const getDocumentColor = (documentStatus: boolean | null, FormStatus?: string) => {
     if (FormStatus === 'REJECTED') return color.red;
-    else if (FormStatus === 'APPROVED') return color.maruDefault;
-    return color.gray600;
+    else if (
+      FormStatus === 'RECEIVED' ||
+      FormStatus === 'FINAL_SUBMITTED' ||
+      FormStatus === 'SUBMITTED'
+    )
+      return color.gray600;
+    return color.maruDefault;
   };
 
   const isFormToPrintSelecting = useIsFormToPrintSelectingValueStore();
