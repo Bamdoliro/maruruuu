@@ -11,7 +11,6 @@ interface Props {
 }
 
 const MobileAccessController = ({ children }: Props) => {
-
   const router = useRouter();
 
   const handleButtonClick = () => {
@@ -19,7 +18,7 @@ const MobileAccessController = ({ children }: Props) => {
   };
 
   return (
-		<>
+    <>
       <StyledMobileBlocker>
         <Column gap={36} alignItems="center" height={420}>
           <img src="/svg/maruLogo.svg" width={160} alt="logo" loading="lazy" />
@@ -43,32 +42,31 @@ const MobileAccessController = ({ children }: Props) => {
           </Button>
         </Column>
       </StyledMobileBlocker>
-			<StyledDesktopContent>{children}</StyledDesktopContent>
-		</>
+      <StyledDesktopContent>{children}</StyledDesktopContent>
+    </>
   );
 };
 
 const StyledMobileBlocker = styled.div`
-    display: none;
+  display: none;
 
-    @media (max-width: 700px) {
-        display: flex;
-        width: 100%;
-        min-height: 100vh;
-        background: white;
-        align-items: center;
-        justify-content: center;
-		    z-index: 9999;
-    }
+  @media (max-width: 700px) {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background: white;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
 `;
 
 const StyledDesktopContent = styled.div`
   display: block;
-  
+
   @media (max-width: 700px) {
     display: none;
   }
 `;
-
 
 export default MobileAccessController;
