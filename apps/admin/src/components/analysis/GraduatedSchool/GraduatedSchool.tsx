@@ -13,7 +13,6 @@ const GraduatedSchool = () => {
     handleAreaCategoryChange,
     formList,
   } = useGraduatedSchool();
-
   return (
     <StyledGenderRatio>
       <NavigatorBar>

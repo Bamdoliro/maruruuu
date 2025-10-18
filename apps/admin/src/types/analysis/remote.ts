@@ -37,7 +37,7 @@ export interface GetGenderRatioRes {
 
 export interface GraduatedSchoolStatusReq {
   statusList: AnalysisApplicantType[];
-  isBusan: boolean;
+  isBusan: boolean | '';
   gu?: AreaCategory | null;
 }
 
