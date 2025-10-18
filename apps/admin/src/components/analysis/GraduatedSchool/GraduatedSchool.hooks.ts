@@ -20,7 +20,7 @@ const useGraduatedSchool = () => {
 
   const { data: formList } = useGraduatedSchoolListQuery({
     statusList: stepMap[currentAnalysisPassStep],
-    isBusan: areaCategory === 'BUSAN' ? true : false,
+    isBusan: areaCategory !== 'OTHER_AREA',
     gu: areaCategory === 'OTHER_AREA' ? '' : areaCategory,
   });
 
