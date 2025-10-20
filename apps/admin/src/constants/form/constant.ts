@@ -83,7 +83,6 @@ export const GRADES_FIELDS = ['교과 성적', '출결 상황', '봉사 시간',
 
 export const GRADES_QUALIFICATION_EXAMINATION_FIELDS = [
   '교과 성적',
-  '봉사 시간',
   '자격증',
 ] as const;
 

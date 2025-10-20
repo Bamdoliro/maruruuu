@@ -73,8 +73,8 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
                 '출결 상황': (
                   <AttendanceStatus attendanceList={gradesData.attendanceList} />
                 ),
+              '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerList} />,
               }),
-          '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerList} />,
           자격증: <Certificate certificateList={gradesData.certificateList} />,
         }}
       />
