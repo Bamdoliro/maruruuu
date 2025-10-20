@@ -6,11 +6,10 @@ import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import { color } from '@maru/design-system';
 import dayjs from 'dayjs';
-import { formatDate } from '@/utils';
 
 const InspectionPage = () => {
-	const 점검_시작 = dayjs(process.env.NEXT_PUBLIC_INSPECTION_START_DAY);
-	const 점검_끝 = dayjs(process.env.NEXT_PUBLIC_INSPECTION_END_DAY);
+  const 점검_시작 = dayjs(process.env.NEXT_PUBLIC_INSPECTION_START_DAY);
+  const 점검_끝 = dayjs(process.env.NEXT_PUBLIC_INSPECTION_END_DAY);
 
   return (
     <AppLayout>
@@ -26,7 +25,8 @@ const InspectionPage = () => {
             사용에 불편을 드려 죄송합니다.
           </Text>
           <Text fontType="p1" color={color.red} textAlign="center">
-            일시: {점검_시작.format('YYYY.MM.DD.(dd) hh:mm')} - {점검_끝.format('YYYY.MM.DD.(dd) hh:mm')}
+            일시: {점검_시작.format('YYYY.MM.DD.(dd) hh:mm')} -{' '}
+            {점검_끝.format('YYYY.MM.DD.(dd) hh:mm')}
           </Text>
         </Column>
       </StyledErrorPage>
