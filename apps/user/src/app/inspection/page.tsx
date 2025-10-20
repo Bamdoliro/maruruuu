@@ -21,7 +21,7 @@ const InspectionPage = () => {
             사용에 불편을 드려 죄송합니다.
           </Text>
           <Text fontType="p1" color={color.red} textAlign="center">
-            일시: 2024.10.20.(월) 11:30 - 13:30
+            일시: 2025.10.20.(월) 11:30 - 13:30
           </Text>
         </Column>
       </StyledErrorPage>
