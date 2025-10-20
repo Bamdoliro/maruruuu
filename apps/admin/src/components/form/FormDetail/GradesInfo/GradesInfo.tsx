@@ -12,6 +12,7 @@ import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 import Volunteer from './Volunteer/Volunteer';
 import Certificate from './Certificate/Certificate';
 import { useFormDetailQuery } from '@/services/form/queries';
+import QualificationExaminationGrade from '@/components/form/FormDetail/GradesInfo/QualificationExaminationGrade/QualificationExaminationGrade';
 
 interface GradesInfoProps {
   id: number;
@@ -63,7 +64,9 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
         caseBy={{
           ...(isQualificationExam
             ? {
-                '교과 성적': <Grade subjectList={gradesData.subjectList} />,
+                '교과 성적': (
+                  <QualificationExaminationGrade subjectList={gradesData.subjectList} />
+                ),
               }
             : {
                 '교과 성적': <Grade subjectList={gradesData.subjectList} />,
