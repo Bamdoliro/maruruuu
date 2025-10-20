@@ -61,12 +61,13 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
       </Column>
       <SwitchCase
         value={currentGradeField}
-        caseBy={{
-          ...(isQualificationExam
+        caseBy={
+          isQualificationExam
             ? {
                 '교과 성적': (
                   <QualificationExaminationGrade subjectList={gradesData.subjectList} />
                 ),
+                자격증: <Certificate certificateList={gradesData.certificateList} />,
               }
             : {
                 '교과 성적': <Grade subjectList={gradesData.subjectList} />,
@@ -74,9 +75,9 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
                   <AttendanceStatus attendanceList={gradesData.attendanceList} />
                 ),
                 '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerList} />,
-              }),
-          자격증: <Certificate certificateList={gradesData.certificateList} />,
-        }}
+                자격증: <Certificate certificateList={gradesData.certificateList} />,
+              }
+        }
       />
     </StyledGradesInfo>
   );
