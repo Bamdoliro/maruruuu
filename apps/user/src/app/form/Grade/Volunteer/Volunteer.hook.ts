@@ -12,7 +12,11 @@ export const useCTAButton = () => {
   };
 
   const handlePreviousStep = () => {
-    setFormGradeStep('출결상황');
+    if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
+      setFormGradeStep('교과성적');
+    } else {
+      setFormGradeStep('출결상황');
+    }
     saveFormMutate(form);
   };
 
