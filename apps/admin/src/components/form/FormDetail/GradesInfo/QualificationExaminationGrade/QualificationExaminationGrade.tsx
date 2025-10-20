@@ -10,7 +10,6 @@ interface GradeProps {
 const QualificationExaminationGrade = ({ subjectList }: GradeProps) => {
   const achievementLevelsGroupList =
     getQualificationExaminationAchievementLevelsGroupList(subjectList);
-  console.log(subjectList);
   return (
     <Column>
       <QualificationExaminationGradeHeader />

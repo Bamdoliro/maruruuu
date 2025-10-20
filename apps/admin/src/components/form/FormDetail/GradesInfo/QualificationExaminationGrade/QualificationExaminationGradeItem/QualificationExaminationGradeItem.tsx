@@ -10,7 +10,6 @@ const QualificationExaminationGradeItem = ({
   subjectName,
   achievementLevel,
 }: GradeItemProps) => {
-  console.log(subjectName, achievementLevel);
   return (
     <Row height={64}>
       <Td styleType="SECONDARY" width={123} height="100%">
