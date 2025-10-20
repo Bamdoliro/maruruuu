@@ -73,10 +73,10 @@ const Header = () => {
               status?.status === 'ENTERED';
 
             const handleClick = () => {
-              /*if (route === ROUTES.FORM && banStatus) {
+              if (route === ROUTES.FORM && banStatus) {
                 alert('현재 상태에서는 원서 작성 페이지로 이동할 수 없습니다.');
                 return;
-              }*/
+              }
               router.push(route);
             };
 
