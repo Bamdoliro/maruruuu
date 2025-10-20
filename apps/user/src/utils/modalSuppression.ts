@@ -10,13 +10,8 @@ interface ModalSuppressionSettings {
 const STORAGE_KEY = 'modal_suppression_settings';
 
 export const getModalSuppressionSettings = (): ModalSuppressionSettings => {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : {};
-  } catch (error) {
-    console.warn('Failed to parse modal suppression settings:', error);
-    return {};
-  }
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored ? JSON.parse(stored) : {};
 };
 
 export const saveModalSuppression = (
