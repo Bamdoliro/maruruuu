@@ -44,7 +44,7 @@ const Footer = () => {
         <Row gap={105} alignItems="flex-start">
           <Row gap={125} alignItems="flex-start">
             <Column gap={24}>
-              {/*<StyledLink href={ROUTES.FORM}>원서접수</StyledLink>*/}
+              <StyledLink href={ROUTES.FORM}>원서접수</StyledLink>
               <StyledLink href={ROUTES.NOTICE}>공지사항</StyledLink>
               <StyledLink href={ROUTES.FAQ}>자주묻는질문</StyledLink>
               <StyledLink href="https://bssm.hs.kr">학교 홈페이지</StyledLink>
