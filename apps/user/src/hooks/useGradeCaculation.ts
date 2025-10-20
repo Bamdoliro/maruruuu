@@ -45,8 +45,7 @@ const useGradeCalculation = () => {
       const subjectName = subject.subjectName;
       if (
         (!CORE_SUBJECTS.includes(subjectName) && achievementLevel === null) ||
-        achievementLevel === '-' ||
-        achievementLevel === 'F'
+        achievementLevel === '-'
       ) {
         return acc;
       }
