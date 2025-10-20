@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 interface ModalSuppressionData {
   suppressedAt: number;
   expiresAt: number;
@@ -36,7 +38,7 @@ export const isModalSuppressed = (modalId: string): boolean => {
 
   if (!modalSettings) return false;
 
-  const now = Date.now();
+  const now = dayjs().valueOf();
 
   if (now >= modalSettings.expiresAt) {
     removeModalSuppression(modalId);
@@ -47,14 +49,14 @@ export const isModalSuppressed = (modalId: string): boolean => {
 };
 
 export const suppressModalForOneDay = (modalId: string): void => {
-  const now = Date.now();
-  const oneDayLater = now + 24 * 60 * 60 * 1000;
-  saveModalSuppression(modalId, now, oneDayLater);
+  const now = dayjs();
+  const oneDayLater = now.add(1, 'day').valueOf();
+  saveModalSuppression(modalId, now.valueOf(), oneDayLater);
 };
 
 export const cleanupExpiredSuppressions = (): void => {
   const settings = getModalSuppressionSettings();
-  const now = Date.now();
+  const now = dayjs().valueOf();
   let hasChanges = false;
 
   Object.keys(settings).forEach((modalId) => {
