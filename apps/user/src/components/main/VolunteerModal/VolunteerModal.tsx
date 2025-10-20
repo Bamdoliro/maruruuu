@@ -6,6 +6,7 @@ import Button from '@maru/ui/src/Button/Button';
 import React from 'react';
 import { IconClose } from '@maru/icon';
 import { flex } from '@maru/utils';
+import { useModalSuppression } from '@/hooks/useModalSuppression';
 
 interface VolunteerModalProps {
   isOpen: boolean;
@@ -13,6 +14,15 @@ interface VolunteerModalProps {
 }
 
 const VolunteerModal = ({ isOpen, onClose }: VolunteerModalProps) => {
+  const { isSuppressed, suppressModal } = useModalSuppression('volunteer');
+
+  if (isSuppressed) return null;
+
+  const handleSuppressAndClose = () => {
+    suppressModal();
+    onClose();
+  };
+
   return (
     <BlurBackground $isOpen={isOpen}>
       <StyledVolunteerModal>
@@ -63,7 +73,15 @@ const VolunteerModal = ({ isOpen, onClose }: VolunteerModalProps) => {
             부탁드립니다.
           </Text>
         </ScrollContent>
-        <Row justifyContent="flex-end">
+        <Row justifyContent="flex-end" gap={12}>
+          <Button
+            size="SMALL"
+            styleType="SECONDARY"
+            width={180}
+            onClick={handleSuppressAndClose}
+          >
+            하루 동안 보지 않기
+          </Button>
           <Button size="SMALL" styleType="PRIMARY" width={88} onClick={onClose}>
             확인
           </Button>

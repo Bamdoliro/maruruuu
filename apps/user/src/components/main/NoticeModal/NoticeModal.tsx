@@ -8,6 +8,7 @@ import Button from '@maru/ui/src/Button/Button';
 import React from 'react';
 import { IconClose } from '@maru/icon';
 import { useRouter } from 'next/navigation';
+import { useModalSuppression } from '@/hooks/useModalSuppression';
 
 interface NoticeModalProps {
   isOpen: boolean;
@@ -16,9 +17,17 @@ interface NoticeModalProps {
 
 const NoticeModal = ({ isOpen, onClose }: NoticeModalProps) => {
   const router = useRouter();
+  const { isSuppressed, suppressModal } = useModalSuppression('notice');
+
+  if (isSuppressed) return null;
 
   const handleConfirm = () => {
     router.push('/notice');
+  };
+
+  const handleSuppressAndClose = () => {
+    suppressModal();
+    onClose();
   };
 
   return (
@@ -56,7 +65,15 @@ const NoticeModal = ({ isOpen, onClose }: NoticeModalProps) => {
           </Column>
         </Column>
 
-        <Row justifyContent="flex-end">
+        <Row justifyContent="flex-end" gap={12}>
+          <Button
+            size="SMALL"
+            styleType="SECONDARY"
+            width={180}
+            onClick={handleSuppressAndClose}
+          >
+            하루 동안 보지 않기
+          </Button>
           <Button size="SMALL" styleType="PRIMARY" width={88} onClick={handleConfirm}>
             보러가기
           </Button>
