@@ -17,7 +17,7 @@ const Header = () => {
 
   const NAVIGATION_LIST = [
     { name: '홈', route: ROUTES.MAIN },
-    { name: '원서 작성', route: ROUTES.FORM },
+    //{ name: '원서 작성', route: ROUTES.FORM },
     { name: '원서 관리', route: ROUTES.FORM_MANAGEMENT },
     { name: '공지사항', route: ROUTES.NOTICE },
     { name: '자주묻는질문', route: ROUTES.FAQ },
@@ -73,10 +73,10 @@ const Header = () => {
               status?.status === 'ENTERED';
 
             const handleClick = () => {
-              if (route === ROUTES.FORM && banStatus) {
+              /*if (route === ROUTES.FORM && banStatus) {
                 alert('현재 상태에서는 원서 작성 페이지로 이동할 수 없습니다.');
                 return;
-              }
+              }*/
               router.push(route);
             };
 

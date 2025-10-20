@@ -26,9 +26,9 @@ export const useBoxClick = (status?: string) => {
 
     if (banStatus) {
       alert('원서를 제출한 상태입니다.');
-    } else {
+    } /*else {
       router.push(ROUTES.FORM);
-    }
+    }*/
   };
 
   const handleDownloadForm = () => {

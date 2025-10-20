@@ -22,7 +22,7 @@ export const useCTAButton = (status?: string) => {
       alert('현재 상태에서는 원서 작성 페이지로 이동할 수 없습니다.');
       return;
     }
-    router.push(ROUTES.FORM);
+    //router.push(ROUTES.FORM);
   };
 
   const handleMoveManagement = () => {
