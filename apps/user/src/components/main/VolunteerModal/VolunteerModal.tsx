@@ -3,29 +3,19 @@ import { color } from '@maru/design-system';
 import Row from '@maru/ui/src/Flex/Row';
 import Text from '@maru/ui/src/Text/Text';
 import Button from '@maru/ui/src/Button/Button';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IconClose } from '@maru/icon';
 import { flex } from '@maru/utils';
-import { useModalSuppression } from '@/hooks/useModalSuppression';
 
 interface VolunteerModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSuppress: () => void;
 }
 
-const VolunteerModal = ({ isOpen, onClose }: VolunteerModalProps) => {
-  const { isSuppressed, suppressModal } = useModalSuppression('volunteer');
-
-  useEffect(() => {
-    if (isSuppressed) {
-      onClose();
-    }
-  }, [isSuppressed, onClose]);
-
-  if (isSuppressed) return null;
-
+const VolunteerModal = ({ isOpen, onClose, onSuppress }: VolunteerModalProps) => {
   const handleSuppressAndClose = () => {
-    suppressModal();
+    onSuppress();
     onClose();
   };
 
