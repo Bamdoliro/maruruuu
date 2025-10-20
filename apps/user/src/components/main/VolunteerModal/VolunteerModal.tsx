@@ -10,9 +10,15 @@ import { flex } from '@maru/utils';
 interface VolunteerModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSuppress: () => void;
 }
 
-const VolunteerModal = ({ isOpen, onClose }: VolunteerModalProps) => {
+const VolunteerModal = ({ isOpen, onClose, onSuppress }: VolunteerModalProps) => {
+  const handleSuppressAndClose = () => {
+    onSuppress();
+    onClose();
+  };
+
   return (
     <BlurBackground $isOpen={isOpen}>
       <StyledVolunteerModal>
@@ -63,7 +69,15 @@ const VolunteerModal = ({ isOpen, onClose }: VolunteerModalProps) => {
             부탁드립니다.
           </Text>
         </ScrollContent>
-        <Row justifyContent="flex-end">
+        <Row justifyContent="flex-end" gap={12}>
+          <Button
+            size="SMALL"
+            styleType="SECONDARY"
+            width={180}
+            onClick={handleSuppressAndClose}
+          >
+            하루 동안 보지 않기
+          </Button>
           <Button size="SMALL" styleType="PRIMARY" width={88} onClick={onClose}>
             확인
           </Button>
