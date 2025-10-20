@@ -5,6 +5,7 @@ import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
 import { color } from '@maru/design-system';
+import { SCHEDULE } from '@/constants/form/constants';
 
 const InspectionPage = () => {
   return (
@@ -21,7 +22,8 @@ const InspectionPage = () => {
             사용에 불편을 드려 죄송합니다.
           </Text>
           <Text fontType="p1" color={color.red} textAlign="center">
-            일시: 2025. 10. 20.(월) 11:30 - 2025. 10. 20.(월) 14:30
+            일시: {SCHEDULE.점검_시작.format('YYYY. MM. DD.(dd) hh:mm')} -&nbsp;
+            {SCHEDULE.점검_끝.format('YYYY. MM. DD.(dd) hh:mm')}
           </Text>
         </Column>
       </StyledErrorPage>
