@@ -5,7 +5,7 @@ import Column from '@maru/ui/src/Flex/Column';
 import Row from '@maru/ui/src/Flex/Row';
 import Text from '@maru/ui/src/Text/Text';
 import Button from '@maru/ui/src/Button/Button';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IconClose } from '@maru/icon';
 import { useRouter } from 'next/navigation';
 import { useModalSuppression } from '@/hooks/useModalSuppression';
@@ -18,6 +18,12 @@ interface NoticeModalProps {
 const NoticeModal = ({ isOpen, onClose }: NoticeModalProps) => {
   const router = useRouter();
   const { isSuppressed, suppressModal } = useModalSuppression('notice');
+
+  useEffect(() => {
+    if (isSuppressed) {
+      onClose();
+    }
+  }, [isSuppressed, onClose]);
 
   if (isSuppressed) return null;
 
