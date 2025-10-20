@@ -1,5 +1,8 @@
 import { SideMenu } from '@/components/common';
-import { GRADES_FIELDS } from '@/constants/form/constant';
+import {
+  GRADES_FIELDS,
+  GRADES_QUALIFICATION_EXAMINATION_FIELDS,
+} from '@/constants/form/constant';
 import { Column, Loader } from '@maru/ui';
 import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
@@ -9,6 +12,7 @@ import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 import Volunteer from './Volunteer/Volunteer';
 import Certificate from './Certificate/Certificate';
 import { useFormDetailQuery } from '@/services/form/queries';
+import QualificationExaminationGrade from '@/components/form/FormDetail/GradesInfo/QualificationExaminationGrade/QualificationExaminationGrade';
 
 interface GradesInfoProps {
   id: number;
@@ -35,10 +39,17 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
     certificateList: formDetailData.grade.certificateList,
   };
 
+  const isQualificationExam =
+    formDetailData.education.graduationType === 'QUALIFICATION_EXAMINATION';
+
+  const gradeFields = isQualificationExam
+    ? GRADES_QUALIFICATION_EXAMINATION_FIELDS
+    : GRADES_FIELDS;
+
   return (
     <StyledGradesInfo>
       <Column gap={10}>
-        {GRADES_FIELDS.map((gradeField) => (
+        {gradeFields.map((gradeField) => (
           <SideMenu
             key={gradeField}
             isActive={currentGradeField === gradeField}
@@ -50,16 +61,28 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
       </Column>
       <SwitchCase
         value={currentGradeField}
-        caseBy={{
-          '교과 성적': <Grade subjectList={gradesData.subjectList} />,
-          '출결 상황': <AttendanceStatus attendanceList={gradesData.attendanceList} />,
-          '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerList} />,
-          자격증: <Certificate certificateList={gradesData.certificateList} />,
-        }}
+        caseBy={
+          isQualificationExam
+            ? {
+                '교과 성적': (
+                  <QualificationExaminationGrade subjectList={gradesData.subjectList} />
+                ),
+                자격증: <Certificate certificateList={gradesData.certificateList} />,
+              }
+            : {
+                '교과 성적': <Grade subjectList={gradesData.subjectList} />,
+                '출결 상황': (
+                  <AttendanceStatus attendanceList={gradesData.attendanceList} />
+                ),
+                '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerList} />,
+                자격증: <Certificate certificateList={gradesData.certificateList} />,
+              }
+        }
       />
     </StyledGradesInfo>
   );
 };
+
 export default GradesInfo;
 
 const StyledGradesInfo = styled.div`

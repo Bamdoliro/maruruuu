@@ -10,7 +10,6 @@ interface GradeProps {
 
 const Grade = ({ subjectList }: GradeProps) => {
   const achievementLevelsGroupList = getAchievementLevelsGroupList(subjectList);
-
   return (
     <Column>
       <GradeHeader />

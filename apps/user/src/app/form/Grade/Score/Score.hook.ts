@@ -57,7 +57,11 @@ export const useCTAButton = () => {
 
   const handleNextStep = () => {
     if (validateSubjects()) {
-      setFormGradeStep('출결상황');
+      if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
+        setFormGradeStep('자격증');
+      } else {
+        setFormGradeStep('출결상황');
+      }
       saveFormMutate(form);
     }
   };
