@@ -38,7 +38,6 @@ export const isModalSuppressed = (modalId: string): boolean => {
 
   const now = Date.now();
 
-  // 만료되었으면 설정을 정리하고 false 반환
   if (now >= modalSettings.expiresAt) {
     removeModalSuppression(modalId);
     return false;
@@ -49,7 +48,7 @@ export const isModalSuppressed = (modalId: string): boolean => {
 
 export const suppressModalForOneDay = (modalId: string): void => {
   const now = Date.now();
-  const oneDayLater = now + 24 * 60 * 60 * 1000; // 24시간 후
+  const oneDayLater = now + 24 * 60 * 60 * 1000;
   saveModalSuppression(modalId, now, oneDayLater);
 };
 
