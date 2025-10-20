@@ -9,9 +9,6 @@ interface ModalSuppressionSettings {
 
 const STORAGE_KEY = 'modal_suppression_settings';
 
-/**
- * 로컬 스토리지에서 모달 숨김 설정을 가져옵니다
- */
 export const getModalSuppressionSettings = (): ModalSuppressionSettings => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -22,9 +19,6 @@ export const getModalSuppressionSettings = (): ModalSuppressionSettings => {
   }
 };
 
-/**
- * 특정 모달의 숨김 설정을 저장합니다
- */
 export const saveModalSuppression = (
   modalId: string,
   suppressedAt: number,
@@ -39,9 +33,6 @@ export const saveModalSuppression = (
   }
 };
 
-/**
- * 특정 모달의 숨김 설정을 제거합니다
- */
 export const removeModalSuppression = (modalId: string): void => {
   try {
     const settings = getModalSuppressionSettings();
@@ -52,9 +43,6 @@ export const removeModalSuppression = (modalId: string): void => {
   }
 };
 
-/**
- * 특정 모달이 현재 숨겨져 있는지 확인합니다
- */
 export const isModalSuppressed = (modalId: string): boolean => {
   try {
     const settings = getModalSuppressionSettings();
@@ -77,18 +65,12 @@ export const isModalSuppressed = (modalId: string): boolean => {
   }
 };
 
-/**
- * 모달을 24시간 동안 숨김 처리합니다
- */
 export const suppressModalForOneDay = (modalId: string): void => {
   const now = Date.now();
   const oneDayLater = now + 24 * 60 * 60 * 1000; // 24시간 후
   saveModalSuppression(modalId, now, oneDayLater);
 };
 
-/**
- * 모든 만료된 모달 숨김 설정을 정리합니다
- */
 export const cleanupExpiredSuppressions = (): void => {
   try {
     const settings = getModalSuppressionSettings();
