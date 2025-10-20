@@ -4,7 +4,6 @@ const getAchievementLevelsGroupList = (
   subjectList?: Subject[]
 ): AchievementLevelsGroup[] => {
   if (!subjectList || subjectList.length === 0) return [];
-
   return subjectList.reduce((acc: AchievementLevelsGroup[], cur) => {
     const existingSubject = acc.find(
       (subject) => subject.subjectName === cur.subjectName
