@@ -1,6 +1,6 @@
 export const ROUTES = {
   MAIN: '/',
-  FORM: '/form',
+  //FORM: '/form',
   FORM_MANAGEMENT: '/management',
   NOTICE: '/notice',
   FAQ: '/faq',
