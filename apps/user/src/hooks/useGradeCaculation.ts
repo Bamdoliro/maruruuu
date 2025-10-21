@@ -58,7 +58,6 @@ const useGradeCalculation = () => {
 
     return scoreTotal / scoreLength;
   };
-
   const calculateRegularScore = () => {
     if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
       const regularTotal = form.grade.subjectList.reduce((acc, subject) => {
