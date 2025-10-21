@@ -13,12 +13,13 @@ const Grade = ({ subjectList }: GradeProps) => {
   return (
     <Column>
       <GradeHeader />
-      {achievementLevelsGroupList.map((item) => (
+      {achievementLevelsGroupList.map((item, index) => (
         <GradeItem
           subjectName={item.subjectName}
           achievementLevel21={item.achievementLevels[0]}
           achievementLevel22={item.achievementLevels[1]}
           achievementLevel31={item.achievementLevels[2]}
+          isLast={index === achievementLevelsGroupList.length - 1}
         />
       ))}
     </Column>

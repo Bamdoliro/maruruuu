@@ -6,6 +6,7 @@ interface GradeItemProps {
   achievementLevel21: AchievementLevel;
   achievementLevel22: AchievementLevel;
   achievementLevel31: AchievementLevel;
+  isLast: boolean;
 }
 
 const GradeItem = ({
@@ -13,6 +14,7 @@ const GradeItem = ({
   achievementLevel21,
   achievementLevel22,
   achievementLevel31,
+  isLast,
 }: GradeItemProps) => {
   const getDisplayValue = (value: AchievementLevel) => {
     if (value === 'F') return '미이수';
@@ -21,7 +23,12 @@ const GradeItem = ({
 
   return (
     <Row height={64}>
-      <Td styleType="SECONDARY" width={123} height="100%">
+      <Td
+        styleType="SECONDARY"
+        width={123}
+        height="100%"
+        borderBottomLeftRadius={isLast ? 12 : 0}
+      >
         {subjectName}
       </Td>
       <Td width={140} height="100%">
@@ -30,7 +37,7 @@ const GradeItem = ({
       <Td width={140} height="100%">
         <CellInput type="text" value={getDisplayValue(achievementLevel22)} readOnly />
       </Td>
-      <Td width={140} height="100%">
+      <Td width={140} height="100%" borderBottomRightRadius={isLast ? 12 : 0}>
         <CellInput type="text" value={getDisplayValue(achievementLevel31)} readOnly />
       </Td>
     </Row>
