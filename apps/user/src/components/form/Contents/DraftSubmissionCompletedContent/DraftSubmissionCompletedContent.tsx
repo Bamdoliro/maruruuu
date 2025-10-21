@@ -4,12 +4,12 @@ import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useCTAButton } from './DraftSubmissionCompletedContent.hook';
-import { useFormStore } from '@/stores';
+import { useFormValueStore } from '@/stores';
 
 const DraftSubmissionCompletedContent = () => {
   const { handleMoveMainPage, handleMoveFinalSubmit } = useCTAButton();
-  const [form] = useFormStore();
-
+  const form = useFormValueStore();
+  console.log(form);
   return (
     <StyledDraftSubmissionCompletedContent>
       <Row gap={8} alignItems="center">

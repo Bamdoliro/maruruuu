@@ -3,7 +3,7 @@ import { IconCheckCircle } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from 'styled-components';
-import { useFormStore } from '@/stores';
+import { useFormValueStore } from '@/stores';
 
 interface DraftCompletedContentProps {
   onClick: () => void;
@@ -11,7 +11,7 @@ interface DraftCompletedContentProps {
 }
 
 const DraftCompletedContent = ({ onClick, check }: DraftCompletedContentProps) => {
-  const [form] = useFormStore();
+  const form = useFormValueStore();
 
   return (
     <StyledDraftCompletedContent>
