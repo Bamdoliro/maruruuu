@@ -1,29 +1,13 @@
-# maru-v2
+![image](https://github.com/Bamdoliro/marururu/assets/102123549/07bb8be6-a90d-48c2-a282-ba05dec78ec3)
 
-마루의 프론트엔드 레포지토리 입니다.
+# 마루(maru)
 
-## Git Commit Type Convention
+마루는 밤돌이로에서 개발 중인 부산소프트웨어마이스터 고등학교의 입학 전형 시스템이에요. <br>
+마루는 입학 과정에 있어서 선생님들과 학생들을 편리하게 하는 것을 목적으로 개발하고 있어요.
 
-각 커밋 타입의 설명과 참고사항입니다. 프로젝트 관리 및 버전 기록을 명확히 하기 위해 아래의 규칙을 따릅니다.
+- [**apps**](https://github.com/Bamdoliro/maruruuu/tree/main/apps): 마루의 admin, user 등 다양한 웹이 들어가요. 대표적인 예시로 [user](https://github.com/Bamdoliro/marururu/tree/main/apps/user), [admin](https://github.com/Bamdoliro/maruruuu/tree/main/apps/admin)
+- [**packages**](https://github.com/Bamdoliro/maruruuu/tree/main/packages): 마루의 개발을 도와줄 다양한 라이브러리들이 들어가요. 대표적인 예시로 [@maru/ui](https://github.com/Bamdoliro/marururu/tree/main/packages/ui), [@maru/design-system](https://github.com/Bamdoliro/maruruuu/tree/main/packages/design-system)
 
-| **Type**     | **설명**                 | **참고사항**                             |
-| ------------ | ------------------------ | ---------------------------------------- |
-| **feat**     | 기능 추가                |                                          |
-| **build**    | 라이브러리 세팅/업데이트 |                                          |
-| **config**   | Config 파일 설정         |                                          |
-| **remove**   | 파일 또는 폴더 삭제      |                                          |
-| **rename**   | 파일 또는 폴더 수정      |                                          |
-| **fix**      | 기능 에러 수정           |                                          |
-| **style**    | UI 관련 CSS 수정         |                                          |
-| **chore**    | 단순 코드 수정           | 주석, 줄 바꿈, 임포트문, 세미콜론 등등.. |
-| **refactor** | 기능 변경 없는 코드 개선 |                                          |
-| **asset**    | 이미지, 폰트             | 리소스 파일                              |
-| **docs**     | 문서 작성                |                                          |
+## 라이선스
 
-### 사용 예시
-
-```bash
-git commit -m "feat(user): 사용자 로그인 기능 추가"
-git commit -m "fix(admin): API 호출 시 발생하는 오류 수정"
-git commit -m "style(common): 버튼 hover 스타일 변경"
-```
+MIT © 밤돌이로. [LICENSE](./LICENSE) 파일을 참고하세요.
