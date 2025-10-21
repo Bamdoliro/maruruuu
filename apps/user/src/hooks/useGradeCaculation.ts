@@ -58,10 +58,9 @@ const useGradeCalculation = () => {
 
     return scoreTotal / scoreLength;
   };
-
   const calculateRegularScore = () => {
     if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
-      const regularTotal = form.grade.subjectList.reduce((acc, subject) => {
+      const regularTotal = form.grade.subjectList?.reduce((acc, subject) => {
         const achievementLevel = subject.score ? getAchivementLevel(subject.score) : 'E';
 
         if (achievementLevel) {
@@ -73,7 +72,7 @@ const useGradeCalculation = () => {
         return acc;
       }, 0);
 
-      const regularLength = form.grade.subjectList.length + 1;
+      const regularLength = form.grade.subjectList?.length + 1;
 
       const regularScore = SCORE.REGULAR_TYPE + (12 * 2 * regularTotal) / regularLength;
 
@@ -91,7 +90,7 @@ const useGradeCalculation = () => {
 
   const calculateSpecialScore = () => {
     if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
-      const regularTotal = form.grade.subjectList.reduce((acc, subject) => {
+      const regularTotal = form.grade.subjectList?.reduce((acc, subject) => {
         const achievementLevel = subject.score ? getAchivementLevel(subject.score) : 'E';
 
         if (achievementLevel) {
@@ -103,7 +102,7 @@ const useGradeCalculation = () => {
         return acc;
       }, 0);
 
-      const regularLength = form.grade.subjectList.length + 1;
+      const regularLength = form.grade.subjectList?.length + 1;
 
       const regularScore = SCORE.SPECIAL_TYPE + (7.2 * 2 * regularTotal) / regularLength;
 

@@ -20,7 +20,7 @@ const NewGEDCalculatorItem = ({ id, score }: Props) => {
 
   return (
     <StyledNewGEDCalculatorItem>
-      <Td styleType="SECONDARY" width={123} height="100%">
+      <Td styleType="SECONDARY" width="15.1%" height={64}>
         <Dropdown
           background="Gray"
           value={newGEDSubjectList[newGEDSubjectIndex]?.subjectName}
@@ -34,14 +34,14 @@ const NewGEDCalculatorItem = ({ id, score }: Props) => {
           placeholder="-"
         />
       </Td>
-      <Td width={570} height="100%">
+      <Td width="69.8%" height={64}>
         <CellInput
           value={score ?? 0}
           name="score"
           onChange={(e) => handleScoreChange(e)}
         />
       </Td>
-      <Td width={123} height="100%">
+      <Td width="15.1%" height={64}>
         <Button
           onClick={() => handleDeleteNewGEDSubject(id)}
           styleType="DELETE"
