@@ -4,10 +4,12 @@ import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useCTAButton } from './DraftSubmissionCompletedContent.hook';
+import { useFormValueStore } from '@/stores';
 
 const DraftSubmissionCompletedContent = () => {
   const { handleMoveMainPage, handleMoveFinalSubmit } = useCTAButton();
-
+  const form = useFormValueStore();
+  console.log(form);
   return (
     <StyledDraftSubmissionCompletedContent>
       <Row gap={8} alignItems="center">
@@ -17,10 +19,17 @@ const DraftSubmissionCompletedContent = () => {
         </Text>
       </Row>
       <Column gap={12}>
-        <Text fontType="p1" color={color.gray900}>
-          작성한 원서 초안을 출력하여 학교장 직인을 받은 후, 추가 서류와 함께 인터넷으로
-          접수해 주시기 바랍니다.
-        </Text>
+        {form.education.graduationType === 'QUALIFICATION_EXAMINATION' ? (
+          <Text fontType="p1" color={color.gray900}>
+            작성한 원서 초안을 출력하여 추가 서류와 함께 인터넷으로 접수해 주시기
+            바랍니다.
+          </Text>
+        ) : (
+          <Text fontType="p1" color={color.gray900}>
+            작성한 원서 초안을 출력하여 학교장 직인을 받은 후, 추가 서류와 함께 인터넷으로
+            접수해 주시기 바랍니다.
+          </Text>
+        )}
         <Text fontType="p1" color={color.gray900}>
           최종 접수한 모든 서류는 우편 또는 방문 접수하여 주시기 바랍니다.
         </Text>
