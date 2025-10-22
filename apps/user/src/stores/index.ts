@@ -51,3 +51,5 @@ export {
   useCorrectValueStore,
   useSetCorrectStore,
 } from './form/correct';
+
+export { useStepStore, useStepValueStore, useSetStepStore } from './mobile/step';
