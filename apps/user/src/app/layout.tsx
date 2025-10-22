@@ -2,7 +2,6 @@ import Provider from '@/components/Provider';
 import GoogleAnalytics from '@/lib/GoogleAnalytics';
 import StyledComponentRegistry from '@/lib/registry';
 import QueryClientProvider from '@/services/QueryClientProvider';
-import MobileAccessController from '@/components/common/MobileAccessController/MobileAccessController';
 import React from 'react';
 import type { ReactNode } from 'react';
 
@@ -25,9 +24,7 @@ const RootLayout = ({ children }: Props) => {
           ) : null}
           <StyledComponentRegistry>
             <QueryClientProvider>
-              <Provider>
-                <MobileAccessController>{children}</MobileAccessController>
-              </Provider>
+              <Provider>{children}</Provider>
             </QueryClientProvider>
           </StyledComponentRegistry>
         </body>

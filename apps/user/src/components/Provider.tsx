@@ -7,15 +7,20 @@ import type { ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import { Suspense } from 'react';
 import { useToast } from '@/hooks';
+import { MobileProvider } from './common';
 
 interface Props {
   children: ReactNode;
 }
 
 const GlobalToast = () => {
-  const { showToast, toastMessage, toastType } = useToast();
+  const { showToast, toastMessage, toastType, device } = useToast();
 
-  return showToast ? <Toast type={toastType}>{toastMessage}</Toast> : null;
+  return showToast ? (
+    <Toast type={toastType} device={device}>
+      {toastMessage}
+    </Toast>
+  ) : null;
 };
 
 const Provider = ({ children }: Props) => {
@@ -23,7 +28,9 @@ const Provider = ({ children }: Props) => {
     <RecoilRoot>
       <OverlayProvider>
         <GlobalStyle />
-        <Suspense fallback={<Loader />}>{children}</Suspense>
+        <MobileProvider>
+          <Suspense fallback={<Loader />}>{children}</Suspense>
+        </MobileProvider>
       </OverlayProvider>
       <GlobalToast />
     </RecoilRoot>
