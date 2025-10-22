@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
 
 export const useLoginAction = (loginData: PostLoginReq) => {
-  const { loginMutate } = useLoginMutation(loginData);
+  const { loginMutate } = useLoginMutation('COMPUTER', loginData);
 
   const handleLogin = () => {
     loginMutate();
