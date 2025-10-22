@@ -6,10 +6,15 @@ import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 import { Storage } from '@/apis/storage/storage';
 import { useApiError, useToast } from '@/hooks';
+import { useSetStepStore } from '@/stores';
 
-export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
+export const useLoginMutation = (
+  device: string,
+  { phoneNumber, password }: PostLoginReq
+) => {
   const router = useRouter();
   const { toast } = useToast();
+  const setStep = useSetStepStore();
 
   const { mutate: loginMutate, ...restMutation } = useMutation({
     mutationFn: () => postLogin({ phoneNumber, password }),
@@ -17,11 +22,20 @@ export const useLoginMutation = ({ phoneNumber, password }: PostLoginReq) => {
       const { accessToken, refreshToken } = res.data;
       Storage.setItem(TOKEN.ACCESS, accessToken);
       Storage.setItem(TOKEN.REFRESH, refreshToken);
-      toast('로그인 되었습니다.', 'SUCCESS');
-      router.replace(ROUTES.MAIN);
+      if (device === 'COMPUTER') {
+        toast('로그인 되었습니다.', 'SUCCESS');
+        router.replace(ROUTES.MAIN);
+      } else if (device === 'MOBILE') {
+        toast('로그인 되었습니다.', 'SUCCESS', 'MOBILE');
+        setStep('MAIN');
+      }
     },
     onError: () => {
-      toast('전화번호나 비밀번호를 다시 확인해주세요.', 'ERROR');
+      if (device === 'COMPUTER') {
+        toast('전화번호나 비밀번호를 다시 확인해주세요.', 'ERROR');
+      } else if (device === 'MOBILE') {
+        toast('전화번호나 비밀번호를 다시 확인해주세요.', 'ERROR', 'MOBILE');
+      }
       localStorage.clear();
     },
   });

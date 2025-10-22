@@ -9,6 +9,7 @@ const toastState = atom({
     showToast: false,
     toastMessage: '',
     toastType: 'SUCCESS' as 'ERROR' | 'SUCCESS',
+    device: 'COMPUTER' as 'MOBILE' | 'COMPUTER',
   },
 });
 
@@ -17,7 +18,11 @@ const useToast = () => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const toast = useCallback(
-    (message: string, type: 'ERROR' | 'SUCCESS' = 'SUCCESS') => {
+    (
+      message: string,
+      type: 'ERROR' | 'SUCCESS' = 'SUCCESS',
+      device: 'MOBILE' | 'COMPUTER' = 'COMPUTER'
+    ) => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
@@ -26,6 +31,7 @@ const useToast = () => {
         showToast: true,
         toastMessage: message,
         toastType: type,
+        device: device,
       });
       timeoutRef.current = setTimeout(() => {
         setPopup((prev) => ({
@@ -42,6 +48,7 @@ const useToast = () => {
     showToast: popup.showToast,
     toastMessage: popup.toastMessage,
     toastType: popup.toastType,
+    device: popup.device,
     toast,
   };
 };

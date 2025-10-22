@@ -10,11 +10,12 @@ interface ToastProps {
   children: ReactNode;
   width?: CSSProperties['width'];
   type: 'ERROR' | 'SUCCESS';
+  device?: 'MOBILE' | 'COMPUTER';
 }
 
-const Toast = ({ children, width, type }: ToastProps) => {
+const Toast = ({ children, width, type, device = 'COMPUTER' }: ToastProps) => {
   return (
-    <StyledToast style={{ width }}>
+    <StyledToast style={{ width }} device={device}>
       {type === 'ERROR' ? (
         <IconCancelCircle width={32} height={32} />
       ) : (
@@ -29,7 +30,7 @@ const Toast = ({ children, width, type }: ToastProps) => {
 
 export default Toast;
 
-const StyledToast = styled.div`
+const StyledToast = styled.div<{ device: 'MOBILE' | 'COMPUTER' }>`
   ${flex({
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -37,15 +38,19 @@ const StyledToast = styled.div`
   })}
   position: fixed;
   gap: 8px;
-  top: 150px;
-  right: 48px;
+  top: ${({ device }) => (device === 'MOBILE' ? '20px' : '150px')};
+  right: ${({ device }) => (device === 'MOBILE' ? '0px' : '48px')};
+  left: ${({ device }) => (device === 'MOBILE' ? '0px' : 'initial')};
+  transform: ${({ device }) => (device === 'MOBILE' ? 'translateX(-50%)' : 'initial')};
   background-color: #fff;
   width: auto;
+  margin: ${({ device }) => (device === 'MOBILE' ? '0 20px' : 'auto')};
   padding: 20px 16px;
   border-radius: 8px;
   z-index: 1000;
   opacity: 0;
-  animation: fadeInOut 3s ease forwards;
+  animation: ${({ device }) => (device === 'MOBILE' ? 'fadeInOutMobile' : 'fadeInOut')} 3s
+    ease forwards;
   box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
 
   @keyframes fadeInOut {
@@ -64,6 +69,25 @@ const StyledToast = styled.div`
     100% {
       opacity: 0;
       transform: translateX(80px);
+    }
+  }
+
+  @keyframes fadeInOutMobile {
+    0% {
+      opacity: 0;
+      transform: translateY(-80px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-80px);
     }
   }
 `;
