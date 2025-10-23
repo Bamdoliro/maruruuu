@@ -13,10 +13,11 @@ const QualificationExaminationGrade = ({ subjectList }: GradeProps) => {
   return (
     <Column>
       <QualificationExaminationGradeHeader />
-      {achievementLevelsGroupList.map((item) => (
+      {achievementLevelsGroupList.map((item, index) => (
         <QualificationExaminationGradeItem
           subjectName={item.subjectName}
           achievementLevel={item.achievementLevels[0]}
+          isLast={index === achievementLevelsGroupList.length - 1}
         />
       ))}
     </Column>
