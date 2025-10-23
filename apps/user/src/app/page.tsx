@@ -10,46 +10,12 @@ import {
   SimulationBox,
 } from '@/components/main';
 import { flex } from '@maru/utils';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useOverlay } from '@toss/use-overlay';
-import NoticeModal from '@/components/main/NoticeModal/NoticeModal';
-import VolunteerModal from '@/components/main/VolunteerModal/VolunteerModal';
-import { isModalSuppressed, suppressModalForOneDay } from '@/utils/modalSuppression';
 import { Row } from '@maru/ui';
 import { AppLayout } from '@/layouts';
 
 const Home = () => {
-  const overlay = useOverlay();
-  useEffect(() => {
-    const openNoticeModal = () => {
-      if (isModalSuppressed('notice')) return;
-      overlay.open(({ isOpen, close }) => (
-        <NoticeModal
-          isOpen={isOpen}
-          onClose={close}
-          onSuppress={() => suppressModalForOneDay('notice')}
-        />
-      ));
-    };
-
-    if (isModalSuppressed('volunteer')) {
-      openNoticeModal();
-      return;
-    }
-
-    overlay.open(({ isOpen, close }) => (
-      <VolunteerModal
-        isOpen={isOpen}
-        onClose={() => {
-          close();
-          openNoticeModal();
-        }}
-        onSuppress={() => suppressModalForOneDay('volunteer')}
-      />
-    ));
-  }, [overlay]);
-
   return (
     <AppLayout header footer>
       <StyledHome>
