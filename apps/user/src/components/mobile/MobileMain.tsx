@@ -6,7 +6,7 @@ import { useMobile } from './Mobile.hook';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import { SCHEDULE } from '@/constants/form/constants';
-import { formatResultDateTime } from '@/utils';
+import { formatResultDateTime, formatYear } from '@/utils';
 
 dayjs.extend(isBetween);
 
@@ -23,7 +23,7 @@ const MobileMain = () => {
         <Column alignItems="center" gap={40}>
           <Column alignItems="center" gap={4}>
             <Text fontType="p3" color={color.gray900}>
-              2025학년도 부산소프트웨어마이스터고등학교
+              {formatYear(SCHEDULE.원서_접수, true)}학년도 부산소프트웨어마이스터고등학교
             </Text>
             <Text fontType="H3" color={color.gray900}>
               {first && '1차 합격자 발표'}
