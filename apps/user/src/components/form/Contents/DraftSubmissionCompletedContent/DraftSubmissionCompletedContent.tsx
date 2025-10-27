@@ -9,7 +9,6 @@ import { useFormValueStore } from '@/stores';
 const DraftSubmissionCompletedContent = () => {
   const { handleMoveMainPage, handleMoveFinalSubmit } = useCTAButton();
   const form = useFormValueStore();
-  console.log(form);
   return (
     <StyledDraftSubmissionCompletedContent>
       <Row gap={8} alignItems="center">

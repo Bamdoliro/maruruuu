@@ -2,14 +2,26 @@ import type { FormType, GradeDistributionType } from '@/types/analysis/client';
 
 const useMaxMinByType = (formList: GradeDistributionType[] | undefined) => {
   const getMaxMinByType = (type: FormType) => {
-    const entries = formList?.filter((item) => item.type === type);
-    if (!entries || entries.length === 0) {
-      return { max: 0, min: 0 };
-    }
-    const max = Math.max(...entries.map((item) => item.totalMax)).toFixed(3);
-    const min = Math.min(...entries.map((item) => item.totalMin)).toFixed(3);
+    const filtered = formList?.filter((item) => item.type === type);
+    if (!filtered?.length) return { max: '0', min: '0' };
 
-    return { max, min };
+    const isValid = (v: number | null | undefined): v is number =>
+      typeof v === 'number' && !Number.isNaN(v);
+
+    const maxValues = filtered
+      .flatMap((item) => [item.totalMax, item.firstRoundMax])
+      .filter(isValid);
+
+    const minValues = filtered
+      .flatMap((item) => [item.totalMin, item.firstRoundMin])
+      .filter(isValid);
+
+    if (!maxValues.length && !minValues.length) return { max: '0', min: '0' };
+
+    return {
+      max: Math.max(...maxValues).toFixed(3),
+      min: Math.min(...minValues).toFixed(3),
+    };
   };
 
   return {

@@ -24,7 +24,6 @@ const DetailContent = ({ formList }: DetailTableProps) => {
     specialAdmissionApplicant,
     nationalVeteransEducationApplicant,
   } = useMaxMinByType(formList);
-
   return (
     <StyledDetailTable>
       <Column>
