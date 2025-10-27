@@ -13,9 +13,7 @@ export const useCTAButton = () => {
   };
 
   const handleDownloadAdmissionsGuideline = () => {
-    window.open(
-      'https://school.busanedu.net/viewer/doc.html?fn=f9ccabacf50aba9dbe108bdbccf244f34b1a4bf9118f8c63e034e9af8c30afc1&rs=/upload/temp/convertToHtml/202308/bssm-h/'
-    );
+    window.open(process.env.NEXT_PUBLIC_ADMISSION_GUIDELINES);
   };
 
   const handleDownloadAdmissionTicket = () => {
