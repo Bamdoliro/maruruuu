@@ -40,7 +40,7 @@ const ResultFinal = () => {
             MAIN: (
               <ResultMainBox
                 date={formatResultDateTime(SCHEDULE.최종_합격_발표)}
-                capacity="일반전형 36명, 특별전형 28명, 정원 외 전형 3명"
+                capacity="일반전형 48명, 특별전형 16명, 정원 외 전형 2명"
                 setResultStep={setFinalResultStep}
               />
             ),
