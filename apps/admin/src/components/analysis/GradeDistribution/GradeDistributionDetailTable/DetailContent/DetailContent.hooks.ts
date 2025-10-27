@@ -16,7 +16,7 @@ const useMaxMinByType = (formList: GradeDistributionType[] | undefined) => {
       .flatMap((item) => [item.totalMin, item.firstRoundMin])
       .filter(isValid);
 
-    if (!maxValues.length || !minValues.length) return { max: '0', min: '0' };
+    if (!maxValues.length && !minValues.length) return { max: '0', min: '0' };
 
     return {
       max: Math.max(...maxValues).toFixed(3),
