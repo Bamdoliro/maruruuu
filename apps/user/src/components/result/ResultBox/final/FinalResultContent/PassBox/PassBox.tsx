@@ -14,13 +14,18 @@ const PassBox = () => {
 
   return (
     <StyledPassBox>
-      <Text fontType="p1" color={color.gray900} textAlign="center">
-        당신의 합격을 진심으로 축하드립니다!
-        <br />
-        당신의 밝은 미래를 응원하며,
-        <br />
-        앞으로의 여정에 당신과 함께할 수 있어 영광입니다.
-      </Text>
+      <TextPassBox>
+        <Text fontType="p1" color={color.gray900} textAlign="center">
+          당신의 합격을 진심으로 축하드립니다!
+          <br />
+          당신의 밝은 미래를 응원하며,
+          <br />
+          앞으로의 여정에 당신과 함께할 수 있어 영광입니다.
+        </Text>
+        <Text fontType="context" color={color.red}>
+          * 예비소집일 별도 안내 예정
+        </Text>
+      </TextPassBox>
       <Button size="LARGE" styleType="PRIMARY" onClick={handleMoveMainPage}>
         홈으로 돌아가기
       </Button>
@@ -36,4 +41,9 @@ const StyledPassBox = styled.div`
   height: 100%;
   padding-bottom: 127px;
   gap: 161px;
+`;
+
+const TextPassBox = styled.div`
+  ${flex({ flexDirection: 'column', alignItems: 'center' })}
+  gap: 24px;
 `;
