@@ -6,8 +6,8 @@ import { OverlayProvider } from '@toss/use-overlay';
 import type { ReactNode } from 'react';
 import { RecoilRoot } from 'recoil';
 import { Suspense } from 'react';
-import { useToast } from '@/hooks';
 import { MobileProvider } from './common';
+import { useToast } from '@maru/hooks';
 
 interface Props {
   children: ReactNode;
