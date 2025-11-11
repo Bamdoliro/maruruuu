@@ -7,7 +7,7 @@ import { useSignUpStore } from '@/stores';
 import type { SignUp } from '@/types/user/client';
 import { useEffect, useRef, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
-import { useToast } from '@/hooks';
+import { useToast } from '@maru/hooks';
 
 export const useSignUpAction = (signUpData: SignUp, termsAgree: boolean) => {
   const { signUpMutate } = useSignUpMutation(signUpData);

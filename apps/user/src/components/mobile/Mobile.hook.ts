@@ -1,4 +1,4 @@
-import { useToast, useUser } from '@/hooks';
+import { useUser } from '@/hooks';
 import { useLoginMutation } from '@/services/auth/mutations';
 import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
 import { useSetStepStore } from '@/stores';
@@ -9,6 +9,7 @@ import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import isBetween from 'dayjs/plugin/isBetween';
 import { SCHEDULE } from '@/constants/form/constants';
+import { useToast } from '@maru/hooks';
 
 dayjs.extend(isBetween);
 

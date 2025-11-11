@@ -7,7 +7,7 @@ import {
   patchSecondRoundResultAuto,
   patchSecondScoreFormat,
 } from './api';
-import { toast } from 'react-toastify';
+import { useToast } from '@maru/hooks';
 import { KEY } from '@/constants/common/constant';
 import type { PatchSecondRoundResultReq } from '@/types/form/remote';
 import { useSetIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
@@ -18,17 +18,19 @@ import type { ReceiveStatusValue } from '@/types/form/client';
 export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void) => {
   const queryClient = useQueryClient();
   const { handleError } = useApiError();
+  const { toast } = useToast();
+
   const { mutate: uploadSecondScoreFormat, ...restMutation } = useMutation({
     mutationFn: patchSecondScoreFormat,
     onSuccess: async (data) => {
       const contentType = data.headers?.['content-type'];
       const blob = data.data;
       if (data.status === 204) {
-        toast('파일이 입력되었습니다.', { type: 'success' });
+        toast('파일이 입력되었습니다.', 'SUCCESS');
         queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
         handleCloseModal();
       } else if (contentType?.includes('application/json')) {
-        toast.error('잘못된 파일입니다.');
+        toast('잘못된 파일입니다.', 'ERROR');
         handleCloseModal();
       } else if (data.status === 400) {
         const url = window.URL.createObjectURL(blob);
@@ -39,7 +41,7 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
         link.click();
         link.remove();
         window.URL.revokeObjectURL(url);
-        toast.error('오류가 있는 파일이 다운로드되었습니다.');
+        toast('오류가 있는 파일이 다운로드되었습니다.', 'ERROR');
         handleCloseModal();
       }
     },
@@ -54,6 +56,7 @@ export const useEditSecondRoundResultMutation = (
 ) => {
   const { handleError } = useApiError();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   const setIsSecondRoundResultEditing = useSetIsSecondRoundResultEditingStore();
   const setSecondRoundResult = useSetSecondRoundResultStore();
@@ -61,9 +64,7 @@ export const useEditSecondRoundResultMutation = (
   const { mutate: editSecondRoundResult, ...restMutation } = useMutation({
     mutationFn: () => patchSecondRoundResult(secondRoundResultData),
     onSuccess: () => {
-      toast('2차 합격 여부가 반영되었습니다.', {
-        type: 'success',
-      });
+      toast('2차 합격 여부가 반영되었습니다.', 'SUCCESS');
       queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
       setIsSecondRoundResultEditing(false);
       setSecondRoundResult({});
@@ -77,13 +78,12 @@ export const useEditSecondRoundResultMutation = (
 export const useAutoSecondRoundResultMutation = () => {
   const { handleError } = useApiError();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   const { mutate: autoSecondRoundResult, ...restMutation } = useMutation({
     mutationFn: patchSecondRoundResultAuto,
     onSuccess: () => {
-      toast('2차 합격 여부가 모두 반영되었습니다.', {
-        type: 'success',
-      });
+      toast('2차 합격 여부가 모두 반영되었습니다.', 'SUCCESS');
       queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
     },
     onError: handleError,
@@ -117,13 +117,12 @@ export const usePrintFormUrlMutation = () => {
 export const useReceiveStatusChangeMutation = (formId: number, onClose: () => void) => {
   const { handleError } = useApiError();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   const { mutate: changeReceiveStatus, ...restMutation } = useMutation({
     mutationFn: (status: ReceiveStatusValue) => patchReceiveStatus(formId, status),
     onSuccess: () => {
-      toast('접수 상태가 변경되었습니다.', {
-        type: 'success',
-      });
+      toast('접수 상태가 변경되었습니다.', 'SUCCESS');
       queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
       queryClient.invalidateQueries({ queryKey: [KEY.FORM_DETAIL, formId] });
       onClose();
