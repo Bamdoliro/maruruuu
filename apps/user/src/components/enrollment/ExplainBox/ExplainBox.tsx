@@ -1,4 +1,3 @@
-
 import { formatYear } from '@/utils';
 import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
