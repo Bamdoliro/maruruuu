@@ -5,8 +5,9 @@ import type { AxiosResponse } from 'axios';
 import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 import { Storage } from '@/apis/storage/storage';
-import { useApiError, useToast } from '@/hooks';
+import { useApiError} from '@/hooks';
 import { useSetStepStore } from '@/stores';
+import { useToast } from '@maru/hooks';
 
 export const useLoginMutation = (
   device: string,

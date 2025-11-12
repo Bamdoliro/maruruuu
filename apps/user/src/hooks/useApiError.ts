@@ -1,6 +1,6 @@
 import { isAxiosError } from 'axios';
 import type { AxiosError } from 'axios';
-import useToast from './useToast';
+import { useToast } from '@maru/hooks';
 
 interface AxiosErrorResponse {
   code: string;

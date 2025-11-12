@@ -1,5 +1,5 @@
-import { useToast } from '@/hooks';
 import { useCallback } from 'react';
+import { useToast } from '@maru/hooks';
 
 const useDownloadFile = () => {
   const { toast } = useToast();

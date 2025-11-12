@@ -7,7 +7,7 @@ import {
   postRequestVerification,
   postSignUp,
 } from './api';
-import { useApiError, useToast } from '@/hooks';
+import { useApiError } from '@/hooks';
 import { ROUTES, TOKEN } from '@/constants/common/constants';
 import { Storage } from '@/apis/storage/storage';
 import type {
@@ -17,6 +17,7 @@ import type {
   PostUserVerificationReq,
 } from '@/types/user/remote';
 import type { Dispatch, SetStateAction } from 'react';
+import { useToast } from '@maru/hooks';
 
 export const useWithdrawalMutation = (password: string) => {
   const router = useRouter();
