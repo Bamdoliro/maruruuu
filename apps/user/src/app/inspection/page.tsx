@@ -9,10 +9,6 @@ import { SCHEDULE } from '@/constants/common/constants';
 import { formatScheduleDate } from '@/utils';
 
 const InspectionPage = () => {
-  console.log(SCHEDULE.점검_시작);
-  console.log(SCHEDULE.점검_끝);
-
-  console.log(formatScheduleDate([SCHEDULE.점검_시작, SCHEDULE.점검_끝]));
   return (
     <AppLayout>
       <StyledErrorPage>
