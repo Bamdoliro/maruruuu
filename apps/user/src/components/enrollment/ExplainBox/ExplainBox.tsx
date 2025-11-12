@@ -1,9 +1,10 @@
-import { SCHEDULE } from '@/constants/form/constants';
+
 import { formatYear } from '@/utils';
 import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const ExplainBox = () => {
   return (

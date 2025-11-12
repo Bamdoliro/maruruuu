@@ -10,7 +10,7 @@ import { useOpenFileUploader, usePageAccessGuard } from '@/hooks';
 import { useFormStatusQuery } from '@/services/form/queries';
 import { useEntrollmentDocumentStore } from '@/stores/entrollment/entrollmentDocument';
 import { useUploadDocumentMutation } from '@/services/enrollment/mutations';
-import { SCHEDULE } from '@/constants/form/constants';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const Enrollment = () => {
   usePageAccessGuard({

@@ -3,8 +3,8 @@ import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useCTAButton } from '../FirstResultContent.hook';
-import { SCHEDULE } from '@/constants/form/constants';
 import formatMonthDay from '@/utils/formatMonthDay';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const PassBox = () => {
   const {

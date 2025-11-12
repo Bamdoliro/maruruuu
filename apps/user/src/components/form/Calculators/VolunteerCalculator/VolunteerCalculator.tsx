@@ -4,8 +4,8 @@ import { CellInput, Column, Row, Td, Text, Th } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useInput } from './VolunteerCalculator.hook';
-import { SCHEDULE } from '@/constants/form/constants';
 import { formatYear } from '@/utils';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const VolunteerCalculator = () => {
   const form = useFormValueStore();
