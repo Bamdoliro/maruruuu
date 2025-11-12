@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { SCHEDULE } from '@/constants/form/constants';
+import { SCHEDULE } from '@/constants/common/constants';
 
 export const processEnd = () => {
   const today = dayjs().format('YYYY년 MM월 DD일 (ddd) HH:mm');

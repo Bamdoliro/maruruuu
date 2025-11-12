@@ -4,9 +4,9 @@ import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import isBetween from 'dayjs/plugin/isBetween';
 import dayjs from 'dayjs';
-import { SCHEDULE } from '@/constants/form/constants';
 import FirstResult from './MobileResult/first/FirstResult';
 import FinalResult from './MobileResult/final/FinalResult';
+import { SCHEDULE } from '@/constants/common/constants';
 
 dayjs.extend(isBetween);
 

@@ -1,7 +1,6 @@
 'use client';
 
 import { ManagementContent } from '@/components/management';
-import { SCHEDULE } from '@/constants/form/constants';
 import { usePageAccessGuard } from '@/hooks';
 import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
@@ -9,6 +8,7 @@ import { Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { Suspense } from 'react';
 import styled from 'styled-components';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const Management = () => {
   usePageAccessGuard({

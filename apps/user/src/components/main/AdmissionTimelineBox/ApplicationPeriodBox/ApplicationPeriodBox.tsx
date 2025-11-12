@@ -4,7 +4,7 @@ import { color } from '@maru/design-system';
 import styled from 'styled-components';
 import { flex } from '@maru/utils';
 import { formatYear } from '@/utils';
-import { SCHEDULE } from '@/constants/form/constants';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const ApplicationPeriodBox = () => {
   const { applicationStart, applicationEnd, handleMoveFormPage } = useSchoolRecruitDate();

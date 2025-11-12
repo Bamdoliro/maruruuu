@@ -1,4 +1,4 @@
-import { SCHEDULE } from '@/constants/form/constants';
+import { SCHEDULE } from '@/constants/common/constants';
 import {
   IconCancelCircle,
   IconCheckCircle,

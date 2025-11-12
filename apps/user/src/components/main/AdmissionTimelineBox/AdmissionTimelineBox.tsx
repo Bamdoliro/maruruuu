@@ -5,9 +5,9 @@ import { flex } from '@maru/utils';
 import DdayBox from './DdayBox/DdayBox';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import { SCHEDULE } from '@/constants/form/constants';
 import ProcessEndBox from './ProcessEndDox/ProcessEndDox';
 import ApplicationPeriodBox from './ApplicationPeriodBox/ApplicationPeriodBox';
+import { SCHEDULE } from '@/constants/common/constants';
 
 dayjs.extend(isBetween);
 

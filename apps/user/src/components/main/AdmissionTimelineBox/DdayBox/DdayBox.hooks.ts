@@ -1,5 +1,4 @@
-import { ROUTES } from '@/constants/common/constants';
-import { SCHEDULE } from '@/constants/form/constants';
+import { ROUTES, SCHEDULE } from '@/constants/common/constants';
 import { formatDay } from '@/utils';
 import { useInterval } from '@maru/hooks';
 import type { ButtonStyleType } from '@maru/ui';

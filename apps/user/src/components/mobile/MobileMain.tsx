@@ -5,8 +5,8 @@ import { styled } from 'styled-components';
 import { useMobile } from './Mobile.hook';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import { SCHEDULE } from '@/constants/form/constants';
 import { formatResultDateTime, formatYear } from '@/utils';
+import { SCHEDULE } from '@/constants/common/constants';
 
 dayjs.extend(isBetween);
 
