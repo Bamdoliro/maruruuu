@@ -18,7 +18,8 @@ const SCHEDULE_STATUS = new Map([
   [SCHEDULE.이차_면접.toString(), '2차 전형 시작까지'],
   [SCHEDULE.최종_합격_발표.toString(), '최종합격자 발표'],
   [SCHEDULE.일차_합격_발표.toString(), '1차 합격자 발표'],
-  [SCHEDULE.입학_등록.toString(), '입학 등록 기간'],
+  [SCHEDULE.입학_등록.toString(), '입학 등록 시작까지'],
+  [SCHEDULE.입학_등록_마감.toString(), '입학 등록 마감까지'],
 ]);
 
 const UPDATE_INTERVAL = 1000;
@@ -35,8 +36,8 @@ const useDday = () => {
     if (now.isBefore(SCHEDULE.이차_면접_종료)) return SCHEDULE.이차_면접_종료;
     if (now.isBefore(SCHEDULE.최종_합격_발표.add(1, 'day')))
       return SCHEDULE.최종_합격_발표;
-    if (now.isBetween(SCHEDULE.입학_등록, SCHEDULE.입학_등록_마감))
-      return SCHEDULE.입학_등록;
+    if (now.isBefore(SCHEDULE.입학_등록)) return SCHEDULE.입학_등록;
+    if (now.isBefore(SCHEDULE.입학_등록_마감)) return SCHEDULE.입학_등록_마감;
 
     return now;
   };
@@ -63,16 +64,30 @@ export const useRemainDate = () => {
   const now = dayjs();
   const timeDiff = dayjs.utc(currentTime.diff(now)).format('HH:mm:ss');
 
-  const status = SCHEDULE_STATUS.get(currentTime.toString());
-  const remainTime = remainDays >= 1 || remainDays < 0 ? formatDay(remainDays) : timeDiff;
-  const targetDate = currentTime.format('YYYY년 MM월 DD일 (ddd) HH:mm');
+  const status = SCHEDULE_STATUS.get(currentTime.toString()) || '입학 전형 종료';
+
+  const isEnrollmentDeadline = currentTime.isSame(SCHEDULE.입학_등록_마감);
+  const remainTime =
+    remainDays >= 1 || remainDays < 0 || isEnrollmentDeadline
+      ? formatDay(remainDays)
+      : timeDiff;
+
+  const isInEnrollmentPeriod = now.isBetween(SCHEDULE.입학_등록, SCHEDULE.입학_등록_마감);
+  const displayDate = isInEnrollmentPeriod ? SCHEDULE.입학_등록_마감 : currentTime;
+  const targetDate = displayDate.format('YYYY년 MM월 DD일 (ddd) HH:mm');
+
   const isSecondRoundDay = now.isBetween(SCHEDULE.이차_면접, SCHEDULE.이차_면접_종료);
+  const isAfterFormPeriod = dayjs().isBetween(
+    SCHEDULE.원서_접수_마감,
+    SCHEDULE.입학_등록
+  );
 
   return {
     status,
     remainTime,
     targetDate,
     isSecondRoundDay,
+    isAfterFormPeriod,
   };
 };
 
