@@ -2,19 +2,11 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export const middleware = (request: NextRequest) => {
-  const cookies = request.headers.get('cookie');
-  const accessToken = cookies
-    ?.split('; ')
-    .find((row) => row.startsWith('refresh-token='))
-    ?.split('=')[1];
-
-  if (!accessToken) {
+  const refreshToken = request.cookies.get('refresh-token');
+  if (!refreshToken || !refreshToken.value) {
     const redirectUrl = new URL('/', request.url);
-
-    redirectUrl.searchParams.set('message', '로그인 후 시도해주세요');
     return NextResponse.redirect(redirectUrl);
   }
-
   return NextResponse.next();
 };
 
