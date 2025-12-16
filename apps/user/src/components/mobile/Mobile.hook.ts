@@ -8,8 +8,8 @@ import dayjs from 'dayjs';
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import isBetween from 'dayjs/plugin/isBetween';
-import { SCHEDULE } from '@/constants/form/constants';
 import { useToast } from '@maru/hooks';
+import { SCHEDULE } from '@/constants/common/constants';
 dayjs.extend(isBetween);
 
 export const useMobile = (step: Step) => {
