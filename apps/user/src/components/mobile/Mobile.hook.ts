@@ -10,7 +10,6 @@ import { useState } from 'react';
 import isBetween from 'dayjs/plugin/isBetween';
 import { SCHEDULE } from '@/constants/form/constants';
 import { useToast } from '@maru/hooks';
-
 dayjs.extend(isBetween);
 
 export const useMobile = (step: Step) => {

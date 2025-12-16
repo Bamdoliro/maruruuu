@@ -1,7 +1,6 @@
 'use client';
 
 import { FinalResultBox, ResultMainBox } from '@/components/result';
-import { SCHEDULE } from '@/constants/form/constants';
 import { usePageAccessGuard } from '@/hooks';
 import { AppLayout } from '@/layouts';
 import type { ResultStep } from '@/types/result/client';
@@ -12,6 +11,7 @@ import { flex } from '@maru/utils';
 import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
 import { styled } from 'styled-components';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const ResultFinal = () => {
   usePageAccessGuard({

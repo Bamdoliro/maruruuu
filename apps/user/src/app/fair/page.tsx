@@ -1,7 +1,6 @@
 'use client';
 
 import { FairCategory, FairContent } from '@/components/fair';
-import { SCHEDULE } from '@/constants/form/constants';
 import { AppLayout } from '@/layouts';
 import { formatYear } from '@/utils';
 import { color } from '@maru/design-system';
@@ -9,6 +8,7 @@ import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const Fair = () => {
   const [category, setCategory] = useState('진행 중인 신청');

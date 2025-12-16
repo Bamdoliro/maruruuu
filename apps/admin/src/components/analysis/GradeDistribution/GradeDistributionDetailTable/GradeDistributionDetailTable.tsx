@@ -6,10 +6,13 @@ import type { GradeDistributionType } from '@/types/analysis/client';
 import DetailContent from './DetailContent/DetailContent';
 import useMaxMin from './GradeDistributionDetailTable.hooks';
 
-type DetailTableProps = { formList: GradeDistributionType[] | undefined };
+type DetailTableProps = {
+  formList: GradeDistributionType[] | undefined;
+  selectedRound: string;
+};
 
-const GradeDistributionDetailTable = ({ formList }: DetailTableProps) => {
-  const { max, min } = useMaxMin(formList);
+const GradeDistributionDetailTable = ({ formList, selectedRound }: DetailTableProps) => {
+  const { max, min } = useMaxMin(formList, selectedRound);
 
   return (
     <Row gap={60}>

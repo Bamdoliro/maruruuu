@@ -13,8 +13,8 @@ import DraftCompleted from './DraftCompleted/DraftCompleted';
 import DraftSubmissionCompleted from './DraftSubmissionCompleted/DraftSubmissionCompleted';
 import FinalSubmission from './FinalSubmission/FinalSubmission';
 import FinalSubmissionCompleted from './FinalSubmissionCompleted/FinalSubmissionCompleted';
-import { SCHEDULE } from '@/constants/form/constants';
 import { usePageAccessGuard } from '@/hooks';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const Form = () => {
   usePageAccessGuard({

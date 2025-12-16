@@ -6,8 +6,9 @@ import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import { useCTAButton } from './FinalSubmissionCompleted.hook';
-import { SCHEDULE } from '@/constants/form/constants';
+
 import { formatMonthDay } from '@/utils';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const FinalSubmissionCompleted = () => {
   const { handleDownloadReciptButtonClick, userData } = useCTAButton();
