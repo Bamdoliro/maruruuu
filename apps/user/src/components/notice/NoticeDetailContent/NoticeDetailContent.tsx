@@ -30,14 +30,25 @@ const NoticeDetailContent = ({ id }: NoticeDetailContentProps) => {
             __html: convertLink(noticeDetailDta?.content ?? ''),
           }}
         />
-        {noticeDetailDta?.fileList?.map((file, index) => (
-          <DownloadButton
-            key={index}
-            fileName={file.fileName}
-            buttonClick={() => handleFileDownload(file.downloadUrl, file.fileName)}
-            textClick={() => handleOpenFileWindow(file.downloadUrl)}
-          />
-        ))}
+        {noticeDetailDta?.fileList?.map((file, index) => {
+          const isImage = /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(file.fileName);
+
+          return (
+            <div key={index}>
+              {isImage ? (
+                <ImageWrapper>
+                  <Image src={file.downloadUrl} alt={file.fileName} />
+                </ImageWrapper>
+              ) : (
+                <DownloadButton
+                  fileName={file.fileName}
+                  buttonClick={() => handleFileDownload(file.downloadUrl, file.fileName)}
+                  textClick={() => handleOpenFileWindow(file.downloadUrl)}
+                />
+              )}
+            </div>
+          );
+        })}
       </Column>
     </StyledNoticeDetailContent>
   );
@@ -60,4 +71,16 @@ const NoticeDetailHeader = styled.div`
 const Content = styled.div`
   ${font.p2}
   color: ${color.gray900};
+`;
+
+const ImageWrapper = styled.div`
+  ${flex({ alignItems: 'flex-start' })}
+  gap: 12px;
+`;
+
+const Image = styled.img`
+  width: 50%;
+  height: auto;
+  object-fit: contain;
+  display: block;
 `;

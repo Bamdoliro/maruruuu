@@ -1,13 +1,22 @@
 import type { GradeDistributionType } from '@/types/analysis/client';
 
-const useMaxMin = (formList: GradeDistributionType[] | undefined) => {
+const useMaxMin = (
+  formList: GradeDistributionType[] | undefined,
+  selectedRound: string
+) => {
+  const isFirstRound = selectedRound === '1차 합격자';
+
   const entireFirstRoundMax =
     formList && formList.length > 0
-      ? Math.max(...formList.map((item) => item.firstRoundMax)).toFixed(3)
+      ? isFirstRound
+        ? Math.max(...formList.map((item) => item.firstRoundMax)).toFixed(3)
+        : Math.max(...formList.map((item) => item.totalMax ?? 0)).toFixed(3)
       : '0.000';
 
   const minList = formList
-    ? formList.map((item) => item.firstRoundMin).filter((value) => value !== 0)
+    ? isFirstRound
+      ? formList.map((item) => item.firstRoundMin).filter((value) => value !== 0)
+      : formList.map((item) => item.totalMin ?? 0).filter((value) => value !== 0)
     : [];
 
   const entireFirstRoundMin =

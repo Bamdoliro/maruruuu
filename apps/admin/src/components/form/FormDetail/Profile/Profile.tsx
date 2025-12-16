@@ -24,7 +24,7 @@ const Profile = ({ id }: ProfileProps) => {
       icon: <IconPerson width={24} height={24} />,
       value: formDetailData.type
         ? formDetailData.changedToRegular && formDetailData?.type === 'REGULAR'
-          ? '특별전형 -> 일반전형'
+          ? '특별전형 ⭢ 일반전형'
           : FORM_TYPE_CATEGORY[formDetailData.type]
         : null,
     },

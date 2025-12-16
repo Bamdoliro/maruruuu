@@ -6,8 +6,9 @@ import AttendanceCalculatorHeader from './AttendanceCalculatorHeader/AttendanceC
 import { useFormValueStore } from '@/stores';
 import { useInput } from './AttendanceCalculator.hook';
 import AttendanceCalculatorItem from './AttendanceCalculatorItem/AttendanceCalculatorItem';
-import { ATTENDANCE_GRADE, SCHEDULE } from '@/constants/form/constants';
+import { ATTENDANCE_GRADE } from '@/constants/form/constants';
 import { formatYear } from '@/utils';
+import { SCHEDULE } from '@/constants/common/constants';
 
 const AttendanceCalculator = () => {
   const form = useFormValueStore();

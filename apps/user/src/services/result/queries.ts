@@ -1,9 +1,8 @@
-import { KEY, TOKEN } from '@/constants/common/constants';
+import { KEY, SCHEDULE, TOKEN } from '@/constants/common/constants';
 import { useQuery } from '@tanstack/react-query';
 import { getAdmissionTicket, getFinalResult, getFirstResult } from './api';
 import { Storage } from '@/apis/storage/storage';
 import dayjs from 'dayjs';
-import { SCHEDULE } from '@/constants/form/constants';
 
 export const useFirstResultQuery = () => {
   const { data, ...restQuery } = useQuery({

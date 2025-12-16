@@ -2,11 +2,11 @@ import { useFormStatusQuery } from '@/services/form/queries';
 import StatusBox from '../StatusBox/StatusBox';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import { SCHEDULE } from '@/constants/form/constants';
 import { Column, Row } from '@maru/ui';
 import SchoolNumberBox from '../SchoolNumberBox/SchoolNumberBox';
 import CheckingBox from '../CheckingBox/CheckingBox';
 import { useBoxClick } from './ManagementContent.hook';
+import { SCHEDULE } from '@/constants/common/constants';
 
 dayjs.extend(isBetween);
 

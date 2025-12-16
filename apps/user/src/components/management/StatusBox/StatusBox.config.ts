@@ -1,5 +1,5 @@
-import { SCHEDULE } from '@/constants/form/constants';
 import dayjs from 'dayjs';
+import { SCHEDULE } from '@/constants/common/constants';
 
 export const getStatusConfig = (status?: string, name?: string) => {
   const now = dayjs();

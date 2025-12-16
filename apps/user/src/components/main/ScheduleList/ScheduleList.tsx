@@ -1,4 +1,4 @@
-import { SCHEDULE } from '@/constants/form/constants';
+import { SCHEDULE } from '@/constants/common/constants';
 import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
