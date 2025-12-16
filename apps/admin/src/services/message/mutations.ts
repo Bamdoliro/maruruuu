@@ -1,6 +1,6 @@
 import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
+import { useToast } from '@maru/hooks';
 import { postMessageByStatus, postMessageByType, postMessageToAll } from './api';
 import { useSetMessageFormStore } from '@/store/message/messageForm';
 import type { MessageForm } from '@/types/message/client';
@@ -8,11 +8,12 @@ import type { MessageForm } from '@/types/message/client';
 export const usePostMessageByStatusMutation = () => {
   const { handleError } = useApiError();
   const setMessageForm = useSetMessageFormStore();
+  const { toast } = useToast();
 
   const { mutate: postMessageByStatusMutate, ...restMutation } = useMutation({
     mutationFn: postMessageByStatus,
     onSuccess: () => {
-      toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+      toast('메시지를 성공적으로 전송했습니다.', 'SUCCESS');
       setMessageForm({
         title: '',
         recipient: '' as MessageForm['recipient'],
@@ -28,11 +29,12 @@ export const usePostMessageByStatusMutation = () => {
 export const usePostMessageByTypeMutation = () => {
   const { handleError } = useApiError();
   const setMessageForm = useSetMessageFormStore();
+  const { toast } = useToast();
 
   const { mutate: postMessageByTypeMutate, ...restMutation } = useMutation({
     mutationFn: postMessageByType,
     onSuccess: () => {
-      toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+      toast('메시지를 성공적으로 전송했습니다.', 'SUCCESS');
       setMessageForm({
         title: '',
         recipient: '' as MessageForm['recipient'],
@@ -48,11 +50,12 @@ export const usePostMessageByTypeMutation = () => {
 export const usePostMessageToAllMutation = () => {
   const { handleError } = useApiError();
   const setMessageForm = useSetMessageFormStore();
+  const { toast } = useToast();
 
   const { mutate: postMessageToAllMutate, ...restMutation } = useMutation({
     mutationFn: postMessageToAll,
     onSuccess: () => {
-      toast('메시지를 성공적으로 전송했습니다.', { type: 'success' });
+      toast('메시지를 성공적으로 전송했습니다.', 'SUCCESS');
       setMessageForm({
         title: '',
         recipient: '' as MessageForm['recipient'],

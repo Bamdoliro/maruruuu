@@ -1,9 +1,10 @@
-import { useApiError, useToast } from '@/hooks';
+import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { postFairApplication } from './api';
 import type { FairApplication } from '@/types/fair/client';
 import { ROUTES } from '@/constants/common/constants';
+import { useToast } from '@maru/hooks';
 
 export const useFairApplicationQuery = (
   id: number,

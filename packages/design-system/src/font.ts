@@ -6,7 +6,7 @@ const fontGenerator = (
   lineHeight: number,
   letterSpacing: number
 ) => css`
-  font-family: 'Pretendard Variable';
+  font-family: 'Pretendard Variable', sans-serif;
   font-weight: ${weight};
   font-size: ${size}rem;
   line-height: ${lineHeight}%;

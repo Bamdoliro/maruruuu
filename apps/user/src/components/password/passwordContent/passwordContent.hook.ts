@@ -7,7 +7,7 @@ import {
   useVerificationMutation,
 } from '@/services/user/mutations';
 import type { SignUp } from '@/types/user/client';
-import { useToast } from '@/hooks';
+import { useToast } from '@maru/hooks';
 
 export const useInput = () => {
   const [changePassword, setChangePassword] = useChangePasswordStore();
