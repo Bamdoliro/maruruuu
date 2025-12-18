@@ -18,7 +18,7 @@ import {
   IconPrint,
   IconUpload,
 } from '@maru/icon';
-import { Button, Column, Dropdown, Row, Text } from '@maru/ui';
+import { Button, Column, Dropdown, Row, SearchInput, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import {
@@ -156,6 +156,7 @@ const FormPage = () => {
               <div />
             )}
             <Row gap={16}>
+              <SearchInput placeholder="학교 이름을 입력해주세요." />
               {formListType === '검토해야 하는 원서 모아보기' ? (
                 <ReviewFilterBox>
                   <Row alignItems="center" gap={4}>
