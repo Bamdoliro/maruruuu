@@ -11,11 +11,13 @@ import { useFormListSortingTypeStore, useFormListTypeStore } from '@/store/form/
 import { useIsFormToPrintSelectingStore } from '@/store/form/isFormToPrintSelecting';
 import { useIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
 import { useSecondRoundResultValueStore } from '@/store/form/secondRoundResult';
+import { useSchoolSearchStore } from '@/store/form/schoolSearch';
 import type { FormListSortingType } from '@/types/form/client';
 
 export const useFormPageState = () => {
   const [formListType, setFormListType] = useFormListTypeStore();
   const [formListSortingType, setFormListSortingType] = useFormListSortingTypeStore();
+  const [schoolSearch, setSchoolSearch] = useSchoolSearchStore();
 
   const handleCriteriaChange = (value: string, key: string) => {
     setFormListType('정렬');
@@ -29,6 +31,10 @@ export const useFormPageState = () => {
   const handleFormListTypeAll = () => setFormListType('모두 보기');
   const handleFormListTypeReview = () => setFormListType('검토해야 하는 원서 모아보기');
 
+  const handleSchoolSearchChange = (value: string) => {
+    setSchoolSearch(value);
+  };
+
   const getCriteriaDropdownValue = (
     key: keyof FormListSortingType,
     category: Record<string, string>
@@ -39,9 +45,11 @@ export const useFormPageState = () => {
 
   return {
     formListType,
+    schoolSearch,
     handleCriteriaChange,
     handleFormListTypeReview,
     handleFormListTypeAll,
+    handleSchoolSearchChange,
     getCriteriaDropdownValue,
   };
 };
