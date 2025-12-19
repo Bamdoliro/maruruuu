@@ -12,17 +12,27 @@ import {
   useFormListTypeValueStore,
 } from '@/store/form/formType';
 import type { ExportExcelType } from '@/types/form/client';
+import { useSchoolSearchValueStore } from '@/store/form/schoolSearch';
+import { useMemo } from 'react';
 
 export const useFormListQuery = () => {
   const formListType = useFormListTypeValueStore();
   const formListSortingType = useFormListSortingTypeValueStore();
+  const schoolSearch = useSchoolSearchValueStore();
 
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.FORM_LIST, formListType, formListSortingType],
     queryFn: () => getFormList(formListType, formListSortingType),
   });
 
-  return { data: data?.dataList, ...restQuery };
+  const filteredData = useMemo(() => {
+    if (!data?.dataList) return undefined;
+    if (!schoolSearch) return data.dataList;
+
+    return data.dataList.filter((form) => form.school.includes(schoolSearch));
+  }, [data?.dataList, schoolSearch]);
+
+  return { data: filteredData, ...restQuery };
 };
 
 export const useExportSecondScoreFormatQuery = () => {
