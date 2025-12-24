@@ -24,6 +24,7 @@ import { styled } from 'styled-components';
 import {
   useEditSecondRoundResultActions,
   useExportAllAddmissionTicketAction,
+  useExportScoreExcelAction,
   useFormPageState,
   usePrintFormURLActions,
 } from './form.hooks';
@@ -60,6 +61,7 @@ const FormPage = () => {
 
   const { handleExportAllAdmissionTicketButtonClick } =
     useExportAllAddmissionTicketAction();
+  const { handleExportExcelButtonClick } = useExportScoreExcelAction();
   const overlay = useOverlay();
 
   const openSecondScoreUplaodModal = () => {
@@ -75,10 +77,6 @@ const FormPage = () => {
   };
 
   const { autoSecondRoundResult } = useAutoSecondRoundResultMutation();
-
-  const handleAutoSecondRoundResult = () => {
-    autoSecondRoundResult();
-  };
 
   return (
     <AppLayout>
@@ -234,7 +232,7 @@ const FormPage = () => {
                       icon: <IconEditAllDocument width={24} height={24} />,
                       label: '2차 합격자 자동 선발',
                       value: 'auto_select_second_round',
-                      onClick: handleAutoSecondRoundResult,
+                      onClick: autoSecondRoundResult,
                     },
                     {
                       icon: <IconUpload width={24} height={24} />,
@@ -253,6 +251,12 @@ const FormPage = () => {
                       label: '수험표 전체 발급하기',
                       value: 'export_all_exam_tickets',
                       onClick: handleExportAllAdmissionTicketButtonClick,
+                    },
+                    {
+                      icon: <IconUpload width={24} height={24} />,
+                      label: '과목별 성적 상세 발급하기',
+                      value: 'export_all_score_details',
+                      onClick: handleExportExcelButtonClick,
                     },
                   ]}
                 />

@@ -2,6 +2,7 @@ import { KEY } from '@/constants/common/constant';
 import {
   getAllAdmissionTicket,
   getExportExcel,
+  getExportScoreExcel,
   getFormDetail,
   getFormList,
   getSecondScoreFormat,
@@ -69,4 +70,13 @@ export const useFormDetailQuery = (id: number) => {
   });
 
   return { data: data?.data, ...restQuery };
+};
+
+export const useExportScoreExcelQuery = () => {
+  const { data, ...restQuery } = useQuery({
+    queryKey: [KEY.FORM_EXPORT_SCORE_EXCEL],
+    queryFn: getExportScoreExcel,
+  });
+
+  return { data, ...restQuery };
 };
