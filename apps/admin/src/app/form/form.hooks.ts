@@ -2,7 +2,10 @@ import {
   useEditSecondRoundResultMutation,
   usePrintFormUrlMutation,
 } from '@/services/form/mutations';
-import { useExportAllAddmissionTicket } from '@/services/form/queries';
+import {
+  useExportAllAddmissionTicket,
+  useExportScoreExcelQuery,
+} from '@/services/form/queries';
 import {
   useFormToPrintValueStore,
   useSetFormToPrintStore,
@@ -138,4 +141,23 @@ export const useExportAllAddmissionTicketAction = () => {
   };
 
   return { handleExportAllAdmissionTicketButtonClick };
+};
+
+export const useExportScoreExcelAction = () => {
+  const { data: exportScoreExcelData } = useExportScoreExcelQuery();
+
+  const handleExportExcelButtonClick = () => {
+    if (!exportScoreExcelData) return;
+    const excelUrl = window.URL.createObjectURL(new Blob([exportScoreExcelData]));
+
+    const link = document.createElement('a');
+    link.href = excelUrl;
+    link.download = `학생 전체 성적표.xlsx`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(excelUrl);
+  };
+
+  return { handleExportExcelButtonClick };
 };
