@@ -124,3 +124,12 @@ export const patchReceiveStatus = async (
   );
   return data;
 };
+
+export const getExportScoreExcel = async () => {
+  const { data } = await maru.get(`/forms/xlsx/subject-grade-detail`, {
+    ...authorization(),
+    responseType: 'blob',
+  });
+
+  return data;
+};
