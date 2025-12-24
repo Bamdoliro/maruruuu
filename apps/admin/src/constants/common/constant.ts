@@ -17,6 +17,7 @@ export const KEY = {
   FAQ_LIST: 'useFaqList',
   FAQ_DETAIL: 'useFaqDetail',
   REGISTRATION_LIST: 'useRegistrationList',
+  FORM_EXPORT_SCORE_EXCEL: 'useFormExportScoreExcel',
 };
 
 export const ROUTES = {
