@@ -6,8 +6,9 @@ import type { ReactNode } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { RecoilRoot } from 'recoil';
 import { Toast } from '@maru/ui';
-import { useToast } from '@maru/hooks';
 import styled from 'styled-components';
+import useToast from '@maru/hooks/src/useToast';
+import type { ToastProgress } from '@maru/hooks/src/useToast';
 
 interface Props {
   children: ReactNode;
@@ -18,7 +19,7 @@ const GlobalToast = () => {
 
   return (
     <StyledToastContainer>
-      {toasts.map((toast) => (
+      {toasts.map((toast: ToastProgress) => (
         <StyledToastWrapper key={toast.id}>
           <Toast
             type={toast.toastType}

@@ -13,7 +13,7 @@ export type ToastItem = {
   createdAt: number;
 };
 
-export type ToastWithProgress = ToastItem & {
+export type ToastProgress = ToastItem & {
   progress: number;
   remaining: number;
 };
@@ -87,7 +87,7 @@ const useToast = () => {
     [setToasts]
   );
 
-  const toastsWithProgress: ToastWithProgress[] = toasts.map((t) => {
+  const toastsWithProgress: ToastProgress[] = toasts.map((t) => {
     const elapsed = Date.now() - t.createdAt;
     const progress = Math.min(1, elapsed / t.duration);
     const remaining = Math.max(0, t.duration - elapsed);
