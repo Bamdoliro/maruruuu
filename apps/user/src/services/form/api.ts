@@ -89,7 +89,7 @@ export const postUploadProfileImage = async (fileData: FileDocument) => {
   return data;
 };
 
-export const putProfileUpoload = async (file: File | null, url: string) => {
+export const putProfileUpload = async (file: File | null, url: string) => {
   const response = await axios.put(url, file, {
     headers: {
       'Content-Type': file?.type,

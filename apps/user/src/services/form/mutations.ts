@@ -8,7 +8,7 @@ import {
   postSubmitDraftForm,
   postUploadProfileImage,
   putFormCorrection,
-  putProfileUpoload,
+  putProfileUpload,
   putUploadForm,
 } from './api';
 import type { Form } from '@/types/form/client';
@@ -68,7 +68,7 @@ export const useCorrectionFormMutation = () => {
 
 export const usePutProfileImageMutation = (file: File | null) => {
   const { mutate: profileImageMutate, ...restMutation } = useMutation({
-    mutationFn: (url: string) => putProfileUpoload(file, url),
+    mutationFn: (url: string) => putProfileUpload(file, url),
   });
 
   return { profileImageMutate, ...restMutation };
