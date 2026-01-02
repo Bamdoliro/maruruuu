@@ -10,6 +10,7 @@ const MobileLogin = () => {
   return (
     <StyledMobileLogin>
       <Column gap={36} alignItems="center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/svg/maruLogo.svg" width={152} height={46} alt="logo" loading="lazy" />
         <Column gap={28} alignItems="center">
           <Column gap={14}>

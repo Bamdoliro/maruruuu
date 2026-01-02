@@ -17,6 +17,7 @@ const NotFound = () => {
   return (
     <AppLayout header footer>
       <StyledNotFound>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           loading="lazy"
           width={388.7}

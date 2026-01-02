@@ -21,6 +21,7 @@ const Error = () => {
   return (
     <AppLayout header footer>
       <StyledError>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           loading="lazy"
           width={363.75}

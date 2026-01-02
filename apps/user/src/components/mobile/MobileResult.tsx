@@ -16,6 +16,7 @@ const MobileResult = () => {
   return (
     <StyledMobileResult>
       <Column gap={36.4} alignItems="center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/svg/maruLogo.svg" width={152} height={46} alt="logo" loading="lazy" />
         {now.isBetween(SCHEDULE.일차_합격_발표, SCHEDULE.이차_면접) && <FirstResult />}
         {now.isBetween(SCHEDULE.최종_합격_발표, SCHEDULE.입학_등록) && <FinalResult />}

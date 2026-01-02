@@ -31,6 +31,7 @@ const MobileProvider = ({ children }: Props) => {
     } else {
       if (step !== 'LOGIN') setStep('LOGIN');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isMobile === null) return null;

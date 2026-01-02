@@ -10,6 +10,7 @@ const SignUp = () => {
   return (
     <AppLayout backgroundColor={color.gray100}>
       <StyledSignUp>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/svg/maruLogo.svg"
           style={{ margin: '0 auto' }}
