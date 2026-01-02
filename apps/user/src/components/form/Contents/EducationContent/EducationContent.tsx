@@ -5,7 +5,7 @@ import { useOverlay } from '@toss/use-overlay';
 import { useEducationForm } from './EducationContent.hook';
 import FindSchoolModal from '../../FindSchoolModal/FindSchoolModal';
 
-const EudcationContent = () => {
+const EducationContent = () => {
   const overlay = useOverlay();
   const form = useFormValueStore();
   const { onFieldChange, handleNextStep, handlePreviousStep, errors } =
@@ -152,4 +152,4 @@ const EudcationContent = () => {
   );
 };
 
-export default EudcationContent;
+export default EducationContent;

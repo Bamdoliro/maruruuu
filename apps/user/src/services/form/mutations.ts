@@ -5,7 +5,7 @@ import {
   patchSubmitFinalForm,
   postFormDocument,
   postSaveForm,
-  postSubmitDraftFrom,
+  postSubmitDraftForm,
   postUploadProfileImage,
   putFormCorrection,
   putProfileUpoload,
@@ -32,7 +32,7 @@ export const useSubmitDraftFormMutation = () => {
   const setFormStep = useSetFormStepStore();
 
   const { mutate: submitDraftFormMutate, ...restMutation } = useMutation({
-    mutationFn: (formData: Form) => postSubmitDraftFrom(formData),
+    mutationFn: (formData: Form) => postSubmitDraftForm(formData),
     onSuccess: () => setFormStep('초안제출완료'),
     onError: handleError,
   });

@@ -51,7 +51,7 @@ export const getSchoolList = async (school: string) => {
   return data;
 };
 
-export const postSubmitDraftFrom = async (formData: Form) => {
+export const postSubmitDraftForm = async (formData: Form) => {
   const { data } = await maru.post('/forms', formData, authorization());
 
   return data;
