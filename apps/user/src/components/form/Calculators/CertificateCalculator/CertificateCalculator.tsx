@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 import { useInput } from './CertificateCalculator.hook';
 import CertificateCalculatorHeader from './CertificateCalculatorHeader/CertificateCalculatorHeader';
 import CertificateCalculatorItem from './CertificateCalculatorItem/CertificateCalculatorItem';
-import ComputerSpeciallistItem from './CertificateCalculatorItem/ComputerSpeciallistItem/ComputerSpeciallistItem';
+import ComputerSpecialistItem from './CertificateCalculatorItem/ComputerSpecialistItem/ComputerSpecialistItem';
 import { CERTIFICATE_LIST } from '@/constants/form/constants';
 
 const CertificateCalculator = () => {
@@ -29,7 +29,7 @@ const CertificateCalculator = () => {
               onChange={handleCertificateListChange}
             />
           ))}
-          <ComputerSpeciallistItem onChange={handleCertificateListChange} />
+          <ComputerSpecialistItem onChange={handleCertificateListChange} />
         </Column>
       </Column>
     </StyledCertificateCalculator>
