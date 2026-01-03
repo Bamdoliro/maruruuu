@@ -36,8 +36,8 @@ const FinalFormTable = () => {
             <li>
               <Text fontType="form" color={color.red}>
                 인터넷 접수
-                <a href={'https://maru.bamdoliro.com/'}>(maru.bamdoliro.com)</a>후
-                출력하여 출신 중학교장 직인 날인 후 제출
+                <a href="https://maru.bamdoliro.com/">(maru.bamdoliro.com)</a>후 출력하여
+                출신 중학교장 직인 날인 후 제출
               </Text>
             </li>
             <ul>
@@ -45,7 +45,7 @@ const FinalFormTable = () => {
             </ul>
             <li>
               인터넷 접수
-              <a href={'https://maru.bamdoliro.com/'}>(maru.bamdoliro.com)</a>후 출력
+              <a href="https://maru.bamdoliro.com/">(maru.bamdoliro.com)</a>후 출력
             </li>
             <ul>
               <li>학교생활기록부 || 사본 1부 </li>

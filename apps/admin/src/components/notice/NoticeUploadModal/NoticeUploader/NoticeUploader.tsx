@@ -22,6 +22,7 @@ const NoticeUploader = ({ isOpen }: Props) => {
     if (isOpen && uploadedFile) {
       setUploadedFile(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, setUploadedFile]);
 
   const handleUploadCancelButtonClick = () => {

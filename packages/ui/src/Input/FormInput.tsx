@@ -1,5 +1,5 @@
 import { color, font } from '@maru/design-system';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import type { InputProps } from './Input.type';
 
 const FormInput = ({

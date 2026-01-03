@@ -33,6 +33,7 @@ const Header = () => {
           alignItems="center"
           justifyContent="space-between"
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             loading="lazy"
             src="/svg/maruLogo.svg"

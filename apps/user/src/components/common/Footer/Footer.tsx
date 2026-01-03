@@ -14,6 +14,7 @@ const Footer = () => {
     <StyledFooter>
       <FooterBox>
         <Column gap={40} height={262}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             loading="lazy"
             src="/svg/maruGrayLogo.svg"

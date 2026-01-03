@@ -19,6 +19,7 @@ const SecondScoreUploader = ({ isOpen }: SecondScoreUploaderProps) => {
     if (isOpen && uploadedFile) {
       setUploadedFile(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, setUploadedFile]);
 
   const handleUploadCancelButtonClick = () => {
