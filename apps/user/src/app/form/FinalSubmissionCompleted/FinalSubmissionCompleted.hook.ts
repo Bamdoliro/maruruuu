@@ -1,23 +1,23 @@
 import { ROUTES } from '@/constants/common/constants';
 import { useUser, useDownloadFile } from '@/hooks';
-import { useExportReciptQuery } from '@/services/form/queries';
+import { useExportReceiptQuery } from '@/services/form/queries';
 import { useRouter } from 'next/navigation';
 
 export const useCTAButton = () => {
   const router = useRouter();
-  const { data: reciptData } = useExportReciptQuery();
+  const { data: receiptData } = useExportReceiptQuery();
   const { userData } = useUser();
   const downloadFile = useDownloadFile();
 
-  const handleDownloadReciptButtonClick = () => {
-    if (!reciptData) return;
+  const handleDownloadReceiptButtonClick = () => {
+    if (!receiptData) return;
 
-    console.log(reciptData);
+    console.log(receiptData);
 
-    downloadFile(reciptData, `${userData.name} 접수증.pdf`);
+    downloadFile(receiptData, `${userData.name} 접수증.pdf`);
 
     router.push(ROUTES.FORM_MANAGEMENT);
   };
 
-  return { handleDownloadReciptButtonClick, userData };
+  return { handleDownloadReceiptButtonClick, userData };
 };

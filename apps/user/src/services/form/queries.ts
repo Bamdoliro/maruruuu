@@ -2,7 +2,7 @@ import { KEY, SCHEDULE, TOKEN } from '@/constants/common/constants';
 import { useQuery } from '@tanstack/react-query';
 import {
   getExportForm,
-  getExportRecipt,
+  getExportReceipt,
   getFormStatus,
   getSaveForm,
   getSchoolList,
@@ -39,12 +39,12 @@ export const useExportFormQuery = () => {
   return { data, ...restQuery };
 };
 
-export const useExportReciptQuery = () => {
+export const useExportReceiptQuery = () => {
   const day = dayjs();
 
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.EXPORT_RECEIPT],
-    queryFn: getExportRecipt,
+    queryFn: getExportReceipt,
     enabled:
       !!Storage.getItem(TOKEN.ACCESS) &&
       day.isBetween(SCHEDULE.원서_접수, SCHEDULE.원서_접수_마감),

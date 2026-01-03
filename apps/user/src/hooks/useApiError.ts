@@ -23,8 +23,8 @@ const useApiError = () => {
     if (isAxiosError(error)) {
       if (error.response) {
         const status = error.response.status as ErrorStatus;
-        const maessage = error.response.data.message;
-        errorMessage = maessage || ERROR[status];
+        const message = error.response.data.message;
+        errorMessage = message || ERROR[status];
         if (status === 500) {
           throw new Error('500');
         }

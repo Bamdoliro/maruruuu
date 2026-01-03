@@ -24,7 +24,7 @@ export const getExportForm = async () => {
   return data;
 };
 
-export const getExportRecipt = async () => {
+export const getExportReceipt = async () => {
   const { data } = await maru.get('/forms/proof-of-application', {
     ...authorization(),
     responseType: 'blob',
@@ -51,7 +51,7 @@ export const getSchoolList = async (school: string) => {
   return data;
 };
 
-export const postSubmitDraftFrom = async (formData: Form) => {
+export const postSubmitDraftForm = async (formData: Form) => {
   const { data } = await maru.post('/forms', formData, authorization());
 
   return data;
@@ -89,7 +89,7 @@ export const postUploadProfileImage = async (fileData: FileDocument) => {
   return data;
 };
 
-export const putProfileUpoload = async (file: File | null, url: string) => {
+export const putProfileUpload = async (file: File | null, url: string) => {
   const response = await axios.put(url, file, {
     headers: {
       'Content-Type': file?.type,

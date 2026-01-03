@@ -5,10 +5,10 @@ import {
   patchSubmitFinalForm,
   postFormDocument,
   postSaveForm,
-  postSubmitDraftFrom,
+  postSubmitDraftForm,
   postUploadProfileImage,
   putFormCorrection,
-  putProfileUpoload,
+  putProfileUpload,
   putUploadForm,
 } from './api';
 import type { Form } from '@/types/form/client';
@@ -32,7 +32,7 @@ export const useSubmitDraftFormMutation = () => {
   const setFormStep = useSetFormStepStore();
 
   const { mutate: submitDraftFormMutate, ...restMutation } = useMutation({
-    mutationFn: (formData: Form) => postSubmitDraftFrom(formData),
+    mutationFn: (formData: Form) => postSubmitDraftForm(formData),
     onSuccess: () => setFormStep('초안제출완료'),
     onError: handleError,
   });
@@ -68,7 +68,7 @@ export const useCorrectionFormMutation = () => {
 
 export const usePutProfileImageMutation = (file: File | null) => {
   const { mutate: profileImageMutate, ...restMutation } = useMutation({
-    mutationFn: (url: string) => putProfileUpoload(file, url),
+    mutationFn: (url: string) => putProfileUpload(file, url),
   });
 
   return { profileImageMutate, ...restMutation };

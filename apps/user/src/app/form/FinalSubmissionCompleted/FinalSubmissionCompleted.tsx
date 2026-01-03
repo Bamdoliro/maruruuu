@@ -11,7 +11,7 @@ import { formatMonthDay } from '@/utils';
 import { SCHEDULE } from '@/constants/common/constants';
 
 const FinalSubmissionCompleted = () => {
-  const { handleDownloadReciptButtonClick, userData } = useCTAButton();
+  const { handleDownloadReceiptButtonClick, userData } = useCTAButton();
 
   return (
     <AppLayout header footer>
@@ -43,7 +43,7 @@ const FinalSubmissionCompleted = () => {
             </Text>
           </Column>
           <Button
-            onClick={handleDownloadReciptButtonClick}
+            onClick={handleDownloadReceiptButtonClick}
             size="SMALL"
             styleType="PRIMARY"
           >

@@ -1,6 +1,6 @@
 import { ROUTES } from '@/constants/common/constants';
 import { useUser, useDownloadFile } from '@/hooks';
-import { useExportFormQuery, useExportReciptQuery } from '@/services/form/queries';
+import { useExportFormQuery, useExportReceiptQuery } from '@/services/form/queries';
 import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
 import { useRouter } from 'next/navigation';
 
@@ -9,7 +9,7 @@ export const useBoxClick = (status?: string) => {
   const { userData } = useUser();
   const downloadFile = useDownloadFile();
   const { data: exportFormData } = useExportFormQuery();
-  const { data: reciptData } = useExportReciptQuery();
+  const { data: receiptData } = useExportReceiptQuery();
   const { data: admissionTicketData } = useDownloadAdmissionTicketQuery();
 
   const handleWriteFormContinue = () => {
@@ -51,7 +51,7 @@ export const useBoxClick = (status?: string) => {
     if (!accept) {
       alert('원서가 미제출 상태이거나 확인 중에 있어, 다운로드할 수 없습니다.');
     } else {
-      downloadFile(reciptData, `${userData.name} 접수증.pdf`);
+      downloadFile(receiptData, `${userData.name} 접수증.pdf`);
     }
   };
 

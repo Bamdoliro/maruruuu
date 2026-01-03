@@ -2,11 +2,11 @@ import { LEVEL_LIST } from '@/constants/form/constants';
 import { useFormValueStore } from '@/stores';
 import { CheckBox, Column, Row, Td } from '@maru/ui';
 
-interface ComputerSpeciallistItemProps {
+interface ComputerSpecialistItemProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ComputerSpeciallistItem = ({ onChange }: ComputerSpeciallistItemProps) => {
+const ComputerSpecialistItem = ({ onChange }: ComputerSpecialistItemProps) => {
   const form = useFormValueStore();
 
   return (
@@ -41,4 +41,4 @@ const ComputerSpeciallistItem = ({ onChange }: ComputerSpeciallistItemProps) => 
   );
 };
 
-export default ComputerSpeciallistItem;
+export default ComputerSpecialistItem;
