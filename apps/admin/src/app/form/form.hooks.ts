@@ -9,12 +9,13 @@ import {
 import {
   useFormToPrintValueStore,
   useSetFormToPrintStore,
-} from '@/store/form/formToPrint';
-import { useFormListSortingTypeStore, useFormListTypeStore } from '@/store/form/formType';
-import { useIsFormToPrintSelectingStore } from '@/store/form/isFormToPrintSelecting';
-import { useIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
-import { useSecondRoundResultValueStore } from '@/store/form/secondRoundResult';
-import { useSchoolSearchStore } from '@/store/form/schoolSearch';
+  useFormListSortingTypeStore,
+  useFormListTypeStore,
+  useIsFormToPrintSelectingStore,
+  useIsSecondRoundResultEditingStore,
+  useSecondRoundResultValueStore,
+  useSchoolSearchStore,
+} from '@/store';
 import type { FormListSortingType } from '@/types/form/client';
 
 export const useFormPageState = () => {

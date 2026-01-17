@@ -2,7 +2,7 @@ import {
   usePostNoticeMutation,
   useNoticeFileUrlMutation,
 } from '@/services/notice/mutations';
-import { useNoticeFileStore } from '@/store/notice/noticeFile';
+import { useNoticeFileStore } from '@/store';
 import type { NoticeInput } from '@/types/notice/client';
 import { resizeTextarea } from '@/utils';
 import { useEffect, useRef, useState } from 'react';

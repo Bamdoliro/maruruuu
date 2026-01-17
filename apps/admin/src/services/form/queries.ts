@@ -11,9 +11,9 @@ import { useQuery } from '@tanstack/react-query';
 import {
   useFormListSortingTypeValueStore,
   useFormListTypeValueStore,
-} from '@/store/form/formType';
+  useSchoolSearchValueStore,
+} from '@/store';
 import type { ExportExcelType } from '@/types/form/client';
-import { useSchoolSearchValueStore } from '@/store/form/schoolSearch';
 import { useMemo } from 'react';
 
 export const useFormListQuery = () => {
