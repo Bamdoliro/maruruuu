@@ -1,10 +1,12 @@
 import { TableItem } from '@/components/common';
 import { ROUTES } from '@/constants/common/constant';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
-import { useFormToPrintStore } from '@/store/form/formToPrint';
-import { useIsFormToPrintSelectingValueStore } from '@/store/form/isFormToPrintSelecting';
-import { useIsSecondRoundResultEditingValueStore } from '@/store/form/isSecondRoundResultEditing';
-import { useSecondRoundResultStore } from '@/store/form/secondRoundResult';
+import {
+  useFormToPrintStore,
+  useIsFormToPrintSelectingValueStore,
+  useIsSecondRoundResultEditingValueStore,
+  useSecondRoundResultStore,
+} from '@/store';
 import type { Form, PassStatusType } from '@/types/form/client';
 import { convertToResponsive, maskName } from '@/utils';
 import { color } from '@maru/design-system';
