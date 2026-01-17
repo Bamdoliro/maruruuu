@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil';
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const secondScoreFileAtomState = atom<File | null>({
   key: 'second-score-file',
@@ -6,3 +6,7 @@ const secondScoreFileAtomState = atom<File | null>({
 });
 
 export const useSecondScoreFileStore = () => useRecoilState(secondScoreFileAtomState);
+export const useSecondScoreFileValueStore = () =>
+  useRecoilValue(secondScoreFileAtomState);
+export const useSetSecondScoreFileStore = () =>
+  useSetRecoilState(secondScoreFileAtomState);

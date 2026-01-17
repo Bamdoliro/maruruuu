@@ -1,4 +1,4 @@
-import { useNoticeFileStore } from '@/store/notice/noticeFile';
+import { useNoticeFileStore } from '@/store';
 import { color, font } from '@maru/design-system';
 import { IconClip } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';

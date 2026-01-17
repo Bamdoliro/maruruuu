@@ -5,7 +5,7 @@ import {
 import type { PostSendMessageByTypeRequest } from '@/types/message/remote';
 import type { MessageForm } from '@/types/message/client';
 import { MESSAGE_STATUS_VALUES } from '@/constants/message/constant';
-import { useMessageFormStore } from '@/store/message/messageForm';
+import { useMessageFormStore } from '@/store';
 
 export const useMessage = () => {
   const [form, setForm] = useMessageFormStore();

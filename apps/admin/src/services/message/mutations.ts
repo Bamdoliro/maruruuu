@@ -2,7 +2,7 @@ import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@maru/hooks';
 import { postMessageByStatus, postMessageByType, postMessageToAll } from './api';
-import { useSetMessageFormStore } from '@/store/message/messageForm';
+import { useSetMessageFormStore } from '@/store';
 import type { MessageForm } from '@/types/message/client';
 
 export const usePostMessageByStatusMutation = () => {

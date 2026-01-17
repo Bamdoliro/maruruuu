@@ -6,7 +6,7 @@ import { styled } from 'styled-components';
 import SecondScoreUploader from './SecondScoreUploader/SecondScoreUploader';
 import { useEffect } from 'react';
 import type { ChangeEventHandler } from 'react';
-import { useSecondScoreFileStore } from '@/store/form/secondScoreFile';
+import { useSecondScoreFileStore } from '@/store';
 import {
   useExportExcelAction,
   useUploadSecondScoreFormatAction,

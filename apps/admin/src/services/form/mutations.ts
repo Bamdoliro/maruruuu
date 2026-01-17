@@ -10,8 +10,10 @@ import {
 import { useToast } from '@maru/hooks';
 import { KEY } from '@/constants/common/constant';
 import type { PatchSecondRoundResultReq } from '@/types/form/remote';
-import { useSetIsSecondRoundResultEditingStore } from '@/store/form/isSecondRoundResultEditing';
-import { useSetSecondRoundResultStore } from '@/store/form/secondRoundResult';
+import {
+  useSetIsSecondRoundResultEditingStore,
+  useSetSecondRoundResultStore,
+} from '@/store';
 import { isPopupBlocked } from '@/utils';
 import type { ReceiveStatusValue } from '@/types/form/client';
 

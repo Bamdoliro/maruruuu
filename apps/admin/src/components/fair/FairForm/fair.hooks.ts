@@ -1,4 +1,4 @@
-import { useFairFormStore } from '@/store/fair/fairType';
+import { useFairFormStore } from '@/store';
 import { useCreateFairMutation } from '@/services/fair/mutations';
 import type { FairType } from '@/types/fair/client';
 import convertToApiDateFormat from '@/utils/functions/convertToApiDateFormat';

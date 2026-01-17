@@ -2,7 +2,7 @@ import {
   useNoticeFileUrlMutation,
   usePutNoticeMutation,
 } from '@/services/notice/mutations';
-import { useNoticeFileStore } from '@/store/notice/noticeFile';
+import { useNoticeFileStore } from '@/store';
 import type { NoticeInput } from '@/types/notice/client';
 import { useState, useEffect, useRef } from 'react';
 import type { ChangeEventHandler } from 'react';
