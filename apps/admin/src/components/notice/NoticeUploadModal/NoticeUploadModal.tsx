@@ -4,10 +4,7 @@ import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { styled } from 'styled-components';
 import NoticeUploader from './NoticeUploader/NoticeUploader';
-import {
-  useNoticeFileStore,
-  useUploadedNoticeFileStore,
-} from '@/store/notice/noticeFile';
+import { useNoticeFileStore, useUploadedNoticeFileStore } from '@/store';
 import { useEffect } from 'react';
 import type { ChangeEventHandler } from 'react';
 
