@@ -17,8 +17,6 @@
     "@maru/eslint-config-ts": "workspace:*",
     "@maru/tsconfig": "workspace:*",
     "@types/react": "18.2.13",
-    "@types/styled-components": "^5.1.26",
-    "styled-reset": "^4.4.7",
-    "typescript": "^5.1.3"
+        "typescript": "^5.1.3"
   }
 }

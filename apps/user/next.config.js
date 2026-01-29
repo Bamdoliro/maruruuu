@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@maru/design-system'],
+  compiler: {
+    emotion: true,
+  },
+  transpilePackages: ['@maru/design-system', '@maru/ui', '@maru/utils'],
   poweredByHeader: false,
   images: {
     unoptimized: false,
