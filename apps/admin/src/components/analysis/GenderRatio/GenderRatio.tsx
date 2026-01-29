@@ -2,7 +2,7 @@ import { ANALYSIS_PASS_STEP } from '@/constants/analysis/constant';
 import { UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { SwitchCase } from '@toss/react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import GenderRatioDetailTable from './GenderRatioDetailTable/GenderRatioDetailTable';
 import useGenderRatio from './GenderRatio.hooks';
 

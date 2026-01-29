@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { flex } from '@maru/utils';
 import { color } from '@maru/design-system';
 import Column from '@maru/ui/src/Flex/Column';

@@ -2,7 +2,7 @@ import { color } from '@maru/design-system';
 import { IconClose } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import NoticeUploader from './NoticeUploader/NoticeUploader';
 import { useNoticeFileStore, useUploadedNoticeFileStore } from '@/store';
 import { useEffect } from 'react';

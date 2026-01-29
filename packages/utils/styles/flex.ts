@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { css } from 'styled-components';
+import { css } from '@emotion/react';
 
 interface Props {
   flexDirection?: CSSProperties['flexDirection'];

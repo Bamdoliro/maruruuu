@@ -6,7 +6,7 @@ import {
 import { Column, Loader } from '@maru/ui';
 import { SwitchCase } from '@toss/react';
 import { useState } from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import Grade from './Grade/Grade';
 import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 import Volunteer from './Volunteer/Volunteer';

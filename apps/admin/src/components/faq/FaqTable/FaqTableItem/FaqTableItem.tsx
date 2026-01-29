@@ -5,7 +5,7 @@ import type { FaqCategory } from '@/types/faq/client';
 import { formatDate } from '@/utils';
 import { Row, Text } from '@maru/ui';
 import { useRouter } from 'next/navigation';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface FaqTableItemProps {
   id: number;

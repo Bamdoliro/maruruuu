@@ -11,7 +11,7 @@ import {
 } from '@/components/main';
 import { flex } from '@maru/utils';
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Row } from '@maru/ui';
 import { AppLayout } from '@/layouts';
 

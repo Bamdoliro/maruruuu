@@ -1,6 +1,6 @@
 'use client';
 
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { color } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import { AppLayout } from '@/layouts';

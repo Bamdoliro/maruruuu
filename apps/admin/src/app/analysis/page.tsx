@@ -2,7 +2,7 @@
 
 import AppLayout from '@/layouts/AppLayout';
 import ApplicantCount from '@/components/analysis/ApplicantCount/ApplicantCount';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { flex } from '@maru/utils';
 import { Column, Row } from '@maru/ui';
 import SideMenu from '@/components/common/SideMenu/SideMenu';

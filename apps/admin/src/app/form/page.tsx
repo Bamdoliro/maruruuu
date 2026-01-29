@@ -20,7 +20,7 @@ import {
 } from '@maru/icon';
 import { Button, Column, Dropdown, Row, SearchInput, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import {
   useEditSecondRoundResultActions,
   useExportAllAddmissionTicketAction,

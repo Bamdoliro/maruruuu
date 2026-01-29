@@ -1,6 +1,7 @@
 import { color, font } from '@maru/design-system';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 interface ConditionalMessageProps {
   message?: string;

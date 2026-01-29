@@ -1,6 +1,6 @@
 import { color, font } from '@maru/design-system';
 import type { ChangeEvent } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import type { MessageForm } from '@/types/message/client';
 
 interface ContentTextareaProps {

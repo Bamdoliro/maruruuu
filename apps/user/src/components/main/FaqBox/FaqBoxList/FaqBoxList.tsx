@@ -1,5 +1,5 @@
 import { useFaqListQuery } from '@/services/faq/queries';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import FaqBoxItem from './FaqBoxItem/FaqBoxItem';
 
 const FaqBoxList = () => {

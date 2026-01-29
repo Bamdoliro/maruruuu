@@ -1,6 +1,6 @@
 import { Footer, Header } from '@/components/common';
 import type { ReactNode, CSSProperties } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface AppLayoutProps {
   header?: boolean;

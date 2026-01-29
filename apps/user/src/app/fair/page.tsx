@@ -7,7 +7,7 @@ import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { SCHEDULE } from '@/constants/common/constants';
 
 const Fair = () => {

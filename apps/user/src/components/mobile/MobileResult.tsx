@@ -1,7 +1,7 @@
 import { color } from '@maru/design-system';
 import { Column } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import isBetween from 'dayjs/plugin/isBetween';
 import dayjs from 'dayjs';
 import FirstResult from './MobileResult/first/FirstResult';

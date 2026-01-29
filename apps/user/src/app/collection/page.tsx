@@ -4,7 +4,7 @@ import { CollectionTable, PolicyRoule } from '@/components/policy';
 import { AppLayout } from '@/layouts';
 import { color, font } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 type Font = keyof typeof font;
 

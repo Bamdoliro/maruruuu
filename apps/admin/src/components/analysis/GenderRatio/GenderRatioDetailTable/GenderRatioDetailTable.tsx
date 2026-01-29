@@ -1,6 +1,6 @@
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import AreaGenderRatioContent from '../AreaGenderRatioContent/AreaGenderRatioContent';
 import TypeRatioTable from './TypeRatioTable/TypeRatioTable';
 import type {

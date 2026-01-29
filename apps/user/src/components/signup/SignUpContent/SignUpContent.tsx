@@ -9,7 +9,7 @@ import {
   TimeLimitInput,
 } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import Terms from '../Terms/Terms';
 import Validate from '../Validate/Validate';
 import {

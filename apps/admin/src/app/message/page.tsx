@@ -3,7 +3,7 @@
 import { Text } from '@maru/ui';
 import AppLayout from '@/layouts/AppLayout';
 import MessageCreate from '@/components/message/MessageCreate/MessageCreate';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { flex } from '@maru/utils';
 
 const MessagePage = () => {

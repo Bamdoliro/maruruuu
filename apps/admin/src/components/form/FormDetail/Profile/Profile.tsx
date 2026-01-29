@@ -5,7 +5,7 @@ import { color } from '@maru/design-system';
 import { IconBadge, IconCall, IconPerson, IconSchool } from '@maru/icon';
 import { Column, Loader, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface ProfileProps {
   id: number;

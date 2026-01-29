@@ -5,7 +5,7 @@ import { IconClip } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useNoticeDeleteAction, handleFileDownload } from './noticeDetail.hooks';
 import { formatDate } from '@/utils';
 

@@ -1,7 +1,7 @@
 import type { FairStatus, StatusType } from '@/types/fair/client';
 import { flex } from '@maru/utils';
 import { color } from '@maru/design-system';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { Column, Row, Text } from '@maru/ui';
 import { FunctionDropdown } from '@/components/common';
 import { IconUpload } from '@maru/icon';

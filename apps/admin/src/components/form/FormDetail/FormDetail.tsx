@@ -3,7 +3,7 @@ import { color } from '@maru/design-system';
 import { Column, UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useState } from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import Profile from './Profile/Profile';
 import { SwitchCase } from '@toss/react';
 import ApplicantInfo from './ApplicantInfo/ApplicantInfo';

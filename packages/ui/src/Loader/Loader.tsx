@@ -2,7 +2,7 @@ import { color } from '@maru/design-system';
 import type { CSSProperties } from 'react';
 import React from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface LoaderProps {
   top?: CSSProperties['top'];

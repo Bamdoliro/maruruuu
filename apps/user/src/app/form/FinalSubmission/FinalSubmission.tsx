@@ -11,7 +11,7 @@ import { AppLayout } from '@/layouts';
 import { useBooleanState } from '@maru/hooks';
 import { Column, Row } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useCTAButton, useInput } from './FinalSubmission.hook';
 import { useOverlay } from '@toss/use-overlay';
 

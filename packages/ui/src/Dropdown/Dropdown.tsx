@@ -4,7 +4,8 @@ import { IconArrowBottom, IconArrowTop } from '@maru/icon';
 import { flex } from '@maru/utils';
 import type { CSSProperties } from 'react';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import Text from '../Text/Text';
 
 type DropdownSizeOption = 'MEDIUM' | 'SMALL';

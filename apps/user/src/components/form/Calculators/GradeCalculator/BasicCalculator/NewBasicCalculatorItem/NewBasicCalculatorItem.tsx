@@ -1,6 +1,6 @@
 import { Button, Dropdown, Td } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { SUBJECT_LIST } from '@/constants/form/data';
 import { useNewSubjectListValueStore } from '@/stores';
 import color from '@maru/design-system/src/color';

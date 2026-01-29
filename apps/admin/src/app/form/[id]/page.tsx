@@ -7,7 +7,7 @@ import { color, font } from '@maru/design-system';
 import { IconArrowLeft } from '@maru/icon';
 import { flex } from '@maru/utils';
 import Link from 'next/link';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface FormDetailPageProps {
   params: { id: number };

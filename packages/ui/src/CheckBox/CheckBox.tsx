@@ -1,6 +1,6 @@
 import { flex } from '@maru/utils';
 import type { InputHTMLAttributes } from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 const CheckBox = ({
   name,

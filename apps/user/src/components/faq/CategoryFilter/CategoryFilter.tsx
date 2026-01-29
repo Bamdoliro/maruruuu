@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import Category from './Category/Category';
 import { flex } from '@maru/utils';
 

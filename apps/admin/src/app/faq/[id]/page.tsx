@@ -8,7 +8,7 @@ import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import FaqDetail from '@/components/faq/FaqDetail/FaqDetail';
 
 interface FaqDetailProps {

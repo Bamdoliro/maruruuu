@@ -1,6 +1,6 @@
 import { FormController, GradeCalculator } from '@/components/form';
 import { Column, UnderlineButton } from '@maru/ui';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useCTAButton } from './Score.hook';
 
 const Score = () => {

@@ -3,7 +3,7 @@
 import { CompleteAlarm, DraftCompletedContent, DraftFormModal } from '@/components/form';
 import { AppLayout } from '@/layouts';
 import { IconLoader } from '@maru/icon';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useCTAButton } from './DraftCompleted.hook';
 import { useOverlay } from '@toss/use-overlay';
 

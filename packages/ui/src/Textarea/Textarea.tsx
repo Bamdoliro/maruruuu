@@ -1,7 +1,8 @@
 import { color, font } from '@maru/design-system';
 import type { CSSProperties, TextareaHTMLAttributes } from 'react';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import ConditionalMessage from './ConditionalMessage';
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {

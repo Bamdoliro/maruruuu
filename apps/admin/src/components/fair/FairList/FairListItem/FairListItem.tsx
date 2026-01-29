@@ -6,7 +6,7 @@ import { color } from '@maru/design-system';
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface FairListItemProps {
   id: number;

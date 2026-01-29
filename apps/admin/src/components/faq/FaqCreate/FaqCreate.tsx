@@ -2,7 +2,7 @@ import { FAQ_CATEGORY, FAQ_CATEGORY_OPTIONS } from '@/constants/faq/constant';
 import { color, font } from '@maru/design-system';
 import { Button, Column, Dropdown, Row } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useFaqCreateAction, useFaqCreateData } from './faqCreate.hooks';
 import type { FaqCategory } from '@/types/faq/client';
 

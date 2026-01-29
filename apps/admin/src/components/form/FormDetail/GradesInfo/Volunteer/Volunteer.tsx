@@ -1,6 +1,6 @@
 import { color, font } from '@maru/design-system';
 import { CellInput, Column, Row, Td, Th } from '@maru/ui';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface VolunteerProps {
   VolunteerList: number[];

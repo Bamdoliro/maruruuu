@@ -2,7 +2,7 @@ import DataBox from '@/components/common/DataBox/DataBox';
 import { useFormDetailQuery } from '@/services/form/queries';
 import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface DocumentInfoProps {
   id: number;

@@ -1,6 +1,6 @@
 'use client';
 
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { flex } from '@maru/utils';
 import DdayBox from './DdayBox/DdayBox';
 import dayjs from 'dayjs';

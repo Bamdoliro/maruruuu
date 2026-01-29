@@ -3,7 +3,7 @@ import { color, font } from '@maru/design-system';
 import { IconFaq } from '@maru/icon';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface FaqBoxItemProps {
   title: string;

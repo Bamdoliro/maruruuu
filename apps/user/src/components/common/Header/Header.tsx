@@ -2,7 +2,7 @@ import { ROUTES } from '@/constants/common/constants';
 import { color } from '@maru/design-system';
 import { Button, Row, UnderlineButton } from '@maru/ui';
 import { usePathname, useRouter } from 'next/navigation';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import Profile from './Profile/Profile';
 import { useUser } from '@/hooks';
 import { useCTAButton } from './Header.hook';

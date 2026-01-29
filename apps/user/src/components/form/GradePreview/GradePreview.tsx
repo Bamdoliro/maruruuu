@@ -1,7 +1,7 @@
 import { useGradeCaculation } from '@/hooks';
 import type { GradeStep } from '@/types/form/client';
 import { Row, Td, Th } from '@maru/ui';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface GradePreviewProps {
   location?: GradeStep;

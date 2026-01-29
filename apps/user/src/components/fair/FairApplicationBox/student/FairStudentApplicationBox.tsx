@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { color } from '@maru/design-system';
 import { Button, CellInput, Column, Input, RadioGroup, Text, Textarea } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useAgree, useCTAButton, useInput } from './FairStudentApplicationBox.hook';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/common/constants';

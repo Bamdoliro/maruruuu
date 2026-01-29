@@ -4,7 +4,7 @@ import { IconFunction } from '@maru/icon';
 import { Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const SimulationBox = () => {
   const router = useRouter();

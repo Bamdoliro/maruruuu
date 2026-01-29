@@ -1,5 +1,5 @@
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import TermsItem from './TermsItem/TermsItem';
 import { ROUTES } from '@/constants/common/constants';
 import type { Dispatch, SetStateAction } from 'react';

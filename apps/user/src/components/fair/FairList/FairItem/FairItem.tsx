@@ -2,7 +2,7 @@ import { formatApplicationDate, formatStartDate, formatStatus } from '@/utils';
 import { color } from '@maru/design-system';
 import { Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface FairItemProps {
   id: number;

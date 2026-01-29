@@ -3,7 +3,7 @@
 import AppLayout from '@/layouts/AppLayout';
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Button, Column, PreviewInput, Text } from '@maru/ui';
 import { ROUTES } from '@/constants/common/constants';
 import { IconArrowRight } from '@maru/icon';

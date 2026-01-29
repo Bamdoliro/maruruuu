@@ -2,7 +2,7 @@ import { color, font } from '@maru/design-system';
 import { IconArrowRight } from '@maru/icon';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface TermsItemProps {
   id: string;

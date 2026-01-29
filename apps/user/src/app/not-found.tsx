@@ -5,7 +5,7 @@ import { color } from '@maru/design-system';
 import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const NotFound = () => {
   const router = useRouter();

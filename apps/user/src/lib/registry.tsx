@@ -1,33 +1,48 @@
 'use client';
 
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import { useServerInsertedHTML } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 interface RegistryProps {
   children: ReactNode;
 }
 
-const StyledComponentRegistry = ({ children }: RegistryProps) => {
-  const [styledComponentStyleSheet] = useState(() => new ServerStyleSheet());
-
-  useServerInsertedHTML(() => {
-    const styles = styledComponentStyleSheet.getStyleElement();
-
-    styledComponentStyleSheet.instance.clearTag();
-    return <>{styles}</>;
+const EmotionRegistry = ({ children }: RegistryProps) => {
+  const [cache] = useState(() => {
+    const cache = createCache({ key: 'css' });
+    cache.compat = true;
+    return cache;
   });
 
-  if (typeof window !== 'undefined') {
-    return <>{children}</>;
-  }
+  useServerInsertedHTML(() => {
+    const entries = Object.entries(cache.inserted);
+    if (entries.length === 0) {
+      return null;
+    }
 
-  return (
-    <StyleSheetManager sheet={styledComponentStyleSheet.instance}>
-      {children}
-    </StyleSheetManager>
-  );
+    const names = entries
+      .filter(([, value]) => typeof value !== 'boolean')
+      .map(([name]) => name)
+      .join(' ');
+
+    const styles = entries
+      .filter(([, value]) => typeof value !== 'boolean')
+      .map(([, value]) => value)
+      .join('');
+
+    return (
+      <style
+        key={cache.key}
+        data-emotion={`${cache.key} ${names}`}
+        dangerouslySetInnerHTML={{ __html: styles }}
+      />
+    );
+  });
+
+  return <CacheProvider value={cache}>{children}</CacheProvider>;
 };
 
-export default StyledComponentRegistry;
+export default EmotionRegistry;

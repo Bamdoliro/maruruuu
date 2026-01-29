@@ -3,7 +3,7 @@ import { color } from '@maru/design-system';
 import { Button, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 const FailBox = () => {
   const router = useRouter();

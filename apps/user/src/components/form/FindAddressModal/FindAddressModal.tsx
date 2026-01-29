@@ -1,5 +1,5 @@
 import { useOutsideClick } from '@maru/hooks';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import DaumPostcode from 'react-daum-postcode';
 import { useEffect } from 'react';
 import { useOnComplete } from './FindAddressModal.hook';

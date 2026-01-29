@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import AppLayout from '@/layouts/AppLayout';
 import FaqTable from '@/components/faq/FaqTable/FaqTable';
 import { useFaqListQuery } from '@/services/faq/queries';

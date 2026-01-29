@@ -1,7 +1,7 @@
-import { createGlobalStyle } from 'styled-components';
+import { css } from '@emotion/react';
 import color from './color';
 
-const GlobalStyle = createGlobalStyle`
+const globalStyles = css`
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 * {
@@ -60,14 +60,14 @@ html, body {
     overflow: auto;
     font-family: 'Pretendard Variable', Pretendard sans-serif;
 
-    
+
     ::-webkit-scrollbar {
       display: none;
     }
-    
+
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
 `;
 
-export default GlobalStyle;
+export default globalStyles;

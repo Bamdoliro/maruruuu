@@ -1,6 +1,7 @@
 'use client';
 
-import { GlobalStyle } from '@maru/design-system';
+import { Global } from '@emotion/react';
+import { globalStyles } from '@maru/design-system';
 import { Loader, Toast } from '@maru/ui';
 import { OverlayProvider } from '@toss/use-overlay';
 import type { ReactNode } from 'react';
@@ -8,7 +9,7 @@ import { RecoilRoot } from 'recoil';
 import { Suspense } from 'react';
 import { MobileProvider } from './common';
 import { useToast } from '@maru/hooks';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface Props {
   children: ReactNode;
@@ -76,7 +77,7 @@ const Provider = ({ children }: Props) => {
   return (
     <RecoilRoot>
       <OverlayProvider>
-        <GlobalStyle />
+        <Global styles={globalStyles} />
         <MobileProvider>
           <Suspense fallback={<Loader />}>{children}</Suspense>
         </MobileProvider>

@@ -3,7 +3,7 @@ import { IconClose } from '@maru/icon';
 import { flex } from '@maru/utils';
 import type { CSSProperties, ReactNode } from 'react';
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import Button from '../Button/Button';
 import Column from '../Flex/Column';
 import Row from '../Flex/Row';

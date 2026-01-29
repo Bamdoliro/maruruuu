@@ -1,12 +1,13 @@
 'use client';
 
-import { GlobalStyle } from '@maru/design-system';
+import { Global } from '@emotion/react';
+import { globalStyles } from '@maru/design-system';
 import { OverlayProvider } from '@toss/use-overlay';
 import type { ReactNode } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { RecoilRoot } from 'recoil';
 import { Toast } from '@maru/ui';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import useToast from '@maru/hooks/src/useToast';
 import type { ToastProgress } from '@maru/hooks/src/useToast';
 
@@ -76,7 +77,7 @@ const Provider = ({ children }: Props) => {
   return (
     <RecoilRoot>
       <OverlayProvider>
-        <GlobalStyle />
+        <Global styles={globalStyles} />
         {children}
         <GlobalToast />
       </OverlayProvider>

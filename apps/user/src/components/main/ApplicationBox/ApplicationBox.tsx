@@ -4,7 +4,7 @@ import { IconArrowOutward } from '@maru/icon';
 import { Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const ApplicationBox = () => {
   const date = '7월 8일, 8월 26일, 9월 16일, 10월 4일';

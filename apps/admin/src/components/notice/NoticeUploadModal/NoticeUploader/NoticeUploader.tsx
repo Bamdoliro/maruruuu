@@ -5,7 +5,7 @@ import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useEffect, useRef, useState } from 'react';
 import type { ChangeEvent, DragEvent } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface Props {
   isOpen: boolean;

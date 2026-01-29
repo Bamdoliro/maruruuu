@@ -1,5 +1,5 @@
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Column, Radio, Row, Td } from '@maru/ui';
 import TypeHeader from './TypeHeader/TypeHeader';
 import FormController from '../../FormController/FormController';

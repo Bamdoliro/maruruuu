@@ -9,7 +9,7 @@ import { Button, Column, Loader, Row, Text, SearchInput } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 const NoticePage = () => {
   const router = useRouter();

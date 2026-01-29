@@ -2,7 +2,8 @@ import { color, font } from '@maru/design-system';
 import { useBooleanState } from '@maru/hooks';
 import { IconInvisibleEye, IconVisibleEye } from '@maru/icon';
 import { flex } from '@maru/utils';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import ConditionalMessage from './ConditionalMessage';
 import type { InputProps } from './Input.type';
 

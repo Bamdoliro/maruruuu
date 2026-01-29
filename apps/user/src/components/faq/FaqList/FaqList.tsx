@@ -1,6 +1,6 @@
 import { useFaqListQuery } from '@/services/faq/queries';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import FaqItem from './FaqItem/FaqItem';
 import { useEffect, useState } from 'react';
 

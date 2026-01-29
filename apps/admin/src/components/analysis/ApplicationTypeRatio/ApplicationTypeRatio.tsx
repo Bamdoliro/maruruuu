@@ -1,6 +1,6 @@
 import { UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import DetailTable from './DetailTable/DetailTable';
 import { SwitchCase } from '@toss/react';
 import { ANALYSIS_STEP } from '@/constants/analysis/constant';
