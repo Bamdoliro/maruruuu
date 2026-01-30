@@ -2,7 +2,7 @@ import { useNoticeDetailQuery } from '@/services/notice/queries';
 import { color, font } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { convertLink, flex, formatCreatedAt } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useNoticeFile } from './NoticeDetailContent.hook';
 import DownloadButton from './DownloadButton/DownloadButton';
 

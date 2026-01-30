@@ -5,7 +5,7 @@ import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useOpenFileUploader, usePageAccessGuard } from '@/hooks';
 import { useFormStatusQuery } from '@/services/form/queries';
 import { useEntrollmentDocumentStore } from '@/stores/entrollment/entrollmentDocument';

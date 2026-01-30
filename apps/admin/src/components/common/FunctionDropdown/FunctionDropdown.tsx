@@ -1,7 +1,8 @@
 import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { css, styled } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import type { ReactNode } from 'react';
 import { IconArrowTop, IconArrowBottom } from '@maru/icon';
 import { useBooleanState, useOutsideClick } from '@maru/hooks';

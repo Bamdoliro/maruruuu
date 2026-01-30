@@ -4,7 +4,7 @@ import { IconArrowRight } from '@maru/icon';
 import { Column, Text } from '@maru/ui';
 import { flex, formatCreatedAt } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface NoticeItemProps {
   id: number;

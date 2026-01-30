@@ -3,7 +3,7 @@ import { color } from '@maru/design-system';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useFaqDetailQuery } from '@/services/faq/queries';
 import { FAQ_CATEGORY } from '@/constants/faq/constant';
 import { useFaqDeleteAction } from './faqDetail.hooks';

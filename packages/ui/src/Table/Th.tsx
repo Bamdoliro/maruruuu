@@ -1,6 +1,7 @@
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import type { TableProps, TableStyleType } from './Table.type';
 
 const Th = ({

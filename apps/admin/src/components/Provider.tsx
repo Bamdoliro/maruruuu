@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { RecoilRoot } from 'recoil';
 import { Toast } from '@maru/ui';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import useToast from '@maru/hooks/src/useToast';
 import type { ToastProgress } from '@maru/hooks/src/useToast';
 

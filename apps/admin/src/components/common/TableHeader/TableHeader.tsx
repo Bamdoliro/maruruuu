@@ -1,7 +1,7 @@
 import { color } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import type { ReactNode } from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface Props {
   children: ReactNode;

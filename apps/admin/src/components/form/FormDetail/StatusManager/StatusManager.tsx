@@ -1,6 +1,6 @@
 import { Button, Column, Loader, Text } from '@maru/ui';
 import { useFormDetailQuery } from '@/services/form/queries';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { color } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import { useStatusFormatter } from '@/components/form/FormDetail/StatusManager/StatusManager.hook';

@@ -1,6 +1,6 @@
 import { CellInput, Td } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useInput } from './GEDCalculatorItem.hook';
 
 interface Props {

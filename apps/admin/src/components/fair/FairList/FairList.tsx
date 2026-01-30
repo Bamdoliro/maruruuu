@@ -1,5 +1,5 @@
 import { useFairListQuery } from '@/services/fair/queries';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import FairListItem from './FairListItem/FairListItem';
 import FairListHeader from './FairListHeader/FairListHeader';
 import { useState } from 'react';

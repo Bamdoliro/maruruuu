@@ -3,7 +3,7 @@ import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
 import { useFormDetailQuery } from '@/services/form/queries';
 import { Loader } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface TypeInfoProps {
   id: number;

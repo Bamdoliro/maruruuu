@@ -1,7 +1,7 @@
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import React from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import Input from './Input';
 import type { InputProps } from './Input.type';
 

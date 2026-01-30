@@ -1,7 +1,7 @@
 import { color } from '@maru/design-system';
 import { UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 interface CategoryProps {
   selectedTab: string;

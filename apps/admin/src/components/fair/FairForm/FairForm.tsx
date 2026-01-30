@@ -1,7 +1,7 @@
 import { color } from '@maru/design-system';
 import { Text, RadioGroup } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { IconClock, IconCalendar } from '@maru/icon';
 import FormInput from '@maru/ui/src/Input/FormInput';
 import type { FairType } from '@/types/fair/client';

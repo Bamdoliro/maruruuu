@@ -5,7 +5,8 @@ import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { useExportExcelAction } from './exportExcelModal.hooks';
 import { EXPORT_EXCEL_TYPE } from '@/constants/form/constant';
 

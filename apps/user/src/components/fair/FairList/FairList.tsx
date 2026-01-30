@@ -1,5 +1,5 @@
 import { useFairListQuery } from '@/services/fair/queries';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import FairItem from './FairItem/FairItem';
 import { Text } from '@maru/ui';
 import { color } from '@maru/design-system';

@@ -1,7 +1,7 @@
 import { CompleteAlarm, DraftSubmissionCompletedContent } from '@/components/form';
 import { AppLayout } from '@/layouts';
 import { IconCheckCircle } from '@maru/icon';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 const DraftSubmissionCompleted = () => {
   return (

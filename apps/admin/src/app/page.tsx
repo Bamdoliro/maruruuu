@@ -3,7 +3,7 @@
 import { color } from '@maru/design-system';
 import { Button, Column, Input, Loader, PreviewInput } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useInput, useLoginAction } from './Login.hooks';
 import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';

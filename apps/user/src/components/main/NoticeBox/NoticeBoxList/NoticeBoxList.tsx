@@ -1,5 +1,5 @@
 import { useNoticeListQuery } from '@/services/notice/queries';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import NoticeBoxItem from './NoticeBoxItem/NoticeBoxItem';
 
 const NoticeBoxList = () => {

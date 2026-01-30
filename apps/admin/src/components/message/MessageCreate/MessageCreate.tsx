@@ -1,5 +1,5 @@
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useOverlay } from '@toss/use-overlay';
 import MessageHeader from './MessageHeader/MessageHeader';
 import ContentTextarea from './ContentTextarea/ContentTextarea';

@@ -1,7 +1,7 @@
 import { Column, Row, Text } from '@maru/ui';
 import DetailContent from './DetailContent/DetailContent';
 import RatioTable from './RatioTable/RatioTable';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { flex } from '@maru/utils';
 import type { ApplicantCountType } from '@/types/analysis/client';
 import useRatio from './DetailTable.hooks';

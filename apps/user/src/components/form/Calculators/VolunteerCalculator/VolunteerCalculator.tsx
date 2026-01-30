@@ -2,7 +2,7 @@ import { useFormValueStore } from '@/stores';
 import { color, font } from '@maru/design-system';
 import { CellInput, Column, Row, Td, Text, Th } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useInput } from './VolunteerCalculator.hook';
 import { formatYear } from '@/utils';
 import { SCHEDULE } from '@/constants/common/constants';

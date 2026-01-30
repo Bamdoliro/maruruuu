@@ -8,7 +8,7 @@ import { RecoilRoot } from 'recoil';
 import { Suspense } from 'react';
 import { MobileProvider } from './common';
 import { useToast } from '@maru/hooks';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface Props {
   children: ReactNode;

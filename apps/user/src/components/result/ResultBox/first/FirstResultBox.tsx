@@ -1,5 +1,5 @@
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import FirstResultItem from './FirstResultItem/FirstResultItem';
 import { useFirstResultQuery } from '@/services/result/queries';
 import PassBox from './FirstResultContent/PassBox/PassBox';

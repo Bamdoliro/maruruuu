@@ -4,7 +4,7 @@ import { Box } from '@/components/policy';
 import { AppLayout } from '@/layouts';
 import { color, font } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import Chpater01 from './Chapter01/Chapter01';
 import Chpater02 from './Chapter02/Chapter02';
 import Chpater03 from './Chapter03/Chapter03';

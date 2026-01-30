@@ -2,7 +2,7 @@ import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import { Text } from '@maru/ui';
 import type { CSSProperties } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const FinalFormTable = () => {
   return (

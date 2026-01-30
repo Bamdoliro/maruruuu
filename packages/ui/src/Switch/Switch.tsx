@@ -1,6 +1,7 @@
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
-import { css, styled } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 interface SwitchProps {
   value: string;

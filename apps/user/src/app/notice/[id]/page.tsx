@@ -9,7 +9,7 @@ import { Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface NoticeDetailProps {
   params: { id: number };

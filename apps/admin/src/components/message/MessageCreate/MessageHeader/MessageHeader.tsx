@@ -1,6 +1,6 @@
 import { Button } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import TitleInput from '../TitleInput/TitleInput';
 import RecipientDropdown from '../RecipientDropdown/RecipientDropdown';
 import type { MessageForm } from '@/types/message/client';

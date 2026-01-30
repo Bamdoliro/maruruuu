@@ -1,5 +1,5 @@
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { SchoolItem } from './SchoolItem/SchoolItem';
 import { useSchoolListQuery } from '@/services/form/queries';
 import type { School } from '@/types/form/client';

@@ -1,5 +1,5 @@
 import { color, font } from '@maru/design-system';
-import { css } from 'styled-components';
+import { css } from '@emotion/react';
 
 export const getButtonStyle = {
   PRIMARY: css`

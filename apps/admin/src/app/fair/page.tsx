@@ -4,7 +4,7 @@ import FairList from '@/components/fair/FairList/FairList';
 import AppLayout from '@/layouts/AppLayout';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 const FairPage = () => {
   return (

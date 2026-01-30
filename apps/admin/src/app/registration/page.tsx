@@ -5,7 +5,7 @@ import AppLayout from '@/layouts/AppLayout';
 import { Column, Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { Suspense } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const RegistrationPage = () => {
   return (

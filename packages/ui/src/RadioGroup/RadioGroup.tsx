@@ -1,7 +1,7 @@
 import { color, font } from '@maru/design-system';
 import type { ChangeEventHandler } from 'react';
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import Row from '../Flex/Row';
 import Radio from '../Radio/Radio';
 

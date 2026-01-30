@@ -1,5 +1,5 @@
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import type { FlexProps } from './Flex.type';
 
 const Column = ({

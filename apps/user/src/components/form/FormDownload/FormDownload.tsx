@@ -1,6 +1,6 @@
 import { color, font } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface FormDownloadProps {
   onClick: () => void;

@@ -2,7 +2,7 @@ import { color } from '@maru/design-system';
 import { IconAdd, IconClip, IconShortcuts } from '@maru/icon';
 import { flex } from '@maru/utils';
 import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { getButtonPadding, getButtonSize, getButtonStyle } from './Button.style';
 import type { ButtonIcon, ButtonSize, ButtonStyleType } from './Button.type';
 

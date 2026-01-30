@@ -2,7 +2,7 @@ import { ROUTES } from '@/constants/common/constants';
 import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface NoticeBoxItemProps {
   title: string;

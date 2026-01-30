@@ -12,7 +12,7 @@ import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
 import { Column, Text, UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useNavigationClick } from './simulation.hook';
 import { SwitchCase } from '@toss/react';
 

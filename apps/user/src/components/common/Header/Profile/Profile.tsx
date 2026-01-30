@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { flex } from '@maru/utils';
 import { color, font } from '@maru/design-system';
 import { IconArrowDropdown } from '@maru/icon';

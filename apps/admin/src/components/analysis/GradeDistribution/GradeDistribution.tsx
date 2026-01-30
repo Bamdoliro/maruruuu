@@ -1,6 +1,6 @@
 import { UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { SwitchCase } from '@toss/react';
 import GradeDistributionDetailTable from './GradeDistributionDetailTable/GradeDistributionDetailTable';
 import useGradeDistribution from './GradeDistribution.hooks';

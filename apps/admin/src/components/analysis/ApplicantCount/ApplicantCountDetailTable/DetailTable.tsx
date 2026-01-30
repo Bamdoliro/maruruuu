@@ -1,6 +1,6 @@
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import Competition from './Competition/Competition';
 import DetailContent from '../../ApplicationTypeRatio/DetailTable/DetailContent/DetailContent';
 import type { ApplicantCountType } from '@/types/analysis/client';

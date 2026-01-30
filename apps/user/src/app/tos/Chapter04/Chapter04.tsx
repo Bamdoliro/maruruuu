@@ -1,7 +1,7 @@
 import { PolicyRoule } from '@/components/policy';
 import { color, font } from '@maru/design-system';
 import { Column } from '@maru/ui';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 type Font = keyof typeof font;
 

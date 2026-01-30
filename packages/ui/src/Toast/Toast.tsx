@@ -1,7 +1,7 @@
 import { flex } from '@maru/utils';
 import type { ReactNode } from 'react';
-import type { CSSProperties } from 'styled-components';
-import styled from 'styled-components';
+import type { CSSProperties } from 'react';
+import styled from '@emotion/styled';
 import Text from '../Text/Text';
 import { color } from '@maru/design-system';
 import { IconCancelCircle, IconCheckCircle } from '@maru/icon';

@@ -1,6 +1,6 @@
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import ScoreTable from './ScoreTable/ScoreTable';
 import type { GradeDistributionType } from '@/types/analysis/client';
 import DetailContent from './DetailContent/DetailContent';

@@ -2,7 +2,7 @@ import { useFormStepValueStore } from '@/stores';
 import { color, font } from '@maru/design-system';
 import { IconCheck } from '@maru/icon';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const PROGRESS_BAR_DISPLAY_DATA = [
   '지원자 정보',

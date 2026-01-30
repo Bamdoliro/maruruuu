@@ -1,7 +1,7 @@
 import { useNewGEDSubjectListValueStore } from '@/stores';
 import { Button, CellInput, Dropdown, Td } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useDeleteNewGEDSubject, useInput } from './NewGEDCalculatorItem.hook';
 
 interface Props {

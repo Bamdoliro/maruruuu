@@ -1,7 +1,7 @@
 import { color } from '@maru/design-system';
 import { Button, Column, Input, RadioGroup, Text, Textarea } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useAgree, useCTAButton, useInput } from './FairTeacherApplicationBox.hook';
 import { useState } from 'react';
 import Link from 'next/link';

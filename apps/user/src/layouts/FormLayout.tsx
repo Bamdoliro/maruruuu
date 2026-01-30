@@ -3,7 +3,7 @@ import { ProgressStage } from '@/components/form';
 import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import type { ReactNode } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface FormLayoutProps {
   children: ReactNode;

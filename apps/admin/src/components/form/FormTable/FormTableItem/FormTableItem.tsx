@@ -14,7 +14,7 @@ import { CheckBox, Dropdown, Row, Text } from '@maru/ui';
 import { useRouter } from 'next/navigation';
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 
 const FormTableItem = ({
   id,

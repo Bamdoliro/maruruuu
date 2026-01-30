@@ -2,7 +2,7 @@ import { useUser } from '@/hooks';
 import { color, font } from '@maru/design-system';
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { getStatusConfig } from './StatusBox.config';
 import StatusIcon from './StatusIcon';
 

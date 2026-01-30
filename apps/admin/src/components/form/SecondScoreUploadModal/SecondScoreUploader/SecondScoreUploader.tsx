@@ -4,7 +4,7 @@ import { IconClose } from '@maru/icon';
 import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useEffect, useRef, useState, type DragEvent, type ChangeEvent } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface SecondScoreUploaderProps {
   isOpen: boolean;

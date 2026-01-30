@@ -4,7 +4,7 @@ import { IconClip } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useOverlay } from '@toss/use-overlay';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import NoticeUploadModal from '../NoticeUploadModal/NoticeUploadModal';
 import { useNoticeCreateAction, useNoticeCreateData } from './NoticeCreate.hooks';
 

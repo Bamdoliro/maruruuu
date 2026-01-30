@@ -1,7 +1,7 @@
 import { color } from '@maru/design-system';
 import { Button, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import { styled } from 'styled-components';
+import styled from '@emotion/styled';
 import { useCTAButton } from '../FirstResultContent.hook';
 
 const FailBox = () => {

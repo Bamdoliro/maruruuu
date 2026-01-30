@@ -2,7 +2,7 @@ import { formatApplicationDate, formatStartDate, formatStatus } from '@/utils';
 import { color } from '@maru/design-system';
 import { Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 interface FairItemProps {
   id: number;
@@ -36,7 +36,7 @@ const FairItem = ({
         </StatusBox>
       </Row>
       <Text fontType="p2" color={color.gray500}>
-        <EllipsisText as="span">장소: {place}</EllipsisText>
+        <EllipsisText>장소: {place}</EllipsisText>
         <br />
         신청 기한: {formatApplicationDate(applicationStartDate)} ~{' '}
         {formatApplicationDate(applicationEndDate)}
@@ -75,7 +75,7 @@ const StatusBox = styled.div<{ status: string }>`
       : 'rgba(244, 67, 54, 0.1)'};
 `;
 
-const EllipsisText = styled(Text)`
+const EllipsisText = styled.span`
   display: inline-block;
   max-width: 336px;
   overflow: hidden;
