@@ -93,6 +93,24 @@ const useToast = () => {
     const remaining = Math.max(0, t.duration - elapsed);
     return { ...t, progress, remaining };
   });
+
+  useEffect(() => {
+    const now = Date.now();
+    const expiredIds = toasts
+      .filter((t) => now - t.createdAt >= t.duration)
+      .map((t) => t.id);
+
+    if (expiredIds.length > 0) {
+      setToasts((prev) => prev.filter((t) => expiredIds.indexOf(t.id) === -1));
+      expiredIds.forEach((id) => {
+        if (timeoutRefs.current[id]) {
+          clearTimeout(timeoutRefs.current[id]);
+          delete timeoutRefs.current[id];
+        }
+      });
+    }
+  }, [tick, toasts, setToasts]);
+
   void tick;
 
   return {
