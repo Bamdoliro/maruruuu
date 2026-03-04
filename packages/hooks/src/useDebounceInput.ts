@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce';
+import { debounce } from 'es-toolkit/compat';
 import type { ChangeEventHandler } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 
