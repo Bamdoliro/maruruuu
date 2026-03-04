@@ -24,5 +24,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Run Lint (User App)
+        run: pnpm turbo run lint --filter=./apps/user
+
+      - name: Run Type Check (User App)
+        run: pnpm turbo run check-types --filter=./apps/user
+
       - name: Run Build (User App)
         run: pnpm turbo run build --filter=./apps/user --continue

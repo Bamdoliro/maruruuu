@@ -24,5 +24,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Run Lint (admin App)
+        run: pnpm turbo run lint --filter=./apps/admin
+
+      - name: Run Type Check (admin App)
+        run: pnpm turbo run check-types --filter=./apps/admin
+
       - name: Run Build (admin App)
         run: pnpm turbo run build --filter=./apps/admin --continue

@@ -8,6 +8,9 @@
     "lint": {
       "dependsOn": ["^build"]
     },
+    "check-types": {
+      "dependsOn": ["^build"]
+    },
     "dev": {
       "dependsOn": ["^build"],
       "outputs": [".next/**"],
