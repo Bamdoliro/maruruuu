@@ -17,18 +17,16 @@ interface Props {
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang="ko">
-      <head>
-        <body>
-          {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
-            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
-          ) : null}
-          <StyledComponentRegistry>
-            <QueryClientProvider>
-              <Provider>{children}</Provider>
-            </QueryClientProvider>
-          </StyledComponentRegistry>
-        </body>
-      </head>
+      <body>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
+        <StyledComponentRegistry>
+          <QueryClientProvider>
+            <Provider>{children}</Provider>
+          </QueryClientProvider>
+        </StyledComponentRegistry>
+      </body>
     </html>
   );
 };
