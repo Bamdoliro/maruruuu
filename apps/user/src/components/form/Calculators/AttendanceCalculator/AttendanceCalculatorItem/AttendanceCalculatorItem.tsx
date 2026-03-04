@@ -30,8 +30,8 @@ const AttendanceCalculatorItem = ({
       {attendanceName === 'attendance1'
         ? '1학년'
         : attendanceName === 'attendance2'
-        ? '2학년'
-        : '3학년'}
+          ? '2학년'
+          : '3학년'}
     </Td>
     {ATTENDANCE_TYPE.map((countName) => (
       <Td key={countName} width="20%" height={56}>

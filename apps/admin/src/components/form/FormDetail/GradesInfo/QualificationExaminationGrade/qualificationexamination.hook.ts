@@ -2,7 +2,7 @@ import type { QualificationExaminationSubject } from '@/types/form/client';
 import type { QualificationExaminationAchievementLevelsGroup } from '@/types/form/client';
 
 const getQualificationExaminationAchievementLevelsGroupList = (
-  subjectList?: QualificationExaminationSubject[]
+  subjectList?: QualificationExaminationSubject[],
 ): QualificationExaminationAchievementLevelsGroup[] => {
   if (!subjectList || subjectList.length === 0) return [];
 

@@ -54,7 +54,7 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
 };
 
 export const useEditSecondRoundResultMutation = (
-  secondRoundResultData: PatchSecondRoundResultReq
+  secondRoundResultData: PatchSecondRoundResultReq,
 ) => {
   const { handleError } = useApiError();
   const queryClient = useQueryClient();

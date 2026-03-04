@@ -11,7 +11,7 @@ export const getRegistrationList = async () => {
 
   const { data: returnData } = await maru.get<GetRegistrationListRes>(
     `/forms/admission-and-pledges?id-list=${encodedIdList}`,
-    authorization()
+    authorization(),
   );
 
   return returnData;

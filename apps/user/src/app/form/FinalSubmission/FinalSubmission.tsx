@@ -27,7 +27,7 @@ const FinalSubmission = () => {
 
   const { handleSubmitFinalForm, handleExportForm } = useCTAButton(
     openPdfLoader,
-    closePdfLoader
+    closePdfLoader,
   );
   const { handleFormDocumentChange, final } = useInput();
 

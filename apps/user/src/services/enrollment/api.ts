@@ -7,7 +7,7 @@ export const postEntrollmentDocument = async (fileData: FileDocument) => {
   const { data } = await maru.post(
     '/forms/admission-and-pledge',
     fileData,
-    authorization()
+    authorization(),
   );
 
   return data;

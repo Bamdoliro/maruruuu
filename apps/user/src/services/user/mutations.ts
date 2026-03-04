@@ -97,7 +97,7 @@ export const useRequestUserVerificationMutation = ({
 };
 
 export const useVerificationMutation = (
-  setIsSuccessVerification: Dispatch<SetStateAction<boolean>>
+  setIsSuccessVerification: Dispatch<SetStateAction<boolean>>,
 ) => {
   const { handleError } = useApiError();
   const { toast } = useToast();

@@ -39,7 +39,7 @@ export const useBoxClick = (status?: string) => {
     } else {
       downloadFile(
         exportFormData,
-        `${userData.name} 부산소프트웨어마이스터고등학교 원서.pdf`
+        `${userData.name} 부산소프트웨어마이스터고등학교 원서.pdf`,
       );
     }
   };

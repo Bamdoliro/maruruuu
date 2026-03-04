@@ -41,7 +41,7 @@ export const useFormPageState = () => {
 
   const getCriteriaDropdownValue = (
     key: keyof FormListSortingType,
-    category: Record<string, string>
+    category: Record<string, string>,
   ) => {
     const value = formListSortingType[key];
     return value ? category[value] : undefined;
@@ -108,7 +108,7 @@ export const usePrintFormURLActions = () => {
   const formIdList = Object.entries(formToPrint).reduce(
     (acc: number[], [formId, isSelected]) =>
       isSelected ? [...acc, Number(formId)] : acc,
-    []
+    [],
   );
   const { printFormUrl } = usePrintFormUrlMutation();
   const handlePrintFormUrlButtonClick = () => {

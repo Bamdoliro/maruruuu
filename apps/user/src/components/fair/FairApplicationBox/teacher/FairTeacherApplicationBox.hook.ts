@@ -29,7 +29,7 @@ export const useInput = () => {
   };
 
   const handleApplicationTextAreaChange: ChangeEventHandler<HTMLTextAreaElement> = (
-    e
+    e,
   ) => {
     const { name, value } = e.target;
     setApplication({ ...application, [name]: value });

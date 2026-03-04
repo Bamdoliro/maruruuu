@@ -21,7 +21,7 @@ const QueryClientProvider = ({ children }: QueryClientProviderProps) => {
             refetchOnWindowFocus: false,
           },
         },
-      })
+      }),
   );
 
   return (

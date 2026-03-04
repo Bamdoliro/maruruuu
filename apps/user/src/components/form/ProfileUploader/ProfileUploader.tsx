@@ -48,7 +48,7 @@ const ProfileUploader = ({
       mediaType: profile.mediaType ?? '',
       fileSize: profile.fileSize ?? 0,
     },
-    profile.file ?? null
+    profile.file ?? null,
   );
 
   const mountedRef = useRef(false);
@@ -113,7 +113,7 @@ const ProfileUploader = ({
             0,
             0,
             crop.width,
-            crop.height
+            crop.height,
           );
 
           const TARGET_WIDTH = 117;
@@ -140,7 +140,7 @@ const ProfileUploader = ({
             0,
             0,
             TARGET_WIDTH,
-            TARGET_HEIGHT
+            TARGET_HEIGHT,
           );
 
           const dataUrl = outputCanvas.toDataURL('image/jpeg', 1.0);
@@ -182,7 +182,7 @@ const ProfileUploader = ({
 
       reader.readAsDataURL(file);
     },
-    [setProfile, uploadProfileMutate]
+    [setProfile, uploadProfileMutate],
   );
 
   const { isDragging, onDragOver, onDragLeave, onDrop, onDragEnter } =
@@ -194,7 +194,7 @@ const ProfileUploader = ({
       if (!file) return;
       handleFile(file);
     },
-    [handleFile]
+    [handleFile],
   );
 
   return (

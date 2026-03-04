@@ -34,7 +34,7 @@ export const useIntoductionForm = () => {
       if (err instanceof z.ZodError) {
         const fieldErrors = err.flatten().fieldErrors;
         const normalizedErrors = Object.fromEntries(
-          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
+          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []]),
         );
         setErrors(normalizedErrors);
       }
@@ -52,7 +52,7 @@ export const useIntoductionForm = () => {
       if (err instanceof z.ZodError) {
         const fieldErrors = err.flatten().fieldErrors;
         const normalizedErrors = Object.fromEntries(
-          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []])
+          Object.entries(fieldErrors).map(([key, value]) => [key, value ?? []]),
         );
         setErrors(normalizedErrors);
       }

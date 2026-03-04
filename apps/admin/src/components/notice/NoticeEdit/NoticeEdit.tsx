@@ -42,7 +42,7 @@ const NoticeEdit = ({ id }: NoticeEditProps) => {
     setNoticeData((prevData) => ({
       ...prevData,
       fileNameList: (prevData.fileNameList ?? []).filter(
-        (file) => file !== fileNameToDelete
+        (file) => file !== fileNameToDelete,
       ),
     }));
     setFileData(fileData?.filter((file) => file.name !== fileNameToDelete) ?? []);

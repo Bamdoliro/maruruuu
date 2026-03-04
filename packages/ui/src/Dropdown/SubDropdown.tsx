@@ -51,7 +51,7 @@ const SubDropdown: FC<SubDropdownProps> = ({
   const handleDropdownItemButtonClick = (
     value: string,
     children?: Data[],
-    itemOnChange?: (value: string) => void
+    itemOnChange?: (value: string) => void,
   ) => {
     if (children && children.length > 0) {
       setSelectedParent(value);

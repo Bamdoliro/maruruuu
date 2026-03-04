@@ -17,7 +17,7 @@ const FairStudentApplicationBox = ({ id }: FairStudentApplicationBoxProps) => {
     useInput();
   const { handleSendFairApplication } = useCTAButton(id, application);
   const { agree, handleAgreeChange, handleButtonClick } = useAgree(
-    handleSendFairApplication
+    handleSendFairApplication,
   );
 
   const handleClick = () => {

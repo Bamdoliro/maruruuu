@@ -19,7 +19,7 @@ export const getModalSuppressionSettings = (): ModalSuppressionSettings => {
 export const saveModalSuppression = (
   modalId: string,
   suppressedAt: number,
-  expiresAt: number
+  expiresAt: number,
 ): void => {
   const settings = getModalSuppressionSettings();
   settings[modalId] = { suppressedAt, expiresAt };

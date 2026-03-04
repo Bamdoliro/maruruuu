@@ -31,7 +31,7 @@ const Enrollment = () => {
       mediaType: entrollmentDocument.mediaType ?? '',
       fileSize: entrollmentDocument.fileSize ?? 0,
     },
-    entrollmentDocument.file ?? null
+    entrollmentDocument.file ?? null,
   );
 
   const onCheckPassFileUploader = () => {

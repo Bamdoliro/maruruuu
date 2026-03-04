@@ -13,8 +13,8 @@ const useRatio = (formList: ApplicantCountType[] | undefined) => {
       ?.filter(
         (item) =>
           !['REGULAR', 'SPECIAL_ADMISSION', 'NATIONAL_VETERANS_EDUCATION'].includes(
-            item.type
-          )
+            item.type,
+          ),
       )
       .reduce((sum, item) => sum + item.count, 0) || 0;
 

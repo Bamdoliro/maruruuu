@@ -4,7 +4,7 @@ import { useReceiveStatusChangeMutation } from '@/services/form/mutations';
 export const useReceiveStatusChangeModalAction = (
   formId: number,
   status: ReceiveStatusValue | null,
-  onClose: () => void
+  onClose: () => void,
 ) => {
   const { changeReceiveStatus } = useReceiveStatusChangeMutation(formId, onClose);
 

@@ -19,7 +19,7 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
       mediaType: final.mediaType ?? '',
       fileSize: final.fileSize ?? 0,
     },
-    final.file ?? null
+    final.file ?? null,
   );
 
   const handleSubmitFinalForm = () => {
@@ -31,7 +31,7 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
 
     downloadFile(
       pdfBlobUrl,
-      `${userData.name} 부산소프트웨어마이스터고등학교 원서접수.pdf`
+      `${userData.name} 부산소프트웨어마이스터고등학교 원서접수.pdf`,
     );
     setPdfBlobUrl('');
     setHasDownloaded(true);

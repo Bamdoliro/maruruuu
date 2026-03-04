@@ -1,13 +1,13 @@
 import type { AchievementLevelsGroup, Subject } from '@/types/form/client';
 
 const getAchievementLevelsGroupList = (
-  subjectList?: Subject[]
+  subjectList?: Subject[],
 ): AchievementLevelsGroup[] => {
   if (!subjectList || subjectList.length === 0) return [];
 
   return subjectList.reduce((acc: AchievementLevelsGroup[], cur) => {
     const existingSubject = acc.find(
-      (subject) => subject.subjectName === cur.subjectName
+      (subject) => subject.subjectName === cur.subjectName,
     );
 
     const indexMap: Record<string, number> = {

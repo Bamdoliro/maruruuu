@@ -51,7 +51,7 @@ export const useNoticeCreateAction = (noticeData: NoticeInput) => {
 
     postNoticeMutate(
       { ...noticeData, fileNameList },
-      { onSuccess: () => setFileData([]) }
+      { onSuccess: () => setFileData([]) },
     );
   };
 

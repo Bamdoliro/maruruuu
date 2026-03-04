@@ -18,7 +18,7 @@ export const useFairForm = () => {
   const [form, setForm] = useFairFormStore();
   const handleChange = <K extends keyof FairFormInput>(
     key: K,
-    value: FairFormInput[K]
+    value: FairFormInput[K],
   ) => {
     setForm((prev) => ({
       ...prev,

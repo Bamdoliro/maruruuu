@@ -22,7 +22,7 @@ const useScoreRatio = (formList: ApplicantCountType[] | undefined) => {
         regularCount: 0,
         specialAdmissionCount: 0,
         otherCount: 0,
-      }
+      },
     ) || { totalCount: 0, regularCount: 0, specialAdmissionCount: 0, otherCount: 0 };
 
   const calculateRatio = (count: number) =>

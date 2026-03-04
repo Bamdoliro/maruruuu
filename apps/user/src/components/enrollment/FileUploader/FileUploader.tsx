@@ -24,7 +24,7 @@ const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
         <input ref={ref} onChange={onChange} type="file" accept=".pdf, .hwpx" hidden />
       </>
     );
-  }
+  },
 );
 
 FileUploader.displayName = 'FileUploader';

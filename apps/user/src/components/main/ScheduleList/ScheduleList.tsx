@@ -28,7 +28,7 @@ const ScheduleList = () => {
       title: '2차 전형',
       date: formatScheduleDate(
         [SCHEDULE.이차_면접, SCHEDULE.이차_면접_종료],
-        'INTERVIEW'
+        'INTERVIEW',
       ),
       startTime: SCHEDULE.이차_면접,
       endTime: SCHEDULE.이차_면접_종료,
@@ -45,7 +45,7 @@ const ScheduleList = () => {
       title: '입학등록기간',
       date: formatScheduleDate(
         [SCHEDULE.입학_등록, SCHEDULE.입학_등록_마감],
-        'REGISTRATION'
+        'REGISTRATION',
       ),
       startTime: SCHEDULE.입학_등록,
       endTime: SCHEDULE.입학_등록_마감,

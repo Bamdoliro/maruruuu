@@ -5,7 +5,7 @@ const useScoreStatus = (formList: GradeDistributionType[] | undefined) => {
     ? Math.max(
         ...formList
           .filter((item) => item.type === 'REGULAR')
-          .map((item) => item.firstRoundMax)
+          .map((item) => item.firstRoundMax),
       ).toFixed(3)
     : undefined;
 
@@ -15,10 +15,10 @@ const useScoreStatus = (formList: GradeDistributionType[] | undefined) => {
           .filter(
             (item) =>
               !['REGULAR', 'SPECIAL_ADMISSION', 'NATIONAL_VETERANS_EDUCATION'].includes(
-                item.type
-              )
+                item.type,
+              ),
           )
-          .map((item) => item.firstRoundMax)
+          .map((item) => item.firstRoundMax),
       ).toFixed(3)
     : undefined;
 
@@ -26,7 +26,7 @@ const useScoreStatus = (formList: GradeDistributionType[] | undefined) => {
     ? Math.min(
         ...formList
           .filter((item) => item.type === 'REGULAR')
-          .map((item) => item.firstRoundMin)
+          .map((item) => item.firstRoundMin),
       ).toFixed(3)
     : undefined;
 
@@ -35,8 +35,8 @@ const useScoreStatus = (formList: GradeDistributionType[] | undefined) => {
         .filter(
           (item) =>
             !['REGULAR', 'SPECIAL_ADMISSION', 'NATIONAL_VETERANS_EDUCATION'].includes(
-              item.type
-            ) && item.firstRoundMin !== 0
+              item.type,
+            ) && item.firstRoundMin !== 0,
         )
         .map((item) => item.firstRoundMin)
         .reduce((min, value) => Math.min(min, value), Infinity)
@@ -55,14 +55,14 @@ const useScoreStatus = (formList: GradeDistributionType[] | undefined) => {
       ?.filter(
         (item) =>
           !['REGULAR', 'SPECIAL_ADMISSION', 'NATIONAL_VETERANS_EDUCATION'].includes(
-            item.type
-          )
+            item.type,
+          ),
       )
       .filter((item) => item.firstRoundAvg !== 0) || [];
 
   const totalRoundAvg = SpecialAdmissionData.reduce(
     (sum, item) => sum + item.firstRoundAvg,
-    0
+    0,
   );
 
   const SpecialAdmissionRoundAvg =

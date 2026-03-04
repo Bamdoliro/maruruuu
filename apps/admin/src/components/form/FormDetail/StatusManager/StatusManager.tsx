@@ -16,7 +16,7 @@ const StatusManager = ({ id }: StatusManagerProps) => {
   const overlay = useOverlay();
 
   const { submissionStatus, firstRoundStatus, secondRoundStatus } = useStatusFormatter(
-    formDetailData?.status || 'SUBMITTED'
+    formDetailData?.status || 'SUBMITTED',
   );
 
   if (!formDetailData) return <Loader />;

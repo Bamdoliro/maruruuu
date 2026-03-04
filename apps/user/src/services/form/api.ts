@@ -83,7 +83,7 @@ export const postUploadProfileImage = async (fileData: FileDocument) => {
   const { data } = await maru.post(
     '/forms/identification-picture',
     fileData,
-    authorization()
+    authorization(),
   );
 
   return data;

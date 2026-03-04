@@ -40,7 +40,7 @@ const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps
 
   const { handleUploadSecondScoreFormatButtonClick } = useUploadSecondScoreFormatAction(
     uploadedFile,
-    handleCloseModal
+    handleCloseModal,
   );
 
   return (

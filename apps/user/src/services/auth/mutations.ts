@@ -11,7 +11,7 @@ import { useToast } from '@maru/hooks';
 
 export const useLoginMutation = (
   device: string,
-  { phoneNumber, password }: PostLoginReq
+  { phoneNumber, password }: PostLoginReq,
 ) => {
   const router = useRouter();
   const { toast } = useToast();
