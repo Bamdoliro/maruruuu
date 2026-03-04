@@ -23,7 +23,7 @@ const NoticePage = () => {
 
   const filteredNoticeList = useMemo(() => {
     return noticeList?.filter((notice) =>
-      (notice.title ?? '').toLowerCase().includes(debouncedNoticeTitle.toLowerCase())
+      (notice.title ?? '').toLowerCase().includes(debouncedNoticeTitle.toLowerCase()),
     );
   }, [noticeList, debouncedNoticeTitle]);
 

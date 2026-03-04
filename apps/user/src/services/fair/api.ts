@@ -10,7 +10,7 @@ export const getFairList = async (fairType?: 'STUDENT_AND_PARENT' | 'TEACHER') =
 
 export const postFairApplication = async (
   fairId: number,
-  fairApplicationData: FairApplication
+  fairApplicationData: FairApplication,
 ) => {
   const { data } = await maru.post(`/fairs/${fairId}`, fairApplicationData);
 

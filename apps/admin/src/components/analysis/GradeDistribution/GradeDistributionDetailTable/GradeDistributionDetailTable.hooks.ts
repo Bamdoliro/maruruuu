@@ -2,7 +2,7 @@ import type { GradeDistributionType } from '@/types/analysis/client';
 
 const useMaxMin = (
   formList: GradeDistributionType[] | undefined,
-  selectedRound: string
+  selectedRound: string,
 ) => {
   const isFirstRound = selectedRound === '1차 합격자';
 

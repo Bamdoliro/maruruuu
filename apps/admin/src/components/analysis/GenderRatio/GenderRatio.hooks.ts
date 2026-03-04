@@ -39,11 +39,11 @@ const useGenderRatio = () => {
   const calculateGenderRatio = (data: GenderRatioType[]) => {
     const totalMale = data.reduce(
       (acc, item) => acc + (item.busanMale || 0) + (item.otherLocationMale || 0),
-      0
+      0,
     );
     const totalFemale = data.reduce(
       (acc, item) => acc + (item.busanFemale || 0) + (item.otherLocationFemale || 0),
-      0
+      0,
     );
     return { totalMale, totalFemale };
   };

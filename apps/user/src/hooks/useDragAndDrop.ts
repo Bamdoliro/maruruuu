@@ -21,7 +21,7 @@ const useDragAndDrop = (onFileDrop: OnFileDrop) => {
       const file = e.dataTransfer.files[0];
       if (file) onFileDrop(file);
     },
-    [onFileDrop]
+    [onFileDrop],
   );
 
   const onDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>) => {

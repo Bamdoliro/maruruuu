@@ -21,7 +21,7 @@ const useToast = () => {
     (
       message: string,
       type: 'ERROR' | 'SUCCESS' = 'SUCCESS',
-      device: 'MOBILE' | 'COMPUTER' = 'COMPUTER'
+      device: 'MOBILE' | 'COMPUTER' = 'COMPUTER',
     ) => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -41,7 +41,7 @@ const useToast = () => {
         timeoutRef.current = null;
       }, 3000);
     },
-    [setPopup]
+    [setPopup],
   );
 
   return {

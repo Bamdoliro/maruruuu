@@ -28,7 +28,7 @@ const ReceiveStatusChangeModal = ({
   const { handleReceiveStatusChange } = useReceiveStatusChangeModalAction(
     formId,
     receiveStatus,
-    onClose
+    onClose,
   );
 
   return (

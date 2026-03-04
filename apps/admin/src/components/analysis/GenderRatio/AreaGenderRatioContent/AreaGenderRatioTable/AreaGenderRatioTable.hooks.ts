@@ -15,7 +15,7 @@ const useCalculateGenderRatio = (formList: GenderRatioType[] = []) => {
         busanFemaleTotal: 0,
         otherLocationMaleTotal: 0,
         otherLocationFemaleTotal: 0,
-      }
+      },
     );
   };
 

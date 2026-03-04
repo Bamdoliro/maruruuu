@@ -11,7 +11,7 @@ const useCompetiton = (formList: ApplicantCountType[] | undefined) => {
         acc.regularCount += item.count;
       } else if (
         !['REGULAR', 'SPECIAL_ADMISSION', 'NATIONAL_VETERANS_EDUCATION'].includes(
-          item.type
+          item.type,
         )
       ) {
         acc.specialCount += item.count;
@@ -27,7 +27,7 @@ const useCompetiton = (formList: ApplicantCountType[] | undefined) => {
       regularCount: 0,
       specialCount: 0,
       theOtherCount: 0,
-    }
+    },
   ) || { regularCount: 0, specialCount: 0, theOtherCount: 0 };
 
   const regularCompetitionRate = (regularCount / REGULAR_ADMISSION).toFixed(1);

@@ -9,7 +9,7 @@ export const useNoticeListQuery = () => {
     select: (data) => ({
       ...data,
       dataList: data.dataList.sort(
-        (a, b) => new Date(b.updatedAt).getDate() - new Date(a.updatedAt).getDate()
+        (a, b) => new Date(b.updatedAt).getDate() - new Date(a.updatedAt).getDate(),
       ),
     }),
     retry: false,

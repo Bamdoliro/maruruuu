@@ -31,7 +31,7 @@ const NoticeDetail = ({ id }: NoticeDetailProps) => {
           </Text>
           <Text fontType="p2" color={color.gray600}>
             {formatDate.toFullDateTime(
-              noticeDetailData.updatedAt ?? noticeDetailData.createdAt
+              noticeDetailData.updatedAt ?? noticeDetailData.createdAt,
             )}
           </Text>
         </Column>

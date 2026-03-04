@@ -38,12 +38,12 @@ const NewBasicCalculatorItem = ({
     !subject.subjectName ||
     SUBJECT_LIST.some(
       (listSubject) =>
-        listSubject.subjectName.toLowerCase() === subject.subjectName?.toLowerCase()
+        listSubject.subjectName.toLowerCase() === subject.subjectName?.toLowerCase(),
     );
 
   const sameSubject = SUBJECT_LIST.some(
     (listSubject) =>
-      listSubject.subjectName.toLowerCase() === subject.subjectName?.toLowerCase()
+      listSubject.subjectName.toLowerCase() === subject.subjectName?.toLowerCase(),
   );
 
   const getDisplayValue = (value: string) => {

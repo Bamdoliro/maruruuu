@@ -91,7 +91,7 @@ export const GED_SUBJECT_LIST: Subject[] = ['국어', '수학', '사회', '과�
     achievementLevel22: 'F',
     achievementLevel31: 'F',
     score: 0,
-  })
+  }),
 );
 
 export const SELECT_GED_SUBJECT_LIST: Subject[] = [

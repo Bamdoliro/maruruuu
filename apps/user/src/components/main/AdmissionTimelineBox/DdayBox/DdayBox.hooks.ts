@@ -79,7 +79,7 @@ export const useRemainDate = () => {
   const isSecondRoundDay = now.isBetween(SCHEDULE.이차_면접, SCHEDULE.이차_면접_종료);
   const isAfterFormPeriod = dayjs().isBetween(
     SCHEDULE.원서_접수_마감,
-    SCHEDULE.입학_등록
+    SCHEDULE.입학_등록,
   );
 
   return {
@@ -119,8 +119,8 @@ export const useButtonStatus = () => {
   const buttonText = dayjs().isBefore(SCHEDULE.원서_접수_마감)
     ? '원서 접수하기'
     : dayjs().isBetween(SCHEDULE.입학_등록, SCHEDULE.입학_등록_마감)
-    ? '입학 등록하기'
-    : '결과 확인하기';
+      ? '입학 등록하기'
+      : '결과 확인하기';
 
   return {
     buttonStyleType,

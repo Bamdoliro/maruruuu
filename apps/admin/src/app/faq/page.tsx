@@ -50,7 +50,7 @@ const FaqPage = () => {
         : faqList?.filter((item) => item.category === selectedCategory);
 
     return byCategory?.filter((item) =>
-      (item.title ?? '').toLowerCase().includes(debouncedFaqTitle.toLowerCase())
+      (item.title ?? '').toLowerCase().includes(debouncedFaqTitle.toLowerCase()),
     );
   }, [faqList, selectedCategory, debouncedFaqTitle]);
 

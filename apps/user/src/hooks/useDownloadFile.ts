@@ -31,7 +31,7 @@ const useDownloadFile = () => {
         toast('파일 다운로드에 실패하였습니다.', 'ERROR');
       }
     },
-    [toast]
+    [toast],
   );
 
   return downloadFile;

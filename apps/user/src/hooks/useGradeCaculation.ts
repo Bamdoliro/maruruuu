@@ -137,7 +137,7 @@ const useGradeCalculation = () => {
         (getAttendanceCount('latenessCount') +
           getAttendanceCount('earlyLeaveCount') +
           getAttendanceCount('classAbsenceCount')) /
-          3
+          3,
       );
 
     const attendanceScore =
@@ -170,7 +170,7 @@ const useGradeCalculation = () => {
       if (
         form.grade.certificateList.includes('CRAFTSMAN_INFORMATION_PROCESSING') ||
         form.grade.certificateList.includes(
-          'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION'
+          'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION',
         ) ||
         form.grade.certificateList.includes('CRAFTSMAN_COMPUTER')
       )

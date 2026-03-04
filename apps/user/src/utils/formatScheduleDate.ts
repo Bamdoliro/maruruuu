@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 const formatScheduleDate = (
   dates: (string | Dayjs)[],
-  type?: 'FORM' | 'INTERVIEW' | 'REGISTRATION' | 'SCHEDULE'
+  type?: 'FORM' | 'INTERVIEW' | 'REGISTRATION' | 'SCHEDULE',
 ): string => {
   const formatDate = (date: Dayjs, withTime = true) => {
     const y = date.year();
@@ -32,7 +32,7 @@ const formatScheduleDate = (
 
     if (type === 'INTERVIEW') {
       return `${start.year()}년 ${start.month() + 1}월 ${start.date()}일 ${start.format(
-        'HH:mm'
+        'HH:mm',
       )} ~ ${end.format('HH:mm')}`;
     }
 
@@ -43,7 +43,7 @@ const formatScheduleDate = (
     }
     if (type === 'SCHEDULE') {
       return `${start.year()}년 ${start.month()}월 ${start.date()}일 ${start.format(
-        'HH:mm'
+        'HH:mm',
       )} ~ ${end.year()}년 ${end.month()}월 ${end.date()}일 ${end.format('HH:mm')}`;
     }
   }

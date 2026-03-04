@@ -12,7 +12,7 @@ const FairList = () => {
   const { data: fairListData } = useFairListQuery();
 
   const filteredFairList = fairListData?.filter(({ status }) =>
-    FAIR_TAP_STATUS[tabStatus]?.includes(status)
+    FAIR_TAP_STATUS[tabStatus]?.includes(status),
   );
 
   return (
@@ -30,7 +30,7 @@ const FairList = () => {
               applicationEndDate={applicationEndDate}
               status={status}
             />
-          )
+          ),
         )}
       </StyledFairList>
     </Column>

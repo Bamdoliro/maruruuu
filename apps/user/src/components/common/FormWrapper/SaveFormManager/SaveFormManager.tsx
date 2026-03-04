@@ -33,7 +33,7 @@ const SaveFormManager = () => {
       const updateSubjects: [
         SetterOrUpdater<Subject[]>,
         SetterOrUpdater<Subject[]>,
-        number
+        number,
       ] =
         graduationType === 'QUALIFICATION_EXAMINATION'
           ? [setGEDSubjectList, setNewGEDSubjectList, 5]

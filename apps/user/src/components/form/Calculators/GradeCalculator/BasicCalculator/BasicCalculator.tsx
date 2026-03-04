@@ -26,7 +26,7 @@ const BasicCalculator = ({ subjectError, newSubjectError }: BasicCalculatorProps
 
   useEffect(() => {
     const studentSubjectList = [...subjectList, ...newSubjectList].map(
-      ({ ...rest }) => rest
+      ({ ...rest }) => rest,
     );
 
     setForm((prev) => ({

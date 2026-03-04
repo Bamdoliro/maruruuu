@@ -48,7 +48,7 @@ const useToast = () => {
         delete timeoutRefs.current[id];
       }
     },
-    [setToasts]
+    [setToasts],
   );
 
   const clearToasts = useCallback(() => {
@@ -64,7 +64,7 @@ const useToast = () => {
       message: string,
       type: ToastType = 'SUCCESS',
       device: DeviceType = 'COMPUTER',
-      duration = 3000
+      duration = 3000,
     ) => {
       const id = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
       const createdAt = Date.now();
@@ -84,7 +84,7 @@ const useToast = () => {
 
       return id;
     },
-    [setToasts]
+    [setToasts],
   );
 
   const toastsWithProgress: ToastProgress[] = toasts.map((t) => {

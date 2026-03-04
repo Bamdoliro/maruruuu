@@ -43,7 +43,7 @@ const EducationInfo = ({ id }: EducationInfoProps) => {
               <GridItem key={`education-info-${index}`}>
                 <DataBox label={item.label} data={item.data} />
               </GridItem>
-            )
+            ),
         )}
       </GridContainer>
     </StyledEducationInfo>

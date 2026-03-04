@@ -22,7 +22,7 @@ export const useExportExcelAction = () => {
 
 export const useUploadSecondScoreFormatAction = (
   fileData: File | null,
-  handleCloseModal: () => void
+  handleCloseModal: () => void,
 ) => {
   const { uploadSecondScoreFormat } =
     useUploadSecondScoreFormatMutation(handleCloseModal);

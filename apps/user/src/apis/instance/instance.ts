@@ -19,7 +19,7 @@ maru.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 interface FailedRequest {
@@ -106,5 +106,5 @@ maru.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );

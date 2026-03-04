@@ -33,7 +33,7 @@ export const postNoticeFile = async (params: PostNoticeFileReq[]) => {
   const data = await maru.post<PostNoticeFileRes>(
     '/notices/files',
     params,
-    authorization()
+    authorization(),
   );
   const dataList = data.data.dataList;
 

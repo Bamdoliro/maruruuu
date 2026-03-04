@@ -8,7 +8,7 @@ import { useToast } from '@maru/hooks';
 
 export const useFairApplicationQuery = (
   id: number,
-  fairApplicationData: FairApplication
+  fairApplicationData: FairApplication,
 ) => {
   const { handleError } = useApiError();
   const router = useRouter();
