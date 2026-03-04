@@ -4,6 +4,7 @@ import { getAchivementLevel } from '@/utils';
 
 enum AchievementScore {
   '-' = 0,
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   'F' = 0,
   'A' = 5,
   'B' = 4,
