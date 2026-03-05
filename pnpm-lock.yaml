@@ -294,10 +294,10 @@ importers:
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.2.0))(@types/react@18.3.1)(react@18.2.0)
       react:
-        specifier: 18.2.0
+        specifier: ^18.0.0
         version: 18.2.0
       react-dom:
-        specifier: 18.2.0
+        specifier: ^18.0.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@maru/eslint-config':
@@ -322,7 +322,7 @@ importers:
         specifier: ^1.0.0
         version: 1.45.0
       react:
-        specifier: 18.2.0
+        specifier: ^18.0.0
         version: 18.2.0
       recoil:
         specifier: ^0.7.7
@@ -344,7 +344,7 @@ importers:
   packages/icon:
     dependencies:
       react:
-        specifier: 18.2.0
+        specifier: ^18.0.0
         version: 18.2.0
     devDependencies:
       '@maru/eslint-config':
@@ -384,10 +384,10 @@ importers:
         specifier: ^6.2.0
         version: 6.2.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
-        specifier: 18.2.0
+        specifier: ^18.0.0
         version: 18.2.0
       react-dom:
-        specifier: 18.2.0
+        specifier: ^18.0.0
         version: 18.2.0(react@18.2.0)
       react-spinners:
         specifier: ^0.13.8
@@ -424,10 +424,10 @@ importers:
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.2.0))(@types/react@18.3.1)(react@18.2.0)
       react:
-        specifier: ^18.2.0
+        specifier: ^18.0.0
         version: 18.2.0
       react-dom:
-        specifier: 18.2.0
+        specifier: ^18.0.0
         version: 18.2.0(react@18.2.0)
       recoil:
         specifier: ^0.7.7
