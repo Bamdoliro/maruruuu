@@ -3,11 +3,10 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
-  transpilePackages: ['@maru/design-system', '@maru/ui', '@maru/utils'],
+  transpilePackages: ['@maru/design-system', '@maru/hooks', '@maru/icon', '@maru/ui', '@maru/utils'],
   poweredByHeader: false,
   images: {
     unoptimized: false,
-    domains: ['s3.ap-northeast-2.amazonaws.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,7 +15,6 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
-  swcMinify: true,
   // async rewrites() {
   //   return [
   //     {
