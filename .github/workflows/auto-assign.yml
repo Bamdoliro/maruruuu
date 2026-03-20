@@ -15,17 +15,18 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const org = 'Bamdoliro';
+            const collaborators = await github.paginate(github.rest.repos.listCollaborators, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const collaboratorLogins = new Set(collaborators.map(c => c.login));
 
-            const members = await github.paginate(github.rest.orgs.listMembers, { org });
-            const memberLogins = new Set(members.map(m => m.login));
-
-            const { data: issues } = await github.rest.issues.listForRepo({
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
               assignee: 'none',
-              per_page: 50,
+              per_page: 100,
             });
 
             const tenMinAgo = new Date(Date.now() - 10 * 60 * 1000);
@@ -33,14 +34,17 @@ jobs:
             for (const issue of issues) {
               if (issue.pull_request) continue;
               if (new Date(issue.created_at) > tenMinAgo) continue;
-              if (!memberLogins.has(issue.user.login)) continue;
+              if (!collaboratorLogins.has(issue.user.login)) continue;
 
-              await github.rest.issues.addAssignees({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                assignees: [issue.user.login],
-              });
-
-              core.info(`Assigned #${issue.number} to ${issue.user.login}`);
+              try {
+                await github.rest.issues.addAssignees({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  assignees: [issue.user.login],
+                });
+                core.info(`Assigned #${issue.number} to ${issue.user.login}`);
+              } catch (err) {
+                core.warning(`Failed to assign #${issue.number}: ${err.message}`);
+              }
             }
