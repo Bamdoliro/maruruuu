@@ -10,6 +10,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "isomorphic-dompurify": "^3.5.1",
     "recoil": "^0.7.7"
   },
   "peerDependencies": {
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@maru/eslint-config": "workspace:*",
     "@maru/tsconfig": "workspace:*",
+    "@types/dompurify": "^3.2.0",
     "@types/react": "18.3.1",
     "typescript": "5.5.4"
   }
