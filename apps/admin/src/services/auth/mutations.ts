@@ -9,6 +9,7 @@ import { useToast } from '@maru/hooks';
 import { deleteLogoutAdmin, postLoginAdmin } from './api';
 import type { AxiosResponse } from 'axios';
 import { maru } from '@/apis/instance/instance';
+import type { GetAdminRes } from '@/types/admin/remote';
 
 const saveTokens = (accessToken: string, refreshToken: string) => {
   Storage.setItem(TOKEN.ACCESS, accessToken);
@@ -30,7 +31,7 @@ export const useLoginAdminMutation = ({ phoneNumber, password }: PostLoginAuthRe
     onSuccess: async (res: AxiosResponse) => {
       const { accessToken, refreshToken } = res.data;
       try {
-        const adminRes = await maru.get('/user', {
+        const adminRes = await maru.get<GetAdminRes>('/users', {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
         if (adminRes.data.data?.authority !== 'ADMIN') {
