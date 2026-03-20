@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [user, admin]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Security audit
+        run: pnpm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Lint
+        run: pnpm turbo run lint --filter=./apps/${{ matrix.app }}
+
+      - name: Type check
+        run: pnpm turbo run check-types --filter=./apps/${{ matrix.app }}
+
+      - name: Build
+        run: pnpm turbo run build --filter=./apps/${{ matrix.app }}
+
+  lighthouse:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build user app
+        run: pnpm turbo run build --filter=./apps/user
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
