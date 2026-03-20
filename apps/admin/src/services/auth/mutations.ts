@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@maru/hooks';
 import { deleteLogoutAdmin, postLoginAdmin } from './api';
 import type { AxiosResponse } from 'axios';
-import checkIsAdmin from '@/utils/functions/checkIsAdmin';
+import { maru } from '@/apis/instance/instance';
 
 const saveTokens = (accessToken: string, refreshToken: string) => {
   Storage.setItem(TOKEN.ACCESS, accessToken);
@@ -29,19 +29,19 @@ export const useLoginAdminMutation = ({ phoneNumber, password }: PostLoginAuthRe
     mutationFn: () => postLoginAdmin({ phoneNumber, password }),
     onSuccess: async (res: AxiosResponse) => {
       const { accessToken, refreshToken } = res.data;
-      saveTokens(accessToken, refreshToken);
       try {
-        const authority = await checkIsAdmin();
-        if (authority) {
-          router.replace(ROUTES.FORM);
-        } else {
+        const adminRes = await maru.get('/user', {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        });
+        if (adminRes.data.data?.authority !== 'ADMIN') {
           toast('어드민 권한이 없습니다.', 'ERROR');
-          removeTokens();
           router.replace(ROUTES.MAIN);
+          return;
         }
-      } catch (e) {
+        saveTokens(accessToken, refreshToken);
+        router.replace(ROUTES.FORM);
+      } catch {
         toast('관리자 정보 조회 실패', 'ERROR');
-        removeTokens();
         router.replace(ROUTES.MAIN);
       }
     },
