@@ -1,0 +1,27 @@
+user:
+  - changed-files:
+      - any-glob-to-any-file: 'apps/user/**'
+
+admin:
+  - changed-files:
+      - any-glob-to-any-file: 'apps/admin/**'
+
+ui:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/ui/**'
+
+hooks:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/hooks/**'
+
+utils:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/utils/**'
+
+design-system:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/design-system/**'
+
+'⚙️ Setting':
+  - changed-files:
+      - any-glob-to-any-file: '.github/**'
