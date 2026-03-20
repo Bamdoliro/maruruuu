@@ -19,4 +19,4 @@ jobs:
           l_max_size: '500'
           fail_if_xl: 'false'
           files_to_ignore: |
-            "pnpm-lock.yaml"
+            pnpm-lock.yaml

@@ -22,6 +22,10 @@ design-system:
   - changed-files:
       - any-glob-to-any-file: 'packages/design-system/**'
 
+icon:
+  - changed-files:
+      - any-glob-to-any-file: 'packages/icon/**'
+
 '⚙️ Setting':
   - changed-files:
       - any-glob-to-any-file: '.github/**'

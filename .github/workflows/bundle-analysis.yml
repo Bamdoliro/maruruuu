@@ -77,7 +77,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: base-bundle-sizes.json
-          key: bundle-sizes-main-placeholder
+          key: bundle-sizes-main-${{ github.event.pull_request.base.sha }}
           restore-keys: |
             bundle-sizes-main-
 
@@ -103,10 +103,10 @@ jobs:
             const diff = (curr, prev) => {
               if (!prev) return '';
               const d = curr - prev;
-              const pct = prev ? ((d / prev) * 100).toFixed(1) : '0';
-              const sign = d > 0 ? '+' : '';
+              const pct = Math.abs((d / prev) * 100).toFixed(1);
+              const prefix = d > 0 ? '+' : d < 0 ? '-' : '';
               const warn = d > prev * 0.2 ? ' ⚠️' : d < 0 ? ' ✅' : '';
-              return ` (${sign}${fmt(Math.abs(d))}, ${sign}${pct}%)${warn}`;
+              return ` (${prefix}${fmt(Math.abs(d))}, ${prefix}${pct}%)${warn}`;
             };
 
             let body = '## 📦 Bundle Size Report\n\n';
