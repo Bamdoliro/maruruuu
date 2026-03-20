@@ -1,7 +1,7 @@
 import Script from 'next/script';
 
 export default function GoogleAnalytics({ gaId }: { gaId: string }) {
-  if (!/^(G-[A-Z0-9]+|UA-\d+-\d+)$/i.test(gaId)) return null;
+  if (!/^(G-[A-Z0-9]{1,20}|UA-\d{1,10}-\d{1,4})$/i.test(gaId)) return null;
 
   return (
     <>
