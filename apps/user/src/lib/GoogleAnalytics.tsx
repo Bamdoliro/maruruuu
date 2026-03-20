@@ -1,13 +1,11 @@
 import Script from 'next/script';
 
 export default function GoogleAnalytics({ gaId }: { gaId: string }) {
+  if (!/^(G-[A-Z0-9]+|UA-\d+-\d+)$/i.test(gaId)) return null;
+
   return (
     <>
-      <Script
-        async
-        src={`https://www.googletagmanager.com/gtag/js
-				?id=${gaId}`}
-      />
+      <Script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
       <Script
         id="google-analytics"
         dangerouslySetInnerHTML={{
