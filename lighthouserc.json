@@ -2,7 +2,7 @@
   "ci": {
     "collect": {
       "startServerCommand": "pnpm --filter user start -p 9222",
-      "startServerReadyPattern": "Ready in",
+      "startServerReadyPattern": "Ready on",
       "url": ["http://localhost:9222"],
       "numberOfRuns": 1
     },
