@@ -92,7 +92,7 @@
 2. 목적에 맞는 포맷팅 로직 구현 (한국 시간 기준)
 3. 타입 정의: `(input: Date | string): string`
 4. `index.ts`에서 export 추가
-5. `npm run lint`로 TypeScript 검증
+5. `pnpm lint`로 TypeScript 검증
 
 **Flex 스타일 추가:**
 

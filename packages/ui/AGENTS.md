@@ -123,7 +123,7 @@
 3. `{ComponentName}.tsx`에서 컴포넌트 구현
 4. design-system 색상/폰트 사용
 5. `index.ts`에서 export 추가
-6. `npm run lint`로 TypeScript, ESLint 검증
+6. `pnpm lint`로 TypeScript, ESLint 검증
 
 **기존 컴포넌트 수정:**
 

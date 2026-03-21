@@ -256,13 +256,13 @@ pnpm dev
 **타입 확인**:
 
 ```bash
-npm run check-types
+pnpm check-types
 ```
 
 **린트**:
 
 ```bash
-npm run lint  # max-warnings 0 (모든 경고를 에러로 취급)
+pnpm lint  # max-warnings 0 (모든 경고를 에러로 취급)
 ```
 
 ### 의존성

@@ -96,7 +96,7 @@
    - viewBox, stroke/fill 속성 확인
    - currentColor 사용으로 색상 상속 활성화
 4. `index.ts`에서 export 추가
-5. `npm run lint`로 TypeScript 검증
+5. `pnpm lint`로 TypeScript 검증
 
 **아이콘 사용 (UI 컴포넌트에서):**
 

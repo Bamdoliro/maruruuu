@@ -171,20 +171,20 @@ pnpm dev
 **타입 검사**:
 
 ```bash
-npm run check-types
+pnpm check-types
 ```
 
 **빌드**:
 
 ```bash
-npm run build
-npm run start
+pnpm build
+pnpm start
 ```
 
 **린트**:
 
 ```bash
-npm run lint
+pnpm lint
 ```
 
 ### 의존성
