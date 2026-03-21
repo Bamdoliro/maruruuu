@@ -127,12 +127,12 @@ components/
 
 **저수준 API 유틸리티**
 
-| 파일                   | 역할                                                                             |
-| ---------------------- | -------------------------------------------------------------------------------- |
-| `instance/instance.ts` | Axios 인스턴스 생성 및 인터셉터 (요청 헤더에 Bearer 토큰 추가, 401 시 토큰 갱신) |
-| `token/`               | 토큰 헬퍼 (authorization() 함수)                                                 |
-| `cookie/`              | 쿠키 접근 (refresh-token 저장/조회)                                              |
-| `storage/`             | localStorage 접근 (access-token 저장/조회)                                       |
+| 파일                   | 역할                            |
+| ---------------------- | ------------------------------- |
+| `instance/instance.ts` | Axios 인스턴스 생성 및 인터셉터 |
+| `token/`               | 인증 헤더 헬퍼                  |
+| `cookie/`              | 쿠키 유틸                       |
+| `storage/`             | 스토리지 유틸                   |
 
 ### src/constants
 
@@ -165,8 +165,8 @@ components/
 ### 작업 시 주의사항
 
 1. **인증 플로우 이해하기**
-   - refresh-token 쿠키가 없으면 `/` (로그인)로 리다이렉트
-   - access-token이 만료되면 interceptor가 자동으로 `/auth` (PATCH) 호출하여 갱신
+   - refresh-token 쿠키가 없으면 로그인 페이지로 리다이렉트
+   - access-token 만료 시 interceptor가 자동 갱신
    - 갱신 실패 시 localStorage 초기화 후 로그인 페이지로 이동
 
 2. **상태 관리 분리**
@@ -222,41 +222,12 @@ app/
 └── layout.tsx (루트 레이아웃, Provider 감싸기)
 ```
 
-**middleware.ts 보호 대상**:
-
-```
-/form/*
-/notice/*
-/faq/*
-/message/*
-/fair/*
-/registration/*
-/analysis/*
-```
+**middleware.ts**에서 인증이 필요한 경로를 보호합니다. 상세 경로는 `middleware.ts`의 `config.matcher`를 참고하세요.
 
 ### 인증 흐름
 
-**로그인 시**:
-
-1. `Login.hooks.ts` → `useLoginAction()` → `postLoginAdmin(phoneNumber, password)`
-2. 응답: `{ data: { accessToken, refreshToken } }`
-3. access-token → localStorage 저장
-4. refresh-token → 쿠키에 저장 (HttpOnly 권장)
-5. 첫 API 호출 시 middleware 검사 (refresh-token 쿠키 필요)
-
-**access-token 만료 시**:
-
-1. API 응답 401 에러
-2. `instance.ts` interceptor 감지 → PATCH `/auth` (Refresh-Token 헤더)
-3. 새 access-token 받음 → localStorage 업데이트
-4. 원래 요청 재시도
-
-**로그아웃 시**:
-
-1. `deleteLogoutAdmin()` 호출
-2. localStorage 초기화
-3. 쿠키 삭제 (클라이언트 side effect)
-4. `/` 리다이렉트
+인증은 JWT 기반이며, `src/apis/instance/instance.ts`의 interceptor가 토큰 갱신을 자동 처리합니다.
+상세 흐름은 `src/services/auth/mutations.ts`와 `src/apis/instance/instance.ts`를 참고하세요.
 
 ### 테스트
 
@@ -279,21 +250,25 @@ app/
 **로컬 개발**:
 
 ```bash
-npm run dev
-# http://localhost:3000/
-# 관리자 계정: 전화번호 + 비밀번호 (백엔드 준비 필요)
+pnpm dev
 ```
 
 **타입 확인**:
 
 ```bash
-npm run check-types
+pnpm check-types
 ```
 
 **린트**:
 
 ```bash
-npm run lint  # max-warnings 0 (모든 경고를 에러로 취급)
+pnpm lint  # max-warnings 0 (모든 경고를 에러로 취급)
+```
+
+**포매팅**:
+
+```bash
+pnpm format
 ```
 
 ### 의존성
@@ -382,8 +357,7 @@ npm run lint  # max-warnings 0 (모든 경고를 에러로 취급)
 
 **401 무한 루프**:
 
-- interceptor의 `isRefreshing` 플래그 확인
-- refresh 응답에 accessToken 존재 확인
+- `src/apis/instance/instance.ts` interceptor 로직 확인
 
 **쿼리 캐시 안 갱신**:
 
@@ -397,8 +371,7 @@ npm run lint  # max-warnings 0 (모든 경고를 에러로 취급)
 
 **CORS 에러**:
 
-- `NEXT_PUBLIC_BASE_URL` 환경변수 확인
-- 백엔드 CORS 설정 확인
+- 환경변수 및 백엔드 CORS 설정 확인
 
 ---
 

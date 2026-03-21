@@ -30,7 +30,7 @@
 1. **색상 변경**: `src/color.ts`의 hex 값 수정 시, 모든 참조 패키지(`@maru/ui`, `@maru/hooks`)의 테스트를 실행하세요.
 
    ```bash
-   npm run lint
+   pnpm lint
    ```
 
 2. **타이포그래피 추가/수정**: 새로운 폰트 스타일 추가 후 UI 컴포넌트에서 실제 사용 확인 필수.
@@ -62,7 +62,7 @@
 **색상 추가:**
 
 1. `src/color.ts`에서 상수 추가
-2. `npm run lint`로 TypeScript 오류 확인
+2. `pnpm lint`로 TypeScript 오류 확인
 3. `@maru/ui` 컴포넌트에서 참조 테스트
 
 **폰트 스타일 추가:**

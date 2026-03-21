@@ -39,10 +39,10 @@
 
 ### apps/
 
-| 디렉토리     | 용도                                              | 포트        |
-| ------------ | ------------------------------------------------- | ----------- |
-| `apps/admin` | 관리자 대시보드 (학생 지원서 관리, 공지사항, FAQ) | 3000 (기본) |
-| `apps/user`  | 학생용 애플리케이션 (지원서 작성, 결과 확인)      | 3001        |
+| 디렉토리     | 용도                                              |
+| ------------ | ------------------------------------------------- |
+| `apps/admin` | 관리자 대시보드 (학생 지원서 관리, 공지사항, FAQ) |
+| `apps/user`  | 학생용 애플리케이션 (지원서 작성, 결과 확인)      |
 
 **공통 구조**
 
@@ -148,8 +148,7 @@ pnpm lint                         # 모든 패키지 린팅
 # 앱 시작
 pnpm dev
 
-# admin: http://localhost:3000
-# user: http://localhost:3001
+# 각 앱이 별도 포트로 실행됩니다
 
 # 타입 체크
 pnpm check-types
@@ -201,12 +200,8 @@ import { authAtom } from './atoms';
 export const useAuth = () => {
   const [auth, setAuth] = useRecoilState(authAtom);
 
-  const login = async (email: string, password: string) => {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
+  const login = async (credentials: LoginCredentials) => {
+    const data = await authApi.login(credentials);
     setAuth(data);
   };
 
@@ -239,7 +234,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL, // .env에서 설정
 });
 
 export const useApplications = () => {
@@ -392,16 +387,7 @@ pnpm turbo run build --filter=[HEAD^]
 
 ## 환경 변수
 
-각 앱은 자신의 `.env.local` 또는 `.env.{environment}` 파일을 가질 수 있습니다.
-
-```bash
-# apps/admin/.env.local
-NEXT_PUBLIC_API_URL=https://api.example.com
-
-# apps/user/.env.local
-NEXT_PUBLIC_API_URL=https://api.example.com
-NEXT_PUBLIC_DAUM_API_KEY=...
-```
+각 앱은 자신의 `.env` 파일에서 환경 변수를 관리합니다.
 
 ---
 

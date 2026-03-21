@@ -91,7 +91,7 @@ src/
 
 **절대 금지**:
 
-- 환경 변수 검증 없이 API 엔드포인트 변경 금지 (`NEXT_PUBLIC_BASE_URL`)
+- 환경 변수 검증 없이 API 엔드포인트 변경 금지
 - `middleware.ts`의 점검 시간대 로직 수정 시 `SCHEDULE` 상수 동기화 필수
 - 토큰 갱신 로직 변경 (`instance.ts` 인터셉터) 시 테스트 필수
 
@@ -124,10 +124,7 @@ src/
 
 **토큰 관리**:
 
-1. `src/apis/storage/storage.ts`에서 Access Token과 Refresh Token을 localStorage에 저장
-2. `src/apis/instance/instance.ts`의 request 인터셉터가 모든 요청에 Authorization 헤더 자동 추가
-3. 401 응답 시 response 인터셉터가 자동으로 Refresh Token을 사용해 새로운 Access Token 획득
-4. 토큰 갱신 중 다른 요청은 큐에 대기 후 갱신 완료 시 재시도
+JWT 기반 인증. 상세 흐름은 `src/apis/instance/instance.ts`와 `src/apis/storage/storage.ts`를 참고하세요.
 
 **요청 권한 확인**:
 
@@ -165,47 +162,35 @@ src/
 
 ### 테스트
 
-**환경 변수**:
-
-```bash
-NEXT_PUBLIC_BASE_URL=http://localhost:8080
-NEXT_PUBLIC_FORM_START=2026-03-21T00:00:00
-NEXT_PUBLIC_FORM_END=2026-04-21T23:59:59
-NEXT_PUBLIC_FIRST_RESULT=2026-05-01T14:00:00
-NEXT_PUBLIC_INTERVIEW_START=2026-05-05T00:00:00
-NEXT_PUBLIC_INTERVIEW_END=2026-05-16T23:59:59
-NEXT_PUBLIC_FINAL_RESULT=2026-05-25T14:00:00
-NEXT_PUBLIC_REGISTRATION_START=2026-05-26T00:00:00
-NEXT_PUBLIC_REGISTRATION_END=2026-06-10T23:59:59
-NEXT_PUBLIC_INSPECTION_START_DAY=2026-06-11T00:00:00
-NEXT_PUBLIC_INSPECTION_END_DAY=2026-06-15T23:59:59
-NEXT_PUBLIC_GOOGLE_ANALYTICS=UA-XXXXXXXXX-X  # 선택사항
-```
-
 **개발 서버**:
 
 ```bash
-npm run dev
-# http://localhost:3000
+pnpm dev
 ```
 
 **타입 검사**:
 
 ```bash
-npm run check-types
+pnpm check-types
 ```
 
 **빌드**:
 
 ```bash
-npm run build
-npm run start
+pnpm build
+pnpm start
 ```
 
 **린트**:
 
 ```bash
-npm run lint
+pnpm lint
+```
+
+**포매팅**:
+
+```bash
+pnpm format
 ```
 
 ### 의존성

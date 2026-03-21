@@ -66,7 +66,7 @@
 2. 타입 정의, 매개변수, 반환값 명시
 3. `useEffect`/`useLayoutEffect`로 부수 효과 관리
 4. `index.ts`에서 export 추가
-5. `npm run lint`로 TypeScript, ESLint 검증
+5. `pnpm lint`로 TypeScript, ESLint 검증
 
 **Hook에서 Recoil 사용:**
 
