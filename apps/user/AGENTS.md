@@ -187,6 +187,12 @@ pnpm start
 pnpm lint
 ```
 
+**포매팅**:
+
+```bash
+pnpm format
+```
+
 ### 의존성
 
 #### 주요 라이브러리

@@ -265,6 +265,12 @@ pnpm check-types
 pnpm lint  # max-warnings 0 (모든 경고를 에러로 취급)
 ```
 
+**포매팅**:
+
+```bash
+pnpm format
+```
+
 ### 의존성
 
 **핵심 라이브러리**:

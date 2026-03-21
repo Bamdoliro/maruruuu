@@ -234,7 +234,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL, // .env.local에서 설정
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL, // .env에서 설정
 });
 
 export const useApplications = () => {
@@ -387,7 +387,7 @@ pnpm turbo run build --filter=[HEAD^]
 
 ## 환경 변수
 
-각 앱은 자신의 `.env.local` 파일에서 환경 변수를 관리합니다.
+각 앱은 자신의 `.env` 파일에서 환경 변수를 관리합니다.
 
 ---
 
