@@ -1,4 +1,4 @@
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from 'dompurify';
 
 const convertLink = (content: string): string => {
   const pattern = /(https?:\/\/[^\s<>"']+)/g;
@@ -9,6 +9,8 @@ const convertLink = (content: string): string => {
       '<a href="$1" class="link" target="_blank" rel="noopener noreferrer">$1</a>',
     )
     .replace(/\n/g, '<br />');
+
+  if (typeof window === 'undefined') return html;
 
   return DOMPurify.sanitize(html, {
     ALLOWED_TAGS: ['a', 'br'],
