@@ -1,13 +1,18 @@
 commit_msg=$(cat "$1")
 
-pattern="^(feat|fix|chore|refactor|docs|test|style|perf|ci|build)\(#[0-9]+\): .+"
+pattern="^(feat|fix|chore|refactor|docs|test|style|perf|ci|build)(\(admin\)|\(user\)|\(common\))?: .+"
 
 if ! echo "$commit_msg" | grep -qE "$pattern"; then
   echo "❌ 커밋 메시지 형식이 올바르지 않습니다."
   echo ""
-  echo "올바른 형식: 타입(#이슈번호): 메시지"
-  echo "예시: feat(#123): 로그인 기능 추가"
+  echo "올바른 형식: 타입(스코프): 메시지"
+  echo "예시:"
+  echo "  feat: 로그인 기능 추가"
+  echo "  feat(admin): 관리자 기능 추가"
+  echo "  feat(user): 사용자 기능 추가"
+  echo "  feat(common): 공통 기능 추가"
   echo ""
   echo "허용 타입: feat, fix, chore, refactor, docs, test, style, perf, ci, build"
+  echo "허용 스코프: admin, user, common (선택사항)"
   exit 1
 fi
