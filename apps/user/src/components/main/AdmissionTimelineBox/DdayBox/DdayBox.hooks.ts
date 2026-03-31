@@ -9,9 +9,9 @@ import utc from 'dayjs/plugin/utc';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
+dayjs.locale('ko');
 dayjs.extend(isBetween);
 dayjs.extend(utc);
-dayjs.locale('ko');
 
 const SCHEDULE_STATUS = new Map([
   [SCHEDULE.원서_접수.toString(), '원서 접수 시작까지'],
@@ -74,7 +74,7 @@ export const useRemainDate = () => {
 
   const isInEnrollmentPeriod = now.isBetween(SCHEDULE.입학_등록, SCHEDULE.입학_등록_마감);
   const displayDate = isInEnrollmentPeriod ? SCHEDULE.입학_등록_마감 : currentTime;
-  const targetDate = displayDate.format('YYYY년 MM월 DD일 (ddd) HH:mm');
+  const targetDate = displayDate.locale('ko').format('YYYY년 MM월 DD일 (ddd) HH:mm');
 
   const isSecondRoundDay = now.isBetween(SCHEDULE.이차_면접, SCHEDULE.이차_면접_종료);
   const isAfterFormPeriod = dayjs().isBetween(

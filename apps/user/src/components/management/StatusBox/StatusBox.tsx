@@ -13,7 +13,7 @@ interface StatusBoxProps {
 
 const StatusBox = ({ height, status }: StatusBoxProps) => {
   const { userData } = useUser();
-  const { text, script } = getStatusConfig(status, userData.name);
+  const { text, scriptParts } = getStatusConfig(status);
 
   return (
     <StyledStatusBox height={height}>
@@ -28,7 +28,14 @@ const StatusBox = ({ height, status }: StatusBoxProps) => {
         </Column>
         <StatusIcon status={status} />
       </Row>
-      <ScriptText dangerouslySetInnerHTML={{ __html: script }} />
+      <ScriptText>
+        {scriptParts.map((part, i) => (
+          <span key={i}>
+            {part.replace('{name}', userData.name ?? '')}
+            {i < scriptParts.length - 1 && <br />}
+          </span>
+        ))}
+      </ScriptText>
     </StyledStatusBox>
   );
 };
