@@ -1,8 +1,6 @@
-import { Storage } from '@/apis/storage/storage';
 import { NeedLoginModal } from '@/components/common';
-import { ROUTES, TOKEN } from '@/constants/common/constants';
+import { ROUTES } from '@/constants/common/constants';
 import { useOverlay } from '@toss/use-overlay';
-import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -11,21 +9,9 @@ const useLoginGuard = () => {
   const overlay = useOverlay();
 
   useEffect(() => {
-    const token = Storage.getItem(TOKEN.ACCESS) || undefined;
+    const isLoggedIn = !!localStorage.getItem('isLoggedIn');
 
-    const isTokenValid = (token?: string) => {
-      if (!token) return false;
-
-      try {
-        const decoded: { exp: number } = jwtDecode(token);
-        const now = Date.now() / 1000;
-        return decoded.exp > now;
-      } catch (e) {
-        return false;
-      }
-    };
-
-    if (!isTokenValid(token)) {
+    if (!isLoggedIn) {
       overlay.open(({ close, isOpen }) => (
         <NeedLoginModal
           isOpen={isOpen}

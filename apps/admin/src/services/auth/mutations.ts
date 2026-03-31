@@ -1,25 +1,12 @@
-import { Cookie } from '@/apis/cookie/cookie';
-import { Storage } from '@/apis/storage/storage';
-import { ROUTES, TOKEN } from '@/constants/common/constant';
+import { ROUTES } from '@/constants/common/constant';
 import { useApiError } from '@/hooks';
 import type { PostLoginAuthReq } from '@/types/auth/remote';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@maru/hooks';
 import { deleteLogoutAdmin, postLoginAdmin } from './api';
-import type { AxiosResponse } from 'axios';
 import { maru } from '@/apis/instance/instance';
 import type { GetAdminRes } from '@/types/admin/remote';
-
-const saveTokens = (accessToken: string, refreshToken: string) => {
-  Storage.setItem(TOKEN.ACCESS, accessToken);
-  Cookie.setItem(TOKEN.REFRESH, refreshToken);
-};
-
-const removeTokens = () => {
-  Storage.removeItem(TOKEN.ACCESS);
-  Cookie.removeItem(TOKEN.REFRESH);
-};
 
 export const useLoginAdminMutation = ({ phoneNumber, password }: PostLoginAuthReq) => {
   const router = useRouter();
@@ -28,18 +15,15 @@ export const useLoginAdminMutation = ({ phoneNumber, password }: PostLoginAuthRe
 
   const { mutate: loginAdminMutate, ...restMutation } = useMutation({
     mutationFn: () => postLoginAdmin({ phoneNumber, password }),
-    onSuccess: async (res: AxiosResponse) => {
-      const { accessToken, refreshToken } = res.data;
+    onSuccess: async () => {
       try {
-        const adminRes = await maru.get<GetAdminRes>('/users', {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        });
+        const adminRes = await maru.get<GetAdminRes>('/users');
         if (adminRes.data.data?.authority !== 'ADMIN') {
           toast('어드민 권한이 없습니다.', 'ERROR');
           router.replace(ROUTES.MAIN);
           return;
         }
-        saveTokens(accessToken, refreshToken);
+        localStorage.setItem('isLoggedIn', 'true');
         router.replace(ROUTES.FORM);
       } catch {
         toast('관리자 정보 조회 실패', 'ERROR');
@@ -60,7 +44,7 @@ export const useLogoutAdminMutation = () => {
     mutationFn: deleteLogoutAdmin,
     onSuccess: () => {
       toast('로그아웃 되었습니다.', 'SUCCESS');
-      removeTokens();
+      localStorage.removeItem('isLoggedIn');
       router.replace(ROUTES.MAIN);
     },
     onError: () => {

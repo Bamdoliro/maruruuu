@@ -1,4 +1,3 @@
-import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
 import type { Form } from '@/types/form/client';
 import type {
@@ -10,14 +9,13 @@ import type {
 import axios from 'axios';
 
 export const getFormStatus = async () => {
-  const { data } = await maru.get<GetFormStatusRes>('/forms/status', authorization());
+  const { data } = await maru.get<GetFormStatusRes>('/forms/status');
 
   return data;
 };
 
 export const getExportForm = async () => {
   const { data } = await maru.get('/forms/export', {
-    ...authorization(),
     responseType: 'blob',
   });
 
@@ -26,7 +24,6 @@ export const getExportForm = async () => {
 
 export const getExportReceipt = async () => {
   const { data } = await maru.get('/forms/proof-of-application', {
-    ...authorization(),
     responseType: 'blob',
   });
 
@@ -34,13 +31,13 @@ export const getExportReceipt = async () => {
 };
 
 export const getSaveForm = async () => {
-  const { data } = await maru.get<GetSaveFormRes>('/form/draft', authorization());
+  const { data } = await maru.get<GetSaveFormRes>('/form/draft');
 
   return data;
 };
 
 export const postSaveForm = async (formData: Form) => {
-  const { data } = await maru.post('/form/draft', formData, authorization());
+  const { data } = await maru.post('/form/draft', formData);
 
   return data;
 };
@@ -52,19 +49,19 @@ export const getSchoolList = async (school: string) => {
 };
 
 export const postSubmitDraftForm = async (formData: Form) => {
-  const { data } = await maru.post('/forms', formData, authorization());
+  const { data } = await maru.post('/forms', formData);
 
   return data;
 };
 
 export const patchSubmitFinalForm = async () => {
-  const { data } = await maru.patch('/forms', {}, authorization());
+  const { data } = await maru.patch('/forms', {});
 
   return data;
 };
 
 export const postFormDocument = async (fileData: FileDocument) => {
-  const { data } = await maru.post('/forms/form-document', fileData, authorization());
+  const { data } = await maru.post('/forms/form-document', fileData);
 
   return data;
 };
@@ -80,11 +77,7 @@ export const putUploadForm = async (file: File | null, url: string) => {
 };
 
 export const postUploadProfileImage = async (fileData: FileDocument) => {
-  const { data } = await maru.post(
-    '/forms/identification-picture',
-    fileData,
-    authorization(),
-  );
+  const { data } = await maru.post('/forms/identification-picture', fileData);
 
   return data;
 };
@@ -106,7 +99,7 @@ export const getUploadProfile = async (url: string) => {
 };
 
 export const putFormCorrection = async (formData: Form) => {
-  const { data } = await maru.put('/forms', formData, authorization());
+  const { data } = await maru.put('/forms', formData);
 
   return data;
 };

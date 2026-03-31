@@ -4,10 +4,8 @@ import { useOverlay } from '@toss/use-overlay';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import { Text } from '@maru/ui';
-import { Storage } from '@/apis/storage/storage';
-import { ROUTES, TOKEN } from '@/constants/common/constants';
+import { ROUTES } from '@/constants/common/constants';
 import { AlertStyleModal, NeedLoginModal } from '@/components/common';
-import { jwtDecode } from 'jwt-decode';
 
 interface GuardOptions {
   period?: { start: Dayjs; end: Dayjs };
@@ -21,21 +19,9 @@ const usePageAccessGuard = (options: GuardOptions) => {
 
   useEffect(() => {
     const now = dayjs();
-    const token = Storage.getItem(TOKEN.ACCESS) || undefined;
+    const isLoggedIn = !!localStorage.getItem('isLoggedIn');
 
-    const isTokenValid = (token?: string) => {
-      if (!token) return false;
-
-      try {
-        const decoded: { exp: number } = jwtDecode(token);
-        const now = Date.now() / 1000;
-        return decoded.exp > now;
-      } catch (e) {
-        return false;
-      }
-    };
-
-    if (!isTokenValid(token)) {
+    if (!isLoggedIn) {
       overlay.open(({ close, isOpen }) => (
         <NeedLoginModal
           isOpen={isOpen}

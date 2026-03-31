@@ -1,4 +1,4 @@
-import { KEY, SCHEDULE, TOKEN } from '@/constants/common/constants';
+import { KEY, SCHEDULE } from '@/constants/common/constants';
 import { useQuery } from '@tanstack/react-query';
 import {
   getExportForm,
@@ -7,7 +7,6 @@ import {
   getSaveForm,
   getSchoolList,
 } from './api';
-import { Storage } from '@/apis/storage/storage';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 
@@ -17,7 +16,7 @@ export const useFormStatusQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.FORM_STATUS],
     queryFn: getFormStatus,
-    enabled: !!Storage.getItem(TOKEN.ACCESS),
+    enabled: !!localStorage.getItem('isLoggedIn'),
     retry: false,
   });
 
@@ -31,7 +30,7 @@ export const useExportFormQuery = () => {
     queryKey: [KEY.EXPORT_FORM],
     queryFn: getExportForm,
     enabled:
-      !!Storage.getItem(TOKEN.ACCESS) &&
+      !!localStorage.getItem('isLoggedIn') &&
       day.isBetween(SCHEDULE.원서_접수, SCHEDULE.원서_접수_마감),
     retry: false,
   });
@@ -46,7 +45,7 @@ export const useExportReceiptQuery = () => {
     queryKey: [KEY.EXPORT_RECEIPT],
     queryFn: getExportReceipt,
     enabled:
-      !!Storage.getItem(TOKEN.ACCESS) &&
+      !!localStorage.getItem('isLoggedIn') &&
       day.isBetween(SCHEDULE.원서_접수, SCHEDULE.원서_접수_마감),
     retry: false,
   });
@@ -58,7 +57,7 @@ export const useSaveFormQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.SAVE_FORM],
     queryFn: getSaveForm,
-    enabled: !!Storage.getItem(TOKEN.ACCESS),
+    enabled: !!localStorage.getItem('isLoggedIn'),
     retry: false,
   });
 

@@ -1,31 +1,18 @@
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import { ROUTES, TOKEN } from '@/constants/common/constant';
-import { Storage } from '../storage/storage';
-import { Cookie } from '@/apis/cookie/cookie';
+import { ROUTES } from '@/constants/common/constant';
 
 export const maru = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   timeout: 15000,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 let isRefreshing = false;
-let refreshPromise: Promise<string> | null = null;
-
-maru.interceptors.request.use(
-  (config) => {
-    const token = Storage.getItem(TOKEN.ACCESS);
-    if (token) {
-      config.headers = config.headers || {};
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
+let refreshPromise: Promise<void> | null = null;
 
 maru.interceptors.response.use(
   (response) => response,
@@ -35,32 +22,17 @@ maru.interceptors.response.use(
     const isTokenExpired =
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      Cookie.getItem(TOKEN.REFRESH);
+      localStorage.getItem('isLoggedIn');
 
     if (isTokenExpired) {
       if (!isRefreshing) {
         isRefreshing = true;
 
-        refreshPromise = axios
-          .patch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth`, null, {
-            headers: {
-              'Refresh-Token': Cookie.getItem(TOKEN.REFRESH) || '',
-            },
-          })
-          .then((res) => {
-            const newToken = res.data.data.accessToken;
-            if (!newToken) {
-              alert('다시 로그인 해주세요');
-              localStorage.clear();
-              window.location.href = ROUTES.MAIN;
-              return Promise.reject('No access token');
-            }
-            Storage.setItem(TOKEN.ACCESS, newToken);
-            maru.defaults.headers.common.Authorization = `Bearer ${newToken}`;
-            return newToken;
-          })
+        refreshPromise = maru
+          .patch('/auth')
+          .then(() => {})
           .catch((refreshError) => {
-            localStorage.clear();
+            localStorage.removeItem('isLoggedIn');
             window.location.href = ROUTES.MAIN;
             return Promise.reject(refreshError);
           })
@@ -71,14 +43,7 @@ maru.interceptors.response.use(
 
       originalRequest._retry = true;
 
-      const newToken = await refreshPromise;
-      if (!newToken) return Promise.reject(error);
-
-      originalRequest.headers = {
-        ...originalRequest.headers,
-        Authorization: `Bearer ${newToken}`,
-      };
-
+      await refreshPromise;
       return maru(originalRequest);
     }
 

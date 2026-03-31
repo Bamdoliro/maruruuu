@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import { jwtDecode } from 'jwt-decode';
 
 export const middleware = (request: NextRequest) => {
-  const refreshToken = request.cookies.get('refresh-token');
+  const refreshToken = request.cookies.get('refreshToken');
   if (!refreshToken?.value) {
     return NextResponse.redirect(new URL('/', request.url));
   }
@@ -12,12 +12,12 @@ export const middleware = (request: NextRequest) => {
     const decoded = jwtDecode<{ exp: number }>(refreshToken.value);
     if (decoded.exp * 1000 < Date.now()) {
       const response = NextResponse.redirect(new URL('/', request.url));
-      response.cookies.delete('refresh-token');
+      response.cookies.delete('refreshToken');
       return response;
     }
   } catch {
     const response = NextResponse.redirect(new URL('/', request.url));
-    response.cookies.delete('refresh-token');
+    response.cookies.delete('refreshToken');
     return response;
   }
 

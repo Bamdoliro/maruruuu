@@ -1,6 +1,6 @@
 'use client';
 
-import { ROUTES, TOKEN } from '@/constants/common/constants';
+import { ROUTES } from '@/constants/common/constants';
 import { AppLayout } from '@/layouts';
 import { color, font } from '@maru/design-system';
 import { IconArrowRight } from '@maru/icon';
@@ -10,8 +10,6 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { useCTAButton, useInput, useKeyDown, useLoginAction } from './login.hook';
 import { useEffect } from 'react';
-import { Storage } from '@/apis/storage/storage';
-import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 import { useOverlay } from '@toss/use-overlay';
 import { AlertStyleModal } from '@/components/common';
@@ -21,21 +19,9 @@ const Login = () => {
   const overlay = useOverlay();
 
   useEffect(() => {
-    const token = Storage.getItem(TOKEN.ACCESS) || undefined;
+    const isLoggedIn = !!localStorage.getItem('isLoggedIn');
 
-    const isTokenValid = (token?: string) => {
-      if (!token) return false;
-
-      try {
-        const decoded: { exp: number } = jwtDecode(token);
-        const now = Date.now() / 1000;
-        return decoded.exp > now;
-      } catch (e) {
-        return false;
-      }
-    };
-
-    if (isTokenValid(token)) {
+    if (isLoggedIn) {
       overlay.open(({ close, isOpen }) => (
         <AlertStyleModal
           isOpen={isOpen}

@@ -1,5 +1,4 @@
 import { maru } from '@/apis/instance/instance';
-import { authorization } from '@/apis/token';
 import type {
   GetFaqListRes,
   GetFaqDetailRes,
@@ -20,19 +19,19 @@ export const getFaqDetail = async (id: number) => {
 };
 
 export const postFaq = async (params: PostFaqReq) => {
-  const { data } = await maru.post(`/questions`, params, authorization());
+  const { data } = await maru.post(`/questions`, params);
 
   return data;
 };
 
 export const putFaq = async (id: number, params: PutFaqReq) => {
-  const { data } = await maru.put(`/questions/${id}`, params, authorization());
+  const { data } = await maru.put(`/questions/${id}`, params);
 
   return data;
 };
 
 export const deleteFaq = async (id: number) => {
-  const { data } = await maru.delete(`/questions/${id}`, authorization());
+  const { data } = await maru.delete(`/questions/${id}`);
 
   return data;
 };

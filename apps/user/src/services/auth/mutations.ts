@@ -1,10 +1,8 @@
 import type { PostLoginReq } from '@/types/auth/remote';
 import { useMutation } from '@tanstack/react-query';
 import { deleteLogout, postLogin } from './api';
-import type { AxiosResponse } from 'axios';
-import { ROUTES, TOKEN } from '@/constants/common/constants';
+import { ROUTES } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
-import { Storage } from '@/apis/storage/storage';
 import { useApiError } from '@/hooks';
 import { useSetStepStore } from '@/stores';
 import { useToast } from '@maru/hooks';
@@ -19,10 +17,8 @@ export const useLoginMutation = (
 
   const { mutate: loginMutate, ...restMutation } = useMutation({
     mutationFn: () => postLogin({ phoneNumber, password }),
-    onSuccess: (res: AxiosResponse) => {
-      const { accessToken, refreshToken } = res.data;
-      Storage.setItem(TOKEN.ACCESS, accessToken);
-      Storage.setItem(TOKEN.REFRESH, refreshToken);
+    onSuccess: () => {
+      localStorage.setItem('isLoggedIn', 'true');
       if (device === 'COMPUTER') {
         toast('로그인 되었습니다.', 'SUCCESS');
         router.replace(ROUTES.MAIN);
@@ -37,7 +33,6 @@ export const useLoginMutation = (
       } else if (device === 'MOBILE') {
         toast('전화번호나 비밀번호를 다시 확인해주세요.', 'ERROR', 'MOBILE');
       }
-      localStorage.clear();
     },
   });
 
@@ -51,12 +46,11 @@ export const useLogoutMutation = () => {
   const { mutate: logoutMutate, ...restMutation } = useMutation({
     mutationFn: deleteLogout,
     onSuccess: () => {
+      localStorage.removeItem('isLoggedIn');
       router.replace(ROUTES.MAIN);
       setTimeout(() => {
         window.location.reload();
       }, 500);
-      Storage.removeItem(TOKEN.ACCESS);
-      Storage.removeItem(TOKEN.REFRESH);
     },
     onError: handleError,
   });

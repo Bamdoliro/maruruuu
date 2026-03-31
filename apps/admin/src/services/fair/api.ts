@@ -1,5 +1,4 @@
 import { maru } from '@/apis/instance/instance';
-import { authorization } from '@/apis/token';
 import type { Fair } from '@/types/fair/client';
 import type { GetFairListRes, GetFairDetailRes } from '@/types/fair/remote';
 
@@ -10,14 +9,13 @@ export const getFairList = async () => {
 };
 
 export const getFairDetail = async (id: number) => {
-  const { data } = await maru.get<GetFairDetailRes>(`/fairs/${id}`, authorization());
+  const { data } = await maru.get<GetFairDetailRes>(`/fairs/${id}`);
 
   return data;
 };
 
 export const getFairExportExcel = async (id: number) => {
   const { data } = await maru.get(`/fair/${id}/export`, {
-    ...authorization(),
     responseType: 'blob',
   });
 
@@ -25,7 +23,7 @@ export const getFairExportExcel = async (id: number) => {
 };
 
 export const postFairReq = async (fairData: Fair) => {
-  const { data } = await maru.post(`/fairs`, fairData, authorization());
+  const { data } = await maru.post(`/fairs`, fairData);
 
   return data;
 };

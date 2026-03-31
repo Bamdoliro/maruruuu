@@ -1,8 +1,6 @@
 'use client';
 
-import { Storage } from '@/apis/storage/storage';
 import { MobileLogin, MobileMain, MobileResult } from '@/components/mobile';
-import { TOKEN } from '@/constants/common/constants';
 import { useStepStore } from '@/stores';
 import { SwitchCase } from '@toss/react';
 import { useEffect, useState } from 'react';
@@ -25,8 +23,8 @@ const MobileProvider = ({ children }: Props) => {
   }, []);
 
   useEffect(() => {
-    const accessToken = Storage.getItem(TOKEN.ACCESS);
-    if (accessToken) {
+    const isLoggedIn = !!localStorage.getItem('isLoggedIn');
+    if (isLoggedIn) {
       if (step === 'LOGIN') setStep('MAIN');
     } else {
       if (step !== 'LOGIN') setStep('LOGIN');

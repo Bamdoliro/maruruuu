@@ -1,5 +1,4 @@
 import { maru } from '@/apis/instance/instance';
-import { authorization } from '@/apis/token';
 import type {
   AnalysisApplicantCountReq,
   GetApplicantCountRes,
@@ -14,7 +13,6 @@ import type {
 export const getApplicantCountList = async ({ type }: AnalysisApplicantCountReq) => {
   const { data } = await maru.get<GetApplicantCountRes>(
     `/analysis/number-of-applicants?type=${type}`,
-    authorization(),
   );
   return data;
 };
@@ -24,7 +22,6 @@ export const getGradeDistributionList = async ({
 }: AnalysisApplicantTypeReq) => {
   const { data } = await maru.get<GetGradeDistributionRes>(
     `/analysis/grade-distribution?statusList=${statusList.join('&statusList=')}`,
-    authorization(),
   );
   return data;
 };
@@ -38,7 +35,6 @@ export const getGenderRatioList = async ({
     `/analysis/gender-ratio?statusList=${statusList.join(
       '&statusList=',
     )}&mainCategory=${mainCategory}&type=${type}`,
-    authorization(),
   );
   return data;
 };
@@ -52,7 +48,6 @@ export const getGraduatedSchoolList = async ({
     `/analysis/school-status?statusList=${statusList.join(
       '&statusList=',
     )}&isBusan=${isBusan}&gu=${gu}`,
-    authorization(),
   );
   return data;
 };

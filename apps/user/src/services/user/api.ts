@@ -1,4 +1,3 @@
-import authorization from '@/apis/authorization/authorization';
 import { maru } from '@/apis/instance/instance';
 import type {
   GetUserRes,
@@ -9,13 +8,13 @@ import type {
 } from '@/types/user/remote';
 
 export const getUser = async () => {
-  const { data } = await maru.get<GetUserRes>('/users', authorization());
+  const { data } = await maru.get<GetUserRes>('/users');
 
   return data;
 };
 
 export const deleteUser = async (password: string) => {
-  const { data } = await maru.delete('/users', { data: password, ...authorization() });
+  const { data } = await maru.delete('/users', { data: password });
 
   return data;
 };

@@ -7,7 +7,6 @@ import { useDragAndDrop, useOpenFileUploader } from '@/hooks';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import SmartCrop from 'smartcrop';
 import { useProfileStore } from '@/stores/form/profile';
-import { Storage } from '@/apis/storage/storage';
 import {
   useRefreshProfileMutation,
   useUploadProfileMutation,
@@ -32,9 +31,9 @@ const ProfileUploader = ({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { openFileUploader, ref: imageUploaderRef } = useOpenFileUploader();
 
-  const fileName = Storage.getItem('fileName');
-  const mediaType = Storage.getItem('mediaType');
-  const fileSize = Storage.getItem('fileSize');
+  const fileName = localStorage.getItem('fileName');
+  const mediaType = localStorage.getItem('mediaType');
+  const fileSize = localStorage.getItem('fileSize');
 
   const { refreshProfileMutate } = useRefreshProfileMutation({
     fileName: fileName ?? '',
@@ -54,7 +53,7 @@ const ProfileUploader = ({
   const mountedRef = useRef(false);
 
   useEffect(() => {
-    const upload = Storage.getItem('upload');
+    const upload = localStorage.getItem('upload');
     if (mountedRef.current) return;
     mountedRef.current = true;
 
@@ -163,10 +162,10 @@ const ProfileUploader = ({
               file: croppedFile,
             });
 
-            Storage.setItem('fileName', croppedFile.name);
-            Storage.setItem('mediaType', croppedFile.type);
-            Storage.setItem('fileSize', croppedFile.size.toString());
-            Storage.setItem('upload', 'true');
+            localStorage.setItem('fileName', croppedFile.name);
+            localStorage.setItem('mediaType', croppedFile.type);
+            localStorage.setItem('fileSize', croppedFile.size.toString());
+            localStorage.setItem('upload', 'true');
 
             uploadProfileMutate();
           }, 'image/jpeg');

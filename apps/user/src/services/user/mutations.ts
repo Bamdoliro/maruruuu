@@ -8,8 +8,7 @@ import {
   postSignUp,
 } from './api';
 import { useApiError } from '@/hooks';
-import { ROUTES, TOKEN } from '@/constants/common/constants';
-import { Storage } from '@/apis/storage/storage';
+import { ROUTES } from '@/constants/common/constants';
 import type {
   patchChangePasswordReq,
   PatchUserVerificationReq,
@@ -32,8 +31,7 @@ export const useWithdrawalMutation = (password: string) => {
       setTimeout(() => {
         window.location.reload();
       }, 500);
-      Storage.removeItem(TOKEN.ACCESS);
-      Storage.removeItem(TOKEN.REFRESH);
+      localStorage.removeItem('isLoggedIn');
     },
     onError: handleError,
   });
