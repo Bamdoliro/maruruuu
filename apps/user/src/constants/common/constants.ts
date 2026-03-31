@@ -34,11 +34,6 @@ export const SCHEDULE = {
   점검_끝: dayjs(process.env.NEXT_PUBLIC_INSPECTION_END_DAY),
 };
 
-export const TOKEN = {
-  ACCESS: 'access-token',
-  REFRESH: 'refresh-token',
-} as const;
-
 export const KEY = {
   NOTICE_LIST: 'useNoticeList',
   NOTICE_DETAIL: 'useNoticeDetail',
