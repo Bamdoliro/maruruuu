@@ -24,7 +24,7 @@ const GlobalToast = () => {
           <Toast
             type={toast.toastType}
             device={toast.device}
-            progress={toast.progress}
+            duration={toast.duration}
             onClose={() => removeToast(toast.id)}
           >
             {toast.message}

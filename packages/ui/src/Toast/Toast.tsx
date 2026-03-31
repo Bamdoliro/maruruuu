@@ -11,7 +11,7 @@ interface ToastProps {
   width?: CSSProperties['width'];
   type: 'ERROR' | 'SUCCESS';
   device?: 'MOBILE' | 'COMPUTER';
-  progress?: number;
+  duration?: number;
   onClose?: () => void;
 }
 
@@ -20,7 +20,7 @@ const Toast = ({
   width,
   type,
   device = 'COMPUTER',
-  progress = 0,
+  duration = 3000,
 }: ToastProps) => {
   return (
     <StyledToast style={{ width }} device={device}>
@@ -35,7 +35,7 @@ const Toast = ({
         </Text>
       </StyledToastContent>
       <StyledProgressBar>
-        <StyledProgressFill progress={progress} type={type} />
+        <StyledProgressFill duration={duration} type={type} />
       </StyledProgressBar>
     </StyledToast>
   );
@@ -90,9 +90,18 @@ const StyledProgressBar = styled.div`
   overflow: hidden;
 `;
 
-const StyledProgressFill = styled.div<{ progress: number; type: 'ERROR' | 'SUCCESS' }>`
+const StyledProgressFill = styled.div<{ duration: number; type: 'ERROR' | 'SUCCESS' }>`
   height: 100%;
-  width: ${({ progress }) => `${progress * 100}%`};
+  width: 100%;
   background-color: ${({ type }) => (type === 'ERROR' ? color.red : color.maruDefault)};
-  transition: width 0.1s linear;
+  animation: progressFill ${({ duration }) => duration}ms linear forwards;
+
+  @keyframes progressFill {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
 `;

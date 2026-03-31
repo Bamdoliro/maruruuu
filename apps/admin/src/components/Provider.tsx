@@ -3,12 +3,11 @@
 import { GlobalStyle } from '@maru/design-system';
 import { OverlayProvider } from '@toss/use-overlay';
 import type { ReactNode } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import { RecoilRoot } from 'recoil';
 import { Toast } from '@maru/ui';
 import styled from '@emotion/styled';
 import useToast from '@maru/hooks/src/useToast';
-import type { ToastProgress } from '@maru/hooks/src/useToast';
+import type { ToastItem } from '@maru/hooks/src/useToast';
 
 interface Props {
   children: ReactNode;
@@ -19,12 +18,12 @@ const GlobalToast = () => {
 
   return (
     <StyledToastContainer>
-      {toasts.map((toast: ToastProgress) => (
+      {toasts.map((toast: ToastItem) => (
         <StyledToastWrapper key={toast.id}>
           <Toast
             type={toast.toastType}
             device={toast.device}
-            progress={toast.progress}
+            duration={toast.duration}
             onClose={() => removeToast(toast.id)}
           >
             {toast.message}
