@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "es-toolkit": "^1.0.0",
+    "jotai": "^2.20.3",
     "recoil": "^0.7.7"
   },
   "peerDependencies": {
