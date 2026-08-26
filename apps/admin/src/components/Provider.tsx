@@ -3,7 +3,7 @@
 import { GlobalStyle } from '@maru/design-system';
 import { OverlayProvider } from '@toss/use-overlay';
 import type { ReactNode } from 'react';
-import { RecoilRoot } from 'recoil';
+import { Provider as JotaiProvider } from 'jotai';
 import { Toast } from '@maru/ui';
 import styled from '@emotion/styled';
 import { AuthStateProvider, useToast } from '@maru/hooks';
@@ -73,7 +73,7 @@ const StyledToastWrapper = styled.div`
 
 const Provider = ({ children, initialLoggedIn }: Props) => {
   return (
-    <RecoilRoot>
+    <JotaiProvider>
       <AuthStateProvider initialLoggedIn={initialLoggedIn}>
         <OverlayProvider>
           <GlobalStyle />
@@ -81,7 +81,7 @@ const Provider = ({ children, initialLoggedIn }: Props) => {
           <GlobalToast />
         </OverlayProvider>
       </AuthStateProvider>
-    </RecoilRoot>
+    </JotaiProvider>
   );
 };
 
