@@ -1,4 +1,5 @@
-import { useNoticeFileStore } from '@/store';
+import { noticeFileAtom } from '@/store';
+import { useAtom } from 'jotai';
 import { color, font } from '@maru/design-system';
 import { IconClip } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
@@ -10,7 +11,7 @@ import { useNoticeCreateAction, useNoticeCreateData } from './NoticeCreate.hooks
 
 const NoticeCreate = () => {
   const overlay = useOverlay();
-  const [fileData, setFileData] = useNoticeFileStore();
+  const [fileData, setFileData] = useAtom(noticeFileAtom);
   const { noticeData, setNoticeData, contentTextareaRef, handleNoticeDataChange } =
     useNoticeCreateData();
 

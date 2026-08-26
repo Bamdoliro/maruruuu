@@ -1,9 +1,10 @@
 import TableHeader from '@/components/common/TableHeader/TableHeader';
 import {
-  useSetFormToPrintStore,
-  useIsFormToPrintSelectingValueStore,
-  useIsSecondRoundResultEditingValueStore,
+  formToPrintAtom,
+  isFormToPrintSelectingAtom,
+  isSecondRoundResultEditingAtom,
 } from '@/store';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { convertToResponsive } from '@/utils';
 import { CheckBox, Row, Text } from '@maru/ui';
 import type { ChangeEventHandler } from 'react';
@@ -13,10 +14,10 @@ interface FormTableHeaderProps {
 }
 
 const FormTableHeader = ({ id }: FormTableHeaderProps) => {
-  const isSecondRoundResultEditing = useIsSecondRoundResultEditingValueStore();
-  const isFormToPrintSelecting = useIsFormToPrintSelectingValueStore();
+  const isSecondRoundResultEditing = useAtomValue(isSecondRoundResultEditingAtom);
+  const isFormToPrintSelecting = useAtomValue(isFormToPrintSelectingAtom);
 
-  const setFormToPrint = useSetFormToPrintStore();
+  const setFormToPrint = useSetAtom(formToPrintAtom);
 
   const handleAllFormToPrintSelectChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { checked } = e.target;

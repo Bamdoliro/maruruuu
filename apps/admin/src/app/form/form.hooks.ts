@@ -7,21 +7,21 @@ import {
   useExportScoreExcelQuery,
 } from '@/services/form/queries';
 import {
-  useFormToPrintValueStore,
-  useSetFormToPrintStore,
-  useFormListSortingTypeStore,
-  useFormListTypeStore,
-  useIsFormToPrintSelectingStore,
-  useIsSecondRoundResultEditingStore,
-  useSecondRoundResultValueStore,
-  useSchoolSearchStore,
+  formToPrintAtom,
+  formListSortingTypeAtom,
+  formListTypeAtom,
+  isFormToPrintSelectingAtom,
+  isSecondRoundResultEditingAtom,
+  secondRoundResultAtom,
+  schoolSearchAtom,
 } from '@/store';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import type { FormListSortingType } from '@/types/form/client';
 
 export const useFormPageState = () => {
-  const [formListType, setFormListType] = useFormListTypeStore();
-  const [formListSortingType, setFormListSortingType] = useFormListSortingTypeStore();
-  const [schoolSearch, setSchoolSearch] = useSchoolSearchStore();
+  const [formListType, setFormListType] = useAtom(formListTypeAtom);
+  const [formListSortingType, setFormListSortingType] = useAtom(formListSortingTypeAtom);
+  const [schoolSearch, setSchoolSearch] = useAtom(schoolSearchAtom);
 
   const handleCriteriaChange = (value: string, key: string) => {
     setFormListType('정렬');
@@ -59,15 +59,16 @@ export const useFormPageState = () => {
 };
 
 export const useEditSecondRoundResultActions = () => {
-  const [isSecondRoundResultEditing, setIsSecondRoundResultEditing] =
-    useIsSecondRoundResultEditingStore();
+  const [isSecondRoundResultEditing, setIsSecondRoundResultEditing] = useAtom(
+    isSecondRoundResultEditingAtom,
+  );
 
   const setIsSecondRoundResultEditingTrue = () => setIsSecondRoundResultEditing(true);
   const setIsSecondRoundResultEditingFalse = () => {
     setIsSecondRoundResultEditing(false);
   };
 
-  const secondRoundResult = useSecondRoundResultValueStore();
+  const secondRoundResult = useAtomValue(secondRoundResultAtom);
   const secondRoundResultData = {
     formList: Object.entries(secondRoundResult).map(([formId, passStatus]) => {
       return {
@@ -92,9 +93,10 @@ export const useEditSecondRoundResultActions = () => {
 };
 
 export const usePrintFormURLActions = () => {
-  const [isFormToPrintSelecting, setIsFormToPrintSelecting] =
-    useIsFormToPrintSelectingStore();
-  const setFormToPrint = useSetFormToPrintStore();
+  const [isFormToPrintSelecting, setIsFormToPrintSelecting] = useAtom(
+    isFormToPrintSelectingAtom,
+  );
+  const setFormToPrint = useSetAtom(formToPrintAtom);
 
   const setIsFormToPrintSelectingTrue = () => {
     setIsFormToPrintSelecting(true);
@@ -104,7 +106,7 @@ export const usePrintFormURLActions = () => {
     setFormToPrint({});
   };
 
-  const formToPrint = useFormToPrintValueStore();
+  const formToPrint = useAtomValue(formToPrintAtom);
   const formIdList = Object.entries(formToPrint).reduce(
     (acc: number[], [formId, isSelected]) =>
       isSelected ? [...acc, Number(formId)] : acc,

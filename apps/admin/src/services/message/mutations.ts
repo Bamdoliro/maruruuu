@@ -2,12 +2,13 @@ import { useApiError } from '@/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@maru/hooks';
 import { postMessageByStatus, postMessageByType, postMessageToAll } from './api';
-import { useSetMessageFormStore } from '@/store';
+import { messageFormAtom } from '@/store';
+import { useSetAtom } from 'jotai';
 import type { MessageForm } from '@/types/message/client';
 
 export const usePostMessageByStatusMutation = () => {
   const { handleError } = useApiError();
-  const setMessageForm = useSetMessageFormStore();
+  const setMessageForm = useSetAtom(messageFormAtom);
   const { toast } = useToast();
 
   const { mutate: postMessageByStatusMutate, ...restMutation } = useMutation({
@@ -28,7 +29,7 @@ export const usePostMessageByStatusMutation = () => {
 
 export const usePostMessageByTypeMutation = () => {
   const { handleError } = useApiError();
-  const setMessageForm = useSetMessageFormStore();
+  const setMessageForm = useSetAtom(messageFormAtom);
   const { toast } = useToast();
 
   const { mutate: postMessageByTypeMutate, ...restMutation } = useMutation({
@@ -49,7 +50,7 @@ export const usePostMessageByTypeMutation = () => {
 
 export const usePostMessageToAllMutation = () => {
   const { handleError } = useApiError();
-  const setMessageForm = useSetMessageFormStore();
+  const setMessageForm = useSetAtom(messageFormAtom);
   const { toast } = useToast();
 
   const { mutate: postMessageToAllMutate, ...restMutation } = useMutation({

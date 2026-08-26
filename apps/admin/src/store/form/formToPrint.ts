@@ -1,10 +1,3 @@
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const formToPrintAtomState = atom<Record<number, boolean>>({
-  key: 'form-to-print',
-  default: {},
-});
-
-export const useFormToPrintStore = () => useRecoilState(formToPrintAtomState);
-export const useFormToPrintValueStore = () => useRecoilValue(formToPrintAtomState);
-export const useSetFormToPrintStore = () => useSetRecoilState(formToPrintAtomState);
+export const formToPrintAtom = atom<Record<number, boolean>>({});

@@ -1,22 +1,5 @@
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const noticeFileAtomState = atom<File[] | null>({
-  key: 'notice-file',
-  default: null,
-});
+export const noticeFileAtom = atom<File[] | null>(null);
 
-const uploadedNoticeFileAtomState = atom<File | null>({
-  key: 'uploaded-notice-file',
-  default: null,
-});
-
-export const useNoticeFileStore = () => useRecoilState(noticeFileAtomState);
-export const useNoticeFileValueStore = () => useRecoilValue(noticeFileAtomState);
-export const useSetNoticeFileStore = () => useSetRecoilState(noticeFileAtomState);
-
-export const useUploadedNoticeFileStore = () =>
-  useRecoilState(uploadedNoticeFileAtomState);
-export const useUploadedNoticeFileValueStore = () =>
-  useRecoilValue(uploadedNoticeFileAtomState);
-export const useSetUploadedNoticeFileStore = () =>
-  useSetRecoilState(uploadedNoticeFileAtomState);
+export const uploadedNoticeFileAtom = atom<File | null>(null);
