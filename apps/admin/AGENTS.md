@@ -9,7 +9,7 @@
 
 **마루(Maru)**: 부산소프트웨어마이스터고등학교 입학전형 관리 시스템
 **역할**: 학교 관리자가 학생 원서, 공지, FAQ, 메시지, 공정관리, 등록 현황을 관리하는 어드민 포탈
-**스택**: Next.js 14, React 18, TypeScript, Axios, React Query, Recoil, Emotion styled-components
+**스택**: Next.js 14, React 18, TypeScript, Axios, React Query, Jotai, Emotion styled-components
 **인증**: JWT 기반 (Access Token + Refresh Token)
 
 ## 주요 파일
@@ -113,7 +113,7 @@ components/
 
 ### src/store
 
-**전역 상태 관리**: Recoil atoms
+**전역 상태 관리**: Jotai atoms (`src/store` 배럴에서 export, 소비처는 `useAtom`/`useAtomValue`/`useSetAtom` 직접 사용)
 
 | 모듈       | 상태                                                                 | 용도                     |
 | ---------- | -------------------------------------------------------------------- | ------------------------ |
@@ -170,7 +170,7 @@ components/
    - 갱신 실패 시 localStorage 초기화 후 로그인 페이지로 이동
 
 2. **상태 관리 분리**
-   - Recoil: 전역 필터/선택 상태 (formListType, schoolSearch 등)
+   - Jotai: 전역 필터/선택 상태 (formListTypeAtom, schoolSearchAtom 등)
    - React Query: 서버 데이터 캐싱 (useFormListQuery 등)
    - 로컬 상태: 컴포넌트 내 useState (폼 입력 등)
 
@@ -186,7 +186,7 @@ components/
 
 5. **파일 업로드**
    - notice, fair 등에서 파일 업로드 시 FormData 사용
-   - Recoil store에 임시 저장 후 제출
+   - Jotai atom에 임시 저장 후 제출
 
 6. **쿼리 캐싱 전략**
    - queryKey는 `src/constants/common/constant.ts`의 KEY 사용
@@ -233,7 +233,7 @@ app/
 
 **단위 테스트**:
 
-- Recoil atoms: `renderHook` + `recoilState`
+- Jotai atoms: `renderHook` + `Provider`로 스토어 격리
 - API 함수: Axios 모킹 (jest.mock)
 - React Query hooks: `renderHook` + QueryClientProvider
 
@@ -282,7 +282,7 @@ pnpm format
 | typescript                      | 5.5.4   | 타입 검사            |
 | axios                           | 1.7.9   | HTTP 클라이언트      |
 | @tanstack/react-query           | 5.66.0  | 서버 상태 관리       |
-| recoil                          | 0.7.7   | 전역 클라이언트 상태 |
+| jotai                           | 2.20.3  | 전역 클라이언트 상태 |
 | @emotion/react, @emotion/styled | 11.14.x | CSS-in-JS            |
 | jwt-decode                      | 4.0.0   | JWT 파싱             |
 | react-cookie                    | 7.2.2   | 쿠키 관리            |
@@ -330,7 +330,7 @@ pnpm format
    mutations.ts (쓰기)
    ```
 
-4. **Recoil 상태** (필요시)
+4. **Jotai atom** (필요시)
 
    ```
    src/store/{domain}/

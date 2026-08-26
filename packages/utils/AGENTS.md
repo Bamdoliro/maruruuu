@@ -55,7 +55,7 @@
    `;
    ```
 
-4. **Recoil 상태 접근**: utils에서는 Recoil을 직접 사용하지 않음 (순수 함수 유지).
+4. **전역 상태 접근**: utils에서는 Jotai를 직접 사용하지 않음 (순수 함수 유지).
    - 상태 관련 로직은 `@maru/hooks`로 위임
    - utils는 받은 데이터만 변환/포맷팅
 
@@ -67,17 +67,16 @@
    }
    ```
 
-6. **의존성 추가**: Recoil, Emotion 이미 포함. 추가 라이브러리 필요시 논의 후 추가.
+6. **의존성 추가**: Emotion, dompurify 이미 포함. 추가 라이브러리 필요시 논의 후 추가.
 
 ### 의존성
 
-| 패키지            | 유형           | 버전     | 용도                       |
-| ----------------- | -------------- | -------- | -------------------------- |
-| `@emotion/react`  | dependency     | ^11.14.0 | CSS-in-JS (flex 스타일)    |
-| `@emotion/styled` | dependency     | ^11.14.1 | styled 컴포넌트 (호환성)   |
-| `recoil`          | dependency     | ^0.7.7   | 상태 관리 (미사용, 호환성) |
-| `react`           | peerDependency | ^18.0.0  | React 페이지 제공자        |
-| `react-dom`       | peerDependency | ^18.0.0  | DOM 렌더링                 |
+| 패키지            | 유형           | 버전     | 용도                     |
+| ----------------- | -------------- | -------- | ------------------------ |
+| `@emotion/react`  | dependency     | ^11.14.0 | CSS-in-JS (flex 스타일)  |
+| `@emotion/styled` | dependency     | ^11.14.1 | styled 컴포넌트 (호환성) |
+| `react`           | peerDependency | ^18.0.0  | React 페이지 제공자      |
+| `react-dom`       | peerDependency | ^18.0.0  | DOM 렌더링               |
 
 **다운스트림 의존:**
 
