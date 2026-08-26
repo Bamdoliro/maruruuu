@@ -7,7 +7,7 @@ import { useDragAndDrop, useOpenFileUploader } from '@/hooks';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import SmartCrop from 'smartcrop';
 import { profileAtom, formProfileAtom } from '@/stores';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import {
   useRefreshProfileMutation,
   useUploadProfileMutation,
@@ -26,7 +26,7 @@ const ProfileUploader = ({
   isError = false,
   onUploadStateChange,
 }: ProfileUploaderProps) => {
-  const [profile, setProfile] = useAtom(profileAtom);
+  const setProfile = useSetAtom(profileAtom);
   const profileUrl = useAtomValue(formProfileAtom);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { openFileUploader, ref: imageUploaderRef } = useOpenFileUploader();
@@ -41,14 +41,7 @@ const ProfileUploader = ({
     fileSize: Number(fileSize),
   });
 
-  const { uploadProfileMutate } = useUploadProfileMutation(
-    {
-      fileName: profile.fileName ?? '',
-      mediaType: profile.mediaType ?? '',
-      fileSize: profile.fileSize ?? 0,
-    },
-    profile.file ?? null,
-  );
+  const { uploadProfileMutate } = useUploadProfileMutation();
 
   const mountedRef = useRef(false);
 
@@ -167,7 +160,14 @@ const ProfileUploader = ({
             localStorage.setItem('fileSize', croppedFile.size.toString());
             localStorage.setItem('upload', 'true');
 
-            uploadProfileMutate();
+            uploadProfileMutate({
+              fileData: {
+                fileName: croppedFile.name,
+                mediaType: croppedFile.type,
+                fileSize: croppedFile.size,
+              },
+              file: croppedFile,
+            });
           }, 'image/jpeg');
         };
 

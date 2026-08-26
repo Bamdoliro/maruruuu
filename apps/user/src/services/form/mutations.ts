@@ -66,27 +66,38 @@ export const useCorrectionFormMutation = () => {
   return { correctionFormMutate, ...restMutation };
 };
 
-export const usePutProfileImageMutation = (file: File | null) => {
+interface PutProfileImageVariables {
+  file: File | null;
+  url: string;
+}
+
+interface UploadProfileVariables {
+  fileData: FileDocument;
+  file: File | null;
+}
+
+export const usePutProfileImageMutation = () => {
   const { mutate: profileImageMutate, ...restMutation } = useMutation({
-    mutationFn: (url: string) => putProfileUpload(file, url),
+    mutationFn: ({ file, url }: PutProfileImageVariables) => putProfileUpload(file, url),
   });
 
   return { profileImageMutate, ...restMutation };
 };
 
-export const useUploadProfileMutation = (fileData: FileDocument, file: File | null) => {
+export const useUploadProfileMutation = () => {
   const setFormProfile = useSetAtom(formProfileAtom);
-  const { profileImageMutate } = usePutProfileImageMutation(file);
+  const { profileImageMutate } = usePutProfileImageMutation();
 
   const { mutate: uploadProfileMutate, ...restMutation } = useMutation({
-    mutationFn: () => postUploadProfileImage(fileData),
-    onSuccess: (res) => {
+    mutationFn: ({ fileData }: UploadProfileVariables) =>
+      postUploadProfileImage(fileData),
+    onSuccess: (res, { file }) => {
       const { uploadUrl, downloadUrl } = res.data;
       setFormProfile({
         uploadUrl: uploadUrl,
         downloadUrl: downloadUrl,
       });
-      profileImageMutate(uploadUrl);
+      profileImageMutate({ file, url: uploadUrl });
     },
   });
 
