@@ -1,7 +1,8 @@
 import type { z } from 'zod';
 import type { FormStep } from '@/types/form/client';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormValueStore, useSetCorrectStore, useSetFormStepStore } from '@/stores';
+import { formAtom, correctAtom, formStepAtom } from '@/stores';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 type StepAdvanceParams = {
   schema?: z.ZodTypeAny;
@@ -12,9 +13,9 @@ type StepAdvanceParams = {
 
 const useFormStep = () => {
   const { saveFormMutate } = useSaveFormMutation();
-  const setFormStep = useSetFormStepStore();
-  const setCorrect = useSetCorrectStore();
-  const form = useFormValueStore();
+  const setFormStep = useSetAtom(formStepAtom);
+  const setCorrect = useSetAtom(correctAtom);
+  const form = useAtomValue(formAtom);
 
   const run = ({ schema, formData, nextStep, setErrors }: StepAdvanceParams) => {
     schema?.parse(formData);

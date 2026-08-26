@@ -12,9 +12,9 @@ import {
   putUploadForm,
 } from './api';
 import type { Form } from '@/types/form/client';
-import { useSetFormStepStore } from '@/stores';
+import { formStepAtom, formProfileAtom } from '@/stores';
+import { useSetAtom } from 'jotai';
 import type { FileDocument } from '@/types/form/remote';
-import { useSetFormProfileStore } from '@/stores/form/formProfile';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();
@@ -29,7 +29,7 @@ export const useSaveFormMutation = () => {
 
 export const useSubmitDraftFormMutation = () => {
   const { handleError } = useApiError();
-  const setFormStep = useSetFormStepStore();
+  const setFormStep = useSetAtom(formStepAtom);
 
   const { mutate: submitDraftFormMutate, ...restMutation } = useMutation({
     mutationFn: (formData: Form) => postSubmitDraftForm(formData),
@@ -41,7 +41,7 @@ export const useSubmitDraftFormMutation = () => {
 };
 
 export const useSubmitFinalFormMutation = () => {
-  const setFormStep = useSetFormStepStore();
+  const setFormStep = useSetAtom(formStepAtom);
   const { handleError } = useApiError();
 
   const { mutate: submitFinalFormMutate, ...restMutation } = useMutation({
@@ -55,7 +55,7 @@ export const useSubmitFinalFormMutation = () => {
 
 export const useCorrectionFormMutation = () => {
   const { handleError } = useApiError();
-  const setFormStep = useSetFormStepStore();
+  const setFormStep = useSetAtom(formStepAtom);
 
   const { mutate: correctionFormMutate, ...restMutation } = useMutation({
     mutationFn: (formData: Form) => putFormCorrection(formData),
@@ -75,7 +75,7 @@ export const usePutProfileImageMutation = (file: File | null) => {
 };
 
 export const useUploadProfileMutation = (fileData: FileDocument, file: File | null) => {
-  const setFormProfile = useSetFormProfileStore();
+  const setFormProfile = useSetAtom(formProfileAtom);
   const { profileImageMutate } = usePutProfileImageMutation(file);
 
   const { mutate: uploadProfileMutate, ...restMutation } = useMutation({
@@ -102,7 +102,7 @@ export const useGetRefreshProfileMutation = () => {
 };
 
 export const useRefreshProfileMutation = (fileData: FileDocument) => {
-  const setFormProfile = useSetFormProfileStore();
+  const setFormProfile = useSetAtom(formProfileAtom);
   const { getRefreshProfileMutate } = useGetRefreshProfileMutation();
 
   const { mutate: refreshProfileMutate, ...restMutation } = useMutation({

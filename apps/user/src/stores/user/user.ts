@@ -1,13 +1,8 @@
 import type { User } from '@/types/user/client';
-import { atom, useRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const userAtomState = atom<User>({
-  key: 'userAtom',
-  default: {
-    name: '',
-    authority: '',
-    phoneNumber: '',
-  },
+export const userAtom = atom<User>({
+  name: '',
+  authority: '',
+  phoneNumber: '',
 });
-
-export const useUserStore = () => useRecoilState(userAtomState);

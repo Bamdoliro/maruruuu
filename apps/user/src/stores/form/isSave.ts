@@ -1,8 +1,3 @@
-import { atom, useRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const isSaveFormLoadedAtomState = atom({
-  key: 'load-save-form-state',
-  default: false,
-});
-
-export const useIsSaveFormLoadedStore = () => useRecoilState(isSaveFormLoadedAtomState);
+export const isSaveFormLoadedAtom = atom(false);

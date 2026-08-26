@@ -1,4 +1,5 @@
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { color, font } from '@maru/design-system';
 import { CellInput, Column, Row, Td, Text, Th } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -8,7 +9,7 @@ import { formatYear } from '@/utils';
 import { SCHEDULE } from '@/constants/common/constants';
 
 const VolunteerCalculator = () => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
   const { handleVolunteerTimeChange } = useInput();
 
   const isReadOnly = form.education.graduationType === 'QUALIFICATION_EXAMINATION';

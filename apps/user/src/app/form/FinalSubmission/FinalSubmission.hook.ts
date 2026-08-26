@@ -1,7 +1,8 @@
 import { useUser, useDownloadFile } from '@/hooks';
 import { useUploadFormMutation } from '@/services/form/mutations';
 import { useExportFormQuery } from '@/services/form/queries';
-import { useFinalFormStore, useFinalFormValueStore } from '@/stores/form/finalForm';
+import { finalFormAtom } from '@/stores';
+import { useAtom, useAtomValue } from 'jotai';
 import { useCallback, useEffect, useState } from 'react';
 import { useToast } from '@maru/hooks';
 
@@ -12,7 +13,7 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
   const [pdfBlobUrl, setPdfBlobUrl] = useState('');
   const [hasDownloaded, setHasDownloaded] = useState(false);
   const downloadFile = useDownloadFile();
-  const final = useFinalFormValueStore();
+  const final = useAtomValue(finalFormAtom);
   const { uploadFormMutate } = useUploadFormMutation(
     {
       fileName: final.fileName ?? '',
@@ -91,7 +92,7 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
 };
 
 export const useInput = () => {
-  const [final, setFinal] = useFinalFormStore();
+  const [final, setFinal] = useAtom(finalFormAtom);
 
   const handleFormDocumentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

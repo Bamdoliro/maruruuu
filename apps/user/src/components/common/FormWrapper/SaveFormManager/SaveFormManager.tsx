@@ -1,25 +1,26 @@
 import { useSaveFormQuery } from '@/services/form/queries';
 import {
-  useIsSaveFormLoadedStore,
-  useSetFormStore,
-  useSetGEDSubjectListStore,
-  useSetNewGEDSubjectListStore,
-  useSetNewSubjectListStore,
-  useSetSubjectListStore,
+  isSaveFormLoadedAtom,
+  formAtom,
+  GEDSubjectListAtom,
+  newGEDSubjectListAtom,
+  newSubjectListAtom,
+  subjectListAtom,
 } from '@/stores';
+import { useAtom, useSetAtom } from 'jotai';
 import type { Subject } from '@/types/form/client';
 import { updateSlicedSubjectList } from '@/utils';
 import { useEffect } from 'react';
-import type { SetterOrUpdater } from 'recoil';
+import type { Dispatch, SetStateAction } from 'react';
 
 const SaveFormManager = () => {
   const { data: saveFormData } = useSaveFormQuery();
-  const [isSaveFormLoaded, setIsSaveFormLoaded] = useIsSaveFormLoadedStore();
-  const setForm = useSetFormStore();
-  const setSubjectList = useSetSubjectListStore();
-  const setNewSubjectList = useSetNewSubjectListStore();
-  const setGEDSubjectList = useSetGEDSubjectListStore();
-  const setNewGEDSubjectList = useSetNewGEDSubjectListStore();
+  const [isSaveFormLoaded, setIsSaveFormLoaded] = useAtom(isSaveFormLoadedAtom);
+  const setForm = useSetAtom(formAtom);
+  const setSubjectList = useSetAtom(subjectListAtom);
+  const setNewSubjectList = useSetAtom(newSubjectListAtom);
+  const setGEDSubjectList = useSetAtom(GEDSubjectListAtom);
+  const setNewGEDSubjectList = useSetAtom(newGEDSubjectListAtom);
 
   useEffect(() => {
     if (!saveFormData || isSaveFormLoaded) return;
@@ -31,8 +32,8 @@ const SaveFormManager = () => {
 
     if (subjectList) {
       const updateSubjects: [
-        SetterOrUpdater<Subject[]>,
-        SetterOrUpdater<Subject[]>,
+        Dispatch<SetStateAction<Subject[]>>,
+        Dispatch<SetStateAction<Subject[]>>,
         number,
       ] =
         graduationType === 'QUALIFICATION_EXAMINATION'

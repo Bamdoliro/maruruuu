@@ -1,16 +1,11 @@
 import type { SignUp } from '@/types/user/client';
-import { atom, useRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const signUpAtomState = atom<SignUp>({
-  key: 'signUpAtom',
-  default: {
-    password_confirm: '',
-    phoneNumber: '',
-    password: '',
-    name: '',
-    code: '',
-    type: 'SIGNUP',
-  },
+export const signUpAtom = atom<SignUp>({
+  password_confirm: '',
+  phoneNumber: '',
+  password: '',
+  name: '',
+  code: '',
+  type: 'SIGNUP',
 });
-
-export const useSignUpStore = () => useRecoilState(signUpAtomState);

@@ -2,11 +2,8 @@ import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import BasicCalculatorHeader from './BasicCalculatorHeader/BasicCalculatorHeader';
 import BasicCalculatorItem from './BasicCalculatorItem/BasicCalculatorItem';
-import {
-  useNewSubjectListValueStore,
-  useSetFormStore,
-  useSubjectListValueStore,
-} from '@/stores';
+import { newSubjectListAtom, formAtom, subjectListAtom } from '@/stores';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { color } from '@maru/design-system';
 import { useEffect } from 'react';
 import { Button } from '@maru/ui';
@@ -19,9 +16,9 @@ interface BasicCalculatorProps {
 }
 
 const BasicCalculator = ({ subjectError, newSubjectError }: BasicCalculatorProps) => {
-  const newSubjectList = useNewSubjectListValueStore();
-  const subjectList = useSubjectListValueStore();
-  const setForm = useSetFormStore();
+  const newSubjectList = useAtomValue(newSubjectListAtom);
+  const subjectList = useAtomValue(subjectListAtom);
+  const setForm = useSetAtom(formAtom);
   const { handleAddNewSubject } = useAddNewSubject();
 
   useEffect(() => {

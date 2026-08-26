@@ -1,5 +1,6 @@
 import { COUNT, SCORE, WEIGHT } from '@/constants/form/constants';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { getAchivementLevel } from '@/utils';
 
 enum AchievementScore {
@@ -26,7 +27,7 @@ type AttendanceKey =
 const CORE_SUBJECTS = ['국어', '영어', '수학'];
 
 const useGradeCalculation = () => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
 
   const getScoreOf = (achievementLevelKey: AchievementLevelKey) => {
     const scoreTotal = form.grade.subjectList?.reduce((acc, subject) => {

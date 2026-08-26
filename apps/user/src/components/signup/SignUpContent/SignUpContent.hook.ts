@@ -3,7 +3,8 @@ import {
   useSignUpMutation,
   useVerificationMutation,
 } from '@/services/user/mutations';
-import { useSignUpStore } from '@/stores';
+import { signUpAtom } from '@/stores';
+import { useAtom, useAtomValue } from 'jotai';
 import type { SignUp } from '@/types/user/client';
 import { useEffect, useRef, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
@@ -36,7 +37,7 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
     phoneNumber: signUpData.phoneNumber,
     type: 'SIGNUP',
   });
-  const [signUp] = useSignUpStore();
+  const signUp = useAtomValue(signUpAtom);
   const { verificationMutate } = useVerificationMutation(setIsVerificationCodeConfirmed);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -86,7 +87,7 @@ export const useVerificationCodeAction = (signUpData: SignUp) => {
 };
 
 export const useInput = () => {
-  const [signUp, setSignUp] = useSignUpStore();
+  const [signUp, setSignUp] = useAtom(signUpAtom);
   const { toast } = useToast();
   const handleSignUpChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;

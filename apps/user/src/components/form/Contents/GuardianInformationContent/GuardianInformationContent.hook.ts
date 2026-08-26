@@ -1,15 +1,16 @@
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormStore, useSetFormStepStore } from '@/stores';
+import { formAtom, formStepAtom } from '@/stores';
+import { useAtom, useSetAtom } from 'jotai';
 import { GuardianSchema } from '@/schemas/GuardianSchema';
 import { z } from 'zod';
 import { useFormStep } from '@/utils';
 
 export const useGuardianForm = () => {
-  const [form, setForm] = useFormStore();
+  const [form, setForm] = useAtom(formAtom);
   const [errors, setErrors] = useState<Record<string, string[]>>({});
-  const setFormStep = useSetFormStepStore();
+  const setFormStep = useSetAtom(formStepAtom);
   const { saveFormMutate } = useSaveFormMutation();
   const { run: FormStep } = useFormStep();
 

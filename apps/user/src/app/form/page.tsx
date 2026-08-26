@@ -3,7 +3,8 @@
 import { FormWrapper } from '@/components/common';
 import { SwitchCase } from '@toss/react';
 import ApplicantInformation from './ApplicantInformation/ApplicantInformation';
-import { useFormStepValueStore } from '@/stores';
+import { formStepAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import GuardianInformation from './GuardianInformation/GuardianInformation';
 import Education from './Education/Education';
 import Type from './Type/Type';
@@ -24,7 +25,7 @@ const Form = () => {
       '원서 접수 기간에만 원서 작성이 가능합니다.\n원서 접수 기간까지 조금만 기다려 주세요.',
   });
 
-  const formStep = useFormStepValueStore();
+  const formStep = useAtomValue(formStepAtom);
 
   return (
     <FormWrapper>

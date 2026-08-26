@@ -1,13 +1,14 @@
 import { ButtonInput, Column, Input, RadioGroup, Row } from '@maru/ui';
 import FormController from '../../FormController/FormController';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { useOverlay } from '@toss/use-overlay';
 import { useEducationForm } from './EducationContent.hook';
 import FindSchoolModal from '../../FindSchoolModal/FindSchoolModal';
 
 const EducationContent = () => {
   const overlay = useOverlay();
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
   const { onFieldChange, handleNextStep, handlePreviousStep, errors } =
     useEducationForm();
 

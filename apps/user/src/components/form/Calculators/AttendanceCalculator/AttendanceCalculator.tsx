@@ -3,7 +3,8 @@ import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import AttendanceCalculatorHeader from './AttendanceCalculatorHeader/AttendanceCalculatorHeader';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { useInput } from './AttendanceCalculator.hook';
 import AttendanceCalculatorItem from './AttendanceCalculatorItem/AttendanceCalculatorItem';
 import { ATTENDANCE_GRADE } from '@/constants/form/constants';
@@ -11,7 +12,7 @@ import { formatYear } from '@/utils';
 import { SCHEDULE } from '@/constants/common/constants';
 
 const AttendanceCalculator = () => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
   const { handleAttendanceInfoChange } = useInput();
 
   const isReadOnly = form.education.graduationType === 'QUALIFICATION_EXAMINATION';

@@ -1,7 +1,8 @@
 import { useUser } from '@/hooks';
 import { useLoginMutation } from '@/services/auth/mutations';
 import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
-import { useSetStepStore } from '@/stores';
+import { stepAtom } from '@/stores';
+import { useSetAtom } from 'jotai';
 import type { PostLoginReq } from '@/types/auth/remote';
 import type { Step } from '@/types/mobile/client';
 import dayjs from 'dayjs';
@@ -17,7 +18,7 @@ export const useMobile = (step: Step) => {
     phoneNumber: '',
     password: '',
   });
-  const setStep = useSetStepStore();
+  const setStep = useSetAtom(stepAtom);
   const { data: admissionTicketData } = useDownloadAdmissionTicketQuery();
   const { userData } = useUser();
   const { loginMutate } = useLoginMutation('MOBILE', login);

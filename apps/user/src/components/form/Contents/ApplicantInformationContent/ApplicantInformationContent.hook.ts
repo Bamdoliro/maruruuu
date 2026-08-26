@@ -1,8 +1,8 @@
 import type { ChangeEventHandler } from 'react';
 import { useEffect, useState } from 'react';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormStore, useSetFormStepStore } from '@/stores';
-import { useFormProfileValueStore } from '@/stores/form/formProfile';
+import { formAtom, formStepAtom, formProfileAtom } from '@/stores';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { ApplicantSchema } from '@/schemas/ApplicantSchema';
 import { useSaveFormQuery } from '@/services/form/queries';
 import { useUser } from '@/hooks';
@@ -10,11 +10,11 @@ import { formatDate, useFormStep } from '@/utils';
 import { z } from 'zod';
 
 export const useApplicantForm = () => {
-  const [form, setForm] = useFormStore();
-  const profileUrl = useFormProfileValueStore();
+  const [form, setForm] = useAtom(formAtom);
+  const profileUrl = useAtomValue(formProfileAtom);
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [hasUploadedImage, setHasUploadedImage] = useState(false);
-  const setFormStep = useSetFormStepStore();
+  const setFormStep = useSetAtom(formStepAtom);
   const { saveFormMutate } = useSaveFormMutation();
   const { run: FormStep } = useFormStep();
   const { userData } = useUser();

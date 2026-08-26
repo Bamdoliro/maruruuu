@@ -1,11 +1,8 @@
 import styled from '@emotion/styled';
 import GEDCalculatorHeader from './GEDCalculatorHeader/GEDCalculatorHeader';
 import { useEffect } from 'react';
-import {
-  useGEDSubjectListValueStore,
-  useNewGEDSubjectListValueStore,
-  useSetFormStore,
-} from '@/stores';
+import { GEDSubjectListAtom, newGEDSubjectListAtom, formAtom } from '@/stores';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useAddNewGEDSubject } from './GEDCalculator.hook';
 import GEDCalculatorItem from './GEDCalculatorItem/GEDCalculatorItem';
 import { Button } from '@maru/ui';
@@ -14,9 +11,9 @@ import { color } from '@maru/design-system';
 import NewGEDCalculatorItem from './NewGEDCalculatorItem/NewGEDCalculatorItem';
 
 const GEDCalculator = () => {
-  const newGEDSubjectList = useNewGEDSubjectListValueStore();
-  const GEDSubjectList = useGEDSubjectListValueStore();
-  const setForm = useSetFormStore();
+  const newGEDSubjectList = useAtomValue(newGEDSubjectListAtom);
+  const GEDSubjectList = useAtomValue(GEDSubjectListAtom);
+  const setForm = useSetAtom(formAtom);
   const { handleAddNewGEDSubject } = useAddNewGEDSubject();
 
   useEffect(() => {

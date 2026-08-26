@@ -3,7 +3,8 @@ import { IconCheckCircle } from '@maru/icon';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 
 interface DraftCompletedContentProps {
   onClick: () => void;
@@ -11,7 +12,7 @@ interface DraftCompletedContentProps {
 }
 
 const DraftCompletedContent = ({ onClick, check }: DraftCompletedContentProps) => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
 
   return (
     <StyledDraftCompletedContent>

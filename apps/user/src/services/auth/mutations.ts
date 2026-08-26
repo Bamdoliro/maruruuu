@@ -4,7 +4,8 @@ import { deleteLogout, postLogin } from './api';
 import { ROUTES } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 import { useApiError } from '@/hooks';
-import { useSetStepStore } from '@/stores';
+import { stepAtom } from '@/stores';
+import { useSetAtom } from 'jotai';
 import { useAuthState, useToast } from '@maru/hooks';
 
 export const useLoginMutation = (
@@ -13,7 +14,7 @@ export const useLoginMutation = (
 ) => {
   const router = useRouter();
   const { toast } = useToast();
-  const setStep = useSetStepStore();
+  const setStep = useSetAtom(stepAtom);
   const { setIsLoggedIn } = useAuthState();
 
   const { mutate: loginMutate, ...restMutation } = useMutation({

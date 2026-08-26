@@ -1,4 +1,5 @@
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import type { Certificate } from '@/types/form/client';
 import { CheckBox, Row, Td } from '@maru/ui';
 
@@ -17,7 +18,7 @@ const CertificateCalculatorItem = ({
   value,
   onChange,
 }: CertificateCalculatorItemProps) => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
 
   return (
     <Row>

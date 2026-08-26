@@ -3,14 +3,14 @@ import {
   useSubmitDraftFormMutation,
 } from '@/services/form/mutations';
 import { useFormStatusQuery } from '@/services/form/queries';
-import { useFormValueStore, useSetFormStepStore } from '@/stores';
-import { useSetProfileStore } from '@/stores/form/profile';
+import { formAtom, formStepAtom, profileAtom } from '@/stores';
+import { useAtomValue, useSetAtom } from 'jotai';
 import type { Form } from '@/types/form/client';
 
 export const useCTAButton = () => {
-  const form = useFormValueStore();
-  const setProfile = useSetProfileStore();
-  const setFormStep = useSetFormStepStore();
+  const form = useAtomValue(formAtom);
+  const setProfile = useSetAtom(profileAtom);
+  const setFormStep = useSetAtom(formStepAtom);
   const { submitDraftFormMutate } = useSubmitDraftFormMutation();
   const { correctionFormMutate } = useCorrectionFormMutation();
   const { data: statusData } = useFormStatusQuery();
