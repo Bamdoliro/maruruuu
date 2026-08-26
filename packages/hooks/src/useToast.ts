@@ -1,5 +1,5 @@
+import { atom, useAtom } from 'jotai';
 import { useCallback, useRef } from 'react';
-import { atom, useRecoilState } from 'recoil';
 
 export type ToastType = 'ERROR' | 'SUCCESS';
 export type DeviceType = 'MOBILE' | 'COMPUTER';
@@ -12,13 +12,10 @@ export type ToastItem = {
   duration: number;
 };
 
-const toastListState = atom<ToastItem[]>({
-  key: 'toastListState',
-  default: [],
-});
+const toastListAtom = atom<ToastItem[]>([]);
 
 const useToast = () => {
-  const [toasts, setToasts] = useRecoilState(toastListState);
+  const [toasts, setToasts] = useAtom(toastListAtom);
   const timeoutRefs = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
 
   const removeToast = useCallback(
