@@ -1,24 +1,21 @@
+import { GED_SUBJECT_LIST, SUBJECT_LIST } from '@/constants/form/data';
 import { useSaveFormQuery } from '@/services/form/queries';
 import {
   isSaveFormLoadedAtom,
   formAtom,
   GEDSubjectListAtom,
   newGEDSubjectListAtom,
-  newSubjectListAtom,
   subjectListAtom,
 } from '@/stores';
+import { getHighestCertificateList, updateSlicedSubjectList } from '@/utils';
 import { useAtom, useSetAtom } from 'jotai';
-import type { Subject } from '@/types/form/client';
-import { updateSlicedSubjectList } from '@/utils';
 import { useEffect } from 'react';
-import type { Dispatch, SetStateAction } from 'react';
 
 const SaveFormManager = () => {
   const { data: saveFormData } = useSaveFormQuery();
   const [isSaveFormLoaded, setIsSaveFormLoaded] = useAtom(isSaveFormLoadedAtom);
   const setForm = useSetAtom(formAtom);
   const setSubjectList = useSetAtom(subjectListAtom);
-  const setNewSubjectList = useSetAtom(newSubjectListAtom);
   const setGEDSubjectList = useSetAtom(GEDSubjectListAtom);
   const setNewGEDSubjectList = useSetAtom(newGEDSubjectListAtom);
 
@@ -28,20 +25,33 @@ const SaveFormManager = () => {
     const subjectList = saveFormData.grade.subjectList;
     const graduationType = saveFormData.education.graduationType;
 
-    setForm((prev) => ({ ...prev, ...saveFormData }));
+    setForm((prev) => ({
+      ...prev,
+      ...saveFormData,
+      grade: {
+        ...prev.grade,
+        ...saveFormData.grade,
+        certificateList: getHighestCertificateList(saveFormData.grade.certificateList),
+      },
+    }));
 
     if (subjectList) {
-      const updateSubjects: [
-        Dispatch<SetStateAction<Subject[]>>,
-        Dispatch<SetStateAction<Subject[]>>,
-        number,
-      ] =
-        graduationType === 'QUALIFICATION_EXAMINATION'
-          ? [setGEDSubjectList, setNewGEDSubjectList, 5]
-          : [setSubjectList, setNewSubjectList, 12];
+      if (graduationType === 'QUALIFICATION_EXAMINATION') {
+        const GEDSubjectCount = GED_SUBJECT_LIST.length;
 
-      updateSubjects[0](updateSlicedSubjectList(subjectList, 0, updateSubjects[2]));
-      updateSubjects[1](updateSlicedSubjectList(subjectList, updateSubjects[2]));
+        setGEDSubjectList(updateSlicedSubjectList(subjectList, 0, GEDSubjectCount));
+        setNewGEDSubjectList(updateSlicedSubjectList(subjectList, GEDSubjectCount));
+      } else {
+        setSubjectList(
+          SUBJECT_LIST.map((subject, index) => {
+            const savedSubject = subjectList.find(
+              ({ subjectName }) => subjectName === subject.subjectName,
+            );
+
+            return savedSubject ? { ...subject, ...savedSubject, id: index } : subject;
+          }),
+        );
+      }
     }
 
     setIsSaveFormLoaded(true);
@@ -52,7 +62,6 @@ const SaveFormManager = () => {
     setGEDSubjectList,
     setIsSaveFormLoaded,
     setNewGEDSubjectList,
-    setNewSubjectList,
     setSubjectList,
   ]);
 

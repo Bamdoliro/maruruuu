@@ -44,6 +44,7 @@ export interface Form {
     volunteerTime2: number;
     volunteerTime3: number;
     certificateList: Certificate[];
+    mentoringProgram: boolean;
   };
   document: {
     coverLetter: string;
@@ -90,6 +91,7 @@ export interface Grade {
   volunteerTime2: number;
   volunteerTime3: number;
   certificateList: Certificate[];
+  mentoringProgram: boolean;
 }
 
 export type GraduationType = 'QUALIFICATION_EXAMINATION' | 'EXPECTED' | 'GRADUATED';
@@ -99,6 +101,9 @@ export type SubjectList = Omit<Subject, 'id'>;
 export interface Subject {
   id: number;
   subjectName: string;
+  /** 1학년 성적은 정보 교과 가중치 산출에만 사용하므로 정보 교과만 가진다. */
+  achievementLevel11?: AchievementLevel;
+  achievementLevel12?: AchievementLevel;
   achievementLevel21: AchievementLevel;
   achievementLevel22: AchievementLevel;
   achievementLevel31: AchievementLevel;
@@ -144,7 +149,7 @@ export type FormStep =
   | '최종제출'
   | '최종제출완료';
 
-export type GradeStep = '교과성적' | '출결상황' | '봉사시간' | '자격증';
+export type GradeStep = '교과성적' | '출결상황' | '봉사시간' | '가산점';
 
 export type SaveSubject = Omit<Subject, 'id'>;
 

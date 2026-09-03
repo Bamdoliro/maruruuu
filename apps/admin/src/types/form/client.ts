@@ -77,6 +77,7 @@ export interface FormDetail {
     volunteerTime2: number;
     volunteerTime3: number;
     certificateList: string[];
+    mentoringProgram: boolean;
   };
   document: {
     coverLetter: string;

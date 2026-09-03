@@ -36,7 +36,7 @@ const Grade = () => {
               교과성적: <Score />,
               출결상황: <Attendance />,
               봉사시간: <Volunteer />,
-              자격증: <Certificate />,
+              가산점: <Certificate />,
             }}
             defaultComponent={<Score />}
           />

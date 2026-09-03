@@ -9,6 +9,7 @@ interface Props {
   id: number;
   achievementLevels: string[];
   isError?: boolean[];
+  isLast?: boolean;
 }
 
 const ACHIEVEMENT_KEYS = [
@@ -17,7 +18,12 @@ const ACHIEVEMENT_KEYS = [
   'achievementLevel31',
 ] as const;
 
-const BasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) => {
+const BasicCalculatorItem = ({
+  id,
+  achievementLevels,
+  isError = [],
+  isLast = false,
+}: Props) => {
   const subjectList = useAtomValue(subjectListAtom);
   const { handleSubjectChange } = useInput(id);
 
@@ -30,25 +36,34 @@ const BasicCalculatorItem = ({ id, achievementLevels, isError = [] }: Props) => 
 
   return (
     <StyledBasicCalculatorItem>
-      <Td styleType="SECONDARY" width="15.3%" height={64}>
+      <Td
+        styleType="SECONDARY"
+        width="25%"
+        height={64}
+        borderBottomLeftRadius={isLast ? 12 : undefined}
+      >
         {subject.subjectName}
       </Td>
-      {ACHIEVEMENT_KEYS.map((key) => (
-        <Td key={key} width="24%" height={64}>
+      {ACHIEVEMENT_KEYS.map((key, index) => (
+        <Td
+          key={key}
+          width="25%"
+          height={64}
+          borderBottomRightRadius={
+            isLast && index === ACHIEVEMENT_KEYS.length - 1 ? 12 : undefined
+          }
+        >
           <Dropdown
             value={getDisplayValue(subject[key])}
             size="SMALL"
             data={achievementLevels}
-            width={80}
+            width={96}
             onChange={handleSubjectChange}
             name={key}
             isError={subject[key] === '-' && isError[id]}
           />
         </Td>
       ))}
-      <Td width="15%" height={64}>
-        {null}
-      </Td>
     </StyledBasicCalculatorItem>
   );
 };

@@ -11,6 +11,7 @@ import Grade from './Grade/Grade';
 import AttendanceStatus from './AttendanceStatus/AttendanceStatus';
 import Volunteer from './Volunteer/Volunteer';
 import Certificate from './Certificate/Certificate';
+import MentoringProgram from './MentoringProgram/MentoringProgram';
 import { useFormDetailQuery } from '@/services/form/queries';
 import QualificationExaminationGrade from '@/components/form/FormDetail/GradesInfo/QualificationExaminationGrade/QualificationExaminationGrade';
 
@@ -37,6 +38,7 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
       formDetailData.grade.volunteerTime3,
     ],
     certificateList: formDetailData.grade.certificateList,
+    mentoringProgram: formDetailData.grade.mentoringProgram,
   };
 
   const isQualificationExam =
@@ -67,7 +69,13 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
                 '교과 성적': (
                   <QualificationExaminationGrade subjectList={gradesData.subjectList} />
                 ),
-                자격증: <Certificate certificateList={gradesData.certificateList} />,
+                '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerList} />,
+                가산점: (
+                  <Column gap={24}>
+                    <Certificate certificateList={gradesData.certificateList} />
+                    <MentoringProgram mentoringProgram={gradesData.mentoringProgram} />
+                  </Column>
+                ),
               }
             : {
                 '교과 성적': <Grade subjectList={gradesData.subjectList} />,
@@ -75,7 +83,12 @@ const GradesInfo = ({ id }: GradesInfoProps) => {
                   <AttendanceStatus attendanceList={gradesData.attendanceList} />
                 ),
                 '봉사 시간': <Volunteer VolunteerList={gradesData.volunteerList} />,
-                자격증: <Certificate certificateList={gradesData.certificateList} />,
+                가산점: (
+                  <Column gap={24}>
+                    <Certificate certificateList={gradesData.certificateList} />
+                    <MentoringProgram mentoringProgram={gradesData.mentoringProgram} />
+                  </Column>
+                ),
               }
         }
       />

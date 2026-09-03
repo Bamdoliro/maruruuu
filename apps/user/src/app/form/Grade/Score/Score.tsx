@@ -4,8 +4,7 @@ import styled from '@emotion/styled';
 import { useCTAButton } from './Score.hook';
 
 const Score = () => {
-  const { handleNextStep, handlePreviousStep, subjectError, newSubjectError } =
-    useCTAButton();
+  const { handleNextStep, handlePreviousStep, subjectError } = useCTAButton();
 
   return (
     <>
@@ -13,11 +12,7 @@ const Score = () => {
         <NavigationBar>
           <UnderlineButton active={true}>교과 성적</UnderlineButton>
         </NavigationBar>
-        <GradeCalculator
-          option="FORM"
-          subjectError={subjectError}
-          newSubjectError={newSubjectError}
-        />
+        <GradeCalculator option="FORM" subjectError={subjectError} />
       </Column>
       <FormController
         onNext={handleNextStep}

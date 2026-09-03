@@ -8,12 +8,16 @@ export const useCTAButton = () => {
   const { saveFormMutate } = useSaveFormMutation();
 
   const handleNextStep = () => {
-    setFormGradeStep('자격증');
+    setFormGradeStep('가산점');
     saveFormMutate(form);
   };
 
   const handlePreviousStep = () => {
-    setFormGradeStep('출결상황');
+    if (form.education.graduationType === 'QUALIFICATION_EXAMINATION') {
+      setFormGradeStep('교과성적');
+    } else {
+      setFormGradeStep('출결상황');
+    }
     saveFormMutate(form);
   };
 

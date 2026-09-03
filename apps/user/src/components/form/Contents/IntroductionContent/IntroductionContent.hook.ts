@@ -47,7 +47,7 @@ export const useIntoductionForm = () => {
       IntroductionSchema.parse(form.document);
       setErrors({});
       setFormStep('성적입력');
-      setFormGradeStep('자격증');
+      setFormGradeStep('가산점');
       saveFormMutate(form);
     } catch (err) {
       if (err instanceof z.ZodError) {

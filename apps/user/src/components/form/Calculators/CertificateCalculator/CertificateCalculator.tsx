@@ -14,7 +14,7 @@ const CertificateCalculator = () => {
   return (
     <StyledCertificateCalculator>
       <Text fontType="p3" color={color.red}>
-        *자격증을 중복 선택한 경우, 최고 수준의 자격증 1개만 인정됩니다.
+        *자격증은 1개만 선택할 수 있습니다. 최고 수준의 자격증을 선택해주세요.
       </Text>
       <Column>
         <CertificateCalculatorHeader />

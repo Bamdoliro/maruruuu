@@ -2,68 +2,45 @@ import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import BasicCalculatorHeader from './BasicCalculatorHeader/BasicCalculatorHeader';
 import BasicCalculatorItem from './BasicCalculatorItem/BasicCalculatorItem';
-import { newSubjectListAtom, formAtom, subjectListAtom } from '@/stores';
+import InformationFirstGrade from './InformationFirstGrade/InformationFirstGrade';
+import { formAtom, subjectListAtom } from '@/stores';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { color } from '@maru/design-system';
 import { useEffect } from 'react';
-import { Button } from '@maru/ui';
-import { useAddNewSubject } from './BasicCalculator.hook';
-import NewBasicCalculatorItem from './NewBasicCalculatorItem/NewBasicCalculatorItem';
 
 interface BasicCalculatorProps {
   subjectError?: boolean[];
-  newSubjectError?: boolean[];
 }
 
-const BasicCalculator = ({ subjectError, newSubjectError }: BasicCalculatorProps) => {
-  const newSubjectList = useAtomValue(newSubjectListAtom);
+const ACHIEVEMENT_LEVELS = ['미이수', 'A', 'B', 'C', 'D', 'E'];
+
+const BasicCalculator = ({ subjectError }: BasicCalculatorProps) => {
   const subjectList = useAtomValue(subjectListAtom);
   const setForm = useSetAtom(formAtom);
-  const { handleAddNewSubject } = useAddNewSubject();
 
   useEffect(() => {
-    const studentSubjectList = [...subjectList, ...newSubjectList].map(
-      ({ ...rest }) => rest,
-    );
+    const studentSubjectList = subjectList.map(({ ...rest }) => rest);
 
     setForm((prev) => ({
       ...prev,
       grade: { ...prev.grade, subjectList: studentSubjectList },
     }));
-  }, [newSubjectList, setForm, subjectList]);
+  }, [setForm, subjectList]);
 
   return (
     <StyledBasicCalculator>
-      <BasicCalculatorHeader />
-      {subjectList.map(({ id, subjectName }) => {
-        const isSpecialSubject =
-          subjectName === '미술' || subjectName === '음악' || subjectName === '체육';
-
-        return (
+      <InformationFirstGrade achievementLevels={ACHIEVEMENT_LEVELS} />
+      <Table>
+        <BasicCalculatorHeader />
+        {subjectList.map(({ id }, index) => (
           <BasicCalculatorItem
             id={id}
             key={`subject ${id}`}
-            achievementLevels={
-              isSpecialSubject
-                ? ['미이수', 'A', 'B', 'C']
-                : ['미이수', 'A', 'B', 'C', 'D', 'E']
-            }
+            achievementLevels={ACHIEVEMENT_LEVELS}
             isError={subjectError}
+            isLast={index === subjectList.length - 1}
           />
-        );
-      })}
-      {newSubjectList.map(({ id }) => (
-        <NewBasicCalculatorItem
-          id={id}
-          achievementLevels={['미이수', 'A', 'B', 'C', 'D', 'E']}
-          isError={newSubjectError}
-        />
-      ))}
-      <GradeCalculatorFooter>
-        <Button onClick={handleAddNewSubject} icon="ADD_ICON" size="SMALL">
-          과목추가
-        </Button>
-      </GradeCalculatorFooter>
+        ))}
+      </Table>
     </StyledBasicCalculator>
   );
 };
@@ -72,16 +49,12 @@ export default BasicCalculator;
 
 const StyledBasicCalculator = styled.div`
   ${flex({ flexDirection: 'column' })};
+  gap: 24px;
   width: 100%;
   height: 100%;
 `;
 
-const GradeCalculatorFooter = styled.div`
-  ${flex({ alignItems: 'center', justifyContent: 'center' })}
+const Table = styled.div`
+  ${flex({ flexDirection: 'column' })};
   width: 100%;
-  height: 64px;
-  background-color: ${color.gray100};
-  border-radius: 0px 0px 12px 12px;
-  border: 1px dashed ${color.gray300};
-  border-top: none;
 `;

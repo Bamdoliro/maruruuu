@@ -5,48 +5,70 @@ import { CellInput, Column, Row, Td, Text, Th } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import { useInput } from './VolunteerCalculator.hook';
-import { formatYear } from '@/utils';
 import { SCHEDULE } from '@/constants/common/constants';
+import dayjs from 'dayjs';
+
+const formatDate = (date: string) => dayjs(date).format('YYYY.MM.DD');
+const formatPeriod = (start: string, end: string) =>
+  `${formatDate(start)} ~ ${formatDate(end)}`;
+const februaryEnd = (year: number) => dayjs(`${year}-02-01`).endOf('month').format();
 
 const VolunteerCalculator = () => {
   const form = useAtomValue(formAtom);
   const { handleVolunteerTimeChange } = useInput();
 
-  const isReadOnly = form.education.graduationType === 'QUALIFICATION_EXAMINATION';
-  const scoreEndYear = formatYear(SCHEDULE.원서_접수);
+  const admissionYear = SCHEDULE.원서_접수.year();
   const volunteerData = [
-    { grade: '1학년', name: 'volunteerTime1', value: form.grade.volunteerTime1 },
-    { grade: '2학년', name: 'volunteerTime2', value: form.grade.volunteerTime2 },
-    { grade: '3학년', name: 'volunteerTime3', value: form.grade.volunteerTime3 },
+    {
+      grade: '1학년',
+      period: formatPeriod(`${admissionYear - 2}-03-01`, februaryEnd(admissionYear - 1)),
+      name: 'volunteerTime1',
+      value: form.grade.volunteerTime1,
+    },
+    {
+      grade: '2학년',
+      period: formatPeriod(`${admissionYear - 1}-03-01`, februaryEnd(admissionYear)),
+      name: 'volunteerTime2',
+      value: form.grade.volunteerTime2,
+    },
+    {
+      grade: '3학년',
+      period: formatPeriod(`${admissionYear}-03-01`, `${admissionYear}-09-30`),
+      name: 'volunteerTime3',
+      value: form.grade.volunteerTime3,
+    },
   ];
 
   return (
     <StyledVolunteerCalculator>
       <Text fontType="p3" color={color.red}>
-        *{scoreEndYear}.09.30까지의 봉사시간을 기재해주세요. 졸업생은 졸업일 기준으로
+        *아래 기간에 참여한 봉사시간을 기재해주세요. 졸업생은 졸업일 기준으로
         기재해주세요.
       </Text>
       <Column>
         <Row>
-          <Th borderTopLeftRadius={12} width="20%" height={56}>
-            학년
+          <Th borderTopLeftRadius={12} width="30%" height={56}>
+            <Cell>학년 및 기간</Cell>
           </Th>
-          <Th borderTopRightRadius={12} width="80%" height={56}>
+          <Th borderTopRightRadius={12} width="70%" height={56}>
             봉사시간
           </Th>
         </Row>
-        {volunteerData.map(({ grade, name, value }, index) => (
+        {volunteerData.map(({ grade, period, name, value }, index) => (
           <Row key={name}>
             <Td
-              width="20%"
+              width="30%"
               height={56}
               styleType="SECONDARY"
               borderBottomLeftRadius={index === volunteerData.length - 1 ? 12 : 0}
             >
-              {grade}
+              <Cell>
+                {grade}
+                <Period>{period}</Period>
+              </Cell>
             </Td>
             <Td
-              width="80%"
+              width="70%"
               height={56}
               borderBottomRightRadius={index === volunteerData.length - 1 ? 12 : 0}
             >
@@ -55,7 +77,6 @@ const VolunteerCalculator = () => {
                 onChange={handleVolunteerTimeChange}
                 value={value}
                 isError={Number(value) < 0}
-                readOnly={isReadOnly}
               />
               <Hour>시간</Hour>
             </Td>
@@ -72,6 +93,18 @@ const StyledVolunteerCalculator = styled.div`
   ${flex({ flexDirection: 'column' })};
   width: 100%;
   gap: 16px;
+`;
+
+const Cell = styled.div`
+  ${flex({ alignItems: 'center' })}
+  width: 100%;
+  padding: 0 20px;
+`;
+
+const Period = styled.span`
+  ${font.p3}
+  color: ${color.gray600};
+  margin-left: 12px;
 `;
 
 const Hour = styled.p`

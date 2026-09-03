@@ -29,13 +29,13 @@ const Certificate = ({ certificateList }: CertificateProps) => {
       </Row>
       <Row>
         <Td width={convertToResponsive(200, 340)} height={56}>
-          정보처리기능사, 정보기기운용기능사, <br /> 전자계산기기능사
+          프로그래밍기능사, 정보기기운용기능사, <br /> 임베디드기능사
         </Td>
         <Td width={convertToResponsive(100, 200)} height={56}>
           한국산업인력공단
         </Td>
         <Td width={convertToResponsive(80, 120)} height={56}>
-          4점
+          3점
         </Td>
         <Td width={convertToResponsive(60, 80)} height={56}>
           <CheckBox checked={isCraftsmanIncluded} />

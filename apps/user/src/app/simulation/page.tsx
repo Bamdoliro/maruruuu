@@ -5,19 +5,21 @@ import {
   CertificateCalculator,
   GradeCalculator,
   GradePreview,
+  MentoringProgramCalculator,
   VolunteerCalculator,
 } from '@/components/form';
 import { STEP_LIST } from '@/constants/form/data';
 import { AppLayout } from '@/layouts';
 import { color } from '@maru/design-system';
-import { Column, Text, UnderlineButton } from '@maru/ui';
+import { Column, Row, Switch, Text, UnderlineButton } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import { useNavigationClick } from './simulation.hook';
 import { SwitchCase } from '@toss/react';
 
 const Simulation = () => {
-  const { handleMoveStep, currentStep } = useNavigationClick();
+  const { handleMoveStep, currentStep, graduationType, handleChangeGraduationType } =
+    useNavigationClick();
 
   return (
     <AppLayout header footer>
@@ -31,13 +33,27 @@ const Simulation = () => {
           </Text>
         </Column>
         <Column gap={24}>
-          <Text fontType="p3" color={color.red}>
-            *교과 성적 산출 방식에 대한 자세한 정보는 모집요강에서 확인해주시기 바랍니다.
-            <br />
-            *특례입학 대상자는 일반 전형 교과 성적 산출식이 적용됩니다.
-            <br />
-            *입학전형 요강을 참고하여 신중하게 입력하여 주시기 바랍니다.
-          </Text>
+          <Row alignItems="flex-start" justifyContent="space-between" gap={24}>
+            <Text fontType="p3" color={color.red}>
+              *교과 성적 산출 방식에 대한 자세한 정보는 모집요강에서 확인해주시기
+              바랍니다.
+              <br />
+              *특례입학 대상자는 일반 전형 교과 성적 산출식이 적용됩니다.
+              <br />
+              *입학전형 요강을 참고하여 신중하게 입력하여 주시기 바랍니다.
+            </Text>
+            <GraduationTypeSwitch>
+              <Switch
+                items={[
+                  { name: '졸업 예정', value: 'EXPECTED' },
+                  { name: '졸업', value: 'GRADUATED' },
+                  { name: '검정고시', value: 'QUALIFICATION_EXAMINATION' },
+                ]}
+                value={graduationType}
+                onChange={handleChangeGraduationType}
+              />
+            </GraduationTypeSwitch>
+          </Row>
           <GradePreview />
         </Column>
         <Column gap={24}>
@@ -58,7 +74,12 @@ const Simulation = () => {
               성적입력: <GradeCalculator option="SIMULATION" />,
               출결상황: <AttendanceCalculator />,
               봉사시간: <VolunteerCalculator />,
-              자격증: <CertificateCalculator />,
+              가산점: (
+                <Column gap={24}>
+                  <CertificateCalculator />
+                  <MentoringProgramCalculator />
+                </Column>
+              ),
             }}
             defaultComponent={<GradeCalculator option="SIMULATION" />}
           />
@@ -77,6 +98,11 @@ const StyledSimulation = styled.div`
   padding: 82px 312px 180px;
   margin: 0 auto;
   gap: 48px;
+`;
+
+const GraduationTypeSwitch = styled.div`
+  flex-shrink: 0;
+  white-space: nowrap;
 `;
 
 const Navigation = styled.div`

@@ -13,7 +13,7 @@ const GradePreview = ({ location }: GradePreviewProps) => {
     specialScore,
     attendanceScore,
     volunteerScore,
-    certificateScore,
+    bonusScore,
     regularTotalScore,
     specialTotalScore,
   } = useGradeCaculation();
@@ -68,9 +68,9 @@ const GradePreview = ({ location }: GradePreviewProps) => {
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === '자격증' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '가산점' ? 'FORM' : 'PRIMARY'}
         >
-          {certificateScore}
+          {bonusScore}
         </Td>
         <Td width="calc(100% / 6)" height={56}>
           {regularTotalScore}
@@ -109,9 +109,9 @@ const GradePreview = ({ location }: GradePreviewProps) => {
         <Td
           width="calc(100% / 6)"
           height={56}
-          styleType={location === '자격증' ? 'FORM' : 'PRIMARY'}
+          styleType={location === '가산점' ? 'FORM' : 'PRIMARY'}
         >
-          {certificateScore}
+          {bonusScore}
         </Td>
         <Td borderBottomRightRadius={12} width="calc(100% / 6)" height={56}>
           {specialTotalScore}

@@ -3,7 +3,7 @@ export { entrollmentDocumentAtom } from './entrollment/entrollmentDocument';
 
 export { formAtom } from './form/form';
 
-export { subjectListAtom, newSubjectListAtom } from './form/subjectList';
+export { subjectListAtom } from './form/subjectList';
 
 export { GEDSubjectListAtom, newGEDSubjectListAtom } from './form/GEDSubjectList';
 
