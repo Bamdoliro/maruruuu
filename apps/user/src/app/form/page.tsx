@@ -19,6 +19,8 @@ import { SCHEDULE } from '@/constants/common/constants';
 const Form = () => {
   usePageAccessGuard({
     period: { start: SCHEDULE.원서_접수, end: SCHEDULE.원서_접수_마감 },
+    // TODO: 원서접수 기간 검증 임시 우회. 재적용 시 이 줄 제거
+    bypassPeriod: true,
     title: '원서 접수 기간이 아닙니다',
     content:
       '원서 접수 기간에만 원서 작성이 가능합니다.\n원서 접수 기간까지 조금만 기다려 주세요.',

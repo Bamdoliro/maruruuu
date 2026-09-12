@@ -13,6 +13,8 @@ interface GuardOptions {
   period?: { start: Dayjs; end: Dayjs };
   title?: string;
   content?: string;
+  // TODO: 원서접수 기간 검증 임시 우회용. 재적용 시 이 옵션과 사용처를 제거
+  bypassPeriod?: boolean;
 }
 
 const usePageAccessGuard = (options: GuardOptions) => {
@@ -41,6 +43,7 @@ const usePageAccessGuard = (options: GuardOptions) => {
         />
       ));
     } else if (
+      !guardOptions.bypassPeriod &&
       !now.isBetween(guardOptions.period?.start, guardOptions.period?.end, 'hour', '[]')
     ) {
       overlay.open(({ close, isOpen }) => (
