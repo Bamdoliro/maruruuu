@@ -1,4 +1,5 @@
 import Provider from '@/components/Provider';
+import { AUTH_COOKIES } from '@/constants/common/constants';
 import GoogleAnalytics from '@/lib/GoogleAnalytics';
 import StyledComponentRegistry from '@/lib/registry';
 import QueryClientProvider from '@/services/QueryClientProvider';
@@ -17,8 +18,7 @@ interface Props {
 
 const RootLayout = ({ children }: Props) => {
   const cookieStore = cookies();
-  const initialLoggedIn =
-    cookieStore.has('accessToken') || cookieStore.has('refreshToken');
+  const initialLoggedIn = AUTH_COOKIES.some((name) => cookieStore.has(name));
 
   return (
     <html lang="ko">
