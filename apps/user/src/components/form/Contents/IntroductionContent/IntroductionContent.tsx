@@ -1,13 +1,14 @@
 import { color } from '@maru/design-system';
 import { Column, Text, Textarea } from '@maru/ui';
 import FormController from '../../FormController/FormController';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { useIntoductionForm } from './IntroductionContent.hook';
 
 const IntroductionContent = () => {
   const { onFieldChange, handleNextStep, handlePreviousStep, errors } =
     useIntoductionForm();
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
 
   return (
     <>

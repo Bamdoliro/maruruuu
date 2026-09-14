@@ -1,19 +1,9 @@
 import type { EntrollmentDocument } from '@/types/enrollment/remote';
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const entrollmentDocumentAtomState = atom<EntrollmentDocument>({
-  key: 'entrollment-document',
-  default: {
-    fileName: null,
-    mediaType: null,
-    fileSize: null,
-    file: null,
-  },
+export const entrollmentDocumentAtom = atom<EntrollmentDocument>({
+  fileName: null,
+  mediaType: null,
+  fileSize: null,
+  file: null,
 });
-
-export const useEntrollmentDocumentStore = () =>
-  useRecoilState(entrollmentDocumentAtomState);
-export const useSetEntrollmentDocumentStore = () =>
-  useSetRecoilState(entrollmentDocumentAtomState);
-export const useEntrollmentDocumentValueStore = () =>
-  useRecoilValue(entrollmentDocumentAtomState);

@@ -6,7 +6,8 @@ import styled from '@emotion/styled';
 import SecondScoreUploader from './SecondScoreUploader/SecondScoreUploader';
 import { useEffect } from 'react';
 import type { ChangeEventHandler } from 'react';
-import { useSecondScoreFileStore } from '@/store';
+import { secondScoreFileAtom } from '@/store';
+import { useAtom } from 'jotai';
 import {
   useExportExcelAction,
   useUploadSecondScoreFormatAction,
@@ -18,7 +19,7 @@ interface SecondScoreUploadModalProps {
 }
 
 const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps) => {
-  const [uploadedFile, setUploadedFile] = useSecondScoreFileStore();
+  const [uploadedFile, setUploadedFile] = useAtom(secondScoreFileAtom);
 
   const { handleExportSecondScoreFormatButtonClick } = useExportExcelAction();
 

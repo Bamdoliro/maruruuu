@@ -1,5 +1,6 @@
 import { MENTORING_PROGRAM } from '@/constants/form/constants';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { color } from '@maru/design-system';
 import { CheckBox, Column, Row, Td, Text, Th } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -7,7 +8,7 @@ import styled from '@emotion/styled';
 import { useInput } from './MentoringProgramCalculator.hook';
 
 const MentoringProgramCalculator = () => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
   const { handleMentoringProgramChange } = useInput();
 
   return (

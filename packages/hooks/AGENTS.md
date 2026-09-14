@@ -11,7 +11,7 @@
 **핵심 책임:**
 
 - Custom Hook 라이브러리 제공
-- Recoil 상태 관리 통합
+- Jotai 상태 관리 통합
 - DOM 및 입력 이벤트 처리 유틸리티
 
 ## 주요 파일
@@ -22,7 +22,7 @@
 | `src/useDebounceInput.ts` | 입력 값 디바운싱 (검색 입력 등)       |
 | `src/useInterval.ts`      | 반복 실행 효과 관리                   |
 | `src/useOutsideClick.ts`  | DOM 외부 클릭 감지 (드롭다운 닫기 등) |
-| `src/useToast.ts`         | 토스트 알림 표시 (Recoil 상태 기반)   |
+| `src/useToast.ts`         | 토스트 알림 표시 (Jotai 상태 기반)    |
 | `index.ts`                | 공개 export                           |
 
 ## AI 에이전트 안내
@@ -33,9 +33,9 @@
    - 파일명: `use{HookName}.ts`
    - 단일 책임 원칙 준수 (한 Hook = 한 기능)
 
-2. **Recoil 상태 의존**: `useToast`, `useInterval` 등에서 Recoil atom/selector를 사용 가능.
+2. **Jotai 상태 의존**: `useToast` 등에서 Jotai atom을 사용 가능.
    - 전역 상태 정의는 별도의 상태 관리 패키지로 중앙화 권장
-   - Hook 내부에서 atom 정의 시, 중복 생성 방지 (useRecoilState의 key 유일성 확인)
+   - `jotai`는 반드시 워크스페이스 전체에서 단일 인스턴스여야 함 (인스턴스가 갈라지면 Provider의 스토어를 찾지 못해 상태가 조용히 분리됨). 버전 변경 시 `pnpm why -r jotai`로 확인
 
 3. **React 18 호환성**: 모든 Hook은 Strict Mode에서 이중 호출 안전성 검증 필수.
    - cleanup 함수 누락 오류 확인
@@ -49,7 +49,7 @@
 
 | 패키지       | 유형           | 버전    | 용도                             |
 | ------------ | -------------- | ------- | -------------------------------- |
-| `recoil`     | dependency     | ^0.7.7  | 전역 상태 관리                   |
+| `jotai`      | dependency     | ^2.20.3 | 전역 상태 관리                   |
 | `es-toolkit` | dependency     | ^1.0.0  | 유틸리티 함수 모음 (debounce 등) |
 | `react`      | peerDependency | ^18.0.0 | React 페이지 제공자              |
 
@@ -68,10 +68,10 @@
 4. `index.ts`에서 export 추가
 5. `pnpm lint`로 TypeScript, ESLint 검증
 
-**Hook에서 Recoil 사용:**
+**Hook에서 Jotai 사용:**
 
-1. atom/selector는 Hook 외부에서 정의 (중복 생성 방지)
-2. Hook은 `useRecoilState`, `useSetRecoilState` 등만 호출
+1. atom은 모듈 최상단(Hook 외부)에서 정의 (중복 생성 방지)
+2. Hook은 `useAtom`, `useAtomValue`, `useSetAtom`만 호출 (쓰기 전용은 `useSetAtom`)
 3. 상태 초기화/리셋 로직은 명확하게 구현
 
 **Hook 테스트:**

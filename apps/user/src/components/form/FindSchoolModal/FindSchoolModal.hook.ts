@@ -1,9 +1,10 @@
-import { useSetFormStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useSetAtom } from 'jotai';
 import type { School } from '@/types/form/client';
 import { useState } from 'react';
 
 export const useFindSchoolModal = (onClose: () => void) => {
-  const setForm = useSetFormStore();
+  const setForm = useSetAtom(formAtom);
   const [school, setSchool] = useState<School>({
     name: '',
     location: '',

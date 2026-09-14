@@ -13,7 +13,7 @@
 - **런타임**: Node.js, pnpm 9.0.0+
 - **프레임워크**: Next.js 14 (App Router)
 - **언어**: TypeScript 5.5.4
-- **상태관리**: Recoil, React Query
+- **상태관리**: Jotai, React Query
 - **스타일링**: Emotion (CSS-in-JS)
 - **빌드**: Turbo 2.3.3+, Next.js
 - **린팅**: ESLint 8.0+, Prettier 3.0+
@@ -190,15 +190,29 @@ export const Button: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 );
 ```
 
-#### 2. 커스텀 훅 (Recoil 상태)
+#### 2. 커스텀 훅 (Jotai 상태)
+
+전역 상태는 앱별 `src/stores`(user) / `src/store`(admin)에 atom을 정의하고 배럴(`@/stores`, `@/store`)로 export합니다. 소비처에서는 `useAtom` / `useAtomValue` / `useSetAtom`을 직접 사용하며, **쓰기 전용인 경우 반드시 `useSetAtom`을 써서 불필요한 구독을 만들지 않습니다.**
 
 ```typescript
-// packages/hooks/useAuth.ts
-import { useRecoilState } from 'recoil';
-import { authAtom } from './atoms';
+// apps/user/src/stores/user/user.ts
+import type { User } from '@/types/user/client';
+import { atom } from 'jotai';
+
+export const userAtom = atom<User>({
+  name: '',
+  authority: '',
+  phoneNumber: '',
+});
+```
+
+```typescript
+// apps/user/src/hooks/useAuth.ts
+import { userAtom } from '@/stores';
+import { useAtom } from 'jotai';
 
 export const useAuth = () => {
-  const [auth, setAuth] = useRecoilState(authAtom);
+  const [auth, setAuth] = useAtom(userAtom);
 
   const login = async (credentials: LoginCredentials) => {
     const data = await authApi.login(credentials);
@@ -303,7 +317,7 @@ packages/ui
 └── @maru/utils
 
 packages/hooks
-├── recoil
+├── jotai
 └── es-toolkit
 ```
 
@@ -315,7 +329,7 @@ packages/hooks
 | `next`                              | ^14.0.0   | 프레임워크                     |
 | `typescript`                        | 5.5.4     | 언어                           |
 | `@emotion/react`, `@emotion/styled` | ^11.14.0+ | CSS-in-JS                      |
-| `recoil`                            | ^0.7.7    | 전역 상태 관리                 |
+| `jotai`                             | ^2.20.3   | 전역 상태 관리                 |
 | `@tanstack/react-query`             | ^5.66.0   | 서버 상태 관리                 |
 | `axios`                             | ^1.7.9    | HTTP 클라이언트                |
 | `jwt-decode`                        | ^4.0.0    | JWT 파싱                       |

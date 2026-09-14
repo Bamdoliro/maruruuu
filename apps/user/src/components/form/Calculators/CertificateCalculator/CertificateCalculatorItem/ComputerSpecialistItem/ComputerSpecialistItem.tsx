@@ -1,5 +1,6 @@
 import { LEVEL_LIST } from '@/constants/form/constants';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { CheckBox, Column, Row, Td } from '@maru/ui';
 
 interface ComputerSpecialistItemProps {
@@ -7,7 +8,7 @@ interface ComputerSpecialistItemProps {
 }
 
 const ComputerSpecialistItem = ({ onChange }: ComputerSpecialistItemProps) => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
 
   return (
     <Row>

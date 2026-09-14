@@ -1,65 +1,19 @@
-export {
-  useFairFormStore,
-  useFairFormValueStore,
-  useSetFairFormStore,
-} from './fair/fairType';
+export { fairFormAtom } from './fair/fairType';
 
-export {
-  useMessageFormStore,
-  useMessageFormValueStore,
-  useSetMessageFormStore,
-} from './message/messageForm';
+export { messageFormAtom } from './message/messageForm';
 
-export {
-  useNoticeFileStore,
-  useNoticeFileValueStore,
-  useSetNoticeFileStore,
-  useUploadedNoticeFileStore,
-  useUploadedNoticeFileValueStore,
-  useSetUploadedNoticeFileStore,
-} from './notice/noticeFile';
+export { noticeFileAtom, uploadedNoticeFileAtom } from './notice/noticeFile';
 
-export {
-  useFormListTypeStore,
-  useFormListTypeValueStore,
-  useSetFormListTypeStore,
-  useFormListSortingTypeStore,
-  useFormListSortingTypeValueStore,
-  useSetFormListSortingTypeStore,
-} from './form/formType';
+export { formListTypeAtom, formListSortingTypeAtom } from './form/formType';
 
-export {
-  useSchoolSearchStore,
-  useSchoolSearchValueStore,
-  useSetSchoolSearchStore,
-} from './form/schoolSearch';
+export { schoolSearchAtom } from './form/schoolSearch';
 
-export {
-  useFormToPrintStore,
-  useFormToPrintValueStore,
-  useSetFormToPrintStore,
-} from './form/formToPrint';
+export { formToPrintAtom } from './form/formToPrint';
 
-export {
-  useIsFormToPrintSelectingStore,
-  useIsFormToPrintSelectingValueStore,
-  useSetIsFormToPrintSelectingStore,
-} from './form/isFormToPrintSelecting';
+export { isFormToPrintSelectingAtom } from './form/isFormToPrintSelecting';
 
-export {
-  useSecondRoundResultStore,
-  useSecondRoundResultValueStore,
-  useSetSecondRoundResultStore,
-} from './form/secondRoundResult';
+export { secondRoundResultAtom } from './form/secondRoundResult';
 
-export {
-  useIsSecondRoundResultEditingStore,
-  useIsSecondRoundResultEditingValueStore,
-  useSetIsSecondRoundResultEditingStore,
-} from './form/isSecondRoundResultEditing';
+export { isSecondRoundResultEditingAtom } from './form/isSecondRoundResultEditing';
 
-export {
-  useSecondScoreFileStore,
-  useSecondScoreFileValueStore,
-  useSetSecondScoreFileStore,
-} from './form/secondScoreFile';
+export { secondScoreFileAtom } from './form/secondScoreFile';

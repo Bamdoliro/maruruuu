@@ -1,4 +1,5 @@
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -13,7 +14,7 @@ interface GradeCalculatorProps {
 }
 
 const GradeCalculator = ({ subjectError, option }: GradeCalculatorProps) => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
 
   return (
     <StyledGradeCalculator>

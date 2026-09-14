@@ -1,4 +1,5 @@
-import { useNewGEDSubjectListValueStore } from '@/stores';
+import { newGEDSubjectListAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { Button, CellInput, Dropdown, Td } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
@@ -12,7 +13,7 @@ interface Props {
 const SUBJECT_OPTIONS = ['도덕', '기술가정', '음악', '체육', '미술'];
 
 const NewGEDCalculatorItem = ({ id, score }: Props) => {
-  const newGEDSubjectList = useNewGEDSubjectListValueStore();
+  const newGEDSubjectList = useAtomValue(newGEDSubjectListAtom);
   const newGEDSubjectIndex = newGEDSubjectList.findIndex((item) => item.id === id);
 
   const { handleNewGEDSubjectChange, handleScoreChange } = useInput(newGEDSubjectIndex);

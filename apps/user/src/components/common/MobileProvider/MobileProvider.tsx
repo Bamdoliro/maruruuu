@@ -1,7 +1,8 @@
 'use client';
 
 import { MobileLogin, MobileMain, MobileResult } from '@/components/mobile';
-import { useStepStore } from '@/stores';
+import { stepAtom } from '@/stores';
+import { useAtom } from 'jotai';
 import { useAuthState } from '@maru/hooks';
 import { SwitchCase } from '@toss/react';
 import { useEffect, useState } from 'react';
@@ -13,7 +14,7 @@ interface Props {
 
 const MobileProvider = ({ children }: Props) => {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
-  const [step, setStep] = useStepStore();
+  const [step, setStep] = useAtom(stepAtom);
   const { isLoggedIn } = useAuthState();
 
   useEffect(() => {

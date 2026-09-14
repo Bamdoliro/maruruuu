@@ -1,12 +1,3 @@
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const secondScoreFileAtomState = atom<File | null>({
-  key: 'second-score-file',
-  default: null,
-});
-
-export const useSecondScoreFileStore = () => useRecoilState(secondScoreFileAtomState);
-export const useSecondScoreFileValueStore = () =>
-  useRecoilValue(secondScoreFileAtomState);
-export const useSetSecondScoreFileStore = () =>
-  useSetRecoilState(secondScoreFileAtomState);
+export const secondScoreFileAtom = atom<File | null>(null);

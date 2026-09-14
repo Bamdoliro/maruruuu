@@ -1,8 +1,9 @@
-import { useSetFormStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useSetAtom } from 'jotai';
 import type { ChangeEventHandler } from 'react';
 
 export const useInput = () => {
-  const setForm = useSetFormStore();
+  const setForm = useSetAtom(formAtom);
 
   const handleMentoringProgramChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { checked } = e.target;

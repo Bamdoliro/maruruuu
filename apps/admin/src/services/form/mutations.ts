@@ -10,10 +10,8 @@ import {
 import { useToast } from '@maru/hooks';
 import { KEY } from '@/constants/common/constant';
 import type { PatchSecondRoundResultReq } from '@/types/form/remote';
-import {
-  useSetIsSecondRoundResultEditingStore,
-  useSetSecondRoundResultStore,
-} from '@/store';
+import { isSecondRoundResultEditingAtom, secondRoundResultAtom } from '@/store';
+import { useSetAtom } from 'jotai';
 import { isPopupBlocked } from '@/utils';
 import type { ReceiveStatusValue } from '@/types/form/client';
 
@@ -60,8 +58,8 @@ export const useEditSecondRoundResultMutation = (
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
-  const setIsSecondRoundResultEditing = useSetIsSecondRoundResultEditingStore();
-  const setSecondRoundResult = useSetSecondRoundResultStore();
+  const setIsSecondRoundResultEditing = useSetAtom(isSecondRoundResultEditingAtom);
+  const setSecondRoundResult = useSetAtom(secondRoundResultAtom);
 
   const { mutate: editSecondRoundResult, ...restMutation } = useMutation({
     mutationFn: () => patchSecondRoundResult(secondRoundResultData),

@@ -1,22 +1,23 @@
 import { GED_SUBJECT_LIST, SUBJECT_LIST } from '@/constants/form/data';
 import { useSaveFormQuery } from '@/services/form/queries';
 import {
-  useIsSaveFormLoadedStore,
-  useSetFormStore,
-  useSetGEDSubjectListStore,
-  useSetNewGEDSubjectListStore,
-  useSetSubjectListStore,
+  isSaveFormLoadedAtom,
+  formAtom,
+  GEDSubjectListAtom,
+  newGEDSubjectListAtom,
+  subjectListAtom,
 } from '@/stores';
 import { getHighestCertificateList, updateSlicedSubjectList } from '@/utils';
+import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
 const SaveFormManager = () => {
   const { data: saveFormData } = useSaveFormQuery();
-  const [isSaveFormLoaded, setIsSaveFormLoaded] = useIsSaveFormLoadedStore();
-  const setForm = useSetFormStore();
-  const setSubjectList = useSetSubjectListStore();
-  const setGEDSubjectList = useSetGEDSubjectListStore();
-  const setNewGEDSubjectList = useSetNewGEDSubjectListStore();
+  const [isSaveFormLoaded, setIsSaveFormLoaded] = useAtom(isSaveFormLoadedAtom);
+  const setForm = useSetAtom(formAtom);
+  const setSubjectList = useSetAtom(subjectListAtom);
+  const setGEDSubjectList = useSetAtom(GEDSubjectListAtom);
+  const setNewGEDSubjectList = useSetAtom(newGEDSubjectListAtom);
 
   useEffect(() => {
     if (!saveFormData || isSaveFormLoaded) return;

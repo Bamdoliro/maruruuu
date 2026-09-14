@@ -1,6 +1,7 @@
 import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
-import { useChangePasswordStore } from '@/stores/user/changePassword';
+import { changePasswordAtom } from '@/stores';
+import { useAtom } from 'jotai';
 import {
   useChangePasswordMutation,
   useRequestUserVerificationMutation,
@@ -10,7 +11,7 @@ import type { SignUp } from '@/types/user/client';
 import { useToast } from '@maru/hooks';
 
 export const useInput = () => {
-  const [changePassword, setChangePassword] = useChangePasswordStore();
+  const [changePassword, setChangePassword] = useAtom(changePasswordAtom);
 
   const handleChangePasswordChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;

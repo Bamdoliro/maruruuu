@@ -1,6 +1,7 @@
 import { GradePreview } from '@/components/form';
 import { FormLayout } from '@/layouts';
-import { useFormGradeStepValueStore } from '@/stores';
+import { formGradeStepAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -12,7 +13,7 @@ import Volunteer from './Volunteer/Volunteer';
 import Certificate from './Certificate/Certificate';
 
 const Grade = () => {
-  const formStep = useFormGradeStepValueStore();
+  const formStep = useAtomValue(formGradeStepAtom);
 
   return (
     <FormLayout title="성적 입력">

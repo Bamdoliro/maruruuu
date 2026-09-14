@@ -10,8 +10,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "dompurify": "^3.3.3",
-    "recoil": "^0.7.7"
+    "dompurify": "^3.3.3"
   },
   "peerDependencies": {
     "react": "^18.0.0",

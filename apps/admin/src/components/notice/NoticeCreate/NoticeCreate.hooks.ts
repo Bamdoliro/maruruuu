@@ -2,7 +2,8 @@ import {
   usePostNoticeMutation,
   useNoticeFileUrlMutation,
 } from '@/services/notice/mutations';
-import { useNoticeFileStore } from '@/store';
+import { noticeFileAtom } from '@/store';
+import { useAtom } from 'jotai';
 import type { NoticeInput } from '@/types/notice/client';
 import { resizeTextarea } from '@/utils';
 import { useEffect, useRef, useState } from 'react';
@@ -40,7 +41,7 @@ export const useNoticeCreateData = () => {
 export const useNoticeCreateAction = (noticeData: NoticeInput) => {
   const { postNoticeMutate } = usePostNoticeMutation();
   const { noticeFileUrlMutateAsync } = useNoticeFileUrlMutation();
-  const [fileData, setFileData] = useNoticeFileStore();
+  const [fileData, setFileData] = useAtom(noticeFileAtom);
 
   const handleNoticeCreateButtonClick = async () => {
     let fileNameList: string[] | null = noticeData.fileNameList?.length

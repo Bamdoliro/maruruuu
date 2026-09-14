@@ -1,10 +1,3 @@
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const schoolSearchAtomState = atom<string>({
-  key: 'school-search',
-  default: '',
-});
-
-export const useSchoolSearchStore = () => useRecoilState(schoolSearchAtomState);
-export const useSchoolSearchValueStore = () => useRecoilValue(schoolSearchAtomState);
-export const useSetSchoolSearchStore = () => useSetRecoilState(schoolSearchAtomState);
+export const schoolSearchAtom = atom<string>('');

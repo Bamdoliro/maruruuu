@@ -4,10 +4,11 @@ import { Column, Radio, Row, Td } from '@maru/ui';
 import TypeHeader from './TypeHeader/TypeHeader';
 import FormController from '../../FormController/FormController';
 import { useCTAButton, useRadio } from './TypeContent.hook';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 
 const TypeContent = () => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
   const { handleNextStep, handlePreviousStep } = useCTAButton();
   const { handleFormTypeChange } = useRadio();
 

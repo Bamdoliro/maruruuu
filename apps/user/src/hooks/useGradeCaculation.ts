@@ -5,7 +5,8 @@ import {
   SCORE,
   WEIGHT,
 } from '@/constants/form/constants';
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import type { AchievementLevel } from '@/types/form/client';
 import { getAchivementLevel } from '@/utils';
 
@@ -44,7 +45,7 @@ const INFORMATION_LEVEL_KEYS = [
 const INFORMATION_FALLBACK_LEVEL = 'C';
 
 const useGradeCalculation = () => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
 
   // 정보 교과 가중치 = (정보 교과 성적 환산 점수 총합 / 정보 교과 총 이수학기) x 0.5
   // 가중치 산출에 사용할 정보 교과 성적이 없는 경우 C로 환산하여 반영한다.

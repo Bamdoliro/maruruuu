@@ -2,11 +2,12 @@ import { TableItem } from '@/components/common';
 import { ROUTES } from '@/constants/common/constant';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
 import {
-  useFormToPrintStore,
-  useIsFormToPrintSelectingValueStore,
-  useIsSecondRoundResultEditingValueStore,
-  useSecondRoundResultStore,
+  formToPrintAtom,
+  isFormToPrintSelectingAtom,
+  isSecondRoundResultEditingAtom,
+  secondRoundResultAtom,
 } from '@/store';
+import { useAtom, useAtomValue } from 'jotai';
 import type { Form, PassStatusType } from '@/types/form/client';
 import { convertToResponsive, maskName } from '@/utils';
 import { color } from '@maru/design-system';
@@ -31,8 +32,8 @@ const FormTableItem = ({
 }: Form) => {
   const router = useRouter();
 
-  const isSecondRoundResultEditing = useIsSecondRoundResultEditingValueStore();
-  const [secondRoundResult, setSecondRoundResult] = useSecondRoundResultStore();
+  const isSecondRoundResultEditing = useAtomValue(isSecondRoundResultEditingAtom);
+  const [secondRoundResult, setSecondRoundResult] = useAtom(secondRoundResultAtom);
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -73,8 +74,8 @@ const FormTableItem = ({
     return color.maruDefault;
   };
 
-  const isFormToPrintSelecting = useIsFormToPrintSelectingValueStore();
-  const [formToPrint, setFormToPrint] = useFormToPrintStore();
+  const isFormToPrintSelecting = useAtomValue(isFormToPrintSelectingAtom);
+  const [formToPrint, setFormToPrint] = useAtom(formToPrintAtom);
 
   const handleFormToPrintSelectChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { checked } = e.target;

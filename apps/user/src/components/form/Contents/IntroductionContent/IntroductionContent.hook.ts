@@ -1,15 +1,16 @@
 import { IntroductionSchema } from '@/schemas/IntroductionSchema';
 import { useSaveFormMutation } from '@/services/form/mutations';
-import { useFormStore, useSetFormGradeStepStore, useSetFormStepStore } from '@/stores';
+import { formAtom, formGradeStepAtom, formStepAtom } from '@/stores';
+import { useAtom, useSetAtom } from 'jotai';
 import { useFormStep } from '@/utils';
 import { useState, type ChangeEventHandler } from 'react';
 import { z } from 'zod';
 
 export const useIntoductionForm = () => {
-  const [form, setForm] = useFormStore();
+  const [form, setForm] = useAtom(formAtom);
   const [errors, setErrors] = useState<Record<string, string[]>>({});
-  const setFormStep = useSetFormStepStore();
-  const setFormGradeStep = useSetFormGradeStepStore();
+  const setFormStep = useSetAtom(formStepAtom);
+  const setFormGradeStep = useSetAtom(formGradeStepAtom);
   const { saveFormMutate } = useSaveFormMutation();
   const { run: FormStep } = useFormStep();
 

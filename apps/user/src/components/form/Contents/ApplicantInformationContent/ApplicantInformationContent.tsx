@@ -1,5 +1,5 @@
-import { useFormValueStore } from '@/stores';
-import { useFormProfileValueStore } from '@/stores/form/formProfile';
+import { formAtom, formProfileAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { Column, Input, RadioGroup, Row } from '@maru/ui';
 import ProfileUploader from '../../ProfileUploader/ProfileUploader';
 import FormController from '../../FormController/FormController';
@@ -8,8 +8,8 @@ import { useApplicantForm } from './ApplicantInformationContent.hook';
 const ApplicantInformationContent = () => {
   const { onFieldChange, handleNextStep, errors, handleUploadStateChange } =
     useApplicantForm();
-  const form = useFormValueStore();
-  const profileUrl = useFormProfileValueStore();
+  const form = useAtomValue(formAtom);
+  const profileUrl = useAtomValue(formProfileAtom);
 
   return (
     <>

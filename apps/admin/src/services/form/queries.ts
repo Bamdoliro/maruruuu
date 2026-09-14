@@ -8,18 +8,15 @@ import {
   getSecondScoreFormat,
 } from './api';
 import { useQuery } from '@tanstack/react-query';
-import {
-  useFormListSortingTypeValueStore,
-  useFormListTypeValueStore,
-  useSchoolSearchValueStore,
-} from '@/store';
+import { formListSortingTypeAtom, formListTypeAtom, schoolSearchAtom } from '@/store';
+import { useAtomValue } from 'jotai';
 import type { ExportExcelType } from '@/types/form/client';
 import { useMemo } from 'react';
 
 export const useFormListQuery = () => {
-  const formListType = useFormListTypeValueStore();
-  const formListSortingType = useFormListSortingTypeValueStore();
-  const schoolSearch = useSchoolSearchValueStore();
+  const formListType = useAtomValue(formListTypeAtom);
+  const formListSortingType = useAtomValue(formListSortingTypeAtom);
+  const schoolSearch = useAtomValue(schoolSearchAtom);
 
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.FORM_LIST, formListType, formListSortingType],

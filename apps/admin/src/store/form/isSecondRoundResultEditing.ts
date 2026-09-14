@@ -1,13 +1,3 @@
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const isSecondRoundResultEditingAtomState = atom<boolean>({
-  key: 'is-second-round-result-editing',
-  default: false,
-});
-
-export const useIsSecondRoundResultEditingStore = () =>
-  useRecoilState(isSecondRoundResultEditingAtomState);
-export const useIsSecondRoundResultEditingValueStore = () =>
-  useRecoilValue(isSecondRoundResultEditingAtomState);
-export const useSetIsSecondRoundResultEditingStore = () =>
-  useSetRecoilState(isSecondRoundResultEditingAtomState);
+export const isSecondRoundResultEditingAtom = atom<boolean>(false);

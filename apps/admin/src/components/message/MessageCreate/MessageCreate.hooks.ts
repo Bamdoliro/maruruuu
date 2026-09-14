@@ -5,10 +5,11 @@ import {
 import type { PostSendMessageByTypeRequest } from '@/types/message/remote';
 import type { MessageForm } from '@/types/message/client';
 import { MESSAGE_STATUS_VALUES } from '@/constants/message/constant';
-import { useMessageFormStore } from '@/store';
+import { messageFormAtom } from '@/store';
+import { useAtom } from 'jotai';
 
 export const useMessage = () => {
-  const [form, setForm] = useMessageFormStore();
+  const [form, setForm] = useAtom(messageFormAtom);
   const { postMessageByStatusMutate } = usePostMessageByStatusMutation();
   const { postMessageByTypeMutate } = usePostMessageByTypeMutation();
 

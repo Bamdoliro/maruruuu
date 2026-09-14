@@ -10,10 +10,11 @@ import {
   formatTimeInput,
   useFairForm,
 } from '@/components/fair/FairForm/fair.hooks';
-import { useFairFormStore } from '@/store';
+import { fairFormAtom } from '@/store';
+import { useAtomValue } from 'jotai';
 
 const FairForm = () => {
-  const [form] = useFairFormStore();
+  const form = useAtomValue(fairFormAtom);
 
   const {
     handleChange,

@@ -1,8 +1,9 @@
-import { useSetNewGEDSubjectListStore } from '@/stores';
+import { newGEDSubjectListAtom } from '@/stores';
+import { useSetAtom } from 'jotai';
 import type { ChangeEventHandler } from 'react';
 
 export const useInput = (newGEDSubjectIndex: number) => {
-  const setNewGEDSubjectList = useSetNewGEDSubjectListStore();
+  const setNewGEDSubjectList = useSetAtom(newGEDSubjectListAtom);
 
   const handleNewGEDSubjectChange = (value: string) => {
     setNewGEDSubjectList((prev) => {
@@ -40,7 +41,7 @@ export const useInput = (newGEDSubjectIndex: number) => {
 };
 
 export const useDeleteNewGEDSubject = () => {
-  const setNewGEDSubjectList = useSetNewGEDSubjectListStore();
+  const setNewGEDSubjectList = useSetAtom(newGEDSubjectListAtom);
 
   const handleDeleteNewGEDSubject = (id: number) => {
     setNewGEDSubjectList((prev) => prev.filter((item) => item.id !== id));

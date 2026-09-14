@@ -1,8 +1,9 @@
-import { useSetGEDSubjectListStore } from '@/stores';
+import { GEDSubjectListAtom } from '@/stores';
+import { useSetAtom } from 'jotai';
 import type { ChangeEventHandler } from 'react';
 
 export const useInput = (id: number) => {
-  const setGEDSubjectList = useSetGEDSubjectListStore();
+  const setGEDSubjectList = useSetAtom(GEDSubjectListAtom);
 
   const handleGEDSubjectChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;

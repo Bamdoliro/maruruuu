@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 import BasicCalculatorHeader from './BasicCalculatorHeader/BasicCalculatorHeader';
 import BasicCalculatorItem from './BasicCalculatorItem/BasicCalculatorItem';
 import InformationFirstGrade from './InformationFirstGrade/InformationFirstGrade';
-import { useSetFormStore, useSubjectListValueStore } from '@/stores';
+import { formAtom, subjectListAtom } from '@/stores';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
 interface BasicCalculatorProps {
@@ -13,8 +14,8 @@ interface BasicCalculatorProps {
 const ACHIEVEMENT_LEVELS = ['미이수', 'A', 'B', 'C', 'D', 'E'];
 
 const BasicCalculator = ({ subjectError }: BasicCalculatorProps) => {
-  const subjectList = useSubjectListValueStore();
-  const setForm = useSetFormStore();
+  const subjectList = useAtomValue(subjectListAtom);
+  const setForm = useSetAtom(formAtom);
 
   useEffect(() => {
     const studentSubjectList = subjectList.map(({ ...rest }) => rest);

@@ -1,9 +1,10 @@
-import { useFormStore } from '@/stores';
+import { formAtom } from '@/stores';
 import type { GraduationType } from '@/types/form/client';
+import { useAtom } from 'jotai';
 import { useState } from 'react';
 
 export const useNavigationClick = () => {
-  const [form, setForm] = useFormStore();
+  const [form, setForm] = useAtom(formAtom);
   const [currentStep, setCurrentStep] = useState('성적 입력');
 
   const graduationType = form.education.graduationType;

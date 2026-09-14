@@ -1,14 +1,7 @@
 import type { FormDocument } from '@/types/form/remote';
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom } from 'jotai';
 
-const formDocumentAtomState = atom<FormDocument>({
-  key: 'form-document',
-  default: {
-    fileName: '',
-    formUrl: '',
-  },
+export const formDocumentAtom = atom<FormDocument>({
+  fileName: '',
+  formUrl: '',
 });
-
-export const useFormDocumentStore = () => useRecoilState(formDocumentAtomState);
-export const useSetFormDocumentStore = () => useSetRecoilState(formDocumentAtomState);
-export const useFormDocumentValueStore = () => useRecoilValue(formDocumentAtomState);

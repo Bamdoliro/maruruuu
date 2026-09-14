@@ -25,7 +25,7 @@
 | `src/apis/authorization/authorization.ts` | Authorization 헤더 생성                             |
 | `src/constants/common/constants.ts`       | 라우팅 경로, 일정, 토큰 키, 쿼리 키 정의            |
 | `src/app/layout.tsx`                      | 루트 레이아웃 (Provider, QueryClient, Emotion 설정) |
-| `src/components/Provider.tsx`             | Recoil, OverlayProvider, GlobalToast 설정           |
+| `src/components/Provider.tsx`             | Jotai, OverlayProvider, GlobalToast 설정            |
 
 ## 하위 디렉토리
 
@@ -77,7 +77,7 @@ src/
 │   ├── fair/                # 박람회 정보 서비스
 │   ├── notice/              # 공지사항 서비스
 │   └── faq/                 # FAQ 서비스
-├── stores/                  # Recoil 상태 관리
+├── stores/                  # Jotai 상태 관리
 ├── types/                   # TypeScript 타입 정의
 ├── utils/                   # 유틸리티 함수
 ├── schemas/                 # Zod 스키마 (폼 검증)
@@ -203,7 +203,7 @@ pnpm format
 | `react`                             | ^18.2.0  | UI 라이브러리        |
 | `axios`                             | ^1.7.9   | HTTP 클라이언트      |
 | `@tanstack/react-query`             | ^5.66.0  | 서버 상태 관리       |
-| `recoil`                            | ^0.7.7   | 클라이언트 상태 관리 |
+| `jotai`                             | ^2.20.3  | 클라이언트 상태 관리 |
 | `@emotion/react`, `@emotion/styled` | ^11.14.x | CSS-in-JS            |
 | `dayjs`                             | ^1.11.13 | 날짜 처리            |
 | `zod`                               | ^3.24.2  | 데이터 스키마 검증   |

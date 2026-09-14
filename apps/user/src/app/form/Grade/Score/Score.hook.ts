@@ -1,22 +1,23 @@
 import { useSaveFormMutation } from '@/services/form/mutations';
 import {
-  useFormValueStore,
-  useGEDSubjectListValueStore,
-  useNewGEDSubjectListValueStore,
-  useSetFormGradeStepStore,
-  useSetFormStepStore,
-  useSubjectListValueStore,
+  formAtom,
+  GEDSubjectListAtom,
+  newGEDSubjectListAtom,
+  formGradeStepAtom,
+  formStepAtom,
+  subjectListAtom,
 } from '@/stores';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useState } from 'react';
 
 export const useCTAButton = () => {
-  const form = useFormValueStore();
-  const subjectList = useSubjectListValueStore();
-  const GEDSubjectList = useGEDSubjectListValueStore();
-  const newGEDSubjectList = useNewGEDSubjectListValueStore();
+  const form = useAtomValue(formAtom);
+  const subjectList = useAtomValue(subjectListAtom);
+  const GEDSubjectList = useAtomValue(GEDSubjectListAtom);
+  const newGEDSubjectList = useAtomValue(newGEDSubjectListAtom);
 
-  const setFormStep = useSetFormStepStore();
-  const setFormGradeStep = useSetFormGradeStepStore();
+  const setFormStep = useSetAtom(formStepAtom);
+  const setFormGradeStep = useSetAtom(formGradeStepAtom);
 
   const { saveFormMutate } = useSaveFormMutation();
 

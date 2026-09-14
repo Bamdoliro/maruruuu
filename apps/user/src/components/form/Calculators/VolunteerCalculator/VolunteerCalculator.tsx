@@ -1,4 +1,5 @@
-import { useFormValueStore } from '@/stores';
+import { formAtom } from '@/stores';
+import { useAtomValue } from 'jotai';
 import { color, font } from '@maru/design-system';
 import { CellInput, Column, Row, Td, Text, Th } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -13,7 +14,7 @@ const formatPeriod = (start: string, end: string) =>
 const februaryEnd = (year: number) => dayjs(`${year}-02-01`).endOf('month').format();
 
 const VolunteerCalculator = () => {
-  const form = useFormValueStore();
+  const form = useAtomValue(formAtom);
   const { handleVolunteerTimeChange } = useInput();
 
   const admissionYear = SCHEDULE.원서_접수.year();

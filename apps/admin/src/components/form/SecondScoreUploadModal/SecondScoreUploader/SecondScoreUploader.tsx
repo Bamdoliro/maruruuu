@@ -1,4 +1,5 @@
-import { useSecondScoreFileStore } from '@/store';
+import { secondScoreFileAtom } from '@/store';
+import { useAtom } from 'jotai';
 import { color } from '@maru/design-system';
 import { IconClose } from '@maru/icon';
 import { Button, Column, Text } from '@maru/ui';
@@ -11,7 +12,7 @@ interface SecondScoreUploaderProps {
 }
 
 const SecondScoreUploader = ({ isOpen }: SecondScoreUploaderProps) => {
-  const [uploadedFile, setUploadedFile] = useSecondScoreFileStore();
+  const [uploadedFile, setUploadedFile] = useAtom(secondScoreFileAtom);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 

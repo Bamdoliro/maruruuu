@@ -2,15 +2,16 @@ import {
   INFORMATION_FIRST_GRADE_KEYS,
   INFORMATION_SUBJECT,
 } from '@/constants/form/constants';
-import { useSubjectListStore } from '@/stores';
+import { subjectListAtom } from '@/stores';
 import type { AchievementLevel, Subject } from '@/types/form/client';
+import { useAtom } from 'jotai';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 type InformationFirstGradeKey = (typeof INFORMATION_FIRST_GRADE_KEYS)[number];
 
 export const useInformationFirstGrade = () => {
-  const [subjectList, setSubjectList] = useSubjectListStore();
+  const [subjectList, setSubjectList] = useAtom(subjectListAtom);
   const [isChecked, setIsChecked] = useState(false);
 
   const informationSubject = subjectList.find(
