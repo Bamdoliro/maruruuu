@@ -52,13 +52,13 @@ export const CERTIFICATE_LIST: {
     name: '프로그래밍기능사',
     organization: '한국산업인력공단',
     score: '3점',
-    value: 'CRAFTSMAN_INFORMATION_PROCESSING',
+    value: 'CRAFTSMAN_PROGRAMMING',
   },
   {
     name: '정보기기운용기능사',
     organization: '한국산업인력공단',
     score: '3점',
-    value: 'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION',
+    value: 'CRAFTSMAN_EMBEDDED',
   },
   {
     name: '임베디드기능사',
@@ -69,8 +69,8 @@ export const CERTIFICATE_LIST: {
 ];
 
 export const CERTIFICATE_SCORE: Record<Certificate, number> = {
-  CRAFTSMAN_INFORMATION_PROCESSING: 3,
-  CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION: 3,
+  CRAFTSMAN_PROGRAMMING: 3,
+  CRAFTSMAN_EMBEDDED: 3,
   CRAFTSMAN_COMPUTER: 3,
   COMPUTER_SPECIALIST_LEVEL_1: 3,
   COMPUTER_SPECIALIST_LEVEL_2: 2,
