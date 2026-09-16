@@ -21,6 +21,8 @@ export const ROUTES = {
   INSPECTION: '/inspection',
 };
 
+export const AUTH_COOKIES = ['accessToken', 'refreshToken'] as const;
+
 export const SCHEDULE = {
   원서_접수: dayjs(process.env.NEXT_PUBLIC_FORM_START),
   원서_접수_마감: dayjs(process.env.NEXT_PUBLIC_FORM_END),

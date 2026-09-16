@@ -12,8 +12,6 @@ export const useCTAButton = () => {
   const handleDownloadReceiptButtonClick = () => {
     if (!receiptData) return;
 
-    console.log(receiptData);
-
     downloadFile(receiptData, `${userData.name} 접수증.pdf`);
 
     router.push(ROUTES.FORM_MANAGEMENT);

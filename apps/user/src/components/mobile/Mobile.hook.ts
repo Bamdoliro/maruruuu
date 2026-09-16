@@ -49,10 +49,12 @@ export const useMobile = (step: Step) => {
   };
 
   const handleLogin = () => {
-    if (now.isBetween(SCHEDULE.일차_합격_발표, SCHEDULE.입학_등록)) {
-      loginMutate();
+    if (!now.isBetween(SCHEDULE.일차_합격_발표, SCHEDULE.입학_등록)) {
+      toast('아직 합격 발표일이 아닙니다!', 'ERROR', 'MOBILE');
+      return;
     }
-    toast('아직 합격 발표일이 아닙니다!', 'ERROR', 'MOBILE');
+
+    loginMutate();
   };
 
   return {

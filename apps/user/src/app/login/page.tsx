@@ -4,12 +4,17 @@ import { ROUTES } from '@/constants/common/constants';
 import { AppLayout } from '@/layouts';
 import { color, font } from '@maru/design-system';
 import { IconArrowRight } from '@maru/icon';
-import { useAuthState } from '@maru/hooks';
 import { Button, Column, Input, PreviewInput, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { useCTAButton, useInput, useKeyDown, useLoginAction } from './login.hook';
+import {
+  useCTAButton,
+  useInput,
+  useKeyDown,
+  useLoginAction,
+  useSessionVerification,
+} from './login.hook';
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOverlay } from '@toss/use-overlay';
@@ -18,11 +23,13 @@ import { AlertStyleModal } from '@/components/common';
 const Login = () => {
   const router = useRouter();
   const overlay = useOverlay();
-  const { isLoggedIn } = useAuthState();
-  const initialIsLoggedIn = useRef(isLoggedIn);
+  const { isSessionAlive } = useSessionVerification();
+  const hasOpenedModal = useRef(false);
 
   useEffect(() => {
-    if (initialIsLoggedIn.current) {
+    if (isSessionAlive && !hasOpenedModal.current) {
+      hasOpenedModal.current = true;
+
       overlay.open(({ close, isOpen }) => (
         <AlertStyleModal
           isOpen={isOpen}
@@ -42,7 +49,7 @@ const Login = () => {
         />
       ));
     }
-  }, [overlay, router]);
+  }, [isSessionAlive, overlay, router]);
 
   const { handleMoveMainPage } = useCTAButton();
   const { login, handleLoginChange } = useInput();

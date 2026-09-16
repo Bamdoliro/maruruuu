@@ -1,3 +1,4 @@
+import { INFORMATION_FIRST_GRADE_KEYS } from '@/constants/form/constants';
 import { GED_SUBJECT_LIST, SUBJECT_LIST } from '@/constants/form/data';
 import { useSaveFormQuery } from '@/services/form/queries';
 import {
@@ -48,7 +49,15 @@ const SaveFormManager = () => {
               ({ subjectName }) => subjectName === subject.subjectName,
             );
 
-            return savedSubject ? { ...subject, ...savedSubject, id: index } : subject;
+            if (!savedSubject) return subject;
+
+            const restoredSubject = { ...subject, ...savedSubject, id: index };
+
+            INFORMATION_FIRST_GRADE_KEYS.forEach((key) => {
+              if (!(key in savedSubject)) delete restoredSubject[key];
+            });
+
+            return restoredSubject;
           }),
         );
       }

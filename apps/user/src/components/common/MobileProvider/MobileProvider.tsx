@@ -4,6 +4,7 @@ import { MobileLogin, MobileMain, MobileResult } from '@/components/mobile';
 import { stepAtom } from '@/stores';
 import { useAtom } from 'jotai';
 import { useAuthState } from '@maru/hooks';
+import { isMobileDevice } from '@/utils';
 import { SwitchCase } from '@toss/react';
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
@@ -18,11 +19,7 @@ const MobileProvider = ({ children }: Props) => {
   const { isLoggedIn } = useAuthState();
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 700);
-    checkMobile();
-
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    setIsMobile(isMobileDevice());
   }, []);
 
   useEffect(() => {

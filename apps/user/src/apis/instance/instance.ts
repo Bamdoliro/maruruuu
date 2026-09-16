@@ -1,5 +1,7 @@
+import { ROUTES } from '@/constants/common/constants';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
+import { clearStaleSession, isSessionExpiredStatus } from './session';
 
 export const maru = axios.create({
   baseURL: '/api',
@@ -10,10 +12,26 @@ export const maru = axios.create({
   },
 });
 
+const REFRESH_URL = '/auth';
+
 interface FailedRequest {
   resolve: () => void;
   reject: (error?: unknown) => void;
 }
+
+const REFRESH_EXCLUDED_REQUESTS = [
+  { url: REFRESH_URL, method: 'patch' },
+  { url: REFRESH_URL, method: 'post' },
+  { url: '/users', method: 'post' },
+  { url: '/users/password', method: 'patch' },
+  { url: '/users/verification', method: 'post' },
+  { url: '/users/verification', method: 'patch' },
+];
+
+const isRefreshExcluded = (config?: AxiosRequestConfig) =>
+  REFRESH_EXCLUDED_REQUESTS.some(
+    ({ url, method }) => config?.url === url && config?.method?.toLowerCase() === method,
+  );
 
 let isRefreshing = false;
 let failedQueue: FailedRequest[] = [];
@@ -36,9 +54,18 @@ maru.interceptors.response.use(
       _retry?: boolean;
     };
 
+    if (isRefreshExcluded(originalRequest)) {
+      return Promise.reject(error);
+    }
+
     const isTokenExpired = error.response?.status === 401 && !originalRequest._retry;
 
     if (isTokenExpired) {
+      // 재발급 후 재시도할 요청임을 먼저 표시한다.
+      // 큐에 들어가는 요청도 재시도 대상이므로 여기서 표시해야
+      // 재시도가 또 401이 났을 때 재발급을 반복하지 않는다.
+      originalRequest._retry = true;
+
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({
@@ -48,16 +75,25 @@ maru.interceptors.response.use(
         });
       }
 
-      originalRequest._retry = true;
       isRefreshing = true;
 
       try {
-        await maru.patch('/auth');
+        await maru.patch(REFRESH_URL);
         processQueue(null);
         return maru(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError);
-        window.location.href = '/login';
+
+        const refreshStatus = (refreshError as AxiosError).response?.status;
+
+        if (isSessionExpiredStatus(refreshStatus)) {
+          await clearStaleSession();
+        }
+
+        if (window.location.pathname !== ROUTES.LOGIN) {
+          window.location.href = ROUTES.LOGIN;
+        }
+
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

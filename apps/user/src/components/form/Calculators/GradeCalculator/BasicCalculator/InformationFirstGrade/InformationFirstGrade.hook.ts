@@ -35,6 +35,19 @@ export const useInformationFirstGrade = () => {
     );
   };
 
+  const clearFirstGradeAchievementLevel = () => {
+    setSubjectList((prev) =>
+      prev.map((subject) => {
+        if (subject.subjectName !== INFORMATION_SUBJECT) return subject;
+
+        const clearedSubject = { ...subject };
+        INFORMATION_FIRST_GRADE_KEYS.forEach((key) => delete clearedSubject[key]);
+
+        return clearedSubject;
+      }),
+    );
+  };
+
   const handleHasFirstGradeChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === 'EXISTS') {
       setIsChecked(true);
@@ -43,7 +56,7 @@ export const useInformationFirstGrade = () => {
     }
 
     setIsChecked(false);
-    updateInformationSubject({ achievementLevel11: '-', achievementLevel12: '-' });
+    clearFirstGradeAchievementLevel();
   };
 
   const handleAchievementLevelChange = (data: string, name: string) => {
