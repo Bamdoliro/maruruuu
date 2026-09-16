@@ -19,8 +19,19 @@ interface FailedRequest {
   reject: (error?: unknown) => void;
 }
 
-const isRefreshRequest = (config?: AxiosRequestConfig) =>
-  config?.url === REFRESH_URL && config?.method?.toLowerCase() === 'patch';
+const REFRESH_EXCLUDED_REQUESTS = [
+  { url: REFRESH_URL, method: 'patch' },
+  { url: REFRESH_URL, method: 'post' },
+  { url: '/users', method: 'post' },
+  { url: '/users/password', method: 'patch' },
+  { url: '/users/verification', method: 'post' },
+  { url: '/users/verification', method: 'patch' },
+];
+
+const isRefreshExcluded = (config?: AxiosRequestConfig) =>
+  REFRESH_EXCLUDED_REQUESTS.some(
+    ({ url, method }) => config?.url === url && config?.method?.toLowerCase() === method,
+  );
 
 let isRefreshing = false;
 let failedQueue: FailedRequest[] = [];
@@ -43,7 +54,7 @@ maru.interceptors.response.use(
       _retry?: boolean;
     };
 
-    if (isRefreshRequest(originalRequest)) {
+    if (isRefreshExcluded(originalRequest)) {
       return Promise.reject(error);
     }
 
