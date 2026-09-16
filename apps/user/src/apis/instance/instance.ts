@@ -61,6 +61,11 @@ maru.interceptors.response.use(
     const isTokenExpired = error.response?.status === 401 && !originalRequest?._retry;
 
     if (isTokenExpired) {
+      // 재발급 후 재시도할 요청임을 먼저 표시한다.
+      // 큐에 들어가는 요청도 재시도 대상이므로 여기서 표시해야
+      // 재시도가 또 401이 났을 때 재발급을 반복하지 않는다.
+      originalRequest._retry = true;
+
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({
@@ -70,7 +75,6 @@ maru.interceptors.response.use(
         });
       }
 
-      originalRequest._retry = true;
       isRefreshing = true;
 
       try {
