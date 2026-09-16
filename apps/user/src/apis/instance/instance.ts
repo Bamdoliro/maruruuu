@@ -58,7 +58,7 @@ maru.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    const isTokenExpired = error.response?.status === 401 && !originalRequest?._retry;
+    const isTokenExpired = error.response?.status === 401 && !originalRequest._retry;
 
     if (isTokenExpired) {
       // 재발급 후 재시도할 요청임을 먼저 표시한다.
