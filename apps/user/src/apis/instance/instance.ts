@@ -1,7 +1,7 @@
 import { ROUTES } from '@/constants/common/constants';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import { clearStaleSession } from './session';
+import { clearStaleSession, isSessionExpiredStatus } from './session';
 
 export const maru = axios.create({
   baseURL: '/api',
@@ -86,7 +86,7 @@ maru.interceptors.response.use(
 
         const refreshStatus = (refreshError as AxiosError).response?.status;
 
-        if (refreshStatus === 401 || refreshStatus === 403) {
+        if (isSessionExpiredStatus(refreshStatus)) {
           await clearStaleSession();
         }
 

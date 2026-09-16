@@ -1,5 +1,8 @@
 const SESSION_CLEAR_URL = '/session/clear';
 
+export const isSessionExpiredStatus = (status?: number) =>
+  status === 401 || status === 403;
+
 /**
  * 서버에서 이미 만료된 토큰 쿠키가 브라우저에 남아 있으면
  * layout이 이를 로그인 상태로 오판하므로, HttpOnly 쿠키를 만료시킨다.
