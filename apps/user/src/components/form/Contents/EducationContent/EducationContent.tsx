@@ -42,7 +42,6 @@ const EducationContent = () => {
               onClick={openFindAddressModal}
               placeholder="검색 버튼을 눌러 학교를 검색하세요."
               readOnly
-              enabled={true}
               isError={!!errors.schoolName?.length}
               errorMessage={errors.schoolName ? errors.schoolName[0] : ''}
             />

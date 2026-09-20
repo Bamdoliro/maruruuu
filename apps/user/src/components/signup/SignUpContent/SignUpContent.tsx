@@ -71,7 +71,7 @@ const SignUpContent = () => {
             placeholder="- 없이 입력해주세요."
             onChange={handleSignUpChange}
             value={signUp.phoneNumber}
-            enabled={!isVerificationCodeDisabled}
+            disabled={isVerificationCodeDisabled}
           />
           {isVerificationCodeSent && (
             <TimeLimitInput
@@ -85,7 +85,7 @@ const SignUpContent = () => {
               setTimerTime={setTimerTime}
               isError={!(signUp.code.length === 6)}
               buttonText="인증번호 확인"
-              enabled={isVerificationCodeConfirmDisabled}
+              disabled={isVerificationCodeConfirmDisabled}
               placeholder="인증번호를 입력해주세요."
             />
           )}

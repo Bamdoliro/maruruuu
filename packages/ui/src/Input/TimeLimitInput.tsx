@@ -14,7 +14,7 @@ interface TimeLimitInputProps extends InputProps {
   timerTime: number;
   setTimerTime: Dispatch<SetStateAction<number>>;
   buttonText: string;
-  enabled?: boolean;
+  disabled?: boolean;
   onClick: () => void;
 }
 
@@ -32,7 +32,7 @@ const TimeLimitInput = ({
   errorMessage,
   onClick,
   buttonText,
-  enabled = false,
+  disabled = false,
 }: TimeLimitInputProps) => {
   useInterval(() => {
     setTimerTime((prev) => prev - 1);
@@ -57,7 +57,7 @@ const TimeLimitInput = ({
             {formatTime(timerTime)}
           </Text>
         </StyledTimeLimitInput>
-        <Button onClick={onClick} enabled={enabled}>
+        <Button type="button" onClick={onClick} disabled={disabled}>
           {buttonText}
         </Button>
       </Row>
@@ -114,20 +114,19 @@ const StyledInput = styled.input`
   }
 `;
 
-const Button = styled.button<{ enabled: boolean }>`
+const Button = styled.button<{ disabled: boolean }>`
   ${font.btn2};
   color: ${color.white};
-  background-color: ${(props) => (props.enabled ? color.gray400 : color.maruDefault)};
-  pointer-events: ${(props) => props.enabled && 'none'};
+  background-color: ${(props) => (props.disabled ? color.gray400 : color.maruDefault)};
   ${flex({ alignItems: 'center', justifyContent: 'center' })}
   border-radius: 6px;
   height: 48px;
   padding: 10px 20px;
   flex-shrink: 0;
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 
   &:hover {
-    background-color: ${(props) => (props.enabled ? color.gray400 : color.maruHoverd)};
-    cursor: ${(props) => (props.enabled ? 'default' : 'pointer')};
+    background-color: ${(props) => (props.disabled ? color.gray400 : color.maruHoverd)};
   }
 `;
 

@@ -53,7 +53,7 @@ const PasswordContent = () => {
           name="phoneNumber"
           onChange={handleChangePasswordChange}
           value={changePassword.phoneNumber}
-          enabled={!isVerificationCodeDisabled}
+          disabled={isVerificationCodeDisabled}
         />
 
         {isVerificationCodeSent && (
@@ -65,7 +65,7 @@ const PasswordContent = () => {
             buttonText="인증번호 확인"
             onClick={handleVerificationConfirm}
             name="code"
-            enabled={isVerificationCodeConfirmDisabled}
+            disabled={isVerificationCodeConfirmDisabled}
             timerTime={timerTime}
             setTimerTime={setTimerTime}
             isError={!(changePassword.code.length == 6)}

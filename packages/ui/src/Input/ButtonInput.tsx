@@ -7,7 +7,7 @@ import type { InputProps } from './Input.type';
 
 interface ButtonInputProps extends InputProps {
   buttonText: string;
-  enabled?: boolean;
+  disabled?: boolean;
   buttonWidth?: string;
   onClick: () => void;
 }
@@ -23,7 +23,7 @@ const ButtonInput = ({
   maxLength,
   buttonText,
   onClick,
-  enabled = false,
+  disabled = false,
   readOnly,
   isError = false,
   errorMessage,
@@ -44,7 +44,7 @@ const ButtonInput = ({
           errorMessage={errorMessage}
           maxLength={maxLength}
         />
-        <Button onClick={onClick} disabled={!enabled}>
+        <Button type="button" onClick={onClick} disabled={disabled}>
           {buttonText}
         </Button>
       </StyledButtonInput>

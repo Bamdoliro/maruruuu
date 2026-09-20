@@ -58,7 +58,6 @@ const GuardianInformationContent = () => {
           width="100%"
           value={form.parent.address}
           placeholder="예) 부산광역시 강서구 가락대로 1393 봉림동 15"
-          enabled={true}
           readOnly
           onClick={openFindAddressModal}
           isError={!!errors.address?.length}
