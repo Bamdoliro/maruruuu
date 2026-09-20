@@ -66,7 +66,7 @@ const PasswordContent = () => {
             onClick={handleVerificationConfirm}
             name="code"
             disabled={isVerificationCodeConfirmDisabled}
-            timerTime={timerTime}
+            timerTime={isVerificationCodeConfirmed ? 0 : timerTime}
             setTimerTime={setTimerTime}
             isError={!(changePassword.code.length == 6)}
             onChange={handleChangePasswordChange}
