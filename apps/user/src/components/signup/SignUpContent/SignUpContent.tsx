@@ -24,18 +24,20 @@ const SignUpContent = () => {
   const [timerTime, setTimerTime] = useState(0);
 
   const { signUp, handleSignUpChange } = useInput();
-  const {
-    handleRequestVerificationCode,
-    handleVerificationCodeConfirm,
-    isVerificationCodeDisabled,
-    isVerificationCodeConfirmed,
-    isVerificationCodeSent,
-  } = useVerificationCodeAction(signUp);
-  const { handleSignUp } = useSignUpAction(signUp, termsAgree);
 
   const startTimer = () => {
     setTimerTime(300);
   };
+
+  const {
+    handleRequestVerificationCode,
+    handleVerificationCodeConfirm,
+    isVerificationCodeDisabled,
+    isVerificationCodeConfirmDisabled,
+    isVerificationCodeConfirmed,
+    isVerificationCodeSent,
+  } = useVerificationCodeAction(signUp, startTimer);
+  const { handleSignUp } = useSignUpAction(signUp, termsAgree);
 
   return (
     <StyleSignupContent>
@@ -63,16 +65,13 @@ const SignUpContent = () => {
             name="phoneNumber"
             label="전화번호 인증"
             buttonText={isVerificationCodeSent ? '재전송' : '인증번호 전송'}
-            onClick={() => {
-              handleRequestVerificationCode();
-              startTimer();
-            }}
+            onClick={handleRequestVerificationCode}
             maxLength={11}
             type="phoneNumber"
             placeholder="- 없이 입력해주세요."
             onChange={handleSignUpChange}
             value={signUp.phoneNumber}
-            enabled={!isVerificationCodeDisabled}
+            disabled={isVerificationCodeDisabled}
           />
           {isVerificationCodeSent && (
             <TimeLimitInput
@@ -86,7 +85,7 @@ const SignUpContent = () => {
               setTimerTime={setTimerTime}
               isError={!(signUp.code.length === 6)}
               buttonText="인증번호 확인"
-              enabled={isVerificationCodeConfirmed}
+              disabled={isVerificationCodeConfirmDisabled}
               placeholder="인증번호를 입력해주세요."
             />
           )}

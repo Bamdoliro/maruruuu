@@ -20,18 +20,18 @@ const PasswordContent = () => {
   const [timerTime, setTimerTime] = useState(0);
   const { handleChangePassword } = useChangePasswordAction(changePassword);
 
+  const startTimer = () => {
+    setTimerTime(300);
+  };
+
   const {
     isVerificationCodeDisabled,
+    isVerificationCodeConfirmDisabled,
     isVerificationCodeSent,
     isVerificationCodeConfirmed,
     handleRequestVerificationCode,
     handleVerificationConfirm,
-  } = useVerificationCodeAction(changePassword);
-
-  const handleSendVerificationCode = () => {
-    handleRequestVerificationCode();
-    setTimerTime(300);
-  };
+  } = useVerificationCodeAction(changePassword, startTimer);
 
   return (
     <Column gap={128}>
@@ -48,12 +48,12 @@ const PasswordContent = () => {
           placeholder="- 없이 입력해주세요."
           width="100%"
           buttonText={isVerificationCodeSent ? '재전송' : '인증번호 전송'}
-          onClick={handleSendVerificationCode}
+          onClick={handleRequestVerificationCode}
           type="phoneNumber"
           name="phoneNumber"
           onChange={handleChangePasswordChange}
           value={changePassword.phoneNumber}
-          enabled={!isVerificationCodeDisabled}
+          disabled={isVerificationCodeDisabled}
         />
 
         {isVerificationCodeSent && (
@@ -65,8 +65,8 @@ const PasswordContent = () => {
             buttonText="인증번호 확인"
             onClick={handleVerificationConfirm}
             name="code"
-            enabled={isVerificationCodeConfirmed}
-            timerTime={timerTime}
+            disabled={isVerificationCodeConfirmDisabled}
+            timerTime={isVerificationCodeConfirmed ? 0 : timerTime}
             setTimerTime={setTimerTime}
             isError={!(changePassword.code.length == 6)}
             onChange={handleChangePasswordChange}
