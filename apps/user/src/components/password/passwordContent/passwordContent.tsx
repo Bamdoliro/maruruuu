@@ -26,6 +26,7 @@ const PasswordContent = () => {
 
   const {
     isVerificationCodeDisabled,
+    isVerificationCodeConfirmDisabled,
     isVerificationCodeSent,
     isVerificationCodeConfirmed,
     handleRequestVerificationCode,
@@ -64,7 +65,7 @@ const PasswordContent = () => {
             buttonText="인증번호 확인"
             onClick={handleVerificationConfirm}
             name="code"
-            enabled={isVerificationCodeConfirmed}
+            enabled={isVerificationCodeConfirmDisabled}
             timerTime={timerTime}
             setTimerTime={setTimerTime}
             isError={!(changePassword.code.length == 6)}

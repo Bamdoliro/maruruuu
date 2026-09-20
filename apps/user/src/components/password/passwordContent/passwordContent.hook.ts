@@ -78,8 +78,11 @@ export const useVerificationCodeAction = (
     };
   }, []);
 
+  const isVerificationCodeConfirmDisabled =
+    confirmMutation.isPending || isVerificationCodeConfirmed;
+
   const handleVerificationConfirm = () => {
-    if (confirmMutation.isPending || isVerificationCodeConfirmed) return;
+    if (isVerificationCodeConfirmDisabled) return;
 
     if (changePasswordData.code.trim().length === 0) {
       toast('인증 코드를 입력해주세요', 'ERROR');
@@ -95,6 +98,7 @@ export const useVerificationCodeAction = (
 
   return {
     isVerificationCodeDisabled: isRequestPending || isResendCoolingDown,
+    isVerificationCodeConfirmDisabled,
     isVerificationCodeSent,
     isVerificationCodeConfirmed,
     handleRequestVerificationCode,

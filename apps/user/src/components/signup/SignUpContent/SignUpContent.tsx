@@ -33,6 +33,7 @@ const SignUpContent = () => {
     handleRequestVerificationCode,
     handleVerificationCodeConfirm,
     isVerificationCodeDisabled,
+    isVerificationCodeConfirmDisabled,
     isVerificationCodeConfirmed,
     isVerificationCodeSent,
   } = useVerificationCodeAction(signUp, startTimer);
@@ -84,7 +85,7 @@ const SignUpContent = () => {
               setTimerTime={setTimerTime}
               isError={!(signUp.code.length === 6)}
               buttonText="인증번호 확인"
-              enabled={isVerificationCodeConfirmed}
+              enabled={isVerificationCodeConfirmDisabled}
               placeholder="인증번호를 입력해주세요."
             />
           )}
