@@ -1,7 +1,7 @@
 const SESSION_CLEAR_URL = '/session/clear';
 
 export const isSessionExpiredStatus = (status?: number) =>
-  status === 401 || status === 403;
+  status !== undefined && status >= 400 && status < 500;
 
 /**
  * 서버에서 이미 만료된 토큰 쿠키가 브라우저에 남아 있으면
