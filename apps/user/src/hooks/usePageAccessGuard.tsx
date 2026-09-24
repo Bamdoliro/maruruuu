@@ -7,7 +7,8 @@ import { Text } from '@maru/ui';
 import { useAuthState } from '@maru/hooks';
 import { ROUTES } from '@/constants/common/constants';
 import { AlertStyleModal, NeedLoginModal } from '@/components/common';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
+import useSessionExpired from './useSessionExpired';
 
 interface GuardOptions {
   period?: { start: Dayjs; end: Dayjs };
@@ -24,24 +25,28 @@ const usePageAccessGuard = (options: GuardOptions) => {
   const initialIsLoggedIn = useRef(isLoggedIn);
   const initialOptions = useRef(options);
 
+  const openNeedLoginModal = useCallback(() => {
+    overlay.open(({ close, isOpen }) => (
+      <NeedLoginModal
+        isOpen={isOpen}
+        onClose={() => {
+          router.replace(ROUTES.MAIN);
+          close();
+        }}
+        onConfirm={() => {
+          router.replace(ROUTES.LOGIN);
+          close();
+        }}
+      />
+    ));
+  }, [overlay, router]);
+
   useEffect(() => {
     const now = dayjs();
     const guardOptions = initialOptions.current;
 
     if (!initialIsLoggedIn.current) {
-      overlay.open(({ close, isOpen }) => (
-        <NeedLoginModal
-          isOpen={isOpen}
-          onClose={() => {
-            router.replace(ROUTES.MAIN);
-            close();
-          }}
-          onConfirm={() => {
-            router.replace(ROUTES.LOGIN);
-            close();
-          }}
-        />
-      ));
+      openNeedLoginModal();
     } else if (
       !guardOptions.bypassPeriod &&
       !now.isBetween(guardOptions.period?.start, guardOptions.period?.end, 'hour', '[]')
@@ -63,7 +68,9 @@ const usePageAccessGuard = (options: GuardOptions) => {
         />
       ));
     }
-  }, [router, overlay]);
+  }, [router, overlay, openNeedLoginModal]);
+
+  useSessionExpired(openNeedLoginModal);
 };
 
 export default usePageAccessGuard;

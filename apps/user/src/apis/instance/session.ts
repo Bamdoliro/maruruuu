@@ -1,7 +1,7 @@
 const SESSION_CLEAR_URL = '/session/clear';
 
 export const isSessionExpiredStatus = (status?: number) =>
-  status === 401 || status === 403;
+  status !== undefined && status >= 400 && status < 500;
 
 /**
  * 서버에서 이미 만료된 토큰 쿠키가 브라우저에 남아 있으면
@@ -17,4 +17,10 @@ export const clearStaleSession = async () => {
   } catch {
     // 쿠키 정리는 부가 작업이므로 실패해도 이후 흐름을 막지 않는다.
   }
+};
+
+export const SESSION_EXPIRED_EVENT = 'maru:session-expired';
+
+export const notifySessionExpired = () => {
+  window.dispatchEvent(new Event(SESSION_EXPIRED_EVENT));
 };
