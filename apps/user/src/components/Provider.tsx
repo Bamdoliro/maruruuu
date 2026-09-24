@@ -7,7 +7,8 @@ import type { ReactNode } from 'react';
 import { Provider as JotaiProvider } from 'jotai';
 import { Suspense } from 'react';
 import { MobileProvider } from './common';
-import { AuthStateProvider, useToast } from '@maru/hooks';
+import { AuthStateProvider, useAuthState, useToast } from '@maru/hooks';
+import { useSessionExpired } from '@/hooks';
 import styled from '@emotion/styled';
 
 interface Props {
@@ -34,6 +35,14 @@ const GlobalToast = () => {
       ))}
     </StyledToastContainer>
   );
+};
+
+const SessionExpiredHandler = () => {
+  const { setIsLoggedIn } = useAuthState();
+
+  useSessionExpired(() => setIsLoggedIn(false));
+
+  return null;
 };
 
 const StyledToastContainer = styled.div`
@@ -77,6 +86,7 @@ const Provider = ({ children, initialLoggedIn }: Props) => {
   return (
     <JotaiProvider>
       <AuthStateProvider initialLoggedIn={initialLoggedIn}>
+        <SessionExpiredHandler />
         <OverlayProvider>
           <GlobalStyle />
           <MobileProvider>

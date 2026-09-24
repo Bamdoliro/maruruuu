@@ -18,3 +18,9 @@ export const clearStaleSession = async () => {
     // 쿠키 정리는 부가 작업이므로 실패해도 이후 흐름을 막지 않는다.
   }
 };
+
+export const SESSION_EXPIRED_EVENT = 'maru:session-expired';
+
+export const notifySessionExpired = () => {
+  window.dispatchEvent(new Event(SESSION_EXPIRED_EVENT));
+};

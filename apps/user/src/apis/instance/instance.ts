@@ -1,7 +1,10 @@
-import { ROUTES } from '@/constants/common/constants';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import { clearStaleSession, isSessionExpiredStatus } from './session';
+import {
+  clearStaleSession,
+  isSessionExpiredStatus,
+  notifySessionExpired,
+} from './session';
 
 export const maru = axios.create({
   baseURL: '/api',
@@ -88,10 +91,7 @@ maru.interceptors.response.use(
 
         if (isSessionExpiredStatus(refreshStatus)) {
           await clearStaleSession();
-        }
-
-        if (window.location.pathname !== ROUTES.LOGIN) {
-          window.location.href = ROUTES.LOGIN;
+          notifySessionExpired();
         }
 
         return Promise.reject(refreshError);
