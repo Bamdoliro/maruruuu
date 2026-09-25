@@ -1,11 +1,4 @@
-import {
-  Button,
-  ButtonInput,
-  Column,
-  Input,
-  PreviewInput,
-  TimeLimitInput,
-} from '@maru/ui';
+import { Button, ButtonInput, Column, PreviewInput, TimeLimitInput } from '@maru/ui';
 import { Validate } from '@/components/signup';
 
 import {
@@ -36,13 +29,6 @@ const PasswordContent = () => {
   return (
     <Column gap={128}>
       <Column gap={32}>
-        <Input
-          label="이름"
-          placeholder="예) 홍길동"
-          width="100%"
-          name="name"
-          onChange={handleChangePasswordChange}
-        />
         <ButtonInput
           label="전화번호 인증"
           placeholder="- 없이 입력해주세요."
