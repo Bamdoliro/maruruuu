@@ -42,10 +42,11 @@ export const useEducationForm = () => {
   };
 
   const handlePreviousStep = () => {
+    setErrors({});
+    setFormStep('보호자정보');
+
     try {
       EducationSchema.parse(form.education);
-      setErrors({});
-      setFormStep('보호자정보');
       saveFormMutate(form);
     } catch (err) {
       if (err instanceof z.ZodError) {
