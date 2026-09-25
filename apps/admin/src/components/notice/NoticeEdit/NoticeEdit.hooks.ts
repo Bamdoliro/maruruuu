@@ -41,7 +41,9 @@ export const useNoticeEditData = (id: number) => {
     }
   };
 
-  useEffect(() => resizeTextarea(contentTextareaRef), []);
+  useEffect(() => {
+    resizeTextarea(contentTextareaRef);
+  }, [noticeData.content]);
 
   return {
     noticeData,
