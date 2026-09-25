@@ -40,12 +40,33 @@ const processQueue = (error: unknown) => {
   failedQueue = [];
 };
 
+const REFRESH_URL = '/auth';
+
+const REFRESH_EXCLUDED_REQUESTS = [
+  { url: REFRESH_URL, method: 'patch' },
+  { url: REFRESH_URL, method: 'post' },
+];
+
+const isRefreshExcluded = (config?: AxiosRequestConfig) =>
+  REFRESH_EXCLUDED_REQUESTS.some(
+    ({ url, method }) => config?.url === url && config?.method?.toLowerCase() === method,
+  );
+
 const handleRefreshAndRetry = async (error: AxiosError, instance: typeof maru) => {
   const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+
+  if (isRefreshExcluded(originalRequest)) {
+    return Promise.reject(error);
+  }
 
   const isTokenExpired = error.response?.status === 401 && !originalRequest._retry;
 
   if (isTokenExpired) {
+    // 재발급 후 재시도할 요청임을 먼저 표시한다.
+    // 큐에 들어가는 요청도 재시도 대상이므로 여기서 표시해야
+    // 재시도가 또 401이 났을 때 재발급을 반복하지 않는다.
+    originalRequest._retry = true;
+
     if (isRefreshing) {
       return new Promise((resolve, reject) => {
         failedQueue.push({
@@ -55,11 +76,10 @@ const handleRefreshAndRetry = async (error: AxiosError, instance: typeof maru) =
       });
     }
 
-    originalRequest._retry = true;
     isRefreshing = true;
 
     try {
-      await maru.patch('/auth');
+      await maru.patch(REFRESH_URL);
       processQueue(null);
       return instance(originalRequest);
     } catch (refreshError) {
