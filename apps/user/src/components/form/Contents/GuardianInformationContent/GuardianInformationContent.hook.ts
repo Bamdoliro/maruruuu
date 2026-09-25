@@ -55,10 +55,11 @@ export const useGuardianForm = () => {
   };
 
   const handlePreviousStep = () => {
+    setErrors({});
+    setFormStep('지원자정보');
+
     try {
       GuardianSchema.parse(form.parent);
-      setErrors({});
-      setFormStep('지원자정보');
       saveFormMutate(form);
     } catch (err) {
       if (err instanceof z.ZodError) {
