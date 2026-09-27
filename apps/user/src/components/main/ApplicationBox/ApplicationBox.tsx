@@ -1,15 +1,27 @@
 import { ROUTES } from '@/constants/common/constants';
+import { useFairListQuery } from '@/services/fair/queries';
+import { formatMonthDay } from '@/utils';
 import { color } from '@maru/design-system';
 import { IconArrowOutward } from '@maru/icon';
 import { Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import styled from '@emotion/styled';
 
 const ApplicationBox = () => {
-  const date = '7월 8일, 8월 26일, 9월 16일, 10월 4일';
-  const place = '본교 SRC관 1층';
   const router = useRouter();
+  const { data: fairListData } = useFairListQuery('STUDENT_AND_PARENT');
+
+  const fairList = (fairListData ?? [])
+    .map((fair) => ({ ...fair, startDate: dayjs(fair.start) }))
+    .filter(({ startDate }) => startDate.isValid())
+    .sort((a, b) => a.startDate.valueOf() - b.startDate.valueOf());
+
+  const date = Array.from(
+    new Set(fairList.map(({ startDate }) => formatMonthDay(startDate))),
+  ).join(', ');
+  const place = Array.from(new Set(fairList.map(({ place }) => place))).join(', ');
 
   const handleMoveFairPage = () => {
     router.push(ROUTES.FAIR);
@@ -24,8 +36,14 @@ const ApplicationBox = () => {
         <IconArrowOutward width={36} height={36} color={color.maruDefault} />
       </Row>
       <Text fontType="p2" color={color.gray500}>
-        일시: {date} <br />
-        장소: {place}
+        {fairList.length > 0 ? (
+          <>
+            일시: {date} <br />
+            장소: {place}
+          </>
+        ) : (
+          '현재 등록된 입학 설명회가 없습니다.'
+        )}
       </Text>
     </StyledApplicationBox>
   );
