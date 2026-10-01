@@ -36,6 +36,10 @@ export const SCHEDULE = {
   점검_끝: dayjs(process.env.NEXT_PUBLIC_INSPECTION_END_DAY),
 };
 
+export const FLAG = {
+  테스트_진행: process.env.NEXT_PUBLIC_TEST_ENABLED === 'true',
+};
+
 export const KEY = {
   NOTICE_LIST: 'useNoticeList',
   NOTICE_DETAIL: 'useNoticeDetail',
