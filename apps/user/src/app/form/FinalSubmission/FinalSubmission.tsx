@@ -1,5 +1,6 @@
 import {
   FinalFormConfirm,
+  FinalFormOrderCheckConfirm,
   FinalFormTable,
   FinalFormUploader,
   FormDownload,
@@ -31,6 +32,19 @@ const FinalSubmission = () => {
   );
   const { handleFormDocumentChange, final } = useInput();
 
+  const openFinalFormCheckConfirm = () => {
+    overlay.open(({ isOpen, close }) => (
+      <FinalFormOrderCheckConfirm
+        isOpen={isOpen}
+        onClose={close}
+        onConfirm={() => {
+          close();
+          openFinalFormConfirm();
+        }}
+      />
+    ));
+  };
+
   const openFinalFormConfirm = () => {
     overlay.open(({ isOpen, close }) => (
       <FinalFormConfirm
@@ -58,7 +72,7 @@ const FinalSubmission = () => {
             <FinalFormTable />
           </Column>
           <SideBar
-            onClick={openFinalFormConfirm}
+            onClick={openFinalFormCheckConfirm}
             styleType={!final.fileName ? 'DISABLED' : 'PRIMARY'}
           />
         </Row>
