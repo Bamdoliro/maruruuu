@@ -125,7 +125,7 @@ export type Certificate =
   | 'COMPUTER_SPECIALIST_LEVEL_1'
   | 'CRAFTSMAN_PROGRAMMING'
   | 'CRAFTSMAN_EMBEDDED'
-  | 'CRAFTSMAN_COMPUTER';
+  | 'CRAFTSMAN_INFORMATION_EQUIPMENT_OPERATION';
 
 export interface Incomplete {
   [subjectName: string]: {
