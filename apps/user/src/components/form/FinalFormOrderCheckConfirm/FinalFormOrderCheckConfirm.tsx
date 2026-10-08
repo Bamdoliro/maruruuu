@@ -137,13 +137,15 @@ const FinalFormOrderCheckConfirm = ({
   );
 };
 
+export default FinalFormOrderCheckConfirm;
+
 const ScrollArea = styled.div`
   ${flex({ flexDirection: 'column' })}
   gap: 28px;
   width: 100%;
   max-height: 300px;
   overflow-y: auto;
-  padding-right: 12px; /* 스크롤바랑 글자 안 붙게 */
+  padding-right: 12px;
 `;
 
 const Section = styled.div`
@@ -206,5 +208,3 @@ const Note = styled.li<{ $isPoint?: boolean }>`
     left: 0;
   }
 `;
-
-export default FinalFormOrderCheckConfirm;
