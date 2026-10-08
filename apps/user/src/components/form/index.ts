@@ -20,4 +20,5 @@ export { default as FormDownload } from './FormDownload/FormDownload';
 export { default as FinalFormTable } from './FinalFormTable/FinalFormTable';
 export { default as FinalFormUploader } from './FinalFormUploader/FinalFormUploader';
 export { default as FinalFormConfirm } from './FinalFormConfirm/FinalFormConfirm';
+export { default as FinalFormOrderCheckConfirm } from './FinalFormOrderCheckConfirm/FinalFormOrderCheckConfirm';
 export { default as PdfDownloadLoader } from './PdfDownloadLoader/PdfDownloadLoader';
