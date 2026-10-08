@@ -13,7 +13,6 @@ import { SCHEDULE } from '@/constants/common/constants';
 const Management = () => {
   usePageAccessGuard({
     period: { start: SCHEDULE.원서_접수, end: SCHEDULE.입학_등록_마감 },
-    bypassPeriod: true,
     title: '입학 전형 기간이 아닙니다',
     content:
       '입학 전형 기간에만 원서 관리가 가능합니다.\n입학 전형 기간에만 접속해주세요.',
