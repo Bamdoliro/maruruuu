@@ -42,7 +42,7 @@ export interface Form {
   name: string;
   birthday: string;
   graduationType: GraduationType;
-  school: string;
+  school: string | null;
   status: FormStatus;
   type: FormType;
   isChangedToRegular: boolean;

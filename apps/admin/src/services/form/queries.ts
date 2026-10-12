@@ -27,7 +27,7 @@ export const useFormListQuery = () => {
     if (!data?.dataList) return undefined;
     if (!schoolSearch) return data.dataList;
 
-    return data.dataList.filter((form) => form.school.includes(schoolSearch));
+    return data.dataList.filter((form) => (form.school ?? '').includes(schoolSearch));
   }, [data?.dataList, schoolSearch]);
 
   return { data: filteredData, ...restQuery };
