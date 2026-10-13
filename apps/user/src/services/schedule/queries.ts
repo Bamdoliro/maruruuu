@@ -13,6 +13,8 @@ const selectSchedule = ({ data }: ScheduleRes) => ({
   최종_합격_발표: dayjs(data.announcementOfSecondPass),
   입학_등록: dayjs(data.entranceRegistrationPeriodStart),
   입학_등록_마감: dayjs(data.entranceRegistrationPeriodEnd),
+  점검_시작: dayjs(data.maintenanceStart),
+  점검_끝: dayjs(data.maintenanceEnd),
 });
 
 export type Schedule = ReturnType<typeof selectSchedule>;

@@ -10,6 +10,8 @@ export interface ScheduleRes {
     announcementOfSecondPass: string;
     entranceRegistrationPeriodStart: string;
     entranceRegistrationPeriodEnd: string;
+    maintenanceStart: string | null;
+    maintenanceEnd: string | null;
   };
 }
 
