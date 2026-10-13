@@ -5,10 +5,11 @@ import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import { color } from '@maru/design-system';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 import { formatScheduleDate } from '@/utils';
 
 const InspectionPage = () => {
+  const schedule = useSchedule();
   return (
     <AppLayout>
       <StyledErrorPage>
@@ -23,7 +24,7 @@ const InspectionPage = () => {
             사용에 불편을 드려 죄송합니다.
           </Text>
           <Text fontType="p1" color={color.red} textAlign="center">
-            일시: {formatScheduleDate([SCHEDULE.점검_시작, SCHEDULE.점검_끝], 'SCHEDULE')}
+            일시: {formatScheduleDate([schedule.점검_시작, schedule.점검_끝], 'SCHEDULE')}
           </Text>
         </Column>
       </StyledErrorPage>
