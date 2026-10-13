@@ -11,11 +11,12 @@ import { useFormStatusQuery } from '@/services/form/queries';
 import { entrollmentDocumentAtom } from '@/stores';
 import { useAtom } from 'jotai';
 import { useUploadDocumentMutation } from '@/services/enrollment/mutations';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 const Enrollment = () => {
+  const schedule = useSchedule();
   usePageAccessGuard({
-    period: { start: SCHEDULE.입학_등록, end: SCHEDULE.입학_등록_마감 },
+    period: { start: schedule.입학_등록, end: schedule.입학_등록_마감 },
     title: '입학 등록 기간이 아닙니다',
     content:
       '입학 등록 기간에만 접속이 가능합니다.\n입학 등록 기간까지 조금만 기다려 주세요.',

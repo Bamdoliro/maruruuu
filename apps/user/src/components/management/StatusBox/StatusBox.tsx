@@ -1,4 +1,5 @@
 import { useUser } from '@/hooks';
+import { useSchedule } from '@/services/schedule/queries';
 import { color, font } from '@maru/design-system';
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -12,8 +13,9 @@ interface StatusBoxProps {
 }
 
 const StatusBox = ({ height, status }: StatusBoxProps) => {
+  const schedule = useSchedule();
   const { userData } = useUser();
-  const { text, scriptParts } = getStatusConfig(status);
+  const { text, scriptParts } = getStatusConfig(schedule, status);
 
   return (
     <StyledStatusBox height={height}>

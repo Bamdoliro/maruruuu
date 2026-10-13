@@ -15,11 +15,12 @@ import DraftSubmissionCompleted from './DraftSubmissionCompleted/DraftSubmission
 import FinalSubmission from './FinalSubmission/FinalSubmission';
 import FinalSubmissionCompleted from './FinalSubmissionCompleted/FinalSubmissionCompleted';
 import { usePageAccessGuard } from '@/hooks';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 const Form = () => {
+  const schedule = useSchedule();
   usePageAccessGuard({
-    period: { start: SCHEDULE.원서_접수, end: SCHEDULE.원서_접수_마감 },
+    period: { start: schedule.원서_접수, end: schedule.원서_접수_마감 },
     // TODO: 원서접수 기간 검증 임시 우회. 재적용 시 이 줄 제거
     bypassPeriod: true,
     title: '원서 접수 기간이 아닙니다',

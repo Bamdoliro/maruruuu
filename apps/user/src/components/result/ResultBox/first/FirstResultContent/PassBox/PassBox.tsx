@@ -4,9 +4,10 @@ import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import { useCTAButton } from '../FirstResultContent.hook';
 import formatMonthDay from '@/utils/formatMonthDay';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 const PassBox = () => {
+  const schedule = useSchedule();
   const {
     handleMoveMainPage,
     handleDownloadAdmissionsGuideline,
@@ -17,7 +18,7 @@ const PassBox = () => {
     <StyledPassBox>
       <Column gap={24} alignItems="center">
         <Text fontType="p1" color={color.gray900} textAlign="center">
-          2단계 전형 응시를 위해 수험표를 출력하고 {formatMonthDay(SCHEDULE.이차_면접)}에
+          2단계 전형 응시를 위해 수험표를 출력하고 {formatMonthDay(schedule.이차_면접)}에
           본교에 방문해주시기 바랍니다.
           <br />
           자세한 내용은 입학 요강에서 확인해주시기 바랍니다.

@@ -6,15 +6,16 @@ import { useMobile } from './Mobile.hook';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import { formatResultDateTime, formatYear } from '@/utils';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 dayjs.extend(isBetween);
 
 const MobileMain = () => {
+  const schedule = useSchedule();
   const { handleMoveStep } = useMobile('RESULT');
   const now = dayjs();
-  const first = now.isBetween(SCHEDULE.일차_합격_발표, SCHEDULE.이차_면접);
-  const final = now.isBetween(SCHEDULE.최종_합격_발표, SCHEDULE.입학_등록);
+  const first = now.isBetween(schedule.일차_합격_발표, schedule.이차_면접);
+  const final = now.isBetween(schedule.최종_합격_발표, schedule.입학_등록);
 
   return (
     <StyledMobileMain>
@@ -24,7 +25,7 @@ const MobileMain = () => {
         <Column alignItems="center" gap={40}>
           <Column alignItems="center" gap={4}>
             <Text fontType="p3" color={color.gray900}>
-              {formatYear(SCHEDULE.원서_접수, true)}학년도 부산소프트웨어마이스터고등학교
+              {formatYear(schedule.원서_접수, true)}학년도 부산소프트웨어마이스터고등학교
             </Text>
             <Text fontType="H3" color={color.gray900}>
               {first && '1차 합격자 발표'}
@@ -33,8 +34,8 @@ const MobileMain = () => {
           </Column>
           <MainBox>
             <Text fontType="p3" color={color.gray700}>
-              일시: {first && formatResultDateTime(SCHEDULE.일차_합격_발표)}
-              {final && formatResultDateTime(SCHEDULE.최종_합격_발표)}
+              일시: {first && formatResultDateTime(schedule.일차_합격_발표)}
+              {final && formatResultDateTime(schedule.최종_합격_발표)}
             </Text>
             <Text fontType="p3" color={color.gray700}>
               모집 정원:{' '}

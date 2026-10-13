@@ -1,4 +1,5 @@
-import { KEY, SCHEDULE } from '@/constants/common/constants';
+import { KEY } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 import { useQuery } from '@tanstack/react-query';
 import { getAdmissionTicket, getFinalResult, getFirstResult } from './api';
 import dayjs from 'dayjs';
@@ -31,13 +32,14 @@ export const useFinalResultQuery = () => {
 };
 
 export const useDownloadAdmissionTicketQuery = () => {
+  const schedule = useSchedule();
   const day = dayjs();
   const { isLoggedIn } = useAuthState();
 
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.ADMISSION_TICKET] as const,
     queryFn: getAdmissionTicket,
-    enabled: isLoggedIn && day.isBetween(SCHEDULE.일차_합격_발표, SCHEDULE.이차_면접),
+    enabled: isLoggedIn && day.isBetween(schedule.일차_합격_발표, schedule.이차_면접),
     retry: false,
   });
 

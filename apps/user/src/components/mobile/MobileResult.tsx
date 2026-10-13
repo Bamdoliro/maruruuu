@@ -6,11 +6,12 @@ import isBetween from 'dayjs/plugin/isBetween';
 import dayjs from 'dayjs';
 import FirstResult from './MobileResult/first/FirstResult';
 import FinalResult from './MobileResult/final/FinalResult';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 dayjs.extend(isBetween);
 
 const MobileResult = () => {
+  const schedule = useSchedule();
   const now = dayjs();
 
   return (
@@ -18,8 +19,8 @@ const MobileResult = () => {
       <Column gap={36.4} alignItems="center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/svg/maruLogo.svg" width={152} height={46} alt="logo" loading="lazy" />
-        {now.isBetween(SCHEDULE.일차_합격_발표, SCHEDULE.이차_면접) && <FirstResult />}
-        {now.isBetween(SCHEDULE.최종_합격_발표, SCHEDULE.입학_등록) && <FinalResult />}
+        {now.isBetween(schedule.일차_합격_발표, schedule.이차_면접) && <FirstResult />}
+        {now.isBetween(schedule.최종_합격_발표, schedule.입학_등록) && <FinalResult />}
       </Column>
     </StyledMobileResult>
   );

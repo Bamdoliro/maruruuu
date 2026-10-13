@@ -8,14 +8,16 @@ import isBetween from 'dayjs/plugin/isBetween';
 import ProcessEndBox from './ProcessEndDox/ProcessEndDox';
 import ApplicationPeriodBox from './ApplicationPeriodBox/ApplicationPeriodBox';
 import TestPeriodBox from './TestPeriodBox/TestPeriodBox';
-import { SCHEDULE, FLAG } from '@/constants/common/constants';
+import { FLAG } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 dayjs.extend(isBetween);
 
 const AdmissionTimelineBox = () => {
+  const schedule = useSchedule();
   const isTestEnabled = FLAG.테스트_진행;
-  const isSubmitPeriod = dayjs().isBetween(SCHEDULE.원서_접수, SCHEDULE.원서_접수_마감);
-  const isAfterRegistrationEnd = dayjs().isAfter(SCHEDULE.입학_등록_마감);
+  const isSubmitPeriod = dayjs().isBetween(schedule.원서_접수, schedule.원서_접수_마감);
+  const isAfterRegistrationEnd = dayjs().isAfter(schedule.입학_등록_마감);
 
   const renderTimelineContent = () => {
     if (isTestEnabled) return <TestPeriodBox />;

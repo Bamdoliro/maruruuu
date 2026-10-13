@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
-import { SCHEDULE } from '@/constants/common/constants';
+import type { Schedule } from '@/services/schedule/queries';
 
-export const getStatusConfig = (status?: string) => {
+export const getStatusConfig = (schedule: Schedule, status?: string) => {
   const now = dayjs();
 
-  const firstResult = now.isAfter(SCHEDULE.일차_합격_발표);
-  const finalResult = now.isAfter(SCHEDULE.최종_합격_발표);
+  const firstResult = now.isAfter(schedule.일차_합격_발표);
+  const finalResult = now.isAfter(schedule.최종_합격_발표);
 
   const statusConfig = {
     APPROVED: {

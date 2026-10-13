@@ -3,15 +3,16 @@ import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 const ExplainBox = () => {
+  const schedule = useSchedule();
   return (
     <StyledExplainBox>
       <Text fontType="p2" color={color.gray900}>
         기간 내에 서류를 제출하지 않으면 자동으로 <b>입학 포기 처리</b>됩니다.
         <br />
-        입학을 포기할 경우, {formatYear(SCHEDULE.원서_접수, true)}학년도에는 타 학교
+        입학을 포기할 경우, {formatYear(schedule.원서_접수, true)}학년도에는 타 학교
         진학이 불가합니다.
       </Text>
       <Text fontType="p2" color={color.gray900}>

@@ -10,10 +10,11 @@ import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import isBetween from 'dayjs/plugin/isBetween';
 import { useToast } from '@maru/hooks';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 dayjs.extend(isBetween);
 
 export const useMobile = (step: Step) => {
+  const schedule = useSchedule();
   const [login, setLogin] = useState<PostLoginReq>({
     phoneNumber: '',
     password: '',
@@ -49,7 +50,7 @@ export const useMobile = (step: Step) => {
   };
 
   const handleLogin = () => {
-    if (!now.isBetween(SCHEDULE.일차_합격_발표, SCHEDULE.입학_등록)) {
+    if (!now.isBetween(schedule.일차_합격_발표, schedule.입학_등록)) {
       toast('아직 합격 발표일이 아닙니다!', 'ERROR', 'MOBILE');
       return;
     }
