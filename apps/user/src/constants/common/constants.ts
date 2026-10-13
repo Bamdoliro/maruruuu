@@ -54,4 +54,5 @@ export const KEY = {
   EXPORT_RECEIPT: 'useExportReceipt',
   SAVE_FORM: 'useSaveForm',
   SCHOOL_LIST: 'useSchoolList',
+  SCHEDULE: 'useSchedule',
 };

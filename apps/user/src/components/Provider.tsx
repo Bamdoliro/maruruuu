@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 import { MobileProvider } from './common';
 import { AuthStateProvider, useAuthState, useToast } from '@maru/hooks';
 import { useSessionExpired } from '@/hooks';
+import { useScheduleQuery } from '@/services/schedule/queries';
 import styled from '@emotion/styled';
 
 interface Props {
@@ -43,6 +44,15 @@ const SessionExpiredHandler = () => {
   useSessionExpired(() => setIsLoggedIn(false));
 
   return null;
+};
+
+const ScheduleGate = ({ children }: { children: ReactNode }) => {
+  const { data, isError } = useScheduleQuery();
+
+  if (isError) return <div></div>;
+  if (!data) return <Loader />;
+
+  return <>{children}</>;
 };
 
 const StyledToastContainer = styled.div`
@@ -89,9 +99,11 @@ const Provider = ({ children, initialLoggedIn }: Props) => {
         <SessionExpiredHandler />
         <OverlayProvider>
           <GlobalStyle />
-          <MobileProvider>
-            <Suspense fallback={<Loader />}>{children}</Suspense>
-          </MobileProvider>
+          <ScheduleGate>
+            <MobileProvider>
+              <Suspense fallback={<Loader />}>{children}</Suspense>
+            </MobileProvider>
+          </ScheduleGate>
           <GlobalToast />
         </OverlayProvider>
       </AuthStateProvider>
