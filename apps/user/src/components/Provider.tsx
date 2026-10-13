@@ -49,7 +49,7 @@ const SessionExpiredHandler = () => {
 const ScheduleGate = ({ children }: { children: ReactNode }) => {
   const { data, isError } = useScheduleQuery();
 
-  if (isError) return <div></div>;
+  if (isError) return;
   if (!data) return <Loader />;
 
   return <>{children}</>;
