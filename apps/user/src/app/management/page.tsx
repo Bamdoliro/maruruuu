@@ -8,11 +8,12 @@ import { Loader, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { Suspense } from 'react';
 import styled from '@emotion/styled';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 const Management = () => {
+  const schedule = useSchedule();
   usePageAccessGuard({
-    period: { start: SCHEDULE.원서_접수, end: SCHEDULE.입학_등록_마감 },
+    period: { start: schedule.원서_접수, end: schedule.입학_등록_마감 },
     title: '입학 전형 기간이 아닙니다',
     content:
       '입학 전형 기간에만 원서 관리가 가능합니다.\n입학 전형 기간에만 접속해주세요.',

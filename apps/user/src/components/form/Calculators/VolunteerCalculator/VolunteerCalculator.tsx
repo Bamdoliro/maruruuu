@@ -5,7 +5,7 @@ import { CellInput, Column, Row, Td, Text, Th } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import { useInput } from './VolunteerCalculator.hook';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 import dayjs from 'dayjs';
 
 const formatDate = (date: string) => dayjs(date).format('YYYY.MM.DD');
@@ -14,10 +14,11 @@ const formatPeriod = (start: string, end: string) =>
 const februaryEnd = (year: number) => dayjs(`${year}-02-01`).endOf('month').format();
 
 const VolunteerCalculator = () => {
+  const schedule = useSchedule();
   const form = useAtomValue(formAtom);
   const { handleVolunteerTimeChange } = useInput();
 
-  const admissionYear = SCHEDULE.원서_접수.year();
+  const admissionYear = schedule.원서_접수.year();
   const volunteerData = [
     {
       grade: '1학년',

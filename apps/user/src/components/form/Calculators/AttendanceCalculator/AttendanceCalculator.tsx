@@ -9,14 +9,15 @@ import { useInput } from './AttendanceCalculator.hook';
 import AttendanceCalculatorItem from './AttendanceCalculatorItem/AttendanceCalculatorItem';
 import { ATTENDANCE_GRADE } from '@/constants/form/constants';
 import { formatYear } from '@/utils';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 const AttendanceCalculator = () => {
+  const schedule = useSchedule();
   const form = useAtomValue(formAtom);
   const { handleAttendanceInfoChange } = useInput();
 
   const isReadOnly = form.education.graduationType === 'QUALIFICATION_EXAMINATION';
-  const scoreEndYear = formatYear(SCHEDULE.원서_접수);
+  const scoreEndYear = formatYear(schedule.원서_접수);
 
   return (
     <StyledAttendanceCalculator>

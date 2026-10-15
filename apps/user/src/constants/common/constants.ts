@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 export const ROUTES = {
   MAIN: '/',
   FORM: '/form',
@@ -23,19 +21,6 @@ export const ROUTES = {
 
 export const AUTH_COOKIES = ['accessToken', 'refreshToken'] as const;
 
-export const SCHEDULE = {
-  원서_접수: dayjs(process.env.NEXT_PUBLIC_FORM_START),
-  원서_접수_마감: dayjs(process.env.NEXT_PUBLIC_FORM_END),
-  일차_합격_발표: dayjs(process.env.NEXT_PUBLIC_FIRST_RESULT),
-  이차_면접: dayjs(process.env.NEXT_PUBLIC_INTERVIEW_START),
-  이차_면접_종료: dayjs(process.env.NEXT_PUBLIC_INTERVIEW_END),
-  최종_합격_발표: dayjs(process.env.NEXT_PUBLIC_FINAL_RESULT),
-  입학_등록: dayjs(process.env.NEXT_PUBLIC_REGISTRATION_START),
-  입학_등록_마감: dayjs(process.env.NEXT_PUBLIC_REGISTRATION_END),
-  점검_시작: dayjs(process.env.NEXT_PUBLIC_INSPECTION_START_DAY),
-  점검_끝: dayjs(process.env.NEXT_PUBLIC_INSPECTION_END_DAY),
-};
-
 export const FLAG = {
   테스트_진행: process.env.NEXT_PUBLIC_TEST_ENABLED === 'true',
 };
@@ -54,4 +39,5 @@ export const KEY = {
   EXPORT_RECEIPT: 'useExportReceipt',
   SAVE_FORM: 'useSaveForm',
   SCHOOL_LIST: 'useSchoolList',
+  SCHEDULE: 'useSchedule',
 };

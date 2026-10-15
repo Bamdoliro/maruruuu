@@ -2,12 +2,13 @@ import { color, font } from '@maru/design-system';
 import { flex } from '@maru/utils';
 import type { CSSProperties } from 'react';
 import styled from '@emotion/styled';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 import { formatYear } from '@/utils';
 
 const FinalFormTable = () => {
-  const volunteerEndYear = formatYear(SCHEDULE.원서_접수);
-  const volunteerStartYear = formatYear(SCHEDULE.원서_접수.subtract(2, 'year'));
+  const schedule = useSchedule();
+  const volunteerEndYear = formatYear(schedule.원서_접수);
+  const volunteerStartYear = formatYear(schedule.원서_접수.subtract(2, 'year'));
 
   return (
     <StyledFinalFormTable>

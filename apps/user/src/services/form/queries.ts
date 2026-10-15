@@ -1,4 +1,5 @@
-import { KEY, SCHEDULE } from '@/constants/common/constants';
+import { KEY } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 import { useQuery } from '@tanstack/react-query';
 import {
   getExportForm,
@@ -27,13 +28,14 @@ export const useFormStatusQuery = () => {
 };
 
 export const useExportFormQuery = () => {
+  const schedule = useSchedule();
   const day = dayjs();
   const { isLoggedIn } = useAuthState();
 
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.EXPORT_FORM],
     queryFn: getExportForm,
-    enabled: isLoggedIn && day.isBetween(SCHEDULE.원서_접수, SCHEDULE.원서_접수_마감),
+    enabled: isLoggedIn && day.isBetween(schedule.원서_접수, schedule.원서_접수_마감),
     retry: false,
   });
 
@@ -41,13 +43,14 @@ export const useExportFormQuery = () => {
 };
 
 export const useExportReceiptQuery = () => {
+  const schedule = useSchedule();
   const day = dayjs();
   const { isLoggedIn } = useAuthState();
 
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.EXPORT_RECEIPT],
     queryFn: getExportReceipt,
-    enabled: isLoggedIn && day.isBetween(SCHEDULE.원서_접수, SCHEDULE.원서_접수_마감),
+    enabled: isLoggedIn && day.isBetween(schedule.원서_접수, schedule.원서_접수_마감),
     retry: false,
   });
 

@@ -1,4 +1,4 @@
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 import {
   IconCancelCircle,
   IconCheckCircle,
@@ -12,10 +12,11 @@ interface StatusIconProps {
 }
 
 const StatusIcon = ({ status }: StatusIconProps) => {
+  const schedule = useSchedule();
   const now = dayjs();
 
-  const firstResult = now.isAfter(SCHEDULE.일차_합격_발표);
-  const finalResult = now.isAfter(SCHEDULE.최종_합격_발표);
+  const firstResult = now.isAfter(schedule.일차_합격_발표);
+  const finalResult = now.isAfter(schedule.최종_합격_발표);
 
   const iconMap = {
     RECEIVED: <IconCheckCircle width={120} height={120} />,

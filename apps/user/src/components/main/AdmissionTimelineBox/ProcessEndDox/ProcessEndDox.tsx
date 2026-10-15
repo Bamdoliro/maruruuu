@@ -2,10 +2,12 @@ import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
+import { useSchedule } from '@/services/schedule/queries';
 import { processEnd } from './ProcessEndDox.helper';
 
 const ProcessEndBox = () => {
-  const { today, startDate, overDay } = processEnd();
+  const schedule = useSchedule();
+  const { today, startDate, overDay } = processEnd(schedule);
 
   return (
     <StyledDdayBox>

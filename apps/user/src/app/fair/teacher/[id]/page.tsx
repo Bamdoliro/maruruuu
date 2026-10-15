@@ -8,13 +8,14 @@ import { color } from '@maru/design-system';
 import { Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 interface FairTeacherApplicationProps {
   params: { id: number };
 }
 
 const FairTeacherApplication = ({ params: { id } }: FairTeacherApplicationProps) => {
+  const schedule = useSchedule();
   const { data: fairListData } = useFairListQuery('TEACHER');
 
   const numericId = Number(id);
@@ -27,7 +28,7 @@ const FairTeacherApplication = ({ params: { id } }: FairTeacherApplicationProps)
       <StyledFairTeacherApplication>
         <Column gap={36}>
           <Text fontType="H1" color={color.gray900}>
-            {formatYear(SCHEDULE.원서_접수, true)}학년도 부산소프트웨어마이스터고등학교
+            {formatYear(schedule.원서_접수, true)}학년도 부산소프트웨어마이스터고등학교
             <br />
             입학전형 설명회 참가 신청 (교사)
           </Text>

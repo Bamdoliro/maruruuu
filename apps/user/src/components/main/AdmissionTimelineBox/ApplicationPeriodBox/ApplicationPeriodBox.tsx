@@ -4,9 +4,10 @@ import { color } from '@maru/design-system';
 import styled from '@emotion/styled';
 import { flex } from '@maru/utils';
 import { formatYear } from '@/utils';
-import { SCHEDULE } from '@/constants/common/constants';
+import { useSchedule } from '@/services/schedule/queries';
 
 const ApplicationPeriodBox = () => {
+  const schedule = useSchedule();
   const { applicationStart, applicationEnd, handleMoveFormPage } = useSchoolRecruitDate();
 
   return (
@@ -14,7 +15,7 @@ const ApplicationPeriodBox = () => {
       <Column gap={36}>
         <Text fontType="H1" color={color.white}>
           부산소프트웨어마이스터고등학교 <br />
-          {formatYear(SCHEDULE.원서_접수, true)}학년도 신입생 모집
+          {formatYear(schedule.원서_접수, true)}학년도 신입생 모집
         </Text>
         <Text fontType="p2" color={color.gray300}>
           {applicationStart} ~ {applicationEnd}
