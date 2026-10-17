@@ -29,11 +29,10 @@ export const useSignUpAction = (signUpData: SignUp, termsAgree: boolean) => {
 };
 
 const RESEND_COOLDOWN_MS = 5000;
+const VERIFICATION_CODE_EXPIRE_SECONDS = 300;
 
-export const useVerificationCodeAction = (
-  signUpData: SignUp,
-  onRequestSuccess?: () => void,
-) => {
+export const useVerificationCodeAction = (signUpData: SignUp) => {
+  const [timerTime, setTimerTime] = useState(0);
   const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
   const [isResendCoolingDown, setIsResendCoolingDown] = useState(false);
   const [isVerificationCodeConfirmed, setIsVerificationCodeConfirmed] = useState(false);
@@ -66,7 +65,7 @@ export const useVerificationCodeAction = (
         cooldownTimerRef.current = setTimeout(() => {
           setIsResendCoolingDown(false);
         }, RESEND_COOLDOWN_MS);
-        onRequestSuccess?.();
+        setTimerTime(VERIFICATION_CODE_EXPIRE_SECONDS);
       },
     });
   };
@@ -79,8 +78,11 @@ export const useVerificationCodeAction = (
     };
   }, []);
 
+  const isVerificationCodeExpired =
+    isVerificationCodeSent && !isVerificationCodeConfirmed && timerTime <= 0;
+
   const isVerificationCodeConfirmDisabled =
-    confirmMutation.isPending || isVerificationCodeConfirmed;
+    confirmMutation.isPending || isVerificationCodeConfirmed || isVerificationCodeExpired;
 
   const handleVerificationCodeConfirm = () => {
     if (isVerificationCodeConfirmDisabled) return;
@@ -103,7 +105,10 @@ export const useVerificationCodeAction = (
     isVerificationCodeDisabled: isRequestPending || isResendCoolingDown,
     isVerificationCodeConfirmDisabled,
     isVerificationCodeConfirmed,
+    isVerificationCodeExpired,
     isVerificationCodeSent,
+    timerTime,
+    setTimerTime,
   };
 };
 
