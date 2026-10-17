@@ -21,13 +21,7 @@ import { useState } from 'react';
 
 const SignUpContent = () => {
   const [termsAgree, setTermsAgree] = useState(false);
-  const [timerTime, setTimerTime] = useState(0);
-
   const { signUp, handleSignUpChange } = useInput();
-
-  const startTimer = () => {
-    setTimerTime(300);
-  };
 
   const {
     handleRequestVerificationCode,
@@ -35,8 +29,11 @@ const SignUpContent = () => {
     isVerificationCodeDisabled,
     isVerificationCodeConfirmDisabled,
     isVerificationCodeConfirmed,
+    isVerificationCodeExpired,
     isVerificationCodeSent,
-  } = useVerificationCodeAction(signUp, startTimer);
+    timerTime,
+    setTimerTime,
+  } = useVerificationCodeAction(signUp);
   const { handleSignUp } = useSignUpAction(signUp, termsAgree);
 
   return (
@@ -83,7 +80,12 @@ const SignUpContent = () => {
               onClick={handleVerificationCodeConfirm}
               timerTime={isVerificationCodeConfirmed ? 0 : timerTime}
               setTimerTime={setTimerTime}
-              isError={!(signUp.code.length === 6)}
+              isError={isVerificationCodeExpired || !(signUp.code.length === 6)}
+              errorMessage={
+                isVerificationCodeExpired
+                  ? '인증번호가 만료되었습니다. 재전송해주세요.'
+                  : undefined
+              }
               buttonText="인증번호 확인"
               disabled={isVerificationCodeConfirmDisabled}
               placeholder="인증번호를 입력해주세요."

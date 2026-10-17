@@ -6,25 +6,22 @@ import {
   useInput,
   useVerificationCodeAction,
 } from '@/components/password/passwordContent/passwordContent.hook';
-import { useState } from 'react';
 
 const PasswordContent = () => {
   const { changePassword, handleChangePasswordChange } = useInput();
-  const [timerTime, setTimerTime] = useState(0);
   const { handleChangePassword } = useChangePasswordAction(changePassword);
-
-  const startTimer = () => {
-    setTimerTime(300);
-  };
 
   const {
     isVerificationCodeDisabled,
     isVerificationCodeConfirmDisabled,
     isVerificationCodeSent,
     isVerificationCodeConfirmed,
+    isVerificationCodeExpired,
+    timerTime,
+    setTimerTime,
     handleRequestVerificationCode,
     handleVerificationConfirm,
-  } = useVerificationCodeAction(changePassword, startTimer);
+  } = useVerificationCodeAction(changePassword);
 
   return (
     <Column gap={128}>
@@ -54,7 +51,12 @@ const PasswordContent = () => {
             disabled={isVerificationCodeConfirmDisabled}
             timerTime={isVerificationCodeConfirmed ? 0 : timerTime}
             setTimerTime={setTimerTime}
-            isError={!(changePassword.code.length == 6)}
+            isError={isVerificationCodeExpired || !(changePassword.code.length == 6)}
+            errorMessage={
+              isVerificationCodeExpired
+                ? '인증번호가 만료되었습니다. 재전송해주세요.'
+                : undefined
+            }
             onChange={handleChangePasswordChange}
           />
         )}
