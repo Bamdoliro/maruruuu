@@ -30,6 +30,7 @@ const SignUpContent = () => {
     isVerificationCodeConfirmDisabled,
     isVerificationCodeConfirmed,
     isVerificationCodeExpired,
+    isVerificationCodeInvalidated,
     isVerificationCodeSent,
     timerTime,
     setTimerTime,
@@ -77,14 +78,21 @@ const SignUpContent = () => {
               maxLength={6}
               name="code"
               onChange={handleSignUpChange}
+              value={signUp.code}
               onClick={handleVerificationCodeConfirm}
               timerTime={isVerificationCodeConfirmed ? 0 : timerTime}
               setTimerTime={setTimerTime}
-              isError={isVerificationCodeExpired || !(signUp.code.length === 6)}
+              isError={
+                isVerificationCodeExpired ||
+                isVerificationCodeInvalidated ||
+                !(signUp.code.length === 6)
+              }
               errorMessage={
-                isVerificationCodeExpired
-                  ? '인증번호가 만료되었습니다. 재전송해주세요.'
-                  : undefined
+                isVerificationCodeInvalidated
+                  ? '인증번호가 폐기되었습니다. 재전송해주세요.'
+                  : isVerificationCodeExpired
+                    ? '인증번호가 만료되었습니다. 재전송해주세요.'
+                    : undefined
               }
               buttonText="인증번호 확인"
               disabled={isVerificationCodeConfirmDisabled}

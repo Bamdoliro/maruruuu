@@ -17,6 +17,7 @@ const PasswordContent = () => {
     isVerificationCodeSent,
     isVerificationCodeConfirmed,
     isVerificationCodeExpired,
+    isVerificationCodeInvalidated,
     timerTime,
     setTimerTime,
     handleRequestVerificationCode,
@@ -51,13 +52,20 @@ const PasswordContent = () => {
             disabled={isVerificationCodeConfirmDisabled}
             timerTime={isVerificationCodeConfirmed ? 0 : timerTime}
             setTimerTime={setTimerTime}
-            isError={isVerificationCodeExpired || !(changePassword.code.length == 6)}
+            isError={
+              isVerificationCodeExpired ||
+              isVerificationCodeInvalidated ||
+              !(changePassword.code.length == 6)
+            }
             errorMessage={
-              isVerificationCodeExpired
-                ? '인증번호가 만료되었습니다. 재전송해주세요.'
-                : undefined
+              isVerificationCodeInvalidated
+                ? '인증번호가 폐기되었습니다. 재전송해주세요.'
+                : isVerificationCodeExpired
+                  ? '인증번호가 만료되었습니다. 재전송해주세요.'
+                  : undefined
             }
             onChange={handleChangePasswordChange}
+            value={changePassword.code}
           />
         )}
         <Column gap={6}>
