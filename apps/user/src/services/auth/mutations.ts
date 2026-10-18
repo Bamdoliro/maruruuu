@@ -1,5 +1,6 @@
 import type { PostLoginReq } from '@/types/auth/remote';
 import { useMutation } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 import { deleteLogout, postLogin } from './api';
 import { ROUTES } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
@@ -29,11 +30,16 @@ export const useLoginMutation = (
         setStep('MAIN');
       }
     },
-    onError: () => {
+    onError: (error) => {
+      const message =
+        isAxiosError(error) && error.response?.status === 429
+          ? '로그인 시도 횟수가 너무 많습니다. 잠시 후 다시 시도해주세요.'
+          : '전화번호나 비밀번호를 다시 확인해주세요.';
+
       if (device === 'COMPUTER') {
-        toast('전화번호나 비밀번호를 다시 확인해주세요.', 'ERROR');
+        toast(message, 'ERROR');
       } else if (device === 'MOBILE') {
-        toast('전화번호나 비밀번호를 다시 확인해주세요.', 'ERROR', 'MOBILE');
+        toast(message, 'ERROR', 'MOBILE');
       }
     },
   });
