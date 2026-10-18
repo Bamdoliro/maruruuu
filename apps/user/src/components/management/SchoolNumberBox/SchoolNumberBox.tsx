@@ -51,8 +51,8 @@ const StyledSchoolNumberBox = styled.div<{ size: 'big' | 'small' }>`
     alignItems: 'flex-start',
     justifyContent: 'space-between',
   })}
+  flex-grow: 1;
   width: 100%;
-  ${({ size }) => (size === 'big' ? 'height: 415px;' : 'min-height: 141px;')}
   gap: 16px;
   padding: ${({ size }) => (size === 'big' ? '48px 36px' : '24px 32px')};
   border-radius: 12px;
