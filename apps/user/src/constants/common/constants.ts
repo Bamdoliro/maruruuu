@@ -25,6 +25,13 @@ export const FLAG = {
   테스트_진행: process.env.NEXT_PUBLIC_TEST_ENABLED === 'true',
 };
 
+export const ADMISSION_PHONE_NUMBERS = (
+  process.env.NEXT_PUBLIC_ADMISSION_PHONE_NUMBERS || '051-970-1792'
+)
+  .split(',')
+  .map((phoneNumber) => phoneNumber.trim())
+  .filter(Boolean);
+
 export const KEY = {
   NOTICE_LIST: 'useNoticeList',
   NOTICE_DETAIL: 'useNoticeDetail',
