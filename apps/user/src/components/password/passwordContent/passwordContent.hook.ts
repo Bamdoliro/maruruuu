@@ -1,7 +1,7 @@
 import type { ChangeEventHandler } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { changePasswordAtom } from '@/stores';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import {
   useChangePasswordMutation,
   useRequestUserVerificationMutation,
@@ -35,8 +35,19 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
   const [isResendCoolingDown, setIsResendCoolingDown] = useState(false);
   const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
   const [isVerificationCodeConfirmed, setIsVerificationCodeConfirmed] = useState(false);
+  const [isVerificationCodeInvalidated, setIsVerificationCodeInvalidated] =
+    useState(false);
+  const setChangePassword = useSetAtom(changePasswordAtom);
+
+  const handleVerificationCodeInvalidated = () => {
+    setIsVerificationCodeInvalidated(true);
+    setTimerTime(0);
+    setChangePassword((prev) => ({ ...prev, code: '' }));
+  };
+
   const { verificationMutate, restMutation: confirmMutation } = useVerificationMutation(
     setIsVerificationCodeConfirmed,
+    handleVerificationCodeInvalidated,
   );
   const { toast } = useToast();
 
@@ -60,6 +71,7 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
       onSuccess: () => {
         setIsVerificationCodeSent(true);
         setIsVerificationCodeConfirmed(false);
+        setIsVerificationCodeInvalidated(false);
         setIsResendCoolingDown(true);
         cooldownTimerRef.current = setTimeout(() => {
           setIsResendCoolingDown(false);
@@ -78,10 +90,16 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
   }, []);
 
   const isVerificationCodeExpired =
-    isVerificationCodeSent && !isVerificationCodeConfirmed && timerTime <= 0;
+    isVerificationCodeSent &&
+    !isVerificationCodeConfirmed &&
+    !isVerificationCodeInvalidated &&
+    timerTime <= 0;
 
   const isVerificationCodeConfirmDisabled =
-    confirmMutation.isPending || isVerificationCodeConfirmed || isVerificationCodeExpired;
+    confirmMutation.isPending ||
+    isVerificationCodeConfirmed ||
+    isVerificationCodeExpired ||
+    isVerificationCodeInvalidated;
 
   const handleVerificationConfirm = () => {
     if (isVerificationCodeConfirmDisabled) return;
@@ -104,6 +122,7 @@ export const useVerificationCodeAction = (changePasswordData: SignUp) => {
     isVerificationCodeSent,
     isVerificationCodeConfirmed,
     isVerificationCodeExpired,
+    isVerificationCodeInvalidated,
     timerTime,
     setTimerTime,
     handleRequestVerificationCode,

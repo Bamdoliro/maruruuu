@@ -1,4 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import {
   deleteUser,
@@ -91,8 +93,15 @@ export const useRequestUserVerificationMutation = ({
   return { requestVerificationMutate, restMutation };
 };
 
+// 5회 오류로 폐기되면 429, 이후 폐기된 코드로 요청하면 VERIFYING_HAS_FAILED(401)가 내려온다
+const isVerificationInvalidatedError = (error: unknown) =>
+  isAxiosError<{ code?: string }>(error) &&
+  (error.response?.status === 429 ||
+    error.response?.data?.code === 'VERIFYING_HAS_FAILED');
+
 export const useVerificationMutation = (
   setIsSuccessVerification: Dispatch<SetStateAction<boolean>>,
+  onInvalidated: () => void,
 ) => {
   const { handleError } = useApiError();
   const { toast } = useToast();
@@ -104,7 +113,14 @@ export const useVerificationMutation = (
       toast('인증에 성공했습니다.', 'SUCCESS');
       setIsSuccessVerification(true);
     },
-    onError: handleError,
+    onError: (error: AxiosError<{ code: string; message: string }>) => {
+      if (isVerificationInvalidatedError(error)) {
+        toast('인증번호가 폐기되었습니다. 재전송해주세요.', 'ERROR');
+        onInvalidated();
+        return;
+      }
+      handleError(error);
+    },
   });
 
   return { verificationMutate, restMutation };
