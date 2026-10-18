@@ -25,6 +25,7 @@ const TimeLimitInput = ({
   placeholder,
   message,
   onChange,
+  value,
   maxLength,
   timerTime,
   setTimerTime,
@@ -48,6 +49,7 @@ const TimeLimitInput = ({
         <StyledTimeLimitInput $isError={isError}>
           <StyledInput
             onChange={onChange}
+            value={value}
             placeholder={placeholder}
             type="text"
             name={name}
