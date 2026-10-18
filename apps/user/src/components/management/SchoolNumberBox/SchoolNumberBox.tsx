@@ -3,6 +3,7 @@ import { IconPhone } from '@maru/icon';
 import { Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
+import { ADMISSION_PHONE_NUMBERS } from '@/constants/common/constants';
 
 interface SchoolNumberBoxProps {
   size: 'big' | 'small';
@@ -28,9 +29,15 @@ const SchoolNumberBox = ({ size }: SchoolNumberBoxProps) => {
             입학담당관
           </Text>
         )}
-        <Text fontType={size === 'big' ? 'H1' : 'H4'} color={color.gray900}>
-          051-970-1792
-        </Text>
+        {ADMISSION_PHONE_NUMBERS.map((phoneNumber) => (
+          <Text
+            key={phoneNumber}
+            fontType={size === 'big' ? 'H1' : 'H4'}
+            color={color.gray900}
+          >
+            {phoneNumber}
+          </Text>
+        ))}
       </Column>
     </StyledSchoolNumberBox>
   );
@@ -45,7 +52,8 @@ const StyledSchoolNumberBox = styled.div<{ size: 'big' | 'small' }>`
     justifyContent: 'space-between',
   })}
   width: 100%;
-  height: ${({ size }) => (size === 'big' ? '415px' : '141px')};
+  ${({ size }) => (size === 'big' ? 'height: 415px;' : 'min-height: 141px;')}
+  gap: 16px;
   padding: ${({ size }) => (size === 'big' ? '48px 36px' : '24px 32px')};
   border-radius: 12px;
   border: 1px solid ${color.gray200};
