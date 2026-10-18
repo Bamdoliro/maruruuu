@@ -72,7 +72,7 @@ const ManagementContent = () => {
 
   if (now.isBetween(schedule.이차_면접, schedule.입학_등록_마감)) {
     return (
-      <Row alignItems="top" gap={30}>
+      <Row gap={30}>
         <StatusBox height="415px" status={statusData?.status} />
         <SchoolNumberBox size="big" />
       </Row>
@@ -80,7 +80,7 @@ const ManagementContent = () => {
   }
 
   return (
-    <Row alignItems="top" gap={30}>
+    <Row gap={30}>
       <StatusBox height="415px" status={statusData?.status} />
       <SchoolNumberBox size="big" />
     </Row>
