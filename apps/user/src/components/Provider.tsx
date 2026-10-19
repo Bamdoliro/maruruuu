@@ -10,6 +10,7 @@ import { MobileProvider } from './common';
 import { AuthStateProvider, useAuthState, useToast } from '@maru/hooks';
 import { useSessionExpired } from '@/hooks';
 import { useScheduleQuery } from '@/services/schedule/queries';
+import { consumeLoginToast } from '@/utils';
 import { ROUTES, USER_SCOPED_KEYS } from '@/constants/common/constants';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';
@@ -53,6 +54,17 @@ const SessionExpiredHandler = () => {
     setIsLoggedIn(false);
     USER_SCOPED_KEYS.forEach((key) => queryClient.removeQueries({ queryKey: [key] }));
   });
+
+  return null;
+};
+
+const LoginToastHandler = () => {
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const device = consumeLoginToast();
+    if (device) toast('로그인 되었습니다.', 'SUCCESS', device);
+  }, [toast]);
 
   return null;
 };
@@ -128,6 +140,7 @@ const Provider = ({ children, initialLoggedIn }: Props) => {
             </MobileProvider>
           </ScheduleGate>
           <GlobalToast />
+          <LoginToastHandler />
         </OverlayProvider>
       </AuthStateProvider>
     </JotaiProvider>

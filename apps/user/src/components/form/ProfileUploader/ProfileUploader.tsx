@@ -3,7 +3,7 @@ import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { useDragAndDrop, useOpenFileUploader } from '@/hooks';
+import { useDragAndDrop, useOpenFileUploader, useUser } from '@/hooks';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import SmartCrop from 'smartcrop';
 import { profileAtom, formProfileAtom } from '@/stores';
@@ -12,6 +12,7 @@ import {
   useRefreshProfileMutation,
   useUploadProfileMutation,
 } from '@/services/form/mutations';
+import { getStoredProfile, saveStoredProfile } from '@/utils';
 
 const MIN_WIDTH = 113.4;
 const MIN_HEIGHT = 151.2;
@@ -31,31 +32,22 @@ const ProfileUploader = ({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { openFileUploader, ref: imageUploaderRef } = useOpenFileUploader();
 
-  const fileName = localStorage.getItem('fileName');
-  const mediaType = localStorage.getItem('mediaType');
-  const fileSize = localStorage.getItem('fileSize');
+  const { userData } = useUser();
+  const owner = userData.phoneNumber;
 
-  const { refreshProfileMutate } = useRefreshProfileMutation({
-    fileName: fileName ?? '',
-    mediaType: mediaType ?? '',
-    fileSize: Number(fileSize),
-  });
+  const { refreshProfileMutate } = useRefreshProfileMutation();
 
   const { uploadProfileMutate } = useUploadProfileMutation();
 
-  const mountedRef = useRef(false);
+  const hasRefreshedRef = useRef(false);
 
   useEffect(() => {
-    const upload = localStorage.getItem('upload');
-    if (mountedRef.current) return;
-    mountedRef.current = true;
+    if (!owner || hasRefreshedRef.current) return;
+    hasRefreshedRef.current = true;
 
-    if (upload === 'true') {
-      refreshProfileMutate();
-    }
-
-    return;
-  }, [refreshProfileMutate]);
+    const storedProfile = getStoredProfile(owner);
+    if (storedProfile) refreshProfileMutate(storedProfile);
+  }, [owner, refreshProfileMutate]);
 
   useEffect(() => {
     const hasImage = !!(previewUrl || profileUrl?.downloadUrl);
@@ -155,19 +147,15 @@ const ProfileUploader = ({
               file: croppedFile,
             });
 
-            localStorage.setItem('fileName', croppedFile.name);
-            localStorage.setItem('mediaType', croppedFile.type);
-            localStorage.setItem('fileSize', croppedFile.size.toString());
-            localStorage.setItem('upload', 'true');
+            const fileData = {
+              fileName: croppedFile.name,
+              mediaType: croppedFile.type,
+              fileSize: croppedFile.size,
+            };
 
-            uploadProfileMutate({
-              fileData: {
-                fileName: croppedFile.name,
-                mediaType: croppedFile.type,
-                fileSize: croppedFile.size,
-              },
-              file: croppedFile,
-            });
+            if (owner) saveStoredProfile(owner, fileData);
+
+            uploadProfileMutate({ fileData, file: croppedFile });
           }, 'image/jpeg');
         };
 
@@ -181,7 +169,7 @@ const ProfileUploader = ({
 
       reader.readAsDataURL(file);
     },
-    [setProfile, uploadProfileMutate],
+    [owner, setProfile, uploadProfileMutate],
   );
 
   const { isDragging, onDragOver, onDragLeave, onDrop, onDragEnter } =

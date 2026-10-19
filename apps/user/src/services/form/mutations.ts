@@ -145,12 +145,12 @@ export const useGetRefreshProfileMutation = () => {
   return { getRefreshProfileMutate, ...restMutation };
 };
 
-export const useRefreshProfileMutation = (fileData: FileDocument) => {
+export const useRefreshProfileMutation = () => {
   const setFormProfile = useSetAtom(formProfileAtom);
   const { getRefreshProfileMutate } = useGetRefreshProfileMutation();
 
   const { mutate: refreshProfileMutate, ...restMutation } = useMutation({
-    mutationFn: () => postUploadProfileImage(fileData),
+    mutationFn: (fileData: FileDocument) => postUploadProfileImage(fileData),
     onSuccess: (res) => {
       const { uploadUrl, downloadUrl } = res.data;
       setFormProfile({
