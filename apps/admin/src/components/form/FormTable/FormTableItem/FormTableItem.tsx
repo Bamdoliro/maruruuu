@@ -2,6 +2,7 @@ import { TableItem } from '@/components/common';
 import { ROUTES } from '@/constants/common/constant';
 import { FORM_TYPE_CATEGORY } from '@/constants/form/constant';
 import {
+  formListSortingTypeAtom,
   formToPrintAtom,
   isFormToPrintSelectingAtom,
   isSecondRoundResultEditingAtom,
@@ -27,10 +28,16 @@ const FormTableItem = ({
   type,
   totalScore,
   firstRoundPassed,
+  firstRoundScore,
   secondRoundPassed,
   hasDocument,
 }: Form) => {
   const router = useRouter();
+
+  const { sort } = useAtomValue(formListSortingTypeAtom);
+  const isFirstRoundScoreSort =
+    sort === 'first-round-score-desc' || sort === 'first-round-score-asc';
+  const score = isFirstRoundScoreSort ? firstRoundScore : totalScore;
 
   const isSecondRoundResultEditing = useAtomValue(isSecondRoundResultEditingAtom);
   const [secondRoundResult, setSecondRoundResult] = useAtom(secondRoundResultAtom);
@@ -139,9 +146,9 @@ const FormTableItem = ({
           <Text
             fontType="p2"
             width={convertToResponsive(40, 60)}
-            color={typeof totalScore !== 'number' ? color.gray600 : color.black}
+            color={typeof score !== 'number' ? color.gray600 : color.black}
           >
-            {typeof totalScore !== 'number' ? '미정' : Number(totalScore.toFixed(3))}
+            {typeof score !== 'number' ? '미정' : Number(score.toFixed(3))}
           </Text>
         </Row>
         <Row>
