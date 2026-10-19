@@ -1,5 +1,6 @@
 import TableHeader from '@/components/common/TableHeader/TableHeader';
 import {
+  formListSortingTypeAtom,
   formToPrintAtom,
   isFormToPrintSelectingAtom,
   isSecondRoundResultEditingAtom,
@@ -16,6 +17,9 @@ interface FormTableHeaderProps {
 const FormTableHeader = ({ id }: FormTableHeaderProps) => {
   const isSecondRoundResultEditing = useAtomValue(isSecondRoundResultEditingAtom);
   const isFormToPrintSelecting = useAtomValue(isFormToPrintSelectingAtom);
+  const { sort } = useAtomValue(formListSortingTypeAtom);
+  const isFirstRoundScoreSort =
+    sort === 'first-round-score-desc' || sort === 'first-round-score-asc';
 
   const setFormToPrint = useSetAtom(formToPrintAtom);
 
@@ -59,7 +63,7 @@ const FormTableHeader = ({ id }: FormTableHeaderProps) => {
           1차 결과
         </Text>
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
-          최종 점수
+          {isFirstRoundScoreSort ? '1차 점수' : '최종 점수'}
         </Text>
       </Row>
       <Text
