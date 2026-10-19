@@ -1,19 +1,17 @@
 import { useUser, useDownloadFile } from '@/hooks';
-import { useUploadFormMutation } from '@/services/form/mutations';
-import { useExportFormQuery } from '@/services/form/queries';
+import { useExportFormMutation, useUploadFormMutation } from '@/services/form/mutations';
 import { finalFormAtom } from '@/stores';
 import { useAtom, useAtomValue } from 'jotai';
-import { useCallback, useEffect, useState } from 'react';
-import { useToast } from '@maru/hooks';
+import { useEffect, useRef } from 'react';
 
 export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => void) => {
   const { userData } = useUser();
-  const { toast } = useToast();
-  const { data: exportFormData, isLoading: exportFormDataLoading } = useExportFormQuery();
-  const [pdfBlobUrl, setPdfBlobUrl] = useState('');
-  const [hasDownloaded, setHasDownloaded] = useState(false);
   const downloadFile = useDownloadFile();
+  const { exportFormMutate, isPending: isExportFormPending } = useExportFormMutation();
   const final = useAtomValue(finalFormAtom);
+  const hasAutoExported = useRef(false);
+  const userNameRef = useRef(userData.name);
+  userNameRef.current = userData.name;
   const { uploadFormMutate } = useUploadFormMutation(
     {
       fileName: final.fileName ?? '',
@@ -27,66 +25,26 @@ export const useCTAButton = (openPdfLoader: () => void, closePdfLoader: () => vo
     uploadFormMutate();
   };
 
-  const downloadPdf = useCallback(() => {
-    if (!pdfBlobUrl) return;
+  const handleExportForm = () => {
+    if (isExportFormPending) return;
 
-    downloadFile(
-      pdfBlobUrl,
-      `${userData.name} 부산소프트웨어마이스터고등학교 원서접수.pdf`,
-    );
-    setPdfBlobUrl('');
-    setHasDownloaded(true);
-  }, [pdfBlobUrl, userData.name, downloadFile]);
-
-  const processFormData = useCallback(() => {
-    if (!exportFormData) return;
-    const blob = new Blob([exportFormData]);
-    const blobUrl = window.URL.createObjectURL(blob);
-    setPdfBlobUrl(blobUrl);
-    downloadPdf();
-    closePdfLoader();
-  }, [exportFormData, downloadPdf, closePdfLoader]);
+    openPdfLoader();
+    exportFormMutate(undefined, {
+      onSuccess: (data) =>
+        downloadFile(
+          data,
+          `${userNameRef.current} 부산소프트웨어마이스터고등학교 원서접수.pdf`,
+        ),
+      onSettled: closePdfLoader,
+    });
+  };
 
   useEffect(() => {
-    if (exportFormDataLoading) {
-      openPdfLoader();
-    } else if (exportFormData && !hasDownloaded) {
-      processFormData();
-    } else if (!exportFormData && !exportFormDataLoading) {
-      toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
-      closePdfLoader();
-    }
-  }, [
-    exportFormData,
-    exportFormDataLoading,
-    hasDownloaded,
-    openPdfLoader,
-    processFormData,
-    closePdfLoader,
-    toast,
-  ]);
+    if (hasAutoExported.current) return;
 
-  const handleExportForm = useCallback(() => {
-    if (exportFormDataLoading) {
-      openPdfLoader();
-    } else if (pdfBlobUrl) {
-      downloadPdf();
-    } else if (exportFormData) {
-      processFormData();
-    } else if (!exportFormData && !exportFormDataLoading) {
-      toast('원서 데이터를 불러오지 못했습니다.', 'ERROR');
-      closePdfLoader();
-    }
-  }, [
-    exportFormDataLoading,
-    pdfBlobUrl,
-    downloadPdf,
-    processFormData,
-    openPdfLoader,
-    exportFormData,
-    toast,
-    closePdfLoader,
-  ]);
+    hasAutoExported.current = true;
+    handleExportForm();
+  });
 
   return { handleSubmitFinalForm, handleExportForm };
 };
