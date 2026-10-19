@@ -142,8 +142,8 @@ const FormPage = () => {
                 <Dropdown
                   data={[
                     { value: 'RESET', label: '정렬 초기화' },
-                    { value: 'total-score-desc', label: '높은 순' },
-                    { value: 'total-score-asc', label: '낮은 순' },
+                    { value: 'first-round-score-desc', label: '높은 순' },
+                    { value: 'first-round-score-asc', label: '낮은 순' },
                     { value: 'form-id', label: '접수순' },
                   ]}
                   size="SMALL"
