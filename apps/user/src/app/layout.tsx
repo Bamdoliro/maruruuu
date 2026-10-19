@@ -1,6 +1,7 @@
 import Provider from '@/components/Provider';
 import { AUTH_COOKIES } from '@/constants/common/constants';
 import GoogleAnalytics from '@/lib/GoogleAnalytics';
+import MainBackgroundPreload from '@/lib/MainBackgroundPreload';
 import StyledComponentRegistry from '@/lib/registry';
 import QueryClientProvider from '@/services/QueryClientProvider';
 import { cookies } from 'next/headers';
@@ -24,12 +25,6 @@ const RootLayout = ({ children }: Props) => {
     <html lang="ko">
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
-        <link
-          rel="preload"
-          href="/images/school_background.webp"
-          as="image"
-          fetchPriority="high"
-        />
         <noscript>
           <link
             rel="stylesheet"
@@ -38,6 +33,7 @@ const RootLayout = ({ children }: Props) => {
         </noscript>
       </head>
       <body>
+        <MainBackgroundPreload />
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}

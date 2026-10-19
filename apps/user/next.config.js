@@ -17,7 +17,13 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
-  transpilePackages: ['@maru/design-system', '@maru/hooks', '@maru/icon', '@maru/ui', '@maru/utils'],
+  transpilePackages: [
+    '@maru/design-system',
+    '@maru/hooks',
+    '@maru/icon',
+    '@maru/ui',
+    '@maru/utils',
+  ],
   poweredByHeader: false,
   images: {
     unoptimized: false,
@@ -44,6 +50,15 @@ const nextConfig = {
   },
   async headers() {
     return [
+      {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
+        ],
+      },
       {
         source: '/(.*)?',
         headers: [
