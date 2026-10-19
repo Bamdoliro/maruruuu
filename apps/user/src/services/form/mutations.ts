@@ -15,18 +15,28 @@ import {
 } from './api';
 import type { Form } from '@/types/form/client';
 import { KEY } from '@/constants/common/constants';
-import { formStepAtom, formProfileAtom } from '@/stores';
-import { useSetAtom } from 'jotai';
+import { formStepAtom, formProfileAtom, lastSavedFormAtom } from '@/stores';
+import { useAtom, useSetAtom } from 'jotai';
 import type { FileDocument } from '@/types/form/remote';
 import { useToast } from '@maru/hooks';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();
+  const [lastSavedForm, setLastSavedForm] = useAtom(lastSavedFormAtom);
 
-  const { mutate: saveFormMutate, ...restMutation } = useMutation({
+  const { mutate, ...restMutation } = useMutation({
     mutationFn: (form: Form) => postSaveForm(form),
+    onSuccess: (_, form) => {
+      setLastSavedForm(JSON.stringify(form));
+    },
     onError: handleError,
   });
+
+  const saveFormMutate = (form: Form) => {
+    if (JSON.stringify(form) === lastSavedForm) return;
+
+    mutate(form);
+  };
 
   return { saveFormMutate, ...restMutation };
 };
@@ -34,12 +44,14 @@ export const useSaveFormMutation = () => {
 export const useSubmitDraftFormMutation = () => {
   const { handleError } = useApiError();
   const setFormStep = useSetAtom(formStepAtom);
+  const setLastSavedForm = useSetAtom(lastSavedFormAtom);
   const queryClient = useQueryClient();
 
   const { mutate: submitDraftFormMutate, ...restMutation } = useMutation({
     mutationFn: (formData: Form) => postSubmitDraftForm(formData),
     onSuccess: () => {
       setFormStep('초안제출완료');
+      setLastSavedForm(null);
       queryClient.invalidateQueries({ queryKey: [KEY.FORM_STATUS] });
       queryClient.invalidateQueries({ queryKey: [KEY.SAVE_FORM] });
     },
@@ -69,12 +81,14 @@ export const useSubmitFinalFormMutation = () => {
 export const useCorrectionFormMutation = () => {
   const { handleError } = useApiError();
   const setFormStep = useSetAtom(formStepAtom);
+  const setLastSavedForm = useSetAtom(lastSavedFormAtom);
   const queryClient = useQueryClient();
 
   const { mutate: correctionFormMutate, ...restMutation } = useMutation({
     mutationFn: (formData: Form) => putFormCorrection(formData),
     onSuccess: () => {
       setFormStep('초안제출완료');
+      setLastSavedForm(null);
       queryClient.invalidateQueries({ queryKey: [KEY.FORM_STATUS] });
       queryClient.invalidateQueries({ queryKey: [KEY.SAVE_FORM] });
     },

@@ -5,7 +5,7 @@ import { deleteLogout, postLogin } from './api';
 import { ROUTES, USER_SCOPED_KEYS } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 import { useApiError } from '@/hooks';
-import { stepAtom } from '@/stores';
+import { lastSavedFormAtom, stepAtom } from '@/stores';
 import { useSetAtom } from 'jotai';
 import { useAuthState, useToast } from '@maru/hooks';
 
@@ -16,6 +16,7 @@ export const useLoginMutation = (
   const router = useRouter();
   const { toast } = useToast();
   const setStep = useSetAtom(stepAtom);
+  const setLastSavedForm = useSetAtom(lastSavedFormAtom);
   const { setIsLoggedIn } = useAuthState();
   const queryClient = useQueryClient();
 
@@ -23,6 +24,7 @@ export const useLoginMutation = (
     mutationFn: () => postLogin({ phoneNumber, password }),
     onSuccess: () => {
       USER_SCOPED_KEYS.forEach((key) => queryClient.removeQueries({ queryKey: [key] }));
+      setLastSavedForm(null);
       setIsLoggedIn(true);
       if (device === 'COMPUTER') {
         toast('로그인 되었습니다.', 'SUCCESS');
