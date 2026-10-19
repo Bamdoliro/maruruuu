@@ -11,6 +11,8 @@ export { formStepAtom } from './form/formStep';
 
 export { isSaveFormLoadedAtom } from './form/isSave';
 
+export { lastSavedFormAtom } from './form/lastSavedForm';
+
 export { formGradeStepAtom } from './form/formGradeStep';
 
 export { formDocumentAtom } from './form/formDocument';
