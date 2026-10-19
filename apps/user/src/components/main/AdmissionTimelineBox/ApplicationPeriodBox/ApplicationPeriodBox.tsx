@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { flex } from '@maru/utils';
 import { formatYear } from '@/utils';
 import { useSchedule } from '@/services/schedule/queries';
+import SubmissionNotice from '../SubmissionNotice/SubmissionNotice';
 
 const ApplicationPeriodBox = () => {
   const schedule = useSchedule();
@@ -21,6 +22,7 @@ const ApplicationPeriodBox = () => {
           {applicationStart} ~ {applicationEnd}
         </Text>
       </Column>
+      <SubmissionNotice />
       <Button width={250} size="LARGE" styleType="PRIMARY" onClick={handleMoveFormPage}>
         원서 작성하기
       </Button>
