@@ -1,6 +1,8 @@
 import { useApiError } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
+  getExportForm,
+  getExportReceipt,
   getUploadProfile,
   patchSubmitFinalForm,
   postFormDocument,
@@ -16,6 +18,7 @@ import { KEY } from '@/constants/common/constants';
 import { formStepAtom, formProfileAtom } from '@/stores';
 import { useSetAtom } from 'jotai';
 import type { FileDocument } from '@/types/form/remote';
+import { useToast } from '@maru/hooks';
 
 export const useSaveFormMutation = () => {
   const { handleError } = useApiError();
@@ -56,8 +59,6 @@ export const useSubmitFinalFormMutation = () => {
     onSuccess: () => {
       setFormStep('최종제출완료');
       queryClient.invalidateQueries({ queryKey: [KEY.FORM_STATUS] });
-      queryClient.invalidateQueries({ queryKey: [KEY.EXPORT_FORM] });
-      queryClient.invalidateQueries({ queryKey: [KEY.EXPORT_RECEIPT] });
     },
     onError: handleError,
   });
@@ -173,4 +174,30 @@ export const useUploadFormMutation = (fileData: FileDocument, file: File | null)
   });
 
   return { uploadFormMutate, ...restMutation };
+};
+
+export const useExportFormMutation = () => {
+  const { toast } = useToast();
+
+  const { mutate: exportFormMutate, ...restMutation } = useMutation({
+    mutationFn: getExportForm,
+    onError: () => {
+      toast('원서를 불러오지 못했습니다.', 'ERROR');
+    },
+  });
+
+  return { exportFormMutate, ...restMutation };
+};
+
+export const useExportReceiptMutation = () => {
+  const { toast } = useToast();
+
+  const { mutate: exportReceiptMutate, ...restMutation } = useMutation({
+    mutationFn: getExportReceipt,
+    onError: () => {
+      toast('접수증을 불러오지 못했습니다.', 'ERROR');
+    },
+  });
+
+  return { exportReceiptMutate, ...restMutation };
 };
