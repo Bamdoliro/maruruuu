@@ -3,6 +3,7 @@ import { Button, Column, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import { useButtonStatus, useRemainDate } from './DdayBox.hooks';
+import SubmissionNotice from '../SubmissionNotice/SubmissionNotice';
 
 const DdayBox = () => {
   const { status, remainTime, targetDate } = useRemainDate();
@@ -23,14 +24,7 @@ const DdayBox = () => {
           {targetDate}
         </Text>
       </Column>
-      <Column gap={4}>
-        <Text fontType="p2" color={color.gray400}>
-          모든 원서 서류는 원서접수 사이트에서 PDF 파일로 최종 제출해야 하며,
-        </Text>
-        <Text fontType="p2" color={color.gray400}>
-          직인 날인 등 필요한 절차를 완료한 원본 서류도 반드시 본교에 제출해야 합니다.
-        </Text>
-      </Column>
+      <SubmissionNotice />
       <Button
         width={250}
         size="LARGE"
