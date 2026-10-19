@@ -13,6 +13,7 @@ const FormTable = () => {
       {formList &&
         formList.map((item) => (
           <FormTableItem
+            key={item.id}
             id={item.id}
             birthday={item.birthday}
             examinationNumber={item.examinationNumber}
@@ -25,6 +26,7 @@ const FormTable = () => {
             isChangedToRegular={item.isChangedToRegular}
             totalScore={item.totalScore}
             firstRoundPassed={item.firstRoundPassed}
+            firstRoundScore={item.firstRoundScore}
             secondRoundPassed={item.secondRoundPassed}
           />
         ))}
