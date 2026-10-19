@@ -1,4 +1,6 @@
 import { maruAdmin } from '@/apis/instance/instance';
+import type { FormStatus } from '@/types/form/client';
+import type { GetFormListRes } from '@/types/form/remote';
 import type {
   PostSendMessageByStatusRequest,
   PostSendMessageByTypeRequest,
@@ -17,5 +19,12 @@ export const postMessageByType = async (params: PostSendMessageByTypeRequest) =>
 
 export const postMessageToAll = async (params: PostSendMessageToAllRequest) => {
   const { data } = await maruAdmin.post('/messages/all', params);
+  return data;
+};
+
+export const getMessageRecipientList = async (status: FormStatus) => {
+  const { data } = await maruAdmin.get<GetFormListRes>('/forms', {
+    params: { status },
+  });
   return data;
 };

@@ -33,7 +33,6 @@ export default MessageHeader;
 
 const StyledWrapper = styled.div`
   width: 100%;
-  padding-right: 120px;
   margin-bottom: 48px;
 `;
 

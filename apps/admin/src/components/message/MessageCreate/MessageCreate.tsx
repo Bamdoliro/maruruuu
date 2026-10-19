@@ -4,6 +4,7 @@ import { useOverlay } from '@toss/use-overlay';
 import MessageHeader from './MessageHeader/MessageHeader';
 import ContentTextarea from './ContentTextarea/ContentTextarea';
 import MessageConfirmModal from './MessageConfirmModal/MessageConfirmModal';
+import RecipientList from './RecipientList/RecipientList';
 import { useMessage } from './MessageCreate.hooks';
 
 const MessageCreate = () => {
@@ -25,13 +26,16 @@ const MessageCreate = () => {
 
   return (
     <StyledContainer>
-      <MessageHeader
-        title={form.title}
-        recipient={form.recipient}
-        onChange={handleChange}
-        onSubmit={openConfirmModal}
-      />
-      <ContentTextarea name="content" value={form.content} onChange={handleChange} />
+      <StyledEditor>
+        <MessageHeader
+          title={form.title}
+          recipient={form.recipient}
+          onChange={handleChange}
+          onSubmit={openConfirmModal}
+        />
+        <ContentTextarea name="content" value={form.content} onChange={handleChange} />
+      </StyledEditor>
+      {form.recipient && <RecipientList recipient={form.recipient} />}
     </StyledContainer>
   );
 };
@@ -39,7 +43,14 @@ const MessageCreate = () => {
 export default MessageCreate;
 
 const StyledContainer = styled.div`
-  ${flex({ flexDirection: 'column' })}
+  ${flex({ alignItems: 'flex-start' })}
+  gap: 40px;
   width: 100%;
   margin: 0 auto;
+`;
+
+const StyledEditor = styled.div`
+  ${flex({ flexDirection: 'column' })}
+  flex: 1;
+  min-width: 0;
 `;

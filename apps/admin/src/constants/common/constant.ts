@@ -18,6 +18,7 @@ export const KEY = {
   FAQ_DETAIL: 'useFaqDetail',
   REGISTRATION_LIST: 'useRegistrationList',
   FORM_EXPORT_SCORE_EXCEL: 'useFormExportScoreExcel',
+  MESSAGE_RECIPIENT_LIST: 'useMessageRecipientList',
 };
 
 export const ROUTES = {
