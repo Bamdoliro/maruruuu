@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useGenderRatioListQuery } from '@/services/analysis/queries';
+import { ANALYSIS_ALL_STATUS_LIST } from '@/constants/analysis/constant';
 import type {
   AnalysisApplicantType,
   FormTypeMainCategory,
@@ -7,7 +8,7 @@ import type {
 } from '@/types/analysis/client';
 
 const stepMap: Record<string, AnalysisApplicantType[]> = {
-  '전체 조회': ['RECEIVED', 'FIRST_PASSED', 'FIRST_FAILED', 'FAILED', 'PASSED'],
+  '전체 조회': ANALYSIS_ALL_STATUS_LIST,
   '1차 합격자': ['FIRST_PASSED', 'FAILED', 'PASSED'],
   '2차 전형자': ['FAILED', 'PASSED'],
   '최종 합격자': ['PASSED'],

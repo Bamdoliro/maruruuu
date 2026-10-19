@@ -35,6 +35,10 @@ export type FormType =
   | 'NATIONAL_VETERANS_EDUCATION';
 
 export type AnalysisApplicantType =
+  | 'SUBMITTED'
+  | 'FINAL_SUBMITTED'
+  | 'APPROVED'
+  | 'REJECTED'
   | 'FIRST_PASSED'
   | 'FAILED'
   | 'PASSED'

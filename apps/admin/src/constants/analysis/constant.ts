@@ -1,3 +1,5 @@
+import type { AnalysisApplicantType } from '@/types/analysis/client';
+
 export const ANALYSIS_TYPE = [
   '지원자 수 (경쟁률)',
   '성적 분포',
@@ -14,6 +16,18 @@ export const ANALYSIS_PASS_STEP = [
   '2차 전형자',
   '최종 합격자',
 ] as const;
+
+export const ANALYSIS_ALL_STATUS_LIST: AnalysisApplicantType[] = [
+  'SUBMITTED',
+  'FINAL_SUBMITTED',
+  'APPROVED',
+  'REJECTED',
+  'RECEIVED',
+  'FIRST_PASSED',
+  'FIRST_FAILED',
+  'FAILED',
+  'PASSED',
+];
 
 export const ANALYSIS_RATIO_TYPE = [
   '일반 전형 성비',
