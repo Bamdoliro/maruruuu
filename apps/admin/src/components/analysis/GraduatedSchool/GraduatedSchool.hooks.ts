@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useGraduatedSchoolListQuery } from '@/services/analysis/queries';
+import { ANALYSIS_ALL_STATUS_LIST } from '@/constants/analysis/constant';
 import type { AnalysisApplicantType, AreaCategory } from '@/types/analysis/client';
 
 const useGraduatedSchool = () => {
@@ -8,7 +9,7 @@ const useGraduatedSchool = () => {
   const [areaCategory, setAreaCategory] = useState<AreaCategory | null>(null);
 
   const stepMap: Record<string, AnalysisApplicantType[]> = {
-    '전체 조회': ['RECEIVED', 'FIRST_PASSED', 'FIRST_FAILED', 'FAILED', 'PASSED'],
+    '전체 조회': ANALYSIS_ALL_STATUS_LIST,
     '1차 합격자': ['FIRST_PASSED', 'FAILED', 'PASSED'],
     '2차 전형자': ['FAILED', 'PASSED'],
     '최종 합격자': ['PASSED'],
