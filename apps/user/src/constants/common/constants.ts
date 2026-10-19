@@ -45,3 +45,11 @@ export const KEY = {
   SCHOOL_LIST: 'useSchoolList',
   SCHEDULE: 'useSchedule',
 };
+
+export const USER_SCOPED_KEYS = [
+  KEY.USER,
+  KEY.FORM_STATUS,
+  KEY.SAVE_FORM,
+  KEY.FIRST_RESULT,
+  KEY.FINAL_RESULT,
+];

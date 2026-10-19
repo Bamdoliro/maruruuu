@@ -10,6 +10,7 @@ export const useUserQuery = () => {
     queryKey: [KEY.USER],
     queryFn: getUser,
     enabled: isLoggedIn,
+    staleTime: Infinity,
     retry: false,
   });
 
