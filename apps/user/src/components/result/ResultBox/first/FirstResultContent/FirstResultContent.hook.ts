@@ -1,12 +1,13 @@
 import { ROUTES } from '@/constants/common/constants';
-import { useUser } from '@/hooks';
-import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
+import { useUser, useDownloadFile } from '@/hooks';
+import { useDownloadAdmissionTicketMutation } from '@/services/result/mutations';
 import { useRouter } from 'next/navigation';
 
 export const useCTAButton = () => {
   const router = useRouter();
-  const { data: admissionTicketData } = useDownloadAdmissionTicketQuery();
+  const { downloadAdmissionTicketMutate } = useDownloadAdmissionTicketMutation();
   const { userData } = useUser();
+  const downloadFile = useDownloadFile();
 
   const handleMoveMainPage = () => {
     router.push(ROUTES.MAIN);
@@ -17,17 +18,9 @@ export const useCTAButton = () => {
   };
 
   const handleDownloadAdmissionTicket = () => {
-    if (!admissionTicketData) return;
-
-    const admissionTicket = window.URL.createObjectURL(new Blob([admissionTicketData]));
-
-    const link = document.createElement('a');
-    link.href = admissionTicket;
-    link.download = `${userData.name} 수험표.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(admissionTicket);
+    downloadAdmissionTicketMutate(undefined, {
+      onSuccess: (data) => downloadFile(data, `${userData.name} 수험표.pdf`),
+    });
   };
 
   return {
