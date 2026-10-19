@@ -1,5 +1,6 @@
 import {
   useEditSecondRoundResultMutation,
+  useMergeFormPdfMutation,
   usePrintFormUrlMutation,
 } from '@/services/form/mutations';
 import {
@@ -16,6 +17,7 @@ import {
   schoolSearchAtom,
 } from '@/store';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useToast } from '@maru/hooks';
 import type { FormListSortingType } from '@/types/form/client';
 
 export const useFormPageState = () => {
@@ -119,11 +121,23 @@ export const usePrintFormURLActions = () => {
     printFormUrl(formIdList);
   };
 
+  const { toast } = useToast();
+  const { mergeFormPdf, isPending: isMergeFormPdfPending } = useMergeFormPdfMutation();
+  const handleMergeFormPdfButtonClick = () => {
+    if (formIdList.length === 0) {
+      toast('병합할 원서를 선택해주세요.', 'ERROR');
+      return;
+    }
+    mergeFormPdf(formIdList);
+  };
+
   return {
     isFormToPrintSelecting,
     setIsFormToPrintSelectingTrue,
     setIsFormToPrintSelectingFalse,
     handlePrintFormUrlButtonClick,
+    handleMergeFormPdfButtonClick,
+    isMergeFormPdfPending,
   };
 };
 

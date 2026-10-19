@@ -2,6 +2,7 @@ import { useApiError } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   getFormUrl,
+  getMergedFormPdf,
   patchReceiveStatus,
   patchSecondRoundResult,
   patchSecondRoundResultAuto,
@@ -112,6 +113,30 @@ export const usePrintFormUrlMutation = () => {
   });
 
   return { printFormUrl, ...restMutation };
+};
+
+export const useMergeFormPdfMutation = () => {
+  const { handleError } = useApiError();
+
+  const { mutate: mergeFormPdf, ...restMutation } = useMutation({
+    mutationFn: (formIdList: number[]) => getMergedFormPdf(formIdList),
+    onSuccess: (data) => {
+      const pdfUrl = window.URL.createObjectURL(
+        new Blob([data], { type: 'application/pdf' }),
+      );
+
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = '원서 병합.pdf';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(pdfUrl);
+    },
+    onError: handleError,
+  });
+
+  return { mergeFormPdf, ...restMutation };
 };
 
 export const useReceiveStatusChangeMutation = (formId: number, onClose: () => void) => {

@@ -66,6 +66,17 @@ export const getFormUrl = async (formIdList: number[]) => {
   return data;
 };
 
+export const getMergedFormPdf = async (formIdList: number[]) => {
+  const { data } = await maruAdmin.get<Blob>(
+    `/forms/pdf?id-list=${formIdList.join('%2C')}`,
+    {
+      responseType: 'blob',
+    },
+  );
+
+  return data;
+};
+
 export const getAllAdmissionTicket = async () => {
   const { data } = await maruAdmin.get('/forms/admission-tickets', {
     responseType: 'blob',
