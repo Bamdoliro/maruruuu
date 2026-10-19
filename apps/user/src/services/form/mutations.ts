@@ -26,6 +26,7 @@ export const useSaveFormMutation = () => {
 
   const { mutate, ...restMutation } = useMutation({
     mutationFn: (form: Form) => postSaveForm(form),
+    scope: { id: KEY.SAVE_FORM },
     onSuccess: (_, form) => {
       setLastSavedForm(JSON.stringify(form));
     },
