@@ -1,37 +1,27 @@
 import type { PostLoginReq } from '@/types/auth/remote';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { deleteLogout, postLogin } from './api';
-import { ROUTES, USER_SCOPED_KEYS } from '@/constants/common/constants';
-import { useRouter } from 'next/navigation';
-import { useApiError } from '@/hooks';
-import { lastSavedFormAtom, stepAtom } from '@/stores';
-import { useSetAtom } from 'jotai';
-import { useAuthState, useToast } from '@maru/hooks';
+import { ROUTES } from '@/constants/common/constants';
+import { clearStaleSession } from '@/apis/instance/session';
+import { reserveLoginToast } from '@/utils';
+import { useToast } from '@maru/hooks';
 
 export const useLoginMutation = (
-  device: string,
+  device: 'COMPUTER' | 'MOBILE',
   { phoneNumber, password }: PostLoginReq,
 ) => {
-  const router = useRouter();
   const { toast } = useToast();
-  const setStep = useSetAtom(stepAtom);
-  const setLastSavedForm = useSetAtom(lastSavedFormAtom);
-  const { setIsLoggedIn } = useAuthState();
-  const queryClient = useQueryClient();
 
   const { mutate: loginMutate, ...restMutation } = useMutation({
     mutationFn: () => postLogin({ phoneNumber, password }),
     onSuccess: () => {
-      USER_SCOPED_KEYS.forEach((key) => queryClient.removeQueries({ queryKey: [key] }));
-      setLastSavedForm(null);
-      setIsLoggedIn(true);
+      // 이전 계정의 원서 상태(Jotai)와 쿼리 캐시가 남지 않도록 페이지를 새로 연다.
+      reserveLoginToast(device);
       if (device === 'COMPUTER') {
-        toast('로그인 되었습니다.', 'SUCCESS');
-        router.replace(ROUTES.MAIN);
+        window.location.replace(ROUTES.MAIN);
       } else if (device === 'MOBILE') {
-        toast('로그인 되었습니다.', 'SUCCESS', 'MOBILE');
-        setStep('MAIN');
+        window.location.reload();
       }
     },
     onError: (error) => {
@@ -52,16 +42,12 @@ export const useLoginMutation = (
 };
 
 export const useLogoutMutation = () => {
-  const { handleError } = useApiError();
-  const { setIsLoggedIn } = useAuthState();
-
   const { mutate: logoutMutate, ...restMutation } = useMutation({
     mutationFn: deleteLogout,
-    onSuccess: () => {
-      setIsLoggedIn(false);
+    onSettled: async (_, error) => {
+      if (error) await clearStaleSession();
       window.location.href = ROUTES.MAIN;
     },
-    onError: handleError,
   });
 
   return { logoutMutate, ...restMutation };
