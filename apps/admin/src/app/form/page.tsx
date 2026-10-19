@@ -57,6 +57,8 @@ const FormPage = () => {
     setIsFormToPrintSelectingTrue,
     setIsFormToPrintSelectingFalse,
     handlePrintFormUrlButtonClick,
+    handleMergeFormPdfButtonClick,
+    isMergeFormPdfPending,
   } = usePrintFormURLActions();
 
   const { handleExportAllAdmissionTicketButtonClick } =
@@ -157,6 +159,7 @@ const FormPage = () => {
             )}
             <Row gap={16}>
               <SearchInput
+                width={200}
                 placeholder="학교 이름을 입력해주세요."
                 value={schoolSearch}
                 onChange={(e) => handleSchoolSearchChange(e.target.value)}
@@ -205,6 +208,13 @@ const FormPage = () => {
                   </Button>
                   <Button size="SMALL" onClick={handlePrintFormUrlButtonClick}>
                     출력하기
+                  </Button>
+                  <Button
+                    size="SMALL"
+                    onClick={handleMergeFormPdfButtonClick}
+                    disabled={isMergeFormPdfPending}
+                  >
+                    PDF 병합하기
                   </Button>
                 </Row>
               ) : (
