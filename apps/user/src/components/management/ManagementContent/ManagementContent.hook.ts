@@ -1,16 +1,19 @@
 import { ROUTES } from '@/constants/common/constants';
 import { useUser, useDownloadFile } from '@/hooks';
-import { useExportFormQuery, useExportReceiptQuery } from '@/services/form/queries';
-import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
+import {
+  useExportFormMutation,
+  useExportReceiptMutation,
+} from '@/services/form/mutations';
+import { useDownloadAdmissionTicketMutation } from '@/services/result/mutations';
 import { useRouter } from 'next/navigation';
 
 export const useBoxClick = (status?: string) => {
   const router = useRouter();
   const { userData } = useUser();
   const downloadFile = useDownloadFile();
-  const { data: exportFormData } = useExportFormQuery();
-  const { data: receiptData } = useExportReceiptQuery();
-  const { data: admissionTicketData } = useDownloadAdmissionTicketQuery();
+  const { exportFormMutate } = useExportFormMutation();
+  const { exportReceiptMutate } = useExportReceiptMutation();
+  const { downloadAdmissionTicketMutate } = useDownloadAdmissionTicketMutation();
 
   const handleWriteFormContinue = () => {
     const banStatus =
@@ -37,10 +40,10 @@ export const useBoxClick = (status?: string) => {
     if (!status || !accept.includes(status)) {
       alert('원서를 제출하지 않아, 다운로드 할 수 없습니다.');
     } else {
-      downloadFile(
-        exportFormData,
-        `${userData.name} 부산소프트웨어마이스터고등학교 원서.pdf`,
-      );
+      exportFormMutate(undefined, {
+        onSuccess: (data) =>
+          downloadFile(data, `${userData.name} 부산소프트웨어마이스터고등학교 원서.pdf`),
+      });
     }
   };
 
@@ -51,7 +54,9 @@ export const useBoxClick = (status?: string) => {
     if (!accept) {
       alert('원서가 미제출 상태이거나 확인 중에 있어, 다운로드할 수 없습니다.');
     } else {
-      downloadFile(receiptData, `${userData.name} 접수증.pdf`);
+      exportReceiptMutate(undefined, {
+        onSuccess: (data) => downloadFile(data, `${userData.name} 접수증.pdf`),
+      });
     }
   };
 
@@ -59,7 +64,9 @@ export const useBoxClick = (status?: string) => {
     if (!(status === 'FIRST_PASSED')) {
       alert('1차 합격일때만 수험표를 출력할 수 있습니다.');
     } else {
-      downloadFile(admissionTicketData, `${userData.name} 수험표.pdf`);
+      downloadAdmissionTicketMutate(undefined, {
+        onSuccess: (data) => downloadFile(data, `${userData.name} 수험표.pdf`),
+      });
     }
   };
 

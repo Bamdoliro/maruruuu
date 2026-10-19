@@ -1,6 +1,6 @@
-import { useUser } from '@/hooks';
+import { useUser, useDownloadFile } from '@/hooks';
 import { useLoginMutation } from '@/services/auth/mutations';
-import { useDownloadAdmissionTicketQuery } from '@/services/result/queries';
+import { useDownloadAdmissionTicketMutation } from '@/services/result/mutations';
 import { stepAtom } from '@/stores';
 import { useSetAtom } from 'jotai';
 import type { PostLoginReq } from '@/types/auth/remote';
@@ -20,8 +20,9 @@ export const useMobile = (step: Step) => {
     password: '',
   });
   const setStep = useSetAtom(stepAtom);
-  const { data: admissionTicketData } = useDownloadAdmissionTicketQuery();
+  const { downloadAdmissionTicketMutate } = useDownloadAdmissionTicketMutation('MOBILE');
   const { userData } = useUser();
+  const downloadFile = useDownloadFile();
   const { loginMutate } = useLoginMutation('MOBILE', login);
   const now = dayjs();
   const { toast } = useToast();
@@ -31,17 +32,9 @@ export const useMobile = (step: Step) => {
   };
 
   const handleDownloadAdmissionTicket = () => {
-    if (!admissionTicketData) return;
-
-    const admissionTicket = window.URL.createObjectURL(new Blob([admissionTicketData]));
-
-    const link = document.createElement('a');
-    link.href = admissionTicket;
-    link.download = `${userData.name} 수험표.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(admissionTicket);
+    downloadAdmissionTicketMutate(undefined, {
+      onSuccess: (data) => downloadFile(data, `${userData.name} 수험표.pdf`),
+    });
   };
 
   const handleLoginChange: ChangeEventHandler<HTMLInputElement> = (e) => {
