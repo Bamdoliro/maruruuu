@@ -1,8 +1,8 @@
 import type { PostLoginReq } from '@/types/auth/remote';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { deleteLogout, postLogin } from './api';
-import { ROUTES } from '@/constants/common/constants';
+import { ROUTES, USER_SCOPED_KEYS } from '@/constants/common/constants';
 import { useRouter } from 'next/navigation';
 import { useApiError } from '@/hooks';
 import { stepAtom } from '@/stores';
@@ -17,10 +17,12 @@ export const useLoginMutation = (
   const { toast } = useToast();
   const setStep = useSetAtom(stepAtom);
   const { setIsLoggedIn } = useAuthState();
+  const queryClient = useQueryClient();
 
   const { mutate: loginMutate, ...restMutation } = useMutation({
     mutationFn: () => postLogin({ phoneNumber, password }),
     onSuccess: () => {
+      USER_SCOPED_KEYS.forEach((key) => queryClient.removeQueries({ queryKey: [key] }));
       setIsLoggedIn(true);
       if (device === 'COMPUTER') {
         toast('로그인 되었습니다.', 'SUCCESS');

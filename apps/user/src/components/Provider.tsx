@@ -10,7 +10,8 @@ import { MobileProvider } from './common';
 import { AuthStateProvider, useAuthState, useToast } from '@maru/hooks';
 import { useSessionExpired } from '@/hooks';
 import { useScheduleQuery } from '@/services/schedule/queries';
-import { ROUTES } from '@/constants/common/constants';
+import { ROUTES, USER_SCOPED_KEYS } from '@/constants/common/constants';
+import { useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
@@ -46,8 +47,12 @@ const GlobalToast = () => {
 
 const SessionExpiredHandler = () => {
   const { setIsLoggedIn } = useAuthState();
+  const queryClient = useQueryClient();
 
-  useSessionExpired(() => setIsLoggedIn(false));
+  useSessionExpired(() => {
+    setIsLoggedIn(false);
+    USER_SCOPED_KEYS.forEach((key) => queryClient.removeQueries({ queryKey: [key] }));
+  });
 
   return null;
 };
