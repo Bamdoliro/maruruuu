@@ -33,7 +33,7 @@ const GradeDistributionDetailTable = ({ formList, selectedRound }: DetailTablePr
           <ScoreTable formList={formList} />
         </Column>
       </ScoreInfoWrapper>
-      <DetailContent formList={formList} />
+      <DetailContent formList={formList} selectedRound={selectedRound} />
     </Row>
   );
 };
