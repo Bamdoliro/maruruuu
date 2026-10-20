@@ -6,9 +6,12 @@ import useMaxMinByType from './DetailContent.hooks';
 import DetailHeader from '../DetailHeader/DetailHeader';
 import { EMPTY_VALUE } from '@/constants/common/constant';
 
-type DetailTableProps = { formList: GradeDistributionType[] | undefined };
+type DetailTableProps = {
+  formList: GradeDistributionType[] | undefined;
+  selectedRound: string;
+};
 
-const DetailContent = ({ formList }: DetailTableProps) => {
+const DetailContent = ({ formList, selectedRound }: DetailTableProps) => {
   const {
     regularApplicant,
     meisterTalentApplicant,
@@ -23,7 +26,7 @@ const DetailContent = ({ formList }: DetailTableProps) => {
     farmingAndFishingApplicant,
     specialAdmissionApplicant,
     nationalVeteransEducationApplicant,
-  } = useMaxMinByType(formList);
+  } = useMaxMinByType(formList, selectedRound);
   return (
     <StyledDetailTable>
       <Column>
