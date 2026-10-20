@@ -17,7 +17,7 @@ export const useFormListQuery = () => {
   const formListType = useAtomValue(formListTypeAtom);
   const formListSortingType = useAtomValue(formListSortingTypeAtom);
   const schoolSearch = useAtomValue(schoolSearchAtom);
-  const [debouncedSchoolSearch, setDebouncedSchoolSearch] = useState(schoolSearch);
+  const [debouncedSchoolSearch, setDebouncedSchoolSearch] = useState(schoolSearch.trim());
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSchoolSearch(schoolSearch.trim()), 300);
