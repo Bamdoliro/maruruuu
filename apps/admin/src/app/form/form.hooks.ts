@@ -18,7 +18,7 @@ import {
 } from '@/store';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useToast } from '@maru/hooks';
-import type { FormListSortingType } from '@/types/form/client';
+import type { FormListCriteriaKey } from '@/types/form/client';
 
 export const useFormPageState = () => {
   const [formListType, setFormListType] = useAtom(formListTypeAtom);
@@ -42,7 +42,7 @@ export const useFormPageState = () => {
   };
 
   const getCriteriaDropdownValue = (
-    key: keyof FormListSortingType,
+    key: FormListCriteriaKey,
     category: Record<string, string>,
   ) => {
     const value = formListSortingType[key];

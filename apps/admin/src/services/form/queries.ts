@@ -11,24 +11,37 @@ import { useQuery } from '@tanstack/react-query';
 import { formListSortingTypeAtom, formListTypeAtom, schoolSearchAtom } from '@/store';
 import { useAtomValue } from 'jotai';
 import type { ExportExcelType } from '@/types/form/client';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export const useFormListQuery = () => {
   const formListType = useAtomValue(formListTypeAtom);
   const formListSortingType = useAtomValue(formListSortingTypeAtom);
   const schoolSearch = useAtomValue(schoolSearchAtom);
+  const [debouncedSchoolSearch, setDebouncedSchoolSearch] = useState(schoolSearch.trim());
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSchoolSearch(schoolSearch.trim()), 300);
+    return () => clearTimeout(timer);
+  }, [schoolSearch]);
+
+  const isReviewList = formListType === '검토해야 하는 원서 모아보기';
 
   const { data, ...restQuery } = useQuery({
-    queryKey: [KEY.FORM_LIST, formListType, formListSortingType],
-    queryFn: () => getFormList(formListType, formListSortingType),
+    queryKey: [
+      KEY.FORM_LIST,
+      formListType,
+      formListSortingType,
+      isReviewList ? null : debouncedSchoolSearch,
+    ],
+    queryFn: () => getFormList(formListType, formListSortingType, debouncedSchoolSearch),
   });
 
   const filteredData = useMemo(() => {
     if (!data?.dataList) return undefined;
-    if (!schoolSearch) return data.dataList;
+    if (!isReviewList || !schoolSearch) return data.dataList;
 
     return data.dataList.filter((form) => (form.school ?? '').includes(schoolSearch));
-  }, [data?.dataList, schoolSearch]);
+  }, [data?.dataList, isReviewList, schoolSearch]);
 
   return { data: filteredData, ...restQuery };
 };

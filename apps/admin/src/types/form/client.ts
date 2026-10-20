@@ -57,11 +57,26 @@ export type FormListType = '모두 보기' | '검토해야 하는 원서 모아�
 
 export type FormSort = 'first-round-score-asc' | 'first-round-score-desc' | 'form-id';
 
+export type MentoringProgramFilter = 'true' | 'false';
+
 export interface FormListSortingType {
   status: FormStatus | null;
   type: FormType | null;
   sort: FormSort | null;
+  mentoringProgram: MentoringProgramFilter | null;
+  firstRoundScoreMin: number | null;
+  firstRoundScoreMax: number | null;
+  totalScoreMin: number | null;
+  totalScoreMax: number | null;
 }
+
+export type FormListCriteriaKey = 'status' | 'type' | 'sort' | 'mentoringProgram';
+
+export type FormListScoreRangeKey =
+  | 'firstRoundScoreMin'
+  | 'firstRoundScoreMax'
+  | 'totalScoreMin'
+  | 'totalScoreMax';
 
 export interface FormDetail {
   id: number;

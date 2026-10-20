@@ -7,4 +7,9 @@ export const formListSortingTypeAtom = atom<FormListSortingType>({
   status: null,
   type: null,
   sort: null,
+  mentoringProgram: null,
+  firstRoundScoreMin: null,
+  firstRoundScoreMax: null,
+  totalScoreMin: null,
+  totalScoreMax: null,
 });

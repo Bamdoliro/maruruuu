@@ -6,6 +6,7 @@ import {
   FORM_SORTING_CATEGORY,
   FORM_STATUS_CATEGORY,
   FORM_TYPE_CATEGORY,
+  MENTORING_PROGRAM_CATEGORY,
 } from '@/constants/form/constant';
 import AppLayout from '@/layouts/AppLayout';
 import {
@@ -33,6 +34,7 @@ import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
 import { useAutoSecondRoundResultMutation } from '@/services/form/mutations';
 import ExportExcelModal from '@/components/form/ExportExcelModal/ExportExcelModal';
+import ScoreRangeFilter from '@/components/form/ScoreRangeFilter/ScoreRangeFilter';
 
 const FormPage = () => {
   const {
@@ -152,6 +154,32 @@ const FormPage = () => {
                   onChange={handleCriteriaChange}
                   value={getCriteriaDropdownValue('sort', FORM_SORTING_CATEGORY)}
                   name="sort"
+                />
+                <Dropdown
+                  data={[
+                    { value: 'RESET', label: '정렬 초기화' },
+                    { value: 'true', label: '멘토멘티 신청' },
+                    { value: 'false', label: '멘토멘티 미신청' },
+                  ]}
+                  size="SMALL"
+                  width={160}
+                  placeholder="멘토멘티"
+                  onChange={handleCriteriaChange}
+                  value={getCriteriaDropdownValue(
+                    'mentoringProgram',
+                    MENTORING_PROGRAM_CATEGORY,
+                  )}
+                  name="mentoringProgram"
+                />
+                <ScoreRangeFilter
+                  label="1차 점수"
+                  minName="firstRoundScoreMin"
+                  maxName="firstRoundScoreMax"
+                />
+                <ScoreRangeFilter
+                  label="최종 점수"
+                  minName="totalScoreMin"
+                  maxName="totalScoreMax"
                 />
               </Row>
             ) : (
