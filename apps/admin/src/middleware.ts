@@ -33,5 +33,6 @@ export const config = {
     '/fair/:path*',
     '/registration/:path*',
     '/analysis/:path*',
+    '/schedule/:path*',
   ],
 };

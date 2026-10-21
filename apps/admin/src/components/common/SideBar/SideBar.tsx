@@ -39,6 +39,10 @@ const NAVIGATION_DATA = [
     name: '분석',
     route: ROUTES.ANALYSIS,
   },
+  {
+    name: '일정 관리',
+    route: ROUTES.SCHEDULE,
+  },
 ] as const;
 
 const SideBar = () => {
