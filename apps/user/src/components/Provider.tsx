@@ -70,7 +70,7 @@ const LoginToastHandler = () => {
 };
 
 const ScheduleGate = ({ children }: { children: ReactNode }) => {
-  const { data, isError } = useScheduleQuery();
+  const { data, isPending } = useScheduleQuery();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -84,8 +84,7 @@ const ScheduleGate = ({ children }: { children: ReactNode }) => {
     router.replace(isInspection ? ROUTES.INSPECTION : ROUTES.MAIN);
   }, [shouldRedirect, isInspection, router]);
 
-  if (isError) return;
-  if (!data || shouldRedirect) return <Loader />;
+  if (isPending || shouldRedirect) return <Loader />;
 
   return <>{children}</>;
 };
