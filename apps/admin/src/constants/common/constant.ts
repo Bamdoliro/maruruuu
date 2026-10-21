@@ -19,6 +19,7 @@ export const KEY = {
   REGISTRATION_LIST: 'useRegistrationList',
   FORM_EXPORT_SCORE_EXCEL: 'useFormExportScoreExcel',
   MESSAGE_RECIPIENT_LIST: 'useMessageRecipientList',
+  SCHEDULE: 'useSchedule',
 };
 
 export const ROUTES = {
@@ -35,6 +36,7 @@ export const ROUTES = {
   FAIR: '/fair',
   FAIR_CREATE: '/fair/create',
   REGISTRATION: '/registration',
+  SCHEDULE: '/schedule',
 } as const;
 
 export const EMPTY_VALUE = '';
