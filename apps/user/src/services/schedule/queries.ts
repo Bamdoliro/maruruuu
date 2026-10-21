@@ -34,6 +34,7 @@ export const useScheduleQuery = () => {
     staleTime: Infinity,
     retry: false,
     retryOnMount: false,
+    refetchOnReconnect: false,
   });
 
   return { data, ...restQuery };
