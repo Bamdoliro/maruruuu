@@ -205,9 +205,7 @@ const useGradeCalculation = () => {
     if (totalVolunteerTime < COUNT.MIN_VOLUNTEER) return SCORE.MIN_VOLUNTEER;
     if (totalVolunteerTime > COUNT.MAX_VOLUNTEER) return SCORE.MAX_VOLUNTEER;
 
-    const volunteerTime =
-      SCORE.MAX_VOLUNTEER - (COUNT.MAX_VOLUNTEER - totalVolunteerTime) * 0.5;
-    return Math.round(volunteerTime);
+    return SCORE.MAX_VOLUNTEER - (COUNT.MAX_VOLUNTEER - totalVolunteerTime) * 0.5;
   };
 
   const calculateCertificateScore = () => {
