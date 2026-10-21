@@ -11,7 +11,7 @@ import {
 import { useAtom, useAtomValue } from 'jotai';
 import type { Form, PassStatusType } from '@/types/form/client';
 import { convertToResponsive, maskName } from '@/utils';
-import { color } from '@maru/design-system';
+import { color, font } from '@maru/design-system';
 import { CheckBox, Dropdown, Row, Text } from '@maru/ui';
 import { useRouter } from 'next/navigation';
 import type { ChangeEventHandler } from 'react';
@@ -143,13 +143,15 @@ const FormTableItem = ({
           >
             {getRoundResult(firstRoundPassed)}
           </Text>
-          <Text
-            fontType="p2"
-            width={convertToResponsive(40, 60)}
-            color={typeof score !== 'number' ? color.gray600 : color.black}
-          >
-            {typeof score !== 'number' ? '미정' : Number(score.toFixed(3))}
-          </Text>
+          {typeof score !== 'number' ? (
+            <Text fontType="p2" width={convertToResponsive(40, 60)} color={color.gray600}>
+              미정
+            </Text>
+          ) : (
+            <Text fontType="p2" width={convertToResponsive(40, 60)} color={color.black}>
+              {isHovered ? Number(score.toFixed(3)) : <MaskedScore>•••</MaskedScore>}
+            </Text>
+          )}
         </Row>
         <Row>
           {isSecondRoundResultEditing ? (
@@ -180,4 +182,10 @@ export default FormTableItem;
 
 const DirectButton = styled.button`
   text-align: start;
+`;
+
+const MaskedScore = styled.span`
+  ${font.p2}
+  color: ${color.gray500};
+  letter-spacing: 1px;
 `;
