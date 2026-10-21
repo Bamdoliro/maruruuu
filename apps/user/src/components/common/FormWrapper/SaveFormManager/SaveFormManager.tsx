@@ -54,7 +54,7 @@ const SaveFormManager = () => {
             const restoredSubject = { ...subject, ...savedSubject, id: index };
 
             INFORMATION_FIRST_GRADE_KEYS.forEach((key) => {
-              if (!(key in savedSubject)) delete restoredSubject[key];
+              if (savedSubject[key] == null) delete restoredSubject[key];
             });
 
             return restoredSubject;

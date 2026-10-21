@@ -20,7 +20,7 @@ export const useInformationFirstGrade = () => {
 
   const hasFirstGradeScore = INFORMATION_FIRST_GRADE_KEYS.some((key) => {
     const achievementLevel = informationSubject?.[key];
-    return achievementLevel !== undefined && achievementLevel !== '-';
+    return achievementLevel != null && achievementLevel !== '-';
   });
 
   const isOpen = isChecked || hasFirstGradeScore;

@@ -58,9 +58,7 @@ const useGradeCalculation = () => {
       (key) => informationSubject?.[key],
     ).filter(
       (achievementLevel): achievementLevel is Exclude<AchievementLevel, '-' | 'F'> =>
-        achievementLevel !== undefined &&
-        achievementLevel !== '-' &&
-        achievementLevel !== 'F',
+        achievementLevel != null && achievementLevel !== '-' && achievementLevel !== 'F',
     );
 
     const averageScore = achievementLevels.length
