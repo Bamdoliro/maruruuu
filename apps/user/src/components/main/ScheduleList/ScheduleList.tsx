@@ -1,4 +1,5 @@
-import { useSchedule } from '@/services/schedule/queries';
+import { useScheduleQuery } from '@/services/schedule/queries';
+import type { Schedule } from '@/services/schedule/queries';
 import { color } from '@maru/design-system';
 import { Text } from '@maru/ui';
 import { flex } from '@maru/utils';
@@ -8,7 +9,27 @@ import ScheduleItem from './ScheduleItem/ScheduleItem';
 import { formatYear, formatScheduleDate } from '@/utils';
 
 const ScheduleList = () => {
-  const schedule = useSchedule();
+  const { data: schedule } = useScheduleQuery();
+
+  if (!schedule) {
+    return (
+      <StyledScheduleList>
+        <Text fontType="H3" color={color.gray900}>
+          신입생 입학 일정
+        </Text>
+        <EmptyScheduleBox>
+          <Text fontType="p2" color={color.gray500}>
+            입학 일정 준비 중입니다.
+          </Text>
+        </EmptyScheduleBox>
+      </StyledScheduleList>
+    );
+  }
+
+  return <ScheduleListContent schedule={schedule} />;
+};
+
+const ScheduleListContent = ({ schedule }: { schedule: Schedule }) => {
   const SCHEDULE_LIST = [
     {
       id: 1,
@@ -87,4 +108,14 @@ const ScheduleListBox = styled.div`
   height: 100%;
   margin-top: 32px;
   gap: 16px;
+`;
+
+const EmptyScheduleBox = styled.div`
+  ${flex({ alignItems: 'center', justifyContent: 'center' })}
+  width: 100%;
+  height: 384px;
+  flex-shrink: 0;
+  margin-top: 32px;
+  background-color: ${color.gray50};
+  border-radius: 12px;
 `;

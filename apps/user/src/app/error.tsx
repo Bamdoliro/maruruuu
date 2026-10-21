@@ -1,14 +1,67 @@
 'use client';
 
+import { ROUTES } from '@/constants/common/constants';
 import { AppLayout } from '@/layouts';
+import { ScheduleUnavailableError } from '@/services/schedule/queries';
 import { color } from '@maru/design-system';
 import { Button, Column, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import { useRouter } from 'next/navigation';
 import styled from '@emotion/styled';
 
-const Error = () => {
+interface Props {
+  error: Error;
+}
+
+const OffSeasonError = () => {
   const router = useRouter();
+
+  const handleMoveMain = () => {
+    router.push(ROUTES.MAIN);
+  };
+
+  const handleMoveSimulation = () => {
+    router.push(ROUTES.SIMULATION);
+  };
+
+  return (
+    <AppLayout header footer>
+      <StyledError>
+        <Column gap={24} alignItems="center">
+          <Text fontType="H1" color={color.gray900}>
+            지금은 입학 전형 기간이 아닙니다
+          </Text>
+          <Column alignItems="center">
+            <Text fontType="p2" color={color.gray600}>
+              입학 일정은 전형 기간에 맞춰 공개됩니다.
+            </Text>
+            <Text fontType="p2" color={color.gray600}>
+              성적 모의 계산은 지금도 이용할 수 있어요.
+            </Text>
+          </Column>
+        </Column>
+        <Row alignItems="center" gap={16}>
+          <Button size="LARGE" width="fit-content" onClick={handleMoveSimulation}>
+            성적 모의 계산하기
+          </Button>
+          <Button
+            styleType="SECONDARY"
+            size="LARGE"
+            width="fit-content"
+            onClick={handleMoveMain}
+          >
+            메인으로 돌아가기
+          </Button>
+        </Row>
+      </StyledError>
+    </AppLayout>
+  );
+};
+
+const Error = ({ error }: Props) => {
+  const router = useRouter();
+
+  if (error instanceof ScheduleUnavailableError) return <OffSeasonError />;
 
   const handleMovePeriodPage = () => {
     router.back();

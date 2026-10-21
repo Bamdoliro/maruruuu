@@ -19,12 +19,22 @@ const selectSchedule = ({ data }: ScheduleRes) => ({
 
 export type Schedule = ReturnType<typeof selectSchedule>;
 
+export class ScheduleUnavailableError extends Error {
+  constructor() {
+    super('입학 일정을 불러올 수 없습니다.');
+    this.name = 'ScheduleUnavailableError';
+  }
+}
+
 export const useScheduleQuery = () => {
   const { data, ...restQuery } = useQuery({
     queryKey: [KEY.SCHEDULE],
     queryFn: getCurrentSchedule,
     select: selectSchedule,
     staleTime: Infinity,
+    retry: false,
+    retryOnMount: false,
+    refetchOnReconnect: false,
   });
 
   return { data, ...restQuery };
@@ -34,7 +44,7 @@ export const useSchedule = () => {
   const { data } = useScheduleQuery();
 
   if (!data) {
-    throw new Error('useSchedule은 ScheduleGate 내부에서만 사용할 수 있습니다.');
+    throw new ScheduleUnavailableError();
   }
 
   return data;

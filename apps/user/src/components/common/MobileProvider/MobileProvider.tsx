@@ -6,6 +6,7 @@ import { useAtom } from 'jotai';
 import { useAuthState } from '@maru/hooks';
 import { isMobileDevice } from '@/utils';
 import { SwitchCase } from '@toss/react';
+import { useScheduleQuery } from '@/services/schedule/queries';
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 
@@ -17,6 +18,7 @@ const MobileProvider = ({ children }: Props) => {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const [step, setStep] = useAtom(stepAtom);
   const { isLoggedIn } = useAuthState();
+  const { data: schedule } = useScheduleQuery();
 
   useEffect(() => {
     setIsMobile(isMobileDevice());
@@ -32,7 +34,7 @@ const MobileProvider = ({ children }: Props) => {
 
   if (isMobile === null) return null;
 
-  if (isMobile) {
+  if (isMobile && schedule) {
     return (
       <>
         <SwitchCase
