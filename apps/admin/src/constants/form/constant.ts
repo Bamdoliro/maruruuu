@@ -5,7 +5,6 @@ import type {
   FormType,
   Gender,
   GraduationType,
-  MentoringProgramFilter,
   ReceiveStatusValue,
 } from '@/types/form/client';
 import { color } from '@maru/design-system';
@@ -44,11 +43,6 @@ export const FORM_SORTING_CATEGORY: Record<FormSort, string> = {
   'first-round-score-desc': '최종 점수 높은 순',
   'first-round-score-asc': '최종 점수 낮은 순',
   'form-id': '접수순',
-} as const;
-
-export const MENTORING_PROGRAM_CATEGORY: Record<MentoringProgramFilter, string> = {
-  true: '멘토멘티 신청',
-  false: '멘토멘티 미신청',
 } as const;
 
 export const EXPORT_EXCEL_TYPE_VALUE: Record<ExportExcelType, string> = {

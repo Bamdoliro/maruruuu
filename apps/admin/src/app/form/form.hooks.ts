@@ -49,6 +49,19 @@ export const useFormPageState = () => {
     return value ? category[value] : undefined;
   };
 
+  const {
+    mentoringProgram,
+    firstRoundScoreMin,
+    firstRoundScoreMax,
+    totalScoreMin,
+    totalScoreMax,
+  } = formListSortingType;
+  const detailFilterCount = [
+    mentoringProgram !== null,
+    firstRoundScoreMin !== null || firstRoundScoreMax !== null,
+    totalScoreMin !== null || totalScoreMax !== null,
+  ].filter(Boolean).length;
+
   return {
     formListType,
     schoolSearch,
@@ -57,6 +70,7 @@ export const useFormPageState = () => {
     handleFormListTypeAll,
     handleSchoolSearchChange,
     getCriteriaDropdownValue,
+    detailFilterCount,
   };
 };
 
