@@ -2,6 +2,7 @@
 
 import FormDetail from '@/components/form/FormDetail/FormDetail';
 import { ROUTES } from '@/constants/common/constant';
+import { requestScrollRestoration } from '@/hooks';
 import AppLayout from '@/layouts/AppLayout';
 import { color, font } from '@maru/design-system';
 import { IconArrowLeft } from '@maru/icon';
@@ -17,7 +18,7 @@ const FormDetailPage = ({ params: { id } }: FormDetailPageProps) => {
   return (
     <AppLayout>
       <StyledFormDetail>
-        <DirectLink href={ROUTES.FORM}>
+        <DirectLink href={ROUTES.FORM} onClick={requestScrollRestoration}>
           <IconArrowLeft width={18} height={18} />
           돌아가기
         </DirectLink>

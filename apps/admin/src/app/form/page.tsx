@@ -36,8 +36,15 @@ import ExportExcelModal from '@/components/form/ExportExcelModal/ExportExcelModa
 import DetailFilterPanel from '@/components/form/DetailFilterPanel/DetailFilterPanel';
 import { useBooleanState } from '@maru/hooks';
 import { css } from '@emotion/react';
+import { useRef } from 'react';
+import { useScrollRestoration } from '@/hooks';
+import { useFormListQuery } from '@/services/form/queries';
 
 const FormPage = () => {
+  const scrollRef = useRef<HTMLElement>(null);
+  const { data: formList } = useFormListQuery();
+  useScrollRestoration('form-list', scrollRef, !!formList);
+
   const {
     formListType,
     schoolSearch,
@@ -91,7 +98,7 @@ const FormPage = () => {
   const isReviewList = formListType === '검토해야 하는 원서 모아보기';
 
   return (
-    <AppLayout>
+    <AppLayout ref={scrollRef}>
       <StyledFormPage>
         <Text fontType="H1">원서 관리</Text>
         <Column gap={36}>
