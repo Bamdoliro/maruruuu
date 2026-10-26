@@ -36,7 +36,7 @@ const FormTableHeader = ({ id }: FormTableHeaderProps) => {
 
   return (
     <TableHeader>
-      <Row gap={48}>
+      <Row gap={40}>
         {isFormToPrintSelecting ? (
           <CheckBox onChange={handleAllFormToPrintSelectChange} />
         ) : null}
@@ -44,7 +44,7 @@ const FormTableHeader = ({ id }: FormTableHeaderProps) => {
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
           수험번호
         </Text>
-        <Text fontType="p2" width={convertToResponsive(40, 60)}>
+        <Text fontType="p2" width={convertToResponsive(60, 80)}>
           이름
         </Text>
         <Text fontType="p2" width={convertToResponsive(120, 160)}>
@@ -81,5 +81,5 @@ const FormTableHeader = ({ id }: FormTableHeaderProps) => {
 export default FormTableHeader;
 
 const ListNumberSpace = styled.div`
-  width: ${convertToResponsive(20, 30)};
+  width: ${convertToResponsive(12, 20)};
 `;

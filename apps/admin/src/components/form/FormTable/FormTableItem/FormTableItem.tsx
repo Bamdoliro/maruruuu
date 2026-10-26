@@ -110,20 +110,20 @@ const FormTableItem = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <TableItem key={id}>
-        <Row gap={48}>
+        <Row gap={40}>
           {isFormToPrintSelecting ? (
             <CheckBox
               checked={formToPrint[id]}
               onChange={handleFormToPrintSelectChange}
             />
           ) : null}
-          <Text fontType="p2" width={convertToResponsive(20, 30)} color={color.gray600}>
+          <Text fontType="p2" width={convertToResponsive(10, 20)} color={color.gray500}>
             {listNumber}
           </Text>
           <Text fontType="p2" width={convertToResponsive(40, 60)}>
             {examinationNumber}
           </Text>
-          <Text fontType="p2" width={convertToResponsive(40, 60)}>
+          <Text fontType="p2" width={convertToResponsive(60, 80)}>
             {isHovered ? name : maskName(name)}
           </Text>
           <Text fontType="p2" width={convertToResponsive(120, 160)}>
