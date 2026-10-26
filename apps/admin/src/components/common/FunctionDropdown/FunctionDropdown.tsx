@@ -92,7 +92,8 @@ const DropdownItemList = styled.div`
   position: absolute;
   right: 0px;
   margin-top: 8px;
-  width: 280px;
+  width: max-content;
+  min-width: 280px;
   padding: 8px;
   background-color: ${color.white};
   border: 1px solid ${color.gray200};
@@ -107,7 +108,12 @@ const DropdownItem = styled.button`
   height: 44px;
   padding: 0 8px;
   border-radius: 6px;
+  white-space: nowrap;
   cursor: pointer;
+
+  & > svg {
+    flex-shrink: 0;
+  }
 
   &:hover {
     background-color: ${color.gray100};
