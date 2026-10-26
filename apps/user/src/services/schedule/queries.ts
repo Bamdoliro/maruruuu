@@ -9,6 +9,7 @@ const selectSchedule = ({ data }: ScheduleRes) => ({
   원서_접수_마감: dayjs(data.applicationFormEnd),
   일차_합격_발표: dayjs(data.announcementOfFirstPass),
   이차_면접: dayjs(data.meisterTalentEntranceTime),
+  이차_면접_마이스터_외: dayjs(data.meisterTalentExclusionEntranceTime),
   이차_면접_종료: dayjs(data.physicalExamination),
   최종_합격_발표: dayjs(data.announcementOfSecondPass),
   입학_등록: dayjs(data.entranceRegistrationPeriodStart),
