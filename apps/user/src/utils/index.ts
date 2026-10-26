@@ -12,6 +12,8 @@ export { default as formatScheduleDate } from './formatScheduleDate';
 export { default as formatYear } from './formatYear';
 export { default as formatResultDateTime } from './formatResultDateTime';
 export { default as formatMonthDay } from './formatMonthDay';
+export { default as formatMonthDayTime } from './formatMonthDayTime';
+export { default as isMeisterTalentPassed } from './isMeisterTalentPassed';
 export { default as getHighestCertificateList } from './getHighestCertificateList';
 export { default as isMobileDevice } from './isMobileDevice';
 export { reserveLoginToast, consumeLoginToast } from './loginToast';

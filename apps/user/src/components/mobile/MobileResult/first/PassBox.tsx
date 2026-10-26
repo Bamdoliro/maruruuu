@@ -3,8 +3,18 @@ import { Button, Row, Text } from '@maru/ui';
 import { flex } from '@maru/utils';
 import styled from '@emotion/styled';
 import { useMobile } from '../../Mobile.hook';
+import formatMonthDayTime from '@/utils/formatMonthDayTime';
+import { useSchedule } from '@/services/schedule/queries';
 
-const PassBox = () => {
+interface PassBoxProps {
+  isMeisterTalent: boolean;
+}
+
+const PassBox = ({ isMeisterTalent }: PassBoxProps) => {
+  const schedule = useSchedule();
+  const entranceTime = formatMonthDayTime(
+    isMeisterTalent ? schedule.이차_면접 : schedule.이차_면접_마이스터_외,
+  );
   const { handleDownloadAdmissionTicket, handleMoveStep } = useMobile('MAIN');
 
   return (
@@ -12,9 +22,10 @@ const PassBox = () => {
       <Text fontType="p3" color={color.gray900} textAlign="center">
         2단계 전형 응시를 위해 수험표를 출력하고
         <br />
-        10월 31일에 본교에 방문해주시기 바랍니다.
+        {entranceTime}에 본교에 입실해주시기 바랍니다.
         <br />
-        자세한 내용은 입학 요강에서 확인해주시기 바랍니다.
+        자세한 내용은 학교 홈페이지 - 입학 안내 - 입학 공지사항의 <br /> 입학 요강을
+        확인해주시기 바랍니다.
       </Text>
       <Row gap={16} alignItems="center">
         <Button size="SMALL" onClick={handleDownloadAdmissionTicket}>
