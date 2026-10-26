@@ -1,6 +1,7 @@
 import { useApiError } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
+  getApplicationFormExcel,
   getFormUrl,
   getMergedFormPdf,
   patchReceiveStatus,
@@ -137,6 +138,32 @@ export const useMergeFormPdfMutation = () => {
   });
 
   return { mergeFormPdf, ...restMutation };
+};
+
+export const useExportApplicationFormExcelMutation = () => {
+  const { handleError } = useApiError();
+
+  const { mutate: exportApplicationFormExcel, ...restMutation } = useMutation({
+    mutationFn: getApplicationFormExcel,
+    onSuccess: (data) => {
+      const excelUrl = window.URL.createObjectURL(
+        new Blob([data], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        }),
+      );
+
+      const link = document.createElement('a');
+      link.href = excelUrl;
+      link.download = '고입업무지원시스템 지원자등록양식.xlsx';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(excelUrl);
+    },
+    onError: handleError,
+  });
+
+  return { exportApplicationFormExcel, ...restMutation };
 };
 
 export const useReceiveStatusChangeMutation = (formId: number, onClose: () => void) => {

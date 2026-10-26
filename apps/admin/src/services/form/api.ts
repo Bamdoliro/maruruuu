@@ -1,5 +1,6 @@
 import { maru, maruAdmin } from '@/apis/instance/instance';
 import { EXPORT_EXCEL_TYPE_VALUE } from '@/constants/form/constant';
+import { isAxiosError } from 'axios';
 import type {
   ExportExcelType,
   FormListSortingType,
@@ -132,4 +133,23 @@ export const getExportScoreExcel = async () => {
   });
 
   return data;
+};
+
+export const getApplicationFormExcel = async () => {
+  try {
+    const { data } = await maruAdmin.get<Blob>('/forms/xlsx/application-form', {
+      responseType: 'blob',
+    });
+
+    return data;
+  } catch (error) {
+    if (
+      isAxiosError(error) &&
+      error.response?.data instanceof Blob &&
+      error.response.data.type.includes('application/json')
+    ) {
+      error.response.data = JSON.parse(await error.response.data.text());
+    }
+    throw error;
+  }
 };

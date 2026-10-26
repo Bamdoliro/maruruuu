@@ -31,7 +31,10 @@ import {
 import { color, font } from '@maru/design-system';
 import { useOverlay } from '@toss/use-overlay';
 import SecondScoreUploadModal from '@/components/form/SecondScoreUploadModal/SecondScoreUploadModal';
-import { useAutoSecondRoundResultMutation } from '@/services/form/mutations';
+import {
+  useAutoSecondRoundResultMutation,
+  useExportApplicationFormExcelMutation,
+} from '@/services/form/mutations';
 import ExportExcelModal from '@/components/form/ExportExcelModal/ExportExcelModal';
 import DetailFilterPanel from '@/components/form/DetailFilterPanel/DetailFilterPanel';
 import { useBooleanState } from '@maru/hooks';
@@ -95,6 +98,12 @@ const FormPage = () => {
   };
 
   const { autoSecondRoundResult } = useAutoSecondRoundResultMutation();
+  const { exportApplicationFormExcel, isPending: isExportApplicationFormExcelPending } =
+    useExportApplicationFormExcelMutation();
+  const handleExportApplicationFormExcelButtonClick = () => {
+    if (isExportApplicationFormExcelPending) return;
+    exportApplicationFormExcel();
+  };
   const isReviewList = formListType === '검토해야 하는 원서 모아보기';
 
   return (
@@ -296,6 +305,12 @@ const FormPage = () => {
                         label: '과목별 성적 상세 발급하기',
                         value: 'export_all_score_details',
                         onClick: handleExportExcelButtonClick,
+                      },
+                      {
+                        icon: <IconUpload width={24} height={24} />,
+                        label: '고입업무지원시스템 등록양식 발급하기',
+                        value: 'export_application_form',
+                        onClick: handleExportApplicationFormExcelButtonClick,
                       },
                     ]}
                   />
