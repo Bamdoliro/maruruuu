@@ -3,6 +3,7 @@ import FirstResultItem from './FirstResultItem';
 import PassBox from './PassBox';
 import FailBox from '../FailBox';
 import { useFirstResultQuery } from '@/services/result/queries';
+import { isMeisterTalentPassed } from '@/utils';
 
 const FirstResult = () => {
   const { data: firstResultData } = useFirstResultQuery();
@@ -14,7 +15,11 @@ const FirstResult = () => {
         isPassed={firstResultData?.passed}
         changedToRegular={firstResultData?.changedToRegular}
       />
-      {firstResultData?.passed ? <PassBox /> : <FailBox />}
+      {firstResultData?.passed ? (
+        <PassBox isMeisterTalent={isMeisterTalentPassed(firstResultData)} />
+      ) : (
+        <FailBox />
+      )}
     </Column>
   );
 };

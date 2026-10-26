@@ -6,6 +6,7 @@ export interface ScheduleRes {
     applicationFormEnd: string;
     announcementOfFirstPass: string;
     meisterTalentEntranceTime: string;
+    meisterTalentExclusionEntranceTime: string;
     physicalExamination: string;
     announcementOfSecondPass: string;
     entranceRegistrationPeriodStart: string;
