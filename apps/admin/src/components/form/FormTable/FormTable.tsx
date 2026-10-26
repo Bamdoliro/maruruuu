@@ -11,9 +11,10 @@ const FormTable = () => {
     <Column gap={12}>
       <FormTableHeader id={formIdList ?? []} />
       {formList &&
-        formList.map((item) => (
+        formList.map((item, index) => (
           <FormTableItem
             key={item.id}
+            listNumber={index + 1}
             id={item.id}
             birthday={item.birthday}
             examinationNumber={item.examinationNumber}

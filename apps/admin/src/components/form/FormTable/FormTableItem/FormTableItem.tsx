@@ -18,7 +18,12 @@ import type { ChangeEventHandler } from 'react';
 import { useState } from 'react';
 import styled from '@emotion/styled';
 
+interface FormTableItemProps extends Form {
+  listNumber: number;
+}
+
 const FormTableItem = ({
+  listNumber,
   id,
   examinationNumber,
   name,
@@ -31,7 +36,7 @@ const FormTableItem = ({
   firstRoundScore,
   secondRoundPassed,
   hasDocument,
-}: Form) => {
+}: FormTableItemProps) => {
   const router = useRouter();
 
   const { sort } = useAtomValue(formListSortingTypeAtom);
@@ -105,23 +110,26 @@ const FormTableItem = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <TableItem key={id}>
-        <Row gap={48}>
+        <Row gap={40}>
           {isFormToPrintSelecting ? (
             <CheckBox
               checked={formToPrint[id]}
               onChange={handleFormToPrintSelectChange}
             />
           ) : null}
+          <Text fontType="p2" width={convertToResponsive(10, 20)} color={color.gray500}>
+            {listNumber}
+          </Text>
           <Text fontType="p2" width={convertToResponsive(40, 60)}>
             {examinationNumber}
           </Text>
-          <Text fontType="p2" width={convertToResponsive(40, 60)}>
+          <Text fontType="p2" width={convertToResponsive(60, 80)}>
             {isHovered ? name : maskName(name)}
           </Text>
           <Text fontType="p2" width={convertToResponsive(120, 160)}>
             {graduationType === 'QUALIFICATION_EXAMINATION' ? '검정고시' : school}
           </Text>
-          <Text fontType="p2" width={convertToResponsive(180, 240)}>
+          <Text fontType="p2" width={convertToResponsive(100, 160)}>
             {FORM_TYPE_CATEGORY[type]}
           </Text>
         </Row>

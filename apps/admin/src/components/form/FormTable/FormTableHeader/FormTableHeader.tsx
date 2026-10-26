@@ -9,6 +9,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { convertToResponsive } from '@/utils';
 import { CheckBox, Row, Text } from '@maru/ui';
 import type { ChangeEventHandler } from 'react';
+import styled from '@emotion/styled';
 
 interface FormTableHeaderProps {
   id: number[];
@@ -35,20 +36,21 @@ const FormTableHeader = ({ id }: FormTableHeaderProps) => {
 
   return (
     <TableHeader>
-      <Row gap={48}>
+      <Row gap={40}>
         {isFormToPrintSelecting ? (
           <CheckBox onChange={handleAllFormToPrintSelectChange} />
         ) : null}
+        <ListNumberSpace />
         <Text fontType="p2" width={convertToResponsive(40, 60)}>
           수험번호
         </Text>
-        <Text fontType="p2" width={convertToResponsive(40, 60)}>
+        <Text fontType="p2" width={convertToResponsive(60, 80)}>
           이름
         </Text>
         <Text fontType="p2" width={convertToResponsive(120, 160)}>
           학교
         </Text>
-        <Text fontType="p2" width={convertToResponsive(180, 240)}>
+        <Text fontType="p2" width={convertToResponsive(100, 160)}>
           전형
         </Text>
       </Row>
@@ -77,3 +79,7 @@ const FormTableHeader = ({ id }: FormTableHeaderProps) => {
 };
 
 export default FormTableHeader;
+
+const ListNumberSpace = styled.div`
+  width: ${convertToResponsive(12, 20)};
+`;
