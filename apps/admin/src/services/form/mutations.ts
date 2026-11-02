@@ -38,11 +38,13 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
       }
 
       const { status, headers, data: blob } = error.response;
-      const isJsonResponse = String(headers['content-type'] ?? '').includes(
-        'application/json',
+      const contentType = String(headers['content-type'] ?? '');
+      const isJsonResponse = contentType.includes('application/json');
+      const isXlsxResponse = contentType.includes(
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       );
 
-      if (status === 400 && !isJsonResponse) {
+      if (status === 400 && isXlsxResponse) {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
@@ -56,7 +58,7 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
         return;
       }
 
-      if (status === 400) {
+      if (status === 400 && isJsonResponse) {
         toast('잘못된 파일입니다.', 'ERROR');
         handleCloseModal();
         return;
