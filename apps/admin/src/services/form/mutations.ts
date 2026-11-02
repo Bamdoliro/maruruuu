@@ -45,6 +45,8 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
         window.URL.revokeObjectURL(url);
         toast('오류가 있는 파일이 다운로드되었습니다.', 'ERROR');
         handleCloseModal();
+      } else {
+        toast('파일 업로드에 실패했습니다.', 'ERROR');
       }
     },
     onError: handleError,
