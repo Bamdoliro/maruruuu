@@ -24,16 +24,16 @@ export const useUploadSecondScoreFormatAction = (
   fileData: File | null,
   handleCloseModal: () => void,
 ) => {
-  const { uploadSecondScoreFormat } =
+  const { uploadSecondScoreFormat, isPending } =
     useUploadSecondScoreFormatMutation(handleCloseModal);
 
   const handleUploadSecondScoreFormatButtonClick = () => {
-    if (!fileData) return;
+    if (!fileData || isPending) return;
 
     const formData = new FormData();
     formData.append('xlsx', fileData);
     uploadSecondScoreFormat(formData);
   };
 
-  return { handleUploadSecondScoreFormatButtonClick };
+  return { handleUploadSecondScoreFormatButtonClick, isPending };
 };
