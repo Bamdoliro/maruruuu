@@ -1,7 +1,6 @@
 import { useApiError } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
-import type { AxiosError } from 'axios';
 import {
   getApplicationFormExcel,
   getFormUrl,
@@ -19,9 +18,32 @@ import { useSetAtom } from 'jotai';
 import { isPopupBlocked } from '@/utils';
 import type { ReceiveStatusValue } from '@/types/form/client';
 
+const SECOND_SCORE_UPLOAD_ERROR_MESSAGE: Record<number, string> = {
+  403: '유저의 권한이 없습니다.',
+  429: '너무 많이 요청하였습니다. 조금 뒤 다시 이용해주세요.',
+  500: '서버에 알 수 없는 오류가 발생하였습니다.',
+};
+
+const readErrorMessage = async (blob: Blob) => {
+  try {
+    const body: unknown = JSON.parse(await blob.text());
+    if (
+      typeof body === 'object' &&
+      body !== null &&
+      'message' in body &&
+      typeof body.message === 'string' &&
+      body.message
+    ) {
+      return body.message;
+    }
+  } catch {
+    return undefined;
+  }
+  return undefined;
+};
+
 export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void) => {
   const queryClient = useQueryClient();
-  const { handleError } = useApiError();
   const { toast } = useToast();
 
   const { mutate: uploadSecondScoreFormat, ...restMutation } = useMutation({
@@ -32,12 +54,14 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
       handleCloseModal();
     },
     onError: async (error) => {
-      if (!isAxiosError(error) || !(error.response?.data instanceof Blob)) {
-        handleError(error as AxiosError<never>);
+      const response = isAxiosError<Blob>(error) ? error.response : undefined;
+
+      if (!response || !(response.data instanceof Blob)) {
+        toast('알 수 없는 오류가 발생하였습니다.', 'ERROR');
         return;
       }
 
-      const { status, headers, data: blob } = error.response;
+      const { status, headers, data: blob } = response;
       const contentType = String(headers['content-type'] ?? '');
       const isJsonResponse = contentType.includes('application/json');
       const isXlsxResponse = contentType.includes(
@@ -58,18 +82,20 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
         return;
       }
 
+      const serverMessage = isJsonResponse ? await readErrorMessage(blob) : undefined;
+
       if (status === 400 && isJsonResponse) {
-        toast('잘못된 파일입니다.', 'ERROR');
+        toast(serverMessage ?? '잘못된 파일입니다.', 'ERROR');
         handleCloseModal();
         return;
       }
 
-      try {
-        error.response.data = isJsonResponse ? JSON.parse(await blob.text()) : {};
-      } catch {
-        error.response.data = {};
-      }
-      handleError(error as AxiosError<never>);
+      toast(
+        serverMessage ??
+          SECOND_SCORE_UPLOAD_ERROR_MESSAGE[status] ??
+          '파일 업로드에 실패했습니다.',
+        'ERROR',
+      );
     },
   });
 

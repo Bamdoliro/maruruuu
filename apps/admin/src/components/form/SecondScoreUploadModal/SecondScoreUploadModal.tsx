@@ -39,10 +39,8 @@ const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps
     onClose();
   };
 
-  const { handleUploadSecondScoreFormatButtonClick } = useUploadSecondScoreFormatAction(
-    uploadedFile,
-    handleCloseModal,
-  );
+  const { handleUploadSecondScoreFormatButtonClick, isPending } =
+    useUploadSecondScoreFormatAction(uploadedFile, handleCloseModal);
 
   return (
     <BlurBackground isOpen={isOpen}>
@@ -80,7 +78,7 @@ const SecondScoreUploadModal = ({ isOpen, onClose }: SecondScoreUploadModalProps
           </Button>
           <Button
             size="SMALL"
-            styleType={uploadedFile ? 'PRIMARY' : 'DISABLED'}
+            styleType={uploadedFile && !isPending ? 'PRIMARY' : 'DISABLED'}
             onClick={handleUploadSecondScoreFormatButtonClick}
           >
             입력하기
