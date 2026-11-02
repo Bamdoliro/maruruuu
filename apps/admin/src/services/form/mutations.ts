@@ -1,5 +1,7 @@
 import { useApiError } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 import {
   getApplicationFormExcel,
   getFormUrl,
@@ -24,17 +26,23 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
 
   const { mutate: uploadSecondScoreFormat, ...restMutation } = useMutation({
     mutationFn: patchSecondScoreFormat,
-    onSuccess: async (data) => {
-      const contentType = data.headers?.['content-type'];
-      const blob = data.data;
-      if (data.status === 204) {
-        toast('파일이 입력되었습니다.', 'SUCCESS');
-        queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
-        handleCloseModal();
-      } else if (contentType?.includes('application/json')) {
-        toast('잘못된 파일입니다.', 'ERROR');
-        handleCloseModal();
-      } else if (data.status === 400) {
+    onSuccess: () => {
+      toast('파일이 입력되었습니다.', 'SUCCESS');
+      queryClient.invalidateQueries({ queryKey: [KEY.FORM_LIST] });
+      handleCloseModal();
+    },
+    onError: async (error) => {
+      if (!isAxiosError(error) || !(error.response?.data instanceof Blob)) {
+        handleError(error as AxiosError<never>);
+        return;
+      }
+
+      const { status, headers, data: blob } = error.response;
+      const isJsonResponse = String(headers['content-type'] ?? '').includes(
+        'application/json',
+      );
+
+      if (status === 400 && !isJsonResponse) {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
@@ -45,11 +53,22 @@ export const useUploadSecondScoreFormatMutation = (handleCloseModal: () => void)
         window.URL.revokeObjectURL(url);
         toast('오류가 있는 파일이 다운로드되었습니다.', 'ERROR');
         handleCloseModal();
-      } else {
-        toast('파일 업로드에 실패했습니다.', 'ERROR');
+        return;
       }
+
+      if (status === 400) {
+        toast('잘못된 파일입니다.', 'ERROR');
+        handleCloseModal();
+        return;
+      }
+
+      try {
+        error.response.data = isJsonResponse ? JSON.parse(await blob.text()) : {};
+      } catch {
+        error.response.data = {};
+      }
+      handleError(error as AxiosError<never>);
     },
-    onError: handleError,
   });
 
   return { uploadSecondScoreFormat, ...restMutation };
