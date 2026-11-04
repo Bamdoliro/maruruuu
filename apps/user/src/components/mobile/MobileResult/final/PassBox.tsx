@@ -17,8 +17,10 @@ const PassBox = () => {
           <br />
           앞으로의 여정에 당신과 함께할 수 있어 영광입니다.
         </Text>
-        <Text fontType="context" color={color.red}>
-          * 예비소집일 별도 안내 예정
+        <Text fontType="context" color={color.red} textAlign="center">
+          * 예비소집일은 12월 14일 월요일이며,
+          <br />
+          자세한 안내는 학교 홈페이지 입학 공지사항에서 확인하세요.
         </Text>
       </TextPassBox>
       <Button size="SMALL" onClick={handleMoveStep}>
