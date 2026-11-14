@@ -29,6 +29,7 @@ const FindAddressModal = ({ isOpen, onClose }: FindAddressModalProps) => {
     <BlurBackground $isOpen={isOpen}>
       <StyledFindAddressModal ref={findAddressModal}>
         <DaumPostcode
+          scriptUrl="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
           onComplete={handleCompleteFindAddress}
           style={{ width: '100%', height: '100%' }}
         />
